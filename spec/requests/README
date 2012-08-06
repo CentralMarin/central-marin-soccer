@@ -1,0 +1,4 @@
+Spork has a problem with views calling helpers. Had to make the following change so it would work:
+
+https://github.com/jackkinsella/spork/commit/f8351ae63110869d0f747d3adea055e253da38eb
+

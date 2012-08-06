@@ -1,0 +1,24 @@
+== Installation Dependencies
+Install ImageMagick
+
+== TODO ==
+Team page should pull upcoming events (2 weeks) from both the team and the club calendar
+Each Team should have a calendar
+The Club should have a calendar
+Implement CKEditor browser server for images & links
+Implement CKEditor image upload
+Update menu so it doesn't scroll off the page as the your scrolls up
+
+Setup Output caching in nginx to cache a generated page (outside of /admin) for 1 minute
+Associate a team manager with a team during account creation
+Lock down team manager to just be able to post news to their team
+Only show the team subcategory if the team category is selected
+Automatically detect author when creating / editing a news story
+
+
+== Calendar Questions ==
+Should each team have a unique calendar or should it be an attribute on a calendar that rolls up to the club level?
+Can this be used for field scheduling?
+Should these link back to our fields page?
+Can you toggle the view for a coach to see all of the games / practices?
+Should we bring in scheduled games from state cup?

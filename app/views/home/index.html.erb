@@ -1,0 +1,30 @@
+
+
+<div class="container_12">
+<div id="slider-container" class="grid_12">
+    <div class="ws_images">
+        <% @news_items.each_with_index do |news_item, i| %>
+            <%= link_to image_tag(news_item.image_url.to_s, :id=> "img" + i.to_s) + news_item.title, news_item %> 
+        <% end  %>
+    </div>
+    <div class="ws_bullets">
+        <div>
+        <% @news_items.each_with_index do |news_item, i| %>
+            <a href="#img<%=i%>"><%= image_tag news_item.image_url(:thumb).to_s %><%=i + 1%></a>
+        <% end %>
+        </div>
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="TVEPGNRXXD2YN">
+    <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<% content_for :javascript do %>
+    <%= javascript_include_tag 'home' %>
+<% end %>

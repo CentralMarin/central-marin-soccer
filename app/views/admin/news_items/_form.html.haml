@@ -1,0 +1,33 @@
+= stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/jquery-ui.css'
+= javascript_include_tag 'ckeditor/ckeditor.js'
+= javascript_include_tag 'ckeditor/config.js'
+
+= semantic_form_for [:admin, @news_item], :html => {:multipart => true} do |f|
+
+  .language-tabs
+    %ul.language-selection
+      - @news_item.translations.each do |lang|
+        %li= link_to ADDITIONAL_LOCALES[lang.locale.to_sym], "#lang-#{lang.locale}"
+
+    = f.semantic_fields_for :translations do |lf|
+      %div{:id => "lang-#{lf.object.locale}"}
+        = f.inputs do
+          = lf.input :title
+          = lf.input :body, :as => :ckeditor, :input_html => {:namespace => 'translation', :language => "#{lf.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[lf.object.locale.to_sym]}"}
+          = lf.input :locale, :as => :hidden
+
+  = f.inputs do
+    = image_tag @news_item.image if @news_item.image_url
+    = f.input :image, :as => :file
+    = f.input :category_id, :collection => NewsItem::NEWS_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
+    = f.input :subcategory_id, :collection => Team.all(:order => 'age asc'), :label => 'to_team_name_with_coach', :as => :select, :label => "Team"
+    = f.input :carousel
+
+  = f.buttons do
+    = f.commit_button
+    = content_tag(:li, (link_to I18n.t('active_admin.cancel'), {:action => "index"}, {}), {:class => 'cancel'})
+
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js'
+
+:javascript
+  $('.language-tabs').tabs();

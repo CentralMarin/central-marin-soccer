@@ -1,0 +1,54 @@
+<% content_for :css do %>
+    <%=  stylesheet_link_tag "fields" %>
+    <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/dark-hive/jquery-ui.css" %>
+<% end %>
+
+<h1 class="grid_12"><%= t 'field.heading' %></h1>
+
+<div class="grid_12">
+    <form id="filter" action="#">
+        <span class="grid_2"><%= t 'field.filter.heading' %></span>
+        <%= t 'field.filter.club' %> <select id="clubFilter">
+            <option value="All"><%= t 'field.filter.all' %></option>
+            <% @clubs.each do |club| %>
+                <option><%= club %></option>
+            <% end %>
+        </select>
+        <%= t 'field.filter.state' %>
+        <span id="stateFilter">
+            <input type="radio" id="state99" name="state" checked value="All"/><label for="state99"><%= t 'field.filter.all' %></label>
+            <% @states.each_with_index do |state, index| %>
+                <input type="radio" id="state<%=index%>" name="state" value="<%= state %>"/><label for="state<%=index%>"><%= state %></label>
+            <% end %>    
+        </span>
+    </form>
+</div>
+
+<div class="grid_3">
+
+    <ul id="fields">
+
+    </ul>
+</div>
+<div id="map_canvas" class="grid_9"></div>
+
+<script id='CoachTemplate' type='text/html'>
+    <li id="field{{=id!}}" class="field">
+        <a href="#">
+            <h2>{{=name!}}</h2>
+            <div class="club">{{=club!}}</div>
+            <div class="rain">{{=rain_line!}}</div>
+            <div class="state">{{=state!}}</div>
+        </a>
+     </li>
+</script>
+
+<% content_for :javascript do %>
+    <%= javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false' %>
+    <%= javascript_include_tag "fields" %>
+
+    <%= javascript_tag do -%>
+        var fields = <%= @fields.to_json.html_safe %>;
+        $(document).ready(soccer.fields.init(fields));
+    <% end -%>
+<% end %>

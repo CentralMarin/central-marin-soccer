@@ -1,0 +1,51 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+*/
+
+    div.overlay.black {
+        background-image:url(http://static.flowplayer.org/tools/img/overlay/transparent.png);
+        color:#fff;
+    }
+    div.overlay h2 {
+        margin:10px 0 -9px 0;
+        font-weight:bold;
+        font-size:14px;
+    }
+    /* the overlayed element */
+    .overlay {
+
+        /* must be initially hidden */
+        display:none;
+
+        /* styling */
+        background-img:url(http://static.flowplayer.org/tools/img/overlay/white.png);
+        padding:35px;
+        width:640px;
+    }
+
+    .coach {
+        text-align: center;
+    }
+
+    .overlay .contentWrap {
+        overflow-y:auto;
+        height: 500px;
+    }
+    /* close button positioned on upper right corner */
+    .overlay .close {
+        background-image:url(http://static.flowplayer.org/tools/img/overlay/close.png);
+        position:absolute;
+        right:5px;
+        top:5px;
+        cursor:pointer;
+        height:35px;
+        width:35px;
+    }
+
+    .coachImage {
+        float: left;
+        margin: 0 10px 0 0;
+    }

@@ -1,0 +1,13 @@
+<div class="grid_12">TODO: Team photo goes here</div>
+<h1 class="grid_12"><%= @team.to_s %></h1>
+<h2 class="grid_12">Coached by <%= @team.coach.to_s %></h2>
+<!-- Nice to have the same overlay we use on the coach page available here when clicking on the coach -->
+
+<% @news_items.each do |news_item| %>
+    <div class="grid_12"><%= news_item.title %></div>
+    <div class="grid_12"><%= image_tag news_item.image %></div>
+    <div class="grid_12"><%= news_item.body.html_safe %></div>
+    <hr class="grid_12"/>
+<% end %>
+
+<%= link_to 'Teams', teams_path %>

@@ -1,0 +1,29 @@
+= stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/jquery-ui.css'
+= javascript_include_tag 'ckeditor/ckeditor.js'
+= javascript_include_tag 'ckeditor/config.js'
+
+= semantic_form_for [:admin, @coach], :html => {:multipart => true} do |f|
+
+  = f.inputs do
+    = f.input :name
+    = f.input :email
+
+    .language-tabs
+      %ul.language-selection
+        - @coach.translations.each do |lang|
+          %li= link_to ADDITIONAL_LOCALES[lang.locale.to_sym], "#lang-#{lang.locale}"
+
+      = f.semantic_fields_for :translations do |lf|
+        %div{:id => "lang-#{lf.object.locale}"}
+          = f.inputs do
+            = lf.input :bio, :as => :ckeditor, :input_html => {:namespace => 'translation', :language => "#{lf.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[lf.object.locale.to_sym]}"}
+            = lf.input :locale, :as => :hidden
+
+  = f.buttons do
+    = f.commit_button
+    = content_tag(:li, (link_to I18n.t('active_admin.cancel'), {:action => "index"}, {}), {:class => 'cancel'})
+
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js'
+
+:javascript
+  $('.language-tabs').tabs();

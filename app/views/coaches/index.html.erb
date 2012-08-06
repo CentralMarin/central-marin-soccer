@@ -1,0 +1,57 @@
+<% content_for :css do %>
+    <%= stylesheet_link_tag "coach" %>
+    <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/dark-hive/jquery-ui.css" %>
+<% end %>
+
+<h2 class="grid_12"><%= t "coach.intro" %></h2>
+<div class="clear"></div>
+<div class="grid_12" id="accordion">
+    <% @objectives[:header].each_with_index do |header, index| %>
+        <h3><a href="#"><%= header %></a></h3>
+        <div><%= @objectives[:body][index] %></div>
+    <% end %>
+</div>
+
+<hr class="grid_12" />
+<h2 class="grid_12"><%= t 'coach.staff' %></h2>
+<% @coaches.each_with_index do |coach, index| %>
+    <% if index % 6 == 0 %> <div class="clear"></div><% end %>
+    <div class="grid_2 coach">
+        <%= link_to "##{coach.id}", :class => 'coachlink', :rel => "#coach#{coach.id}", :data => {:coach_id => "#{coach.id}"} do %>
+            <%= image_tag coach.image_url, :alt => coach.name, :id => "coach-img-#{coach.id}" %><br/><%= coach.name %>
+        <% end %>
+    </div>
+    <div class='overlay black' id='<%= "coach#{coach.id}" %>'>
+        <div class="contentWrap"></div>
+    </div>
+<% end %>
+
+<script id='CoachTemplate' type='text/html'>
+    <table width="100%">
+        <tr>
+            <td>
+                <img class="coachImage" src='{{=coachImageUrl}}'/>
+                <div>
+                    <H3>{{=name}}</H3>
+                    <p>{{=bio!}}</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <H3><%= t "coach.teams" %></H3>
+                <ul>
+                    {{#each teams}}
+                    <li><a href='/teams/{{=id}}'>{{=name}}</a></li>
+                    {{/each}}
+                </ul>
+            </td>
+        </tr>
+    </table>
+</script>
+
+<% content_for :javascript do %>
+<%= javascript_include_tag "coaches" %>
+
+<% end %>
+

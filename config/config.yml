@@ -1,0 +1,9 @@
+development: &DEVELOPMENT
+  switch_hosts: { es: "www.localhost:3000", en: "es.localhost:3000" }
+test:
+  <<: *DEVELOPMENT
+staging:
+  switch_hosts: { es: "staging.centralmarinsoccer.digitalfoundry.com", en: "es.staging.centralmarinsoccer.digitalfoundry.com" }
+
+production:
+  switch_hosts: { es: "centralmarinsoccer.digitalfoundry.com", en: "es.centralmarinsoccer.digitalfoundry.com" }

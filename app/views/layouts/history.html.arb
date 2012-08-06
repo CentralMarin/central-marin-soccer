@@ -1,0 +1,11 @@
+panel "History" do
+  table_for assigns[:versions] do
+    column :item_type
+    column :event
+    column "Admin" do |version|
+      AdminUser.find(version.whodunnit).to_s if version.whodunnit && version.whodunnit != "Unknown user"
+    end
+    column :object
+    column :created_at
+  end
+end

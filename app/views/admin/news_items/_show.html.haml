@@ -1,0 +1,27 @@
+= stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/jquery-ui.css'
+
+= image_tag (news.image) if (news.image.to_s)
+
+%div.language-tabs
+  %ul.language-selection
+    - @news_item.translations.each do |lang|
+      %li= link_to ADDITIONAL_LOCALES[lang.locale.to_sym], "#lang-#{lang.locale}"
+
+  - @news_item.translations.each do |lang|
+    %div{:id => "lang-#{lang.locale}"}
+      %h3= lang.title
+      %p= lang.body.html_safe
+
+%ul
+  %li= "Category: #{news.category.to_s}"
+  - unless news.subcategory_id != ''
+    %li= Team.to_team_name_with_coach(news.subcategory_id)
+  - if news.carousel
+    %li= "Show in carousel"
+  %li= "Created at #{news.created_at}"
+  %li= "Last updated #{news.updated_at}"
+
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js'
+
+:javascript
+  $('.language-tabs').tabs();

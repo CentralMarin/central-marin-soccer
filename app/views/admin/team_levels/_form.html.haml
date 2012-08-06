@@ -1,0 +1,31 @@
+= stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/jquery-ui.css'
+
+= semantic_form_for [:admin, @team_level] do |f|
+
+  .language-tabs
+    %ul.language-selection
+      %li= link_to 'English', "#lang-en"
+      - @team_level.translations.each do |lang|
+        - unless lang.locale == :en
+          %li= link_to ADDITIONAL_LOCALES[lang.locale.to_sym], "#lang-#{lang.locale}"
+
+    %div#lang-en
+      = f.inputs 'English Text' do
+        = f.input :name
+
+    - index = 0
+    = f.semantic_fields_for :translations do |lf|
+      %div{:id => "lang-#{lf.object.locale}", :style => "#{'display: none;' if lf.object.locale == :en}"}
+        = lf.inputs "#{ADDITIONAL_LOCALES[lf.object.locale.to_sym]} Text" do
+          = lf.input :name
+          = lf.input :locale, :as => :hidden
+      - index += 1
+
+  = f.buttons do
+    = f.commit_button
+    = content_tag(:li, (link_to I18n.t('active_admin.cancel'), {:action => "index"}, {}), {:class => 'cancel'})
+
+= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js'
+
+:javascript
+  $('.language-tabs').tabs();

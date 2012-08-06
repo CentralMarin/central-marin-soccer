@@ -1,0 +1,27 @@
+
+<p>
+  <%= image_tag @news_item.image_url.to_s %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @news_item.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @news_item.body.html_safe %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%= @news_item.author %>
+</p>
+
+<p>
+  <b>Carousel:</b>
+  <%= @news_item.carousel %>
+</p>
+
+<%= link_to 'News', news_index_path %>
+
