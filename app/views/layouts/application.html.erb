@@ -26,24 +26,7 @@
     <%= yield :css %>
 
 
-    <style>
-        .box {
-            border: 1px solid #666;
-            overflow: hidden;
-        }
-        .section {
-
-        }
-        .section_header {
-            min-height: 53px;
-            padding: 0;
-            margin: 0 0 10px 0;
-            background: #E5F4FA url('section_header.png');
-        }
-        .section_header h2 {
-            padding: 0 0 0 10px;
-        }
-    </style>
+    
 
   <!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
 
@@ -55,33 +38,50 @@
 </head>
 <body class="<%= body_classes.join(' ') %>">
 
-  <div class="container_12" id="container">
-    <header>
-      <div class="grid_12"><%= image_tag "masthead.jpg", :width => "940", :height => "90" %></div>
-        <div class="grid_12">
-            <div id="menu" class="menu">
-                <ul class="grid_10">
-                    <%= menu %>
-                </ul>
-                <ul class="grid_2">
-                    <%= link_to t('menu.language').html_safe, "http://#{AppConfig[:switch_hosts][I18n.locale]}", :class => 'width:100%; text-align:right'%>
-                </ul>
-            </div>
-        </div>
+  <div class="container_16" id="container">
+
+	<header>
+
+
+	  <div id="header_container">
+
+		<div class="grid_1 endcap alpha"><%= image_tag "logo.png", :id=>'logo' %></div>
+
+		<div class="grid_14">
+		  <div class="grid_7 prefix_7 push_1">
+			<ul id="secondary_menu">
+			  <%= menu_secondary  %>
+			</ul>
+		  </div>
+		  <div class="grid_12 prefix_2">
+			<%= image_tag "header_text.png", :alt=>  t('header_text_alt'), :style=>'display: block' %>
+		  </div>
+		  <div class="grid_12 prefix_2">
+			<ul id="menu">
+				<%= menu %>
+			</ul>
+		  </div>
+		</div>
+
+		<div class="grid_1 omega endcap"></div>
+
+	  </div>
     </header>
-    <div id="main" role="main">
-      <%= yield %>
-    </div>
-    <footer>
-        <!--<div class="grid_12"><div class="section_header"><h2>Affiliated Clubs</h2></div></div>-->
-        <!--<div class="clear"></div>-->
-        <!--<div class="grid_3"><%= link_to image_tag("affiliates/marinfc-115.jpg", :width=>115, :height => 25), "http://www.marinfc.com/", :target => "_blank" %></div>-->
-        <!--<div class="grid_3"><%= link_to image_tag("affiliates/SRYSC_logo.jpg", :width=>65, :height => 65), "http://www.sanrafaelsoccer.org/", :target => "_blank" %></div>-->
-        <!--<div class="grid_3"><%= link_to image_tag("affiliates/rvsc-55.jpg", :width=>55, :height => 73), "http://www.rossvalleysoccer.org/", :target => "_blank" %></div>-->
-        <!--<div class="grid_3"><%= link_to image_tag("affiliates/dysa-55.jpg", :width=>55, :height => 53), "http://www.dixiesoccer.org/home/", :target => "_blank" %></div>-->
-        <!--<div class="clear"></div>-->
-        <%=  render 'layouts/footer' %>
-    </footer>
+
+	<div id="main_container">
+
+  	  <div id="main_bg"></div>
+	  <div id="main" role="main" class="">
+		<%= yield %>
+	  </div>
+	  <footer>
+		<span><%= t('footer_copy') %></span>
+	  </footer>
+  	  <div class="clear"></div>
+	</div>
+	<div id="bottom_padder"></div>
+
+
   </div> <!--! end of #container -->
 
 

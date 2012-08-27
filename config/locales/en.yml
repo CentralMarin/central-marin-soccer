@@ -2,16 +2,22 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  footer_copy: "All rights Reserved © 2012 - Central Marin Soccer Club"
+  header_text_alt: 'Central Marin Soccr'
   title: "Welcome to Central Marin Soccer Club"
   menu:
     home: "Home"
-    news: "Club Info"
+    news: "News"
     teams: "Teams"
     coaches: "Coaching"
     tournaments: "Tournaments"
     referees: "Referees"
     calendar: "Calendar"
     language: "En&nbsp;Español"
+    facebook: "Facebook"
+    newsletter: "Newsletter"
+    clubInfo: "Club Info"
+    contact: "Contact"
   coach:
      intro: "The five core objectives are:"
      objectives:
