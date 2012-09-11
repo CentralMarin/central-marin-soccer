@@ -11,7 +11,7 @@
 
 </div>
 
-  <div id="slider-container" class="grid_10 box">
+<div id="slider-container" class="grid_10 box">
     <div class="ws_images">
 	  <img src="/assets/sample_news.png" />
 	  <img src="/assets/sample_news.png" />
@@ -35,20 +35,70 @@
   
 </div>
 
-<div class="grid_10 box">
-  <h2>BOX > h2</h2>
-  <p>P Tag asdf ;asdfj ;klsda ;sdafj ;slfj ;sldkj;sdaf lfdljf ;sj ;sj ;skj ;lkj;aj;sdfasdfsad fjfhiajsdfhblkjsdabliuhfljfn </p>
+<div class="padV10 clear"></div>
 
-</div>
+<div class="grid_10">
 
+  <div class="box">
+  <h2>Donate</h2>
+  <p>Duis lacus purus, tincidunt nec venenatis ac, rhoncus at nunc. Duis euismod sollicitudin adipiscing. Etiam leo mi</p>
 
-
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+  <form class="right" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
     <input type="hidden" name="cmd" value="_s-xclick">
     <input type="hidden" name="hosted_button_id" value="TVEPGNRXXD2YN">
     <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
     <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
+  </form>
+
+  <div class="clear"></div>
+  </div>
+
+  <div class="box">
+	<h2>Support Our Sponsors</h2>
+	<p class="text-center">
+	  <img class="pad5" src="/assets/sample_sponsors1.png" />
+	  <img class="pad5" src="/assets/sample_sponsors2.png" />
+	  <img class="pad5" src="/assets/sample_sponsors3.png" />
+	  <img class="pad5" src="/assets/sample_sponsors4.png" />
+	</p>
+
+  </div>
+
+
+</div>
+
+
+<div id="field_status" class="grid_6 box relative">
+  <div class="bg_inlay"></div>
+  <div class="relative">
+	<h2>Field Status</h2>
+	<ol class="block">
+	  <li class="odd">
+		<div class="grid_3">Fields Open</div>
+		<div class="grid_2 text-center">6</div>
+		<div class="clear"></div>
+	  </li>
+	  <li>
+		<div class="grid_3">Fields Closed</div>
+		<div class="grid_2 text-center">3</div>
+		<div class="clear"></div>
+	  </li>
+	  <li class="odd">
+		<div class="grid_3">Status Unknown</div>
+		<div class="grid_2 text-center">3</div>
+		<div class="clear"></div>
+	  </li>
+	</ol>
+
+	<div class="clear"></div>
+	<h4 class="alt">For Full status visit the fields page</h4>
+	<a href="#" class="right">Fields page</a>
+	<div class="clear"></div>
+  </div>
+</div>
+<div class="clear"></div>
+
+
 
 <% content_for :javascript do %>
     <%= javascript_include_tag 'home' %>

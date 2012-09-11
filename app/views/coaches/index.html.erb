@@ -3,17 +3,19 @@
     <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/dark-hive/jquery-ui.css" %>
 <% end %>
 
-<h2 class="grid_12"><%= t "coach.intro" %></h2>
+<h2 class="grid_16"><%= t "coach.intro" %></h2>
 <div class="clear"></div>
-<div class="grid_12" id="accordion">
+<div class="margin10">
+<div class="grid_16" id="accordion">
     <% @objectives[:header].each_with_index do |header, index| %>
         <h3><a href="#"><%= header %></a></h3>
         <div><%= @objectives[:body][index] %></div>
     <% end %>
 </div>
+</div>
 
-<hr class="grid_12" />
-<h2 class="grid_12"><%= t 'coach.staff' %></h2>
+<hr class="grid_16" />
+<h2 class="grid_16"><%= t 'coach.staff' %></h2>
 <% @coaches.each_with_index do |coach, index| %>
     <% if index % 6 == 0 %> <div class="clear"></div><% end %>
     <div class="grid_2 coach">
@@ -33,7 +35,7 @@
                 <img class="coachImage" src='{{=coachImageUrl}}'/>
                 <div>
                     <H3>{{=name}}</H3>
-                    <p>{{=bio!}}</p>
+                    <p>{{=bio!}}</p>h
                 </div>
             </td>
         </tr>

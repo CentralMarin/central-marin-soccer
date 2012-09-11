@@ -1,28 +1,33 @@
-<h1 class="grid_12">Teams</h1>
-<div class="grid_12">Some basic overview of team play and values goes here</div>
-<hr class="grid_12">
-<div class="clear"></div>
-<table>
-    <thead>
-    <tr>
-        <td class="grid_6"><h2>Boys</h2></td>
-        <td class="grid_5"><h2>Girls</h2></td>
-    </tr>
-    </thead>
-    <tbody>
-    <% @ages.each do |age| %>
-    <tr>
-        <td class="grid_6">
-            <% find_teams('Boys', age).each do |team|  %>
-              <h3><%= link_to team.to_s, team %></h3>
-            <% end %>
-        </td>
-        <td class="grid_5">
-            <% find_teams('Girls', age).each do |team| %>
-            <h3><%= link_to team.to_s, team %></h3>
-            <% end %>
-        </td>
-    </tr>
-    <% end %>
-    </tbody>
-</table>
+
+
+<div class="grid_16 box">
+  <h1>Teams</h1>
+  <p>Some basic overview of team play and values goes here</p>
+</div>
+<div class="grid_16">
+
+  <table>
+	  <thead>
+	  <tr>
+		  <td class="grid_6"><h2>Boys</h2></td>
+		  <td class="grid_5"><h2>Girls</h2></td>
+	  </tr>
+	  </thead>
+	  <tbody>
+	  <% @ages.each do |age| %>
+	  <tr>
+		  <td class="grid_6">
+			  <% find_teams('Boys', age).each do |team|  %>
+				<h3><%= link_to team.to_s, team %></h3>
+			  <% end %>
+		  </td>
+		  <td class="grid_5">
+			  <% find_teams('Girls', age).each do |team| %>
+			  <h3><%= link_to team.to_s, team %></h3>
+			  <% end %>
+		  </td>
+	  </tr>
+	  <% end %>
+	  </tbody>
+  </table>
+</div>
