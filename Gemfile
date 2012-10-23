@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '>= 3.2.1'
 
-gem 'activeadmin', '>= 0.4.2'
+gem 'activeadmin', '>= 0.5'
 gem 'meta_search', '>= 1.1.0.pre'
 gem 'paper_trail'
 gem 'ckeditor', '>=3.7.0.rc3'
@@ -28,7 +28,7 @@ gem 'jquery-rails'
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'
-  gem 'annotate', :git => 'https://github.com/ctran/annotate_models.git'
+  gem 'annotate', '>=2.5.0'
   gem 'sqlite3'
 end
 
