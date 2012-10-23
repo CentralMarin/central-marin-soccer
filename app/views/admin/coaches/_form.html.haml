@@ -19,9 +19,9 @@
             = lf.input :bio, :as => :ckeditor, :input_html => {:namespace => 'translation', :language => "#{lf.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[lf.object.locale.to_sym]}"}
             = lf.input :locale, :as => :hidden
 
-  = f.buttons do
-    = f.commit_button
-    = content_tag(:li, (link_to I18n.t('active_admin.cancel'), {:action => "index"}, {}), {:class => 'cancel'})
+  = f.actions do
+    = f.action :submit, :label => true
+    = f.action :cancel, :as => :link, :label => I18n.t('active_admin.cancel'), :wrapper_html => { :class => 'cancel' }
 
 = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js'
 

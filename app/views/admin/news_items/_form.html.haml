@@ -23,9 +23,9 @@
     = f.input :subcategory_id, :collection => Team.all(:order => 'age asc'), :label => 'to_team_name_with_coach', :as => :select, :label => "Team"
     = f.input :carousel
 
-  = f.buttons do
-    = f.commit_button
-    = content_tag(:li, (link_to I18n.t('active_admin.cancel'), {:action => "index"}, {}), {:class => 'cancel'})
+  = f.actions do
+    = f.action :submit, :label => true
+    = f.action :cancel, :as => :link, :label => I18n.t('active_admin.cancel'), :wrapper_html => { :class => 'cancel' }
 
 = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js'
 

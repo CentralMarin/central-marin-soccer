@@ -1,4 +1,53 @@
-ActiveAdmin::Dashboards.build do
+ActiveAdmin.register_page "Dashboard" do
+  menu :priority => 1, :label => proc { I18n.t("active_admin.dashboard") }
+
+  content :title => proc { I18n.t("active_admin.dashboard") } do
+    #div :class => "blank_slate_container", :id => "dashboard_default_message" do
+    #  span :class => "blank_slate" do
+    #    span I18n.t("active_admin.dashboard_welcome.welcome")
+    #    small I18n.t("active_admin.dashboard_welcome.call_to_action")
+    #  end
+    #end
+
+    section "Recently updated content" do
+
+      if can?(:manage, AdminUser)
+        # Admin users should see all changes
+        versions = Version.where('whodunnit is not null').order('id desc').limit(20)
+      else
+        # other users should only see their changes
+        versions = Version.order('id desc').find_all_by_whodunnit(current_admin_user, :limit => 20)
+      end
+
+      table_for versions do
+        column "Item" do |v|
+          if v.item
+            link_to v.item, v.item.admin_permalink
+          else
+            "<DELETED>"
+          end
+        end
+        #column "Item" do |v| v.item end
+        column "Type" do |v| v.item_type.underscore.humanize end
+        column "Modified at" do |v| v.created_at.to_s :long end
+        column "Admin" do |v|
+          case v.whodunnit
+            when nil
+            when "Unknown user"
+              v.whodunnit
+            else
+              link_to AdminUser.find(v.whodunnit), admin_admin_user_path(v.whodunnit)
+          end
+        end
+      end
+    end
+  end
+
+end
+
+
+
+#ActiveAdmin::Dashboards.build do
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
@@ -35,37 +84,40 @@ ActiveAdmin::Dashboards.build do
   #
   # Will render the "Recent Users" then the "Recent Posts" sections on the dashboard.
 
-  section "Recently updated content" do
 
-    if can?(:manage, AdminUser)
-      # Admin users should see all changes
-      versions = Version.where('whodunnit is not null').order('id desc').limit(20)
-    else
-      # other users should only see their changes
-      versions = Version.order('id desc').find_all_by_whodunnit(current_admin_user, :limit => 20)
-    end
 
-    table_for versions do
-      column "Item" do |v|
-        if v.item
-          link_to v.item, v.item.admin_permalink
-        else
-          "<DELETED>"
-        end
-      end
-      #column "Item" do |v| v.item end
-      column "Type" do |v| v.item_type.underscore.humanize end
-      column "Modified at" do |v| v.created_at.to_s :long end
-      column "Admin" do |v|
-        case v.whodunnit
-          when nil
-          when "Unknown user"
-            v.whodunnit
-          else
-            link_to AdminUser.find(v.whodunnit), admin_admin_user_path(v.whodunnit)
-        end
-      end
-    end
-  end
 
-end
+#  section "Recently updated content" do
+#
+#    if can?(:manage, AdminUser)
+#      # Admin users should see all changes
+#      versions = Version.where('whodunnit is not null').order('id desc').limit(20)
+#    else
+#      # other users should only see their changes
+#      versions = Version.order('id desc').find_all_by_whodunnit(current_admin_user, :limit => 20)
+#    end
+#
+#    table_for versions do
+#      column "Item" do |v|
+#        if v.item
+#          link_to v.item, v.item.admin_permalink
+#        else
+#          "<DELETED>"
+#        end
+#      end
+#      #column "Item" do |v| v.item end
+#      column "Type" do |v| v.item_type.underscore.humanize end
+#      column "Modified at" do |v| v.created_at.to_s :long end
+#      column "Admin" do |v|
+#        case v.whodunnit
+#          when nil
+#          when "Unknown user"
+#            v.whodunnit
+#          else
+#            link_to AdminUser.find(v.whodunnit), admin_admin_user_path(v.whodunnit)
+#        end
+#      end
+#    end
+#  end
+#
+#end

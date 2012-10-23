@@ -10,7 +10,7 @@ ActiveAdmin.setup do |config|
   # Set the link url for the title. For example, to take 
   # users to your main site. Defaults to no link.
   #
-  # config.site_title_link = "/"
+  config.site_title_link = "/"
 
   # == Default Namespace
   #
@@ -101,4 +101,18 @@ ActiveAdmin.setup do |config|
   # To load a javascript file:
   #config.register_javascript 'ckeditor/ckeditor.js'
   #config.register_javascript 'ckeditor/config.js'
+
+  # == Root
+  # Set the action to call for the root path. You can set different
+  # roots for each namespace.
+  # Default:
+  # config.root_to = 'dashboard#index'
+   
+  # == Batch Actions
+  # Enable and disable Batch Actions
+  config.batch_actions = true
+ 
+  # == CSV options
+  # Set the CSV builder separator (default is ",")
+  # config.csv_column_separator = ','
 end
