@@ -2,13 +2,16 @@
 #
 # Table name: fields
 #
-#  id         :integer         not null, primary key
+#  id         :integer          not null, primary key
 #  name       :string(255)
 #  club       :string(255)
 #  rain_line  :string(255)
-#  map_url    :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  state_id   :integer
+#  lat        :decimal(15, 10)
+#  lng        :decimal(15, 10)
+#  address    :string(255)
 #
 
 require "net/http"

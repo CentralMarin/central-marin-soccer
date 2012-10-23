@@ -2,13 +2,13 @@
 #
 # Table name: parents
 #
-#  id         :integer         not null, primary key
+#  id         :integer          not null, primary key
 #  name       :string(255)
 #  email      :string(255)
 #  home_phone :string(255)
 #  cell_phone :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class Parent < ActiveRecord::Base

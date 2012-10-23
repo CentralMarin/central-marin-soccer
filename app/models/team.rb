@@ -1,17 +1,16 @@
 # encoding: utf-8
-
 # == Schema Information
 #
 # Table name: teams
 #
-#  id            :integer         not null, primary key
+#  id            :integer          not null, primary key
 #  age           :integer
-#  gender_id     :integer
+#  gender        :string(255)
 #  name          :string(255)
 #  coach_id      :integer
 #  team_level_id :integer
-#  created_at    :datetime
-#  updated_at    :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 

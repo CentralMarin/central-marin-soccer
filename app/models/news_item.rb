@@ -1,17 +1,17 @@
 # == Schema Information
 #
-# Table name: news
+# Table name: news_items
 #
-#  id               :integer         not null, primary key
-#  title            :string(255)
-#  body             :text
-#  author           :string(255)
-#  carousel         :boolean
-#  news_category_id :integer
-#  created_at       :datetime
-#  updated_at       :datetime
-#  image            :string(255)
-#  subcategory_id   :integer
+#  id             :integer          not null, primary key
+#  title          :string(255)
+#  body           :text
+#  author         :string(255)
+#  carousel       :boolean
+#  category_id    :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  image          :string(255)
+#  subcategory_id :integer
 #
 
 class NewsItem < ActiveRecord::Base
