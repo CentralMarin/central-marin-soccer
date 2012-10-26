@@ -17,6 +17,7 @@ header {
 	background: url('/assets/header_grad3.png') repeat-x;
 	position: relative;
 	z-index: 5;
+    min-width: 960px;
 
 	.endcap {
 		height: 160px;
