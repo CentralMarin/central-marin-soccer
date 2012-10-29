@@ -18,10 +18,11 @@ header {
   #header_container .endcap {
     height: 160px;
     background: url("/assets/header_grad4.png") repeat-x; }
-    #header_container .endcap:first-child {
+    #header_container .first-child {
       margin-right: 20px; }
-    #header_container .endcap:last-child {
+    #header_container .last-child {
       margin-left: 20px; }
+    #header_container
 
 #header_sub {
   background: #03051c;

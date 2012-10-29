@@ -17,17 +17,17 @@ header {
 	background: url('/assets/header_grad3.png') repeat-x;
 	position: relative;
 	z-index: 5;
-    min-width: 960px;
+	min-width: 960px;
 
 	.endcap {
 		height: 160px;
 		background: url('/assets/header_grad4.png') repeat-x;
-		&:first-child {
-			margin-right: 20px;
-		}
-		&:last-child {
-			margin-left: 20px;
-		}
+	}
+	.first-child {
+		margin-right: 20px;
+	}
+	.last-child {
+		margin-left: 20px;
 	}
 
 }
