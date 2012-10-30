@@ -46,13 +46,10 @@ describe NewsItem do
 
   context "translations" do
     before(:each) do
-      puts "creating translations"
       I18n.locale = :en
       @news_item = NewsItem.create title: "Sample Title", body: "HTML Body", author: "Sample Author", carousel: false, category_id: NewsItem::NEWS_CATEGORY[0]
       I18n.locale = :es
       @news_item.update_attributes title: "Muestra Título", body: "HTML Cuerpo"
-
-      puts "done"
     end
 
     it "should read the correct translation" do
