@@ -13,9 +13,7 @@
 class Coach < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  has_paper_trail
-
-  translates :bio, :fallbacks_for_empty_translations => true
+  translates :bio, versioning: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
   has_many :team_level_translations
 

@@ -65,5 +65,26 @@ describe Coach do
     coach_with_duplicate_email = Coach.new(@attr)
     coach_with_duplicate_email.should_not be_valid
   end
+
+  context "translations" do
+    before(:each) do
+      I18n.locale = :en
+      @coach = Coach.create name: "Sample name", email: "test@test.com", bio: "Sample bio"
+      I18n.locale = :es
+      @coach.update_attributes bio: "Muestra nombre"
+    end
+
+    it "should read the correct translation" do
+      @coach = Coach.last
+
+      I18n.locale = :en
+      @coach.name.should == "Sample name"
+      @coach.email.should == "test@test.com"
+      @coach.bio.should == "Sample bio"
+
+      I18n.locale = :es
+      @coach.bio.should == "Muestra nombre"
+    end
+  end
 end
 
