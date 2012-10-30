@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 # == Schema Information
 #
 # Table name: news_items
@@ -42,4 +44,27 @@ describe NewsItem do
     no_body_news.should_not be_valid
   end
 
+  context "translations" do
+    before(:each) do
+      puts "creating translations"
+      I18n.locale = :en
+      @news_item = NewsItem.create title: "Sample Title", body: "HTML Body", author: "Sample Author", carousel: false, category_id: NewsItem::NEWS_CATEGORY[0]
+      I18n.locale = :es
+      @news_item.update_attributes title: "Muestra Título", body: "HTML Cuerpo"
+
+      puts "done"
+    end
+
+    it "should read the correct translation" do
+      @news_item = NewsItem.last
+
+      I18n.locale = :en
+      @news_item.title.should == "Sample Title"
+      @news_item.body.should == "HTML Body"
+
+      I18n.locale = :es
+      @news_item.title.should == "Muestra Título"
+      @news_item.body.should == "HTML Cuerpo"
+    end
+  end
 end
