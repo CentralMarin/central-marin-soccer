@@ -13,57 +13,62 @@
 require 'spec_helper'
 
 describe Coach do
-  before(:each) do
-    @attr = { :name => "Example Coach", :email => "coach@example.com", :bio => "This is a example bio."}
-  end
-
-  it "creates a new instance given valid attributes" do
-    Coach.create!(@attr)
+  it "has a valid factory" do
+    FactoryGirl.create(:coach).should be_valid
   end
 
   it "requires a name" do
-    no_name_coach = Coach.new(@attr.merge(:name => ""))
-    no_name_coach.should_not be_valid
+    FactoryGirl.build(:coach, name: nil).should_not be_valid
   end
 
   it "requires an email address" do
-    no_email_coach = Coach.new(@attr.merge(:email => ""))
-    no_email_coach.should_not be_valid
+    FactoryGirl.build(:coach, email: nil).should_not be_valid
   end
 
   it "rejects names that are too long" do
     long_name = "a" * 51
-    long_name_coach = Coach.new(@attr.merge(:name => long_name))
-    long_name_coach.should_not be_valid
-  end
-
-  it "accepts valid email addresses" do
-    addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
-    addresses.each do |address|
-      valid_email_coach = Coach.new(@attr.merge(:email => address))
-      valid_email_coach.should be_valid
-    end
+    FactoryGirl.build(:coach, name: long_name).should_not be_valid
   end
 
   it "rejects invalid email addresses" do
     addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
     addresses.each do |address|
-      valid_email_coach = Coach.new(@attr.merge(:email => address))
-      valid_email_coach.should_not be_valid
+      FactoryGirl.build(:coach, email: address).should_not be_valid
     end
   end
 
   it "rejects duplicate email addresses" do
-    Coach.create!(@attr)
-    coach_with_duplicate_email = Coach.new(@attr)
-    coach_with_duplicate_email.should_not be_valid
+    coach = FactoryGirl.create(:coach)
+    FactoryGirl.build(:coach, email: coach.email).should_not be_valid
   end
 
   it "rejects email addresses identical up to case" do
-    upcased_email = @attr[:email].upcase
-    Coach.create!(@attr.merge(:email => upcased_email))
-    coach_with_duplicate_email = Coach.new(@attr)
-    coach_with_duplicate_email.should_not be_valid
+    coach = FactoryGirl.create(:coach)
+    FactoryGirl.build(:coach, email: coach.email.upcase).should_not be_valid
+  end
+
+  context "instance methods" do
+    it "returns a relative url for an coaches image" do
+      coach = FactoryGirl.create(:coach).image_url.should be_kind_of(String)
+    end
+
+    it "returns a jpeg" do
+      FactoryGirl.create(:coach).image_url.ends_with?('.jpg').should == true
+    end
+
+    it "returns name as string object representation" do
+      coach = FactoryGirl.create(:coach)
+      coach.to_s.should == coach.name
+    end
+
+    it "returns json containing name, bio, and teams" do
+      coach = FactoryGirl.create(:coach)
+      json = coach.as_json
+      json[:name].should == coach.name
+      json[:bio].should == coach.bio
+      json[:teams].should == coach.teams
+    end
+
   end
 
   context "translations" do
