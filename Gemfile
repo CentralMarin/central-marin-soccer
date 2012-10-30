@@ -27,7 +27,7 @@ gem 'jquery-rails'
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'guard-rspec'
+  gem 'factory_girl_rails'
   gem 'annotate', '>=2.5.0'
   gem 'sqlite3'
 end
@@ -38,12 +38,13 @@ end
 
 group :test do
   gem 'spork', '~> 0.9.0.rc'
-  gem 'factory_girl_rails'
   gem 'capybara', :git => 'https://github.com/jnicklas/capybara.git'
   gem 'guard-spork'
   gem 'rb-fsevent'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'guard-rspec'
+  gem 'faker'
 end
 
 gem 'therubyracer'
