@@ -19,7 +19,7 @@ class Parent < ActiveRecord::Base
   has_and_belongs_to_many :players, :join_table => :parents_players
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  phone_regex = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/
+  phone_regex = /^[+]?[1]?\(?[- .]?\d{3}\)?[- .]?\d{3}[- .]?\d{4}[ ]?[x]?[0-9]*$/
 
   validates :name,         :presence => true,
                            :length => { :maximum => 50 }
