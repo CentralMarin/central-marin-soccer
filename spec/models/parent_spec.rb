@@ -86,4 +86,11 @@ describe Parent do
     end
   end
 
+  context "instance methods" do
+    it "returns name as a string object representation" do
+      parent = FactoryGirl.create(:parent)
+      parent.to_s.should == parent.name
+    end
+  end
+
 end
