@@ -19,29 +19,39 @@
 require 'spec_helper'
 
 describe NewsItem do
-  before(:each) do
-    @attr = { :title => "Sample Title", :body => "<h1><b>Header<b></h1><p>Content</p>", :author => "Sample Author", :carousel => false, :category_id => NewsItem::NEWS_CATEGORY[0]}
+  it "has a valid factory" do
+    FactoryGirl.create(:news_item)
   end
 
-  it "should create a news item given valid attributes" do
-    NewsItem.create!(@attr)
+  it "requires a title" do
+    FactoryGirl.build(:news_item, title: nil).should_not be_valid
   end
 
-  it "should require a title" do
-    no_title_news = NewsItem.new(@attr.merge(:title => ""))
-    no_title_news.should_not be_valid
-  end
-
-  it "should reject titles that are too long" do
+  it "rejects titles that are too long" do
     long_title = "a" * 256
-    long_title_news = NewsItem.new(@attr.merge(:title => long_title))
-    long_title_news.should_not be_valid
-
+    FactoryGirl.build(:news_item, title: long_title).should_not be_valid
   end
 
-  it "should require body" do
-    no_body_news = NewsItem.new(@attr.merge(:body => ""))
-    no_body_news.should_not be_valid
+  it "requires body" do
+    FactoryGirl.build(:news_item, body: nil).should_not be_valid
+  end
+
+  it "saves settings properly" do
+
+    news_item = FactoryGirl.create(:news_item)
+    news_item.save
+
+    db_news_item = NewsItem.last
+    db_news_item.title.should == news_item.title
+    db_news_item.body.should == news_item.body
+    db_news_item.author.should == news_item.author
+    db_news_item.carousel.should == news_item.carousel
+    db_news_item.category_id.should == news_item.category_id
+    db_news_item.subcategory_id.should == news_item.subcategory_id
+  end
+
+  context "instance methods" do
+
   end
 
   context "translations" do
