@@ -11,12 +11,8 @@
 require 'spec_helper'
 
 describe TeamLevel do
-  before(:each) do
-    @attr = { :name => "Sample level"}
-  end
-
-  it "should create a team_level given valid attributes" do
-    TeamLevel.create!(@attr)
+  it "has a valid factory" do
+    FactoryGirl.create(:team_level)
   end
 
   context "translations" do
