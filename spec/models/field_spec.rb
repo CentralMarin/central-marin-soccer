@@ -37,7 +37,46 @@ describe Field do
     FactoryGirl.build(:field, address: nil).should_not be_valid
   end
 
-  it "should require a state id" do
+  it "requires a state id" do
     FactoryGirl.build(:field, state_id: nil).should_not be_valid
+  end
+
+  context "instance methods" do
+    it "state_id should convert to and from a symbol" do
+      field = FactoryGirl.create(:field)
+      state_id = field.state_id
+      Field.state_id(field.state).should == state_id
+    end
+
+    it "map_url should properly return a google maps url" do
+      FactoryGirl.create(:field).map_url.starts_with?("http://maps.google.com").should == true
+    end
+
+    it "object as a string" do
+      field = FactoryGirl.create(:field)
+      field.to_s.should == field.name
+    end
+
+    it "json representation of the object should include id, name, club, rain_line, address, lat, lng, and state" do
+      field = FactoryGirl.create(:field)
+      json = field.as_json
+      json[:id].should == field.id
+      json[:name].should == field.name
+      json[:club].should == field.club
+      json[:rain_line].should == field.rain_line
+      json[:address].should == field.address
+      json[:lat].should == field.lat
+      json[:lng].should == field.lng
+      json[:state].should == field.state
+    end
+  end
+
+  context "translations" do
+    it "field status should change depending on locale" do
+      I18n.locale = :en
+      english = Field.states
+      I18n.locale = :es
+      Field.states.should_not == english
+    end
   end
 end
