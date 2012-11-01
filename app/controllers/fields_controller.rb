@@ -6,7 +6,7 @@ class FieldsController < InheritedResources::Base
   def index
     @fields = Field.all()
     @clubs = Field.pluck(:club).uniq
-    @states = Field.states
+    @statuses = Field.statuses
 
     respond_to do |format|
       format.html # index.html.erb

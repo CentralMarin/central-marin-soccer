@@ -33,7 +33,11 @@ es:
   field:
     heading: "Marin County Campos de Fútbol"
     filter:
-        heading: "Filtros"
-        club: "Club: "
-        state: "Campo del Estado: "
-        all: "Todo"
+      heading: "Filtros"
+      club: "Club: "
+      state: "Campo del Estado: "
+      all: "Todo"
+    status:
+      open: "Abrir"
+      closed: "Cerrado"
+      call: "Llamar"

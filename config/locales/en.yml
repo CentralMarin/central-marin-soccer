@@ -43,3 +43,7 @@ en:
         club: "Club: "
         state: "Field Status: "
         all: "All"
+    status:
+      open: "Open"
+      closed: "Closed"
+      call: "Call"
