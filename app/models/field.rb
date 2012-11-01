@@ -23,13 +23,13 @@ class Field < ActiveRecord::Base
 
   has_paper_trail
 
-  attr_accessible :name, :club, :rain_line, :address, :state_id
+  attr_accessible :name, :club, :rain_line, :address, :status
 
   validates :name,  :presence => true
   validates :club, :presence => true
   validates :rain_line, :presence => true
   validates :address, :presence => true
-  validates :state_id, :presence => true
+  validates :status, :presence => true
 
   before_save :set_latlng
 
@@ -37,28 +37,12 @@ class Field < ActiveRecord::Base
     admin_field_path(self)
   end
 
-  def state(sym)
-    self[:state_id]=STATES.index(sym)
+  def status_name
+    Field.statuses[status]
   end
 
-  def state
-    if I18n.locale == :es
-      SPANISH_STATES[read_attribute(:state_id)]
-    else
-      STATES[read_attribute(:state_id)]
-    end
-  end
-
-  def self.state_id(sym)
-    STATES.index(sym)
-  end
-
-  def self.states
-    if I18n.locale == :es
-      SPANISH_STATES
-    else
-      STATES
-    end
+  def self.statuses
+    [I18n.t('field.status.open'), I18n.t('field.status.closed'), I18n.t('field.status.call')]
   end
 
   def map_url
@@ -66,7 +50,7 @@ class Field < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    { :id => self.id, :name => self.name, :club => self.club, :rain_line => self.rain_line, :address => self.address, :lat => self.lat, :lng => self.lng, :state => self.state }
+    { :id => self.id, :name => self.name, :club => self.club, :rain_line => self.rain_line, :address => self.address, :lat => self.lat, :lng => self.lng, :status => self.status, :status_name => self.status_name   }
   end
 
   def to_s
@@ -74,9 +58,6 @@ class Field < ActiveRecord::Base
   end
 
   protected
-
-  STATES = [:open, :closed, :call]
-  SPANISH_STATES = ['abrir', 'cerrado', 'llamar']
 
   def set_latlng
 

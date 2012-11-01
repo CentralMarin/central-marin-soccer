@@ -6,7 +6,7 @@ FactoryGirl.define do
     f.name { Faker::Company.name }
     f.club { Faker::Company.catch_phrase }
     f.rain_line { Faker::PhoneNumber.phone_number }
-    f.state_id { rand(3) }
+    f.status { rand(3) }
     f.lat { Faker::Address.latitude }
     f.lng { Faker::Address.longitude }
     f.address { Faker::Address.street_address }

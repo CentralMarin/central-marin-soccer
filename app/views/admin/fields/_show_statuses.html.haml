@@ -1,0 +1,43 @@
+
+Notes:
+%ul
+  %li Use the All row to update all fields at once.
+  %li Changes to a field status are immediately saved.
+
+%table.index_table
+  %thead
+    %tr
+      %th Field
+      - Field.statuses.each_with_index do |status, index|
+        %th=link_to status, "#", {:title => "Click here to set all fields to #{status}", :onclick => "setAllFieldsStatus('#{index}')"}
+
+  %tbody
+    - @fields.each do |field|
+      %tr{:class => cycle('odd', 'even')}
+        %td
+          = field.name
+        - Field.statuses.each_with_index do |status, index|
+          %td
+            = radio_button_tag "#{field.id}", index, field.status == index, :class => "field"
+
+:javascript
+  function saveFieldsStatus(fields, status) {
+    $.get('update_fields_status', {fields: fields, status: status})
+  }
+
+  function setAllFieldsStatus(status) {
+    var changedFields = []
+    $('input[type=radio].field').each(function() {
+      if ($(this).attr("value") == status && $(this).prop('checked') == false) {
+        $(this).prop('checked', true)
+        changedFields.push($(this).prop("name"))
+      }
+    });
+    if (changedFields.length > 0) {
+      saveFieldsStatus(changedFields, status)
+    }
+  };
+
+  $('input[type=radio].field').change(function() {
+    saveFieldsStatus($(this).attr("name"), $(this).attr("value"))
+  });

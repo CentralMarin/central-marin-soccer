@@ -9,9 +9,7 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
     column :club
     column :rain_line
     column(:map_url) {|field| link_to 'directions', field.map_url}
-    column :state_id, :sortable => :'state_id' do |field|
-      Field::STATES[field.state_id]
-    end
+    column(:status) { |field| field.status_name }
     default_actions
 
   end
@@ -38,7 +36,9 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
                marginwidth: "0",
                src: map_url.html_safe
       end
-      row :state_id
+      row :status do
+        field.status_name
+      end
       row :created_at
       row :updated_at
     end
@@ -50,7 +50,8 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
       f.input :club
       f.input :rain_line
       f.input :address
-      f.input :state_id, :collection => Field::STATES.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "State"
+      f.input :status, :collection => Field::STATUS.each_with_index.map {|c, index| [c, index]}, :as => :select, :label => "Status"
+      #f.input :state_id, :collection => Field::STATES.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "State"
     end
     f.buttons
   end
@@ -71,15 +72,14 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
     render "layouts/history"
   end
 
-  collection_action :fields_status, :title => "test", :method => :get do
+  collection_action :fields_status, :title => "Field Status", :method => :get do
     @fields = Field.find_all_by_club('San Rafael')
 
-    render "admin/fields/_show_states"
+    render "admin/fields/_show_statuses"
   end
 
   collection_action :update_fields_status, :method => :get do
     fields = params[:fields]
-    state_id = params[:state_id].to_i
 
     if (fields.kind_of? String)
       fields = [fields]
@@ -88,7 +88,7 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
     fields.each do |field_param|
       id = field_param.to_i
       field = Field.find(id)
-      field.state_id = state_id.to_i
+      field.status = params[:status]
       field.save
     end
 
