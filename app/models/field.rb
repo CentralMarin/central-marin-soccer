@@ -38,11 +38,11 @@ class Field < ActiveRecord::Base
   end
 
   def status_name
-    STATUS[status]
+    Field.statuses[status]
   end
 
   def self.statuses
-    STATUS
+    [I18n.t('field.status.open'), I18n.t('field.status.closed'), I18n.t('field.status.call')]
   end
 
   def map_url
@@ -58,8 +58,6 @@ class Field < ActiveRecord::Base
   end
 
   protected
-
-  STATUS = [I18n.t('field.status.open'), I18n.t('field.status.closed'), I18n.t('field.status.call')]
 
   def set_latlng
 
