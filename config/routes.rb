@@ -9,7 +9,7 @@ CentralMarin::Application.routes.draw do
   # Active Admin
   mount Ckeditor::Engine => '/admin/ckeditor'
   ActiveAdmin.routes(self)
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :users, ActiveAdmin::Devise.config
 
   root :to => 'home#index'
 

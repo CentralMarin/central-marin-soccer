@@ -58,7 +58,8 @@ class NewsItem < ActiveRecord::Base
   end
 
   def has_translation
-    translations.find_by_locale('es').title != ''
+    translation = translations.find_by_locale('es')
+    translation && translation.title != ''
   end
 
   def to_param

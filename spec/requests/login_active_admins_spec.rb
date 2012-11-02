@@ -15,7 +15,7 @@ describe "login" do
 
   it "should successfully login" do
     coach = Factory(:coach)
-    adminUser = Factory(:admin_user, :roles => [Factory(:admin_role)])
+    adminUser = Factory(:user, :roles => [Factory(:admin_role)])
     visit admin_dashboard_path
 
     # should get redirected to login page

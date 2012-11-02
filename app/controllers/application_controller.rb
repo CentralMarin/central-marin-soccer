@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def user_for_paper_trail
-    admin_user_signed_in? ? current_admin_user : nil
+    user_signed_in? ? current_user : nil
   end
 
   #def populate_teams
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_ability
-    @current_ability ||= Ability.new(current_admin_user)
+    @current_ability ||= Ability.new(current_user)
   end
 
   before_filter :set_locale

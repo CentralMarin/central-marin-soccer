@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= AdminUser.new
+    user ||= User.new
 
     cannot :manage, :all
 

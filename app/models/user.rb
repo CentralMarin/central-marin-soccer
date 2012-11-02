@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: admin_users
+# Table name: users
 #
 #  id                     :integer          not null, primary key
 #  email                  :string(255)      default(""), not null
@@ -17,7 +17,7 @@
 #  updated_at             :datetime         not null
 #
 
-class AdminUser < ActiveRecord::Base
+class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
 
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
@@ -32,7 +32,7 @@ class AdminUser < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def admin_permalink
-    admin_admin_user_path(self)
+    admin_user_path(self)
   end
 
   def to_s

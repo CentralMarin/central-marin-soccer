@@ -1,13 +1,13 @@
-ActiveAdmin.register AdminUser, {:sort_order => "email_asc"} do
+ActiveAdmin.register User, {:sort_order => "email_asc"} do
 
-  menu :if => proc{ can?(:manage, AdminUser) }
+  menu :if => proc{ can?(:manage, User) }
 
   controller.authorize_resource
 
   index do
     column :email
-    column :roles do |admin_user|
-      admin_user.roles.join(", ").html_safe
+    column :roles do |user|
+      user.roles.join(", ").html_safe
     end
     column :current_sign_in_at
     column :last_sign_in_at
@@ -15,11 +15,11 @@ ActiveAdmin.register AdminUser, {:sort_order => "email_asc"} do
     default_actions
   end
 
-  show do |admin_user|
+  show do |user|
     attributes_table do
       row :email
       row :roles do
-        admin_user.roles.join("<br/>").html_safe
+        user.roles.join("<br/>").html_safe
       end
     end
   end
@@ -35,17 +35,17 @@ ActiveAdmin.register AdminUser, {:sort_order => "email_asc"} do
 
   controller do
     def show
-        @admin_user = AdminUser.find(params[:id])
-        @versions = @admin_user.versions
-        @admin_user = @admin_user.versions[params[:version].to_i].reify if params[:version]
+        @user = User.find(params[:id])
+        @versions = @user.versions
+        @user = @user.versions[params[:version].to_i].reify if params[:version]
         show! #it seems to need this
     end
   end
     sidebar :versions, :partial => "layouts/version", :only => :show
 
   member_action :history do
-    @admin_user = AdminUser.find(params[:id])
-    @versions = @admin_user.versions
+    @user = User.find(params[:id])
+    @versions = @user.versions
     render "layouts/history"
   end
 

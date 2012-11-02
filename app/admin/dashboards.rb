@@ -11,12 +11,12 @@ ActiveAdmin.register_page "Dashboard" do
 
     section "Recently updated content" do
 
-      if can?(:manage, AdminUser)
+      if can?(:manage, User)
         # Admin users should see all changes
         versions = Version.where('whodunnit is not null').order('id desc').limit(20)
       else
         # other users should only see their changes
-        versions = Version.order('id desc').find_all_by_whodunnit(current_admin_user, :limit => 20)
+        versions = Version.order('id desc').find_all_by_whodunnit(current_user, :limit => 20)
       end
 
       table_for versions do
@@ -36,7 +36,7 @@ ActiveAdmin.register_page "Dashboard" do
             when "Unknown user"
               v.whodunnit
             else
-              link_to AdminUser.find(v.whodunnit), admin_admin_user_path(v.whodunnit)
+              link_to User.find(v.whodunnit), admin_user_path(v.whodunnit)
           end
         end
       end
@@ -89,12 +89,12 @@ end
 
 #  section "Recently updated content" do
 #
-#    if can?(:manage, AdminUser)
+#    if can?(:manage, User)
 #      # Admin users should see all changes
 #      versions = Version.where('whodunnit is not null').order('id desc').limit(20)
 #    else
 #      # other users should only see their changes
-#      versions = Version.order('id desc').find_all_by_whodunnit(current_admin_user, :limit => 20)
+#      versions = Version.order('id desc').find_all_by_whodunnit(current_user, :limit => 20)
 #    end
 #
 #    table_for versions do
@@ -114,7 +114,7 @@ end
 #          when "Unknown user"
 #            v.whodunnit
 #          else
-#            link_to AdminUser.find(v.whodunnit), admin_admin_user_path(v.whodunnit)
+#            link_to User.find(v.whodunnit), admin_admin_user_path(v.whodunnit)
 #        end
 #      end
 #    end
