@@ -18,11 +18,7 @@
 #
 
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :roles
-
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
-
-  validates :roles, :presence => true
 
   has_paper_trail
 
@@ -40,7 +36,7 @@ class User < ActiveRecord::Base
   end
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role_ids
+  attr_accessible :email, :password, :password_confirmation, :remember_me
 
   #after_create { |admin| admin.send_reset_password_instructions }
 

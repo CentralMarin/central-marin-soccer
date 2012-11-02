@@ -1,9 +1,6 @@
 ActiveAdmin.register Player do
 
-
-  menu :if => proc{ can?(:manage, Player) }
-
-  controller.authorize_resource
+#  menu :if => proc{ can?(:manage, Player) }
 
   controller do
     def show

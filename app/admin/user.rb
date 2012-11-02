@@ -1,14 +1,9 @@
 ActiveAdmin.register User, {:sort_order => "email_asc"} do
 
-  menu :if => proc{ can?(:manage, User) }
-
-  controller.authorize_resource
+#  menu :if => proc{ can?(:manage, User) }
 
   index do
     column :email
-    column :roles do |user|
-      user.roles.join(", ").html_safe
-    end
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
@@ -18,9 +13,6 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
   show do |user|
     attributes_table do
       row :email
-      row :roles do
-        user.roles.join("<br/>").html_safe
-      end
     end
   end
 
@@ -28,7 +20,6 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
     f.inputs "Admin Details" do
       f.input :email
       f.input :password
-      f.input :roles, :as => :check_boxes, :collection => Role.all
     end
     f.buttons
   end

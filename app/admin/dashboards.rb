@@ -11,13 +11,13 @@ ActiveAdmin.register_page "Dashboard" do
 
     section "Recently updated content" do
 
-      if can?(:manage, User)
-        # Admin users should see all changes
-        versions = Version.where('whodunnit is not null').order('id desc').limit(20)
-      else
+      #if can?(:manage, User)
+      #  # Admin users should see all changes
+      #  versions = Version.where('whodunnit is not null').order('id desc').limit(20)
+      #else
         # other users should only see their changes
         versions = Version.order('id desc').find_all_by_whodunnit(current_user, :limit => 20)
-      end
+      #end
 
       table_for versions do
         column "Item" do |v|

@@ -8,7 +8,6 @@ gem 'paper_trail'
 gem 'ckeditor', '>=3.7.0.rc3'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'cancan'
 gem 'globalize3', :git => 'https://github.com/svenfuchs/globalize3.git'
 gem 'haml-rails', '~> 0.3.5'
 

@@ -1,8 +1,6 @@
 ActiveAdmin.register Field, {:sort_order => "name_asc"} do
 
-  menu :if => proc{ can?(:manage, Field) }
-
-  controller.authorize_resource
+#  menu :if => proc{ can?(:manage, Field) }
 
   index do
     column :name

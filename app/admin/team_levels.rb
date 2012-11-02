@@ -2,9 +2,7 @@
 
 ActiveAdmin.register TeamLevel do
 
-  menu :if => proc{ can?(:manage, TeamLevel) }, :label => 'Level', :parent => 'Teams'
-
-  controller.authorize_resource
+#  menu :if => proc{ can?(:manage, TeamLevel) }, :label => 'Level', :parent => 'Teams'
 
   show do |level|
     attributes_table do
