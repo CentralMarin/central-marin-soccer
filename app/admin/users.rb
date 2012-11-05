@@ -2,8 +2,13 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
 
 #  menu :if => proc{ can?(:manage, User) }
 
+# TODO: Provide a change password screen
+
   index do
     column :email
+    column :roles do |user|
+      user.show_roles
+    end
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
@@ -13,13 +18,20 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
   show do |user|
     attributes_table do
       row :email
+      row :roles do
+        user.show_roles
+      end
     end
   end
 
   form do |f|
     f.inputs "Admin Details" do
       f.input :email
-      f.input :password
+      if f.object.new_record?
+        f.input :password
+        f.input :password_confirmation
+      end
+      f.input :roles, :as => :check_boxes, :collection => User::ROLES
     end
     f.buttons
   end
