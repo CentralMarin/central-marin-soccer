@@ -2,6 +2,14 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
 
   menu :if => proc{ can?(:manage, User) }
 
+  scope :all, default: true
+  User::ROLES.each_with_index do |role, index|
+    self.send(:scope, role.to_sym) do |users|
+      mask = 1 << index
+      users.where('roles_mask & ? = ?', mask, mask)
+    end
+  end
+
 # TODO: Provide a change password screen
 
   index do
