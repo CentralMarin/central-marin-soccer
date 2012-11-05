@@ -16,8 +16,7 @@ class Ability
   end
 
   def admin
-    team_manager
-    #can :manage, Bill
+    can :manage, :all
   end
 
   def board_member
