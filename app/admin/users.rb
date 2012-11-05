@@ -10,8 +10,6 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
     end
   end
 
-# TODO: Provide a change password screen
-
   index do
     column :email
     column :roles do |user|
@@ -35,10 +33,6 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
   form do |f|
     f.inputs "Admin Details" do
       f.input :email
-      if f.object.new_record?
-        f.input :password
-        f.input :password_confirmation
-      end
       f.input :roles, :as => :check_boxes, :collection => User::ROLES
     end
     f.buttons
