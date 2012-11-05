@@ -1,7 +1,7 @@
 # encoding: utf-8
 ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
 
-#  menu :if => proc{ can?(:manage, Coach) }
+  menu :if => proc{ can?(:manage, Coach) }
 
   index do
     column :name

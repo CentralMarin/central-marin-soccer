@@ -1,6 +1,6 @@
 ActiveAdmin.register NewsItem do
 
-#  menu :if => proc{ can?(:manage, NewsItem) }, :label => 'News'
+  menu :if => proc{ can?(:manage, NewsItem) }, :label => 'News'
 
   filter :title
   filter :category

@@ -1,6 +1,6 @@
 ActiveAdmin.register Team, {:sort_order => "age_asc"} do
 
- menu :label => 'Teams', :parent => 'Teams'
+ menu if: proc{ can?(:manage, Team) }, :label => 'Teams', :parent => 'Teams'
 
  index do
     column :age

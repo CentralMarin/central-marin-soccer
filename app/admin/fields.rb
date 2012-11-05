@@ -1,6 +1,6 @@
 ActiveAdmin.register Field, {:sort_order => "name_asc"} do
 
-#  menu :if => proc{ can?(:manage, Field) }
+  menu :if => proc{ can?(:manage, Field) }
 
   index do
     column :name
