@@ -1,6 +1,6 @@
 ActiveAdmin.register User, {:sort_order => "email_asc"} do
 
-#  menu :if => proc{ can?(:manage, User) }
+  menu :if => proc{ can?(:manage, User) }
 
 # TODO: Provide a change password screen
 
