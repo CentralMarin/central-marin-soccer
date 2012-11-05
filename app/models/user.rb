@@ -20,7 +20,7 @@
 class User < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  ROLES = %w[admin board_member team_manager field_manager]
+  ROLES = %w[admin board_member team_manager field_manager coach]
 
   has_paper_trail
 
