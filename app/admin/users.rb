@@ -10,6 +10,8 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
     end
   end
 
+  filter :email
+
   index do
     column :email
     column :roles do |user|
