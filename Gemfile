@@ -1,11 +1,12 @@
 source 'http://rubygems.org'
 
 gem 'rails', '>= 3.2.1'
+gem 'jquery-rails'
 
 gem 'activeadmin', '>= 0.5'
 gem 'meta_search', '>= 1.1.0.pre'
 gem 'paper_trail'
-gem 'ckeditor', '>=3.7.0.rc3'
+gem 'ckeditor', '3.7.3'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'globalize3', :git => 'https://github.com/svenfuchs/globalize3.git'
@@ -23,7 +24,6 @@ group :assets do
   gem 'uglifier', '~> 1.3.0'
 end
 
-gem 'jquery-rails'
 
 group :development, :test do
   gem 'rspec-rails'

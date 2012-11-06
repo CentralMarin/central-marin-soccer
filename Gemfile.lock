@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/jnicklas/capybara.git
-  revision: 7e661d2e6aa0866725eebb8bf1831b56959bd032
+  revision: 94ef71852c5e2d14cd1fa4ef09461bb042a13a00
   specs:
     capybara (2.0.0.beta4)
       mime-types (>= 1.16)
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/svenfuchs/globalize3.git
-  revision: f4e0398883b207c5826abff2ad94e8183d85da16
+  revision: d0ab3bd587019bbb58c321790bf511fa70dd4c7c
   specs:
     globalize3 (0.2.0)
       activemodel (>= 3.0.0)
@@ -263,7 +263,7 @@ DEPENDENCIES
   cancan
   capybara!
   carrierwave
-  ckeditor (>= 3.7.0.rc3)
+  ckeditor (= 3.7.3)
   coffee-rails (~> 3.2.2)
   database_cleaner
   factory_girl_rails

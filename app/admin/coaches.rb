@@ -1,4 +1,3 @@
-# encoding: utf-8
 ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
 
   menu :if => proc{ can?(:manage, Coach) }
@@ -27,11 +26,17 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
         image_tag coach.image_url
       end
       row :bio do
-        coach.bio.html_safe if coach.bio
-      end
-      row 'Biografía' do
-        translation = coach.translations.find_by_locale('es')
-        translation.bio.html_safe if translation
+        I18n.available_locales.each do |locale|
+          h3 I18n.t( "coach.bio", locale: locale)
+          div do
+            translated_coach = coach.translations.where(locale: locale).first
+            if (translated_coach.nil? || translated_coach.bio.nil?)
+              h4 b "Missing"
+            else
+              h4 translated_coach.bio.html_safe
+            end
+          end
+        end
       end
       row :team do
         coach.teams.join("<br/>").html_safe
@@ -68,12 +73,9 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
       end
       edit!
     end
-
   end
 
-
   sidebar :versions, :partial => "layouts/version", :only => :show
-
 
   member_action :history do
     @coach = Coach.find(params[:id])
