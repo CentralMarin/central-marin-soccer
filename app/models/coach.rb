@@ -44,5 +44,21 @@ class Coach < ActiveRecord::Base
   def as_json(options = {})
     { :name => self.name, :bio => self.bio, :teams => teams.as_json }
   end
+
+  class Translation
+    include Rails.application.routes.url_helpers # needed for _path helpers to work in models
+
+    attr_accessible :bio
+
+    def admin_permalink
+      admin_coach_path(self)
+    end
+
+    def to_s
+      coach = Coach.find(self['coach_id'])
+      coach.name
+    end
+
+  end
 end
 
