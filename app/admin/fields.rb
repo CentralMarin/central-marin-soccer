@@ -48,8 +48,7 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
       f.input :club
       f.input :rain_line
       f.input :address
-      f.input :status, :collection => Field::STATUS.each_with_index.map {|c, index| [c, index]}, :as => :select, :label => "Status"
-      #f.input :state_id, :collection => Field::STATES.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "State"
+      f.input :status, :collection => Field.statuses.each_with_index.map {|c, index| [c, index]}, :as => :select, :label => "Status"
     end
     f.buttons
   end
