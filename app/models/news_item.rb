@@ -21,7 +21,7 @@ class NewsItem < ActiveRecord::Base
   accepts_nested_attributes_for :translations, :allow_destroy => true
   has_many :news_item_translations
 
-  NEWS_CATEGORY = [:Club, :Team, :Coach, :Referee]
+  NEWS_CATEGORY = [:club, :team, :coach, :referee, :tournament]
 
   attr_accessible :title, :body, :image, :author, :category_id, :subcategory_id, :carousel, :translations_attributes
   mount_uploader :image, ImageUploader

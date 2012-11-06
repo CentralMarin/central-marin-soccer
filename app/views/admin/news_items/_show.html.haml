@@ -1,6 +1,6 @@
-= stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/jquery-ui.css'
 
-= image_tag (news.image) if (news.image.to_s)
+= image_tag (@news_item.image) unless (@news_item.image.blank?)
+%h1= @news_item.image
 
 %div.language-tabs
   %ul.language-selection
@@ -13,15 +13,13 @@
       %p= lang.body.html_safe
 
 %ul
-  %li= "Category: #{news.category.to_s}"
-  - unless news.subcategory_id != ''
-    %li= Team.to_team_name_with_coach(news.subcategory_id)
-  - if news.carousel
+  %li= "Category: #{@news_item.category.to_s}"
+  - unless @news_item.subcategory_id != ''
+    %li= Team.to_team_name_with_coach(@news_item.subcategory_id)
+  - if @news_item.carousel
     %li= "Show in carousel"
-  %li= "Created at #{news.created_at}"
-  %li= "Last updated #{news.updated_at}"
-
-= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js'
+  %li= "Created at #{@news_item.created_at}"
+  %li= "Last updated #{@news_item.updated_at}"
 
 :javascript
   $('.language-tabs').tabs();
