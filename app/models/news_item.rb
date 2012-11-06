@@ -31,8 +31,6 @@ class NewsItem < ActiveRecord::Base
   validates :body,        :presence => true
   validates :category_id, :presence => true
 
-  before_save :set_author
-
   def page_title
     self.to_s
   end
@@ -66,19 +64,20 @@ class NewsItem < ActiveRecord::Base
     "#{id} #{to_s}".parameterize
   end
 
-protected
+  class Translation
+    include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  def set_author
-    #self.author = user_for_paper_trail
-  end
+    attr_accessible :title, :body
 
-  def create_missing_translations
-    ADDITIONAL_LOCALES.each do |lang|
-      t = translations.find_by_locale(lang[0].to_s)
-      if t.nil?
-        translations.create(:locale => lang[0].to_s)
-      end
+    def admin_permalink
+      admin_news_item_path(self)
     end
+
+    def to_s
+      news_item = NewsItem.find(self['news_item_id'])
+      news_item.title
+    end
+
   end
 
 end
