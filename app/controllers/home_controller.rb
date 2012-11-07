@@ -9,6 +9,6 @@ class HomeController < InheritedResources::Base
   protected
 
   def set_section_name
-          @top_level_section_name = 'menu.home'
+    @top_level_section_name = 'menu.home'
   end
 end

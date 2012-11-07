@@ -10,7 +10,7 @@ module ApplicationHelper
        ['menu.coaches', coaches_path],
        ['menu.tournaments', tournaments_path],
        ['menu.referees', referees_path],
-       ['menu.news', articles_index_path]
+       ['menu.news', articles_path]
     ].map do |item|
       menu_item item, (@top_level_section_name == item[0]) ? 'current' : 'single-link'
    end

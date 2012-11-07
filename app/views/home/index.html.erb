@@ -16,13 +16,13 @@
 	  <img src="/assets/sample_news.png" />
 	  <img src="/assets/sample_news.png" />
 <!--
-        <% @article.each_with_index do |article, i| %>
+        <% @articles.each_with_index do |article, i| %>
             <%= link_to image_tag(article.image_url.to_s, :id=> "img" + i.to_s) + article.title, article %> 
         <% end  %>
     </div>
     <div class="ws_bullets">
         <div>
-        <% @article.each_with_index do |article, i| %>
+        <% @articles.each_with_index do |article, i| %>
             <a href="#img<%=i%>"><%= image_tag article.image_url(:thumb).to_s %><%=i + 1%></a>
         <% end %>
         </div>
