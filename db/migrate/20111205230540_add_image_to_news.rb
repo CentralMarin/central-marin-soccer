@@ -1,5 +1,5 @@
 class AddImageToNews < ActiveRecord::Migration
   def change
-    add_column :news_items, :image, :string
+    add_column :article, :image, :string
   end
 end

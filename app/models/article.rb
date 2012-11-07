@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: news_items
+# Table name: articles
 #
 #  id             :integer          not null, primary key
 #  title          :string(255)
@@ -19,9 +19,9 @@ class Article < ActiveRecord::Base
 
   translates :title, :body, versioning: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
-  has_many :news_item_translations
+  has_many :article_translations
 
-  NEWS_CATEGORY = [:club, :team, :coach, :referee, :tournament]
+  ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
 
   attr_accessible :title, :body, :image, :author, :category_id, :subcategory_id, :carousel, :translations_attributes
   mount_uploader :image, ImageUploader
@@ -36,7 +36,7 @@ class Article < ActiveRecord::Base
   end
 
   def admin_permalink
-    admin_news_item_path(self)
+    admin_article_item_path(self)
   end
 
   def to_s
@@ -44,20 +44,20 @@ class Article < ActiveRecord::Base
   end
 
   def category=(sym)
-    self[:category_id]=NEWS_CATEGORY.index(sym)
+    self[:category_id]=ARTICLE_CATEGORY.index(sym)
   end
 
   def category
-    NEWS_CATEGORY[read_attribute(:category_id)]
+    ARTICLE_CATEGORY[read_attribute(:category_id)]
   end
 
   def self.category_id(sym)
-    NEWS_CATEGORY.index(sym)
+    ARTICLE_CATEGORY.index(sym)
   end
 
   def has_translation
     translation = translations.find_by_locale('es')
-    translation && translation.title != ''
+    translation.blank?
   end
 
   def to_param
@@ -70,12 +70,12 @@ class Article < ActiveRecord::Base
     attr_accessible :title, :body
 
     def admin_permalink
-      admin_news_item_path(self)
+      admin_article_path(self)
     end
 
     def to_s
-      news_item = Article.find(self['news_item_id'])
-      news_item.title
+      article = Article.find(self['article_id'])
+      article.title
     end
 
   end

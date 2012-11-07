@@ -2,7 +2,7 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :news_item do |f|
+  factory :article do |f|
     f.title { Faker::Lorem.sentence }
     f.body { Faker::Lorem.paragraphs }
     f.author { Faker::Name.name }

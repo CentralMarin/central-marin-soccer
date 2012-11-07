@@ -3,10 +3,10 @@
 <h2 class="grid_12">Coached by <%= @team.coach.to_s %></h2>
 <!-- Nice to have the same overlay we use on the coach page available here when clicking on the coach -->
 
-<% @news_items.each do |news_item| %>
-    <div class="grid_12"><%= news_item.title %></div>
-    <div class="grid_12"><%= image_tag news_item.image %></div>
-    <div class="grid_12"><%= news_item.body.html_safe %></div>
+<% @articles.each do |article| %>
+    <div class="grid_12"><%= article.title %></div>
+    <div class="grid_12"><%= image_tag article.image %></div>
+    <div class="grid_12"><%= article.body.html_safe %></div>
     <hr class="grid_12"/>
 <% end %>
 

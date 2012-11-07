@@ -3,7 +3,7 @@ class HomeController < InheritedResources::Base
   before_filter :set_section_name
 
   def index
-    @news_items = NewsItem.all(:limit => 4)
+    @articles = Article.all(:limit => 4)
   end
 
   protected

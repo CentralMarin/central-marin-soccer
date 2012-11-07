@@ -1,27 +1,27 @@
 
 <p>
-  <%= image_tag @news_item.image_url.to_s %>
+  <%= image_tag @article.image_url.to_s %>
 </p>
 
 <p>
   <b>Title:</b>
-  <%= @news_item.title %>
+  <%= @article.title %>
 </p>
 
 <p>
   <b>Body:</b>
-  <%= @news_item.body.html_safe %>
+  <%= @article.body.html_safe %>
 </p>
 
 <p>
   <b>Author:</b>
-  <%= @news_item.author %>
+  <%= @article.author %>
 </p>
 
 <p>
   <b>Carousel:</b>
-  <%= @news_item.carousel %>
+  <%= @article.carousel %>
 </p>
 
-<%= link_to 'News', news_index_path %>
+<%= link_to 'Articles', article_index_path %>
 

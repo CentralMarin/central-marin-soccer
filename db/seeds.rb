@@ -121,5 +121,5 @@ Team.create(age: '18', gender: Team::GENDERS[1], team_level: team_level_blank, n
 Team.create(age: '19', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
 Team.create(age: '19', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
 
-User.create(:email => 'ryan@robinett.org', :password => 'password', :password_confirmation => 'password')
+User.create(:email => 'ryan@robinett.org', roles: User::ROLES)
 

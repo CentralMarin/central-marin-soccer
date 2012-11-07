@@ -13,8 +13,8 @@ CentralMarin::Application.routes.draw do
 
   root :to => 'home#index'
 
-  match '/news/', :to => 'news_items#index', :as => 'news_index'
-  match '/news/:id', :to => 'news_items#show', :as => 'news_item'
+  match '/news/', :to => 'articles#index', :as => 'articles'
+  match '/news/:id', :to => 'articles#show', :as => 'article'
 
   match '/coaches/', :to => 'coaches#index', :as => 'coaches'
   match '/coaches/:id', :to => 'coaches#show', :as => 'coach'

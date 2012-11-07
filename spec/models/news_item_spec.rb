@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: news_items
+# Table name: articles
 #
 #  id             :integer          not null, primary key
 #  title          :string(255)
@@ -18,36 +18,36 @@
 
 require 'spec_helper'
 
-describe NewsItem do
+describe Article do
   it "has a valid factory" do
-    FactoryGirl.create(:news_item)
+    FactoryGirl.create(:article)
   end
 
   it "requires a title" do
-    FactoryGirl.build(:news_item, title: nil).should_not be_valid
+    FactoryGirl.build(:article, title: nil).should_not be_valid
   end
 
   it "rejects titles that are too long" do
     long_title = "a" * 256
-    FactoryGirl.build(:news_item, title: long_title).should_not be_valid
+    FactoryGirl.build(:article, title: long_title).should_not be_valid
   end
 
   it "requires body" do
-    FactoryGirl.build(:news_item, body: nil).should_not be_valid
+    FactoryGirl.build(:article, body: nil).should_not be_valid
   end
 
   it "saves settings properly" do
 
-    news_item = FactoryGirl.create(:news_item)
-    news_item.save
+    article = FactoryGirl.create(:article)
+    article.save
 
-    db_news_item = NewsItem.last
-    db_news_item.title.should == news_item.title
-    db_news_item.body.should == news_item.body
-    db_news_item.author.should == news_item.author
-    db_news_item.carousel.should == news_item.carousel
-    db_news_item.category_id.should == news_item.category_id
-    db_news_item.subcategory_id.should == news_item.subcategory_id
+    db_article = Article.last
+    db_article.title.should == article.title
+    db_article.body.should == article.body
+    db_article.author.should == article.author
+    db_article.carousel.should == article.carousel
+    db_article.category_id.should == article.category_id
+    db_article.subcategory_id.should == article.subcategory_id
   end
 
   context "instance methods" do
@@ -57,21 +57,21 @@ describe NewsItem do
   context "translations" do
     before(:each) do
       I18n.locale = :en
-      @news_item = NewsItem.create title: "Sample Title", body: "HTML Body", author: "Sample Author", carousel: false, category_id: NewsItem::NEWS_CATEGORY[0]
+      @article = Article.create title: "Sample Title", body: "HTML Body", author: "Sample Author", carousel: false, category_id: Article::ARTICLE_CATEGORY[0]
       I18n.locale = :es
-      @news_item.update_attributes title: "Muestra Título", body: "HTML Cuerpo"
+      @article.update_attributes title: "Muestra Título", body: "HTML Cuerpo"
     end
 
     it "should read the correct translation" do
-      @news_item = NewsItem.last
+      @article = Article.last
 
       I18n.locale = :en
-      @news_item.title.should == "Sample Title"
-      @news_item.body.should == "HTML Body"
+      @article.title.should == "Sample Title"
+      @article.body.should == "HTML Body"
 
       I18n.locale = :es
-      @news_item.title.should == "Muestra Título"
-      @news_item.body.should == "HTML Cuerpo"
+      @article.title.should == "Muestra Título"
+      @article.body.should == "HTML Cuerpo"
     end
   end
 end

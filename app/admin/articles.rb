@@ -1,6 +1,6 @@
 ActiveAdmin.register Article do
 
-  menu :if => proc{ can?(:manage, Article) }, :label => 'News'
+  menu :if => proc{ can?(:manage, Article) }, :label => 'Articles'
 
   filter :title
   filter :category
@@ -10,19 +10,19 @@ ActiveAdmin.register Article do
   filter :updated_at
 
   index do
-    column :title do |news|
-      news.translations.find_by_locale('en').title
+    column :title do |articles|
+      articles.translations.find_by_locale('en').title
     end
     column :author
-    column 'Has Translation', :sortable => :"news.has_translation()" do |news|
-      news.has_translation
+    column 'Has Translation', :sortable => :"article.has_translation()" do |articles|
+      articles.has_translation
     end
     column :carousel
-    column :category do |news|
-      news.category.to_s
+    column :category do |articles|
+      articles.category.to_s
     end
-    column :subcategory_id do |news|
-      Team.to_team_name_with_coach(news.subcategory_id)
+    column :subcategory_id do |articles|
+      Team.to_team_name_with_coach(articles.subcategory_id)
     end
 
     default_actions
@@ -36,24 +36,24 @@ ActiveAdmin.register Article do
 
   controller do
     def show
-        @news = Article.find(params[:id])
-        @versions = @news.versions
-        @news = @news.versions[params[:version].to_i].reify if params[:version]
+        @article = Article.find(params[:id])
+        @versions = @article.versions
+        @article = @article.versions[params[:version].to_i].reify if params[:version]
         show!
     end
 
     def new
-      @news_item = Article.new
+      @article = Article.new
       ADDITIONAL_LOCALES.each do |lang|
-        @news_item.translations.find_or_initialize_by_locale(lang[0])
+        @article.translations.find_or_initialize_by_locale(lang[0])
       end
       new!
     end
 
     def edit
-      @news_item = Article.find(params[:id])
+      @article = Article.find(params[:id])
       ADDITIONAL_LOCALES.each do |lang|
-        @news_item.translations.find_or_initialize_by_locale(lang[0])
+        @article.translations.find_or_initialize_by_locale(lang[0])
       end
       edit!
     end
@@ -62,8 +62,8 @@ ActiveAdmin.register Article do
   sidebar :versions, :partial => "layouts/version", :only => :show
 
   member_action :history do
-    @news = Article.find(params[:id])
-    @versions = @news.versions
+    @article = Article.find(params[:id])
+    @versions = @article.versions
     render "layouts/history"
   end
 

@@ -1,4 +1,4 @@
-<h1>Listing news</h1>
+<h1>Listing articles</h1>
 
 <table>
   <tr>
@@ -11,13 +11,13 @@
     <th></th>
   </tr>
 
-<% @news_items.each do |news_item| %>
+<% @article.each do |article| %>
   <tr>
-    <td><%= news_item.title %></td>
-    <td><%= news_item.body.html_safe %></td>
-    <td><%= news_item.author %></td>
-    <td><%= news_item.carousel %></td>
-    <td><%= link_to 'Show', news_item %></td>
+    <td><%= article.title %></td>
+    <td><%= article.body.html_safe %></td>
+    <td><%= article.author %></td>
+    <td><%= article.carousel %></td>
+    <td><%= link_to 'Show', article %></td>
   </tr>
 <% end %>
 </table>
