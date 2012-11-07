@@ -1,4 +1,4 @@
-class NewsItemsController < InheritedResources::Base
+class ArticlesController < InheritedResources::Base
 
   before_filter :set_section_name
 

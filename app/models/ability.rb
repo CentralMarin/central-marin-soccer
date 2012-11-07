@@ -30,4 +30,8 @@ class Ability
 
   def player
   end
+
+  def coach
+
+  end
 end

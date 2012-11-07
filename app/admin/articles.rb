@@ -1,6 +1,6 @@
-ActiveAdmin.register NewsItem do
+ActiveAdmin.register Article do
 
-  menu :if => proc{ can?(:manage, NewsItem) }, :label => 'News'
+  menu :if => proc{ can?(:manage, Article) }, :label => 'News'
 
   filter :title
   filter :category
@@ -36,14 +36,14 @@ ActiveAdmin.register NewsItem do
 
   controller do
     def show
-        @news = NewsItem.find(params[:id])
+        @news = Article.find(params[:id])
         @versions = @news.versions
         @news = @news.versions[params[:version].to_i].reify if params[:version]
         show!
     end
 
     def new
-      @news_item = NewsItem.new
+      @news_item = Article.new
       ADDITIONAL_LOCALES.each do |lang|
         @news_item.translations.find_or_initialize_by_locale(lang[0])
       end
@@ -51,7 +51,7 @@ ActiveAdmin.register NewsItem do
     end
 
     def edit
-      @news_item = NewsItem.find(params[:id])
+      @news_item = Article.find(params[:id])
       ADDITIONAL_LOCALES.each do |lang|
         @news_item.translations.find_or_initialize_by_locale(lang[0])
       end
@@ -62,7 +62,7 @@ ActiveAdmin.register NewsItem do
   sidebar :versions, :partial => "layouts/version", :only => :show
 
   member_action :history do
-    @news = NewsItem.find(params[:id])
+    @news = Article.find(params[:id])
     @versions = @news.versions
     render "layouts/history"
   end

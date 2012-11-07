@@ -14,7 +14,7 @@
 #  subcategory_id :integer
 #
 
-class NewsItem < ActiveRecord::Base
+class Article < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
   translates :title, :body, versioning: true
@@ -74,7 +74,7 @@ class NewsItem < ActiveRecord::Base
     end
 
     def to_s
-      news_item = NewsItem.find(self['news_item_id'])
+      news_item = Article.find(self['news_item_id'])
       news_item.title
     end
 

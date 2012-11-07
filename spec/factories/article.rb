@@ -1,4 +1,4 @@
-# spec/factories/news_item.rb
+# spec/factories/article.rb
 require 'faker'
 
 FactoryGirl.define do
