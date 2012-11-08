@@ -6,7 +6,7 @@
 */
 
     div.overlay.black {
-        background-image:url(http://static.flowplayer.org/tools/img/overlay/transparent.png);
+        background-image:url(/assets/transparent.png);
         color:#fff;
     }
     div.overlay h2 {
@@ -21,7 +21,7 @@
         display:none;
 
         /* styling */
-        background-img:url(http://static.flowplayer.org/tools/img/overlay/white.png);
+        background-img:url(/assets/white.png);
         padding:35px;
         width:640px;
     }
@@ -36,7 +36,7 @@
     }
     /* close button positioned on upper right corner */
     .overlay .close {
-        background-image:url(http://static.flowplayer.org/tools/img/overlay/close.png);
+        background-image:url(/assets/close.png);
         position:absolute;
         right:5px;
         top:5px;

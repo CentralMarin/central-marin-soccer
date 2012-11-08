@@ -17,7 +17,7 @@
 <hr class="grid_16" />
 <h2 class="grid_16"><%= t 'coach.staff' %></h2>
 <% @coaches.each_with_index do |coach, index| %>
-    <% if index % 6 == 0 %> <div class="clear"></div><% end %>
+    <% if index % 8 == 0 %> <div class="clear"></div><% end %>
     <div class="grid_2 coach">
         <%= link_to "##{coach.id}", :class => 'coachlink', :rel => "#coach#{coach.id}", :data => {:coach_id => "#{coach.id}"} do %>
             <%= image_tag coach.image_url, :alt => coach.name, :id => "coach-img-#{coach.id}" %><br/><%= coach.name %>
