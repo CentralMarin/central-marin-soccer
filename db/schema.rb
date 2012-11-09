@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121107001534) do
+ActiveRecord::Schema.define(:version => 20121104233035) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -37,22 +37,22 @@ ActiveRecord::Schema.define(:version => 20121107001534) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "article_translations", ["article_id"], :name => "index_news_item_translations_on_news_item_id"
-  add_index "article_translations", ["locale"], :name => "index_news_item_translations_on_locale"
+  add_index "article_translations", ["article_id"], :name => "index_article_translations_on_article_id"
+  add_index "article_translations", ["locale"], :name => "index_article_translations_on_locale"
 
   create_table "articles", :force => true do |t|
     t.string   "title"
     t.text     "body"
     t.string   "author"
-    t.boolean  "carousel"
+    t.string   "image"
     t.integer  "category_id"
+    t.integer  "subcategory_id"
+    t.boolean  "carousel"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.string   "image"
-    t.integer  "subcategory_id"
   end
 
-  add_index "articles", ["subcategory_id"], :name => "index_news_items_on_subcategory_id"
+  add_index "articles", ["subcategory_id"], :name => "index_articles_on_subcategory_id"
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
