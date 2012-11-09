@@ -23,35 +23,30 @@
             <%= image_tag coach.image_url, :alt => coach.name, :id => "coach-img-#{coach.id}" %><br/><%= coach.name %>
         <% end %>
     </div>
-    <div class='overlay black' id='<%= "coach#{coach.id}" %>'>
-        <div class="contentWrap"></div>
+    <div id='<%= "coach#{coach.id}" %>'>
     </div>
 <% end %>
 
 <script id='CoachTemplate' type='text/html'>
-    <table width="100%">
-        <tr>
-            <td>
-                <img class="coachImage" src='{{=coachImageUrl}}'/>
-                <div>
-                    <H3>{{=name}}</H3>
-                    <p>{{=bio!}}</p>h
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <H3><%= t "coach.teams" %></H3>
-                <ul>
-                    {{#each teams}}
-                    <li><a href='/teams/{{=id}}'>{{=name}}</a></li>
-                    {{/each}}
-                </ul>
-            </td>
-        </tr>
-    </table>
+    <div id='simplemodal'>
+        <img class="coachImage" src="{{=coachImageUrl}}"/>
+        <div>
+            <h3>{{=name}}</h3>
+            <p>{{=bio!}}</p>
+        </div>
+        <div class="teams">
+            <h3><%= t "coach.teams" %></h3>
+            <ul>
+                {{#each teams}}
+                <li><a href="/teams/{{=id}}">{{=name}}</a></li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
 </script>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 <% content_for :javascript do %>
 <%= javascript_include_tag "coaches" %>
 

@@ -5,47 +5,30 @@
  *= require_self
 */
 
-    div.overlay.black {
-        background-image:url(/assets/transparent.png);
-        color:#fff;
-    }
-    div.overlay h2 {
-        margin:10px 0 -9px 0;
-        font-weight:bold;
-        font-size:14px;
-    }
-    /* the overlayed element */
-    .overlay {
+/* Overlay */
+#simplemodal-overlay {background-color:#000; cursor:wait;}
 
-        /* must be initially hidden */
-        display:none;
+/* Container */
+#simplemodal-container {height:360px; width:600px; color:#bbb; background-color:#333; border:4px solid #444; padding:12px;}
+#simplemodal-container .simplemodal-data {padding:8px;}
+#simplemodal-container a {color:#ddd;}
+#simplemodal-container a.modalCloseImg {background:url(/assets/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+#simplemodal-container h3 {color:#84b8d9; margin: 0 0 0 0;}
 
-        /* styling */
-        background-img:url(/assets/white.png);
-        padding:35px;
-        width:640px;
-    }
+#simplemodal .teams {
+    clear: left;
+    padding-top: 10px;
+}
+.coach {
+    text-align: center;
+}
 
-    .coach {
-        text-align: center;
-    }
+.overlay .contentWrap {
+    overflow-y:auto;
+    height: 500px;
+}
 
-    .overlay .contentWrap {
-        overflow-y:auto;
-        height: 500px;
-    }
-    /* close button positioned on upper right corner */
-    .overlay .close {
-        background-image:url(/assets/close.png);
-        position:absolute;
-        right:5px;
-        top:5px;
-        cursor:pointer;
-        height:35px;
-        width:35px;
-    }
-
-    .coachImage {
-        float: left;
-        margin: 0 10px 0 0;
-    }
+.coachImage {
+    float: left;
+    margin: 0 10px 0 0;
+}
