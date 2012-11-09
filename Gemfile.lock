@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/jnicklas/capybara.git
-  revision: 94ef71852c5e2d14cd1fa4ef09461bb042a13a00
+  revision: 6446eac5a3f245d35a22829ec91a57d5c881971e
   specs:
     capybara (2.0.0.beta4)
       mime-types (>= 1.16)
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/svenfuchs/globalize3.git
-  revision: d0ab3bd587019bbb58c321790bf511fa70dd4c7c
+  revision: 076de8385b3f0594184117d08da0f2e22d5f0af8
   specs:
     globalize3 (0.2.0)
       activemodel (>= 3.0.0)
@@ -73,7 +73,7 @@ GEM
       thor
     builder (3.0.4)
     cancan (1.6.8)
-    carrierwave (0.7.0)
+    carrierwave (0.7.1)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
     childprocess (0.3.6)
@@ -110,7 +110,7 @@ GEM
     ffi (1.1.5)
     formtastic (2.2.1)
       actionpack (>= 3.0)
-    guard (1.5.3)
+    guard (1.5.4)
       listen (>= 0.4.2)
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
