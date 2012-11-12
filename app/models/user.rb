@@ -20,19 +20,13 @@
 class User < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  ROLES = %w[admin board_member team_manager field_manager coach]
-  ADMIN_ROLE_INDEX = 0
-  BOARD_MEMBER_ROLE_INDEX = 1
-  TEAM_MANAGER_ROLE_INDEX = 2
-  FIELD_MANAGER_ROLE_INDEX = 3
-  COACH_ROLE_INDEX = 4
+  ROLES = [:admin, :board_member, :team_manager, :field_manager, :coach]
 
   has_paper_trail
 
   validates :email, :presence =>true,
             :uniqueness=>true
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   def admin_permalink
@@ -48,15 +42,15 @@ class User < ActiveRecord::Base
 
   after_create { |admin| admin.send_reset_password_instructions }
 
-  def password_required?
-    new_record? ? false : super
-  end
-
   def roles=(roles)
-    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
+    roles = roles.collect {|r| r.to_sym} unless roles.length > 0 && roles[0].kind_of?(Symbol)
+    self.roles_mask = (roles & ROLES).map do |r|
+      2**ROLES.index(r) # Get integer representation of bits
+    end.inject(0, :+) # Add all to get an int we can store in the db
   end
 
   def roles
+    # return an array of the roles
     ROLES.reject do |r|
       ((roles_mask || 0) & 2**ROLES.index(r)).zero?
     end
@@ -66,9 +60,24 @@ class User < ActiveRecord::Base
     roles.include?(role.to_s)
   end
 
-  def show_roles
-    self.roles.collect {|role| role.capitalize }.join(', ')
+  def self.show_role(role)
+    role.capitalize
   end
+
+  def self.show_roles
+    ROLES.collect {|role| User.show_role(role)}
+  end
+
+  def show_roles
+    self.roles.collect {|role| User.show_role(role) }.join(', ')
+  end
+
+protected
+  # TODO: See if we can remove password from attr_accessible
+  def password_required?
+    new_record? ? false : super
+  end
+
 end
 
 
