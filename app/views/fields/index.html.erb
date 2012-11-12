@@ -3,9 +3,9 @@
     <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/dark-hive/jquery-ui.css" %>
 <% end %>
 
-<h1 class="grid_12"><%= t 'field.heading' %></h1>
+<h1 class="grid_16"><%= t 'field.heading' %></h1>
 
-<div class="grid_12">
+<div class="grid_16">
     <form id="filter" action="#">
         <span class="grid_2"><%= t 'field.filter.heading' %></span>
         <%= t 'field.filter.club' %> <select id="clubFilter">
@@ -24,15 +24,17 @@
     </form>
 </div>
 
+<div id="map_canvas" class="grid_13"></div>
+
 <div class="grid_3">
 
     <ul id="fields">
 
     </ul>
 </div>
-<div id="map_canvas" class="grid_9"></div>
 
-<script id='CoachTemplate' type='text/html'>
+
+<script id='FieldTemplate' type='text/html'>
     <li id="field{{=id!}}" class="field">
         <a href="#">
             <h2>{{=name!}}</h2>

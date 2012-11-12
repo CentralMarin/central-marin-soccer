@@ -91,7 +91,7 @@
 
         var init = function (fieldsArray) {
 
-            $('#fields').html($("#CoachTemplate").render(fieldsArray));
+            $('#fields').html($("#FieldTemplate").render(fieldsArray));
             map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
             // Enable UI glitz
