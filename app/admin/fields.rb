@@ -50,7 +50,7 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
       f.input :address
       f.input :status, :collection => Field.statuses.each_with_index.map {|c, index| [c, index]}, :as => :select, :label => "Status"
     end
-    f.buttons
+    f.actions
   end
 
   controller do

@@ -23,7 +23,7 @@ ActiveAdmin.register Team, {:sort_order => "age_asc"} do
      f.input :name
    end
 
-   f.buttons
+   f.actions
  end
 
  controller do
