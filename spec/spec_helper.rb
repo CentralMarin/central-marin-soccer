@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'spork'
+ENV["RAILS_ENV"] ||= 'test'
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
@@ -7,10 +8,9 @@ Spork.prefork do
   # need to restart spork for it take effect.
 
   # This file is copied to spec/ when you run 'rails generate rspec:install'
-  ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
-  require 'capybara/rspec'
+#  require 'capybara/rspec'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -30,6 +30,7 @@ Spork.prefork do
     config.include(ActionView::Helpers::TextHelper)
     config.include(ActiveAdmin::ViewHelpers)
     config.include(ActiveAdminMacros)
+    config.include Rails.application.routes.url_helpers
     #config.include(MailerMacros)
     #config.before(:each) { reset_email }
 

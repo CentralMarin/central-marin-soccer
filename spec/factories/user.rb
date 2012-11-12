@@ -7,7 +7,7 @@ FactoryGirl.define do
     f.password 'password'
 
     trait :admin_user do
-      f.roles { [User::ROLES[User::ADMIN_ROLE_INDEX]] }
+      f.roles { [:admin] }
     end
 
     #trait :board_member_user do

@@ -37,7 +37,7 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
       f.input :email
       f.input :roles, :as => :check_boxes, :collection => User::ROLES
     end
-    f.buttons
+    f.actions
   end
 
   controller do
