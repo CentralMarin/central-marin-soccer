@@ -23,7 +23,8 @@ end
 
 #repo details
 set :scm, :git
-set :repository, "git@github.com:CentralMarin/Soccer.git"
+#set :repository, "git@github.com:CentralMarin/Soccer.git"
+set :repository, "git@repo.digitalfoundry.com:central-marin-soccer/central-marin-soccer.git"
 set :branch, "release"
 
 # bundle install has to be run before assets can be precompiled

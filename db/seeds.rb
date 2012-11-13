@@ -8,11 +8,13 @@
 
 def coach_create(details)
   coach = Coach.create(details)
-  I18n.available_locales.each do |locale|
-    I18n.locale = locale
-    coach.bio = Faker::Lorem.paragraphs(5)
+  if ENV['RAILS_ENV'] != 'production'
+    I18n.available_locales.each do |locale|
+      I18n.locale = locale
+      coach.bio = Faker::Lorem.paragraphs(5)
+    end
+    coach.save
   end
-  coach.save
 
   return coach
 end

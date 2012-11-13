@@ -32,6 +32,10 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+group :development, :test, :staging do
+  gem 'faker' # want to use faker in all environments except production
+end
+
 group :staging, :production do
   gem 'mysql2'
 end
@@ -44,7 +48,6 @@ group :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'guard-rspec'
-  gem 'faker'
 end
 
 gem 'therubyracer'
