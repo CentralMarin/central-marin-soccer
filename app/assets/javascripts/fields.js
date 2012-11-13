@@ -89,6 +89,29 @@
             _display_info_window(field)
         };
 
+        var _resizeMap = function () {
+            var headerHeight = $('#header')[0].offsetHeight;
+            var fieldHeaderHeight = $('#field_header')[0].offsetHeight;
+            var mid = $('#map_canvas')[0];
+            var footerHeight = $('#footer')[0].offsetHeight;
+
+            console.log('Page: ' + _getDocHeight() + ' header: ' + headerHeight + ' fieldHeader: ' + fieldHeaderHeight + ' Footer: ' + footerHeight);
+            mid.style.height = _getDocHeight()
+                - (headerHeight + fieldHeaderHeight + footerHeight)
+                + 'px';
+            if (map != null) {
+                google.maps.event.trigger(map, 'resize');
+            }
+        };
+
+        var _getDocHeight = function() {
+            return Math.max(
+              $(window).height(),
+              /* For operat */
+              document.documentElement.clientHeight
+            );
+        };
+
         var init = function (fieldsArray) {
 
             $('#fields').html($("#FieldTemplate").render(fieldsArray));
@@ -115,6 +138,16 @@
 
             // Allow the user to click on a field panel to show it on the map
             $("#fields > li").click(_showField);
+
+            //resize the map container
+            _resizeMap();
+
+            // bind resize map function to the resize event for the window
+            var resizeTimer = null;
+            $(window).resize(function() {
+                if (resizeTimer) clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(_resizeMap, 100);
+            });
         };
 
         return {
