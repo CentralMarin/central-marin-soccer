@@ -61,38 +61,26 @@
 	  <img class="pad5" src="/assets/sample_sponsors3.png" />
 	  <img class="pad5" src="/assets/sample_sponsors4.png" />
 	</p>
-
   </div>
-
-
 </div>
-
 
 <div id="field_status" class="grid_6 box relative">
   <div class="bg_inlay"></div>
   <div class="relative">
 	<h2>Field Status</h2>
 	<ol class="block">
-	  <li class="odd">
-		<div class="grid_3">Fields Open</div>
-		<div class="grid_2 text-center">6</div>
+      <% @fields_status.each_with_index do |(status, count), index| %>
+	  <li <%= "class='odd' unless index % 2 == 0" %>>
+		<div class="grid_3"><%= status %></div>
+		<div class="grid_2 text-center"><%=  count %></div>
 		<div class="clear"></div>
 	  </li>
-	  <li>
-		<div class="grid_3">Fields Closed</div>
-		<div class="grid_2 text-center">3</div>
-		<div class="clear"></div>
-	  </li>
-	  <li class="odd">
-		<div class="grid_3">Status Unknown</div>
-		<div class="grid_2 text-center">3</div>
-		<div class="clear"></div>
-	  </li>
+      <% end %>
 	</ol>
 
 	<div class="clear"></div>
 	<h4 class="alt">For Full status visit the fields page</h4>
-	<a href="#" class="right">Fields page</a>
+	<a href="/fields" class="right">Fields page</a>
 	<div class="clear"></div>
   </div>
 </div>
