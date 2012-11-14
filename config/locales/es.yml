@@ -7,11 +7,15 @@ es:
     home: "Inicio"
     news: "Noticias"
     teams: "Equipos"
+    academy: "Academy"
     coaches: "Entrenamiento"
     tournaments: "Torneos"
     referees: "Árbitros"
     calendar: "Calendario"
-    language: "In&nbsp;English"
+    language: "English"
+    facebook: "Facebook"
+    clubInfo: "Información"
+    contact: "Contacto"
   coach:
      intro: "Los cinco objetivos fundamentales son:"
      objectives:
@@ -34,7 +38,7 @@ es:
   field:
     heading: "Marin County Campos de Fútbol"
     filter:
-      heading: "Filtros"
+      heading: "Field Status"
       club: "Club: "
       state: "Campo del Estado: "
       all: "Todo"
@@ -42,3 +46,5 @@ es:
       open: "Abrir"
       closed: "Cerrado"
       call: "Llamar"
+    map:
+      directions: "Select a field below to view Google Map locations and directions"

@@ -7,6 +7,7 @@ module ApplicationHelper
    [
        ['menu.home', root_path],
        ['menu.teams', teams_path],
+       ['menu.academy', teams_path],
        ['menu.coaches', coaches_path],
        ['menu.tournaments', tournaments_path],
        ['menu.referees', referees_path],
@@ -21,10 +22,10 @@ module ApplicationHelper
 	def menu_secondary
    [
        ['menu.calendar', calendar_path],
-       ['menu.newsletter', root_path],
        ['menu.facebook', root_path],
        ['menu.clubInfo', root_path],
-       ['menu.contact', root_path]
+       ['menu.contact', root_path],
+       ['menu.language', "http://#{AppConfig[:switch_hosts][I18n.locale]}"]
     ].map do |item|
       menu_item item, (@top_level_section_name == item[0]) ? 'current' : 'single-link'
    end
@@ -32,11 +33,7 @@ module ApplicationHelper
    .html_safe
   end
 
-
-
   private
-
-  LANGUAGE_MENU_ITEM = ['menu.language', "http://#{AppConfig[:switch_hosts][I18n.locale]}"]
 
   def menu_item item, class_name
     content_tag :li, class_name == 'current' ? content_tag(:span, I18n.t(item[0])) : link_to(I18n.t(item[0]), item[1]), :class => class_name
