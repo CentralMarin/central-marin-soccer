@@ -1,5 +1,7 @@
 CentralMarin::Application.routes.draw do
 
+  get "academy/index"
+
   get "information/index"
 
   get "calendar/index"
@@ -34,6 +36,7 @@ CentralMarin::Application.routes.draw do
   match '/referees', :to => 'referees#index', :as => 'referees'
 
   match '/information', to: 'information#index', as: 'information'
+  match '/academy', to: 'academy#index', as: 'academy'
 
 
   # The priority is based upon order of creation:

@@ -7,7 +7,7 @@ module ApplicationHelper
    [
        ['menu.home', root_path],
        ['menu.teams', teams_path],
-       ['menu.academy', teams_path],
+       ['menu.academy', academy_path],
        ['menu.coaches', coaches_path],
        ['menu.tournaments', tournaments_path],
        ['menu.referees', referees_path],
