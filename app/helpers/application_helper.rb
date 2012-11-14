@@ -22,9 +22,9 @@ module ApplicationHelper
 	def menu_secondary
    [
        ['menu.calendar', calendar_path],
-       ['menu.facebook', root_path],
+       ['menu.facebook', "http://www.facebook.com"],
        ['menu.clubInfo', information_path],
-       ['menu.contact', root_path],
+       ['menu.contact', contact_path],
        ['menu.language', "http://#{AppConfig[:switch_hosts][I18n.locale]}"]
     ].map do |item|
       menu_item item, (@top_level_section_name == item[0]) ? 'current' : 'single-link'

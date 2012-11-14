@@ -1,5 +1,7 @@
 CentralMarin::Application.routes.draw do
 
+  get "contact/index"
+
   get "academy/index"
 
   get "information/index"
@@ -37,6 +39,7 @@ CentralMarin::Application.routes.draw do
 
   match '/information', to: 'information#index', as: 'information'
   match '/academy', to: 'academy#index', as: 'academy'
+  match '/contact', to: 'contact#index', as: 'contact'
 
 
   # The priority is based upon order of creation:
