@@ -1,3 +1,4 @@
+
 <% content_for :css do %>
     <%= stylesheet_link_tag "coach" %>
     <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/dark-hive/jquery-ui.css" %>
@@ -14,18 +15,21 @@
 </div>
 </div>
 
-<hr class="grid_16" />
-<h2 class="grid_16"><%= t 'coach.staff' %></h2>
-<% @coaches.each_with_index do |coach, index| %>
-    <% if index % 8 == 0 %> <div class="clear"></div><% end %>
-    <div class="grid_2 coach">
+<div class="grid_16">
+<h2><%= t 'coach.staff' %></h2>
+<div style="padding-top: 5px;">
+<% @coaches.each_with_index do |coach, index|
+     image_count = 8
+       mod = index % image_count
+       if mod == 0 %><div class="clear"></div><% end %>
+    <div class="grid_2 coach <%= 'alpha' if mod == 0 %> <%= 'omega' if mod == image_count - 1 %>">
         <%= link_to "##{coach.id}", :class => 'coachlink', :rel => "#coach#{coach.id}", :data => {:coach_id => "#{coach.id}"} do %>
             <%= image_tag coach.image_url, :alt => coach.name, :id => "coach-img-#{coach.id}" %><br/><%= coach.name %>
         <% end %>
     </div>
-    <div id='<%= "coach#{coach.id}" %>'>
-    </div>
 <% end %>
+</div>
+</div>
 
 <script id='CoachTemplate' type='text/html'>
     <div id='simplemodal'>

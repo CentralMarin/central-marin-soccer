@@ -33,4 +33,4 @@
     });
 
 
-    $('#accordion').accordion();
+    $('#accordion').accordion({ header: "h3"} );
