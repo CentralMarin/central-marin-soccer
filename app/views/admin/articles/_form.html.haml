@@ -13,7 +13,7 @@
           = lf.input :locale, :as => :hidden
 
   = f.inputs do
-    = image_tag @article.image unless @article.image_url.blank?
+    = image_tag @article.image_url unless @article.image_url.blank?
     = f.input :image, :as => :file
     = f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
     = f.input :subcategory_id, :collection => Team.all(:order => 'age asc'), :label => 'to_team_name_with_coach', :as => :select, :label => "Team"
