@@ -23,7 +23,7 @@ module ApplicationHelper
    [
        ['menu.calendar', calendar_path],
        ['menu.facebook', root_path],
-       ['menu.clubInfo', root_path],
+       ['menu.clubInfo', information_path],
        ['menu.contact', root_path],
        ['menu.language', "http://#{AppConfig[:switch_hosts][I18n.locale]}"]
     ].map do |item|
