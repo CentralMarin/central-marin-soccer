@@ -3,9 +3,8 @@ require 'spec_helper'
 describe "Fields" do
   describe "GET /fields" do
     it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get fields_path
-      response.status.should be(200)
+      visit fields_path
+      assert current_path == fields_path
     end
   end
 end

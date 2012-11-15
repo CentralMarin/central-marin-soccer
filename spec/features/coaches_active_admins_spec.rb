@@ -78,8 +78,7 @@ describe "CoachesActiveAdmins" do
       end
 
       it "he should be able to delete a coach", :js => true do
-        page.evaluate_script('window.confirm= function() { return true; }')
-        find("#coach_#{@coach.id}").click_link "Delete"
+        click_delete @coach
         page.should have_no_content(@coach.name)
         assert_path admin_coaches_path
       end
