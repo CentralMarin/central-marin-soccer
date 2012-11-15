@@ -5,7 +5,7 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
   index do
     column :name
     column :image do |coach|
-      image_tag coach.image_url
+      image_tag image_path(coach.image_url)
     end
     column :bio do |coach|
       html_overview(coach.bio)
@@ -23,7 +23,7 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
       row :email
       row :image do
         # TODO: Put a default image up if we don't have one. See about using the a 404 handler to accomplish this
-        image_tag coach.image_url
+        image_tag image_path(coach.image_url)
       end
       row :bio do
         I18n.available_locales.each do |locale|

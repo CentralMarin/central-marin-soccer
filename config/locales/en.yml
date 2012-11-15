@@ -9,14 +9,14 @@ en:
     home: "Home"
     news: "News"
     teams: "Teams"
+    academy: "Academy"
     coaches: "Coaching"
     tournaments: "Tournaments"
     referees: "Referees"
     calendar: "Calendar"
-    language: "En&nbsp;Español"
+    language: "Español"
     facebook: "Facebook"
-    newsletter: "Newsletter"
-    clubInfo: "Club Info"
+    clubInfo: "Information"
     contact: "Contact"
   coach:
      intro: "The five core objectives are:"
@@ -40,7 +40,7 @@ en:
   field:
     heading: "Marin County Soccer Fields"
     filter:
-        heading: "Filters"
+        heading: "Field Status"
         club: "Club: "
         state: "Field Status: "
         all: "All"
@@ -48,3 +48,5 @@ en:
       open: "Open"
       closed: "Closed"
       call: "Call"
+    map:
+      directions: "Select a field below to view Google Map locations and directions"

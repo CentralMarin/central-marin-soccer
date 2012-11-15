@@ -29,8 +29,22 @@ class Coach < ActiveRecord::Base
                            :format => { :with => email_regex },
                            :uniqueness => { :case_sensitive => false }
 
+  MISSING_COACH_URL = 'coach/default-coach.jpg'
+
+  @image_url = ''
+
   def image_url
-    "/assets/coach/#{name.downcase.gsub(' ', '-')}.jpg"
+    if @image_url.blank?
+      @image_url = "coach/#{name.downcase.gsub(' ', '-')}.jpg"
+      if CentralMarin::Application.assets.find_asset(@image_url).nil?
+        @image_url = MISSING_COACH_URL
+      end
+    end
+    return @image_url
+  end
+
+  def image_url=(url)
+    @image_url = url
   end
 
   def admin_permalink

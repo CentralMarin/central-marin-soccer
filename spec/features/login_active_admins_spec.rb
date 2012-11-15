@@ -10,21 +10,9 @@ describe "login" do
     click_button "Login"
 
     page.should have_content("Invalid email or password.")
-    #save_and_open_page
   end
 
   it "should successfully login" do
-    coach = Factory(:coach)
-    adminUser = Factory(:user, :roles => [Factory(:admin_role)])
-    visit admin_dashboard_path
-
-    # should get redirected to login page
-    fill_in "Email", :with => adminUser.email
-    fill_in "Password", :with => adminUser.password
-    click_button "Login"
-
-    assert current_path == admin_dashboard_path
-
-    #save_and_open_page
+    login_as_admin
   end
 end

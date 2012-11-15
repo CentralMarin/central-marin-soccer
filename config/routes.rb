@@ -1,17 +1,20 @@
 CentralMarin::Application.routes.draw do
 
+  # Single page
+  get "contact/index"
+  get "academy/index"
+  get "information/index"
   get "calendar/index"
-
   get "tournaments/index"
-
   get "referees/index"
+  root :to => 'home#index'
 
   # Active Admin
   mount Ckeditor::Engine => '/admin/ckeditor'
   ActiveAdmin.routes(self)
   devise_for :users, ActiveAdmin::Devise.config
 
-  root :to => 'home#index'
+
 
   match '/news/', :to => 'articles#index', :as => 'articles'
   match '/news/:id', :to => 'articles#show', :as => 'article'
@@ -24,13 +27,6 @@ CentralMarin::Application.routes.draw do
 
   match '/fields/', :to => 'fields#index', :as => 'fields'
   match '/fields/:id', :to => 'fields#show', :as => 'field'
-
-  match '/calendar', :to => 'calendar#index', :as => 'calendar'
-
-  match '/tournaments', :to => 'tournaments#index', :as => 'tournaments'
-
-  match '/referees', :to => 'referees#index', :as => 'referees'
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

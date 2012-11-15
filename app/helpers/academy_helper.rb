@@ -1,0 +1,2 @@
+module AcademyHelper
+end

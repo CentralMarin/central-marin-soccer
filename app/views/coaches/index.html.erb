@@ -24,7 +24,7 @@
        if mod == 0 %><div class="clear"></div><% end %>
     <div class="grid_2 coach <%= 'alpha' if mod == 0 %> <%= 'omega' if mod == image_count - 1 %>">
         <%= link_to "##{coach.id}", :class => 'coachlink', :rel => "#coach#{coach.id}", :data => {:coach_id => "#{coach.id}"} do %>
-            <%= image_tag coach.image_url, :alt => coach.name, :id => "coach-img-#{coach.id}" %><br/><%= coach.name %>
+            <%= image_tag image_path(coach.image_url), alt: coach.name, id: "coach-img-#{coach.id}", height: 118, width: 100 %><br/><%= coach.name %>
         <% end %>
     </div>
 <% end %>
