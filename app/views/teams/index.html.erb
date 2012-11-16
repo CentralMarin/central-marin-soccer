@@ -14,15 +14,15 @@
 	  </tr>
 	  </thead>
 	  <tbody>
-	  <% @ages.each do |age| %>
+	  <% @years.each do |age| %>
 	  <tr>
 		  <td class="grid_6">
-			  <% find_teams('Boys', age).each do |team|  %>
+			  <% find_teams(0, age).each do |team|  %>
 				<h3><%= link_to team.to_s, team %></h3>
 			  <% end %>
 		  </td>
 		  <td class="grid_5">
-			  <% find_teams('Girls', age).each do |team| %>
+			  <% find_teams(1, age).each do |team| %>
 			  <h3><%= link_to team.to_s, team %></h3>
 			  <% end %>
 		  </td>

@@ -48,3 +48,11 @@ es:
       call: "Llamar"
     map:
       directions: "Select a field below to view Google Map locations and directions"
+  team:
+    gender:
+      boys: "Niños"
+      girls: "Niñas"
+    name:
+      under: "A"
+      team: "Equipo"
+

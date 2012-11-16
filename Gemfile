@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'rake', '>= 10.0.0'
 gem 'rails', '>= 3.2.1'
 gem 'jquery-rails'
 

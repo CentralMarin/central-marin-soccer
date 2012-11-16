@@ -1,7 +1,7 @@
 module TeamsHelper
-  def find_teams(gender, age)
+  def find_teams(gender, year)
 
-    @teams.find_all {|team| team.age == age && team.gender == gender }
+    @teams.find_all {|team| team.year == year && team.gender == gender }
 
   end
 end
