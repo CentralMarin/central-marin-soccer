@@ -4,13 +4,13 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-    @teams = Team.all(:order => ['age', 'team_level_id'], :include => [:team_level, :coach])
-    age_min = @teams.first.age if @teams.first
-    age_max = @teams.last.age  if @teams.last
-    if age_min && age_max
-      @ages = age_min .. age_max
+    @teams = Team.all(:order => ['year', 'team_level_id'], :include => [:team_level, :coach])
+    year_min = @teams.first.year if @teams.first
+    year_max = @teams.last.year  if @teams.last
+    if year_min && year_max
+      @years = year_min .. year_max
     else
-      @ages = []
+      @years = []
     end
 
     respond_to do |format|

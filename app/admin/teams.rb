@@ -1,9 +1,10 @@
-ActiveAdmin.register Team, {:sort_order => "age_asc"} do
+ActiveAdmin.register Team, {:sort_order => "year_desc"} do
 
  menu if: proc{ can?(:manage, Team) }, :label => 'Teams', :parent => 'Teams'
 
  index do
-    column :age
+    column :year
+    column :age, sortable: false
     column :gender
     column :name
     column(:level, :sortable => :'team_levels.name') {|team| team.team_level.name}
@@ -18,8 +19,8 @@ ActiveAdmin.register Team, {:sort_order => "age_asc"} do
    f.inputs :name => "Team" do
      f.input :coach
      f.input :team_level
-     f.input :age
-     f.input :gender, :collection => Team::GENDERS
+     f.input :year
+     f.input :gender, :collection => Team.genders
      f.input :name
    end
 

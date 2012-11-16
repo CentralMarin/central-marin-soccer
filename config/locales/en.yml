@@ -3,7 +3,7 @@
 
 en:
   footer_copy: "All rights Reserved © 2012 - Central Marin Soccer Club"
-  header_text_alt: 'Central Marin Soccr'
+  header_text_alt: 'Central Marin Soccer'
   title: "Welcome to Central Marin Soccer Club"
   menu:
     home: "Home"
@@ -50,3 +50,11 @@ en:
       call: "Call"
     map:
       directions: "Select a field below to view Google Map locations and directions"
+  team:
+    gender:
+      boys: "Boys"
+      girls: "Girls"
+    name:
+      under: "U"
+      team: "Team"
+

@@ -19,24 +19,24 @@ describe Team do
     FactoryGirl.create(:team)
   end
 
-  it "requires an age" do
-    FactoryGirl.build(:team, age: nil).should_not be_valid
+  it "requires a year" do
+    FactoryGirl.build(:team, year: nil).should_not be_valid
   end
 
-  it "requires an age 8 or older" do
-    FactoryGirl.build(:team, age: 7).should_not be_valid
-    FactoryGirl.build(:team, age: 8).should be_valid
-  end
-
-  it "requires an age 18 or younger" do
-    FactoryGirl.build(:team, age: 19).should_not be_valid
-    FactoryGirl.build(:team, age:18).should be_valid
-  end
-
-  it "requires a gender" do
-    FactoryGirl.build(:team, gender: nil).should_not be_valid
-  end
-
+  #it "requires an age 8 or older" do
+  #  FactoryGirl.build(:team, year: 7).should_not be_valid
+  #  FactoryGirl.build(:team, age: 8).should be_valid
+  #end
+  #
+  #it "requires an age 18 or younger" do
+  #  FactoryGirl.build(:team, age: 19).should_not be_valid
+  #  FactoryGirl.build(:team, age:18).should be_valid
+  #end
+  #
+  #it "requires a gender" do
+  #  FactoryGirl.build(:team, gender_id: nil).should_not be_valid
+  #end
+  #
   it "requires a coach" do
     FactoryGirl.build(:team, coach: nil).should_not be_valid
   end

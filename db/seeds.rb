@@ -7,6 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 def coach_create(details)
+  return if Coach.find_by_email(details[:email])
+
+  teams = details.delete(:coached_teams)
+
   coach = Coach.create(details)
   I18n.available_locales.each do |locale|
     I18n.locale = locale
@@ -14,7 +18,12 @@ def coach_create(details)
   end
   coach.save
 
-  return coach
+  I18n.locale = :en
+  teams.each do |team|
+    team[:coach_id] = coach.id
+    team[:team_level_id] = team.delete(:team_level).id
+    Team.create(team)
+  end
 end
 
 team_level_premier = TeamLevel.create(name: 'Premier')
@@ -81,56 +90,72 @@ sleep 1
 Field.create(name: 'Vallecito (V2)', club: 'San Rafael/Dixie', rain_line: '472-4686', address: 'Vallecito Elementary School, San Rafael, CA, 94903', status: 0)
 Field.create(name: 'Venetia Valley', club: 'San Rafael', rain_line: '485-2246', address: '177 North San Pedro Road, San Rafael, CA 94903', status: 0)
 
-coach = coach_create(name: 'Steven Sosa', email: 'steven.sosa@centralmarinsoccer.com')
-Team.create(age: '13', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'John Barnes', email: 'john.barnes@centralmarinsoccer.com')
-Team.create(age: '11', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Phil Bellici-Gard', email: 'phil.bellici-gard@centralmarinsoccer.com')
-Team.create(age: '12', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Craig Breslin', email: 'craig.breslin@centralmarinsoccer.com')
-Team.create(age: '10', gender: Team::GENDERS[0], team_level: team_level_blank, name: 'Arsenal', coach: coach)
-Team.create(age: '11', gender: Team::GENDERS[0], team_level: team_level_blank, name: 'Arsenal', coach: coach)
-coach = coach_create(name: 'Mike Carbone', email: 'mike.carbone@centralmarinsoccer.com')
-Team.create(age: '9', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Kelly Coffey', email: 'kelly.coffey@centralmarinsoccer.com')
-Team.create(age: '12', gender: Team::GENDERS[0], team_level: team_level_blank, name: 'Arsenal', coach: coach)
-coach = coach_create(name: 'Mike Crivello', email: 'mike.crivello@centralmarinsoccer.com')
-Team.create(age: '12', gender: Team::GENDERS[0], team_level: team_level_blank, name: 'Arsenal', coach: coach)
-coach = coach_create(name: 'Adam Dietz', email: 'adam.dietz@centralmarinsoccer.com')
-Team.create(age: '13', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Sjur Hatloe', email: 'sjur.hatloe@centralmarinsoccer.com')
-Team.create(age: '15', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '16', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Eamon Kavanagh', email: 'eamon.kavanah@centralmarinsoccer.com')
-Team.create(age: '9', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '14', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '14', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Jim Lasher', email: 'jim.lasher@centralmarinsoccer.com')
-Team.create(age: '10', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '13', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Mark Machado', email: 'mark.machado@centralmarinsoccer.com')
-Team.create(age: '13', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Nicole Miller', email: 'nicole.miller@centralmarinsoccer.com')
-Team.create(age: '11', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Brandon Murphy', email: 'brandon.murphy@centralmarinsoccer.com')
-Team.create(age: '11', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '13', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Brandon Romeo', email: 'brandon.romeo@centralmarinsoccer.com')
-Team.create(age: '12', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Tom Ryan', email: 'tom.ryan@centralmarinsoccer.com')
-Team.create(age: '16', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-coach = coach_create(name: 'Jeff Troyer', email: 'jeff.troyer@centralmarinsoccer.com')
-Team.create(age: '12', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '15', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '15', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '16', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '16', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '17', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '17', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '18', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '18', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '19', gender: Team::GENDERS[0], team_level: team_level_blank, name: '', coach: coach)
-Team.create(age: '19', gender: Team::GENDERS[1], team_level: team_level_blank, name: '', coach: coach)
+coach_create(name: 'Steven Sosa', email: 'steven.sosa@centralmarinsoccer.com',
+             coached_teams: [{year: 1999, gender: 'Boys', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'John Barnes', email: 'john.barnes@centralmarinsoccer.com',
+             coached_teams: [{year: 2001, gender: 'Boys', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Phil Bellici-Gard', email: 'phil.bellici-gard@centralmarinsoccer.com',
+             coached_teams: [{year: 2000, gender: 'Girls', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Craig Breslin', email: 'craig.breslin@centralmarinsoccer.com',
+             coached_teams: [{year: 2002, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal'},
+                     {year: 2001, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal'}])
+
+coach_create(name: 'Mike Carbone', email: 'mike.carbone@centralmarinsoccer.com',
+             coached_teams: [{year: 2003, gender: 'Boys', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Kelly Coffey', email: 'kelly.coffey@centralmarinsoccer.com',
+             coached_teams: [{year: 2000, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal'}])
+
+coach_create(name: 'Mike Crivello', email: 'mike.crivello@centralmarinsoccer.com',
+             coached_teams: [{year: 2000, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal'}])
+
+coach_create(name: 'Adam Dietz', email: 'adam.dietz@centralmarinsoccer.com',
+             coached_teams: [{year: 1999, gender: 'Girls', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Sjur Hatloe', email: 'sjur.hatloe@centralmarinsoccer.com',
+             coached_teams: [{year: 1997, gender: 'Boys', team_level: team_level_blank, name: ''},
+                     {year: 1996, gender: 'Boys', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Eamon Kavanagh', email: 'eamon.kavanah@centralmarinsoccer.com',
+             coached_teams: [{year: 2003, gender: 'Boys', team_level: team_level_blank, name: ''},
+                     {year: 1998, gender: 'Boys', team_level: team_level_blank, name: ''},
+                     {year: 1998, gender: 'Girls', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Jim Lasher', email: 'jim.lasher@centralmarinsoccer.com',
+             coached_teams: [{year: 2002, gender: 'Girls', team_level: team_level_blank, name: ''},
+                     {year: 1999, gender: 'Boys', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Mark Machado', email: 'mark.machado@centralmarinsoccer.com',
+             coached_teams: [{year: 1999, gender: 'Boys', team_level: team_level_blank}])
+
+coach_create(name: 'Nicole Miller', email: 'nicole.miller@centralmarinsoccer.com',
+             coached_teams: [{year: 2001, gender: 'Girls', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Brandon Murphy', email: 'brandon.murphy@centralmarinsoccer.com',
+             coached_teams: [{year: 2001, gender: 'Girls', team_level: team_level_blank, name: ''},
+                     {year: 1999, gender: 'Girls', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Brandon Romeo', email: 'brandon.romeo@centralmarinsoccer.com',
+             coached_teams: [{year: 2000, gender: 'Girls', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Tom Ryan', email: 'tom.ryan@centralmarinsoccer.com',
+             coached_teams: [{year: 1996, gender: 'Boys', team_level: team_level_blank, name: ''}])
+
+coach_create(name: 'Jeff Troyer', email: 'jeff.troyer@centralmarinsoccer.com',
+             coached_teams: [{year: 2000, gender: 'Boys', team_level: team_level_blank, name: ''},
+                     {year: 1997, gender: 'Boys', team_level: team_level_blank, name: ''},
+                     {year: 1997, gender: 'Girls', team_level: team_level_blank, name: ''},
+                     {year: 1996, gender: 'Boys', team_level: team_level_blank, name: ''},
+                     {year: 1996, gender: 'Girls', team_level: team_level_blank, name: ''},
+                     {year: 1995, gender: 'Boys', team_level: team_level_blank, name: ''},
+                     {year: 1995, gender: 'Girls', team_level: team_level_blank, name: ''},
+                     {year: 1994, gender: 'Boys', team_level: team_level_blank, name: ''},
+                     {year: 1994, gender: 'Girls', team_level: team_level_blank, name: ''},
+                     {year: 1993, gender: 'Boys', team_level: team_level_blank, name: ''},
+                     {year: 1993, gender: 'Girls', team_level: team_level_blank, name: ''}])
 
 User.create(:email => 'ryan@robinett.org', roles: User::ROLES)
 

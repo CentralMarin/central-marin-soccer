@@ -24,27 +24,31 @@ class Team < ActiveRecord::Base
 
   default_scope :include => [:team_level, :coach]
 
-  validates :age, :presence => true,
-      :numericality => {
-          :greater_than_or_equal_to => 8,
-          :less_than_or_equal_to => 18 }
+  validates :year, :presence => true
   validates :gender, :presence => true
   validates :coach, :presence => true
   validates :team_level, :presence => true
 
-  GENDERS = ['Boys', 'Girls']
-  SPANISH_GENDERS = ['Niños', 'Niñas']
+  attr_accessible :coach_id, :team_level_id, :gender, :year, :name
+
+  def gender
+    Team.genders[self.gender_id]
+  end
+
+  def gender=(gender)
+    self.gender_id = Team.genders.index(gender) || Team.genders[0]
+  end
 
   def page_title
     self.to_s
   end
 
+  def age
+    Time.now.year - year
+  end
+
   def to_s
-    if I18n.locale == :es
-      "U#{age} #{gender == GENDERS[0]? SPANISH_GENDERS[0] : SPANISH_GENDERS[1]} #{name} Equipo de #{team_level.name}"
-    else
-      "U#{age} #{gender} #{name} #{team_level.name} Team"
-    end
+    "#{I18n.t('team.name.under')}#{age} #{gender} #{name} #{team_level.name} #{I18n.t('team.name.team')}"
   end
 
   def admin_permalink
@@ -65,6 +69,11 @@ class Team < ActiveRecord::Base
 
   def to_team_name_with_coach
     "#{to_s} coached by #{coach}"
+  end
+
+protected
+  def self.genders
+    [I18n.t('team.gender.boys'), I18n.t('team.gender.girls')]
   end
 end
 
