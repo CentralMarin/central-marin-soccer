@@ -73,7 +73,6 @@ class User < ActiveRecord::Base
   end
 
 protected
-  # TODO: See if we can remove password from attr_accessible
   def password_required?
     new_record? ? false : super
   end
