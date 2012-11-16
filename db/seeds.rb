@@ -28,27 +28,24 @@ def coach_create(details)
   end
 end
 
-team_level_premier = TeamLevel.create(name: 'Premier')
-team_level_gold = TeamLevel.create(name: 'Gold')
-team_level_silver = TeamLevel.create(name: 'Silver')
-team_level_bronze = TeamLevel.create(name: 'Bronze')
-team_level_academy = TeamLevel.create(name: 'Academy')
-team_level_blank = TeamLevel.create(name: '')
-                                                                
-# Create Spanish versions
-I18n.locale = :es
-team_level_premier.name = 'Primero'
-team_level_premier.save!
-team_level_gold.name = 'Oro'
-team_level_gold.save!
-team_level_silver.name = 'Plata'
-team_level_silver.save!
-team_level_bronze.name = 'Bronce'
-team_level_bronze.save!
-team_level_academy.name = 'Academia'
-team_level_academy.save!
-I18n.locale = :en
+def team_level_create(english, spanish)
+  I18n.locale = :en
+  team = TeamLevel.create(name: english)
+  I18n.locale = :es
+  team.name = spanish
+  team.save
 
+  return team
+end
+
+team_level_premier = team_level_create('Premier', 'Primero')
+team_level_gold = team_level_create('Gold', 'Oro')
+team_level_silver = team_level_create('Silver', 'Plata')
+team_level_bronze = team_level_create('Bronze', 'Bronce')
+team_level_academy = team_level_create('Academy', 'Academia')
+team_level_blank = team_level_create('', '')
+                                                                
+I18n.locale = :en
 Field.create(name: 'Edna McGuire Elementary School', club: 'Mill Valley', rain_line: '383-7818', address: '80 Lomita Dr. Mill Valley, CA 94941', status: 0)
 Field.create(name: 'Bacich School', club: 'Kentfield/Ross valley', rain_line: '721-1965', address: '699 Sir Francis Drake Blvd., Kentfield, CA 94904', status: 0)
 Field.create(name: 'Bayfront Park', club: 'Mill Valley', rain_line: '383-7818', address: 'Bayfront Park, Sycamore Avenue, Mill Valley, CA', status: 0)
