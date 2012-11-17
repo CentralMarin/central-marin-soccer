@@ -1,0 +1,24 @@
+
+%p
+  = image_tag @article.image_url.to_s
+
+%p
+  %b Title:
+  = @article.title
+
+%p
+  %b Body:
+  = @article.body.html_safe
+
+%p
+  %b Author:
+  = @article.author
+
+
+%p
+  %b Carousel:
+  = @article.carousel
+
+
+= link_to 'Articles', article_index_path
+
