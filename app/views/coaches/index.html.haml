@@ -1,58 +1,46 @@
+- content_for :css do
+  = stylesheet_link_tag "coach"
+  = stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/dark-hive/jquery-ui.css"
 
-<% content_for :css do %>
-    <%= stylesheet_link_tag "coach" %>
-    <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/dark-hive/jquery-ui.css" %>
-<% end %>
+%h2{class: 'grid_16'}= t('coach.intro')
+%div{class: 'clear'}
+%div{class: 'margin10'}
+%div{class: 'grid_16', id: 'accordion'}
+  - @objectives[:header].each_with_index do |header, index|
+    %h3
+      %a{href: '#'}= header
+    %div= @objectives[:body][index]
 
-<h2 class="grid_16"><%= t "coach.intro" %></h2>
-<div class="clear"></div>
-<div class="margin10">
-<div class="grid_16" id="accordion">
-    <% @objectives[:header].each_with_index do |header, index| %>
-        <h3><a href="#"><%= header %></a></h3>
-        <div><%= @objectives[:body][index] %></div>
-    <% end %>
-</div>
-</div>
+%div{class: 'grid_16'}
+%h2= t('coach.staff')
+%div{style: 'padding-top: 5px;'}
+- @coaches.each_with_index do |coach, index|
+  - image_count = 8
+  - mod = index % image_count
+  - if mod == 0
+    %div{class: 'clear'}
+  %div{class: ['grid_2 coach', ('omega' if mod == image_count - 1)]}
+    = link_to "##{coach.id}", :class => 'coachlink', :rel => "#coach#{coach.id}", :data => {:coach_id => "#{coach.id}"} do
+      = image_tag image_path(coach.image_url), alt: coach.name, id: "coach-img-#{coach.id}", height: 118, width: 100
+      %br
+      = coach.name
 
-<div class="grid_16">
-<h2><%= t 'coach.staff' %></h2>
-<div style="padding-top: 5px;">
-<% @coaches.each_with_index do |coach, index|
-     image_count = 8
-       mod = index % image_count
-       if mod == 0 %><div class="clear"></div><% end %>
-    <div class="grid_2 coach <%= 'alpha' if mod == 0 %> <%= 'omega' if mod == image_count - 1 %>">
-        <%= link_to "##{coach.id}", :class => 'coachlink', :rel => "#coach#{coach.id}", :data => {:coach_id => "#{coach.id}"} do %>
-            <%= image_tag image_path(coach.image_url), alt: coach.name, id: "coach-img-#{coach.id}", height: 118, width: 100 %><br/><%= coach.name %>
-        <% end %>
-    </div>
-<% end %>
-</div>
-</div>
+%script{id: 'CoachTemplate', type: 'text/html'}
+  %div{id: 'simplemodal'}
+    %img{class: 'coachImage', src: '{{=coachImageUrl}}'}
+    %div
+      %h3= '{{=name}}'
+      %p= '{{=bio!}}'
+    %div{class: 'teams'}
+      %h3= t "coach.teams"
+      %ul
+        = '{{#each teams}}'
+        %li
+          %a{href: '/teams/{{=id}}'}= '{{=name}}'
+        = '{{/each}}'
 
-<script id='CoachTemplate' type='text/html'>
-    <div id='simplemodal'>
-        <img class="coachImage" src="{{=coachImageUrl}}"/>
-        <div>
-            <h3>{{=name}}</h3>
-            <p>{{=bio!}}</p>
-        </div>
-        <div class="teams">
-            <h3><%= t "coach.teams" %></h3>
-            <ul>
-                {{#each teams}}
-                <li><a href="/teams/{{=id}}">{{=name}}</a></li>
-                {{/each}}
-            </ul>
-        </div>
-    </div>
-</script>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-<% content_for :javascript do %>
-<%= javascript_include_tag "coaches" %>
-
-<% end %>
+%script{src: "//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"}
+%script{src: "//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"}
+- content_for :javascript do
+  =javascript_include_tag "coaches"
 
