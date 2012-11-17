@@ -2,9 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  footer_copy: "All rights Reserved © 2012 - Central Marin Soccer Club"
-  header_text_alt: 'Central Marin Soccer'
   title: "Welcome to Central Marin Soccer Club"
+  footer_copy: "All rights Reserved © 2012 - Central Marin Soccer Club"
+  header_text_alt: 'Central Marin Competitive Soccer Club'
   menu:
     home: "Home"
     news: "News"
@@ -18,6 +18,22 @@ en:
     facebook: "Facebook"
     clubInfo: "Information"
     contact: "Contact"
+  home:
+    title: "Welcome to Central Marin Soccer Club"
+    overview: "The Central Marin Competitive Soccer Club (CMCSC) is comprised of Gold, Silver and Bronze Division select soccer teams serving the central Marin communities of San Rafael, Terra Linda (Dixie), Larkspur, San Anselmo, Ross, Greenbrae, Kentfield and Corte Madera. The club is also home to the U9 Developmental Academy."
+    program:
+      heading: "Program Information"
+      body: "Central Marin Soccer Club offers various levels of league and tournament play. The length of season, and program participation costs varies between each level."
+      link: "Learn More"
+    donate:
+      heading: "Donate"
+      body: " Duis lacus purus, tincidunt nec venenatis ac, rhoncus at nunc. Duis euismod sollicitudin adipiscing. Etiam leo mi"
+    fields:
+      heading: "Fields Statuses"
+      body: "For full status visit the fields page"
+      link: "Fields Page"
+    sponsors:
+      heading: "Support Our Sponsors"
   coach:
      intro: "The five core objectives are:"
      objectives:

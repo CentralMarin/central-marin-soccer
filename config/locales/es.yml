@@ -3,6 +3,8 @@
 
 es:
   title: "Bienvenido a Central Marín Club de Fútbol"
+  footer_copy: "Todos los derechos reservados © 2012 - Central Marín Club de Fútbol"
+  header_text_alt: 'Centro Marin Club de fútbol Competitivo'
   menu:
     home: "Inicio"
     news: "Noticias"
@@ -16,6 +18,22 @@ es:
     facebook: "Facebook"
     clubInfo: "Información"
     contact: "Contacto"
+  home:
+    title: "Bienvenido a Central Marín Club de Fútbol"
+    overview: "El Central Marin Competitiva Club de fútbol (CMCSC) se compone de Oro, Plata y Bronce División de seleccionar los equipos de fútbol al servicio de las comunidades centrales de Marín de San Rafael, Terra Linda (Dixie), Larkspur, San Anselmo, Ross, Greenbrae, Kentfield y Madera Corte. El club es también el hogar de la Academia U9 Desarrollo."
+    program:
+      heading: "Programa de Información"
+      body: "Centro Marin Soccer Club ofrece varios niveles de liga y torneos. La duración de la temporada, y los costos del programa de participación varía entre cada nivel."
+      link: "Más información"
+    donate:
+      heading: "Donar"
+      body: "Duis lacus purus, tincidunt nec venenatis ac, rhoncus at nunc. Duis euismod sollicitudin adipiscing. Etiam leo mi"
+    fields:
+      heading: "Campos de status"
+      body: "Para el estado de completo visite la página de campos"
+      link: "Los campos de página"
+    sponsors:
+      heading: "Apoyo a Nuestros Patrocinadores"
   coach:
      intro: "Los cinco objetivos fundamentales son:"
      objectives:

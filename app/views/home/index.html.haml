@@ -1,95 +1,62 @@
 
 %div{class: 'grid_6'}
+  %h1= t('home.title')
+  %p= t('home.overview')
+  %hr
+  %h2{class: 'alt'}= t('home.program.heading')
+  %p= t('home.program.body')
+  %a{class: 'right', href: '/information'}= t('home.program.link')
 
-<div class="grid_6">
-  <h1>Welcome to the Central Marin Soccer Club</h1>
-  <p>The Central Marin Competitive Soccer Club (CMCSC) is comprised of Gold, Silver and Bronze Division select soccer teams serving the central Marin communities of San Rafael, Terra Linda (Dixie), Larkspur, San Anselmo, Ross, Greenbrae, Kentfield and Corte Madera. The club is also home to the U9 Developmental Academy.</p>
-  
-  <hr />
+%div{id: 'slider-container', class: 'grid_10 box'}
+  %div{class: 'ws_images'}
+    %img{src: '/assets/sample_news.png'}
+    %img{src: '/assets/sample_news.png'}
+  %div{class: 'ws_bullets'}
+    %a{href: '#'}
+      %h2{class: 'alt'}Test1
+      %span Lorem ipsum ... dasf
+    %a{href: '#'}
+      %h2{class: 'alt'}Test2
+      %span Lorem ipsum ... with test 2
 
-  <h2 class="alt">Program Information</h2>
-  <p>Central Marin Soccer Club offers various levels of league and tournament play. The length of season, and program participation costs varies between each level.</p>
-  <a class="right" href="/information">Learn More</a>
+%div{class: 'padV10 clear'}
 
-</div>
+%div{class: 'grid_10'}
+  %div{class: 'box'}
+    %h2= t('home.donate.heading')
+    %p= t('home.donate.body')
 
-<div id="slider-container" class="grid_10 box">
-    <div class="ws_images">
-	  <img src="/assets/sample_news.png" />
-	  <img src="/assets/sample_news.png" />
-<!--
-        <% @articles.each_with_index do |article, i| %>
-            <%= link_to image_tag(article.image_url.to_s, :id=> "img" + i.to_s) + article.title, article %> 
-        <% end  %>
-    </div>
-    <div class="ws_bullets">
-        <div>
-        <% @articles.each_with_index do |article, i| %>
-            <a href="#img<%=i%>"><%= image_tag article.image_url(:thumb).to_s %><%=i + 1%></a>
-        <% end %>
-        </div>
--->
-    </div>
-    <div class="ws_bullets">
-	  <a href="#"><h2 class="alt">Test1</h2><span>Lorem ipsum .... dasf adsf asdf</span></a>
-	  <a href="#"><h2 class="alt">Test2</h2><span>Lorem ipsum .... dasf adsf asdf</span></a>
-	</div>
-  
-</div>
+    %form{class: 'right', action: 'https://www.sandbox.paypal.com/cgi-bin/webscr', method: 'post'}
+      %input{type: 'hidden', name: 'cmd', value: '_s-xclick'}
+      %input{type: 'hidden', name: 'hosted_button_id', value: 'TVEPGNRXXD2YN'}
+      %input{type: 'image', src: 'https://www.sandbox.paypal.com/en_US/i/btn/btn_donateCC_LG.gif', border:'0', name: 'submit', alt: 'PayPal - The safer, easier way to pay online!' }
+      %img{alt:'', border:'0', src:'https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif', width:'1', height:'1'}
 
-<div class="padV10 clear"></div>
+    %div{class: 'clear'}
 
-<div class="grid_10">
+  %div{class: 'box'}
+    %h2= t('home.sponsors.heading')
+    %p{class: 'text-center'}
+      %img{class: 'pad5', src: '/assets/sample_sponsors1.png'}
+      %img{class: 'pad5', src: '/assets/sample_sponsors2.png'}
+      %img{class: 'pad5', src: '/assets/sample_sponsors3.png'}
+      %img{class: 'pad5', src: '/assets/sample_sponsors4.png'}
 
-  <div class="box">
-  <h2>Donate</h2>
-  <p>Duis lacus purus, tincidunt nec venenatis ac, rhoncus at nunc. Duis euismod sollicitudin adipiscing. Etiam leo mi</p>
+%div{id: 'field_status', class: 'grid_6 box relative'}
+  %div{class: 'bg_inlay'}
+  %div{class: 'relative'}
+    %h2= t('home.fields.heading')
+    %ol{class: 'block'}
+      - @fields_status.each_with_index do |(status, count), index|
+        %li{class: ('odd' unless index % 2 == 0)}
+          %div{class: 'grid_3'}= status
+          %div{class: 'grid_2 text-center'}= count
+          %div{class: 'clear'}
+    %div{class: 'clear'}
+    %h4{class: 'alt'}= t('home.fields.body')
+    = link_to t('home.fields.link'), fields_path, class: 'right'
+    %div{class: 'clear'}
+%div{class: 'clear'}
 
-  <form class="right" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-    <input type="hidden" name="cmd" value="_s-xclick">
-    <input type="hidden" name="hosted_button_id" value="TVEPGNRXXD2YN">
-    <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-    <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-  </form>
-
-  <div class="clear"></div>
-  </div>
-
-  <div class="box">
-	<h2>Support Our Sponsors</h2>
-	<p class="text-center">
-	  <img class="pad5" src="/assets/sample_sponsors1.png" />
-	  <img class="pad5" src="/assets/sample_sponsors2.png" />
-	  <img class="pad5" src="/assets/sample_sponsors3.png" />
-	  <img class="pad5" src="/assets/sample_sponsors4.png" />
-	</p>
-  </div>
-</div>
-
-<div id="field_status" class="grid_6 box relative">
-  <div class="bg_inlay"></div>
-  <div class="relative">
-	<h2>Field Status</h2>
-	<ol class="block">
-      <% @fields_status.each_with_index do |(status, count), index| %>
-	  <li <%= "class='odd' unless index % 2 == 0" %>>
-		<div class="grid_3"><%= status %></div>
-		<div class="grid_2 text-center"><%=  count %></div>
-		<div class="clear"></div>
-	  </li>
-      <% end %>
-	</ol>
-
-	<div class="clear"></div>
-	<h4 class="alt">For Full status visit the fields page</h4>
-	<a href="/fields" class="right">Fields page</a>
-	<div class="clear"></div>
-  </div>
-</div>
-<div class="clear"></div>
-
-
-
-<% content_for :javascript do %>
-    <%= javascript_include_tag 'home' %>
-<% end %>
+- content_for :javascript do
+  = javascript_include_tag 'home'
