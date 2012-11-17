@@ -9,20 +9,23 @@
   <table>
 	  <thead>
 	  <tr>
-		  <td class="grid_6"><h2>Boys</h2></td>
-		  <td class="grid_5"><h2>Girls</h2></td>
+		  <td class="grid_6"><h2><%= Team.genders[0] %></h2></td>
+		  <td class="grid_5"><h2><%= Team.genders[1] %></h2></td>
 	  </tr>
 	  </thead>
 	  <tbody>
-	  <% @years.each do |age| %>
+
+
+
+	  <% @teams_by_year_and_gender.each do |year, boys_and_girls| %>
 	  <tr>
 		  <td class="grid_6">
-			  <% find_teams(0, age).each do |team|  %>
+			  <% boys_and_girls[0].each do |team|  %>
 				<h3><%= link_to team.to_s, team %></h3>
 			  <% end %>
 		  </td>
 		  <td class="grid_5">
-			  <% find_teams(1, age).each do |team| %>
+			  <% boys_and_girls[1].each do |team| %>
 			  <h3><%= link_to team.to_s, team %></h3>
 			  <% end %>
 		  </td>

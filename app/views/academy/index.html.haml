@@ -1,2 +1,8 @@
-%h1 Academy#index
-%p Find me in app/views/academy/index.html.haml
+%h1 Academy
+%p Add some pictures
+%p Say something great here
+%h2 Teams
+-@academy_teams.each do |team|
+  %ul
+    %li=link_to team, team
+

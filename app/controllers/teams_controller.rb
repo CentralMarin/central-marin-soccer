@@ -4,14 +4,9 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-    @teams = Team.all(:order => ['year', 'team_level_id'], :include => [:team_level, :coach])
-    year_min = @teams.first.year if @teams.first
-    year_max = @teams.last.year  if @teams.last
-    if year_min && year_max
-      @years = year_min .. year_max
-    else
-      @years = []
-    end
+
+    teams = Team.order('year desc', :gender_id, :team_level_id)
+    @teams_by_year_and_gender = process_teams(teams)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -31,6 +26,22 @@ class TeamsController < ApplicationController
   protected
 
   def set_section_name
-          @top_level_section_name = 'menu.teams'
+    @top_level_section_name = 'menu.teams'
+  end
+
+  def process_teams(teams)
+    return {} if teams.nil?
+
+    teams_by_year_and_gender = {}
+    teams.each do |team|
+      if teams_by_year_and_gender[team.year].nil?
+        teams_by_year_and_gender[team.year] = []
+        teams_by_year_and_gender[team.year][0] = []
+        teams_by_year_and_gender[team.year][1] = []
+      end
+      teams_by_year_and_gender[team.year][team.gender_id] << team
+    end
+
+    return teams_by_year_and_gender
   end
 end
