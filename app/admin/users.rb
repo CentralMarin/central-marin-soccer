@@ -32,13 +32,7 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
     end
   end
 
-  form do |f|
-    f.inputs "Admin Details" do
-      f.input :email
-      f.input :roles, :as => :check_boxes, :collection => User::ROLES
-    end
-    f.actions
-  end
+  form :partial => "form"
 
   controller do
     def show
@@ -46,6 +40,16 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
         @versions = @user.versions
         @user = @user.versions[params[:version].to_i].reify if params[:version]
         show! #it seems to need this
+    end
+
+    def new
+      @user = User.new
+      new!
+    end
+
+    def edit
+      @user = User.find(params[:id])
+      edit!
     end
   end
     sidebar :versions, :partial => "layouts/version", :only => :show
