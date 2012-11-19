@@ -31,6 +31,9 @@ class Article < ActiveRecord::Base
   validates :body,        :presence => true
   validates :category_id, :presence => true
 
+  # Selecting Coach and no team shows the article for all of the coaches' teams
+  # Selecting Team and no team shows the article on all team pages
+
   def page_title
     self.to_s
   end
