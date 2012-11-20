@@ -9,4 +9,27 @@
     = f.action :cancel, :as => :link, :label => I18n.t('active_admin.cancel'), :wrapper_html => { :class => 'cancel' }
 
 :javascript
-  //$('.language-tabs').tabs();
+  var permissions = {
+      "team_manager": [1,5,6],
+      "coach": 4,
+      "parent": [3,4,5],
+      "player": 3
+    };
+
+  $.each(permissions, function(key, value) {
+    $("#user_roles_" + key).change(checkbox_clicked);
+  });
+
+  function checkbox_clicked(el) {
+    alert('checkbox changed');
+  }
+
+  /*
+    Configure roles and permissions through a json block:
+      Manager -> has one or more teams
+      Coach -> has one coach
+      Parent -> has one or more teams
+      Player -> has one team
+
+      TODO: Need to pull down coaches and teams - create hidden drop downs for them and insert them into the DOM when item is clicked
+   */

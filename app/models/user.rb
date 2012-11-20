@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   serialize :permissions, Hash
 
-  ROLES = [:admin, :board_member, :field_manager, :coach, :referee_manager, :team_manager, :parent, :player]
+  ROLES = [:admin, :board_member, :field_manager, :referee_manager, :coach, :team_manager, :parent, :player]
 
   has_paper_trail
 
@@ -72,6 +72,17 @@ class User < ActiveRecord::Base
 
   def show_roles
     self.roles.collect {|role| User.show_role(role) }.join(', ')
+  end
+
+  def generate_json
+    # TODO: Map permissions into this structure
+    json = {}
+    json[:Manager.to_s] = []
+    json[:Coach.to_s] = nil
+    json[:Parent.to_s] = []
+    json[:player.to_s] = nil
+
+    return json.to_json
   end
 
 protected

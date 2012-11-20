@@ -44,11 +44,15 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
 
     def new
       @user = User.new
+      @teams = Team.all
+      @coaches = Coach.all
       new!
     end
 
     def edit
       @user = User.find(params[:id])
+      @teams = Team.all
+      @coaches = Coach.all
       edit!
     end
   end
