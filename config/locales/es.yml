@@ -56,7 +56,7 @@ es:
   field:
     heading: "Marin County Campos de Fútbol"
     filter:
-      heading: "Field Status"
+      heading: "Campo Estado"
       club: "Club: "
       state: "Campo del Estado: "
       all: "Todo"
@@ -65,7 +65,7 @@ es:
       closed: "Cerrado"
       call: "Llamar"
     map:
-      directions: "Select a field below to view Google Map locations and directions"
+      directions: "Seleccione un campo de abajo para ver las ubicaciones de Google Map y direcciones"
   team:
     gender:
       boys: "Niños"
