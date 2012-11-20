@@ -34,4 +34,8 @@ class Ability
   def coach
 
   end
+
+  def referee_manager
+
+  end
 end

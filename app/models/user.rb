@@ -20,7 +20,9 @@
 class User < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  ROLES = [:admin, :board_member, :team_manager, :field_manager, :coach]
+  serialize :permissions, Hash
+
+  ROLES = [:admin, :board_member, :field_manager, :referee_manager, :coach, :team_manager, :parent, :player]
 
   has_paper_trail
 
@@ -38,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :roles
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :roles, :permissions
 
   after_create { |admin| admin.send_reset_password_instructions }
 
@@ -70,6 +72,17 @@ class User < ActiveRecord::Base
 
   def show_roles
     self.roles.collect {|role| User.show_role(role) }.join(', ')
+  end
+
+  def generate_json
+    # TODO: Map permissions into this structure
+    json = {}
+    json[:Manager.to_s] = []
+    json[:Coach.to_s] = nil
+    json[:Parent.to_s] = []
+    json[:player.to_s] = nil
+
+    return json.to_json
   end
 
 protected
