@@ -26,12 +26,12 @@
   %ul{id: 'fields'}
 
 %script{id: 'FieldTemplate', type: 'text/html'}
-  %li{id: 'field{{=id!}}', class: 'field'}
+  %li{id: 'field{{:id}}', class: 'field'}
     %a{href: '#'}
-      %h2="{{=name!}}"
-      %div{class: 'club'}= "{{=club!}}"
-      %div{class: 'rain'}= "{{=rain_line!}}"
-      %div{class: 'status'}= "{{=status!}}"
+      %h2="{{:name}}"
+      %div{class: 'club'}= "{{:club}}"
+      %div{class: 'rain'}= "{{:rain_line}}"
+      %div{class: 'status'}= "{{:status}}"
 
 - content_for :javascript do
   = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
