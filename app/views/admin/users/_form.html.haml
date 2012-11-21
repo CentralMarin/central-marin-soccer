@@ -4,6 +4,8 @@
     = f.input :email
     = f.input :roles, :as => :check_boxes, :collection => User::ROLES
 
+    = f.input :permissions, :as => :hidden, :value => @user.permissions.to_json
+
   = f.actions do
     = f.action :submit, :label => true
     = f.action :cancel, :as => :link, :label => I18n.t('active_admin.cancel'), :wrapper_html => { :class => 'cancel' }
@@ -34,27 +36,16 @@
     }
   });
 
-  var permissions = {
-      "team_manager": [1,5,6],
-      "coach": 4,
-      "parent": [3,4,5],
-      "player": 3
-    };
+  var permissions = $.parseJSON($("#user_permissions").val());
 
   var coaches = #{@coaches.to_json};
   var teams = #{@teams.to_json};
-  var permission_controls = {}
 
   checkbox_add({name: "team_manager", collection: teams, multiple: 'true'});
   checkbox_add({name: "coach", collection: coaches});
   checkbox_add({name: "parent", collection: teams, multiple: 'true'});
   checkbox_add({name: "player", collection: teams});
 
-  //$.each(permissions, function(key, value) {
-  //  // Enable / Disable dropdown
-  //  $("#user_roles_" + key).change(checkbox_clicked);
-  //});
-  //
   function checkbox_add(options) {
     var checkbox = $("#user_roles_"+options.name);
     checkbox.parent().after($("#selectTemplate").render({
@@ -68,11 +59,6 @@
     checkbox.change(function() {
       $(this).is(':checked') ? select.show() : select.hide();
     }).change();
-  }
-
-  function checkbox_clicked(el) {
-    // TODO: Lookup the name of the select if one exists
-    var i = 0;
   }
 
   /*
