@@ -51,8 +51,8 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
 
     def edit
       @user = User.find(params[:id])
-      @teams = Team.all
-      @coaches = Coach.all
+      @teams = Team.all.map { |team| {id: team.id, name: team.to_team_name_with_coach} }
+      @coaches = Coach.all.map { |coach| {id: coach.id, name: coach.name} }
       edit!
     end
   end

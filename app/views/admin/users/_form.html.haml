@@ -8,7 +8,32 @@
     = f.action :submit, :label => true
     = f.action :cancel, :as => :link, :label => I18n.t('active_admin.cancel'), :wrapper_html => { :class => 'cancel' }
 
+%script{id: 'selectTemplate', type: 'text/html'}
+  = '<select id="{{:select_id}}" {{if multiple}}multiple{{/if}} size="5">'.html_safe
+  = '{{for options}}'
+  = "<option value='{{:id}}' {{:~isSelected(id, #parent.parent.data.permissions)}}>{{:name}}</option>".html_safe
+  = '{{/for}}'
+  = '</select>'.html_safe
+
+= javascript_include_tag "jsrender"
 :javascript
+  $.views.helpers({
+    isSelected: function(id, permissions) {
+      var selected = " selected";
+      switch(typeof permissions) {
+        case 'number':
+          return id == permissions? selected : "";
+          break;
+        case 'object':
+          for(var i = 0; i < permissions.length; i++) {
+            if (id == permissions[i])
+              return selected;
+          }
+          break;
+      }
+    }
+  });
+
   var permissions = {
       "team_manager": [1,5,6],
       "coach": 4,
@@ -16,12 +41,38 @@
       "player": 3
     };
 
-  $.each(permissions, function(key, value) {
-    $("#user_roles_" + key).change(checkbox_clicked);
-  });
+  var coaches = #{@coaches.to_json};
+  var teams = #{@teams.to_json};
+  var permission_controls = {}
+
+  checkbox_add({name: "team_manager", collection: teams, multiple: 'true'});
+  checkbox_add({name: "coach", collection: coaches});
+  checkbox_add({name: "parent", collection: teams, multiple: 'true'});
+  checkbox_add({name: "player", collection: teams});
+
+  //$.each(permissions, function(key, value) {
+  //  // Enable / Disable dropdown
+  //  $("#user_roles_" + key).change(checkbox_clicked);
+  //});
+  //
+  function checkbox_add(options) {
+    var checkbox = $("#user_roles_"+options.name);
+    checkbox.parent().after($("#selectTemplate").render({
+      select_id: options.name + '_permissions',
+      multiple: options.multiple,
+      options: options.collection,
+      permissions: permissions[options.name]
+    }));
+
+    var select = $("#" + options.name + "_permissions");
+    checkbox.change(function() {
+      $(this).is(':checked') ? select.show() : select.hide();
+    }).change();
+  }
 
   function checkbox_clicked(el) {
-    alert('checkbox changed');
+    // TODO: Lookup the name of the select if one exists
+    var i = 0;
   }
 
   /*
