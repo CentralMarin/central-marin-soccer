@@ -1,3 +1,4 @@
+
 = semantic_form_for [:admin, @user], :html => {:multipart => true} do |f|
 
   = f.inputs do
@@ -17,7 +18,6 @@
   = '{{/for}}'
   = '</select>'.html_safe
 
-= javascript_include_tag "jsrender"
 :javascript
   $.views.helpers({
     isSelected: function(id, permissions) {
@@ -40,10 +40,10 @@
   var coaches = #{@coaches.to_json};
   var teams = #{@teams.to_json};
 
-  checkbox_add({name: "team_manager", collection: teams, multiple: 'true'});
-  checkbox_add({name: "coach", collection: coaches});
-  checkbox_add({name: "parent", collection: teams, multiple: 'true'});
-  checkbox_add({name: "player", collection: teams});
+  checkbox_add({name: "team_manager", collection: teams, multiple: 'true', message: 'Select one or more teams'});
+  checkbox_add({name: "coach", collection: coaches, message: 'Select a coach'});
+  checkbox_add({name: "parent", collection: teams, multiple: 'true', message: 'Select one or more teams'});
+  checkbox_add({name: "player", collection: teams, message: 'Select a team'});
 
   function checkbox_add(options) {
     var checkbox = $("#user_roles_"+options.name);
@@ -54,21 +54,18 @@
       permissions: permissions[options.name]
     }));
 
-    var select = $("#" + options.name + "_permissions");
+    var $select = $("#" + options.name + "_permissions").multiselect({
+      multiple: options.multiple? true : false,
+      noneSelectedText: options.message,
+      selectedList: 1
+    });
     checkbox.change(function() {
-      $(this).is(':checked') ? select.show() : select.hide();
+
+      // TODO: Update permissions as roles are checked / unchecked
+      $select.multiselect( !$(this).is(':checked') ? 'disable' : 'enable');
     }).change();
   }
 
   $("form").submit(function() {
-    alert('submitting form');
+    $("#user_permissions").val(permissions);
   });
-  /*
-    Configure roles and permissions through a json block:
-      Manager -> has one or more teams
-      Coach -> has one coach
-      Parent -> has one or more teams
-      Player -> has one team
-
-      TODO: Need to pull down coaches and teams - create hidden drop downs for them and insert them into the DOM when item is clicked
-   */
