@@ -37,7 +37,6 @@
   });
 
   var permissions = $.parseJSON($("#user_permissions").val());
-
   var coaches = #{@coaches.to_json};
   var teams = #{@teams.to_json};
 
@@ -61,6 +60,9 @@
     }).change();
   }
 
+  $("form").submit(function() {
+    alert('submitting form');
+  });
   /*
     Configure roles and permissions through a json block:
       Manager -> has one or more teams

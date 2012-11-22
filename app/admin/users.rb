@@ -44,8 +44,8 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
 
     def new
       @user = User.new
-      @teams = Team.all
-      @coaches = Coach.all
+      @teams = Team.all.map { |team| {id: team.id, name: team.to_team_name_with_coach} }
+      @coaches = Coach.all.map { |coach| {id: coach.id, name: coach.name} }
       new!
     end
 
@@ -54,6 +54,18 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
       @teams = Team.all.map { |team| {id: team.id, name: team.to_team_name_with_coach} }
       @coaches = Coach.all.map { |coach| {id: coach.id, name: coach.name} }
       edit!
+    end
+
+    def update
+      @teams = Team.all.map { |team| {id: team.id, name: team.to_team_name_with_coach} }
+      @coaches = Coach.all.map { |coach| {id: coach.id, name: coach.name} }
+      super
+    end
+
+    def create
+      @teams = Team.all.map { |team| {id: team.id, name: team.to_team_name_with_coach} }
+      @coaches = Coach.all.map { |coach| {id: coach.id, name: coach.name} }
+      super
     end
   end
     sidebar :versions, :partial => "layouts/version", :only => :show
