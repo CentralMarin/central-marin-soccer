@@ -5,7 +5,7 @@
     = f.input :email
     = f.input :roles, :as => :check_boxes, :collection => User::ROLES
 
-    = f.input :permissions, :as => :hidden, :value => @user.permissions.to_json
+    = f.input :permissions, :as => :hidden, :input_html => {:value => @user.permissions.to_json}
 
   = f.actions do
     = f.action :submit, :label => true
@@ -39,6 +39,7 @@
   var permissions = $.parseJSON($("#user_permissions").val());
   var coaches = #{@coaches.to_json};
   var teams = #{@teams.to_json};
+  var $selects = {};
 
   checkbox_add({name: "team_manager", collection: teams, multiple: 'true', message: 'Select one or more teams'});
   checkbox_add({name: "coach", collection: coaches, message: 'Select a coach'});
@@ -60,12 +61,20 @@
       selectedList: 1
     });
     checkbox.change(function() {
-
-      // TODO: Update permissions as roles are checked / unchecked
       $select.multiselect( !$(this).is(':checked') ? 'disable' : 'enable');
     }).change();
+
+    $selects[options.name] = $select;
   }
 
   $("form").submit(function() {
-    $("#user_permissions").val(permissions);
+    permissions = {};
+    for(var select in $selects) {
+      if ($("#user_roles_" + select).is(':checked')) {
+        permissions[select] = $selects[select].multiselect('getChecked').map(function() {
+          return this.value;
+        }).get();
+      }
+    }
+    $("#user_permissions").val(JSON.stringify(permissions));
   });

@@ -57,12 +57,14 @@ ActiveAdmin.register User, {:sort_order => "email_asc"} do
     end
 
     def update
+      params['user']['permissions'] = JSON.parse(params['user']['permissions'])
       @teams = Team.all.map { |team| {id: team.id, name: team.to_team_name_with_coach} }
       @coaches = Coach.all.map { |coach| {id: coach.id, name: coach.name} }
       super
     end
 
     def create
+      params['user']['permissions'] = JSON.parse(params['user']['permissions'])
       @teams = Team.all.map { |team| {id: team.id, name: team.to_team_name_with_coach} }
       @coaches = Coach.all.map { |coach| {id: coach.id, name: coach.name} }
       super
