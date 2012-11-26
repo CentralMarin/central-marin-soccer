@@ -53,7 +53,7 @@
             "<a target='_blank' href='http://maps.google.com/maps?saddr=&daddr=" ,encodeURIComponent(field.address),"'>Directions</a>"].join("");
             infowindow.setContent(content);
             infowindow.open(map, field.marker);
-        }
+        };
 
         var _addMarker = function (field) {
             var marker = new google.maps.Marker({
