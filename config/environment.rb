@@ -6,7 +6,3 @@ CentralMarin::Application.initialize!
 
 # Mailer settings
 #ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.smtp_settings = {
-        :address => 'mail-02.marin.digitalfoundry.com',
-        :enable_starttls_auto => false
-}

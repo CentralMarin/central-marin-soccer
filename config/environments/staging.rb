@@ -59,9 +59,17 @@ CentralMarin::Application.configure do
   config.active_support.deprecation = :notify
 
   # Devise settings
-  config.action_mailer.default_url_options = {:host => 'localhost:3000'}
+  config.action_mailer.default_url_options = {:host => 'staging.centralmarinsoccer.com'}
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :address    => 'smtp.gmail.com',
+      :port       => 587,
+      :user_name  => 'cmcsc@robinett.org',
+      :password   => '3iZ1U0ee/#g#0{YbYh#(',
+      :authentication => 'plain',
+      :enable_starttls_auto => true
+  }
 
   config.assets.precompile += %w[active_admin.css active_admin.js modernizr-2.0.6.js wowslider.js coach.css coaches.js fields.css fields.js]
 end
