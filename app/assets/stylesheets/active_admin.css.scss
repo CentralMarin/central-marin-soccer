@@ -8,10 +8,10 @@
 // $sidebar-width: 242px;
 
 // Active Admin's got SASS!
-@import "overcast/jquery-ui-1.9.1.custom.css";
+@import "smoothness/jquery-ui-1.9.2.custom.css";
 @import "jquery.multiselect";
-//@import "active_admin/mixins";
-//@import "active_admin/base";
+@import "active_admin/mixins";
+@import "active_admin/base";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -29,3 +29,4 @@
 // .active_admin       applies to any Active Admin namespace
 // .admin_namespace    applies to the admin namespace (eg: /admin)
 // .other_namespace    applies to a custom namespace named other (eg: /other)
+//
