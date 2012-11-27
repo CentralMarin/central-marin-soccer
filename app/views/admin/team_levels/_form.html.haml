@@ -1,5 +1,3 @@
-= stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/base/jquery-ui.css'
-
 = semantic_form_for [:admin, @team_level] do |f|
 
   .language-tabs
@@ -24,8 +22,6 @@
   = f.actions do
     = f.action :submit, :label => true
     = f.action :cancel, :as => :link, :label => I18n.t('active_admin.cancel'), :wrapper_html => { :class => 'cancel' }
-
-= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js'
 
 :javascript
   $('.language-tabs').tabs();
