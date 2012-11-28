@@ -8,7 +8,7 @@
 // $sidebar-width: 242px;
 
 // Active Admin's got SASS!
-@import "smoothness/jquery-ui-1.9.2.custom.css";
+@import url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css);
 @import "jquery.multiselect";
 @import "active_admin/mixins";
 @import "active_admin/base";
