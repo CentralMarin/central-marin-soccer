@@ -52,7 +52,8 @@ group :test do
   gem 'guard-rspec'
 end
 
-gem 'therubyracer'
+gem 'libv8', '~> 3.11.8'
+gem 'therubyracer', :require => 'v8'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
