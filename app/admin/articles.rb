@@ -39,7 +39,7 @@ ActiveAdmin.register Article do
         @article = Article.find(params[:id])
         @versions = @article.versions
         @article = @article.versions[params[:version].to_i].reify if params[:version]
-        show!
+        response.headers['X-XSS-Protection'] = "0"
     end
 
     def new
