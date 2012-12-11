@@ -23,7 +23,7 @@ class Article < ActiveRecord::Base
 
   ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
 
-  attr_accessible :title, :body, :image, :author, :category_id, :subcategory_id, :carousel, :translations_attributes
+  attr_accessible :title, :body, :image, :author, :category_id, :subcategory_id, :carousel, :translations_attributes, :published
   mount_uploader :image, ImageUploader
 
   validates :title,         :presence => true,
@@ -33,6 +33,8 @@ class Article < ActiveRecord::Base
 
   # Selecting Coach and no team shows the article for all of the coaches' teams
   # Selecting Team and no team shows the article on all team pages
+
+  # TODO: Can't put an article in the carousel unless you have an image
 
   def page_title
     self.to_s

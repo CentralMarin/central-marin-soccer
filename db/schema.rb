@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119215517) do
+ActiveRecord::Schema.define(:version => 20121211192834) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(:version => 20121119215517) do
     t.integer  "category_id"
     t.integer  "subcategory_id"
     t.boolean  "carousel"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.boolean  "published",      :default => false
   end
 
   add_index "articles", ["subcategory_id"], :name => "index_articles_on_subcategory_id"

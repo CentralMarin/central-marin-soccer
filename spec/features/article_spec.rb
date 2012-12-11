@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "News" do
+describe "Articles" do
   describe "GET /news" do
     it "works! (now write some real specs)" do
       visit articles_path
