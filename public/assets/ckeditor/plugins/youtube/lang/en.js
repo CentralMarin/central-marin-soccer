@@ -4,6 +4,6 @@ CKEDITOR.plugins.setLang('youtube', 'en',
   {
     title : "Embed Youtube Video",
     button : "Add Youtube Video",
-    pasteMsg : "Please copy and paste the Youtube URL here, .e.g watch?v=c0tW-QWI7Wk"
+    pasteMsg : "Please copy and paste the Youtube URL here<br>Please don't paste the embed code. Just Paste the URL.<br>example: http://www.youtube.com/embed/JK4oDgDicW8<br>http://youtu.be/JK4oDgDicW8"
   }
 });

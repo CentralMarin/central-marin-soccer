@@ -49,7 +49,7 @@ CKEDITOR.editorConfig = function( config )
   
   /* Extra plugins */
   // works only with en, ru, uk locales
-  config.extraPlugins = "embed,attachment,youtube";
+  config.extraPlugins = "youtube,mp3player";
   
   /* Toolbars */
   config.toolbar = 'Easy';
@@ -62,7 +62,7 @@ CKEDITOR.editorConfig = function( config )
         [ 'Find','Replace','-','SelectAll','-','Scayt' ],
         ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-        ['Link','Unlink','Anchor'], ['Attachment'], ['Youtube'],
+        ['Link','Unlink','Anchor'], ['Attachment'], ['Youtube', 'Mp3Player'],
         ['Table','HorizontalRule','PageBreak']
     ];
 };
