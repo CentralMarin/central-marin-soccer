@@ -57,7 +57,7 @@ describe Article do
   context "translations" do
     before(:each) do
       I18n.locale = :en
-      @article = Article.create title: "Sample Title", body: "HTML Body", author: "Sample Author", carousel: false, category_id: Article::ARTICLE_CATEGORY[0]
+      @article = Article.create title: "Sample Title", body: "HTML Body", author: "Sample Author", carousel: false, category_id: Article.category_id(Article::ARTICLE_CATEGORY[0])
       I18n.locale = :es
       @article.update_attributes title: "Muestra Título", body: "HTML Cuerpo"
     end
