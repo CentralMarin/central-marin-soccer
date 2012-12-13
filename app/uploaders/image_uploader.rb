@@ -21,16 +21,16 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :scale => [700, 522]
+  process :scale => [573, 363]
 
   def scale(width, height)
     resize_and_pad(width, height)
   end
 
   # Create different versions of your uploaded files:
-  version :thumb do
-    process :scale => [200, 150]
-  end
+  #version :thumb do
+  #  process :scale => [200, 150]
+  #end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
