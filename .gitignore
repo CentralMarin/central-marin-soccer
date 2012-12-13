@@ -17,3 +17,4 @@ pickle-email-*.html
 .idea/
 *.iml
 public/assets/*
+public/uploads/*
