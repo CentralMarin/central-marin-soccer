@@ -17,7 +17,6 @@
     = f.input :image, :as => :file
     = f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
     = f.input :subcategory_id, :collection => Team.all(:order => 'year desc').map {|e| [e.to_team_name_with_coach, e.id]}, :label => 'to_team_name_with_coach', :as => :select, :label => "Team"
-    = f.input :carousel
 
   = f.actions do
     = f.action :submit, :label => true

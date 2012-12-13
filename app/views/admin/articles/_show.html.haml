@@ -1,6 +1,4 @@
 
-= image_tag (@article.image) unless (@article.image.blank?)
-%h1= @article.image
 
 %div.language-tabs
   %ul.language-selection
@@ -9,6 +7,8 @@
 
   - @article.translations.each do |lang|
     %div{:id => "lang-#{lang.locale}"}
+      %hr
+      = image_tag (@article.image) unless (@article.image.blank?)
       %h3= lang.title
       %p= lang.body.html_safe
 
