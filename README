@@ -2,6 +2,20 @@
 Install ImageMagick
 
 == TODO ==
+Limit categories and subcategories on article create to permission admin has
+Create an article page for managing the carousel
+    Page should allow the same article to exist multiple times in the carousel
+    Page should allow the ordering of items in the carousel
+    Page should allow the ordering of items in the carousel
+Update home page to use article carousel items
+    Page should show a default image if no carousel items specified
+    Carousel items should link to their respective page
+Update Team page to show articles
+    Show coach articles
+    Show team articles
+
+
+== OLD ==
 Team page should pull upcoming events (2 weeks) from both the team and the club calendar
 Each Team should have a calendar
 The Club should have a calendar
