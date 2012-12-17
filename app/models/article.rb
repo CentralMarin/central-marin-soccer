@@ -20,10 +20,11 @@ class Article < ActiveRecord::Base
   translates :title, :body, versioning: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
   has_many :article_translations
+  has_many :article_carousels
 
   ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
 
-  attr_accessible :title, :body, :image, :author, :category_id, :subcategory_id, :carousel, :translations_attributes, :published
+  attr_accessible :title, :body, :image, :author, :category_id, :subcategory_id, :translations_attributes, :published
   mount_uploader :image, ImageUploader
 
   validates :title,         :presence => true,
@@ -33,8 +34,6 @@ class Article < ActiveRecord::Base
 
   # Selecting Coach and no team shows the article for all of the coaches' teams
   # Selecting Team and no team shows the article on all team pages
-
-  # TODO: Can't put an article in the carousel unless you have an image
 
   def page_title
     self.to_s
