@@ -32,9 +32,6 @@ class Article < ActiveRecord::Base
   validates :body,        :presence => true
   validates :category_id, :presence => true
 
-  # Selecting Coach and no team shows the article for all of the coaches' teams
-  # Selecting Team and no team shows the article on all team pages
-
   def page_title
     self.to_s
   end
@@ -66,6 +63,13 @@ class Article < ActiveRecord::Base
 
   def to_param
     "#{id} #{to_s}".parameterize
+  end
+
+  def destination_url
+    # TODO: Build the appropriate URL based on category_id and subcategory_id
+    # Selecting Coach and no team shows the article for all of the coaches' teams
+    # Selecting Team and no team shows the article on all team pages
+
   end
 
   class Translation
