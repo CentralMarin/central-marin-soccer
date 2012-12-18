@@ -74,17 +74,6 @@ class User < ActiveRecord::Base
     self.roles.collect {|role| User.show_role(role) }.join(', ')
   end
 
-  def generate_json
-    # TODO: Map permissions into this structure
-    json = {}
-    json[:Manager.to_s] = []
-    json[:Coach.to_s] = nil
-    json[:Parent.to_s] = []
-    json[:player.to_s] = nil
-
-    return json.to_json
-  end
-
 protected
   def password_required?
     new_record? ? false : super
