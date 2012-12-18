@@ -9,15 +9,13 @@
 
 %div{id: 'slider-container', class: 'grid_10 box'}
   %div{class: 'ws_images'}
-    %img{src: '/assets/sample_news.png'}
-    %img{src: '/assets/sample_news.png'}
+    - @articles.each do |article|
+      =image_tag (article.image)
   %div{class: 'ws_bullets'}
-    %a{href: '#'}
-      %h2{class: 'alt'}Test1
-      %span Lorem ipsum ... dasf
-    %a{href: '#'}
-      %h2{class: 'alt'}Test2
-      %span Lorem ipsum ... with test 2
+    - @articles.each do |article|
+      %a{href: '#'}
+        %h2{class: 'alt'}= article.title
+        %span= strip_tags(truncate(article.body, length: 50, truncate_string: "..."))
 
 %div{class: 'padV10 clear'}
 

@@ -17,7 +17,6 @@ ActiveAdmin.register Article do
     column 'Has Translation', :sortable => :"article.has_translation()" do |articles|
       articles.has_translation
     end
-    column :carousel
     column :category do |articles|
       articles.category.to_s
     end

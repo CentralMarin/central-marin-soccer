@@ -13,7 +13,7 @@
 class Coach < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  translates :bio, versioning: true
+  translates :bio, versioning: true, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
   has_many :team_level_translations
 

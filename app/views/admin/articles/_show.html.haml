@@ -16,8 +16,6 @@
   %li= "Category: #{@article.category.to_s}"
   - unless @article.subcategory_id != ''
     %li= Team.to_team_name_with_coach(@article.subcategory_id)
-  - if @article.carousel
-    %li= "Show in carousel"
   %li= "Created at #{@article.created_at}"
   %li= "Last updated #{@article.updated_at}"
 

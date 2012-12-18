@@ -17,7 +17,7 @@
 class Article < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  translates :title, :body, versioning: true
+  translates :title, :body, versioning: true, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
   has_many :article_translations
   has_many :article_carousels
