@@ -65,11 +65,30 @@ class Article < ActiveRecord::Base
     "#{id} #{to_s}".parameterize
   end
 
-  def destination_url
+  def correct_article_path
     # TODO: Build the appropriate URL based on category_id and subcategory_id
     # Selecting Coach and no team shows the article for all of the coaches' teams
     # Selecting Team and no team shows the article on all team pages
+    case category
+      when :club
+      when :team
+        if subcategory_id.nil?
+          teams_path
+        else
+          team_path(subcategory_id)
+        end
+      when :coach
+        if subcategory_id.nil?
+          coaches_path
+        else
+          coach_path
+        end
+      when :referee
+      when :tournament
 
+      else
+        '/'
+    end
   end
 
   class Translation

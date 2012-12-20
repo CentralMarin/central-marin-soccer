@@ -13,7 +13,7 @@
       =image_tag (article.image)
   %div{class: 'ws_bullets'}
     - @articles.each do |article|
-      %a{href: '#'}
+      %a{href: "#{article.correct_article_path}"}
         %h2{class: 'alt'}= article.title
         %span= strip_tags(truncate(article.body, length: 50, truncate_string: "..."))
 
