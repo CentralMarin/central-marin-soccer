@@ -9,10 +9,11 @@ Create an article page for managing the carousel
     Page should allow the ordering of items in the carousel
 Update home page to use article carousel items
     Page should show a default image if no carousel items specified
-    Carousel items should link to their respective page
+    Carousel items should link to article detail page
 Update Team page to show articles
     Show coach articles
     Show team articles
+Article details page should have bread crumbs allowing user to get to parent pages based on context of article
 
 
 == OLD ==
