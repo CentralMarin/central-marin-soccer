@@ -17,4 +17,5 @@ pickle-email-*.html
 .idea/
 *.iml
 public/assets/*
+!public/assets/ckeditor
 public/uploads/*
