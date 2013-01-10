@@ -7,6 +7,9 @@ Spork.prefork do
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
 
+  # Delay loading route loading so spork works with ActiveAdmin
+  Spork.trap_method(Rails::Application::RoutesReloader, :reload!) # Rails 3.1
+
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
@@ -60,6 +63,10 @@ end
 Spork.each_run do
   # This code will be run each time you run your specs.
   FactoryGirl.reload
+
+  #ActionView::Template.register_template_handler :arb, lambda { |template|
+  #  "self.class.send :include, Arbre::Builder; @_helpers = self; self.extend ActiveAdmin::ViewHelpers; @__current_dom_element__ = Arbre::Context.new(assigns, self); begin; #{template.source}; end; current_dom_context"
+  #}
 end
 
 
