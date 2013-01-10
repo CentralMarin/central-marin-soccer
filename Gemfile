@@ -26,6 +26,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'rspec-nc'
   gem 'factory_girl_rails'
   gem 'annotate', '>=2.5.0'
   gem 'sqlite3'

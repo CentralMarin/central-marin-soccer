@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/jnicklas/capybara.git
-  revision: 8ba0559ca980aa37b5508f5e27ad68193a8fe0cf
+  revision: 6ee24542406a25bf746b16428ff16f95ecc5ec7c
   specs:
     capybara (2.0.2)
       mime-types (>= 1.16)
@@ -107,7 +107,7 @@ GEM
     faker (1.1.2)
       i18n (~> 0.5)
     fastercsv (1.5.5)
-    ffi (1.3.0)
+    ffi (1.3.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     guard (1.6.1)
@@ -144,7 +144,7 @@ GEM
       activesupport (>= 3.0.0)
     launchy (2.1.2)
       addressable (~> 2.3)
-    libv8 (3.11.8.11)
+    libv8 (3.11.8.13)
     libwebsocket (0.1.7.1)
       addressable
       websocket
@@ -214,6 +214,9 @@ GEM
     rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
     rspec-mocks (2.12.1)
+    rspec-nc (0.0.4)
+      rspec (~> 2.9)
+      terminal-notifier (~> 1.4.2)
     rspec-rails (2.12.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -241,6 +244,7 @@ GEM
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
     subexec (0.2.2)
+    terminal-notifier (1.4.2)
     therubyracer (0.11.1)
       libv8 (~> 3.11.8.7)
       ref
@@ -286,6 +290,7 @@ DEPENDENCIES
   rails (>= 3.2.1)
   rake (>= 10.0.0)
   rb-fsevent
+  rspec-nc
   rspec-rails
   sass-rails (~> 3.2.5)
   spork (~> 0.9.0.rc)
