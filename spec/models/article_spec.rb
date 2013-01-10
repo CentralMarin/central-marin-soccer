@@ -8,7 +8,6 @@
 #  title          :string(255)
 #  body           :text
 #  author         :string(255)
-#  carousel       :boolean
 #  category_id    :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
@@ -45,7 +44,6 @@ describe Article do
     db_article.title.should == article.title
     db_article.body.should == article.body
     db_article.author.should == article.author
-    db_article.carousel.should == article.carousel
     db_article.category_id.should == article.category_id
     db_article.subcategory_id.should == article.subcategory_id
   end
@@ -57,7 +55,7 @@ describe Article do
   context "translations" do
     before(:each) do
       I18n.locale = :en
-      @article = Article.create title: "Sample Title", body: "HTML Body", author: "Sample Author", carousel: false, category_id: Article.category_id(Article::ARTICLE_CATEGORY[0])
+      @article = Article.create title: "Sample Title", body: "HTML Body", author: "Sample Author", category_id: Article.category_id(Article::ARTICLE_CATEGORY[0])
       I18n.locale = :es
       @article.update_attributes title: "Muestra Título", body: "HTML Cuerpo"
     end
