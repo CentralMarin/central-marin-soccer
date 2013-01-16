@@ -1,6 +1,6 @@
 ActiveAdmin.register Article do
 
-  menu :if => proc{ can?(:manage, Article) }, :label => 'Articles'
+  menu :if => proc{ can?(:manage, Article) }, :label => 'Articles', parent: 'Articles'
 
   filter :title
   filter :category
