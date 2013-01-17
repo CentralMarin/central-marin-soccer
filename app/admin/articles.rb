@@ -31,6 +31,13 @@ ActiveAdmin.register Article do
     render 'show'
   end
 
+  collection_action :article_carousel, :title => "Carousel", :method => :get do
+    @articles = Article.all
+    @article_carousel = ArticleCarousel.all
+
+    render "admin/articles/_carousel"
+  end
+
   form :partial => 'form'
 
   controller do
@@ -75,5 +82,9 @@ ActiveAdmin.register Article do
   # show this button only at :history action
   action_item :only => :history do
     link_to "Back", :action => "show"
+  end
+
+  action_item :only => :index do
+    link_to "Carousel", :action => "article_carousel"
   end
 end
