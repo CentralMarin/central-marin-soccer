@@ -1,30 +1,27 @@
 
-%p Click and drag articles from the left column into the right to add them to the carousel. Drag items from the carousel to the recycle bin to remove them from the carousel.
+%div{id: 'info'}
+  Click and drag articles from the left column into the right to add them to the carousel. Drag items from the carousel to the recycle bin to remove them from the carousel.
 
-%table{border: 1}
-  %thead
-    %td
-      %h3 All Articles by Published Date
-    %td
-      %h3{id: 'trash'}
-        Carousel Items
-        %img{src:'/assets/icons/trashcan.jpeg'}
+%div{class: 'column'}
+  %h3 All Articles by Published Date
+  %ul{id: 'article_list'}
+    -@articles.each do |article|
+      %li{class: 'ui-state-default article ui-state-highlight'}
+        =article.title
 
-  %tr
-    %td
-      %ul{id: 'article_list'}
-        -@articles.each do |article|
-          %li{class: 'ui-state-default article ui-state-highlight'}=article.title
+%div{class: 'column'}
+  %h3{id: 'trash'}
+    Carousel Items
+    %img{src:'/assets/icons/trashcan.jpeg'}
+  %ul{id: 'article_carousel_list', class: 'ui-sortable'}
+    -@articles_in_carousel.each do |carousel|
+      %li{class: 'ui-state-default article_carousel_item'}
+        =carousel.article.title
 
-    %td
-      %ul{id: 'article_carousel_list', class: 'ui-sortable'}
-        -@articles_in_carousel.each do |carousel|
-          %li{class: 'ui-state-default article_carousel_item'}
-            =carousel.article.title
 
-%hr
-%h3 Carousel Preview
-
+%div{class: 'preview'}
+  %hr
+  %h3 Carousel Preview
 
 :javascript
 
@@ -38,13 +35,15 @@
       });
       $( "#article_carousel_list" ).sortable({
         revert: true,
-        out: function(event, ui) {
+        stop: function(ev, ui) {
+          if (!ui.item.hasClass('article_carousel_item'))
+            ui.item.attr('class', 'ui-state-default article_carousel_item');
         }
       });
       $( ".article" ).draggable({
         connectToSortable: "#article_carousel_list",
-        helper: "clone",
-        revert: "invalid"
+        revert: "invalid",
+        helper: "clone"
       });
       $( "ul, li" ).disableSelection();
     });

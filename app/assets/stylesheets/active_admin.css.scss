@@ -31,5 +31,33 @@
 // .other_namespace    applies to a custom namespace named other (eg: /other)
 //
 
-.admin_namespace #article_list, #article_carousel_list { list-style-type: none; margin: 0; padding: 0 0 2.5em; float: left; margin-right: 10px; }
-#article_list li, #article_carousel_list li  { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px; }
+
+// Carousel CSS
+.admin_namespace .column {
+  width: 49%;
+  height:200px;
+  float: left;
+  position:relative;
+  border-left: 1px dashed pink;
+}
+
+.admin_namespace .preview {
+  width:98%;
+  height:100%;
+  position:relative;
+  float:left;
+}
+.admin_namespace #article_list, #article_carousel_list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0 2.5em;
+  float: left;
+//  margin-right: 10px;
+  height: 40px;
+//  border:1px dotted #A3A3A3;
+  width: 100%;
+}
+
+#article_list li, #article_carousel_list li  {
+  margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 120px;
+}
