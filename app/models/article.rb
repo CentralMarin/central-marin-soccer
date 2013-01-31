@@ -19,8 +19,8 @@ class Article < ActiveRecord::Base
 
   translates :title, :body, versioning: true, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
-  has_many :article_translations
-  has_many :article_carousels
+  has_many :article_translations, :dependent => :destroy
+  has_many :article_carousels, :dependent => :destroy
 
   ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
 

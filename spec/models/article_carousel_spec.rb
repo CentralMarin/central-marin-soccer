@@ -14,8 +14,11 @@ describe ArticleCarousel do
     FactoryGirl.build(:article_carousel, carousel_order: article_carousel.carousel_order).should_not be_valid
   end
 
-  it "allows an article to be in the carousel multiple times" do
+  it "allows the same article to be in the carousel multiple times" do
     article_carousel = FactoryGirl.create(:article_carousel)
-    ArticleCarousel.new(article_id: article_carousel.article_id, carousel_order: article_carousel.carousel_order + 1)
+    ac = FactoryGirl.build(:article_carousel, article_id: article_carousel.article_id, carousel_order: article_carousel.carousel_order + 1)
+    ac.save.should == true
+    carousels = ArticleCarousel.all
+    carousels.count.should == 2
   end
 end

@@ -1,6 +1,6 @@
 ActiveAdmin.register Article do
 
-  menu :if => proc{ can?(:manage, Article) }, :label => 'Articles', parent: 'Articles'
+  menu :if => proc{ can?(:manage, Article) }, :label => 'Articles'
 
   filter :title
   filter :category
@@ -33,7 +33,7 @@ ActiveAdmin.register Article do
 
   collection_action :article_carousel, :title => "Carousel", :method => :get do
     @articles = Article.all
-    @article_carousel = ArticleCarousel.all
+    @articles_in_carousel = ArticleCarousel.all(:joins => :article, :order => "carousel_order asc")
 
     render "admin/articles/_carousel"
   end
