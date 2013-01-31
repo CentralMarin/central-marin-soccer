@@ -8,6 +8,7 @@
     -@articles.each do |article|
       %li{class: 'ui-state-default article ui-state-highlight', data: {id: article.id}}
         =article.title
+// TODO: Disable articles that don't have a picture
 
 %div{class: 'column'}
   %h3{id: 'trash'}
@@ -23,6 +24,7 @@
 %div{class: 'preview'}
   %hr
   %h3 Carousel Preview
+// TODO: Show preview as the admin makes changes
 
 :javascript
 
@@ -49,6 +51,7 @@
       $( "ul, li" ).disableSelection();
       $( "#save").click(function() {
         var results = $("#article_carousel_list").sortable('toArray', {attribute: 'data-id'});
+        // TODO: Save this back to the server
         alert(results);
       });
     });
