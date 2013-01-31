@@ -6,7 +6,7 @@
   %h3 All Articles by Published Date
   %ul{id: 'article_list'}
     -@articles.each do |article|
-      %li{class: 'ui-state-default article ui-state-highlight'}
+      %li{class: 'ui-state-default article ui-state-highlight', data: {id: article.id}}
         =article.title
 
 %div{class: 'column'}
@@ -15,9 +15,10 @@
     %img{src:'/assets/icons/trashcan.jpeg'}
   %ul{id: 'article_carousel_list', class: 'ui-sortable'}
     -@articles_in_carousel.each do |carousel|
-      %li{class: 'ui-state-default article_carousel_item'}
+      %li{class: 'ui-state-default article_carousel_item', data: {id: carousel.article.id}}
         =carousel.article.title
 
+%input{type: 'button', value: 'save', id: 'save'}
 
 %div{class: 'preview'}
   %hr
@@ -46,4 +47,8 @@
         helper: "clone"
       });
       $( "ul, li" ).disableSelection();
+      $( "#save").click(function() {
+        var results = $("#article_carousel_list").sortable('toArray', {attribute: 'data-id'});
+        alert(results);
+      });
     });
