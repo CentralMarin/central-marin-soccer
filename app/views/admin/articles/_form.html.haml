@@ -24,6 +24,7 @@
 
 :javascript
   $('.language-tabs').tabs();
+  $('#article_subcategory_id_input').hide();
   $('#article_category_id').change(function() {
     var text = $('#article_category_id option:selected').text()
     text == 'team' || text == 'coach' ? $('#article_subcategory_id_input').show() : $('#article_subcategory_id_input').hide()
