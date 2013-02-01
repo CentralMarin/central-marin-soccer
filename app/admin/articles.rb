@@ -73,6 +73,33 @@ ActiveAdmin.register Article do
     render "layouts/history"
   end
 
+  collection_action :update_carousel_list, :method => :get do
+    carousel_list = params[:carousel_list]
+
+    # Remove existing carousel items
+    ArticleCarousel.all.each do |carousel_item|
+      carousel_item.destroy
+    end
+    #all_carousel_items.destroy_all unless all_carousel_items.nil?
+
+    # Add carousel items
+    carousel_list.each_with_index do |article_id, index|
+      ac = ArticleCarousel.new()
+      ac.article_id = article_id
+      ac.carousel_order = index
+      ac.save
+    end
+
+    #fields.each do |field_param|
+    #  id = field_param.to_i
+    #  field = Field.find(id)
+    #  field.status = params[:status]
+    #  field.save
+    #end
+
+    head :ok
+  end
+
   # Buttons
   # show this button only at :show action
   action_item :only => :show do

@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20121217172905) do
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
-  create_table "article_carousels", :id => false, :force => true do |t|
+  create_table "article_carousels", :force => true do |t|
     t.integer "article_id",     :null => false
     t.integer "carousel_order", :null => false
   end

@@ -21,10 +21,10 @@
 
 %input{type: 'button', value: 'save', id: 'save'}
 
-%div{class: 'preview'}
-  %hr
-  %h3 Carousel Preview
-// TODO: Show preview as the admin makes changes
+-#%div{class: 'preview'}
+-#  %hr
+-#  %h3 Carousel Preview
+-#// TODO: Show preview as the admin makes changes
 
 :javascript
 
@@ -50,8 +50,7 @@
       });
       $( "ul, li" ).disableSelection();
       $( "#save").click(function() {
-        var results = $("#article_carousel_list").sortable('toArray', {attribute: 'data-id'});
-        // TODO: Save this back to the server
-        alert(results);
+        var carousel_list = $("#article_carousel_list").sortable('toArray', {attribute: 'data-id'});
+        $.get('update_carousel_list', {carousel_list: carousel_list})
       });
     });
