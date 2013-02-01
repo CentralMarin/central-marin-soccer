@@ -90,13 +90,6 @@ ActiveAdmin.register Article do
       ac.save
     end
 
-    #fields.each do |field_param|
-    #  id = field_param.to_i
-    #  field = Field.find(id)
-    #  field.status = params[:status]
-    #  field.save
-    #end
-
     head :ok
   end
 

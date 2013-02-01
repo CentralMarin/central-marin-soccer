@@ -6,9 +6,8 @@
   %h3 All Articles by Published Date
   %ul{id: 'article_list'}
     -@articles.each do |article|
-      %li{class: 'ui-state-default article ui-state-highlight', data: {id: article.id}}
+      %li{class: 'ui-state-default article ui-state-highlight ' + (article.image.blank? ? 'ui-state-disabled' : ''), data: {id: article.id}}
         =article.title
-// TODO: Disable articles that don't have a picture
 
 %div{class: 'column'}
   %h3{id: 'trash'}
@@ -20,11 +19,6 @@
         =carousel.article.title
 
 %input{type: 'button', value: 'save', id: 'save'}
-
--#%div{class: 'preview'}
--#  %hr
--#  %h3 Carousel Preview
--#// TODO: Show preview as the admin makes changes
 
 :javascript
 
@@ -46,7 +40,8 @@
       $( ".article" ).draggable({
         connectToSortable: "#article_carousel_list",
         revert: "invalid",
-        helper: "clone"
+        helper: "clone",
+        cancel: "li.ui-state-disabled"
       });
       $( "ul, li" ).disableSelection();
       $( "#save").click(function() {
