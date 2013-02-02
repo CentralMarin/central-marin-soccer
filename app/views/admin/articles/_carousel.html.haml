@@ -3,14 +3,14 @@
   Click and drag articles from the left column into the right to add them to the carousel. Drag items from the carousel to the recycle bin to remove them from the carousel.
 
 %div{class: 'column'}
-  %h3 All Articles by Published Date
+  %h3{class: 'carousel_heading'} All Articles by Published Date
   %ul{id: 'article_list'}
     -@articles.each do |article|
       %li{class: 'ui-state-default article ui-state-highlight ' + (article.image.blank? ? 'ui-state-disabled' : ''), data: {id: article.id}}
         =article.title
 
 %div{class: 'column'}
-  %h3{id: 'trash'}
+  %h3{id: 'trash', class: 'carousel_heading'}
     Carousel Items
     %img{src:'/assets/icons/trashcan.jpeg'}
   %ul{id: 'article_carousel_list', class: 'ui-sortable'}
