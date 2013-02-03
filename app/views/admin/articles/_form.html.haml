@@ -16,8 +16,8 @@
     = image_tag @article.image_url unless @article.image_url.blank?
     = f.input :image, :as => :file
     = f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
-    = f.input :team_id, :collection => @teams, :as => :select, :label => "Team"
-    = f.input :coach_id, :collection => @coaches, :as => :select, :label => "Coach"
+    = f.input :team_id, :collection => @teams, :as => :select, :label => "Team", :include_blank => false
+    = f.input :coach_id, :collection => @coaches, :as => :select, :label => "Coach", :include_blank => false
 
   = f.actions do
     = f.action :submit, :label => true
