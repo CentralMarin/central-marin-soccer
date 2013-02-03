@@ -2,11 +2,6 @@
 Install ImageMagick
 
 == TODO ==
-Limit categories and subcategories on article create to permission admin has
-Create an article page for managing the carousel
-    Page should allow the same article to exist multiple times in the carousel
-    Page should allow the ordering of items in the carousel
-    Page should allow the ordering of items in the carousel
 Update home page to use article carousel items
     Page should show a default image if no carousel items specified
     Carousel items should link to article detail page
@@ -14,7 +9,16 @@ Update Team page to show articles
     Show coach articles
     Show team articles
 Article details page should have bread crumbs allowing user to get to parent pages based on context of article
+Limit categories and subcategories on article create to permission admin has
 
+== Outstanding Questions ==
+Articles
+    Category - Coach - Pick the coach and article shows up on all team pages the coach coaches or if no coach selected, article shows up on all team pages
+    Category - Team - Pick team or if no team, article shows up on all team pages
+    Category - Referee - Article shows on referee page
+    Category - Club - Article shows on club page
+
+    Where should the back link take you when an article has multiple parents? Should we list all of the categories that the article is in to show context?
 
 == OLD ==
 Team page should pull upcoming events (2 weeks) from both the team and the club calendar

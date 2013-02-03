@@ -24,7 +24,7 @@ class Article < ActiveRecord::Base
 
   ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
 
-  attr_accessible :title, :body, :image, :author, :category_id, :subcategory_id, :translations_attributes, :published
+  attr_accessible :title, :body, :image, :author, :category_id, :team_id, :coach_id, :translations_attributes, :published
   mount_uploader :image, ImageUploader
 
   validates :title,         :presence => true,

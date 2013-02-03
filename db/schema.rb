@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217172905) do
+ActiveRecord::Schema.define(:version => 20130203010915) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -51,13 +51,14 @@ ActiveRecord::Schema.define(:version => 20121217172905) do
     t.string   "author"
     t.string   "image"
     t.integer  "category_id"
-    t.integer  "subcategory_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.boolean  "published",      :default => false
+    t.integer  "team_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "published",   :default => false
+    t.integer  "coach_id"
   end
 
-  add_index "articles", ["subcategory_id"], :name => "index_articles_on_subcategory_id"
+  add_index "articles", ["team_id"], :name => "index_articles_on_subcategory_id"
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false

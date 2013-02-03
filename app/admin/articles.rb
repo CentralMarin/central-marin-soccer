@@ -1,3 +1,23 @@
+def prepare_article(article_id = nil)
+
+  if article_id.nil?
+    @article = Article.new
+  else
+    @article = Article.find(article_id)
+  end
+
+  ADDITIONAL_LOCALES.each do |lang|
+    @article.translations.find_or_initialize_by_locale(lang[0])
+  end
+  @coaches = Coach.all(:order => 'name desc').map {|e| [e.to_s, e.id] }
+  @teams = Team.all(:order => 'year desc').map {|e| [e.to_team_name_with_coach, e.id]}
+
+  # Load the all option
+  @coaches.insert(0, ['All', 0]);
+  @teams.insert(0, ['All', 0]);
+
+end
+
 ActiveAdmin.register Article do
 
   menu :if => proc{ can?(:manage, Article) }, :label => 'Articles'
@@ -20,8 +40,11 @@ ActiveAdmin.register Article do
     column :category do |articles|
       articles.category.to_s
     end
-    column :subcategory_id do |articles|
-      Team.to_team_name_with_coach(articles.subcategory_id)
+    column :team_id do |articles|
+      Team.to_team_name_with_coach(articles.team_id)
+    end
+    column :coach_id do |articles|
+      Coach.find(articles.coach_id)
     end
 
     default_actions
@@ -49,18 +72,12 @@ ActiveAdmin.register Article do
     end
 
     def new
-      @article = Article.new
-      ADDITIONAL_LOCALES.each do |lang|
-        @article.translations.find_or_initialize_by_locale(lang[0])
-      end
+      prepare_article
       new!
     end
 
     def edit
-      @article = Article.find(params[:id])
-      ADDITIONAL_LOCALES.each do |lang|
-        @article.translations.find_or_initialize_by_locale(lang[0])
-      end
+      prepare_article params[:id]
       edit!
     end
   end

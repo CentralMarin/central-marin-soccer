@@ -45,7 +45,8 @@ describe Article do
     db_article.body.should == article.body
     db_article.author.should == article.author
     db_article.category_id.should == article.category_id
-    db_article.subcategory_id.should == article.subcategory_id
+    db_article.team_id.should == article.team_id
+    db_article.coach_id.should == article.coach_id
   end
 
   context "instance methods" do

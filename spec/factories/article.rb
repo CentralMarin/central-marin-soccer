@@ -8,6 +8,7 @@ FactoryGirl.define do
     f.author { Faker::Name.name }
     f.category_id { rand(4) }
     f.image { Faker::Internet.url }
-    f.subcategory_id { rand(20) }  # TODO: Grab a Team ID
+    f.team_id { rand(20) }
+    f.coach_id { rand(10) }
   end
 end

@@ -14,8 +14,8 @@
 
 %ul
   %li= "Category: #{@article.category.to_s}"
-  - unless @article.subcategory_id != ''
-    %li= Team.to_team_name_with_coach(@article.subcategory_id)
+  - unless @article.team_id != ''
+    %li= Team.to_team_name_with_coach(@article.team_id)
   %li= "Created at #{@article.created_at}"
   %li= "Last updated #{@article.updated_at}"
 

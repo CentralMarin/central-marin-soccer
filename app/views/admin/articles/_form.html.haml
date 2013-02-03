@@ -16,16 +16,31 @@
     = image_tag @article.image_url unless @article.image_url.blank?
     = f.input :image, :as => :file
     = f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
-    = f.input :subcategory_id, :collection => Team.all(:order => 'year desc').map {|e| [e.to_team_name_with_coach, e.id]}, :label => 'to_team_name_with_coach', :as => :select, :label => "Team"
+    = f.input :team_id, :collection => @teams, :as => :select, :label => "Team"
+    = f.input :coach_id, :collection => @coaches, :as => :select, :label => "Coach"
 
   = f.actions do
     = f.action :submit, :label => true
     = f.action :cancel, :as => :link, :label => I18n.t('active_admin.cancel'), :wrapper_html => { :class => 'cancel' }
 
 :javascript
+  function category_changed() {
+    switch($('#article_category_id option:selected').text()) {
+      case 'team':
+        $('#article_team_id_input').show();
+        $('#article_coach_id_input').hide();
+        break;
+      case 'coach':
+        $('#article_coach_id_input').show();
+        $('#article_team_id_input').hide();
+        break;
+      default:
+        $('#article_team_id_input').hide();
+        $('#article_coach_id_input').hide();
+    }
+  }
+
   $('.language-tabs').tabs();
-  $('#article_subcategory_id_input').hide();
-  $('#article_category_id').change(function() {
-    var text = $('#article_category_id option:selected').text()
-    text == 'team' || text == 'coach' ? $('#article_subcategory_id_input').show() : $('#article_subcategory_id_input').hide()
-  });
+  $('#article_category_id').change(category_changed);
+
+  category_changed();
