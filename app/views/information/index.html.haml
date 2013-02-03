@@ -1,2 +1,29 @@
-%h1 Information#index
-%p Find me in app/views/information/index.html.haml
+%div{class: 'grid_16'}
+  %h1= t('information.title')
+  %p= t('information.overview')
+  %p= t('information.overview2')
+
+  %h2= t('information.program_info_title')
+  %p= t('information.program_info_body')
+
+  %h3= t('information.academy_title')
+  %p
+    = t('information.academy')
+    %a=link_to(t('information.academy_more_info'), academy_path)
+
+  %h3= t('information.gold_title')
+  %p
+    = t('information.gold')
+    %a= link_to(t('information.gold_more_info'), gold_path)
+
+  %h3= t('information.silver_title')
+  %p
+    = t('information.silver')
+    %a= link_to(t('information.silver_more_info'), silver_path)
+
+  %h3= t('information.marin_fc_title')
+  %p
+    = t('information.marin_fc')
+    %a= link_to(t('information.marin_fc_more_info'), "http://www.marinfc.com")
+
+

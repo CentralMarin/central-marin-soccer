@@ -1,0 +1,12 @@
+
+%div{class: 'grid_16'}
+  %h1= t("#{@level}.title")
+  %p= t("#{@level}.overview")
+  %h2= t("#{@level}.summary")
+  %p
+    %ul
+      - @bullets.each do |bullet|
+        %li= bullet
+
+  %p
+    = link_to(t("#{@level}.back"), information_path)
