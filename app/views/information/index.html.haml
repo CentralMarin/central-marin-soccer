@@ -9,21 +9,26 @@
   %h3= t('information.academy_title')
   %p
     = t('information.academy')
-    %a=link_to(t('information.academy_more_info'), academy_path)
+    =link_to(t('information.academy_more_info'), academy_path)
 
   %h3= t('information.gold_title')
   %p
     = t('information.gold')
-    %a= link_to(t('information.gold_more_info'), gold_path)
+    = link_to(t('information.gold_more_info'), gold_path)
 
   %h3= t('information.silver_title')
   %p
     = t('information.silver')
-    %a= link_to(t('information.silver_more_info'), silver_path)
+    = link_to(t('information.silver_more_info'), silver_path)
 
   %h3= t('information.marin_fc_title')
   %p
     = t('information.marin_fc')
-    %a= link_to(t('information.marin_fc_more_info'), "http://www.marinfc.com")
+    = link_to(t('information.marin_fc_more_info'), "http://www.marinfc.com")
+
+  %h3= t('scholarship.title')
+  %p
+    = t('scholarship.overview')
+    = link_to(t('information.scholarhip_more_info'), scholarship_path)
 
 

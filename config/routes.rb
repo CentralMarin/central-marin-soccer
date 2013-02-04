@@ -21,14 +21,15 @@ CentralMarin::Application.routes.draw do
   match '/fields/:id', :to => 'fields#show', :as => 'field'
 
   match '/contact', to: 'contact#index', as: 'contact'
-  match '/academy', to: 'academy#index', as: 'academy'
+  match '/calendar', to: 'calendar#index', as: 'calendar'
+  match '/tournaments', to: 'tournaments#index', as: 'tournaments'
+  match '/referees', to: 'referees#index', as: 'referees'
+
   match '/information', to: 'information#index', as: 'information'
   match '/information/gold', to: 'information#gold', as: 'gold'
   match '/information/silver', to: 'information#silver', as: 'silver'
   match '/information/academy', to: 'information#academy', as: 'academy'
-  match '/calendar', to: 'calendar#index', as: 'calendar'
-  match '/tournaments', to: 'tournaments#index', as: 'tournaments'
-  match '/referees', to: 'referees#index', as: 'referees'
+  match '/information/on-equal-footing', to: 'information#scholarship', as: 'scholarship'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

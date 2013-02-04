@@ -3,7 +3,7 @@
 
 en:
   title: "Welcome to Central Marin Soccer Club"
-  footer_copy: "All rights Reserved © 2012 - Central Marin Soccer Club"
+  footer_copy: "All rights Reserved © 2013 - Central Marin Soccer Club"
   header_text_alt: 'Central Marin Competitive Soccer Club'
   menu:
     home: "Home"
@@ -52,6 +52,7 @@ en:
     marin_fc_title: "Marin FC: The Premier/Gold Division Program for U14–U18 Boys and Girls"
     marin_fc: "At the age groups of U14 and above, the tryouts and teams are run by the Marin Football Club, or Marin FC. The purpose of MFC is to serve the needs of Gold Program U14 through under U18 players, families and teams on a county-wide basis. At present, the following clubs participate and feed into the Marin FC: Central Marin Competitive Soccer Club, Mill Valley Youth Soccer League, Tiburon Peninsula Youth Soccer League, and West Marin Youth Soccer League. Marin FC teams are first formed at the U14 age level. Further, participating leagues are encouraged to adhere to the highest standards of excellence in coaching and player development for U10 to U13 Gold Division to ensure an adequate pool of players coming into MFC at the U14 and above level. More information on the "
     marin_fc_more_info: "Marin FC Program..."
+    scholarhip_more_info: "On Equal Footing Program..."
   gold:
     title: "Gold Division Soccer Program"
     overview: "Central Marin Soccer Club's Gold Program offers the opportunity to play with and against players of equal ability and to travel and compete against the top teams from soccer clubs throughout Northern California."
@@ -83,6 +84,59 @@ en:
       - "Teams will participate in 2-3 tournaments"
       - "Team playing expenses include uniforms, tournaments, team fees and training; costs are typically $1,000-1,200 (including registration fee), plus travelling expenses"
       - "An early training start or an extended tournament season may add additional costs at the team's discretion"
+    back: "Back to program overview..."
+  scholarship:
+    title: "Scholarship Program: \"On Equal Footing\""
+    overview: "Central Marin Soccer Club’s intent is to not deny any player the opportunity to play due to the expense of our program. There may be team and individual fund raising efforts, which will vary by team and age group. In addition to team efforts, The Central Marin Club has a financial aid program for teams to support their players. Financial aid may be requested and there is a formal, yet user-friendly application process. Scholarships levels may vary depending on numbers of applications and need, but generally range from $300 to $500 and there typically may be 1 to 3 scholarship players per team."
+    goal_title: "Goal of Program"
+    goal_text:
+      - "The goal of the On Equal Footing Program is to eliminate the financial barriers that keep talented kids from playing soccer at the Competitive/Select level.  The Competitive program is a higher level program, which includes advanced training for the more athletic player and allows them to travel to play against a higher level of competition. Whereas players may play 12 games in a recreational soccer season, it is typical for Competitive teams to play 24-50 games.  Due to additional costs incurred in travel, special training, tournament fees, uniforms and equipment, youths from lower income families have historically been unable to participate at this level. This program has attempted to eliminate that barrier for some players in hopes that the program can be expanded and others will follow the lead of the contributors to this program by supporting players in other ways."
+      - "Special focus is being given to kids from the Canal Area, many of who do not try out for the traveling Teams due to the higher costs. Even though we limit our fees to $1,500 for the highest level and $950 for the 2nd level, this makes the program inaccessible for many players in Central Marin. This focus is to help a known problem and in a small way attempt to bring our communities together with a common sport. The program not only facilitates these players to play at a higher level, but also helps integrate the communities and develops common bonds between families that would not normally interact. In addition, many teams do extensive traveling, some to other states and countries, which helps broaden their view of the world. The program is open to all kids aged 9-17 living in Central Marin.  It is not focused on specific race or sex, but on helping kids progress in sports and in life."
+      - "Each team must provide a scholarship to one player on their team before they are eligible for the Club or the \"On Equal Footing\" scholarship."
+    history_title: "Brief History"
+    history_bullets:
+      - "Over $127,000 has been raised and distributed"
+      - "More than 195 scholarships have been awarded"
+      - "In 2000, a team sponsored by On Equal Footing and Rotary Club of San Rafael and Luxembourg, primarily encompassing players who reside in the Canal, traveled to Luxembourg to play soccer"
+      - "Summer 2002: the Luxembourg team returned, to play soccer with our local teams."
+    qualifications_title: "Scholarship Qualification"
+    qualifications_bullets:
+      - "Candidate must be age 9-17 on August 1, 2010"
+      - "Candidate is currently a resident within the geography covered by the Central Marin Competitive Youth Soccer Club.  Designated scholarships have been set-up for youths from the Canal Area and Central Marin.  For these scholarships, the candidate must be from the Canal Area or Central Marin."
+      - "Coach or team parents will commit to provide transportation to and from practices, games and tournaments."
+      - "Teams must provide a team scholarship before a player from that team is eligible for an \"On Equal Footing\" Scholarship."
+      - "Teams from outside CMCSC may not participate in this scholarship program"
+
+    process:
+      title: "Scholarship Award Process"
+      steps:
+         step1:
+           title: "Step One:"
+           bullets:
+             - "Coaches may nominate players for scholarships."
+             - "Coach or Team manager must submit application form to Gregg Clarke."
+             - "Maximum Scholarship is $500, but may be less."
+         step2:
+           title: "Step Two:"
+           bullets:
+            - "\"On Equal Footing\" Board will review all applications and determine proposed scholarship awards."
+            - "All decisions of the OEF Board are final, there will be no appeal process."
+         step3:
+           title: "Step Three:"
+           bullets:
+            - "Coaches will be notified of the acceptance or denial of their application."
+            - "In the likely event of limited scholarships, a priority schedule has been established.  Each team with qualified candidates will receive one scholarship before any team receives a second scholarship. Based on the amount of money available and number of applicants, partial scholarships may be awarded.  Priority for scholarships will be as follows:"
+           subbullets:
+            - "Returning Players who received the On Equal Footing Scholarship in the past"
+            - "Younger Players (Age 9, 10, 11, 12, through 17)"
+            - "Board Decision"
+         step4:
+          title: "Schedule"
+          bullets:
+           - "Application Deadline: August 1st"
+           - "Notification of Award will be done September 1st"
+           - "Payment by September 15th"
+    pdf: "On Equal Footing Application (PDF)"
     back: "Back to program overview..."
   coach:
      intro: "The five core objectives are:"
