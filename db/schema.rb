@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203010915) do
+ActiveRecord::Schema.define(:version => 20130206160128) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -186,5 +186,23 @@ ActiveRecord::Schema.define(:version => 20130203010915) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  create_table "web_part_translations", :force => true do |t|
+    t.integer  "web_part_id"
+    t.string   "locale"
+    t.string   "html"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "web_part_translations", ["locale"], :name => "index_web_part_translations_on_locale"
+  add_index "web_part_translations", ["web_part_id"], :name => "index_web_part_translations_on_web_part_id"
+
+  create_table "web_parts", :force => true do |t|
+    t.string   "name"
+    t.string   "html"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

@@ -1,0 +1,2 @@
+class WebPartController < ApplicationController
+end
