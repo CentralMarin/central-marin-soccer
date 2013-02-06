@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/jnicklas/capybara.git
-  revision: 6ee24542406a25bf746b16428ff16f95ecc5ec7c
+  revision: 8368069cfd059fbb5d04e2dff0e610005a476fa6
   specs:
     capybara (2.0.2)
       mime-types (>= 1.16)
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/svenfuchs/globalize3.git
-  revision: 39f7ba6a08b0c19654a2c010e69b37201f2bc49e
+  revision: 9a4895b5410a28aedfd774b22e06fa946d9e1191
   specs:
     globalize3 (0.3.0)
       activemodel (>= 3.0.0)
@@ -76,9 +76,9 @@ GEM
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
-    childprocess (0.3.6)
+    childprocess (0.3.7)
       ffi (~> 1.0, >= 1.0.6)
-    ckeditor (3.7.3)
+    ckeditor (4.0.2)
       mime-types
       orm_adapter
     coderay (1.0.8)
@@ -90,7 +90,7 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     database_cleaner (0.9.1)
-    devise (2.2.0)
+    devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
@@ -99,10 +99,10 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    factory_girl (4.1.0)
+    factory_girl (4.2.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.1.0)
-      factory_girl (~> 4.1.0)
+    factory_girl_rails (4.2.0)
+      factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     faker (1.1.2)
       i18n (~> 0.5)
@@ -110,15 +110,16 @@ GEM
     ffi (1.3.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
-    guard (1.6.1)
+    guard (1.6.2)
       listen (>= 0.6.0)
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
+      terminal-table (>= 1.4.3)
       thor (>= 0.14.6)
-    guard-rspec (2.3.3)
+    guard-rspec (2.4.0)
       guard (>= 1.1)
       rspec (~> 2.11)
-    guard-spork (1.4.1)
+    guard-spork (1.4.2)
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
@@ -135,7 +136,7 @@ GEM
       has_scope (~> 0.5.0)
       responders (~> 0.6)
     journey (1.0.4)
-    jquery-rails (2.1.4)
+    jquery-rails (2.2.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.6)
@@ -145,10 +146,7 @@ GEM
     launchy (2.1.2)
       addressable (~> 2.3)
     libv8 (3.11.8.13)
-    libwebsocket (0.1.7.1)
-      addressable
-      websocket
-    listen (0.7.1)
+    listen (0.7.2)
     lumberjack (1.0.2)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -160,7 +158,7 @@ GEM
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
     method_source (0.8.1)
-    mime-types (1.19)
+    mime-types (1.20.1)
     mini_magick (3.4)
       subexec (~> 0.2.1)
     multi_json (1.5.0)
@@ -173,14 +171,14 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
-    pry (0.9.10)
+    pry (0.9.11.4)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
-      slop (~> 3.3.1)
-    rack (1.4.3)
+      slop (~> 3.4)
+    rack (1.4.4)
     rack-cache (1.2)
       rack (>= 0.4)
-    rack-ssl (1.3.2)
+    rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -213,11 +211,11 @@ GEM
     rspec-core (2.12.2)
     rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
-    rspec-mocks (2.12.1)
+    rspec-mocks (2.12.2)
     rspec-nc (0.0.4)
       rspec (~> 2.9)
       terminal-notifier (~> 1.4.2)
-    rspec-rails (2.12.1)
+    rspec-rails (2.12.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
@@ -226,29 +224,30 @@ GEM
       rspec-mocks (~> 2.12.0)
     rubyzip (0.9.9)
     sass (3.2.5)
-    sass-rails (3.2.5)
+    sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.27.2)
+    selenium-webdriver (2.29.0)
       childprocess (>= 0.2.5)
-      libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
-    slop (3.3.3)
+      websocket (~> 1.0.4)
+    slop (3.4.3)
     spork (0.9.2)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.6)
+    sqlite3 (1.3.7)
     subexec (0.2.2)
     terminal-notifier (1.4.2)
-    therubyracer (0.11.1)
-      libv8 (~> 3.11.8.7)
+    terminal-table (1.4.5)
+    therubyracer (0.11.3)
+      libv8 (~> 3.11.8.12)
       ref
-    thor (0.16.0)
+    thor (0.17.0)
     tilt (1.3.3)
     treetop (1.4.12)
       polyglot
@@ -259,7 +258,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
-    websocket (1.0.6)
+    websocket (1.0.7)
     xpath (1.0.0)
       nokogiri (~> 1.3)
 
@@ -267,12 +266,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activeadmin (>= 0.5)
+  activeadmin (>= 0.5.1)
   annotate (>= 2.5.0)
   cancan
   capybara!
   carrierwave
-  ckeditor (= 3.7.3)
+  ckeditor (> 4.0.0)
   coffee-rails (~> 3.2.2)
   database_cleaner
   factory_girl_rails

@@ -4,6 +4,6 @@ ADDITIONAL_LOCALES = {
 }
 
 SPELLCHECK_LANGUAGES = {
-    :en => 'es_ES',
+    :en => 'es_EN',
     :es => 'es_ES'
 }

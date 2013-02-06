@@ -9,7 +9,7 @@
       %div{:id => "lang-#{lf.object.locale}"}
         = f.inputs do
           = lf.input :title
-          = lf.input :body, :as => :ckeditor, :input_html => {:namespace => 'translation', :language => "#{lf.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[lf.object.locale.to_sym]}"}
+          = lf.input :body, :as => :ckeditor, :input_html => {:language => "#{lf.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[lf.object.locale.to_sym]}"}
           = lf.input :locale, :as => :hidden
 
   = f.inputs do

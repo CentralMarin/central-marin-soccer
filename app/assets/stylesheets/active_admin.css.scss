@@ -31,6 +31,9 @@
 // .other_namespace    applies to a custom namespace named other (eg: /other)
 //
 
+body.active_admin {
+  @import "ckeditor/application";
+}
 
 // Carousel CSS
 .admin_namespace .column {
