@@ -4,7 +4,7 @@ require 'faker'
 FactoryGirl.define do
   factory :article do |f|
     f.title { Faker::Lorem.sentence }
-    f.body { Faker::Lorem.paragraphs }
+    f.body { Faker::Lorem.paragraphs.join().gsub('\n', ' ').squeeze(' ') }
     f.author { Faker::Name.name }
     f.category_id { rand(4) }
     f.image { Faker::Internet.url }
