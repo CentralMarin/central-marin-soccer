@@ -57,3 +57,8 @@
     %script{src: '//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js'}
     %script
       window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})
+
+  - if @editable
+    = javascript_include_tag "jquery"
+    = javascript_include_tag "ckeditor/init"
+    = javascript_include_tag "inline_editing"

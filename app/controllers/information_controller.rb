@@ -1,5 +1,9 @@
 class InformationController < ApplicationController
   def index
+
+    # Determine if the current user can edit the page
+    @editable = can?(:manage, WebPart)
+    @web_parts = WebPart.load('information.overview')
   end
 
   def gold

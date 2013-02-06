@@ -31,6 +31,8 @@ CentralMarin::Application.routes.draw do
   match '/information/academy', to: 'information#academy', as: 'academy'
   match '/information/on-equal-footing', to: 'information#scholarship', as: 'scholarship'
 
+  match '/web_part/save', to: 'web_part#save', as: 'web_part'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
