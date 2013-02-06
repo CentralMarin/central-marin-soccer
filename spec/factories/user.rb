@@ -3,7 +3,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :user do |f|
-    f.email "ryan@digitalfoundry.com" #{ Faker::Internet.email }
+    f.email "junk@robinett.org" #{ Faker::Internet.email }
     f.password 'password'
 
     trait :admin_user do
