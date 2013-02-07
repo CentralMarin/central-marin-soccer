@@ -8,6 +8,9 @@ $(document).ready(function() {
             toolbar: null,
             readonly: false,
             on: {
+                focus: function(event) {
+                  event.editor.setReadOnly(false);
+                },
                 blur: function(event) {
                     // Grab the name
                     var name = $(elem).data('name');
@@ -33,8 +36,4 @@ $(document).ready(function() {
             }
         });
     });
-
-    for(var name in CKEDITOR.instances) {
-        CKEDITOR.instances[name].setReadOnly(false);
-    }
 });
