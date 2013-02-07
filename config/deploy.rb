@@ -30,6 +30,9 @@ set :branch, "release"
 # bundle install has to be run before assets can be precompiled
 before "deploy:assets:precompile", "bundle:install"
 
+# Update our database
+after "deploy", "deploy:migrate"
+
 # remove old releases
 after "deploy", "deploy:cleanup"
 
