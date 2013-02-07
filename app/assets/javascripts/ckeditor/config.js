@@ -52,7 +52,8 @@ CKEDITOR.editorConfig = function( config )
   config.extraPlugins = "youtube";
   
   /* Toolbars */
-  config.toolbar = 'Easy';
+  //config.toolbar = 'Easy';
+    config.toolbar = 'toolbar_Full';
   
   config.toolbar_Easy =
     [
@@ -63,6 +64,7 @@ CKEDITOR.editorConfig = function( config )
         ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
         ['Link','Unlink','Anchor'], ['Attachment'], ['Youtube'],
-        ['Table','HorizontalRule','PageBreak']
+        ['Table','HorizontalRule','PageBreak'],
+        ['Heading']
     ];
 };

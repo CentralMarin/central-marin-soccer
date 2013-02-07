@@ -30,7 +30,6 @@ $(document).ready(function() {
                             jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
                         }
                     })
-//                        .done(function(data, status, jqXHR) { alert("Success")})
                         .fail(function(jqXHR, status, error) { alert("Error: " + status + " " + error)});
                 }
             }
