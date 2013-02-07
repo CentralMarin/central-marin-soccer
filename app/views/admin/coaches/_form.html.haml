@@ -12,7 +12,7 @@
       = f.semantic_fields_for :translations do |lf|
         %div{:id => "lang-#{lf.object.locale}", :style => 'padding: 0;'}
           = f.inputs do
-            = lf.input :bio, :as => :ckeditor, :input_html => {:language => "#{lf.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[lf.object.locale.to_sym]}"}
+            = lf.input :bio, :as => :ckeditor, :input_html => {:ckeditor => {:toolbar => 'Easy', :language => "#{lf.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[lf.object.locale.to_sym]}"}}
             = lf.input :locale, :as => :hidden
 
   = f.actions do
