@@ -1,6 +1,6 @@
-%h1 Academy
-%p Add some pictures
-%p Say something great here
+%div.grid_16{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name}  }
+  = @web_parts[@part_name].html.html_safe
+%hr
 %h2 Teams
 -@academy_teams.each do |team|
   %ul

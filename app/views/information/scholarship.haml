@@ -1,32 +1,5 @@
-%div{class: "grid_16"}
-  %h1= t('scholarship.title')
-  %p= t('scholarship.overview')
-  %h2= t('scholarship.goal_title')
-  - @goals.each do |goal|
-    %p= goal
+%div.grid_16{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name}  }
+  = @web_parts[@part_name].html.html_safe
 
-  %h2= t('scholarship.history_title')
-  %ul
-    - @history.each do |a_history|
-      %li= a_history
-
-  %h2= t('scholarship.qualifications_title')
-  %ul
-    - @qualifications.each do |qualification|
-      %li= qualification
-
-  %h2= t('scholarship.process.title')
-  - @steps.each do |step|
-    %h4= step[1][:title]
-    %ul
-      - step[1][:bullets].each_with_index do |bullet, index|
-        %li
-          = bullet
-          - if (index == step[1][:bullets].length - 1 && !step[1][:subbullets].nil?)
-            %ul
-              - step[1][:subbullets].each do |sub|
-                %li= sub
-
-  %p=link_to t('scholarship.pdf'), '/on_equal_footing.pdf'
-
-  %p=link_to t('scholarship.back'), information_path
+%div.grid_16
+  %p=link_to t('information.back'), information_path

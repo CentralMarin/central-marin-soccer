@@ -1,12 +1,6 @@
+%div.grid_16{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name}  }
+  = @web_parts[@part_name].html.html_safe
 
-%div{class: 'grid_16'}
-  %h1= t("#{@level}.title")
-  %p= t("#{@level}.overview")
-  %h2= t("#{@level}.summary")
+%div.grid_16
   %p
-    %ul
-      - @bullets.each do |bullet|
-        %li= bullet
-
-  %p
-    = link_to(t("#{@level}.back"), information_path)
+    = link_to(t("information.back"), information_path)
