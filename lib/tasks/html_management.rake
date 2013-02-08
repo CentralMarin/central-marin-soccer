@@ -49,4 +49,7 @@ namespace :html do
 
     end
   end
+
+  desc "First exports existing content and then imports all content. Useful when creating new nodes"
+  task :export_import => [:export, :import]
 end
