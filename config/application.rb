@@ -52,7 +52,7 @@ module CentralMarin
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile += ['home.js']
+    config.assets.precompile += ['home.js', 'jquery.js', 'inline_editing.js']
 
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
