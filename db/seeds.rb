@@ -102,9 +102,6 @@ coach_create(name: 'Craig Breslin', email: 'craig.breslin@centralmarinsoccer.com
              coached_teams: [{year: 2002, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal'},
                      {year: 2001, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal'}])
 
-coach_create(name: 'Mike Carbone', email: 'mike.carbone@centralmarinsoccer.com',
-             coached_teams: [{year: 2003, gender: 'Boys', team_level: team_level_blank, name: ''}])
-
 coach_create(name: 'Kelly Coffey', email: 'kelly.coffey@centralmarinsoccer.com',
              coached_teams: [{year: 2000, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal'}])
 
@@ -118,20 +115,9 @@ coach_create(name: 'Sjur Hatloe', email: 'sjur.hatloe@centralmarinsoccer.com',
              coached_teams: [{year: 1997, gender: 'Boys', team_level: team_level_blank, name: ''},
                      {year: 1996, gender: 'Boys', team_level: team_level_blank, name: ''}])
 
-coach_create(name: 'Eamon Kavanagh', email: 'eamon.kavanah@centralmarinsoccer.com',
-             coached_teams: [{year: 2003, gender: 'Boys', team_level: team_level_blank, name: ''},
-                     {year: 1998, gender: 'Boys', team_level: team_level_blank, name: ''},
-                     {year: 1998, gender: 'Girls', team_level: team_level_blank, name: ''}])
-
 coach_create(name: 'Jim Lasher', email: 'jim.lasher@centralmarinsoccer.com',
              coached_teams: [{year: 2002, gender: 'Girls', team_level: team_level_blank, name: ''},
                      {year: 1999, gender: 'Boys', team_level: team_level_blank, name: ''}])
-
-coach_create(name: 'Mark Machado', email: 'mark.machado@centralmarinsoccer.com',
-             coached_teams: [{year: 1999, gender: 'Boys', team_level: team_level_blank}])
-
-coach_create(name: 'Nicole Miller', email: 'nicole.miller@centralmarinsoccer.com',
-             coached_teams: [{year: 2001, gender: 'Girls', team_level: team_level_blank, name: ''}])
 
 coach_create(name: 'Brandon Murphy', email: 'brandon.murphy@centralmarinsoccer.com',
              coached_teams: [{year: 2001, gender: 'Girls', team_level: team_level_blank, name: ''},
