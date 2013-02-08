@@ -42,7 +42,10 @@ class InformationController < ApplicationController
   end
 
   def tournaments
-    @part_name = 'information.tournaments'
-    init_web_parts(@part_name)
+    @part_name_overview = 'information.tournaments'
+    @part_name_mission_bell = 'information.tournaments.mission_bell'
+    @part_name_premier_challenge = 'information.tournaments.premier_challenge'
+    @part_name_footer = 'information.tournaments.footer'
+    init_web_parts([@part_name, @part_name_mission_bell, @part_name_premier_challenge, @part_name_footer])
   end
 end

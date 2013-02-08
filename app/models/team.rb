@@ -50,8 +50,12 @@ class Team < ActiveRecord::Base
     Time.now.year - year
   end
 
+  def two_digit_year
+    year.to_s.last(2)
+  end
+
   def to_s
-    "#{I18n.t('team.name.under')}#{age} #{gender} #{name} #{team_level.name} #{I18n.t('team.name.team')}"
+    "#{two_digit_year} #{gender} #{name} #{team_level.name} #{I18n.t('team.name.team')}"
   end
 
   def admin_permalink
