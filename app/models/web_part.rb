@@ -2,9 +2,10 @@
 class WebPart < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  attr_accessible :html, :name
+  attr_accessible :html, :name, :translations_attributes
 
   translates :html, versioning: true, fallbacks_for_empty_translations: true
+  accepts_nested_attributes_for :translations, :allow_destroy => true
 
   validates :name, :presence => true, :uniqueness => true
   validates :html, :presence => true
