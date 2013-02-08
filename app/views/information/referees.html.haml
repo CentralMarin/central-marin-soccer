@@ -1,0 +1,2 @@
+%div.grid_16{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name}  }
+  = @web_parts[@part_name].html.html_safe

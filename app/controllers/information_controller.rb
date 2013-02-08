@@ -14,21 +14,12 @@ class InformationController < ApplicationController
     @part_name = 'information.gold'
     init_web_parts(@part_name)
 
-    @level = 'gold'
-    # Get the bullets
-    @bullets = I18n.t("gold.bullets")
-
     render :action => 'level'
   end
 
   def silver
     @part_name = 'information.silver'
     init_web_parts(@part_name)
-
-
-    @level = 'silver'
-    # Get the bullets
-    @bullets = I18n.t("silver.bullets")
 
     render :action => 'level'
   end
@@ -43,11 +34,15 @@ class InformationController < ApplicationController
   def scholarship
     @part_name = 'information.scholarship'
     init_web_parts(@part_name)
+  end
 
-    # load translations
-    @goals = I18n.t("scholarship.goal_text")
-    @history = I18n.t("scholarship.history_bullets")
-    @qualifications = I18n.t('scholarship.qualifications_bullets')
-    @steps = I18n.t('scholarship.process.steps')
+  def referees
+    @part_name = 'information.referee'
+    init_web_parts(@part_name)
+  end
+
+  def tournaments
+    @part_name = 'information.tournaments'
+    init_web_parts(@part_name)
   end
 end
