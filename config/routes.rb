@@ -22,14 +22,15 @@ CentralMarin::Application.routes.draw do
 
   match '/contact', to: 'contact#index', as: 'contact'
   match '/calendar', to: 'calendar#index', as: 'calendar'
-  match '/tournaments', to: 'tournaments#index', as: 'tournaments'
-  match '/referees', to: 'referees#index', as: 'referees'
 
   match '/information', to: 'information#index', as: 'information'
   match '/information/gold', to: 'information#gold', as: 'gold'
   match '/information/silver', to: 'information#silver', as: 'silver'
   match '/information/academy', to: 'information#academy', as: 'academy'
   match '/information/on-equal-footing', to: 'information#scholarship', as: 'scholarship'
+
+  match '/referees', to: 'information#referees', as: 'referees'
+  match '/tournaments', to: 'information#tournaments', as: 'tournaments'
 
   match '/web_part/save', to: 'web_part#save', as: 'web_part'
 
