@@ -42,6 +42,8 @@ class InformationController < ApplicationController
   end
 
   def tournaments
+    @top_level_section_name = 'menu.tournaments'
+
     @part_name_overview = 'information.tournaments'
     @part_name_mission_bell = 'information.tournaments.mission_bell'
     @part_name_premier_challenge = 'information.tournaments.premier_challenge'
