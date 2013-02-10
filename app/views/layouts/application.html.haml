@@ -45,6 +45,9 @@
       %div{class: 'clear'}
     %div{id: 'bottom_padder'}
 
+  = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+  = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"
+
   = yield :javascript
 
   :javascript
@@ -53,12 +56,14 @@
       load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
     });
 
+    !window.jQuery && document.write(unescape('%3Cscript src="/scripts/jquery-1.6.2.min.js"%3E%3C/script%3E'))
+    !window.jQuery.ui && document.write(unescape('%3Cscript src="/scripts/jquery-ui-1.8.14.min.js"%3E%3C/script%3E'))
+
   /[if lt IE 7 ]
     %script{src: '//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js'}
     %script
       window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})
 
   - if @editable
-    = javascript_include_tag "jquery"
     = javascript_include_tag "ckeditor/init"
     = javascript_include_tag "inline_editing"
