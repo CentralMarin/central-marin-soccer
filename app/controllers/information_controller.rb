@@ -48,6 +48,21 @@ class InformationController < ApplicationController
     @part_name_mission_bell = 'information.tournaments.mission_bell'
     @part_name_premier_challenge = 'information.tournaments.premier_challenge'
     @part_name_footer = 'information.tournaments.footer'
-    init_web_parts([@part_name_overview, @part_name_mission_bell, @part_name_premier_challenge, @part_name_footer])
+    @part_name_premier_challenge_current_winners = 'information.tournaments.premier_challenge.current'
+    @part_name_premier_challenge_previous_winners = 'information.tournaments.premier_challenge.previous'
+    @part_name_mission_bell_current_winners = 'information.tournaments.mission_bell.current'
+    @part_name_mission_bell_previous_winners = 'information.tournaments.mission_bell.previous'
+    init_web_parts(
+        [
+            @part_name_overview,
+            @part_name_mission_bell,
+            @part_name_premier_challenge,
+            @part_name_footer,
+            @part_name_premier_challenge_current_winners,
+            @part_name_premier_challenge_previous_winners,
+            @part_name_mission_bell_current_winners,
+            @part_name_mission_bell_previous_winners
+        ]
+    )
   end
 end
