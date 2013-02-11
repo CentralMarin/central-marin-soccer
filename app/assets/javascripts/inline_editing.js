@@ -1,15 +1,11 @@
 $(document).ready(function() {
-    CKEDITOR.disableAutoInline = true;
-
     $('.editable').each(function(index, elem) {
+
+        elem.contentEditable = true;
 
         CKEDITOR.inline(elem, {
             toolbar: null,
-            readonly: false,
             on: {
-                focus: function(event) {
-                  event.editor.setReadOnly(false);
-                },
                 blur: function(event) {
                     // Grab the name
                     var name = $(elem).data('name');
@@ -35,3 +31,4 @@ $(document).ready(function() {
         });
     });
 });
+
