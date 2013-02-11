@@ -70,6 +70,4 @@ CentralMarin::Application.configure do
       :authentication => 'plain',
       :enable_starttls_auto => true
   }
-
-  config.assets.precompile += %w[active_admin.css active_admin.js modernizr-2.0.6.js wowslider.js coach.css coaches.js fields.css fields.js]
 end
