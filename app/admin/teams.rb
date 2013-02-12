@@ -9,6 +9,7 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
     column :name
     column(:level, :sortable => :'team_levels.name') {|team| team.team_level.name}
     column(:coach, :sortable => :'coaches.name') {|team| team.coach.to_s}
+    column :manager_name
     default_actions
 
  end
@@ -22,6 +23,10 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
      f.input :year
      f.input :gender, :collection => Team.genders
      f.input :name
+     f.input :manager_name
+     f.input :manager_phone
+     f.input :manager_email
+     f.input :teamsnap_url
    end
 
    f.actions

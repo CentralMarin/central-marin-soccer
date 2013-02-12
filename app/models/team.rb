@@ -22,6 +22,9 @@ class Team < ActiveRecord::Base
   belongs_to :coach
   belongs_to :team_level
 
+  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  phone_regex = /^[+]?[1]?\(?[- .]?\d{3}\)?[- .]?\d{3}[- .]?\d{4}[ ]?[x]?[0-9]*$/
+
   default_scope :include => [:team_level, :coach]
   scope :academy, lambda {|year| where("year >= ?", year - ACADEMY_YEAR)}
   scope :boys, where(gender_id: 0).order([:year, :team_level_id])
@@ -30,9 +33,15 @@ class Team < ActiveRecord::Base
   validates :year, :presence => true
   validates :gender, :presence => true
   validates :coach, :presence => true
+  validates :manager_name, :presence => true,
+            :length => { :maximum => 50 }
+  validates :manager_email, :presence => true,
+            :format => { :with => email_regex }
+  validates :manager_phone, :presence => true,
+            :format => { :with => phone_regex }
   validates :team_level, :presence => true
 
-  attr_accessible :coach_id, :team_level_id, :gender, :year, :name
+  attr_accessible :coach_id, :team_level_id, :gender, :year, :name, :manager_name, :manager_email, :manager_phone, :teamsnap_url
 
   def gender
     Team.genders[self.gender_id]
