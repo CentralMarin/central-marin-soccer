@@ -107,11 +107,6 @@ ActiveRecord::Schema.define(:version => 20130212031917) do
     t.string   "address"
   end
 
-  create_table "information", :force => true do |t|
-    t.string "name", :null => false
-    t.string "html", :null => false
-  end
-
   create_table "parents", :force => true do |t|
     t.string   "name"
     t.string   "email"
