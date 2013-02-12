@@ -33,6 +33,16 @@ module ApplicationHelper
    .html_safe
   end
 
+  def editable_attributes(part_name)
+    if @editable
+      {:class => 'editable', contenteditable: true, :data => {:name => part_name}}
+    end
+  end
+
+  def editable_content(part_name)
+    @web_parts[part_name].html.html_safe
+  end
+
   private
 
   def menu_item item, class_name

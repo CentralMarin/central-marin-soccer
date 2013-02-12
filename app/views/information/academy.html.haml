@@ -1,5 +1,5 @@
-%div.grid_16{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name}  }
-  = @web_parts[@part_name].html.html_safe
+%div.grid_16{ editable_attributes(@part_name)  }
+  = editable_content @part_name
 %hr
 %h2 Teams
 -@academy_teams.each do |team|

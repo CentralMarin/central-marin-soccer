@@ -1,8 +1,8 @@
 - content_for :css do
   = stylesheet_link_tag "information"
 
-%div.grid_16{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name_overview}  }
-  = @web_parts[@part_name_overview].html.html_safe
+%div.grid_16{ editable_attributes(@part_name_overview) }
+  = editable_content @part_name_overview
 
 %div.grid_16
   %div{:id => 'tabs'}
@@ -15,31 +15,31 @@
           Mission Bell
 
     %div{:id => 'premier_challenge' }
-      %div{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name_mission_bell} }
-        = @web_parts[@part_name_mission_bell].html.html_safe
+      %div{ editable_attributes(@part_name_mission_bell) }
+        = editable_content @part_name_mission_bell
       %h2 Past Winners
       %div{id: 'premier_challenge_winners'}
         %h3 2012
-        %div{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name_premier_challenge_current_winners} }
-          = @web_parts[@part_name_premier_challenge_current_winners].html.html_safe
+        %div{ editable_attributes(@part_name_premier_challenge_current_winners) }
+          = editable_content @part_name_premier_challenge_current_winners
         %h3 2011
-        %div{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name_premier_challenge_previous_winners} }
-          = @web_parts[@part_name_premier_challenge_previous_winners].html.html_safe
+        %div{ editable_attributes(@part_name_premier_challenge_previous_winners) }
+          = editable_content @part_name_premier_challenge_previous_winners
 
     %div{:id => 'mission_bell' }
-      %div{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name_premier_challenge} }
-        = @web_parts[@part_name_premier_challenge].html.html_safe
+      %div{ editable_attributes(@part_name_premier_challenge) }
+        = editable_content @part_name_premier_challenge
       %h2 Past Winners
       %div{id: 'mission_bell_winners'}
         %h3 2012
-        %div{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name_mission_bell_current_winners} }
-          = @web_parts[@part_name_mission_bell_current_winners].html.html_safe
+        %div{ editable_attributes(@part_name_mission_bell_current_winners) }
+          = editable_content @part_name_mission_bell_current_winners
         %h3 2011
-        %div{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name_mission_bell_previous_winners} }
-          = @web_parts[@part_name_mission_bell_previous_winners].html.html_safe
+        %div{ editable_attributes(@part_name_mission_bell_previous_winners) }
+          = editable_content @part_name_mission_bell_previous_winners
 
-%div.grid_16{:class => @editable == true ? 'editable' : nil, :data => {:name => @part_name_footer}  }
-  = @web_parts[@part_name_footer].html.html_safe
+%div.grid_16{ editable_attributes(@part_name_footer)  }
+  = editable_content @part_name_footer
 
 - content_for :javascript do
   =javascript_include_tag "information.tournaments"
