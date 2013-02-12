@@ -6,6 +6,10 @@ $(document).ready(function() {
         CKEDITOR.inline(elem, {
             toolbar: null,
             on: {
+                focus: function(event) {
+                    // Necessary for hidden dom elements to work properly
+                    event.editor.setReadOnly(false);
+                },
                 blur: function(event) {
                     // Grab the name
                     var name = $(elem).data('name');
