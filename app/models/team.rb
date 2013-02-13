@@ -44,7 +44,7 @@ class Team < ActiveRecord::Base
   attr_accessible :coach_id, :team_level_id, :gender, :year, :name, :manager_name, :manager_email, :manager_phone, :teamsnap_url
 
   def gender
-    Team.genders[self.gender_id]
+    Team.genders[self.gender_id] unless gender_id.nil?
   end
 
   def gender=(gender)
@@ -56,15 +56,15 @@ class Team < ActiveRecord::Base
   end
 
   def age
-    Time.now.year - year
+    Time.now.year - year unless year.nil?
   end
 
   def two_digit_year
-    year.to_s.last(2)
+    year.to_s.last(2) unless year.nil?
   end
 
   def to_s
-    "#{two_digit_year} #{gender} #{name} #{team_level.name} #{I18n.t('team.name.team')}"
+    "#{two_digit_year} #{gender} #{name} #{team_level.name} #{I18n.t('team.name.team')}" unless team_level.nil?
   end
 
   def admin_permalink
@@ -76,7 +76,7 @@ class Team < ActiveRecord::Base
   end
 
   def to_param
-    "#{id} #{to_s}".parameterize
+    "#{id} #{to_s}".parameterize if id
   end
 
   def self.to_team_name_with_coach(id)
