@@ -23,6 +23,13 @@ describe Team do
     FactoryGirl.build(:team, year: nil).should_not be_valid
   end
 
+  it "instance methods should work on a new team" do
+    team = Team.new
+    team.gender.should == nil
+    team.age.should == nil
+    team.two_digit_year.should == nil
+    team.page_title.should == nil
+  end
   #it "requires an age 8 or older" do
   #  FactoryGirl.build(:team, year: 7).should_not be_valid
   #  FactoryGirl.build(:team, age: 8).should be_valid
