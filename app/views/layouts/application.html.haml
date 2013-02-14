@@ -14,10 +14,11 @@
   %meta{name: "description", content: ''}
   %meta{name: 'author', content: ''}
   %meta{name: 'viewport', content: 'width=device-width,initial-scale=1'}
-  = stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/dark-hive/jquery-ui.css"
+  = stylesheet_link_tag "dark-hive/jquery-ui-1.10.0.custom.css"
+  -#= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/dark-hive/jquery-ui.css"
   = stylesheet_link_tag "application"
   = yield :css
-  = javascript_include_tag "modernizr-2.0.6.js"
+  = javascript_include_tag "modernizr-2.6.2.min"
   = csrf_meta_tags
 
 %body{class: "#{body_classes.join(' ')}"}
@@ -46,8 +47,10 @@
       %div{class: 'clear'}
     %div{id: 'bottom_padder'}
 
-  = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
-  = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"
+  = javascript_include_tag "jquery-1.9.0.js"
+  = javascript_include_tag "jquery-ui-1.10.0.custom.min.js"
+  -#= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
+  -#= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"
 
   = yield :javascript
 
@@ -56,9 +59,6 @@
     Modernizr.load({
       load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
     });
-
-    !window.jQuery && document.write(unescape('%3Cscript src="/scripts/jquery-1.6.2.min.js"%3E%3C/script%3E'))
-    !window.jQuery.ui && document.write(unescape('%3Cscript src="/scripts/jquery-ui-1.8.14.min.js"%3E%3C/script%3E'))
 
   /[if lt IE 7 ]
     %script{src: '//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js'}
