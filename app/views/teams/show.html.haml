@@ -1,11 +1,58 @@
-%div{class:'grid_16'}TODO: Team photo goes here
-%h1{class: 'grid_16'}= @team
-%h2{class: 'grid_16'}= "Coached by #{@team.coach}"
-<!-- Nice to have the same overlay we use on the coach page available here when clicking on the coach -->
-- @article.each do |article|
-  %div{class: 'grid_16'}=article.title
-  %div{class: 'grid_16'}=image_tag article.image
-  %div{class: 'grid_16'}= article.body.html_safe
+- content_for :css do
+  = stylesheet_link_tag "coach"
 
-%hr
+%div.grid_6
+  %h1= @team
+  %hr
+  %h2.alt= "Coached by #{@team.coach.name}"
+  %p.grid_2
+    = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :data => {:coach_id => "#{@team.coach.id}"} do
+      = image_tag image_path(@team.coach.image_url), alt: @team.coach.name, id: "coach-img-#{@team.coach.id}", height: 118, width: 100
+  %p.grid_3.alpha= "Email: #{@team.coach.email}"
+  %hr
+  %h2.grid_6.alpha.alt= "Managed by #{@team.manager_name}"
+  %p.grid_6
+    = "Phone: #{@team.manager_phone}"
+    %br
+    = "Email: #{@team.manager_email}"
+
+
+%div.grid_10.box
+  = image_tag @team.image, alt: "Team Photo", height: 363, width: 555
+
+%div.clear
+
+%div.grid_8.box
+  %h2 Schedule
+  %p goes here
+%div.grid_8.box
+  %h2 Results
+  %p Win / Loss
+
+%div.clear
+%div.grid_16.box
+  %h2 Articles
+  - @article.each do |article|
+    %div{class: 'grid_16'}=article.title
+    %div{class: 'grid_16'}=image_tag article.image
+    %div{class: 'grid_16'}= article.body.html_safe
+
+%hr.grid_16
 = link_to 'Return to Teams', teams_path
+
+%script{id: 'CoachTemplate', type: 'text/html'}
+  %div{id: 'simplemodal'}
+    %img{class: 'coachImage', src: '{{:coachImageUrl}}'}
+    %div
+      %h3= '{{:name}}'
+      %p= '{{:bio}}'
+    %div{class: 'teams'}
+      %h3= t "coach.teams"
+      %ul
+        = '{{for teams}}'
+        %li
+          %a{href: '/teams/{{:id}}'}= '{{:name}}'
+        = '{{/for}}'
+
+- content_for :javascript do
+  =javascript_include_tag "coaches"
