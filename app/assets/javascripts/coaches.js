@@ -7,7 +7,7 @@
 //= require plugins
 //= require spin
 //= require jsrender
-//= require jquery.simplemodal.1.4.3.min
+//= require jquery.simplemodal.1.4.4.min
 
 
     var spinner = new Spinner({
