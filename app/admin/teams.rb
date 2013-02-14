@@ -27,6 +27,7 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
      f.input :manager_phone
      f.input :manager_email
      f.input :teamsnap_url
+     f.input :image, :as => :file
    end
 
    f.actions
