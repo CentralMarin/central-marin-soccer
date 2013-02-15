@@ -56,7 +56,7 @@ class Coach < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    { :name => self.name, :bio => self.bio, :teams => teams.as_json }
+    { :name => self.name, :bio => self.bio, :teams => teams.as_json, :image_url => image_url }
   end
 
   class Translation

@@ -2,20 +2,28 @@
   = stylesheet_link_tag "coach"
 
 %div.grid_6
-  %h1= @team
+  %h1= "Team: '#{@team}"
   %hr
-  %h2.alt= "Coached by #{@team.coach.name}"
-  %p.grid_2
+  %h2.alt
+    Coached by
     = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :data => {:coach_id => "#{@team.coach.id}"} do
-      = image_tag image_path(@team.coach.image_url), alt: @team.coach.name, id: "coach-img-#{@team.coach.id}", height: 118, width: 100
-  %p.grid_3.alpha= "Email: #{@team.coach.email}"
+      =" #{@team.coach.name}"
+  %p= "Email: #{@team.coach.email}"
   %hr
-  %h2.grid_6.alpha.alt= "Managed by #{@team.manager_name}"
-  %p.grid_6
+  %h2.alt= "Managed by #{@team.manager_name}"
+  %p
     = "Phone: #{@team.manager_phone}"
     %br
     = "Email: #{@team.manager_email}"
-
+  %h2.alt
+    = "#{Time.now.year} Record"
+  %p
+    League
+    %br
+    Overall
+  %p
+    %a{src: "#{@team.teamsnap_url}"}
+      TeamSnap Login
 
 %div.grid_10.box
   = image_tag @team.image, alt: "Team Photo", height: 363, width: 555
@@ -42,7 +50,7 @@
 
 %script{id: 'CoachTemplate', type: 'text/html'}
   %div{id: 'simplemodal'}
-    %img{class: 'coachImage', src: '{{:coachImageUrl}}'}
+    %img{class: 'coachImage', src: "#{image_path('')}{{:image_url}}"}
     %div
       %h3= '{{:name}}'
       %p= '{{:bio}}'

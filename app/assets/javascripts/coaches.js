@@ -25,7 +25,6 @@
 
         var coachId = event.currentTarget.dataset['coachId'];
         $.getJSON('/coaches/' + coachId + '.json', function(coachDetails) {
-            coachDetails.coachImageUrl = $('#coach-img-' + coachId)[0].src;
             $.modal($("#CoachTemplate").render(coachDetails));
         });
 
