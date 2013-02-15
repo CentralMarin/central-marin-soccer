@@ -50,7 +50,7 @@
 
 %script{id: 'CoachTemplate', type: 'text/html'}
   %div{id: 'simplemodal'}
-    %img{class: 'coachImage', src: "#{image_path('')}{{:image_url}}"}
+    %img{class: 'coachImage', src: '{{:image_url}}'}
     %div
       %h3= '{{:name}}'
       %p= '{{:bio}}'
