@@ -25,7 +25,7 @@ class Article < ActiveRecord::Base
   ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
 
   attr_accessible :title, :body, :image, :author, :category_id, :team_id, :coach_id, :translations_attributes, :published
-  mount_uploader :image, ImageUploader
+  mount_uploader :image, ArticleImageUploader
 
   validates :title,         :presence => true,
                            :length => { :maximum => 255 }

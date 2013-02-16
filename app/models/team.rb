@@ -42,7 +42,7 @@ class Team < ActiveRecord::Base
   validates :team_level, :presence => true
 
   attr_accessible :coach_id, :team_level_id, :gender, :year, :name, :image, :manager_name, :manager_email, :manager_phone, :teamsnap_url
-  mount_uploader :image, ImageUploader
+  mount_uploader :image, TeamImageUploader
 
   def gender
     Team.genders[self.gender_id] unless gender_id.nil?
