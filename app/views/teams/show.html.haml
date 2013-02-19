@@ -34,12 +34,12 @@
   %h2 Schedule
   %p goes here
 %div.grid_8.box
-  %h2 Results
-  %p Win / Loss
+  %h2 Roster
+  %p Team members here
 
 %div.clear
 %div.grid_16.box
-  %h2 Articles
+  %h2 Team News
   - @article.each do |article|
     %div{class: 'grid_16'}=article.title
     %div{class: 'grid_16'}=image_tag article.image
@@ -64,3 +64,4 @@
 
 - content_for :javascript do
   =javascript_include_tag "coaches"
+  =javascript_include_tag "team"

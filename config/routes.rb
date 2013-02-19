@@ -16,6 +16,9 @@ CentralMarin::Application.routes.draw do
 
   match '/teams/', :to => 'teams#index', :as => 'teams'
   match '/teams/:id', :to => 'teams#show', :as => 'team'
+  match '/teams/:id/roster', :to => 'teams#roster', :as => 'roster'
+  match '/teams/:id/schedule', :to => 'teams#schedule', :as => 'schedule'
+  match '/teams/:id/record', :to => 'teams#record', :as => 'record'
 
   match '/fields/', :to => 'fields#index', :as => 'fields'
   match '/fields/:id', :to => 'fields#show', :as => 'field'
