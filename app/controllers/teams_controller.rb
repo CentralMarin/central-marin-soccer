@@ -5,6 +5,8 @@ class TeamsController < ApplicationController
 
   before_filter :set_section_name
 
+  caches_page :record, :roster, :schedule
+
   # GET /teams
   def index
 
@@ -53,15 +55,22 @@ class TeamsController < ApplicationController
     json = teamsnap('https://api.teamsnap.com/v2/teams/49832/as_roster/680909/events')
     schedule = []
     json.each do |game|
+      event = game['event']
+      name = "#{event['shortlabel'].nil? ? event['type'] : event['shortlabel']}"
+      if (event['type'] == 'Game')
+        name += " #{event['home_or_away'].nil? || event['home_or_away'] == 1 ? 'vs.' : 'at'} #{event['opponent']['opponent_name']}"
+      end
+      date_start = DateTime.parse(event['event_date_start'])
+      date_end = DateTime.parse(event['event_date_end'])
+
       schedule << {
-          type: game['event']['type'],
-          date_start: game['event']['event_date_start'],
-          date_end: game['event']['event_date_end'],
-          location: game['event']['location']['location_name']
+          name: name,
+          date: date_start.strftime("%a, %b %d"),
+          start: date_start.strftime("%I:%M %p"),
+          end: (date_start == date_end ? nil : date_end.strftime("%I:%M %p")),
+          location: event['location']['location_name']
       }
     end
-
-    # TODO: show the 10 upcoming. Fill with old if not 10 upcoming
 
     respond_to do |format|
       format.json {render :json => schedule}

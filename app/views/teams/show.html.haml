@@ -1,41 +1,31 @@
 - content_for :css do
   = stylesheet_link_tag "coach"
 
-%div.grid_6
-  %h1= "Team: '#{@team}"
+%div.grid_6.box
+  %h1= "'#{@team}"
   %hr
-  %h2.alt
-    Coached by
+  %h2
+    Coach:
     = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :data => {:coach_id => "#{@team.coach.id}"} do
       =" #{@team.coach.name}"
-  %p= "Email: #{@team.coach.email}"
-  %hr
-  %h2.alt= "Managed by #{@team.manager_name}"
-  %p
-    = "Phone: #{@team.manager_phone}"
-    %br
-    = "Email: #{@team.manager_email}"
-  %h2.alt
-    = "#{Time.now.year} Record"
-  %p
-    League
-    %br
-    Overall
-  %p
-    %a{href: "#{@team.teamsnap_url}"}
-      TeamSnap Login
+  %h2= "Manager: #{@team.manager_name}"
 
-%div.grid_10.box
-  = image_tag image_path(@team.image), alt: "Team Photo", height: 363, width: 555
+  %div.box
+    %h2 Roster
+    %div{id: 'roster', style: 'overflow: auto; height: 200px;'}
+
+%div.grid_10
+  = image_tag image_path(@team.image), alt: "Team Photo", height: 416, width: 555
 
 %div.clear
 
-%div.grid_8.box
-  %h2 Schedule
-  %p goes here
-%div.grid_8.box
-  %h2 Roster
-  %p Team members here
+%div.grid_16.box
+  %h2
+    Schedule
+    %span{style: 'float: right', id: 'record'}
+      = "#{Time.now.year} Record: "
+
+  %div{id: 'schedule', style: 'overflow: auto; height: 200px;'}
 
 %div.clear
 %div.grid_16.box

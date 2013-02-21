@@ -195,9 +195,9 @@ ActiveRecord::Schema.define(:version => 20130214204159) do
   create_table "web_part_translations", :force => true do |t|
     t.integer  "web_part_id"
     t.string   "locale"
-    t.text     "html",        :limit => 255
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.text     "html"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "web_part_translations", ["locale"], :name => "index_web_part_translations_on_locale"
@@ -205,9 +205,9 @@ ActiveRecord::Schema.define(:version => 20130214204159) do
 
   create_table "web_parts", :force => true do |t|
     t.string   "name"
-    t.text     "html",       :limit => 255
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.text     "html"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
