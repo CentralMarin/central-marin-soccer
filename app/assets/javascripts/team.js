@@ -1,4 +1,5 @@
 //= require spin
+//= require coaches
 
 $(document).ready(function() {
 
