@@ -42,8 +42,10 @@ class TeamsController < ApplicationController
     json = teamsnap('https://api.teamsnap.com/v2/teams/49832/as_roster/680909/rosters')
     roster = []
     json.each do |player|
-      roster << {first: player['roster']['first'], last: player['roster']['last']}
+      roster << {first: player['roster']['first'], last: player['roster']['last']}  unless player['roster']['non_player'] == true
     end
+
+    # TODO: pull manager from json -> ['roster']['is_manager'] == true
 
     respond_to do |format|
       format.json {render :json => roster}
