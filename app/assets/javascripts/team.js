@@ -25,11 +25,17 @@ $(document).ready(function() {
 
     $.getJSON(document.url + '/schedule.json', function(schedule) {
         var events = [];
-        $.each(schedule, function(index, event) {
-            events.push('<tr><td>' + event.name + '</td><td>' + event.date + '</td><td>' + event.start + (event.end ? ' - ' + event.end : '') + '</td></tr>');
-        });
+        events.push('<thead><tr><th width="70%" align="left">Name</th><th width="10%" align="center">Date</th><th align="center">Time</th></tr></thead>')
+        if (schedule.length == 0) {
+            events.push('<tr><td colspan="3">No upcoming events</td></tr>')
+        } else {
+            $.each(schedule, function(index, event) {
+                events.push('<tr><td>' + event.name + '</td><td nowrap>' + event.date + '</td><td nowrap>' + event.start + (event.end ? ' - ' + event.end : '') + '</td></tr>');
+            });
+        }
         $('<table/>', {
-            html: events.join('')
+            html: events.join(''),
+            style: 'color: white; font-size: 14px;'
         }).appendTo('#schedule');
         schedule_spinner.stop();
     });

@@ -1,0 +1,26 @@
+table {
+  width: 100%;
+}
+table td {
+  padding-top: 6px;
+  padding-right: 10px;
+  padding-bottom: 6px;
+  padding-left: 10px;
+
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(230, 230, 230);
+}
+
+.scroll-box {
+  overflow: auto;
+  height: 200px;
+}
+
+#info {
+  border-bottom-width: 0px;
+}
+
+#record {
+  float: right;
+}

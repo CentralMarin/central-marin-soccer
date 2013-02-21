@@ -1,18 +1,20 @@
 - content_for :css do
   = stylesheet_link_tag "coach"
+  = stylesheet_link_tag "team"
 
 %div.grid_6.box
   %h1= "'#{@team}"
   %hr
-  %h2
+  %h2{id: 'info'}
     Coach:
-    = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :data => {:coach_id => "#{@team.coach.id}"} do
+    = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :style => 'font-size: 18px;', :data => {:coach_id => "#{@team.coach.id}"} do
       =" #{@team.coach.name}"
-  %h2= "Manager: #{@team.manager_name}"
+    %br
+    = "Manager: #{@team.manager_name}"
 
   %div.box
     %h2 Roster
-    %div{id: 'roster', style: 'overflow: auto; height: 200px;'}
+    %div{id: 'roster', class: 'scroll-box'}
 
 %div.grid_10
   = image_tag image_path(@team.image), alt: "Team Photo", height: 416, width: 555
@@ -22,10 +24,10 @@
 %div.grid_16.box
   %h2
     Schedule
-    %span{style: 'float: right', id: 'record'}
+    %span{id: 'record'}
       = "#{Time.now.year} Record: "
 
-  %div{id: 'schedule', style: 'overflow: auto; height: 200px;'}
+  %div{id: 'schedule', class: 'scroll-box'}
 
 %div.clear
 %div.grid_16.box

@@ -3,12 +3,12 @@ require "json"
 
 class TeamsController < ApplicationController
 
-  before_filter :set_section_name
-
   caches_page :record, :roster, :schedule
 
   # GET /teams
   def index
+
+    @top_level_section_name = 'menu.teams'
 
     teams = Team.order('year desc', :gender_id, :team_level_id)
     @teams_by_year_and_gender = process_teams(teams)
@@ -52,11 +52,11 @@ class TeamsController < ApplicationController
 
   def schedule()
 
-    json = teamsnap('https://api.teamsnap.com/v2/teams/49832/as_roster/680909/events')
+    json = teamsnap('https://api.teamsnap.com/v2/teams/49832/as_roster/680909/events/upcoming')
     schedule = []
     json.each do |game|
       event = game['event']
-      name = "#{event['shortlabel'].nil? ? event['type'] : event['shortlabel']}"
+      name = "#{event['shortlabel'].nil? || event['shortlabel'].blank? ? event['type'] : event['shortlabel']}"
       if (event['type'] == 'Game')
         name += " #{event['home_or_away'].nil? || event['home_or_away'] == 1 ? 'vs.' : 'at'} #{event['opponent']['opponent_name']}"
       end
@@ -91,10 +91,6 @@ class TeamsController < ApplicationController
 
     response = http.request(request)
     JSON.parse(response.body)
-  end
-
-  def set_section_name
-    @top_level_section_name = 'menu.teams'
   end
 
   def process_teams(teams)
