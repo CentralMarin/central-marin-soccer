@@ -43,12 +43,17 @@ $(document).ready(function() {
 
     $.getJSON(document.url + '/roster.json', function(roster) {
         var players = [];
-        $.each(roster, function(index, player) {
+        $.each(roster.players, function(index, player) {
             players.push('<li>' + player.first + ' ' + player.last + '</li>');
         });
         $('<ul/>', {
             html: players.join('')
         }).appendTo('#roster');
+        var managers = [];
+        $.each(roster.managers, function(index, manager) {
+            managers.push(manager.first + ' ' + manager.last);
+        });
+        $('#managers').append(managers.join('<br/>'));
         roster_spinner.stop();
     });
 
