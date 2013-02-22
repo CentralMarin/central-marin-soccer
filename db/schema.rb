@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214204159) do
+ActiveRecord::Schema.define(:version => 20130221165453) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -153,9 +153,6 @@ ActiveRecord::Schema.define(:version => 20130214204159) do
     t.integer  "team_level_id"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
-    t.string   "manager_name"
-    t.string   "manager_phone"
-    t.string   "manager_email"
     t.string   "teamsnap_url"
     t.string   "image"
   end
@@ -195,9 +192,9 @@ ActiveRecord::Schema.define(:version => 20130214204159) do
   create_table "web_part_translations", :force => true do |t|
     t.integer  "web_part_id"
     t.string   "locale"
-    t.text     "html"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.text     "html",        :limit => 255
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   add_index "web_part_translations", ["locale"], :name => "index_web_part_translations_on_locale"
@@ -205,9 +202,9 @@ ActiveRecord::Schema.define(:version => 20130214204159) do
 
   create_table "web_parts", :force => true do |t|
     t.string   "name"
-    t.text     "html"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "html",       :limit => 255
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
 end

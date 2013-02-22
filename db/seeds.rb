@@ -24,9 +24,6 @@ def coach_create(details)
   teams.each do |team|
     team[:coach_id] = coach.id
     team[:team_level_id] = team.delete(:team_level).id
-    team[:manager_name] = 'Replace me'
-    team[:manager_phone] = '123-123-1234'
-    team[:manager_email] = 'manager@centralmarinsoccer.com'
     Team.create(team)
   end
 end

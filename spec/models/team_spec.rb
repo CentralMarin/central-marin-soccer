@@ -52,35 +52,6 @@ describe Team do
     FactoryGirl.build(:team, team_level: nil).should_not be_valid
   end
 
-  it "requires a team manager name" do
-    FactoryGirl.build(:team, manager_name: nil).should_not be_valid
-  end
-
-  it "requires a valid team manager email address" do
-    FactoryGirl.build(:team, manager_email: nil).should_not be_valid
-    addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
-
-    addresses.each do |address|
-      FactoryGirl.build(:team, manager_email: address).should_not be_valid
-    end
-
-  end
-
-  it "requires a valid team manager phone number" do
-    FactoryGirl.build(:team, manager_phone: nil).should_not be_valid
-
-    phone_numbers = %w[123-123-1234 (123)123-1234 9999999999 999999-9999 999-7890987]
-    invalid_phone_numbers = %w[123-1234 (AAA)123-1234 123-123 1 132-AAAA (123)123-AAAA (132)AAA-BBBB]
-
-    phone_numbers.each do |phone|
-      FactoryGirl.build(:team, manager_phone: phone).should be_valid
-    end
-
-    invalid_phone_numbers.each do |phone|
-      FactoryGirl.build(:team, manager_phone: phone).should_not be_valid
-    end
-  end
-
   #describe "associations" do
   #  before(:each) do
   #    @team = Team.create!(@attr)
