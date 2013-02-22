@@ -8,10 +8,10 @@ gem 'rails', '>= 3.2.1'
 gem 'activeadmin', '>= 0.5.1'
 gem 'meta_search', '>= 1.1.0.pre'
 gem 'paper_trail'
-gem 'ckeditor', '>4.0.0'
+gem 'ckeditor', '~>4.0.2'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'globalize3', :git => 'https://github.com/svenfuchs/globalize3.git'
+gem 'globalize3', '~>0.3.0'
 gem 'haml-rails', '~> 0.3.5'
 gem 'cancan'
 
@@ -42,7 +42,7 @@ end
 
 group :test do
   gem 'spork', '~> 0.9.0.rc'
-  gem 'capybara', :git => 'https://github.com/jnicklas/capybara.git'
+  gem 'capybara', '~>2.0.2'
   gem 'guard-spork'
   gem 'rb-fsevent'
   gem 'launchy'
