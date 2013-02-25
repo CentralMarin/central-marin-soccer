@@ -36,6 +36,8 @@ module ApplicationHelper
   def editable_attributes(part_name)
     if @editable
       {:class => 'editable', contenteditable: true, :data => {:name => part_name}}
+    else
+      {}
     end
   end
 
