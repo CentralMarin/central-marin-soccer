@@ -79,11 +79,98 @@ class Team < ActiveRecord::Base
     "#{to_s} coached by #{coach}"
   end
 
+  def update_teamsnap_json
+
+    mutex = Mutex.new
+
+    endpoints = [record, schedule, roster]
+    threads = []
+    json = {}
+
+    for endpoint in endpoints
+      threads << Thread.new(endpoint) { |myEndpoint|
+        results = myEndpoint
+        mutex.synchronize do
+          json = json.merge(results)
+        end
+      }
+    end
+
+    threads.each { |aThread|  aThread.join }
+
+    json
+  end
+
+  def record
+    record = {}
+    teamsnap('https://api.teamsnap.com/v2/teams/49832') do |json|
+      record = {record: json['team']['formatted_record']}
+    end
+
+    record
+  end
+
+  def schedule
+    schedule = []
+    teamsnap('https://api.teamsnap.com/v2/teams/49832/as_roster/680909/events/upcoming') do |json|
+      json.each do |game|
+        event = game['event']
+        name = "#{event['shortlabel'].nil? || event['shortlabel'].blank? ? event['type'] : event['shortlabel']}"
+        if (event['type'] == 'Game')
+          name += " #{event['home_or_away'].nil? || event['home_or_away'] == 1 ? 'vs.' : 'at'} #{event['opponent']['opponent_name']}"
+        end
+        date_start = DateTime.parse(event['event_date_start'])
+        date_end = DateTime.parse(event['event_date_end'])
+
+        schedule << {
+            name: name,
+            date: date_start.strftime("%a, %b %d"),
+            start: date_start.strftime("%I:%M %p"),
+            end: (date_start == date_end ? nil : date_end.strftime("%I:%M %p")),
+            location: event['location']['location_name']
+        }
+      end
+    end
+
+    {schedule: schedule}
+  end
+
+  def roster
+    players = []
+    managers = []
+    teamsnap('https://api.teamsnap.com/v2/teams/49832/as_roster/680909/rosters') do |json|
+      json.each do |player|
+        players << {first: player['roster']['first'], last: player['roster']['last']}  unless player['roster']['non_player'] == true
+        if player['roster']['is_manager'] == true
+          managers << {first: player['roster']['first'], last: player['roster']['last']}
+        end
+      end
+    end
+
+    {players: players, managers: managers}
+  end
+
 protected
   def self.genders
     [I18n.t('team.gender.boys'), I18n.t('team.gender.girls')]
   end
 
   ACADEMY_YEAR = 9
+end
+
+def teamsnap(url)
+  uri = URI.parse(url)
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  request = Net::HTTP::Get.new(uri.request_uri)
+  request['Content-Type'] = 'application/json'
+  request['X-Teamsnap-Token'] = '170b851e-f386-47a0-b6a5-9d5ed6597dbd'
+
+  response = http.request(request)
+  json = JSON.parse(response.body)
+
+  yield(json)
 end
 
