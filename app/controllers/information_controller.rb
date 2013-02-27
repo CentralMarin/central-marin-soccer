@@ -48,21 +48,40 @@ class InformationController < ApplicationController
     @part_name_mission_bell = 'information.tournaments.mission_bell'
     @part_name_premier_challenge = 'information.tournaments.premier_challenge'
     @part_name_footer = 'information.tournaments.footer'
-    @part_name_premier_challenge_current_winners = 'information.tournaments.premier_challenge.current'
-    @part_name_premier_challenge_previous_winners = 'information.tournaments.premier_challenge.previous'
-    @part_name_mission_bell_current_winners = 'information.tournaments.mission_bell.current'
-    @part_name_mission_bell_previous_winners = 'information.tournaments.mission_bell.previous'
     init_web_parts(
         [
             @part_name_overview,
             @part_name_mission_bell,
             @part_name_premier_challenge,
-            @part_name_footer,
-            @part_name_premier_challenge_current_winners,
-            @part_name_premier_challenge_previous_winners,
-            @part_name_mission_bell_current_winners,
-            @part_name_mission_bell_previous_winners
+            @part_name_footer
         ]
     )
+  end
+
+  #'information.tournaments.premier_challenge.current'
+  #'information.tournaments.premier_challenge.previous'
+  #'information.tournaments.mission_bell.current'
+  #'information.tournaments.mission_bell.previous'
+
+  def tournaments_previous_winners
+    # tournament name and (current or past) to build name
+    tournament_name = params[:name]
+    year = params[:year]
+    part_name = "information.tournaments.#{tournament_name}.#{year}"
+
+    # Load the web part
+    web_part = WebPart.load(part_name)
+
+    # build our object
+    winners = {
+        web_part_name: web_part[part_name]['name'],
+        html: web_part[part_name]['html'],
+        tournament_name: tournament_name.gsub('_', ' ').titleize,
+        year: (year == 'current' ? Time.now.year : Time.now.year - 1)
+    }
+
+    respond_to do |format|
+      format.json {render :json => winners}
+    end
   end
 end

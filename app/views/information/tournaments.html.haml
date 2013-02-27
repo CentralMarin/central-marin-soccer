@@ -5,7 +5,7 @@
   = editable_content @part_name_overview
 
 %div.grid_16
-  %div{:id => 'tabs'}
+  %div#tabs
     %ul
       %li
         %a{href: '#premier_challenge'}
@@ -14,32 +14,39 @@
         %a{href: '#mission_bell'}
           Mission Bell
 
-    %div{:id => 'premier_challenge' }
-      %div{ editable_attributes(@part_name_mission_bell) }
-        = editable_content @part_name_mission_bell
-      %h2 Past Winners
-      %div{id: 'premier_challenge_winners'}
-        %h3 2012
-        %div{ editable_attributes(@part_name_premier_challenge_current_winners) }
-          = editable_content @part_name_premier_challenge_current_winners
-        %h3 2011
-        %div{ editable_attributes(@part_name_premier_challenge_previous_winners) }
-          = editable_content @part_name_premier_challenge_previous_winners
-
-    %div{:id => 'mission_bell' }
+    %div#premier_challenge
       %div{ editable_attributes(@part_name_premier_challenge) }
         = editable_content @part_name_premier_challenge
       %h2 Past Winners
-      %div{id: 'mission_bell_winners'}
-        %h3 2012
-        %div{ editable_attributes(@part_name_mission_bell_current_winners) }
-          = editable_content @part_name_mission_bell_current_winners
-        %h3 2011
-        %div{ editable_attributes(@part_name_mission_bell_previous_winners) }
-          = editable_content @part_name_mission_bell_previous_winners
+      %ul
+        %li
+          =link_to '#premier_challenge', :rel => "#winners", :data => {tournament: 'premier_challenge', year: 'current'} do
+            = Time.now.year
+        %li
+          =link_to '#premier_challenge', :rel => "#winners", :data => {tournament: 'premier_challenge', year: 'previous'} do
+            = Time.now.year - 1
+
+    %div#mission_bell
+      %div{ editable_attributes(@part_name_mission_bell) }
+        = editable_content @part_name_mission_bell
+      %h2
+        Past Winners
+      %ul
+        %li
+          =link_to '#mission_bell', :rel => "#winners", :data => {tournament: 'mission_bell', year: 'current'} do
+            = Time.now.year
+        %li
+          =link_to '#mission_bell', :rel => "#winners", :data => {tournament: 'mission_bell', year: 'previous'} do
+            = Time.now.year - 1
 
 %div.grid_16{ editable_attributes(@part_name_footer)  }
   = editable_content @part_name_footer
+
+%script#pastWinnersTemplate{type: 'text/html'}
+  %div
+    %h3= '{{:year}} {{:tournament_name}}'
+    %div#simplemodal{ editable_attributes("{{:web_part_name}}") }
+      = '{{:html}}'
 
 - content_for :javascript do
   =javascript_include_tag "information.tournaments"

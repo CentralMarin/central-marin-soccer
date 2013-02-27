@@ -31,6 +31,7 @@ CentralMarin::Application.routes.draw do
   match '/information/silver', to: 'information#silver', as: 'silver'
   match '/information/academy', to: 'information#academy', as: 'academy'
   match '/information/on-equal-footing', to: 'information#scholarship', as: 'scholarship'
+  match '/tournaments/:name/:year', to: 'information#tournaments_previous_winners', as: 'tournaments_previous_winners'
 
   match '/referees', to: 'information#referees', as: 'referees'
   match '/tournaments', to: 'information#tournaments', as: 'tournaments'
