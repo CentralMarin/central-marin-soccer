@@ -79,7 +79,7 @@ class Team < ActiveRecord::Base
     "#{to_s} coached by #{coach}"
   end
 
-  def update_teamsnap_json
+  def teamsnap_json
 
     mutex = Mutex.new
 
