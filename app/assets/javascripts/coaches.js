@@ -8,28 +8,48 @@
 //= require spin
 //= require jsrender
 //= require jquery.simplemodal.1.4.4.min
+//= require namespace
 
 
-    var spinner = new Spinner({
-        lines: 12, // The number of lines to draw
-        length: 21, // The length of each line
-        width: 10, // The line thickness
-        radius: 31, // The radius of the inner circle
-        color: '#000', // #rgb or #rrggbb
-        speed: 1.5, // Rounds per second
-        trail: 81, // Afterglow percentage
-        shadow: true // Whether to render a shadow
-    });
+(function () {
+    namespace("soccer");
+    soccer.coaches = function() {
 
-    $('a[rel]').click(function(event) {
-
-        var coachId = event.currentTarget.dataset['coachId'];
-        $.getJSON('/coaches/' + coachId + '.json', function(coachDetails) {
-            $.modal($("#CoachTemplate").render(coachDetails));
+        var _spinner_opts = new Spinner({
+            lines: 12, // The number of lines to draw
+            length: 21, // The length of each line
+            width: 10, // The line thickness
+            radius: 31, // The radius of the inner circle
+            color: '#000', // #rgb or #rrggbb
+            speed: 1.5, // Rounds per second
+            trail: 81, // Afterglow percentage
+            shadow: true // Whether to render a shadow
         });
 
-        return false;
-    });
+        var init = function() {
+            $(document).ready(function() {
+                $('a[rel]').click(function(event) {
+
+                    var spinner = new Spinner(_spinner_opts).spin($('#record')[0]);
+
+                    var coachId = event.currentTarget.dataset['coachId'];
+                    $.getJSON('/coaches/' + coachId + '.json', function(coachDetails) {
+                        $.modal($("#CoachTemplate").render(coachDetails));
+                        spinner.stop();
+                    });
+
+                    return false;
+                });
 
 
-    $('#accordion').accordion({ header: "h3"} );
+                $('#accordion').accordion({ header: "h3"} );
+            });
+        };
+
+        return {
+            init:init
+        };
+    };
+}());
+
+soccer.coaches().init();
