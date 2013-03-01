@@ -30,6 +30,8 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
  end
 
  controller do
+  cache_sweeper :team_sweeper, :only => [:create, :update, :destroy]
+
    def show
        @team = Team.find(params[:id])
        @versions = @team.versions
