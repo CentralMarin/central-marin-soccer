@@ -52,6 +52,8 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
   #TODO: Attempt to rename the image if the coaches name is changed
 
   controller do
+    cache_sweeper :coach_sweeper, :only => [:create, :update, :destroy]
+
     def show
       @coach = Coach.find(params[:id])
       @versions = @coach.versions
