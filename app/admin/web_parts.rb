@@ -6,10 +6,12 @@ ActiveAdmin.register WebPart do
   form :partial => "form"
 
   controller do
+    cache_sweeper :web_part_sweeper, :only => [:create, :update, :destroy]
+
     def show
-      @coach = Coach.find(params[:id])
-      @versions = @coach.versions
-      @coach = @coach.versions[params[:version].to_i].reify if params[:version]
+      @web_part = WebPart.find(params[:id])
+      @versions = @web_part.versions
+      @coach = @web_part.versions[params[:version].to_i].reify if params[:version]
       show! #it seems to need this
     end
     def new
