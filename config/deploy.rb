@@ -36,6 +36,9 @@ after "deploy", "deploy:migrate"
 # remove old releases
 after "deploy", "deploy:cleanup"
 
+# create our symlink
+after 'deploy:update_code', 'deploy:symlink_uploads'
+
 #server details
 set :domain, "207.104.28.18"
 role :web,domain                          # Your HTTP server, Apache/etc
@@ -71,6 +74,12 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+
+  task :symlink_uploads do
+    run "ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
+  end
 end
+
+
 
 
