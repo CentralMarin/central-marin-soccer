@@ -54,6 +54,8 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
   end
 
   controller do
+    cache_sweeper :home_sweeper, :only => [:update_fields_status]
+
     def show
         @field = Field.find(params[:id])
         @versions = @field.versions

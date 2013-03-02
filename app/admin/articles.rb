@@ -64,6 +64,8 @@ ActiveAdmin.register Article do
   form :partial => 'form'
 
   controller do
+    cache_sweeper :home_sweeper, :only => [:create, :update, :destroy]
+
     def show
         @article = Article.find(params[:id])
         @versions = @article.versions
