@@ -3,7 +3,7 @@ development: &DEVELOPMENT
 test:
   <<: *DEVELOPMENT
 staging:
-  switch_hosts: { es: "staging.centralmarinsoccer.digitalfoundry.com", en: "es.staging.centralmarinsoccer.digitalfoundry.com" }
+  switch_hosts: { es: "staging.centralmarinsoccer.com", en: "es.staging.centralmarinsoccer.digitalfoundry.com" }
 
 production:
-  switch_hosts: { es: "centralmarinsoccer.digitalfoundry.com", en: "es.centralmarinsoccer.digitalfoundry.com" }
+  switch_hosts: { es: "centralmarinsoccer.com", en: "es.centralmarinsoccer.com" }
