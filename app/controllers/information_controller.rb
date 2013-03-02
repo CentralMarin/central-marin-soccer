@@ -1,4 +1,13 @@
 class InformationController < ApplicationController
+  caches_page :index, :gzip => true
+  caches_page :gold, :gzip => true
+  caches_page :silver, :gzip => true
+  caches_page :academy, :gzip => true
+  caches_page :scholarship, :gzip => true
+  caches_page :referees, :gzip => true
+  caches_page :tournaments, :gzip => true
+  caches_page :tournaments_previous_winners, :gzip => true
+
   def init_web_parts(web_parts)
     # Determine if the current user can edit the page
     @editable = can?(:manage, WebPart)
@@ -57,11 +66,6 @@ class InformationController < ApplicationController
         ]
     )
   end
-
-  #'information.tournaments.premier_challenge.current'
-  #'information.tournaments.premier_challenge.previous'
-  #'information.tournaments.mission_bell.current'
-  #'information.tournaments.mission_bell.previous'
 
   def tournaments_previous_winners
     # tournament name and (current or past) to build name
