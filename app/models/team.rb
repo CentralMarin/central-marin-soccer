@@ -24,8 +24,8 @@ class Team < ActiveRecord::Base
 
   default_scope :include => [:team_level, :coach]
   scope :academy, lambda {|year| where("year >= ?", year - ACADEMY_YEAR)}
-  scope :boys, where(gender_id: 0).order([:year, :team_level_id])
-  scope :girls, where(gender_id: 1).order([:year, :team_level_id])
+  scope :boys, lambda { where(gender_id: 0).order([:year, :team_level_id]) }
+  scope :girls, lambda { where(gender_id: 1).order([:year, :team_level_id]) }
 
   validates :year, :presence => true
   validates :gender, :presence => true
