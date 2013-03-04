@@ -22,7 +22,7 @@ module ApplicationHelper
 	def menu_secondary
    [
        ['menu.calendar', calendar_path],
-       ['menu.facebook', "http://www.facebook.com"],
+       ['menu.facebook', "https://www.facebook.com/CentralMarinSoccerClub"],
        ['menu.clubInfo', information_path],
        ['menu.contact', contact_path],
        ['menu.language', "http://#{AppConfig[:switch_hosts][I18n.locale]}"]
