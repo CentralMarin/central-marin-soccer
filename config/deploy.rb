@@ -10,6 +10,7 @@ set :application, "centralmarinsoccer"
 
 #deployment details
 set :deploy_via, :remote_cache
+set :copy_exclude, ['.git']
 set :user, "dfadmin"
 set :use_sudo, false
 set :deploy_to do
@@ -40,7 +41,8 @@ after "deploy", "deploy:cleanup"
 after 'deploy:update_code', 'deploy:symlink_uploads'
 
 #server details
-set :domain, "207.104.28.18"
+#set :domain, "207.104.28.18"
+set :domain, "192.168.1.21"
 role :web,domain                          # Your HTTP server, Apache/etc
 role :app,domain                          # This may be the same as your `Web` server
 role :db, domain, :primary => true # This is where Rails migrations will run
@@ -48,8 +50,12 @@ role :db, domain, :primary => true # This is where Rails migrations will run
 namespace :deploy do
   namespace :assets do
     task :precompile, :roles => :web, :except => { :no_release => true } do
-      from = source.next_revision(current_revision)
-      if capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+      begin
+        from = source.next_revision(current_revision)
+      rescue
+        err_no = true
+      end
+      if err_no || capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
         run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
       else
         logger.info "Skipping asset pre-compilation because there were no asset changes"
