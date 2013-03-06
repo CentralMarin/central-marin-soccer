@@ -18,9 +18,6 @@ set :deploy_to do
   path << "-#{stage}" unless stage.to_s == "production"
   path
 end
-set :rails_env do
-  stage
-end
 
 #repo details
 set :scm, :git
