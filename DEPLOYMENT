@@ -1,31 +1,13 @@
 Ubuntu 12.04 LTS
 OpenSSH
-http://www.leonardteo.com/p/install-ruby-on-rails-on-ubuntu-server
-Modified the script to use lastest release of Ruby (http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p392.tar.gz)
-    sudo apt-get install -y git && git clone https://github.com/ballistiq/ruby-passenger-nginx-installer.git
-    sudo bash ./ruby-passenger-nginx-installer/install.sh
-
-Install MySQL
-    sudo apt-get install -y mysql-server
-Create databases
-    create database soccer_production
-    create database soccer_staging
-
-Create Folders
-    sudo mkdir /webapps
-    sudo chown <user>:<user> /webapps
-    mkdir /webapps/centralmarinsoccer
-    mkdir /webapps/centralmarinsoccer-staging
-
-    ln -s /webapps/centralmarinsoccer ~/production
-    ln -s /webapps/centralmarinsoccer-staging ~/staging
 
 Create SSH keys and add them to repo
     ssh-keygen -t rsa
 Add public key to repo
 
 Add Hosts entry for repo pointing to 192.168.1.16
-Update known hosts to add repo by doing an ssh to the box
+
+sudo apt-get install -y git && git clone git@repo.digitalfoundry.com:central-marin-soccer/ruby-passenger-nginx-installer.git && bash ./ruby-passenger-nginx-installer/install.sh
 
 Deployment Machine
     cap deploy:setup

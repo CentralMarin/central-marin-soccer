@@ -79,6 +79,8 @@ namespace :deploy do
   end
 
   task :symlink_uploads do
+    run "mkdir -p #{shared_path}/uploads"
+    run "#{try_sudo} chmod 777 #{shared_path}/uploads"
     run "ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
   end
 end
