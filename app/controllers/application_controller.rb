@@ -3,15 +3,14 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def self.page_cache_path(path,extension)
+  def self.page_cache_path(path,extension = nil)
+
+    extension = '.html' if extension.nil?
 
     # make the home page index.html
     path += 'index' if path == '/'
 
-    # Appending the locale
-    path += '-' + I18n.locale.to_s
-
-    CentralMarin::Application.config.action_controller.page_cache_directory + path + extension
+    CentralMarin::Application.config.action_controller.page_cache_directory + I18n.locale.to_s + path + extension
   end
 
   def user_for_paper_trail
