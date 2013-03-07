@@ -59,6 +59,8 @@ module CentralMarin
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
 
+    config.action_controller.page_cache_directory = "#{config.root}/public/cache/"
+
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,

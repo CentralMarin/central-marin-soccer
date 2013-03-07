@@ -1,18 +1,22 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  #before_filter :populate_teams
-
   protected
+
+  def self.page_cache_path(path,extension)
+
+    # make the home page index.html
+    path += 'index' if path == '/'
+
+    # Appending the locale
+    path += '-' + I18n.locale.to_s
+
+    CentralMarin::Application.config.action_controller.page_cache_directory + path + extension
+  end
 
   def user_for_paper_trail
     user_signed_in? ? current_user : nil
   end
-
-  #def populate_teams
-  #  # TODO: Look into read_fragment as well as fragment caching
-  #  @teams = Team.all
-  #end
 
   def current_ability
     @current_ability ||= Ability.new(current_user)
