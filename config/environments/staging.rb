@@ -65,8 +65,8 @@ CentralMarin::Application.configure do
   config.action_mailer.smtp_settings = {
       :address    => 'smtp.gmail.com',
       :port       => 587,
-      :user_name  => 'cmcsc@robinett.org',
-      :password   => '3iZ1U0ee/#g#0{YbYh#(',
+      :user_name  => ENV["SMTP_USER_NAME"],
+      :password   => ENV["SMTP_PASSWORD"],
       :authentication => 'plain',
       :enable_starttls_auto => true
   }

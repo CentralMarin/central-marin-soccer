@@ -6,13 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+ENV = {}
+config = YAML.load(File.read(File.expand_path('../../config/application.yml', __FILE__)))
+config.merge! config.fetch(Rails.env, {})
+config.each do |key, value|
+  ENV[key] = value.to_s unless value.kind_of? Hash
+end
+
 def coach_create(details)
   return if Coach.find_by_email(details[:email])
 
   teams = details.delete(:coached_teams)
 
   coach = Coach.create(details)
-  if ENV['RAILS_ENV'] != 'production'
+  if Rails.env != 'production'
     I18n.available_locales.each do |locale|
       I18n.locale = locale
       coach.bio = Faker::Lorem.paragraphs(5)
@@ -142,5 +149,5 @@ coach_create(name: 'Jeff Troyer', email: 'jeff.troyer@centralmarinsoccer.com',
                      {year: 1993, gender: 'Boys', team_level: team_level_blank, name: ''},
                      {year: 1993, gender: 'Girls', team_level: team_level_blank, name: ''}])
 
-User.create(:email => 'ryan@robinett.org', roles: User::ROLES)
+User.create(:email => ENV["DEFAULT_USER"], roles: User::ROLES)
 

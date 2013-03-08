@@ -1,0 +1,12 @@
+SMTP_USER_NAME: 'xxxxx@xxxxxx.xxx'
+SMTP_PASSWORD: 'xxxxxxxx'
+SECRET_TOKEN: 'xxxxxxxx'
+DEFAULT_USER: 'xxxxx@xxxxxx.xxx'
+development:
+  MAILER_HOST: 'xxxxxxx'
+test:
+  MAILER_HOST: 'xxxxxxx'
+staging:
+  MAILER_HOST: 'xxxxxxx'
+production:
+  MAILER_HOST: 'xxxxxxx'
