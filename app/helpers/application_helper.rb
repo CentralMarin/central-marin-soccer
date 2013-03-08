@@ -3,6 +3,16 @@ module ApplicationHelper
     @body_classes ||= [controller.controller_name, "#{controller.controller_name}_#{controller.action_name}"]
   end
 
+  def analytics_tracking_id
+    production_tracking_id = {en: 'UA-39121765-1', es: 'UA-39121765-2'}
+    staging_tracking_id = {en: 'UA-39121765-3', es: 'UA-39121765-4'}
+    if Rails.env == 'production'
+      production_tracking_id[I18n.locale]
+    else
+      staging_tracking_id[I18n.locale]
+    end
+  end
+
   def menu
    [
        ['menu.home', root_path],
