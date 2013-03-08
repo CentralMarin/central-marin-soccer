@@ -11,7 +11,9 @@ sudo apt-get install -y git && git clone git@repo.digitalfoundry.com:central-mar
 
 Deployment Machine
     cap deploy:setup
+    scp your application.yml file to the shared config folder
     cap deploy
 
     cap production deploy:setup
+    scp your application.yml file to the shared config folder
     cap production deploy

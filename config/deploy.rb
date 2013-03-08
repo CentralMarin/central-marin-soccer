@@ -44,6 +44,11 @@ role :web,domain                          # Your HTTP server, Apache/etc
 role :app,domain                          # This may be the same as your `Web` server
 role :db, domain, :primary => true # This is where Rails migrations will run
 
+
+before 'deploy:assets:precompile' do
+  run "ln -s #{shared_path}/config/application.yml #{release_path}/config/application.yml"
+end
+
 namespace :deploy do
   namespace :assets do
     task :precompile, :roles => :web, :except => { :no_release => true } do
@@ -82,6 +87,10 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/uploads"
     run "#{try_sudo} chmod 777 #{shared_path}/uploads"
     run "ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
+  end
+
+  task :setup do
+    run "mkdir -p #{shared_path}/config"
   end
 end
 
