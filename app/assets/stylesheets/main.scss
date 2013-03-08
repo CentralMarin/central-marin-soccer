@@ -1,5 +1,5 @@
 body {
-	background: url('/assets/header_grad2.png') repeat-x;
+	background: image-url('header_grad2.png') repeat-x;
 	background-color: #25363f;
 }
 
@@ -14,14 +14,14 @@ header {
 
 #header_container {
 	height: 138px;
-	background: url('/assets/header_grad3.png') repeat-x;
+	background: image-url('header_grad3.png') repeat-x;
 	position: relative;
 	z-index: 5;
 	min-width: 960px;
 
 	.endcap {
 		height: 160px;
-		background: url('/assets/header_grad4.png') repeat-x;
+		background: image-url('header_grad4.png') repeat-x;
 	}
 	.first-child {
 		margin-right: 20px;
@@ -156,12 +156,8 @@ footer {
 	height: 100%;
 	width: 995px;
 	left: -17px;
-	background: url(/assets/main_bg.png) repeat-y;
+	background: image-url('main_bg.png') repeat-y;
 }
-
-
-
-
 
 h1, h2, h3, h4, h5 {
 	color: #b09d5a;
@@ -302,7 +298,7 @@ p {
 		height: 300px;
 		top: 20px;
 		position: absolute;
-		background-image: url(/assets/logo_inlay.png);
+		background-image: image-url('logo_inlay.png');
 		background-repeat: no-repeat;
 		background-position: center center;
 	}
