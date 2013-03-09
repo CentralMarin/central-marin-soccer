@@ -38,8 +38,7 @@ after "deploy", "deploy:cleanup"
 after 'deploy:update_code', 'deploy:symlink_uploads'
 
 #server details
-#set :domain, "207.104.28.18"
-set :domain, "192.168.1.21"
+set :domain, "207.104.28.18"
 role :web,domain                          # Your HTTP server, Apache/etc
 role :app,domain                          # This may be the same as your `Web` server
 role :db, domain, :primary => true # This is where Rails migrations will run
