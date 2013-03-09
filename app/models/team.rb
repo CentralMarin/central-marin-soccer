@@ -31,8 +31,11 @@ class Team < ActiveRecord::Base
   validates :gender, :presence => true
   validates :coach, :presence => true
   validates :team_level, :presence => true
+  validates :teamsnap_team_id, :presence => true
 
-  attr_accessible :coach_id, :team_level_id, :gender, :year, :name, :image, :teamsnap_url
+  TEAMSNAP_ROSTER_ID = '1893703'
+
+  attr_accessible :coach_id, :team_level_id, :gender, :year, :name, :image, :teamsnap_team_id
   mount_uploader :image, TeamImageUploader
 
   def gender
@@ -103,7 +106,7 @@ class Team < ActiveRecord::Base
 
   def record
     record = {}
-    teamsnap('https://api.teamsnap.com/v2/teams/49832') do |json|
+    teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}") do |json|
       record = {record: json['team']['formatted_record']}
     end
 
@@ -112,7 +115,7 @@ class Team < ActiveRecord::Base
 
   def schedule
     schedule = []
-    teamsnap('https://api.teamsnap.com/v2/teams/49832/as_roster/680909/events/upcoming') do |json|
+    teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}/as_roster/#{TEAMSNAP_ROSTER_ID}/events/upcoming") do |json|
       json.each do |game|
         event = game['event']
         name = "#{event['shortlabel'].nil? || event['shortlabel'].blank? ? event['type'] : event['shortlabel']}"
@@ -138,7 +141,7 @@ class Team < ActiveRecord::Base
   def roster
     players = []
     managers = []
-    teamsnap('https://api.teamsnap.com/v2/teams/49832/as_roster/680909/rosters') do |json|
+    teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}/as_roster/#{TEAMSNAP_ROSTER_ID}/rosters") do |json|
       json.each do |player|
         players << {first: player['roster']['first'], last: player['roster']['last']}  unless player['roster']['non_player'] == true
         if player['roster']['is_manager'] == true
@@ -166,7 +169,7 @@ def teamsnap(url)
 
   request = Net::HTTP::Get.new(uri.request_uri)
   request['Content-Type'] = 'application/json'
-  request['X-Teamsnap-Token'] = '170b851e-f386-47a0-b6a5-9d5ed6597dbd'
+  request['X-Teamsnap-Token'] = ENV['TEAMSNAP_TOKEN']
 
   response = http.request(request)
   json = JSON.parse(response.body)

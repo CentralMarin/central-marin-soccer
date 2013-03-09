@@ -2,6 +2,7 @@ SMTP_USER_NAME: 'xxxxx@xxxxxx.xxx'
 SMTP_PASSWORD: 'xxxxxxxx'
 SECRET_TOKEN: 'xxxxxxxx'
 DEFAULT_USER: 'xxxxx@xxxxxx.xxx'
+TEAMSNAP_TOKEN: 'xxxxxxxxx'
 development:
   MAILER_HOST: 'xxxxxxx'
 test:

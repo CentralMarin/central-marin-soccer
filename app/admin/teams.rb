@@ -22,7 +22,7 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
      f.input :year
      f.input :gender, :collection => Team.genders
      f.input :name
-     f.input :teamsnap_url
+     f.input :teamsnap_team_id
      f.input :image, :as => :file
    end
 

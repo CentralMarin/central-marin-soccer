@@ -26,7 +26,7 @@ feature "TeamsActiveAdmins" do
       fill_in "Year", :with => team.year
       select team.gender, :from => "team[gender]"
       fill_in "Name", :with => team.name
-      fill_in "Teamsnap url", :with => team.teamsnap_url
+      fill_in "Teamsnap team", :with => team.teamsnap_team_id
 
       click_button "Create Team"
 
