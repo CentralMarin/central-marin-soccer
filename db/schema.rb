@@ -153,7 +153,6 @@ ActiveRecord::Schema.define(:version => 20130309001057) do
     t.integer  "team_level_id"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
-    t.string   "teamsnap_url"
     t.string   "image"
     t.string   "teamsnap_team_id"
   end

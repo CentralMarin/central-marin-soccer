@@ -18,20 +18,23 @@ def coach_create(details)
 
   teams = details.delete(:coached_teams)
 
+  result = false
   coach = Coach.create(details)
   if Rails.env != 'production'
     I18n.available_locales.each do |locale|
       I18n.locale = locale
       coach.bio = Faker::Lorem.paragraphs(5)
     end
-    coach.save
+    result = coach.save
   end
 
   I18n.locale = :en
-  teams.each do |team|
-    team[:coach_id] = coach.id
-    team[:team_level_id] = team.delete(:team_level).id
-    Team.create(team)
+  if not teams.nil?
+    teams.each do |team|
+      team[:coach_id] = coach.id
+      team[:team_level_id] = team.delete(:team_level).id
+      Team.create(team)
+    end
   end
 end
 
@@ -97,57 +100,89 @@ Field.create(name: 'Vallecito (V2)', club: 'San Rafael/Dixie', rain_line: '472-4
 Field.create(name: 'Venetia Valley', club: 'San Rafael', rain_line: '485-2246', address: '177 North San Pedro Road, San Rafael, CA 94903', status: 0)
 
 coach_create(name: 'Steven Sosa', email: 'steven.sosa@centralmarinsoccer.com',
-             coached_teams: [{year: 1999, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
+             coached_teams: nil
+)
 
-coach_create(name: 'John Barnes', email: 'john.barnes@centralmarinsoccer.com',
-             coached_teams: [{year: 2001, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
-
-coach_create(name: 'Phil Bellici-Gard', email: 'phil.bellici-gard@centralmarinsoccer.com',
-             coached_teams: [{year: 2000, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
+coach_create(name: 'Joey Garcia', email: 'joey.garcia@centralmarinsoccer.com',
+             coached_teams: nil
+)
 
 coach_create(name: 'Craig Breslin', email: 'craig.breslin@centralmarinsoccer.com',
-             coached_teams: [{year: 2002, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal'},
-                     {year: 2001, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal', teamsnap_team_id: '12345'}])
+             coached_teams: [
+                 {year: 2004, gender: 'Boys', team_level: team_level_blank, name: 'Academy Pool', teamsnap_team_id: '149840'},
+                 {year: 2001, gender: 'Boys', team_level: team_level_gold, name: 'Pool', teamsnap_team_id: '149846'},
+                 {year: 2000, gender: 'Boys', team_level: team_level_gold, name: 'Pool', teamsnap_team_id: '149849'}
+             ]
+)
+coach_create(name: 'Mike Crivello', email: 'mike.crivello@centralmarinsoccer.com',
+             coached_teams: [
+                 {year: 2003, gender: 'Boys', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149842'}
+
+             ]
+)
+
+coach_create(name: 'Rob Neville', email: 'rob.neville@centralmarinsoccer.com',
+             coached_teams: nil
+)
+
+coach_create(name: 'Gareth Owen', email: 'gareth.owen@centralmarinsoccer.com',
+             coached_teams: nil
+)
 
 coach_create(name: 'Kelly Coffey', email: 'kelly.coffey@centralmarinsoccer.com',
-             coached_teams: [{year: 2000, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal', teamsnap_team_id: '12345'}])
+             coached_teams: [
+                 {year: 2002, gender: 'Boys', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149844'}
+             ]
+)
 
-coach_create(name: 'Mike Crivello', email: 'mike.crivello@centralmarinsoccer.com',
-             coached_teams: [{year: 2000, gender: 'Boys', team_level: team_level_blank, name: 'Arsenal', teamsnap_team_id: '12345'}])
-
-coach_create(name: 'Adam Dietz', email: 'adam.dietz@centralmarinsoccer.com',
-             coached_teams: [{year: 1999, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
-
-coach_create(name: 'Sjur Hatloe', email: 'sjur.hatloe@centralmarinsoccer.com',
-             coached_teams: [{year: 1997, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1996, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
-
-coach_create(name: 'Jim Lasher', email: 'jim.lasher@centralmarinsoccer.com',
-             coached_teams: [{year: 2002, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1999, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
-
-coach_create(name: 'Brandon Murphy', email: 'brandon.murphy@centralmarinsoccer.com',
-             coached_teams: [{year: 2001, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1999, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
-
-coach_create(name: 'Brandon Romeo', email: 'brandon.romeo@centralmarinsoccer.com',
-             coached_teams: [{year: 2000, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
+coach_create(name: 'Phil Billeci-gard', email: 'phil.billeci-gard@centralmarinsoccer.com',
+             coached_teams: nil
+)
 
 coach_create(name: 'Tom Ryan', email: 'tom.ryan@centralmarinsoccer.com',
-             coached_teams: [{year: 1996, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
+             coached_teams: nil
+)
+
+coach_create(name: "Tighe O'sullivan", email: "tighe.o'sullivan@centralmarinsoccer.com",
+             coached_teams: [
+                 {year: 2001, gender: 'Boys', team_level: team_level_silver, name: 'Pool', teamsnap_team_id: '149847'}
+             ]
+)
 
 coach_create(name: 'Jeff Troyer', email: 'jeff.troyer@centralmarinsoccer.com',
-             coached_teams: [{year: 2000, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1997, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1997, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1996, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1996, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1995, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1995, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1994, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1994, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1993, gender: 'Boys', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'},
-                     {year: 1993, gender: 'Girls', team_level: team_level_blank, name: '', teamsnap_team_id: '12345'}])
+             coached_teams: [
+                 {year: 2000, gender: 'Boys', team_level: team_level_silver, name: 'Pool', teamsnap_team_id: '149850'}
+             ]
+)
+
+coach_create(name: 'Brandon Murphy', email: 'brandon.murphy@centralmarinsoccer.com',
+             coached_teams: [
+                 {year: 2004, gender: 'Girls', team_level: team_level_blank, name: 'Academy Pool', teamsnap_team_id: '149839'},
+                 {year: 2003, gender: 'Girls', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149841'},
+                 {year: 2000, gender: 'Girls', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149848'}
+             ]
+)
+
+coach_create(name: 'Jodi ', email: 'jodi.@centralmarinsoccer.com',
+             coached_teams: nil
+)
+
+coach_create(name: 'Jim Lasher', email: 'jim.lasher@centralmarinsoccer.com',
+             coached_teams: [
+                 {year: 2002, gender: 'Girls', team_level: team_level_gold, name: '', teamsnap_team_id: '149843'},
+                 {year: 2001, gender: 'Girls', team_level: team_level_gold, name: '', teamsnap_team_id: '149406'}
+             ]
+)
+
+coach_create(name: 'Jon Owen', email: 'jon.owen@centralmarinsoccer.com',
+             coached_teams: nil
+)
+
+coach_create(name: 'Adam Dietz', email: 'adam.dietz@centralmarinsoccer.com',
+             coached_teams: [
+                 {year: 2001, gender: 'Girls', team_level: team_level_silver, name: '', teamsnap_team_id: '149845'}
+             ]
+)
 
 User.create(:email => ENV["DEFAULT_USER"], roles: User::ROLES)
 
