@@ -73,4 +73,32 @@ es:
     name:
       under: "A"
       team: "Equipo"
+  contact:
+    board:
+      name: 'Miembros de la Junta'
+      voting:
+        name: 'Miembros Votantes'
+        president: 'Presidente'
+        treasurer: 'Tesorero'
+        registrar: 'Registrador'
+        team_comm: 'Equipo de Comunicaciones'
+        secretary: 'Secretario'
+        comm: 'Comunicaciones'
+        at_large: 'Miembro en Libertad'
+      nonvoting:
+        name: 'Los Miembros no Votantes'
+        scholarship: 'Beca - En igualdad de condiciones'
+        marinfc_rep: 'Representante Marin FC'
+        volunteer_coord: 'Coordinador Voluntario'
+        fund_raising: 'Recaudación de Fondos'
+      others:
+        name: 'Otra Ayuda'
+        srysc: 'San Rafael Fútbol Juvenil Club de Enlace'
+        rvys: 'Ross Valley Fútbol Juvenil de Enlace'
+        referee_mentor: 'Árbitro Mentora'
+        scheduling: 'Programación'
+        accounting: 'Contabilidad'
+        website: 'Sitio Web'
+    doc: 'Director de Entrenamiento'
+
 

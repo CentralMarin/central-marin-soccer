@@ -75,4 +75,31 @@ en:
     name:
       under: "U"
       team: "Team"
+  contact:
+    board:
+      name: 'Board of Directors'
+      voting:
+        name: 'Voting Members'
+        president: 'President'
+        treasurer: 'Treasurer'
+        registrar: 'Registrar'
+        team_comm: 'Team Communications'
+        secretary: 'Secretary'
+        comm: 'Communications'
+        at_large: 'Member at Large'
+      nonvoting:
+        name: 'Non-Voting Members'
+        scholarship: 'Scholarship - On Equal Footing'
+        marinfc_rep: 'Marin FC Representative'
+        volunteer_coord: 'Volunteer Coordinator'
+        fund_raising: 'Fund Raising'
+      others:
+        name: 'Other Assistance'
+        referee_mentor: 'Referee Mentor'
+        srysc: 'San Rafael Youth Soccer Club Liaison'
+        rvys: 'Ross Valley Youth Soccer Liaison'
+        scheduling: 'Scheduling'
+        accounting: 'Accounting'
+        website: 'Website'
+    doc: 'Director of Coaching'
 
