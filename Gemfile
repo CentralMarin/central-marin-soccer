@@ -21,8 +21,6 @@ group :assets do
   gem 'sass-rails', '~>3.2.5'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '~> 1.3.0'
-  gem 'sprite-factory', '>= 1.5.2'
-  gem 'rmagick'
 end
 
 
