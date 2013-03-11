@@ -13,6 +13,8 @@
 class Coach < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
+  before_validation :downcase_email
+
   translates :bio, versioning: true, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
   has_many :team_level_translations
@@ -21,13 +23,13 @@ class Coach < ActiveRecord::Base
 
   attr_accessible :name, :email, :bio, :translations_attributes
 
-  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  email_regex = /\A['\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name,         :presence => true,
                            :length => { :maximum => 50 }
   validates :email,        :presence => true,
                            :format => { :with => email_regex },
-                           :uniqueness => { :case_sensitive => false }
+                           :uniqueness => true
 
   MISSING_COACH_URL = 'coach/default-coach.jpg'
 
@@ -57,6 +59,12 @@ class Coach < ActiveRecord::Base
 
   def as_json(options = {})
     { :name => self.name, :bio => self.bio, :teams => teams.as_json, :image_url => options[:image_url] }
+  end
+
+  private
+
+  def downcase_email
+    self.email = self.email.downcase if self.email.present?
   end
 
   class Translation
