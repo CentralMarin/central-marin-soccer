@@ -106,8 +106,12 @@ class Team < ActiveRecord::Base
 
   def record
     record = {}
-    teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}") do |json|
-      record = {record: json['team']['formatted_record']}
+    teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}") do |http_code, json|
+      if (http_code != '200')
+        record.merge(json)
+      else
+        record = {record: json['team']['formatted_record']}
+      end
     end
 
     record
@@ -115,23 +119,27 @@ class Team < ActiveRecord::Base
 
   def schedule
     schedule = []
-    teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}/as_roster/#{TEAMSNAP_ROSTER_ID}/events/upcoming") do |json|
-      json.each do |game|
-        event = game['event']
-        name = "#{event['shortlabel'].nil? || event['shortlabel'].blank? ? event['type'] : event['shortlabel']}"
-        if (event['type'] == 'Game')
-          name += " #{event['home_or_away'].nil? || event['home_or_away'] == 1 ? 'vs.' : 'at'} #{event['opponent']['opponent_name']}"
-        end
-        date_start = DateTime.parse(event['event_date_start'])
-        date_end = DateTime.parse(event['event_date_end'])
+    teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}/as_roster/#{TEAMSNAP_ROSTER_ID}/events/upcoming") do |http_code, json|
+      if http_code != '200'
+        schedule << json
+      else
+        json.each do |game|
+          event = game['event']
+          name = "#{event['shortlabel'].nil? || event['shortlabel'].blank? ? event['type'] : event['shortlabel']}"
+          if (event['type'] == 'Game')
+            name += " #{event['home_or_away'].nil? || event['home_or_away'] == 1 ? 'vs.' : 'at'} #{event['opponent']['opponent_name']}"
+          end
+          date_start = DateTime.parse(event['event_date_start'])
+          date_end = DateTime.parse(event['event_date_end'])
 
-        schedule << {
-            name: name,
-            date: date_start.strftime("%a, %b %d"),
-            start: date_start.strftime("%I:%M %p"),
-            end: (date_start == date_end ? nil : date_end.strftime("%I:%M %p")),
-            location: event['location']['location_name']
-        }
+          schedule << {
+              name: name,
+              date: date_start.strftime("%a, %b %d"),
+              start: date_start.strftime("%I:%M %p"),
+              end: (date_start == date_end ? nil : date_end.strftime("%I:%M %p")),
+              location: event['location']['location_name']
+          }
+        end
       end
     end
 
@@ -141,11 +149,15 @@ class Team < ActiveRecord::Base
   def roster
     players = []
     managers = []
-    teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}/as_roster/#{TEAMSNAP_ROSTER_ID}/rosters") do |json|
-      json.each do |player|
-        players << {first: player['roster']['first'], last: player['roster']['last']}  unless player['roster']['non_player'] == true
-        if player['roster']['is_manager'] == true
-          managers << {first: player['roster']['first'], last: player['roster']['last']}
+    teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}/as_roster/#{TEAMSNAP_ROSTER_ID}/rosters") do |http_code, json|
+      if http_code != '200'
+        players << json
+      else
+        json.each do |player|
+          players << {first: player['roster']['first'], last: player['roster']['last']}  unless player['roster']['non_player'] == true
+          if player['roster']['is_manager'] == true
+            managers << {first: player['roster']['first'], last: player['roster']['last']}
+          end
         end
       end
     end
@@ -174,6 +186,6 @@ def teamsnap(url)
   response = http.request(request)
   json = JSON.parse(response.body)
 
-  yield(json)
+  yield(response.code, json)
 end
 

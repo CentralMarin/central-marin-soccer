@@ -1,4 +1,4 @@
-//= require spin
+    //= require spin
 //= require coaches
 //= require namespace
 
@@ -29,6 +29,8 @@
             events.push('<thead><tr><th width="70%" align="left">Name</th><th width="10%" align="center">Date</th><th align="center">Time</th></tr></thead>')
             if (schedule.length == 0) {
                 events.push('<tr><td colspan="3">No upcoming events</td></tr>')
+            } else if (schedule.length == 1 && schedule[0].error != 'undefined') {
+                events.push('<tr><td colspan="3">' + schedule[0].error + '</td></tr>')
             } else {
                 $.each(schedule, function(index, event) {
                     events.push('<tr><td>' + event.name + '</td><td nowrap>' + event.date + '</td><td nowrap>' + event.start + (event.end ? ' - ' + event.end : '') + '</td></tr>');
@@ -42,16 +44,21 @@
 
         var _roster = function(players, managers) {
             var playersHTML = [];
-            $.each(players, function(index, player) {
-                playersHTML.push('<li>' + player.first + ' ' + player.last + '</li>');
-            });
+            var managersHTML = [];
+            if (players.length == 1 && players[0].error != 'undefined') {
+                playersHTML.push('<li>' + players[0].error + '</li>')
+            } else {
+                $.each(players, function(index, player) {
+                    playersHTML.push('<li>' + player.first + ' ' + player.last + '</li>');
+                });
+                $.each(managers, function(index, manager) {
+                    managersHTML.push(manager.first + ' ' + manager.last);
+                });
+            }
             $('<ul/>', {
                 html: playersHTML.join('')
             }).appendTo('#roster');
-            var managersHTML = [];
-            $.each(managers, function(index, manager) {
-                managersHTML.push(manager.first + ' ' + manager.last);
-            });
+
             $('#managers').append(managersHTML.join('<br/>'));
         };
 
