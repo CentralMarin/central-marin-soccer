@@ -24,11 +24,13 @@
     %h2= t('home.donate.heading')
     %p= t('home.donate.body')
 
-    %form{class: 'right', action: 'https://www.sandbox.paypal.com/cgi-bin/webscr', method: 'post'}
-      %input{type: 'hidden', name: 'cmd', value: '_s-xclick'}
-      %input{type: 'hidden', name: 'hosted_button_id', value: 'TVEPGNRXXD2YN'}
-      %input{type: 'image', src: 'https://www.sandbox.paypal.com/en_US/i/btn/btn_donateCC_LG.gif', border:'0', name: 'submit', alt: 'PayPal - The safer, easier way to pay online!' }
-      %img{alt:'', border:'0', src:'https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif', width:'1', height:'1'}
+    = link_to t('home.donate.link'), '/information/on-equal-footing', class: 'right'
+
+    -#%form{class: 'right', action: 'https://www.sandbox.paypal.com/cgi-bin/webscr', method: 'post'}
+    -#  %input{type: 'hidden', name: 'cmd', value: '_s-xclick'}
+    -#  %input{type: 'hidden', name: 'hosted_button_id', value: 'TVEPGNRXXD2YN'}
+    -#  %input{type: 'image', src: 'https://www.sandbox.paypal.com/en_US/i/btn/btn_donateCC_LG.gif', border:'0', name: 'submit', alt: 'PayPal - The safer, easier way to pay online!' }
+    -#  %img{alt:'', border:'0', src:'https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif', width:'1', height:'1'}
 
     %div{class: 'clear'}
 
