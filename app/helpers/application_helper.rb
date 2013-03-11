@@ -35,7 +35,7 @@ module ApplicationHelper
        ['menu.facebook', "https://www.facebook.com/CentralMarinSoccerClub"],
        ['menu.clubInfo', information_path],
        ['menu.contact', contact_path],
-       ['menu.language', "http://#{AppConfig[:switch_hosts][I18n.locale]}"]
+       ['menu.language', "#{request.protocol}#{AppConfig[:switch_hosts][I18n.locale]}:#{request.port}#{request.fullpath}"]
     ].map do |item|
       menu_item item, (@top_level_section_name == item[0]) ? 'current' : 'single-link'
    end
