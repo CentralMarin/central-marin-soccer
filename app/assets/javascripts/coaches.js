@@ -32,7 +32,7 @@
 
                     var spinner = new Spinner(_spinner_opts).spin($('#record')[0]);
 
-                    var coachId = event.currentTarget.dataset['coachId'];
+                    var coachId = this.dataset['coachId'];
                     $.getJSON('/coaches/' + coachId + '.json', function(coachDetails) {
                         $.modal($("#CoachTemplate").render(coachDetails));
                         spinner.stop();
