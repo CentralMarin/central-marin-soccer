@@ -13,8 +13,8 @@
                 $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
 
                 $('a[rel]').click(function(event) {
-                    var tournament = (this.dataset ? this.dataset['tournament'] : this.getAttribute('data-tournament'));
-                    var year = (this.dataset ? this.dataset['year'] : this.getAttribute('data-year'));
+                    var tournament = $(this).data("tournament");
+                    var year = $(this).data("year");
 
                     $.getJSON(document.URL + '/' + tournament + '/' + year + '.json', function(pastWinners) {
                         var modal = $.modal($("#pastWinnersTemplate").render(pastWinners));
