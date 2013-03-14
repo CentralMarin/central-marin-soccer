@@ -2,6 +2,9 @@ development: &DEVELOPMENT
   switch_hosts: { es: "www.localhost:3000", en: "es.localhost:3000" }
 test:
   <<: *DEVELOPMENT
+vagrant:
+  switch_hosts: { es: 'www.localhost:8080', en: 'es.localhost:8080' }
+
 staging:
   switch_hosts: { es: "staging.centralmarinsoccer.com", en: "es.staging.centralmarinsoccer.digitalfoundry.com" }
 
