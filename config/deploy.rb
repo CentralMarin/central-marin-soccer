@@ -2,7 +2,7 @@
 require 'bundler/capistrano'
 
 #setup multistage
-set :stages, %w(staging production)
+set :stages, %w(vagrant staging production)
 set :default_stage, 'staging'
 require 'capistrano/ext/multistage'
 
@@ -15,7 +15,7 @@ set :user, "dfadmin"
 set :use_sudo, false
 set :deploy_to do
   path = "/webapps/#{application}"
-  path << "-#{stage}" unless stage.to_s == "production"
+  path << "-#{stage}" if stage.to_s == "staging"
   path
 end
 
@@ -36,13 +36,6 @@ after "deploy", "deploy:cleanup"
 
 # create our symlink
 after 'deploy:update_code', 'deploy:symlink_uploads'
-
-#server details
-set :domain, "207.104.28.18"
-role :web,domain                          # Your HTTP server, Apache/etc
-role :app,domain                          # This may be the same as your `Web` server
-role :db, domain, :primary => true # This is where Rails migrations will run
-
 
 before 'deploy:assets:precompile' do
   run "ln -s #{shared_path}/config/application.yml #{release_path}/config/application.yml"

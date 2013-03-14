@@ -20,3 +20,4 @@ public/assets/*
 public/uploads/*
 public/cache/*
 config/application.yml
+.vagrant

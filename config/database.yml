@@ -19,6 +19,13 @@ test:
   pool: 5
   timeout: 5000
 
+vagrant:
+  adapter: mysql2
+  database: soccer_staging
+  username: root
+  password:
+  host: localhost
+
 staging:
   adapter: mysql2
   database: soccer_staging
