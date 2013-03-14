@@ -32,7 +32,7 @@
 
                     var spinner = new Spinner(_spinner_opts).spin($('#record')[0]);
 
-                    var coachId = (this.dataset ? this.dataset['coachId'] : this.getAttribute('data-coach-id'));
+                    var coachId = $(this).data("coachId");
                     $.getJSON('/coaches/' + coachId + '.json', function(coachDetails) {
                         $.modal($("#CoachTemplate").render(coachDetails));
                         spinner.stop();
