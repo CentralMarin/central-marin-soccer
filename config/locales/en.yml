@@ -103,4 +103,5 @@ en:
         accounting: 'Accounting'
         website: 'Website'
     doc: 'Director of Coaching'
-
+  news:
+    heading: 'Recent Club News'

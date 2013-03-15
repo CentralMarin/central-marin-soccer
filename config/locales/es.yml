@@ -101,5 +101,6 @@ es:
         accounting: 'Contabilidad'
         website: 'Sitio Web'
     doc: 'Director de Entrenamiento'
-
+  news:
+    heading: 'Noticias de los Clubes Recientes'
 
