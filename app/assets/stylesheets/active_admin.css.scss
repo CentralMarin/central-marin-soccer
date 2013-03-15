@@ -35,6 +35,11 @@ body.active_admin {
   @import "ckeditor/application";
 }
 
+.cke_chrome {
+  width: 78% !important;
+  overflow: hidden;
+}
+
 // Carousel CSS
 .admin_namespace .column {
   width: 49%;
