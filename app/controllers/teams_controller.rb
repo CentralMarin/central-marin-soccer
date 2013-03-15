@@ -23,8 +23,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   def show
     @team = Team.find(params[:id])
-    @article = Article.find_all_by_category_id_and_team_id(Article.category_id(:team), @team.id, order: "created_at asc", limit: 20)
-
+    @articles = Article.where(:category_id => Article.category_id(:team), :team_id => [0,@team.id]).order("updated_at asc").limit(10).all
     respond_to do |format|
       format.html # show.html.erb
     end

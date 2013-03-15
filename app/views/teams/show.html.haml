@@ -30,12 +30,17 @@
   %div{id: 'schedule', class: 'scroll-box'}
 
 %div.clear
-%div.grid_16.box
-  %h2 Team News
-  - @article.each do |article|
-    %div{class: 'grid_16'}=article.title
-    %div{class: 'grid_16'}=image_tag article.image
-    %div{class: 'grid_16'}= article.body.html_safe
+- if not @articles.nil?
+  %div.grid_16.box
+    %h2 Team News
+    - @articles.each do |article|
+      - if not article.image.to_s.blank?
+        %div.grid_16=image_tag article.image
+      %h3.grid_16=article.title
+      %div.clear
+      %div.grid_16= article.body.html_safe
+      %p.grid_16= "Published: #{article.updated_at.strftime('%m/%d/%Y')}"
+      %hr
 
 %hr.grid_16
 %p= link_to 'Return to Teams', teams_path
