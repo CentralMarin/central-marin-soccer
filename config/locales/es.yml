@@ -74,6 +74,13 @@ es:
     name:
       under: "A"
       team: "Equipo"
+    coach: "Entrenador:"
+    manager: "Gerente:"
+    roster: "lista"
+    schedule: "Programar"
+    record: "Registro:"
+    news: "Noticias del Equipo"
+    back: "Volver a Equipos"
   contact:
     board:
       name: 'Miembros de la Junta'
