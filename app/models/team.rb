@@ -75,7 +75,10 @@ class Team < ActiveRecord::Base
   end
 
   def self.to_team_name_with_coach(id)
-    Team.find(id).to_team_name_with_coach if id
+    if not id.nil?
+      team = Team.find(id)
+      team.to_team_name_with_coach unless team.nil?
+    end
   end
 
   def to_team_name_with_coach

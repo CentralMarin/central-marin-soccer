@@ -41,10 +41,10 @@ ActiveAdmin.register Article do
       articles.category.to_s
     end
     column :team_id do |articles|
-      Team.to_team_name_with_coach(articles.team_id)
+      Team.to_team_name_with_coach(articles.team_id) unless articles.team_id == 0
     end
     column :coach_id do |articles|
-      Coach.find(articles.coach_id)
+      Coach.find(articles.coach_id) unless articles.coach_id == 0
     end
 
     default_actions
