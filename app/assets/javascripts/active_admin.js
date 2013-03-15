@@ -3,4 +3,4 @@
 //= require jquery.multiselect.min
 //= require jsrender
 //= require jquery-ui-1.10.0.custom.min
-//= require ckeditor
+//= require ckeditor/init
