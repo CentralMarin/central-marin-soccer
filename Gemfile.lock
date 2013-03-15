@@ -276,7 +276,7 @@ DEPENDENCIES
   mini_magick
   mysql2
   paper_trail
-  rails (>= 3.2.1)
+  rails (>= 3.2.12)
   rake (>= 10.0.0)
   rb-fsevent
   rspec-nc
