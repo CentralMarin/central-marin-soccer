@@ -99,9 +99,6 @@ ActiveAdmin.setup do |config|
   #config.register_stylesheet 'jquery-ui-1.8.17.custom.css'
   #
   # To load a javascript file:
-  config.register_javascript 'ckeditor/ckeditor.js'
-#  config.register_javascript 'ckeditor/init.js'
-#  config.register_javascript 'ckeditor/config.js'
 
   # == Root
   # Set the action to call for the root path. You can set different
