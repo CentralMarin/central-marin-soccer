@@ -5,15 +5,16 @@
   %h1= "#{@team}"
   %hr
   %h2{id: 'info'}
-    Coach:
+    = t('team.coach')
     = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :style => 'font-size: 18px;', :data => {:coach_id => "#{@team.coach.id}"} do
       =" #{@team.coach.name}"
     %br
     %h2{id: 'managers'}
-      Manager:
+      = t('team.manager')
 
   %div.box
-    %h2 Roster
+    %h2
+      = t('team.roster')
     %div{id: 'roster', class: 'scroll-box'}
 
 %div.grid_10
@@ -23,22 +24,27 @@
 
 %div.grid_16.box
   %h2
-    Schedule
+    = t('team.schedule')
     %span{id: 'record'}
-      = "#{Time.now.year} Record: "
+      = "#{Time.now.year} #{t('team.record')}: "
 
   %div{id: 'schedule', class: 'scroll-box'}
 
 %div.clear
-%div.grid_16.box
-  %h2 Team News
-  - @article.each do |article|
-    %div{class: 'grid_16'}=article.title
-    %div{class: 'grid_16'}=image_tag article.image
-    %div{class: 'grid_16'}= article.body.html_safe
+- if not @articles.nil?
+  %div.grid_16.box
+    %h2= t('team.news')
+    - @articles.each do |article|
+      - if not article.image.to_s.blank?
+        %div.grid_16=image_tag article.image
+      %h3.grid_16=article.title
+      %div.clear
+      %div.grid_16= article.body.html_safe
+      %p.grid_16= "Published: #{article.updated_at.strftime('%m/%d/%Y')}"
+      %hr
 
 %hr.grid_16
-%p= link_to 'Return to Teams', teams_path
+%p= link_to t('team.back'), teams_path
 
 %script{id: 'CoachTemplate', type: 'text/html'}
   %div{id: 'simplemodal'}

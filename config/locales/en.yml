@@ -76,6 +76,13 @@ en:
     name:
       under: "U"
       team: "Team"
+    coach: "Coach:"
+    manager: "Manager:"
+    roster: "Roster"
+    schedule: "Schedule"
+    record: "Record: "
+    news: "Team News"
+    back: "Return to Teams"
   contact:
     board:
       name: 'Board of Directors'
@@ -103,4 +110,5 @@ en:
         accounting: 'Accounting'
         website: 'Website'
     doc: 'Director of Coaching'
-
+  news:
+    heading: 'Recent Club News'
