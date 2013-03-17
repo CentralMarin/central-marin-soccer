@@ -1,14 +1,17 @@
 - content_for :css do
   = stylesheet_link_tag "coach"
 
-%h2{class: 'grid_16'}= t('coach.intro')
+%h2{class: 'grid_16'}= t('coach.heading')
 %div{class: 'clear'}
 %div{class: 'margin10'}
-%div{class: 'grid_16', id: 'accordion'}
-  - @objectives[:header].each_with_index do |header, index|
-    %h3
-      %a{href: '#'}= header
-    %div= @objectives[:body][index]
+%div.grid_16{ editable_attributes(@part_name)  }
+  = editable_content @part_name
+
+-#%div{class: 'grid_16', id: 'accordion'}
+-#  - @objectives[:header].each_with_index do |header, index|
+-#    %h3
+-#      %a{href: '#'}= header
+-#    %div= @objectives[:body][index]
 
 %div{class: 'grid_16'}
 %h2= t('coach.staff')

@@ -10,12 +10,16 @@ class CoachesController < ApplicationController
   def index
     @coaches = Coach.all
 
-    # Get the objectives
-    @objectives = I18n.t("coach.objectives")
-    if (!@objectives || @objectives[:header].length != @objectives[:body].length)
-      raise "Missing coaching objectives or headings and body don't match'"
-    end
+    @part_name = 'coaching.overview'
+    @editable = can?(:manage, WebPart)
+    @web_parts = WebPart.load(@part_name)
 
+    # Get the objectives
+    #@objectives = I18n.t("coach.objectives")
+    #if (!@objectives || @objectives[:header].length != @objectives[:body].length)
+    #  raise "Missing coaching objectives or headings and body don't match'"
+    #end
+    #
     respond_to do |format|
       format.html # index.html.erb
     end

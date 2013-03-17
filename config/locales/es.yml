@@ -36,7 +36,7 @@ es:
     sponsors:
       heading: "Apoyo a Nuestros Patrocinadores"
   coach:
-     intro: "Los cinco objetivos fundamentales son:"
+     heading: "Entrenamiento Filosofía"
      objectives:
         header:
         - "Identificación y Desarrollo"

@@ -38,7 +38,7 @@ en:
   information:
     back: "Back to program overview..."
   coach:
-     intro: "The five core objectives are:"
+     heading: "Coaching Philosophy"
      objectives:
         header:
         - "Identification and Development"
