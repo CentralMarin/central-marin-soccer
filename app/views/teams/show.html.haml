@@ -4,17 +4,17 @@
 %div.grid_6.box
   %h1= "#{@team}"
   %hr
-  %h2{id: 'info'}
+  %h3{id: 'info'}
     = t('team.coach')
     = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :style => 'font-size: 18px;', :data => {:coach_id => "#{@team.coach.id}"} do
       =" #{@team.coach.name}"
-    %br
-    %h2{id: 'managers'}
-      = t('team.manager')
+  %h3{id: 'managers'}
+    = t('team.manager')
 
   %div.box
     %h2
-      = t('team.roster')
+      = link_to @team.teamsnap_roster_url do
+        = t('team.roster')
     %div{id: 'roster', class: 'scroll-box'}
 
 %div.grid_10
@@ -24,9 +24,10 @@
 
 %div.grid_16.box
   %h2
-    = t('team.schedule')
+    = link_to @team.teamsnap_schedule_url do
+      = t('team.schedule')
     %span{id: 'record'}
-      = "#{Time.now.year} #{t('team.record')}: "
+      = "#{Time.now.year} #{t('team.record')} "
 
   %div{id: 'schedule', class: 'scroll-box'}
 
