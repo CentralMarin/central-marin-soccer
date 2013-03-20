@@ -59,7 +59,8 @@ class Team < ActiveRecord::Base
   end
 
   def to_s
-    "'#{two_digit_year} #{gender} #{name} #{team_level.name}" unless team_level.nil?
+#    "'#{two_digit_year} #{gender} #{name} #{team_level.name}" unless team_level.nil?
+    "#{I18n.t('team.name.under')}#{age} #{gender} #{name} #{team_level.name} '#{two_digit_year}" unless team_level.nil?
   end
 
   def admin_permalink
