@@ -86,6 +86,14 @@ class Team < ActiveRecord::Base
     "#{to_s} coached by #{coach}"
   end
 
+  def teamsnap_roster_url
+    "http://go.teamsnap.com/#{teamsnap_team_id}/roster/list"
+  end
+
+  def teamsnap_schedule_url
+    "http://go.teamsnap.com/#{teamsnap_team_id}/schedule"
+  end
+
   def teamsnap_json
 
     mutex = Mutex.new
