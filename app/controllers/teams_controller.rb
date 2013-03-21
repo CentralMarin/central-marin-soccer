@@ -3,7 +3,7 @@ require "json"
 
 class TeamsController < ApplicationController
 
-  caches_page :teamsnap, :gzip => true
+  caches_page :teamsnap, :gzip => true, :expires_in => 10.minutes
   caches_page :index, :gzip => true
   caches_page :show, :gzip => true
 
@@ -33,9 +33,7 @@ class TeamsController < ApplicationController
     team = Team.find(params[:id])
     json = team.teamsnap_json
 
-    respond_to do |format|
-      format.json {render :json => json}
-    end
+    render :json => json
   end
 
   protected
