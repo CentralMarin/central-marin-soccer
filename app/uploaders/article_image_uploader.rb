@@ -21,7 +21,7 @@ class ArticleImageUploader < CarrierWave::Uploader::Base
   #end
 
   # Process files as they are uploaded:
-  process :scale => [573, 363]
+  process :scale => [575, 383]
 
   def scale(width, height)
     resize_and_pad(width, height)
@@ -35,7 +35,7 @@ class ArticleImageUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-    %w(jpg jpeg)
+    %w(jpg jpeg png)
   end
 
   # Override the filename of the uploaded files:
