@@ -65,6 +65,11 @@ class InformationController < ApplicationController
             @part_name_footer
         ]
     )
+    @tournaments = [
+        {name: 'Premier Challenge', id: 'premier_challenge', overview: @part_name_premier_challenge },
+        {name: 'Mission Bell', id: 'mission_bell', overview: @part_name_mission_bell}
+    ]
+    @years = [I18n.t('information.current'), I18n.t('information.previous')]
   end
 
   def tournaments_previous_winners
@@ -81,7 +86,7 @@ class InformationController < ApplicationController
         web_part_name: web_part[part_name]['name'],
         html: web_part[part_name]['html'],
         tournament_name: tournament_name.gsub('_', ' ').titleize,
-        year: (year == 'current' ? Time.now.year : Time.now.year - 1)
+        year: year.capitalize
     }
 
     respond_to do |format|

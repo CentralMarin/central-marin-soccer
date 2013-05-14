@@ -7,47 +7,30 @@
 %div.grid_16
   %div#tabs
     %ul
-      %li
-        %a{href: '#premier_challenge'}
-          Premier Challenge
-      %li
-        %a{href: '#mission_bell'}
-          Mission Bell
+      - @tournaments.each do |tournament|
+        %li
+          %a{href: "##{tournament[:id]}"}
+            = tournament[:name]
 
-    %div#premier_challenge
-      %div{ editable_attributes(@part_name_premier_challenge) }
-        = editable_content @part_name_premier_challenge
-      %h2 Past Winners
-      %ul
-        %li
-          =link_to '#premier_challenge', :rel => "#winners", :data => {tournament: 'premier_challenge', year: 'current'} do
-            = Time.now.year
-        %li
-          =link_to '#premier_challenge', :rel => "#winners", :data => {tournament: 'premier_challenge', year: 'previous'} do
-            = Time.now.year - 1
-
-    %div#mission_bell
-      %div{ editable_attributes(@part_name_mission_bell) }
-        = editable_content @part_name_mission_bell
-      %h2
-        Past Winners
-      %ul
-        %li
-          =link_to '#mission_bell', :rel => "#winners", :data => {tournament: 'mission_bell', year: 'current'} do
-            = Time.now.year
-        %li
-          =link_to '#mission_bell', :rel => "#winners", :data => {tournament: 'mission_bell', year: 'previous'} do
-            = Time.now.year - 1
+    - @tournaments.each do |tournament|
+      %div{id: tournament[:id]}
+        %div{ editable_attributes(tournament[:overview]) }
+          = editable_content tournament[:overview]
+        %h2= t('information.winners')
+        %ul
+          - @years.each do |year|
+            %li
+              =link_to "##{tournament[:id]}", :rel => "#winners", :data => {tournament: tournament[:id], year: year} do
+                = year.capitalize
 
 %div.grid_16{ editable_attributes(@part_name_footer)  }
   = editable_content @part_name_footer
 
 %script#pastWinnersTemplate{type: 'text/html'}
   %div
-    %h3= '{{:year}} {{:tournament_name}}'
+    %h3= '{{:year}} {{:tournament_name}} Winners'
     %div#simplemodal{ editable_attributes("{{:web_part_name}}") }
       = '{{:html}}'
 
 - content_for :javascript do
   =javascript_include_tag "information.tournaments"
-

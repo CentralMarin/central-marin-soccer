@@ -53,7 +53,7 @@ describe Coach do
     end
 
     it "returns a jpeg" do
-      FactoryGirl.create(:coach).image_url.ends_with?('.jpg').should == true
+      FactoryGirl.create(:coach).image_url.ends_with?('.jpeg').should == true
     end
 
     it "returns name as string object representation" do

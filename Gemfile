@@ -8,7 +8,7 @@ gem 'rails', '>= 3.2.12'
 gem 'activeadmin', '>= 0.5.1'
 gem 'meta_search', '>= 1.1.0.pre'
 gem 'paper_trail'
-gem 'ckeditor', '~>4.0.2'
+gem 'ckeditor'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'globalize3', '~>0.3.0'
@@ -41,13 +41,14 @@ group :staging, :production do
 end
 
 group :test do
-  gem 'spork', '~> 0.9.0.rc'
-  gem 'capybara', '~>2.0.2'
+  gem 'spork', '~> 0.9.2'
+  gem 'capybara', '~>2.1.0'
   gem 'guard-spork'
   gem 'rb-fsevent'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'guard-rspec'
+  gem 'selenium-webdriver'
 end
 
 gem 'libv8', '~> 3.11.8'
