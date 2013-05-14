@@ -21,7 +21,8 @@ class Coach < ActiveRecord::Base
 
   has_many :teams
 
-  attr_accessible :name, :email, :bio, :translations_attributes
+  attr_accessible :name, :email, :bio, :translations_attributes, :image
+  mount_uploader :image, CoachImageUploader
 
   email_regex = /\A['\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -30,24 +31,6 @@ class Coach < ActiveRecord::Base
   validates :email,        :presence => true,
                            :format => { :with => email_regex },
                            :uniqueness => true
-
-  MISSING_COACH_URL = 'coach/default-coach.jpg'
-
-  @image_url = ''
-
-  def image_url
-    if @image_url.blank?
-      @image_url = "coach/#{name.downcase.gsub(' ', '-')}.jpg"
-      if CentralMarin::Application.assets.find_asset(@image_url).nil?
-        @image_url = MISSING_COACH_URL
-      end
-    end
-    return @image_url
-  end
-
-  def image_url=(url)
-    @image_url = url
-  end
 
   def admin_permalink
     admin_coach_path(self)

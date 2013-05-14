@@ -3,6 +3,8 @@
   = f.inputs do
     = f.input :name
     = f.input :email
+    = image_tag @coach.image_url
+    = f.input :image, :as => :file
 
     .language-tabs
       %ul.language-selection

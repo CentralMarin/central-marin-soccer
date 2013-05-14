@@ -41,13 +41,14 @@ group :staging, :production do
 end
 
 group :test do
-  gem 'spork', '~> 0.9.0.rc'
-  gem 'capybara', '~>2.0.2'
+  gem 'spork', '~> 0.9.2'
+  gem 'capybara', '~>2.1.0'
   gem 'guard-spork'
   gem 'rb-fsevent'
   gem 'launchy'
   gem 'database_cleaner'
   gem 'guard-rspec'
+  gem 'selenium-webdriver'
 end
 
 gem 'libv8', '~> 3.11.8'
