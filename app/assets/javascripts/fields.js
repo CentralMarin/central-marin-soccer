@@ -70,7 +70,7 @@
         };
 
         var _filterFields = function () {
-            var clubName = $("select option:selected").attr('value');
+            var clubName = $("select option:selected").html();
             var statusName = $("input[name=status]:checked").attr('value');
 
             var bounds = new google.maps.LatLngBounds();
@@ -95,7 +95,7 @@
             var mid = $('#map_canvas')[0];
             var footerHeight = $('#footer')[0].offsetHeight;
 
-            console.log('Page: ' + _getDocHeight() + ' header: ' + headerHeight + ' fieldHeader: ' + fieldHeaderHeight + ' Footer: ' + footerHeight);
+//            console.log('Page: ' + _getDocHeight() + ' header: ' + headerHeight + ' fieldHeader: ' + fieldHeaderHeight + ' Footer: ' + footerHeight);
             mid.style.height = _getDocHeight()
                 - (headerHeight + fieldHeaderHeight + footerHeight)
                 + 'px';
