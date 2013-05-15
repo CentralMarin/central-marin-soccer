@@ -14,6 +14,7 @@ gem 'mini_magick'
 gem 'globalize3', '~>0.3.0'
 gem 'haml-rails', '~> 0.3.5'
 gem 'cancan'
+gem 'whenever', :require => false
 
 # Gems used only for assets and not required
 # in production environments by default.

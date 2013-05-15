@@ -1,10 +1,14 @@
 #setup bundler
 require 'bundler/capistrano'
-
 #setup multistage
 set :stages, %w(vagrant staging production)
 set :default_stage, 'staging'
 require 'capistrano/ext/multistage'
+
+#setup whenever for cron support
+set :whenever_environment, defer { stage }
+set :whenever_identifier, defer { "#{application}_#{stage}" }
+require "whenever/capistrano"
 
 set :application, "centralmarinsoccer"
 
