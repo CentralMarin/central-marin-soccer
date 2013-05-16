@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 every 1.hour do
   # Clear the teamsnap.json files from the cache every hour
-  command "find #{Rails.root} -name teamsnap.json.* -exec rm -f '{}' + "
+  command "find #{Whenever.path}/public -name teamsnap.json.* -exec rm -f '{}' + "
 end
