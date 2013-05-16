@@ -1,3 +1,10 @@
+ENV = {}
+config = YAML.load(File.read('config/application.yml'))
+#config.merge! config.fetch(Rails.env, {})
+config.each do |key, value|
+  ENV[key] = value.to_s unless value.kind_of? Hash
+end
+
 #setup bundler
 require 'bundler/capistrano'
 #setup multistage
@@ -15,7 +22,7 @@ set :application, "centralmarinsoccer"
 #deployment details
 set :deploy_via, :remote_cache
 set :copy_exclude, ['.git']
-set :user, "dfadmin"
+set :user, ENV['SERVER_USER']
 set :use_sudo, false
 set :deploy_to do
   path = "/webapps/#{application}"
@@ -26,7 +33,6 @@ end
 #repo details
 set :scm, :git
 set :repository, "git@github.com:CentralMarin/central-marin-soccer.git"
-#set :repository, "git@repo.digitalfoundry.com:central-marin-soccer/central-marin-soccer.git"
 set :branch, "release"
 
 # bundle install has to be run before assets can be precompiled
