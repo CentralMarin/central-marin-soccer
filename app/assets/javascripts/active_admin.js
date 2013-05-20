@@ -3,4 +3,7 @@
 //= require jquery.multiselect.min
 //= require jsrender
 //= require jquery-ui-1.10.0.custom.min
+//= require jquery.Jcrop.min
 //= require ckeditor/init
+//= require namespace
+//= require crop

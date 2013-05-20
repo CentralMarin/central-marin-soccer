@@ -12,6 +12,7 @@
 @import "jquery.multiselect";
 @import "active_admin/mixins";
 @import "active_admin/base";
+@import "jquery.Jcrop.min";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
@@ -67,4 +68,9 @@ body.active_admin {
   text-align: bottom;
   border-bottom: 1px;
   border-color: #8b0000;
+}
+
+// hide hidden form fields
+body.active_admin form fieldset ol > li.hidden {
+  padding: 0px;
 }
