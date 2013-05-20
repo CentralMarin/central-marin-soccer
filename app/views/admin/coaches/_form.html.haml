@@ -33,6 +33,6 @@
     fileSelect: $('#coach_image'),
     form: $('form'),
     modelName: 'coach',
-    minSize: [100, 118],
-    aspectRatio: 100 / 118
+    minSize: [#{CoachImageUploader::ImageSize::WIDTH}, #{CoachImageUploader::ImageSize::HEIGHT}],
+    aspectRatio: #{CoachImageUploader::ImageSize::WIDTH} / #{CoachImageUploader::ImageSize::HEIGHT}
   }));

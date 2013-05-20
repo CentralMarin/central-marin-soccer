@@ -6,6 +6,11 @@ class CoachImageUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   storage :file
 
+  module ImageSize
+    WIDTH = 100
+    HEIGHT = 118
+  end
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -19,7 +24,7 @@ class CoachImageUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   process :crop_image
-  process :scale => [100, 118]
+  process :scale => [ImageSize::WIDTH, ImageSize::HEIGHT]
 
   def crop_image
     if model.crop_x.present?
@@ -43,11 +48,5 @@ class CoachImageUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w(jpg jpeg)
   end
-
-  # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
 
 end
