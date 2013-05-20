@@ -3,6 +3,7 @@
     soccer.image_crop = (function (options) {
 
         var _options = {};
+        var _fileSelected = false;
 
         // convert bytes into friendly format
         var _bytesToSize = function(bytes) {
@@ -14,8 +15,8 @@
 
         // check for selected crop region
         var _checkForm = function() {
-            if (parseInt($('#' + _options.modelName + '_crop_w').val())) return true;
-            $('.error').html('Please select a crop region and then press Upload').show();
+            if (!_fileSelected || parseInt($('#' + _options.modelName + '_crop_w').val())) return true;
+            $('.error').html('Please crop the image').show();
             return false;
         };
 
@@ -28,6 +29,8 @@
         };
 
         var _fileSelectHandler = function() {
+
+            _fileSelected = true;
 
             // get selected file
             var oFile = _options.fileSelect[0].files[0];
