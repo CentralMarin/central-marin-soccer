@@ -4,6 +4,7 @@
 
         var _options = {};
         var _fileSelected = false;
+        var _jcrop_api;
 
         // convert bytes into friendly format
         var _bytesToSize = function(bytes) {
@@ -26,6 +27,39 @@
             $('#' + _options.modelName + '_crop_y').val(e.y);
             $('#' + _options.modelName + '_crop_w').val(e.w);
             $('#' + _options.modelName + '_crop_h').val(e.h);
+
+            // update the preview
+            $('#crop_preview').css(
+                {
+                    'width' : Math.round(_options.minSize[0]/ e.w * $('#cropbox').width()) + 'px',
+                    'height' : Math.round(_options.minSize[1]/ e.h * $('#cropbox').height()) + 'px',
+                    'marginLeft' : '-' + Math.round(_options.minSize[0]/ e.w * e.x) + 'px',
+                    'marginTop' : '-' + Math.round(_options.minSize[1]/ e.h * e.y) + 'px'
+                }
+            )
+        };
+
+        var _showCropPreview = function(src) {
+
+            // cleanup old preview
+            var cropPreview = $('#crop_preview');
+            if (cropPreview.length != 0) {
+                cropPreview.parent().remove();
+            }
+
+            var container = _options.fileSelect.parent();
+
+            // Create a preview area
+            container.append(
+                $('<p>', {class: 'inline-hints'}).append(
+                    $('<h4>', {text: 'Preview'}),
+                    $('<div>', {style: 'width:'+ _options.minSize[0] + 'px; height:' + _options.minSize[1] + 'px; overflow:hidden'}).append(
+                        $('<img>', {id: 'crop_preview', src: src})
+                    )
+                )
+            );
+
+            return $('#crop_preview');
         };
 
         var _fileSelectHandler = function() {
@@ -51,8 +85,17 @@
                 return;
             }
 
-            // preview element
-            var oImage = document.getElementById('preview');
+            // image element
+            var cropbox = $('#cropbox');
+            var oImage = cropbox[0];
+
+            // destroy Jcrop if it is existed
+            if (typeof _jcrop_api != 'undefined') {
+                _jcrop_api.destroy();
+
+                // remove inline styles that jcrop applied
+                cropbox.attr('style', '');
+            }
 
             // prepare HTML5 FileReader
             var oReader = new FileReader();
@@ -62,15 +105,8 @@
                 oImage.src = e.target.result;
                 oImage.onload = function () { // onload event handler
 
-                    // Create variables (in this scope) to hold the Jcrop API and image size
-                    var jcrop_api;
-
-                    // destroy Jcrop if it is existed
-                    if (typeof jcrop_api != 'undefined')
-                        jcrop_api.destroy();
-
                     // initialize Jcrop
-                    $('#preview').Jcrop({
+                    cropbox.Jcrop({
                         minSize: _options.minSize, // min crop size
                         aspectRatio : _options.aspectRatio, // keep aspect ratio 1:1
                         bgFade: true, // use fade effect
@@ -80,8 +116,11 @@
                     }, function(){
 
                         // Store the Jcrop API in the jcrop_api variable
-                        jcrop_api = this;
+                        _jcrop_api = this;
                     });
+
+                    // Show the preview for cropping
+                    _showCropPreview(this.src);
                 };
             };
 
@@ -95,6 +134,7 @@
             // Attach form handler
             _options.fileSelect.change(_fileSelectHandler);
             _options.form.submit(_checkForm);
+
         };
 
         return {
