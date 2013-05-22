@@ -5,6 +5,8 @@
         var _options = {};
         var _fileSelected = false;
         var _jcrop_api;
+        var _cropBoxWidth;
+        var _cropBoxHeight;
 
         // convert bytes into friendly format
         var _bytesToSize = function(bytes) {
@@ -28,13 +30,16 @@
             $('#' + _options.modelName + '_crop_w').val(e.w);
             $('#' + _options.modelName + '_crop_h').val(e.h);
 
+            var widthFactor = _options.minSize[0]/ e.w;
+            var heightFactor = _options.minSize[1]/ e.h;
+
             // update the preview
             $('#crop_preview').css(
                 {
-                    'width' : Math.round(_options.minSize[0]/ e.w * $('#cropbox').width()) + 'px',
-                    'height' : Math.round(_options.minSize[1]/ e.h * $('#cropbox').height()) + 'px',
-                    'marginLeft' : '-' + Math.round(_options.minSize[0]/ e.w * e.x) + 'px',
-                    'marginTop' : '-' + Math.round(_options.minSize[1]/ e.h * e.y) + 'px'
+                    'width' : Math.round(widthFactor * _cropBoxWidth) + 'px',
+                    'height' : Math.round(heightFactor * _cropBoxHeight) + 'px',
+                    'marginLeft' : '-' + Math.round(widthFactor * e.x) + 'px',
+                    'marginTop' : '-' + Math.round(heightFactor * e.y) + 'px'
                 }
             )
         };
@@ -104,6 +109,9 @@
                 // e.target.result contains the DataURL which we can use as a source of the image
                 oImage.src = e.target.result;
                 oImage.onload = function () { // onload event handler
+
+                    _cropBoxWidth = cropbox.width();
+                    _cropBoxHeight = cropbox.height();
 
                     // initialize Jcrop
                     cropbox.Jcrop({
