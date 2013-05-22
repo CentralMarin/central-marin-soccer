@@ -24,7 +24,9 @@ class Article < ActiveRecord::Base
 
   ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
 
-  attr_accessible :title, :body, :image, :author, :category_id, :team_id, :coach_id, :translations_attributes, :published
+  attr_accessible :title, :body, :image, :author, :category_id, :team_id, :coach_id, :translations_attributes, :published, :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  after_update :crop_article_image
   mount_uploader :image, ArticleImageUploader
 
   validates :title,         :presence => true,
@@ -38,6 +40,10 @@ class Article < ActiveRecord::Base
 
   def admin_permalink
     admin_article_item_path(self)
+  end
+
+  def crop_article_image
+    image.recreate_versions! if crop_x.present?
   end
 
   def to_s

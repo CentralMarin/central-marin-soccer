@@ -30,9 +30,7 @@
 :javascript
   $('.language-tabs').tabs();
   $(document).ready(soccer.image_crop.init({
-    fileSelect: $('#coach_image'),
-    form: $('form'),
     modelName: 'coach',
-    minSize: [#{CoachImageUploader::ImageSize::WIDTH}, #{CoachImageUploader::ImageSize::HEIGHT}],
-    aspectRatio: #{CoachImageUploader::ImageSize::WIDTH} / #{CoachImageUploader::ImageSize::HEIGHT}
+    width: #{CoachImageUploader::ImageSize::WIDTH},
+    height: #{CoachImageUploader::ImageSize::HEIGHT}
   }));

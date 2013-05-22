@@ -85,7 +85,7 @@
             }
 
             // check for file size
-            if (oFile.size > 250 * 1024) {
+            if (oFile.size > 1024 * 1024 * 5) {
                 $('.error').html('You have selected too big file, please select a one smaller image file').show();
                 return;
             }
@@ -138,10 +138,13 @@
 
         var init = function(options) {
             _options = options;
+            _options.fileSelect = $('#' + _options.modelName + '_image');
+            _options.minSize = [_options.width, _options.height];
+            _options.aspectRatio = _options.width / _options.height;
 
             // Attach form handler
             _options.fileSelect.change(_fileSelectHandler);
-            _options.form.submit(_checkForm);
+            $('form').submit(_checkForm);
 
         };
 

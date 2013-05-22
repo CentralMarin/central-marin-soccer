@@ -13,8 +13,14 @@
           = lf.input :locale, :as => :hidden
 
   = f.inputs do
-    = image_tag @article.image_url unless @article.image_url.blank?
-    = f.input :image, :as => :file
+    = f.input :crop_x, :as => :hidden
+    = f.input :crop_y, :as => :hidden
+    = f.input :crop_w, :as => :hidden
+    = f.input :crop_h, :as => :hidden
+    = f.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.url(), :id => "cropbox")
+
+    %div.error
+
     = f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
     = f.input :team_id, :collection => @teams, :as => :select, :label => "Team", :include_blank => false
     = f.input :coach_id, :collection => @coaches, :as => :select, :label => "Coach", :include_blank => false
@@ -45,3 +51,9 @@
   $('#article_category_id').change(category_changed);
 
   category_changed();
+
+  $(document).ready(soccer.image_crop.init({
+    modelName: 'article',
+    width: #{ArticleImageUploader::ImageSize::WIDTH},
+    height: #{ArticleImageUploader::ImageSize::HEIGHT}
+  }));
