@@ -51,7 +51,16 @@ class Team < ActiveRecord::Base
   end
 
   def age
-    Time.now.year - year unless year.nil?
+    return nil if year.nil?
+
+    # Age is calculated from Aug 1 - July 31. Aug 1, team ages up. Jan 1 - July 31, Rising
+    month = Time.now.month
+    age_value = Time.now.year - year
+    if (month >= 8)
+      "#{I18n.t('team.name.under')}#{age_value + 1}"
+    else
+      "#{I18n.t('team.name.under')}#{age_value} (Rising #{I18n.t('team.name.under')}#{age_value + 1})"
+    end
   end
 
   def two_digit_year
@@ -60,7 +69,7 @@ class Team < ActiveRecord::Base
 
   def to_s
 #    "'#{two_digit_year} #{gender} #{name} #{team_level.name}" unless team_level.nil?
-    "#{I18n.t('team.name.under')}#{age} #{gender} #{name} #{team_level.name} '#{two_digit_year}" unless team_level.nil?
+    "#{age} #{gender} #{name} #{team_level.name} '#{two_digit_year}" unless team_level.nil?
   end
 
   def admin_permalink
