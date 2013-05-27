@@ -128,15 +128,15 @@ coach_create(name: 'Joey Garcia', email: 'joey.garcia@centralmarinsoccer.com',
 
 coach_create(name: 'Craig Breslin', email: 'craig.breslin@centralmarinsoccer.com',
              coached_teams: [
-                 {year: 2004, gender: 'Boys', team_level: team_level_blank, name: 'Academy Pool', teamsnap_team_id: '149840'},
-                 {year: 2001, gender: 'Boys', team_level: team_level_gold, name: 'Pool', teamsnap_team_id: '149846'},
-                 {year: 2000, gender: 'Boys', team_level: team_level_gold, name: 'Pool', teamsnap_team_id: '149849'}
+                 {year: 2005, gender: 'Boys', team_level: team_level_blank, name: 'Academy Pool', teamsnap_team_id: '149840'},
+                 {year: 2002, gender: 'Boys', team_level: team_level_gold, name: 'Pool', teamsnap_team_id: '149846'},
+                 {year: 2001, gender: 'Boys', team_level: team_level_gold, name: 'Pool', teamsnap_team_id: '149849'}
              ]
 )
 coach_create(name: 'Mike Crivello', email: 'mike.crivello@centralmarinsoccer.com',
              bio: "Mike Crivello has been coaching at Central Marin since 2008.  Over the last 5 years he has coached various age groups from the U9 Academy to U13's.  Currently he is the U10 Boys Gold Coach and will assist Jeff Troyer with the U14 boys.  Mike is also the Head Varsity Boys Coach at Terra Linda High School and the trainer for the Terra Linda Varsity Girls team.  Mike's coaching licenses include a National and Advanced National Diploma from the NSCAA and he looks to attain his B license from US Soccer in the next year.  Mike grew up in Terra Linda and played youth soccer for the Dixie Stompers.  He attended Terra Linda High School and went on to play for the legendary Steve Negoesco at the University of San Francisco.  Mike was a two year starter at USF and a two time All-League selection in the West Coast Conference.  Mike has a Bachelors Degree in Business Administration and a Master's Degree in Sports Management from USF.  He currently lives in Terra Linda and works at US Sports Camps.",
              coached_teams: [
-                 {year: 2003, gender: 'Boys', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149842'}
+                 {year: 2004, gender: 'Boys', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149842'}
 
              ]
 )
@@ -157,7 +157,7 @@ coach_create(name: 'Kelly Coffey', email: 'kelly.coffey@centralmarinsoccer.com',
                 "<br>" +
                 "Coffey has a USSF National ""A"" license as well as an NSCAA Advanced National Diploma. He received his Bachelor's Degree from Mary Washington College in Fredericksburg, Virginia, where he was a starter for the men's soccer team for four years and was the Team Captain from 1998 to 2000. He also was the 1999 Team MVP and a two-time member of the All-Conference Team. Coffey played a key role in Mary Washington College receiving a bid for two straight years to the National Tournament including making the final four and finishing third in the nation in 1997. Coffey received his Master's Degree from the University of San Francisco in 2003.<br>",
              coached_teams: [
-                 {year: 2002, gender: 'Boys', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149844'}
+                 {year: 2003, gender: 'Boys', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149844'}
              ]
 )
 
@@ -175,13 +175,13 @@ coach_create(name: 'Tom Ryan', email: 'tom.ryan@centralmarinsoccer.com',
 
 coach_create(name: "Tighe O'sullivan", email: "tighe.o'sullivan@centralmarinsoccer.com",
              coached_teams: [
-                 {year: 2001, gender: 'Boys', team_level: team_level_silver, name: 'Pool', teamsnap_team_id: '149847'}
+                 {year: 2002, gender: 'Boys', team_level: team_level_silver, name: 'Pool', teamsnap_team_id: '149847'}
              ]
 )
 
 coach_create(name: 'Jeff Troyer', email: 'jeff.troyer@centralmarinsoccer.com',
              coached_teams: [
-                 {year: 2000, gender: 'Boys', team_level: team_level_silver, name: 'Pool', teamsnap_team_id: '149850'}
+                 {year: 2001, gender: 'Boys', team_level: team_level_silver, name: 'Pool', teamsnap_team_id: '149850'}
              ]
 )
 
@@ -199,9 +199,9 @@ coach_create(name: 'Brandon Murphy', email: 'brandon.murphy@centralmarinsoccer.c
                   "<br>Assistant manager at demosport ski shop<br>" +
                   "<br>When not coaching i like to ride surfboards and snowboards and to travel<br>",
              coached_teams: [
-                 {year: 2004, gender: 'Girls', team_level: team_level_blank, name: 'Academy Pool', teamsnap_team_id: '149839'},
-                 {year: 2003, gender: 'Girls', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149841'},
-                 {year: 2000, gender: 'Girls', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149848'}
+                 {year: 2005, gender: 'Girls', team_level: team_level_blank, name: 'Academy Pool', teamsnap_team_id: '149839'},
+                 {year: 2004, gender: 'Girls', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149841'},
+                 {year: 2001, gender: 'Girls', team_level: team_level_blank, name: 'Pool', teamsnap_team_id: '149848'}
              ]
 )
 
@@ -212,7 +212,7 @@ coach_create(name: 'Jodi Lingafeldt', email: 'jodi.Lingafeldt@centralmarinsoccer
                   "USSF ""C"" License<br>" +
                   "NSCAA Advanced National Diploma",
              coached_teams: [
-                 {year: 2003, gender: 'Girls', team_level: team_level_silver, name: '', teamsnap_team_id: ''}
+                 {year: 2004, gender: 'Girls', team_level: team_level_silver, name: '', teamsnap_team_id: ''}
              ]
 )
 
@@ -222,8 +222,8 @@ coach_create(name: 'Jessica Jean', email: 'jessica.jean@centralmarinsoccer.com',
 
 coach_create(name: 'Jim Lasher', email: 'jim.lasher@centralmarinsoccer.com',
              coached_teams: [
-                 {year: 2002, gender: 'Girls', team_level: team_level_gold, name: '', teamsnap_team_id: '149843'},
-                 {year: 2001, gender: 'Girls', team_level: team_level_gold, name: '', teamsnap_team_id: '149406'}
+                 {year: 2003, gender: 'Girls', team_level: team_level_gold, name: '', teamsnap_team_id: '149843'},
+                 {year: 2002, gender: 'Girls', team_level: team_level_gold, name: '', teamsnap_team_id: '149406'}
              ]
 )
 
@@ -237,7 +237,7 @@ coach_create(name: 'Adam Dietz', email: 'adam.dietz@centralmarinsoccer.com',
                   "Adam grew up playing youth soccer in Terra Linda playing on the local select team.  He played goalkeeper for Terra Linda High School and for San Diego State University.<br>" +
                   "Adam lives in Petaluma with his wife and two children.<br>",
              coached_teams: [
-                 {year: 2001, gender: 'Girls', team_level: team_level_silver, name: '', teamsnap_team_id: '149845'}
+                 {year: 2002, gender: 'Girls', team_level: team_level_silver, name: '', teamsnap_team_id: '149845'}
              ]
 )
 
