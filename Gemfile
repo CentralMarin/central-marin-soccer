@@ -5,7 +5,7 @@ gem 'rails', '>= 3.2.12'
 #gem 'jquery-rails'
 #gem 'jquery-ui-rails'
 
-gem 'activeadmin', '>= 0.5.1'
+gem 'activeadmin', '>= 0.6.0'
 gem 'meta_search', '>= 1.1.0.pre'
 gem 'paper_trail'
 gem 'ckeditor'
