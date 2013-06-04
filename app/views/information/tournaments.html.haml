@@ -4,8 +4,8 @@
 %div.grid_16{ editable_attributes(@part_name_overview) }
   = editable_content @part_name_overview
 
-%div.grid_16
-  %div#tabs
+%div.grid_16.omega
+  %div.omega#tabs
     %ul
       - @tournaments.each do |tournament|
         %li
@@ -16,12 +16,12 @@
       %div{id: tournament[:id]}
         %div{ editable_attributes(tournament[:overview]) }
           = editable_content tournament[:overview]
-        %h2= t('information.winners')
-        %ul
-          - @years.each do |year|
-            %li
-              =link_to "##{tournament[:id]}", :rel => "#winners", :data => {tournament: tournament[:id], year: year} do
-                = year.capitalize
+        -#%h2= t('information.winners')
+        -#%ul
+        -#  - @years.each do |year|
+        -#    %li
+        -#      =link_to "##{tournament[:id]}", :rel => "#winners", :data => {tournament: tournament[:id], year: year} do
+        -#        = year.capitalize
 
 %div.grid_16{ editable_attributes(@part_name_footer)  }
   = editable_content @part_name_footer
