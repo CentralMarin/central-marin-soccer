@@ -9,13 +9,17 @@
 
 %div{id: 'slider-container', class: 'grid_10 box'}
   %div{class: 'ws_images'}
-    - @articles.each do |article|
-      =image_tag (article.image)
+    %ul
+      - @articles.each do |article|
+        %li
+          %a{href: '#'}
+            =image_tag article.image, :alt => article.title, :title => article.title, :id => "wow_#{article.id}"
   %div{class: 'ws_bullets'}
-    - @articles.each do |article|
-      %a{href: "#{article_path article}"}
-        %h2{class: 'alt'}= article.title
-        %span= strip_tags(truncate(article.body, length: 50, truncate_string: "..."))
+    %div
+      - @articles.each do |article|
+        %a{href: "#{article_path article}"}
+          %h2{class: 'alt'}= article.title
+          %span= strip_tags(truncate(article.body, length: 50, truncate_string: "..."))
 
 %div{class: 'padV10 clear'}
 

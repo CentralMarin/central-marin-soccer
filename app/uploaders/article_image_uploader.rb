@@ -9,8 +9,8 @@ class ArticleImageUploader < CarrierWave::Uploader::Base
   storage :file
 
   module ImageSize
-    WIDTH = 900
-    HEIGHT = 675
+    WIDTH = 560
+    HEIGHT = 420
   end
 
   # Override the directory where uploaded files will be stored.
