@@ -2,8 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rake', '>= 10.0.0'
 gem 'rails', '>= 3.2.12'
-#gem 'jquery-rails'
-#gem 'jquery-ui-rails'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem 'activeadmin', '>= 0.6.0'
 gem 'meta_search', '>= 1.1.0.pre'
