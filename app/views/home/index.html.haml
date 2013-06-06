@@ -13,7 +13,8 @@
       %ul
         - @articles.each do |article|
           %li
-            =image_tag article.image, :alt => article.title, :title => article.title, :id => "wow_#{article.id}"
+            %a{href: "#{article_path article}"}
+              =image_tag article.image, :alt => article.title, :title => article.title, :id => "wow_#{article.id}"
             =strip_tags(truncate(article.body, length: 50, truncate_string: "..."))
     -#%div{class: 'ws_bullets'}
     -#  %div
