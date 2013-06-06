@@ -7,21 +7,20 @@
   %p= t('home.program.body')
   %a{class: 'right', href: '/information'}= t('home.program.link')
 
-%div{id: 'slider-container', class: 'grid_10 box'}
-  %div{class: 'ws_images'}
-    %ul
-      - @articles.each do |article|
-        %li
-          %a{href: '#'}
+%div{class: 'grid_10 box'}
+  %div{id: 'slider-container', class: 'grid_10 '}
+    %div{class: 'ws_images'}
+      %ul
+        - @articles.each do |article|
+          %li
             =image_tag article.image, :alt => article.title, :title => article.title, :id => "wow_#{article.id}"
-  %div{class: 'ws_bullets'}
-    %div
-      - @articles.each do |article|
-        %a{href: "#{article_path article}"}
-          %h2{class: 'alt'}= article.title
-          %span= strip_tags(truncate(article.body, length: 50, truncate_string: "..."))
-
-%div{class: 'padV10 clear'}
+            =strip_tags(truncate(article.body, length: 50, truncate_string: "..."))
+    -#%div{class: 'ws_bullets'}
+    -#  %div
+    -#    - @articles.each_with_index do |article, index|
+    -#      %a{href: '#'}
+    -#        =image_tag article.image, :alt => article.title, :title => article.title
+    -#        =index + 1
 
 %div{class: 'grid_10'}
   %div{class: 'box'}

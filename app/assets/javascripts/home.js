@@ -9,38 +9,6 @@
 //= require wowslider
 //= require plugins
 
-// wow slider configuration
-//function ws_fade(slider, el) {
-//    el.each(function(index) {
-//        (index == 0 ? $(this).show() : $(this).hide());
-//    });
-//    this.go = function(next, current) {
-//        $(el.get(next)).fadeIn(slider.duration);
-//        $(el.get(current)).fadeOut(slider.duration);
-//        return next
-//    }
-//};
-
-//$("#slider-container").wowSlider(
-//    {
-//        effect:"fade",
-//        prev:"prev",
-//        next:"next",
-//        duration:20 * 100,
-//        delay:20 * 100,
-//        outWidth:700,
-//        outHeight:522,
-//        width:700,
-//        height:522,
-//        autoPlay:true,
-//        stopOnHover:true,
-//        loop:false,
-//        bullets:true,
-//        caption:true,
-//        controls:true
-//    }
-//);
-
 function ws_fade(c, a, b) {
     var e = jQuery;
     var d = e("ul", b);
@@ -75,7 +43,7 @@ $("#slider-container").wowSlider(
         autoPlay: true,
         stopOnHover: true,
         loop: false,
-        bullets: true,
+        bullets: false,
         caption: true,
         captionEffect: "fade",
         controls: true,
