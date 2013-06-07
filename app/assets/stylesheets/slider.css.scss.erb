@@ -2,8 +2,8 @@
  * Slider
  */
 
-$slider-width: 560px;
-$slider-height: 420px;
+$slider-width: <%= ArticleImageUploader::ImageSize::WIDTH%>px;
+$slider-height: <%= ArticleImageUploader::ImageSize::HEIGHT%>px;
 
 * html #slider-container{ width:$slider-width; height: $slider-height; }
 * html #slider-container a.ws_next,* html #slider-container a.ws_prev{display:block}

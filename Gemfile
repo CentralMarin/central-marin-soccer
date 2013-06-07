@@ -20,6 +20,7 @@ gem 'whenever', :require => false
 # in production environments by default.
 group :assets do
   gem 'sass-rails', '~>3.2.5'
+  gem "sass_rails_patch", "~> 0.0.2"
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '~> 1.3.0'
 end
