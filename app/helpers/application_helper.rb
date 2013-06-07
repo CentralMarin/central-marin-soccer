@@ -59,6 +59,21 @@ module ApplicationHelper
     end
   end
 
+  def show_article(article)
+
+    case article.category
+      when :club     # route to the index page with an anchor to the article
+        path = articles_path
+      when :team     # route to the team page with an anchor to the article
+        # TODO: Send to the correct team page
+      else
+        # TODO: Need to determine the location for other categories
+    end
+
+    path  + "#" + article.to_param
+
+  end
+
   private
 
   def menu_item item, class_name

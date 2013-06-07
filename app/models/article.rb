@@ -58,6 +58,10 @@ class Article < ActiveRecord::Base
     ARTICLE_CATEGORY[read_attribute(:category_id)]
   end
 
+  def category?(sym)
+    ARTICLE_CATEGORY.index(sym) == self[:category_id]
+  end
+
   def self.category_id(sym)
     ARTICLE_CATEGORY.index(sym)
   end
