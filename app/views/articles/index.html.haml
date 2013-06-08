@@ -4,7 +4,8 @@
   %div.box.grid_16
     %a{name: article.to_param}
     %h2= article.title
-    =image_tag article.image, height: "#{ArticleImageUploader::ImageSize::HEIGHT}", width: "#{ArticleImageUploader::ImageSize::WIDTH}", :alt => article.title, :title => article.title, style: 'float: left; margin: 5px;'
+    -if not article.image.to_s.empty?
+      =image_tag article.image, height: "#{ArticleImageUploader::ImageSize::HEIGHT}", width: "#{ArticleImageUploader::ImageSize::WIDTH}", :alt => article.title, :title => article.title, style: 'float: left; margin: 5px;'
     %p= article.body.html_safe
     %br="Publish: #{article.updated_at.strftime("%m/%d/%Y")}"
 
