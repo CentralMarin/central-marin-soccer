@@ -34,6 +34,7 @@ class Team < ActiveRecord::Base
   validates :teamsnap_team_id, :presence => true
 
   TEAMSNAP_ROSTER_ID = '1893703'
+  TEAMSNAP_NO_TEAM_ID = '0000'
 
   attr_accessible :coach_id, :team_level_id, :gender, :year, :name, :image, :teamsnap_team_id
   mount_uploader :image, TeamImageUploader
@@ -105,6 +106,8 @@ class Team < ActiveRecord::Base
 
   def teamsnap_json
 
+    return {} if teamsnap_team_id == TEAMSNAP_NO_TEAM_ID
+
     mutex = Mutex.new
 
     endpoints = [record, schedule, roster]
@@ -128,10 +131,10 @@ class Team < ActiveRecord::Base
   def record
     record = {}
     teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}") do |http_code, json|
-      if (http_code != '200')
-        record.merge(json)
-      else
+      if (http_code == '200')
         record = {record: json['team']['formatted_record']}
+      else
+        log_teamsnap_error 'record', json
       end
     end
 
@@ -171,15 +174,16 @@ class Team < ActiveRecord::Base
     players = []
     managers = []
     teamsnap("https://api.teamsnap.com/v2/teams/#{teamsnap_team_id}/as_roster/#{TEAMSNAP_ROSTER_ID}/rosters") do |http_code, json|
-      if http_code != '200'
-        players << json
-      else
+      if http_code == '200'
         json.each do |player|
           players << {first: player['roster']['first'], last: player['roster']['last']}  unless player['roster']['non_player'] == true
           if player['roster']['is_manager'] == true
             managers << {first: player['roster']['first'], last: player['roster']['last']}
           end
         end
+      else
+        log_teamsnap_error 'roster', json
+        managers << {first: 'Coming', last: 'soon ...'}
       end
     end
 
@@ -192,6 +196,10 @@ protected
   end
 
   ACADEMY_YEAR = 9
+end
+
+def log_teamsnap_error(method, json)
+  logger.error "Unable to locate #{method} for team #{teamsnap_team_id}: #{json}"
 end
 
 def teamsnap(url)

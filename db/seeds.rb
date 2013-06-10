@@ -121,7 +121,7 @@ field_create(name: 'Venetia Valley', club: 'San Rafael', rain_line: '485-2246', 
 coach_create(name: 'Steven Sosa', email: 'steven.sosa@centralmarinsoccer.com',
              bio: "Coming soon...",
              coached_teams: [
-                 {year: 1998, gender: 'Girls', team_level: team_level_silver, name: '', teamsnap_team_id: '0000'}
+                 {year: 1998, gender: 'Girls', team_level: team_level_silver, name: '', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID}
              ]
 )
 
@@ -135,10 +135,10 @@ coach_create(name: 'Craig Breslin', email: 'craigbreslin@comcast.net',
              bio:
                  "Born and raised in London, England too long ago to remember.  Playing career spanned four continents, finally settling in San Francisco in the early 80's.  Now in my twenty first year of coaching boy's competitive football in Marin county.  Currently the Central Marin U10 and U12 boy's Class I coach.  Camp Director of Champions Soccer Camp in Mill Valley for the past 19 years.  Graduated California at Berkeley in 1997 with a BA in Spanish.  Hold English FA and NSCAA coaching licenses.<br><br>Wife Kelly and 3 boys, Logan, Devon and Cade all currently playing in the Central Marin competitive program.",
              coached_teams: [
-                 {year: 2005, gender: 'Boys', team_level: team_level_blank, name: 'Academy Pool', teamsnap_team_id: '0000'},
+                 {year: 2005, gender: 'Boys', team_level: team_level_blank, name: 'Academy Pool', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID},
                  {year: 2002, gender: 'Boys', team_level: team_level_premier, name: 'Arsenal Blue', teamsnap_team_id: '42077'},
                  {year: 2001, gender: 'Boys', team_level: team_level_premier, name: 'Arsenal Blue', teamsnap_team_id: '41592'},
-                 {year: 2001, gender: 'Boys', team_level: team_level_gold, name: 'Arsenal White', teamsnap_team_id: '0000'}
+                 {year: 2001, gender: 'Boys', team_level: team_level_gold, name: 'Arsenal White', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID}
              ]
 )
 coach_create(name: 'Mike Crivello', email: 'mcrivello@ussportscamps.com',
@@ -152,7 +152,7 @@ coach_create(name: 'Mike Crivello', email: 'mcrivello@ussportscamps.com',
 coach_create(name: 'Rob Neville', email: 'Robneville2@att.net',
              bio: "Coming soon...",
              coached_teams: [
-                 {year: 2004, gender: 'Boys', team_level: team_level_gold, name: 'Arsenal White', teamsnap_team_id: '0000'}
+                 {year: 2004, gender: 'Boys', team_level: team_level_gold, name: 'Arsenal White', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID}
              ]
 )
 
@@ -188,17 +188,17 @@ coach_create(name: 'Tom Ryan', email: 'tom_ryan@branson.org',
 coach_create(name: "Tighe O'sullivan", email: 'clubmarin@gmail.com',
              bio: "Coming soon...",
              coached_teams: [
-                 {year: 2002, gender: 'Boys', team_level: team_level_silver, name: 'Arsenal Red', teamsnap_team_id: '0000'}
+                 {year: 2002, gender: 'Boys', team_level: team_level_silver, name: 'Arsenal Red', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID}
              ]
 )
 
 coach_create(name: 'Jeff Troyer', email: 'jefftroyer@gmail.com',
              bio: "Coming soon...",
              coached_teams: [
-                 {year: 2001, gender: 'Boys', team_level: team_level_silver, name: 'Arsenal Red', teamsnap_team_id: '0000'},
-                 {year: 2000, gender: 'Boys', team_level: team_level_silver, name: 'Arsenal Red', teamsnap_team_id: '0000'},
+                 {year: 2001, gender: 'Boys', team_level: team_level_silver, name: 'Arsenal Red', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID},
+                 {year: 2000, gender: 'Boys', team_level: team_level_silver, name: 'Arsenal Red', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID},
                  {year: 1998, gender: 'Boys', team_level: team_level_silver, name: 'Arsenal Red', teamsnap_team_id: '28604'},
-                 {year: 1995, gender: 'Boys', team_level: team_level_silver, name: 'Arsenal Red', teamsnap_team_id: '0000'}
+                 {year: 1995, gender: 'Boys', team_level: team_level_silver, name: 'Arsenal Red', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID}
              ]
 )
 
@@ -206,15 +206,15 @@ coach_create(name: 'Brandon Murphy', email: 'bwmurph99@yahoo.com',
              bio: "Marin catholic '91<br>Humboldt state university '96<br>Head coach marin catholic boys/girls varsity/jv 1997-2006<br>Head coach redwood boys varsity 2006-2012<br>Head coach Novato Youth Soccer Association 1998-2004<br> Head coach Marin FC 2004-2009<br>Head coach Central Marin Soccer Club 2005-present<br>USSF national D<br>NSCAA national diploma<br><br>Favorite player of all time is Zinedine Zidane<br><br>Assistant manager at Demosport ski shop<br><br>When not coaching I like to ride surfboards and snowboards and to travel<br>",
              coached_teams: [
                  {year: 2005, gender: 'Girls', team_level: team_level_academy, name: 'Pool', teamsnap_team_id: '149839'},
-                 {year: 2004, gender: 'Girls', team_level: team_level_gold, name: 'Magic', teamsnap_team_id: '0000'},
-                 {year: 2001, gender: 'Girls', team_level: team_level_gold, name: 'Magic', teamsnap_team_id: '0000'}
+                 {year: 2004, gender: 'Girls', team_level: team_level_gold, name: 'Magic', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID},
+                 {year: 2001, gender: 'Girls', team_level: team_level_gold, name: 'Magic', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID}
              ]
 )
 
 coach_create(name: 'Jodi Lingafeldt', email: 'jmlingafeldt@gmail.com',
              bio: "Played for San Juan Soccer Club (Sacramento), CSU Sacramento NCAA Div. 1, Sonoma State University NCAA Div. 2<br>Coached with Santa Rosa United (7 yrs), Central Marin & Marin FC (5 yrs), Cal North ODP State Team (4 yrs), Asst. Coach Sonoma State University ('98-'00)<br>BS Kinesiology Athletic Training from Sonoma State University<brUSSF C License<br>NSCAA Advanced National Diploma",
              coached_teams: [
-                 {year: 2004, gender: 'Girls', team_level: team_level_silver, name: 'Magic Black', teamsnap_team_id: '0000'}
+                 {year: 2004, gender: 'Girls', team_level: team_level_silver, name: 'Magic Black', teamsnap_team_id: Team::TEAMSNAP_NO_TEAM_ID}
              ]
 )
 
