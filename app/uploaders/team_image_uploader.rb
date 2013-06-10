@@ -9,6 +9,11 @@ class TeamImageUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
+  module ImageSize
+    WIDTH = 573
+    HEIGHT = 363
+  end
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -21,7 +26,21 @@ class TeamImageUploader < CarrierWave::Uploader::Base
   end
 
   # Process files as they are uploaded:
-  process :scale => [573, 363]
+  process :crop_image
+  process :scale => [ImageSize::WIDTH, ImageSize::HEIGHT]
+
+  def crop_image
+    if model.crop_x.present?
+      manipulate! do |img|
+        x = model.crop_x.to_i
+        y = model.crop_y.to_i
+        w = model.crop_w.to_i
+        h = model.crop_h.to_i
+        img.crop("#{w}x#{h}+#{x}+#{y}")
+        img
+      end
+    end
+  end
 
   def scale(width, height)
     resize_and_pad(width, height)

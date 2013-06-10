@@ -15,29 +15,27 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
 
   show :title => :page_title
 
- form do |f|
-   f.inputs :name => "Team" do
-     f.input :coach
-     f.input :team_level
-     f.input :year
-     f.input :gender, :collection => Team.genders
-     f.input :name
-     f.input :teamsnap_team_id
-     f.input :image, :as => :file
-   end
-
-   f.actions
- end
+ form :partial => "form"
 
  controller do
   cache_sweeper :team_sweeper, :only => [:create, :update, :destroy]
 
-   def show
+    def show
        @team = Team.find(params[:id])
        @versions = @team.versions
        @team = @team.versions[params[:version].to_i].reify if params[:version]
        show! #it seems to need this
-   end
+    end
+
+    def new
+      @team = Team.new
+      new!
+    end
+
+    def edit
+      @team = Team.find(params[:id])
+      edit!
+    end
  end
    sidebar :versions, :partial => "layouts/version", :only => :show
 
