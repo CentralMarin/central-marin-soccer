@@ -7,17 +7,17 @@
   %table
     %thead
       %tr
-        %td{class: 'grid_6'}
+        %td{class: 'grid_7'}
           %h2= Team.genders[0]
-        %td{class: 'grid_5'}
+        %td{class: 'grid_7'}
           %h2= Team.genders[1]
     %tbody
       - @teams_by_year_and_gender.each do |year, boys_and_girls|
         %tr
-          %td{class: 'grid_6'}
+          %td{class: 'grid_7'}
             - boys_and_girls[0].each do |team|
               %h3= link_to team, team
-          %td{class: 'grid_5'}
+          %td{class: 'grid_7'}
             - boys_and_girls[1].each do |team|
               %h3= link_to team, team
 
