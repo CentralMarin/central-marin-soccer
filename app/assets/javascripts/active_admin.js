@@ -2,7 +2,7 @@
 //= require active_admin/base
 //= require jquery.multiselect.min
 //= require jsrender
-//= require jquery-ui-1.10.0.custom.min
+//= require jquery-ui
 //= require jquery.Jcrop.min
 //= require ckeditor/init
 //= require namespace
