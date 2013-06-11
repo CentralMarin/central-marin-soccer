@@ -183,7 +183,7 @@ class Team < ActiveRecord::Base
       if http_code == '200'
         json.each do |player|
           players << {first: player['roster']['first'], last: player['roster']['last']}  unless player['roster']['non_player'] == true
-          if player['roster']['is_manager'] == true
+          if player['roster']['is_owner'] == true
             managers << {first: player['roster']['first'], last: player['roster']['last']}
           end
         end
