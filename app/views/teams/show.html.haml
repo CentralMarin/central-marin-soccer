@@ -18,7 +18,7 @@
     %div{id: 'roster', class: 'scroll-box'}
 
 %div.grid_10
-  = image_tag image_path(@team.image), alt: "Team Photo", height: 416, width: 555
+  = image_tag image_path(@team.image), alt: "Team Photo", height: "#{TeamImageUploader::ImageSize::HEIGHT}", width: "#{TeamImageUploader::ImageSize::WIDTH}"
 
 %div.clear
 
