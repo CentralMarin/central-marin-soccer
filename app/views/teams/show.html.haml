@@ -1,9 +1,12 @@
 - content_for :css do
   = stylesheet_link_tag "team"
 
+%div.grid_16
+  %center
+    %h1= "#{@team}"
+    %hr
+
 %div.grid_6.box
-  %h1= "#{@team}"
-  %hr
   %h3{id: 'info'}
     = t('team.coach')
     = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :style => 'font-size: 18px;', :data => {:coach_id => "#{@team.coach.id}"} do
