@@ -21,7 +21,8 @@
     %div{id: 'roster', class: 'scroll-box'}
 
 %div.grid_11
-  = image_tag image_path(@team.image), alt: "Team Photo", height: "#{TeamImageUploader::ImageSize::HEIGHT}", width: "#{TeamImageUploader::ImageSize::WIDTH}"
+  %center
+    = image_tag image_path(@team.image), alt: "Team Photo", height: "#{TeamImageUploader::ImageSize::HEIGHT}", width: "#{TeamImageUploader::ImageSize::WIDTH}"
 
 %div.clear
 
@@ -29,8 +30,8 @@
   %h2
     = link_to @team.teamsnap_schedule_url do
       = t('team.schedule')
-    %span{id: 'record'}
-      = "#{Time.now.year} #{t('team.record')} "
+    -#%span{id: 'record'}
+    -#  = "#{Time.now.year} #{t('team.record')} "
 
   %div{id: 'schedule', class: 'scroll-box'}
 
