@@ -6,7 +6,7 @@
     %h1= "#{@team}"
     %hr
 
-%div.grid_6.box
+%div.grid_5
   %h3{id: 'info'}
     = t('team.coach')
     = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :style => 'font-size: 18px;', :data => {:coach_id => "#{@team.coach.id}"} do
@@ -20,7 +20,7 @@
         = t('team.roster')
     %div{id: 'roster', class: 'scroll-box'}
 
-%div.grid_10
+%div.grid_11
   = image_tag image_path(@team.image), alt: "Team Photo", height: "#{TeamImageUploader::ImageSize::HEIGHT}", width: "#{TeamImageUploader::ImageSize::WIDTH}"
 
 %div.clear

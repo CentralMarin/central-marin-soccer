@@ -10,8 +10,8 @@ class TeamImageUploader < CarrierWave::Uploader::Base
   # storage :fog
 
   module ImageSize
-    WIDTH = 573
-    HEIGHT = 363
+    WIDTH = 600
+    HEIGHT = 400
   end
 
   # Override the directory where uploaded files will be stored.
