@@ -6,7 +6,7 @@
     %h1= "#{@team}"
     %hr
 
-%div.grid_5
+%div.grid_5.omega
   %h3{id: 'info'}
     = t('team.coach')
     = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :style => 'font-size: 18px;', :data => {:coach_id => "#{@team.coach.id}"} do
