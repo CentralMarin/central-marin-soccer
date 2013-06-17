@@ -4,6 +4,10 @@ namespace :html do
   desc "Exports all of the web parts as individual html files to the db/web_parts folder"
   task :export => :environment do
     I18n.available_locales.each do |locale|
+
+      # Set the locale
+      I18n.locale = locale
+
       web_parts = WebPart.all
       web_parts.each do |web_part|
         filename = File.join(Rails.root, path_parts[0], path_parts[1], web_part.name + "." + locale.to_s + ".html")
