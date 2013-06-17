@@ -66,8 +66,8 @@ class InformationController < ApplicationController
         ]
     )
     @tournaments = [
-        {name: 'Premier Challenge', id: 'premier_challenge', overview: @part_name_premier_challenge },
-        {name: 'Mission Bell', id: 'mission_bell', overview: @part_name_mission_bell}
+        {name: 'Mission Bell', id: 'mission_bell', overview: @part_name_mission_bell},
+        {name: 'Premier Challenge', id: 'premier_challenge', overview: @part_name_premier_challenge }
     ]
     @years = [I18n.t('information.current'), I18n.t('information.previous')]
   end
