@@ -14,31 +14,14 @@
 (function () {
     namespace("soccer");
     soccer.fields = (function () {
-        var map = null;
-        var fields = {};
-        var infowindow = new google.maps.InfoWindow({
-            content:"Loading..."
-        });
-
-        var myOptions = {
-            zoom:12,
-            mapTypeId:google.maps.MapTypeId.ROADMAP,
-            panControl:false,
-            scaleControl:false,
-            zoomControlOptions:{
-                style:google.maps.ZoomControlStyle.LARGE,
-                position:google.maps.ControlPosition.RIGHT_TOP
-            },
-            streetViewControl:false,
-            mapTypeControl:true,
-            mapTypeControlOptions:{
-                style:google.maps.MapTypeControlStyle.DROPDOWN_MENU
-            }
-        };
+        var _map = null;
+        var _fields = {};
+        var _infoWindow = null;
+        var _googleMapsLoaded = window.google != undefined;
 
         var _showMarker = function (field, bounds) {
             $(field.node).show('slideUp');
-            field.marker.setMap(map);
+            field.marker.setMap(_map);
             bounds.extend(field.marker.position);
         };
 
@@ -51,8 +34,8 @@
             var content = [field.name, "<br/>",
                 field.club, "<br/><br/>",
             "<a target='_blank' href='http://maps.google.com/maps?saddr=&daddr=" ,encodeURIComponent(field.address),"'>Directions</a>"].join("");
-            infowindow.setContent(content);
-            infowindow.open(map, field.marker);
+            _infoWindow.setContent(content);
+            _infoWindow.open(_map, field.marker);
         };
 
         var _addMarker = function (field) {
@@ -70,37 +53,36 @@
         };
 
         var _filterFields = function () {
-            var clubName = $("select option:selected").html();
-            var statusName = $("input[name=status]:checked").attr('value');
+            var clubName = $("select option:selected").html() || 'All';
+            var statusName = $("input[name=status]:checked").attr('value') || 'All';
 
             var bounds = new google.maps.LatLngBounds();
 
-            $.each(fields, function (key, field) {
+            $.each(_fields, function (key, field) {
                 ((clubName == 'All' || clubName == field.club) && (statusName == 'All' || statusName == field.status_name)) ?
                     _showMarker(field, bounds) :
                     _hideMarker(field);
             });
 
-            map.fitBounds(bounds);
+            _map.fitBounds(bounds);
         };
 
         var _showField = function (e) {
-            field = fields[$(this).attr("id")];
+            field = _fields[$(this).attr("id")];
             _display_info_window(field)
         };
 
         var _resizeMap = function () {
             var headerHeight = $('#header')[0].offsetHeight;
             var fieldHeaderHeight = $('#field_header')[0].offsetHeight;
-            var mid = $('#map_canvas')[0];
+            var mid = $('#map')[0];
             var footerHeight = $('#footer')[0].offsetHeight;
 
-//            console.log('Page: ' + _getDocHeight() + ' header: ' + headerHeight + ' fieldHeader: ' + fieldHeaderHeight + ' Footer: ' + footerHeight);
             mid.style.height = _getDocHeight()
                 - (headerHeight + fieldHeaderHeight + footerHeight)
                 + 'px';
-            if (map != null) {
-                google.maps.event.trigger(map, 'resize');
+            if (_map != null) {
+                google.maps.event.trigger(_map, 'resize');
             }
         };
 
@@ -115,7 +97,30 @@
         var init = function (fieldsArray) {
 
             $('#fields').html($("#FieldTemplate").render(fieldsArray));
-            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+            if (_googleMapsLoaded) {
+                _infoWindow =new google.maps.InfoWindow({
+                    content:"Loading..."
+                });
+                var mapOptions = {
+                    center: new google.maps.LatLng(-34.397, 150.644),
+                    zoom:12,
+                    mapTypeId:google.maps.MapTypeId.ROADMAP,
+                    panControl:false,
+                    scaleControl:false,
+                    zoomControlOptions:{
+                        style:google.maps.ZoomControlStyle.LARGE,
+                        position:google.maps.ControlPosition.RIGHT_TOP
+                    },
+                    streetViewControl:false,
+                    mapTypeControl:true,
+                    mapTypeControlOptions:{
+                        style:google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                    }
+                };
+
+                _map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+            }
 
             // Enable UI glitz
             $("#statusFilter").buttonset();
@@ -127,7 +132,7 @@
                 _addMarker(this);
 
                 field.node = domNodes[index];
-                fields['field' + field.id] = field;
+                _fields['field' + field.id] = field;
             });
 
             _filterFields();
@@ -155,3 +160,4 @@
         };
     }());
 }());
+
