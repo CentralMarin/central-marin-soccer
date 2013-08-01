@@ -4,9 +4,8 @@
 
 %div.grid_16#field_header
   %h1= t 'field.heading'
-  %div.grid_16= 'Marin county fields'
-  -#%img
-  %div.grid_16.alt= 'Select a field below to view location and directions'
+  = image_tag 'field.jpg', :width => '940', :height => '142'
+  %div.grid_16.alt= 'Select a field below to view location and get directions'
 
 %div.grid_16.box#map
   -#%form#filter{action: '#'}
@@ -31,10 +30,11 @@
   %div#map_canvas{style: 'height: 100%'}
 
 %script{id: 'FieldTemplate', type: 'text/html'}
-  %li{id: 'field{{:id}}', class: "field {{:#index%2 ? 'even' : 'odd'}}"}
-    %a{href: '#'}
+  %li{id: 'field{{:id}}', class: "{{:#index%2 ? 'even' : 'odd'}}"}
+    ="{{:name}}"
+    -#%a{href: '#'}
       -#%img{alt: '{{:status}}', src: '/assets/{{:status}}.jpg'}
-      ="{{:name}}"
+      -#="{{:name}}"
       -#%div.club= "{{:club}}"
       -#%div.rain= "{{:rain_line}}"
       -#%div.status= "{{:status}}"

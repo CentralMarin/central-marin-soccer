@@ -9,24 +9,23 @@
     overflow: auto;
 
   .odd {
-    background-color: #c0402a;
+    background-color: #0d0f22;
   }
 
   .even {
-    background-color: #b2b2b2;
+    background-color: #2a3142;
   }
-}
-
-.field {
-  h2 {
-    margin: 0;
+  li {
+    color: #d6d7da;
+    cursor: pointer;
   }
 
-}
-.field:hover {
-    background-color: #d3d3d3;
-}
+  li:hover {
+    background-color: #887637;
+  }
 
-.field:active {
+  li:active {
     background-color: #ffebcd;
+  }
 }
+
