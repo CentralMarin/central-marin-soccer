@@ -30,12 +30,32 @@
             field.marker.setMap(null);
         };
 
+        var _streetView = function (field, el) {
+            street = new google.maps.StreetViewPanorama(el, {
+
+                position: new google.maps.LatLng(field.lat, field.lng),
+                zoomControl: false,
+                enableCloseButton: false,
+                addressControl: false,
+                panControl: false,
+                linksControl: false,
+                pov: {
+                    heading: 0,
+                    pitch: 0,
+                    zoom: 0
+                }
+            });
+        };
+
         var _display_info_window = function (field) {
-            var content = [field.name, "<br/>",
-                field.club, "<br/><br/>",
-            "<a target='_blank' href='http://maps.google.com/maps?saddr=&daddr=" ,encodeURIComponent(field.address),"'>Directions</a>"].join("");
-            _infoWindow.setContent(content);
+            _infoWindow.setContent($("#InfoWindowTemplate").render(field));
+
             _infoWindow.open(_map, field.marker);
+            google.maps.event.addListener(_infoWindow, 'domready', function() {
+                // Add Street View
+                _streetView(field, document.getElementById("StreetView"));
+            });
+
         };
 
         var _addMarker = function (field) {
@@ -75,10 +95,9 @@
         var _resizeMap = function () {
             var headerHeight = $('#header')[0].offsetHeight;
             var fieldHeaderHeight = $('#field_header')[0].offsetHeight;
-            var mid = $('#map')[0];
             var footerHeight = $('#footer')[0].offsetHeight;
 
-            mid.style.height = _getDocHeight()
+                $('#map')[0].style.height = _getDocHeight()
                 - (headerHeight + fieldHeaderHeight + footerHeight)
                 + 'px';
             if (_map != null) {
@@ -122,20 +141,22 @@
                 _map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
             }
 
-            // Enable UI glitz
-            $("#statusFilter").buttonset();
-
             // associate the backing store with the DOM elements
             var domNodes = $('#fields').children();
             $.each(fieldsArray, function (index, field) {
 
                 _addMarker(this);
 
+                field.mapUri = "http://maps.google.com/maps?saddr=&daddr=" + encodeURIComponent(field.address);
+
                 field.node = domNodes[index];
                 _fields['field' + field.id] = field;
             });
 
             _filterFields();
+
+            // Enable UI glitz
+            $("#statusFilter").buttonset();
 
             // Hookup filters
             $("#clubFilter").change(_filterFields);

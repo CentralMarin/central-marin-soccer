@@ -5,7 +5,7 @@
 %div.grid_16#field_header
   %h1= t 'field.heading'
   = image_tag 'field.jpg', :width => '940', :height => '142'
-  %div.grid_16.alt= 'Select a field below to view location and get directions'
+  %div.subheading.alt= 'Select a field below to view location and get directions'
 
 %div.grid_16.box#map
   -#%form#filter{action: '#'}
@@ -38,6 +38,16 @@
       -#%div.club= "{{:club}}"
       -#%div.rain= "{{:rain_line}}"
       -#%div.status= "{{:status}}"
+%script{id: 'InfoWindowTemplate', type: 'text/html'}
+  -#%div{id: 'textWrapper'}
+  %div{id: 'StreetView', style: 'margin: 0; padding: 0; width: 200px; height: 150px'}
+  ="{{:name}}"
+  %br
+  ="{{:address}}"
+  %br
+  %hr
+  %a{target: '_blank', href: "{{:mapUri}}"}
+    = "Directions"
 
 - content_for :javascript do
   = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
