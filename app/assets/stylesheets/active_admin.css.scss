@@ -44,10 +44,18 @@ body.active_admin {
 // Carousel CSS
 .admin_namespace .column {
   width: 49%;
-  height:200px;
+  min-height: 200px;
   float: left;
   position:relative;
   border-left: 1px dashed pink;
+}
+
+.admin_namespace .full {
+  clear: both;
+  display: block;
+  width: 100%;
+  float: left;
+  position: relative;
 }
 
 .admin_namespace #article_list, #article_carousel_list {
