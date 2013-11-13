@@ -1,0 +1,14 @@
+%header{id: 'header'}
+  %div{id: 'header_container'}
+    %div{class: 'grid_1 endcap alpha first-child'}
+      = link_to image_tag("logo.png", :id=>'logo'), root_path
+    %div{class: 'grid_14'}
+      %div{class: 'grid_7 prefix_7 push_1'}
+        %ul{id: 'secondary_menu'}
+          = menu_secondary
+      %div{class: 'grid_12 prefix_2'}
+        = image_tag "header_text.png", :alt=>  t('header_text_alt'), :style=>'display: block'
+      %div{class: 'grid_12 prefix_2'}
+        %ul{id: 'menu'}
+          = menu
+    %div{class: 'grid_1 omega endcap last-child'}

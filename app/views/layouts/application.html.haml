@@ -14,8 +14,8 @@
   %meta{name: "description", content: ''}
   %meta{name: 'author', content: ''}
   %meta{name: 'viewport', content: 'width=device-width,initial-scale=1'}
-  = stylesheet_link_tag "dark-hive/jquery-ui-1.10.0.custom.css"
-  -#= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/dark-hive/jquery-ui.css"
+  -#= stylesheet_link_tag "dark-hive/jquery-ui-1.10.0.custom.css"
+  = stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/dark-hive/jquery-ui.css"
   = stylesheet_link_tag "application"
   = yield :css
   = javascript_include_tag "modernizr-2.6.2.min"
@@ -45,10 +45,9 @@
       %footer{id: 'footer'}
         %span= t('footer_copy')
       %div{class: 'clear'}
-    %div{id: 'bottom_padder'}
+    %div
+      %div{id: 'bottom_padder'}
 
-  -#= javascript_include_tag "jquery-1.9.0.js"
-  -#= javascript_include_tag "jquery-ui.js"
   = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
   = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"
 

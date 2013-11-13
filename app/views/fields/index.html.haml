@@ -2,36 +2,46 @@
   = stylesheet_link_tag "fields"
   = stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/themes/dark-hive/jquery-ui.css"
 
-%h1{class: 'grid_16'}= t 'field.heading'
+%div.grid_16#field_header
+  %h1= t 'field.heading'
+  = image_tag 'field.jpg', :width => '940', :height => '142'
+  %div.subheading.alt= 'Select a field below to view location and get directions'
 
-%div{class: 'grid_16', id: 'field_header'}
-  %form{id: 'filter', action: '#'}
-    %span{class: 'grid_2'}= t 'field.filter.heading'
-    = t 'field.filter.club'
-    %select{id: 'clubFilter'}
-      %option{value: 'All'}= t 'field.filter.all'
-      - @clubs.each do |club|
-        %option= club
-    = t 'field.filter.status'
-    %span{id: 'statusFilter'}
-      %input{type: 'radio', id: 'status99', name: 'status', checked: true, value: 'All'}
-        %label{for: 'status99'}= t 'field.filter.all'
-      - @statuses.each_with_index do |status, index|
-        %input{type: 'radio', id: "status#{index}", name: 'status', value: "#{status}"}
-          %label{for: "status#{index}"}= status
+%div.grid_16.box#map
+  -#%form#filter{action: '#'}
+  -#  %span.grid_2= t 'field.filter.heading'
+  -#  = t 'field.filter.club'
+  -#  %select#clubFilter
+  -#    %option{value: 'All'}= t 'field.filter.all'
+  -#    - @clubs.each do |club|
+  -#      %option= club
+  -#  = t 'field.filter.status'
+  -#  %span#statusFilter
+  -#    %input{type: 'radio', id: 'status99', name: 'status', checked: true, value: 'All'}
+  -#      %label{for: 'status99'}= t 'field.filter.all'
+  -#    - @statuses.each_with_index do |status, index|
+  -#      %input{type: 'radio', id: "status#{index}", name: 'status', value: "#{status}"}
+  -#        %label{for: "status#{index}"}= status
 
-%div{id: 'map_canvas', class: 'grid_13'}
+  %div.grid_5.alpha
+    %h2= 'Fields'
+    %ul#fields
 
-%div{class: 'grid_3'}
-  %ul{id: 'fields'}
+  %div#map_canvas{style: 'height: 500px;'}
 
 %script{id: 'FieldTemplate', type: 'text/html'}
-  %li{id: 'field{{:id}}', class: 'field'}
-    %a{href: '#'}
-      %h2="{{:name}}"
-      %div{class: 'club'}= "{{:club}}"
-      %div{class: 'rain'}= "{{:rain_line}}"
-      %div{class: 'status'}= "{{:status}}"
+  %li{id: 'field{{:id}}', class: "{{:#index%2 ? 'even' : 'odd'}}"}
+    ="{{:name}}"
+    -#%img{alt: '{{:status}}', src: '/assets/{{:status}}.jpg'}
+%script{id: 'InfoWindowTemplate', type: 'text/html'}
+  %div{id: 'StreetView', style: 'margin: 0; padding: 0; width: 200px; height: 150px'}
+  ="{{:name}}"
+  %br
+  ="{{:address}}"
+  %br
+  %hr
+  %a{target: '_blank', href: "{{:mapUri}}"}
+    = "Directions"
 
 - content_for :javascript do
   = javascript_include_tag 'http://maps.googleapis.com/maps/api/js?sensor=false'
@@ -39,3 +49,4 @@
   %script
     var fields = #{@fields.to_json.html_safe};
     $(document).ready(soccer.fields.init(fields));
+

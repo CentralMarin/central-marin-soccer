@@ -1,0 +1,15 @@
+= render :partial => "shared/head"
+
+%body{class: "#{body_classes.join(' ')}"}
+  %div{class: 'container_16', id: 'container'}
+    = render :partial => "shared/header"
+
+    %div{id: 'main_container'}
+      %div{id: 'main_bg'}
+      %div{id: 'main', role: 'main', class: ""}
+        = yield
+      = render :partial => "shared/footer"
+    %div{id: 'bottom_padder'}
+
+  = render :partial => "shared/javascript"
+

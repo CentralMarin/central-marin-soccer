@@ -4,6 +4,8 @@ class FieldsController < InheritedResources::Base
 
   before_filter :set_section_name
 
+  layout 'fields'
+
   # GET /fields
   def index
     @fields = Field.all()
