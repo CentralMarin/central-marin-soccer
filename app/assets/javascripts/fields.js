@@ -30,35 +30,14 @@
             field.marker.setMap(null);
         };
 
-        var _streetView = function (field, el) {
-            street = new google.maps.StreetViewPanorama(el, {
-
-                position: new google.maps.LatLng(field.lat, field.lng),
-                zoomControl: false,
-                enableCloseButton: false,
-                addressControl: false,
-                panControl: false,
-                linksControl: false,
-                pov: {
-                    heading: 0,
-                    pitch: 0,
-                    zoom: 0
-                }
-            });
-        };
-
         var _display_info_window = function (field) {
+
             _infoWindow.setContent($("#InfoWindowTemplate").render(field));
-
             _infoWindow.open(_map, field.marker);
-            google.maps.event.addListener(_infoWindow, 'domready', function() {
-                // Add Street View
-                _streetView(field, document.getElementById("StreetView"));
-            });
-
         };
 
         var _addMarker = function (field) {
+
             var marker = new google.maps.Marker({
                 position:new google.maps.LatLng(field.lat, field.lng),
                 icon: ["/assets/icons/", field.status_name.toLowerCase(), ".png"].join(""),
@@ -73,6 +52,7 @@
         };
 
         var _filterFields = function () {
+
             var clubName = $("select option:selected").html() || 'All';
             var statusName = $("input[name=status]:checked").attr('value') || 'All';
 
@@ -93,53 +73,37 @@
         };
 
         var _resizeMap = function () {
-            var headerHeight = $('#header')[0].offsetHeight;
-            var fieldHeaderHeight = $('#field_header')[0].offsetHeight;
-            var footerHeight = $('#footer')[0].offsetHeight;
 
-                $('#map')[0].style.height = _getDocHeight()
-                - (headerHeight + fieldHeaderHeight + footerHeight)
-                + 'px';
-            if (_map != null) {
+            if (_googleMapsLoaded && _map != null) {
                 google.maps.event.trigger(_map, 'resize');
             }
-        };
-
-        var _getDocHeight = function() {
-            return Math.max(
-              $(window).height(),
-              /* For operat */
-              document.documentElement.clientHeight
-            );
         };
 
         var init = function (fieldsArray) {
 
             $('#fields').html($("#FieldTemplate").render(fieldsArray));
 
-            if (_googleMapsLoaded) {
-                _infoWindow =new google.maps.InfoWindow({
-                    content:"Loading..."
-                });
-                var mapOptions = {
-                    center: new google.maps.LatLng(-34.397, 150.644),
-                    zoom:12,
-                    mapTypeId:google.maps.MapTypeId.ROADMAP,
-                    panControl:false,
-                    scaleControl:false,
-                    zoomControlOptions:{
-                        style:google.maps.ZoomControlStyle.LARGE,
-                        position:google.maps.ControlPosition.RIGHT_TOP
-                    },
-                    streetViewControl:false,
-                    mapTypeControl:true,
-                    mapTypeControlOptions:{
-                        style:google.maps.MapTypeControlStyle.DROPDOWN_MENU
-                    }
-                };
+            _infoWindow =new google.maps.InfoWindow({
+                content:"Loading..."
+            });
+            var mapOptions = {
+                center: new google.maps.LatLng(-34.397, 150.644),
+                zoom:12,
+                mapTypeId:google.maps.MapTypeId.ROADMAP,
+                panControl:false,
+                scaleControl:false,
+                zoomControlOptions:{
+                    style:google.maps.ZoomControlStyle.LARGE,
+                    position:google.maps.ControlPosition.RIGHT_TOP
+                },
+                streetViewControl:true,
+                mapTypeControl:true,
+                mapTypeControlOptions:{
+                    style:google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                }
+            };
 
-                _map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-            }
+            _map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
             // associate the backing store with the DOM elements
             var domNodes = $('#fields').children();

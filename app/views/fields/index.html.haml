@@ -23,23 +23,17 @@
   -#      %input{type: 'radio', id: "status#{index}", name: 'status', value: "#{status}"}
   -#        %label{for: "status#{index}"}= status
 
-  %div.grid_5.alpha{style: 'height: 100%'}
+  %div.grid_5.alpha
     %h2= 'Fields'
-    %ul#fields{style: 'height: 100%'}
+    %ul#fields
 
-  %div#map_canvas{style: 'height: 100%'}
+  %div#map_canvas{style: 'height: 500px;'}
 
 %script{id: 'FieldTemplate', type: 'text/html'}
   %li{id: 'field{{:id}}', class: "{{:#index%2 ? 'even' : 'odd'}}"}
     ="{{:name}}"
-    -#%a{href: '#'}
-      -#%img{alt: '{{:status}}', src: '/assets/{{:status}}.jpg'}
-      -#="{{:name}}"
-      -#%div.club= "{{:club}}"
-      -#%div.rain= "{{:rain_line}}"
-      -#%div.status= "{{:status}}"
+    -#%img{alt: '{{:status}}', src: '/assets/{{:status}}.jpg'}
 %script{id: 'InfoWindowTemplate', type: 'text/html'}
-  -#%div{id: 'textWrapper'}
   %div{id: 'StreetView', style: 'margin: 0; padding: 0; width: 200px; height: 150px'}
   ="{{:name}}"
   %br
