@@ -35,10 +35,12 @@
     -#%img{alt: '{{:status}}', src: '/assets/{{:status}}.jpg'}
 %script{id: 'InfoWindowTemplate', type: 'text/html'}
   %div{id: 'StreetView', style: 'margin: 0; padding: 0; width: 200px; height: 150px'}
+    %img{src: 'http://maps.googleapis.com/maps/api/streetview?size=200x150&location={{:lat}},{{:lng}}&sensor=false'}
   ="{{:name}}"
   %br
   ="{{:address}}"
   %br
+  ="Rain Line: {{:rain_line}}"
   %hr
   %a{target: '_blank', href: "{{:mapUri}}"}
     = "Directions"
