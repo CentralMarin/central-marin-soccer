@@ -35,7 +35,9 @@
     -#%img{alt: '{{:status}}', src: '/assets/{{:status}}.jpg'}
 %script{id: 'InfoWindowTemplate', type: 'text/html'}
   %div{id: 'StreetView', style: 'margin: 0; padding: 0; width: 200px; height: 150px'}
-    %img{src: 'http://maps.googleapis.com/maps/api/streetview?size=200x150&location={{:lat}},{{:lng}}&sensor=false'}
+    {{if street_view}}
+    %img{src: 'http://maps.googleapis.com/maps/api/streetview?size=200x150&location={{:street_view.latlng.ob}},{{:street_view.latlng.pb}}&heading={{:street_view.heading}}&sensor=false'}
+    {{/if}}
   ="{{:name}}"
   %br
   ="{{:address}}"

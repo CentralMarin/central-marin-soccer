@@ -32,8 +32,25 @@
 
         var _display_info_window = function (field) {
 
-            _infoWindow.setContent($("#InfoWindowTemplate").render(field));
-            _infoWindow.open(_map, field.marker);
+            // Get Street View information
+            var streetViewMaxDistance = 100;
+            var point = new google.maps.LatLng(field.lat,field.lng);
+            var streetViewService = new google.maps.StreetViewService();
+            var panorama = _map.getStreetView();
+            streetViewService.getPanoramaByLocation(point, streetViewMaxDistance, function (streetViewPanoramaData, status) {
+
+                if(status === google.maps.StreetViewStatus.OK){
+
+                    var oldPoint = point;
+                    point = streetViewPanoramaData.location.latLng;
+
+                    field["street_view"] = {};
+                    field.street_view["latlng"] = point;
+                    field.street_view["heading"] = google.maps.geometry.spherical.computeHeading(point,oldPoint);
+                }
+                _infoWindow.setContent($("#InfoWindowTemplate").render(field));
+                _infoWindow.open(_map, field.marker);
+            });
         };
 
         var _addMarker = function (field) {
