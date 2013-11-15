@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ActionController::Caching::Pages
+
   protect_from_forgery
 
   protected

@@ -1,28 +1,32 @@
 source 'http://rubygems.org'
 
-gem 'rake', '>= 10.0.0'
-gem 'rails', '>= 3.2.12'
+gem 'rake', '>= 10.1.0'
+gem 'rails', '>= 4.0.1'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
-gem 'activeadmin', '>= 0.6.0'
-gem 'meta_search', '>= 1.1.0.pre'
+#gem 'activeadmin', '>= 0.6.2'
+gem 'activeadmin', github: 'gregbell/active_admin'
+#gem 'meta_search', '>= 1.1.3'
 gem 'paper_trail'
 gem 'ckeditor'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'globalize3', '~>0.3.0'
-gem 'haml-rails', '~> 0.3.5'
+#gem 'globalize3', '~>4.0.0.alpha.2'
+gem 'globalize', '~> 4.0.0.alpha.2'
+gem 'haml-rails', '~> 0.4'
 gem 'cancan'
 gem 'whenever', :require => false
+gem "actionpack-page_caching"
+gem "actionpack-action_caching"
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', '~>3.2.5'
-  gem "sass_rails_patch", "~> 0.0.2"
-  gem 'coffee-rails', '~> 3.2.2'
-  gem 'uglifier', '~> 1.3.0'
+  gem 'sass-rails', '~>4.0.1'
+  #gem "sass_rails_patch", "~> 0.0.2"
+  gem 'coffee-rails', '~> 4.0.1'
+  gem 'uglifier', '~> 2.3.1'
 end
 
 
@@ -43,7 +47,8 @@ group :staging, :production do
 end
 
 group :test do
-  gem 'spork', '~> 0.9.2'
+  #gem 'spork', '~> 0.9.2'
+  gem 'spork-rails', github: 'sporkrb/spork-rails'
   gem 'capybara', '~>2.1.0'
   gem 'guard-spork'
   gem 'rb-fsevent'
