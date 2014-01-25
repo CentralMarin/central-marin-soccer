@@ -1,72 +1,59 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'rake', '>= 10.1.0'
-gem 'rails', '>= 4.0.1'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.0.2'
 
-#gem 'activeadmin', '>= 0.6.2'
 gem 'activeadmin', github: 'gregbell/active_admin'
-#gem 'meta_search', '>= 1.1.3'
-gem 'paper_trail'
+#gem 'paper_trail', github: 'airblade/paper_trail'
+#gem 'cancan'
 gem 'ckeditor'
 gem 'carrierwave'
 gem 'mini_magick'
-#gem 'globalize3', '~>4.0.0.alpha.2'
-gem 'globalize', '~> 4.0.0.alpha.2'
-gem 'haml-rails', '~> 0.4'
-gem 'cancan'
+gem 'globalize', '~> 4.0.0'
+gem 'haml-rails', '~> 0.5.3'
 gem 'whenever', :require => false
-gem "actionpack-page_caching"
-gem "actionpack-action_caching"
+gem 'actionpack-page_caching', '~> 1.0.2'
+gem 'actionpack-action_caching', '~> 1.1.1'
+gem 'rails-observers', '~>0.1.2'
+gem 'google_drive'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails', '~>4.0.1'
-  #gem "sass_rails_patch", "~> 0.0.2"
-  gem 'coffee-rails', '~> 4.0.1'
-  gem 'uglifier', '~> 2.3.1'
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'
+
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.1'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 2.4.0'
+
+# Use CoffeeScript for .js.coffee assets and views
+#gem 'coffee-rails', '~> 4.0.0'
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+gem 'turbolinks'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
 end
 
+# Use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.1.2'
 
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'rspec-nc'
-  gem 'factory_girl_rails'
-  gem 'annotate', '>=2.5.0'
-  gem 'sqlite3'
-end
+# Use unicorn as the app server
+# gem 'unicorn'
 
-group :development, :test, :staging do
-  gem 'faker' # want to use faker in all environments except production
-end
+# Use Capistrano for deployment
+# gem 'capistrano', group: :development
 
-group :staging, :production do
-  gem 'mysql2'
-end
-
-group :test do
-  #gem 'spork', '~> 0.9.2'
-  gem 'spork-rails', github: 'sporkrb/spork-rails'
-  gem 'capybara', '~>2.1.0'
-  gem 'guard-spork'
-  gem 'rb-fsevent'
-  gem 'launchy'
-  gem 'database_cleaner'
-  gem 'guard-rspec'
-  gem 'selenium-webdriver'
-end
-
-gem 'libv8', '~> 3.11.8'
-gem 'therubyracer', :require => 'v8'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-#gem 'ruby-debug19', :require => 'ruby-debug'
-
+# Use debugger
+# gem 'debugger', group: [:development, :test]

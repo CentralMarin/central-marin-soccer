@@ -1,5 +1,5 @@
 class CoachSweeper < ActionController::Caching::Sweeper
-  observe Coach
+   observe Coach
 
   def after_create(coach)
     expire_cache_for(coach)
@@ -16,7 +16,7 @@ class CoachSweeper < ActionController::Caching::Sweeper
   private
   def expire_cache_for(coach)
     # Expire the index page now that we added a new team
-    expire_page(:controller => '/coaches', :action => 'index')
-    expire_page("/coaches/#{coach.id}.json")
+    #expire_page(:controller => '/coaches', :action => 'index')
+    #expire_page("/coaches/#{coach.id}.json")
   end
 end

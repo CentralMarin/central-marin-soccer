@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
   include ActionController::Caching::Pages
 
-  protect_from_forgery
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
 
   protected
 
@@ -13,14 +15,6 @@ class ApplicationController < ActionController::Base
     path += 'index' if path == '/'
 
     CentralMarin::Application.config.action_controller.page_cache_directory + I18n.locale.to_s + path + extension
-  end
-
-  def user_for_paper_trail
-    user_signed_in? ? current_user : nil
-  end
-
-  def current_ability
-    @current_ability ||= Ability.new(current_user)
   end
 
   before_filter :set_locale

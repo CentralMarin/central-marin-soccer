@@ -2,17 +2,18 @@
 
 ActiveAdmin.register TeamLevel do
 
-  menu :if => proc{ can?(:manage, TeamLevel) }, :label => 'Level', :parent => 'Teams'
+  menu :label => 'Level', :parent => 'Teams'
+  permit_params :name, :translations_attributes
 
   show do |level|
     attributes_table do
       row :name do
         level.name
       end
-      row 'Nombre' do
-        translation = level.translations.find_by_locale('es')
-        translation.name if translation
-      end
+      #row 'Nombre' do
+      #  translation = level.translations.find_by_locale('es')
+      #  translation.name if translation
+      #end
       row :created_at
       row :updated_at
     end
@@ -23,8 +24,6 @@ ActiveAdmin.register TeamLevel do
   controller do
     def show
         @level = TeamLevel.find(params[:id])
-        @versions = @level.versions
-        @level = @level.versions[params[:version].to_i].reify if params[:version]
         show! #it seems to need this
     end
 
@@ -45,22 +44,4 @@ ActiveAdmin.register TeamLevel do
     end
   end
 
-  sidebar :versions, :partial => "layouts/version", :only => :show
-
-  member_action :history do
-    @level = TeamLevel.find(params[:id])
-    @versions = @level.versions
-    render "layouts/history"
-  end
-
-  # Buttons
-  # show this button only at :show action
-  action_item :only => :show do
-    link_to "History", :action => "history"
-  end
-
-  # show this button only at :history action
-  action_item :only => :history do
-    link_to "Back", :action => "show"
-  end
 end

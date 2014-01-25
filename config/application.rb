@@ -1,11 +1,10 @@
 require File.expand_path('../boot', __FILE__)
 
-# Pick the frameworks you want:
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-#require "active_resource/railtie"
-require "sprockets/railtie"
+require 'rails/all'
+
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(:default, Rails.env)
 
 config = YAML.load(File.read(File.expand_path('../application.yml', __FILE__)))
 config.merge! config.fetch(Rails.env, {})
@@ -13,34 +12,24 @@ config.each do |key, value|
   ENV[key] = value.to_s unless value.kind_of? Hash
 end
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
-
-module CentralMarin
+module CentralMarinSoccer
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
+    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
+    # config.time_zone = 'Central Time (US & Canada)'
+
+    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    # config.i18n.default_locale = :de
+
     config.autoload_paths += %w(#{config.root}/app/sweepers)
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
-
-    # Only load the plugins named here, in the order given (default is alphabetical).
-    # :all can be used as a placeholder for all plugins not explicitly named.
-    # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-
-    # Activate observers that should always be running.
-    # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    config.time_zone = 'Pacific Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
@@ -53,6 +42,13 @@ module CentralMarin
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
+    config.i18n.default_locale = :en
+    config.i18n.fallbacks = true
+
+    config.secret_key_base = ENV["SECRET_KEY_BASE"]
+
+    config.action_controller.page_cache_directory = "#{config.root}/public/cache/"
+
     # Enable the asset pipeline
     config.assets.enabled = true
 
@@ -61,20 +57,5 @@ module CentralMarin
 
     config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif active_admin.css active_admin.js modernizr-2.6.2.min.js jquery-1.9.0.js jquery-ui.js wowslider.js coach.css coaches.js fields.css fields.js information.css home.js jquery.js inline_editing.js information.tournaments.js ckeditor/**/*.js ckeditor/**/*.css dark-hive/jquery-ui-1.10.0.custom.css team.js team.css]
 
-    config.i18n.default_locale = :en
-    config.i18n.fallbacks = true
-
-    config.action_controller.page_cache_directory = "#{config.root}/public/cache/"
-
-    config.generators do |g|
-      g.test_framework :rspec,
-        fixtures: true,
-        view_specs: false,
-        helper_specs: false,
-        routing_specs: false,
-        controller_specs: true,
-        request_specs: true
-      g.fixture_replacement :factory_girl, dir: "spec/factories"
-    end
   end
 end

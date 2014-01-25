@@ -1,4 +1,5 @@
 class HomeSweeper < ActionController::Caching::Sweeper
+
   observe ArticleCarousel, Field
 
   def after_create(model)
@@ -16,6 +17,6 @@ class HomeSweeper < ActionController::Caching::Sweeper
   private
   def expire_cache_for()
     # Expire the index page now that we added a new team
-    expire_page(:controller => '/home', :action => 'index')
+    #expire_page(:controller => '/home', :action => 'index')
   end
 end

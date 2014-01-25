@@ -1,0 +1,13 @@
+%div.grid_16
+  %h1
+    2014 Tryout Confirmation
+  %div
+    You have been successfull registered for the 2014 Central Marin Soccer tryouts. Your tryouts are at:
+  %h4#tryouts_date_and_times
+  %div
+    Please show up 30 minutes early to get checked in. Wear cleats, shin guards, and a plain shirt.
+
+- content_for :javascript do
+  = javascript_include_tag "registrations"
+  %script
+    $(document).ready(soccer.registrations.init_confirmation("#{@tryout}"));

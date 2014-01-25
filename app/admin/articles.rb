@@ -20,7 +20,9 @@ end
 
 ActiveAdmin.register Article do
 
-  menu :if => proc{ can?(:manage, Article) }, :label => 'Articles'
+  menu :label => 'Articles'
+  permit_params :title, :body, :image, :author, :category_id, :team_id, :coach_id, :translations_attributes, :published, :crop_x, :crop_y, :crop_w, :crop_h, :article_id, :carousel_order
+
 
   filter :title
   filter :category
@@ -67,10 +69,8 @@ ActiveAdmin.register Article do
     cache_sweeper :home_sweeper, :only => [:update_carousel_list]
 
     def show
-        @article = Article.find(params[:id])
-        @versions = @article.versions
-        @article = @article.versions[params[:version].to_i].reify if params[:version]
-        response.headers['X-XSS-Protection'] = "0"
+      @article = Article.find(params[:id])
+      response.headers['X-XSS-Protection'] = "0"
     end
 
     def new
@@ -82,14 +82,6 @@ ActiveAdmin.register Article do
       prepare_article params[:id]
       edit!
     end
-  end
-
-  sidebar :versions, :partial => "layouts/version", :only => :show
-
-  member_action :history do
-    @article = Article.find(params[:id])
-    @versions = @article.versions
-    render "layouts/history"
   end
 
   collection_action :update_carousel_list, :method => :get do
@@ -110,17 +102,6 @@ ActiveAdmin.register Article do
     end
 
     head :ok
-  end
-
-  # Buttons
-  # show this button only at :show action
-  action_item :only => :show do
-    link_to "History", :action => "history"
-  end
-
-  # show this button only at :history action
-  action_item :only => :history do
-    link_to "Back", :action => "show"
   end
 
   action_item :only => :index do

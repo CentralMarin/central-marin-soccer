@@ -17,12 +17,9 @@
 class Team < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  has_paper_trail
-
   belongs_to :coach
   belongs_to :team_level
 
-  default_scope :include => [:team_level, :coach]
   scope :academy, lambda {|year| where("year >= ?", year - ACADEMY_YEAR)}
   scope :boys, lambda { where(gender_id: 0).order([:year, :team_level_id]) }
   scope :girls, lambda { where(gender_id: 1).order([:year, :team_level_id]) }
@@ -36,7 +33,6 @@ class Team < ActiveRecord::Base
   TEAMSNAP_ROSTER_ID = '1893703'
   TEAMSNAP_NO_TEAM_ID = '0000'
 
-  attr_accessible :coach_id, :team_level_id, :gender, :year, :name, :image, :teamsnap_team_id, :crop_x, :crop_y, :crop_w, :crop_h
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :crop_team_image
   mount_uploader :image, TeamImageUploader
@@ -56,14 +52,16 @@ class Team < ActiveRecord::Base
   def age
     return nil if year.nil?
 
+    "#{I18n.t('team.name.under')}#{Time.now.year - year}"
+
     # Age is calculated from Aug 1 - July 31. Aug 1, team ages up. Jan 1 - July 31, Rising
-    month = Time.now.month
-    age_value = Time.now.year - year
-    if (month >= 8)
-      "#{I18n.t('team.name.under')}#{age_value + 1}"
-    else
-      "#{I18n.t('team.name.under')}#{age_value} (Rising #{I18n.t('team.name.under')}#{age_value + 1})"
-    end
+    #month = Time.now.month
+    #age_value = Time.now.year - year
+    #if (month >= 8)
+    #  "#{I18n.t('team.name.under')}#{age_value + 1}"
+    #else
+    #  "#{I18n.t('team.name.under')}#{age_value} (Rising #{I18n.t('team.name.under')}#{age_value + 1})"
+    #end
   end
 
   def two_digit_year

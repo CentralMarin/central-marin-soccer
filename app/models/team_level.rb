@@ -11,13 +11,11 @@
 class TeamLevel < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  translates :name, versioning: true, fallbacks_for_empty_translations: true
+  translates :name, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
-  has_many :team_level_translations
+  #has_many :team_level_translations, :dependent => :destroy
 
   has_many :teams
-
-  attr_accessible :name, :translations_attributes
 
   def admin_permalink
     admin_team_level_path(self)
@@ -26,4 +24,5 @@ class TeamLevel < ActiveRecord::Base
   def to_s
     name
   end
+
 end

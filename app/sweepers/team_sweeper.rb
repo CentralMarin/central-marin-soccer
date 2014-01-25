@@ -16,7 +16,7 @@ class TeamSweeper < ActionController::Caching::Sweeper
   private
   def expire_cache_for(team)
     # Expire the index page now that we added a new team
-    expire_page(:controller => '/teams', :action => 'index')
-    expire_page(:controller => '/teams', :action => 'show', :id => team.to_param)
+    #expire_page(:controller => '/teams', :action => 'index')
+    #expire_page(:controller => '/teams', :action => 'show', :id => team.to_param)
   end
 end

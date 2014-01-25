@@ -8,7 +8,7 @@ Spork.prefork do
   # need to restart spork for it take effect.
 
   # Delay loading route loading so spork works with ActiveAdmin
-  Spork.trap_method(Rails::Application::RoutesReloader, :reload!) # Rails 3.1
+#  Spork.trap_method(Rails::Application::RoutesReloader, :reload!) # Rails 3.1
 
   # This file is copied to spec/ when you run 'rails generate rspec:install'
   require File.expand_path("../../config/environment", __FILE__)

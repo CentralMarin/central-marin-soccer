@@ -1,7 +1,7 @@
 ActiveAdmin.register WebPart do
-  menu :if => proc{ can?(:manage, WebPart) }
 
   actions :index, :show, :new, :create, :update, :edit
+  permit_params :html, :name, :translations_attributes
 
   form :partial => "form"
 
@@ -10,8 +10,6 @@ ActiveAdmin.register WebPart do
 
     def show
       @web_part = WebPart.find(params[:id])
-      @versions = @web_part.versions
-      @coach = @web_part.versions[params[:version].to_i].reify if params[:version]
       show! #it seems to need this
     end
     def new

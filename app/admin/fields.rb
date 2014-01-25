@@ -1,6 +1,6 @@
 ActiveAdmin.register Field, {:sort_order => "name_asc"} do
 
-  menu :if => proc{ can?(:manage, Field) }
+  permit_params :name, :club, :rain_line, :address, :status
 
   index do
     column :name
@@ -59,17 +59,8 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
 
     def show
         @field = Field.find(params[:id])
-        @versions = @field.versions
-        @field = @field.versions[params[:version].to_i].reify if params[:version]
         show! #it seems to need this
     end
-  end
-    sidebar :versions, :partial => "layouts/version", :only => :show
-
-  member_action :history do
-    @field = Field.find(params[:id])
-    @versions = @field.versions
-    render "layouts/history"
   end
 
   collection_action :fields_status, :title => "Field Status", :method => :get do
@@ -95,18 +86,7 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
     head :ok
   end
 
-  # Buttons
-  # show this button only at :show action
-  action_item :only => :show do
-    link_to "History", :action => "history"
-  end
-
   action_item :only => :index do
     link_to "Update fields", :action => "fields_status"
-  end
-
-  # show this button only at :history action
-  action_item :only => :history do
-    link_to "Back", :action => "show"
   end
 end

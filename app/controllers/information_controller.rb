@@ -10,7 +10,8 @@ class InformationController < ApplicationController
 
   def init_web_parts(web_parts)
     # Determine if the current user can edit the page
-    @editable = can?(:manage, WebPart)
+    #@editable = can?(:manage, WebPart)
+    @editable = false
     @web_parts = WebPart.load(web_parts)
   end
 

@@ -2,9 +2,7 @@
 class WebPart < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  attr_accessible :html, :name, :translations_attributes
-
-  translates :html, versioning: true, fallbacks_for_empty_translations: true
+  translates :html, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
 
   validates :name, :presence => true, :uniqueness => true
@@ -30,8 +28,6 @@ class WebPart < ActiveRecord::Base
 
   class Translation
     include Rails.application.routes.url_helpers # needed for _path helpers to work in models
-
-    attr_accessible :html
 
     def admin_permalink
       admin_web_part_path(self)

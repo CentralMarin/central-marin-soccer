@@ -22,7 +22,7 @@ def coach_create(details)
   if Rails.env != 'production'
     I18n.available_locales.each do |locale|
       I18n.locale = locale
-      coach.bio = Faker::Lorem.paragraphs(5) if coach.bio.nil?
+      #coach.bio = Faker::Lorem.paragraphs(5) if coach.bio.nil?
     end
     coach.save
   end
@@ -59,11 +59,11 @@ end
 def field_create(details)
   field = Field.find_by_name(details[:name])
 
-  if field.nil?
-    field = Field.create(details)
-  else
-    field.assign_attributes(details)
-  end
+  #if field.nil?
+  #  field = Field.create(details)
+  #else
+  #  field.assign_attributes(details)
+  #end
 
   field
 end
@@ -247,5 +247,7 @@ coach_create(name: 'Adam Dietz', email: 'dietzadam@yahoo.com',
              ]
 )
 
-User.create(:email => ENV["DEFAULT_USER"], roles: User::ROLES) unless User.find_by_email(ENV["DEFAULT_USER"])
+#AdminUser.create(:email => ENV["DEFAULT_USER"], roles: AdminUser::ROLES) unless User.find_by_email(ENV["DEFAULT_USER"])
+
+AdminUser.create(:email => ENV["DEFAULT_USER"]) unless AdminUser.find_by_email(ENV["DEFAULT_USER"])
 

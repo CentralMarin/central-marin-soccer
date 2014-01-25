@@ -17,14 +17,13 @@
 class Article < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  translates :title, :body, versioning: true, fallbacks_for_empty_translations: true
+  translates :title, :body, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
   has_many :article_translations, :dependent => :destroy
   has_many :article_carousels, :dependent => :destroy
 
   ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
 
-  attr_accessible :title, :body, :image, :author, :category_id, :team_id, :coach_id, :translations_attributes, :published, :crop_x, :crop_y, :crop_w, :crop_h
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :crop_article_image
   mount_uploader :image, ArticleImageUploader
@@ -77,8 +76,6 @@ class Article < ActiveRecord::Base
 
   class Translation
     include Rails.application.routes.url_helpers # needed for _path helpers to work in models
-
-    attr_accessible :title, :body
 
     def admin_permalink
       admin_article_path(self)

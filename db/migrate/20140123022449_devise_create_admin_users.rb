@@ -1,5 +1,11 @@
 class DeviseCreateAdminUsers < ActiveRecord::Migration
-  def self.up
+  def migrate(direction)
+    super
+    # Create a default user
+    AdminUser.create!(:email => 'admin@example.com', :password => 'password', :password_confirmation => 'password') if direction == :up
+  end
+
+  def change
     create_table(:admin_users) do |t|
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""
@@ -13,14 +19,11 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration
       t.datetime :remember_created_at
 
       ## Trackable
-      t.integer  :sign_in_count, :default => 0
+      t.integer  :sign_in_count, :default => 0, :null => false
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
       t.string   :last_sign_in_ip
-
-      ## Encryptable
-      # t.string :password_salt
 
       ## Confirmable
       # t.string   :confirmation_token
@@ -29,15 +32,10 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration
       # t.string   :unconfirmed_email # Only if using reconfirmable
 
       ## Lockable
-      # t.integer  :failed_attempts, :default => 0 # Only if lock strategy is :failed_attempts
+      # t.integer  :failed_attempts, :default => 0, :null => false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      # Token authenticatable
-      # t.string :authentication_token
-
-      ## Invitable
-      # t.string :invitation_token
 
       t.timestamps
     end
@@ -46,10 +44,5 @@ class DeviseCreateAdminUsers < ActiveRecord::Migration
     add_index :admin_users, :reset_password_token, :unique => true
     # add_index :admin_users, :confirmation_token,   :unique => true
     # add_index :admin_users, :unlock_token,         :unique => true
-    # add_index :admin_users, :authentication_token, :unique => true
-  end
-
-  def self.down
-    drop_table :admin_users
   end
 end

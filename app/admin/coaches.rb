@@ -1,6 +1,6 @@
 ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
 
-  menu :if => proc{ can?(:manage, Coach) }
+  permit_params :name, :email, :bio, :translations_attributes, :image, :crop_x, :crop_y, :crop_w, :crop_h
 
   index do
     column :name
@@ -56,8 +56,6 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
 
     def show
       @coach = Coach.find(params[:id])
-      @versions = @coach.versions
-      @coach = @coach.versions[params[:version].to_i].reify if params[:version]
       show! #it seems to need this
     end
     def new
@@ -77,22 +75,4 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
     end
   end
 
-  sidebar :versions, :partial => "layouts/version", :only => :show
-
-  member_action :history do
-    @coach = Coach.find(params[:id])
-    @versions = @coach.versions
-    render "layouts/history"
-  end
-
-  # Buttons
-  # show this button only at :show action
-  action_item :only => :show do
-    link_to "History", :action => "history"
-  end
-
-  # show this button only at :history action
-  action_item :only => :history do
-    link_to "Back", :action => "show"
-  end
 end

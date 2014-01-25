@@ -1,94 +1,41 @@
-CentralMarin::Application.routes.draw do
+CentralMarinSoccer::Application.routes.draw do
 
-  # Single page
   root :to => 'home#index'
 
-  # Active Admin
   mount Ckeditor::Engine => '/admin/ckeditor'
+  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users, ActiveAdmin::Devise.config
 
-  match '/news/', :to => 'articles#index', :as => 'articles'
-  match '/news/:id', :to => 'articles#show', :as => 'article'
+  get '/tryouts', :to => 'home#tryouts', :as => 'tryouts'
 
-  match '/coaches/', :to => 'coaches#index', :as => 'coaches'
-  match '/coaches/:id', :to => 'coaches#show', :as => 'coach'
+  get '/registration', :to => 'registrations#index', :as => 'registration'
+  post '/registration', :to => 'registrations#create', :as => 'registration_create'
 
-  match '/teams/', :to => 'teams#index', :as => 'teams'
-  match '/teams/:id', :to => 'teams#show', :as => 'team'
-  match '/teams/:id/teamsnap', :to => 'teams#teamsnap'
+  get '/news/', :to => 'articles#index', :as => 'articles'
+  get '/news/:id', :to => 'articles#show', :as => 'article'
 
-  match '/fields/', :to => 'fields#index', :as => 'fields'
-  match '/fields/:id', :to => 'fields#show', :as => 'field'
+  get '/coaches/', :to => 'coaches#index', :as => 'coaches'
+  get '/coaches/:id', :to => 'coaches#show', :as => 'coach'
 
-  match '/contact', to: 'contact#index', as: 'contact'
-  match '/calendar', to: 'calendar#index', as: 'calendar'
+  get '/teams/', :to => 'teams#index', :as => 'teams'
+  get '/teams/:id', :to => 'teams#show', :as => 'team'
+  get '/teams/:id/teamsnap', :to => 'teams#teamsnap'
 
-  match '/information', to: 'information#index', as: 'information'
-  match '/information/gold', to: 'information#gold', as: 'gold'
-  match '/information/silver', to: 'information#silver', as: 'silver'
-  match '/information/academy', to: 'information#academy', as: 'academy'
-  match '/information/on-equal-footing', to: 'information#scholarship', as: 'scholarship'
-  match '/tournaments/:name/:year', to: 'information#tournaments_previous_winners', as: 'tournaments_previous_winners'
+  get '/fields/', :to => 'fields#index', :as => 'fields'
+  get '/fields/:id', :to => 'fields#show', :as => 'field'
 
-  match '/referees', to: 'information#referees', as: 'referees'
-  match '/tournaments', to: 'information#tournaments', as: 'tournaments'
+  get '/contact', to: 'contact#index', as: 'contact'
+  get '/calendar', to: 'calendar#index', as: 'calendar'
 
-  match '/web_part/save', to: 'web_part#save', as: 'web_part'
+  get '/information', to: 'information#index', as: 'information'
+  get '/information/gold', to: 'information#gold', as: 'gold'
+  get '/information/silver', to: 'information#silver', as: 'silver'
+  get '/information/academy', to: 'information#academy', as: 'academy'
+  get '/information/on-equal-footing', to: 'information#scholarship', as: 'scholarship'
+  get '/tournaments/:name/:year', to: 'information#tournaments_previous_winners', as: 'tournaments_previous_winners'
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  get '/referees', to: 'information#referees', as: 'referees'
+  get '/tournaments', to: 'information#tournaments', as: 'tournaments'
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  post '/web_part/save', to: 'web_part#save', as: 'web_part'
 end

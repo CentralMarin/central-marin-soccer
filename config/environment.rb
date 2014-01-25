@@ -1,8 +1,5 @@
-# Load the rails application
+# Load the Rails application.
 require File.expand_path('../application', __FILE__)
 
-# Initialize the rails application
-CentralMarin::Application.initialize!
-
-# Mailer settings
-#ActionMailer::Base.delivery_method = :smtp
+# Initialize the Rails application.
+CentralMarinSoccer::Application.initialize!

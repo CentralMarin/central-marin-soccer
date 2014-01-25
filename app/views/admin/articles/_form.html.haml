@@ -24,7 +24,7 @@
     = f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
     = f.input :team_id, :collection => @teams, :as => :select, :label => "Team", :include_blank => false
     = f.input :coach_id, :collection => @coaches, :as => :select, :label => "Coach", :include_blank => false
-    = f.input :author, :as => :hidden, :value => current_user
+    = f.input :author, :as => :hidden, :value => current_admin_user
 
   = f.actions do
     = f.action :submit, :label => true

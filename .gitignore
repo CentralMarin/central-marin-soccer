@@ -21,3 +21,4 @@ public/uploads/*
 public/cache/*
 config/application.yml
 .vagrant
+/bin/*

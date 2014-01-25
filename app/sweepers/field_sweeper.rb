@@ -16,6 +16,6 @@ class FieldSweeper < ActionController::Caching::Sweeper
   private
   def expire_cache_for(field)
     # Expire the index page now that we added a new team
-    expire_page(:controller => '/fields', :action => 'index')
+    #expire_page(:controller => '/fields', :action => 'index')
   end
 end

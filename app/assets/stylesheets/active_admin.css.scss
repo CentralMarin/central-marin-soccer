@@ -8,77 +8,10 @@
 // $sidebar-width: 242px;
 
 // Active Admin's got SASS!
-@import url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css);
-@import "jquery.multiselect";
 @import "active_admin/mixins";
 @import "active_admin/base";
-@import "jquery.Jcrop.min";
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
 //
-//   body.active_admin {
-//      .status_tag { background: #6090DB; }
-//   }
-//
-// Notice that Active Admin CSS rules are nested within a
-// 'body.active_admin' selector to prevent conflicts with
-// other pages in the app. It is best to wrap your changes in a 
-// namespace so they are properly recognized. You have options
-// if you e.g. want different styles for different namespaces:
-//
-// .active_admin       applies to any Active Admin namespace
-// .admin_namespace    applies to the admin namespace (eg: /admin)
-// .other_namespace    applies to a custom namespace named other (eg: /other)
-//
-
-body.active_admin {
-  @import "ckeditor/application";
-}
-
-.cke_chrome {
-  width: 78% !important;
-  overflow: hidden;
-}
-
-// Carousel CSS
-.admin_namespace .column {
-  width: 49%;
-  min-height: 200px;
-  float: left;
-  position:relative;
-  border-left: 1px dashed pink;
-}
-
-.admin_namespace .full {
-  clear: both;
-  display: block;
-  width: 100%;
-  float: left;
-  position: relative;
-}
-
-.admin_namespace #article_list, #article_carousel_list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0 0 2.5em;
-  float: left;
-  height: 40px;
-  width: 100%;
-}
-
-#article_list li, #article_carousel_list li  {
-  margin: 0 5px 5px 5px; padding: 5px; font-size: 1.2em; width: 100%;
-}
-
-.carousel_heading {
-  height: 50px;
-  text-align: bottom;
-  border-bottom: 1px;
-  border-color: #8b0000;
-}
-
-// hide hidden form fields
-body.active_admin form fieldset ol > li.hidden {
-  padding: 0px;
-}
+//   .status_tag { background: #6090DB; }

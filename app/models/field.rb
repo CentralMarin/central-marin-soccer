@@ -21,10 +21,6 @@ require "json"
 class Field < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  has_paper_trail
-
-  attr_accessible :name, :club, :rain_line, :address, :status
-
   validates :name,  :presence => true
   validates :club, :presence => true
   validates :rain_line, :presence => true

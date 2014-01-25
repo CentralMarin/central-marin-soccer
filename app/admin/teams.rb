@@ -1,6 +1,7 @@
 ActiveAdmin.register Team, {:sort_order => "year_desc"} do
 
- menu if: proc{ can?(:manage, Team) }, :label => 'Teams', :parent => 'Teams'
+ menu :label => 'Teams', :parent => 'Teams'
+ permit_params :coach_id, :team_level_id, :gender, :year, :name, :image, :teamsnap_team_id, :crop_x, :crop_y, :crop_w, :crop_h
 
  index do
     column :year
@@ -22,8 +23,6 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
 
     def show
        @team = Team.find(params[:id])
-       @versions = @team.versions
-       @team = @team.versions[params[:version].to_i].reify if params[:version]
        show! #it seems to need this
     end
 
@@ -37,22 +36,4 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
       edit!
     end
  end
-   sidebar :versions, :partial => "layouts/version", :only => :show
-
- member_action :history do
-   @team = Team.find(params[:id])
-   @versions = @team.versions
-   render "layouts/history"
- end
-
-  # Buttons
-  # show this button only at :show action
-  action_item :only => :show do
-    link_to "History", :action => "history"
-  end
-
-  # show this button only at :history action
-  action_item :only => :history do
-    link_to "Back", :action => "show"
-  end
 end

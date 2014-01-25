@@ -14,33 +14,33 @@ module ApplicationHelper
   end
 
   def menu
-   [
-       ['menu.home', root_path],
-       ['menu.teams', teams_path],
-       ['menu.academy', academy_path],
-       ['menu.coaches', coaches_path],
-       ['menu.tournaments', tournaments_path],
-       ['menu.referees', referees_path],
-       ['menu.news', articles_path]
+    [
+        ['menu.home', root_path],
+        ['menu.teams', teams_path],
+        ['menu.academy', academy_path],
+        ['menu.coaches', coaches_path],
+        ['menu.tournaments', tournaments_path],
+        ['menu.referees', referees_path],
+        ['menu.news', articles_path]
     ].map do |item|
       menu_item item, (@top_level_section_name == item[0]) ? 'current' : 'single-link'
-   end
-   .join('')
-   .html_safe
+    end
+    .join('')
+    .html_safe
   end
-	
-	def menu_secondary
-   [
-       ['menu.calendar', calendar_path],
-       ['menu.facebook', "https://www.facebook.com/CentralMarinSoccerClub"],
-       ['menu.clubInfo', information_path],
-       ['menu.contact', contact_path],
-       ['menu.language', "#{request.protocol}#{AppConfig[:switch_hosts][I18n.locale]}:#{request.port}#{request.fullpath}"]
+
+  def menu_secondary
+    [
+        ['menu.calendar', calendar_path],
+        ['menu.facebook', "https://www.facebook.com/CentralMarinSoccerClub"],
+        ['menu.clubInfo', information_path],
+        ['menu.contact', contact_path],
+        ['menu.language', "#{request.protocol}#{AppConfig[:switch_hosts][I18n.locale]}:#{request.port}#{request.fullpath}"]
     ].map do |item|
       menu_item item, (@top_level_section_name == item[0]) ? 'current' : 'single-link'
-   end
-   .join('')
-   .html_safe
+    end
+    .join('')
+    .html_safe
   end
 
   def editable_attributes(part_name)
