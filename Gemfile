@@ -59,5 +59,9 @@ group :development do
   gem 'capistrano-bundler', '~> 1.1', require: false
 end
 
+group :staging, :production do
+  gem 'mysql2'
+end
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
