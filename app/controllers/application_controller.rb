@@ -7,16 +7,16 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def self.page_cache_path(path,extension = nil)
-
-    extension = '.html' if extension.nil?
-
-    # make the home page index.html
-    path += 'index' if path == '/'
-
-    CentralMarin::Application.config.action_controller.page_cache_directory + I18n.locale.to_s + path + extension
-  end
-
+  #def self.page_cache_path(path,extension = nil)
+  #
+  #  extension = '.html' if extension.nil?
+  #
+  #  # make the home page index.html
+  #  path += 'index' if path == '/'
+  #
+  #  CentralMarin::Application.config.action_controller.page_cache_directory + I18n.locale.to_s + path + extension
+  #end
+  #
   before_filter :set_locale
 
   def set_locale
