@@ -1,101 +1,78 @@
-ENV = {}
+# config valid only for Capistrano 3.1
+lock '3.1.0'
+
 config = YAML.load(File.read('config/application.yml'))
-#config.merge! config.fetch(Rails.env, {})
 config.each do |key, value|
   ENV[key] = value.to_s unless value.kind_of? Hash
 end
 
-#setup bundler
-require 'bundler/capistrano'
-#setup multistage
-set :stages, %w(vagrant staging production)
-set :default_stage, 'staging'
-require 'capistrano/ext/multistage'
+#server '207.104.28.18', user: "#{ENV['SERVER_USER']}",roles: %w{app, web, db}
+server '192.168.1.12', user: "#{ENV['SERVER_USER']}",roles: %w{app, web, db}
 
-#setup whenever for cron support
-set :whenever_environment, defer { stage }
-set :whenever_identifier, defer { "#{application}_#{stage}" }
-require "whenever/capistrano"
-
-set :application, "centralmarinsoccer"
+# Source Control
+set :application, 'centralmarinsoccer'
+set :repo_url, 'git@github.com:CentralMarin/central-marin-soccer.git'
+set :branch, 'release'
 
 #deployment details
 set :deploy_via, :remote_cache
 set :copy_exclude, ['.git']
 set :user, ENV['SERVER_USER']
 set :use_sudo, false
-set :deploy_to do
-  path = "/webapps/#{application}"
-  path << "-#{stage}" if stage.to_s == "staging"
-  path
-end
+set :deploy_to, "/webapps/centralmarinsoccer"
 
-#repo details
-set :scm, :git
-set :repository, "git@github.com:CentralMarin/central-marin-soccer.git"
-set :branch, "release"
+set :linked_files, %w{config/application.yml}
+set :linked_dirs, %w{public/uploads public/assets public/system log}
+#
+#set :ssh_options, {
+#    verbose: :debug
+#}
 
-# bundle install has to be run before assets can be precompiled
-before "deploy:assets:precompile", "bundle:install"
+##setup whenever for cron support
+##require "whenever/capistrano"
+##set :whenever_environment, #{stage}
+##set :whenever_identifier, "#{application}_#{stage}"
 
-# Update our database
-after "deploy", "deploy:migrate"
+# Default value for keep_releases is 5
+set :keep_releases, 5
 
-# remove old releases
-after "deploy", "deploy:cleanup"
-
-# create our symlink
-after 'deploy:update_code', 'deploy:symlink_uploads'
-
-before 'deploy:assets:precompile' do
-  run "ln -s #{shared_path}/config/application.yml #{release_path}/config/application.yml"
-end
+SSHKit.config.command_map[:rake] = "bundle exec rake"
 
 namespace :deploy do
-  namespace :assets do
-    task :precompile, :roles => :web, :except => { :no_release => true } do
-      begin
-        from = source.next_revision(current_revision)
-      rescue
-        err_no = true
-      end
-      if err_no || capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
-        run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
-      else
-        logger.info "Skipping asset pre-compilation because there were no asset changes"
-      end
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
-  desc "run 'bundle install' to install Bundler's packaged gems for the current deploy"
-  task :bundle_install, :roles => :app do
-    run "cd #{release_path} && bundle install"
-  end
+  #desc 'Symbolic linking uploads directory'
+  #task :symlink_uploads do
+  #  run "mkdir -p #{shared_path}/uploads"
+  #  run "#{try_sudo} chmod 777 #{shared_path}/uploads"
+  #  run "ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
+  #end
 
-  task :start, :roles => :app do
-    run "touch #{current_release}/tmp/restart.txt"
-  end
-
-  task :stop, :roles => :app do
-    # Do Nothing
-  end
-
-  desc "Restart Application"
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  end
-
-  task :symlink_uploads do
-    run "mkdir -p #{shared_path}/uploads"
-    run "#{try_sudo} chmod 777 #{shared_path}/uploads"
-    run "ln -nfs #{shared_path}/uploads  #{release_path}/public/uploads"
-  end
-
+  desc "Create initial folder structure"
   task :setup do
     run "mkdir -p #{shared_path}/config"
   end
+
+  # Update our database
+  after :deploy, :migrate
+
+  # remove old releases
+  after :deploy, :cleanup
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
 end
-
-
-
-
