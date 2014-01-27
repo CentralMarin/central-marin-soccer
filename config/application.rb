@@ -47,8 +47,6 @@ module CentralMarinSoccer
 
     config.secret_key_base = ENV["SECRET_KEY_BASE"]
 
-    config.action_controller.page_cache_directory = "#{config.root}/public/cache/"
-
     # Enable the asset pipeline
     config.assets.enabled = true
 

@@ -12,8 +12,8 @@ gem 'mini_magick'
 gem 'globalize', '~> 4.0.0'
 gem 'haml-rails', '~> 0.5.3'
 gem 'whenever', :require => false
-gem 'actionpack-page_caching', '~> 1.0.2'
-gem 'actionpack-action_caching', '~> 1.1.1'
+#gem 'actionpack-page_caching', '~> 1.0.2'
+#gem 'actionpack-action_caching', '~> 1.1.1'
 gem 'rails-observers', '~>0.1.2'
 gem 'google_drive'
 

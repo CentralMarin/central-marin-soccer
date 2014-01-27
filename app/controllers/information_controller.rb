@@ -1,12 +1,4 @@
 class InformationController < ApplicationController
-  caches_page :index, :gzip => true
-  caches_page :gold, :gzip => true
-  caches_page :silver, :gzip => true
-  caches_page :academy, :gzip => true
-  caches_page :scholarship, :gzip => true
-  caches_page :referees, :gzip => true
-  caches_page :tournaments, :gzip => true
-  caches_page :tournaments_previous_winners, :gzip => true
 
   def init_web_parts(web_parts)
     # Determine if the current user can edit the page

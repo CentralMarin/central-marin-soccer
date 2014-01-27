@@ -3,10 +3,6 @@ require "json"
 
 class TeamsController < ApplicationController
 
-  caches_page :teamsnap, :gzip => true, :expires_in => 10.minutes
-  caches_page :index, :gzip => true
-  caches_page :show, :gzip => true
-
   # GET /teams
   def index
 

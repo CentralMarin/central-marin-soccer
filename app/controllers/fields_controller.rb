@@ -1,7 +1,5 @@
 class FieldsController < InheritedResources::Base
 
-  caches_page :index, :gzip => true
-
   before_filter :set_section_name
 
   layout 'fields'

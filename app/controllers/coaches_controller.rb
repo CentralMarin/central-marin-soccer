@@ -1,8 +1,5 @@
 class CoachesController < ApplicationController
 
-  caches_page :index, :gzip => true
-  caches_page :show, :gzip => true
-
   before_filter :set_section_name
 
   # GET /coaches
