@@ -6,8 +6,10 @@ namespace :user do
     if not user.nil?
       user.password = args.password
       user.save
+      puts "Updated password"
     else
-      puts "Unable to find #{args.email}"
+      puts "Unable to find #{args.email}.. creating"
+      AdminUser.create!(:email => args.email, :password => args.password, :password_confirmation => args.password)
     end
   end
 
