@@ -40,7 +40,7 @@ class RegistrationsController < InheritedResources::Base
        params['home_phone'],
        params['gender'],
        params['birthdate_month'] + '/' + params['birthdate_day'] + '/' + params['birthdate_year'],
-       params['play_up'],
+       (params['play_up'] ? 'Yes' : 'No'),
        params['tryout'],
        params['previous_team'],
        params['parent1_first'],
