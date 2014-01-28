@@ -5,6 +5,7 @@
 // the compiled file.
 //
 //= require namespace
+//= require parsley
 
 (function () {
     namespace("soccer");
@@ -14,6 +15,10 @@
 
         var _default_text = "Select the player's birthday and gender";
         var _tryouts_message = {
+            "6B": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
+            "7B": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
+            "6G": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
+            "7G": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
             "8B": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
             "9B": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
             "8G": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",

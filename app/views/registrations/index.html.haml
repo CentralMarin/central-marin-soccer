@@ -2,62 +2,69 @@
   %h1
     2014 Tryout Registration
 
-= form_tag do
+= form_tag nil, data: {validate: 'parsley' } do
   %div.grid_16.box
     %h2 Player Information
 
-    %div.grid_3 First Name
+    %div.grid_3
+      %label{for: 'player_first'} First Name *
     %div.grid_4
-      %input{type: 'text', name: 'player_first'}
+      %input{type: 'text', name: 'player_first', "parsley-trigger"=>"change", required: true}
 
-    %div.grid_3 Last Name
-    %div.grid_4
-      %input{type: 'text', name: 'player_last'}
+    %div.grid_3
+      %label{for: 'player_last'} Last Name *
+    %div.grid_5
+      %input{type: 'text', name: 'player_last', "parsley-trigger"=>"change", required: true}
 
-    %div.grid_3 Home Address
+    %div.grid_3
+      %label{for: 'home_address'}Home Address *
     %div.grid_4
-      %input{type: 'text', name: 'home_address'}
+      %input{type: 'text', name: 'home_address', "parsley-trigger"=>"change", required: true}
 
-    %div.grid_3 Home Phone
+    %div.grid_3
+      %label{for: 'home_phone'} Home Phone *
     %div.grid_4
-      %input{type: 'text', name: 'home_phone'}
+      %input{type: 'phone', name: 'home_phone', "parsley-trigger"=>"change", required: true}
 
-    %div.grid_3 Gender
+    %div.grid_3
+      %label{for: 'gender'} Gender *
     %div.grid_4
-      %input{type: "radio", name: 'gender', value: 'Boy'} &nbsp; Boy
-      %input{type: "radio", name: 'gender', value: 'Girl'} &nbsp; Girl
+      %input{type: "radio", name: 'gender', value: 'Boy', required: true} &nbsp; Boy
+      %input{type: "radio", name: 'gender', value: 'Girl', required: true} &nbsp; Girl
 
-    %div.grid_3 Birthday
+    %div.grid_3
+      %label{for: 'birthdate_month'} Birthday*
     %div.grid_4
-      %select#birthdate_month{name: 'birthdate_month'}
+      %select#birthdate_month{name: 'birthdate_month', required: true}
         %option
         -(1..12).each do |month|
           %option
             = month
       /
-      %select#birthdate_day{name: 'birthdate_day'}
+      %select#birthdate_day{name: 'birthdate_day', required: true}
         %option
         -(1..31).each do |day|
           %option
             = day
       /
-      %select#birthdate_year{name: 'birthdate_year'}
+      %select#birthdate_year{name: 'birthdate_year', required: true}
         %option
-        - (Time.now.year - 19..Time.now.year-5).each do |year|
+        - (Time.now.year - 19..Time.now.year-6).each do |year|
           %option
             = year
 
     %div.grid_3
-      Tryout Date and Time:
+      %label{for: 'play_up'} Tryout Date and Time:
     %div.grid_12
       %h3#tryouts_date_and_times
       %input#play_up{name: 'play_up', type: 'checkbox'}
       %input{name: 'tryout', type: 'hidden', value: ''}
       Play Up
 
-    %div.grid_3 Previous Team
+    %div.grid_3
+      %label{for: 'previous_team'} Previous Team *
     %div.grid_12
-      %select{name: 'previous_team'}
+      %select{name: 'previous_team', required: true }
         %option
         %option Rec Soccer
         %option Other Competitive Club
@@ -69,24 +76,30 @@
     %div.grid_16.box
       %h2
         Parent #{parent_id} Information
-        - if (parent_id > 1)
-          = "(Optional)"
 
-      %div.grid_3 First Name
+      %div.grid_3
+        %label{for: "parent#{parent_id}_first"}
+          = parent_label(parent_id, 'First Name')
       %div.grid_4
-        %input{type: 'text', name: "parent#{parent_id}_first"}
+        %input{type: 'text', name: "parent#{parent_id}_first", required: (parent_field_required(parent_id))}
 
-      %div.grid_3 Last Name
+      %div.grid_3
+        %label{for: "parent#{parent_id}_last"}
+          = parent_label(parent_id, 'Last Name')
       %div.grid_4
-        %input{type: 'text', name: "parent#{parent_id}_last"}
+        %input{type: 'text', name: "parent#{parent_id}_last", required: (parent_field_required(parent_id))}
 
-      %div.grid_3 Email
+      %div.grid_3
+        %label{for: "parent#{parent_id}_email" }
+          = parent_label(parent_id, 'Email')
       %div.grid_4
-        %input{type: 'text', name: "parent#{parent_id}_email"}
+        %input{type: 'email', name: "parent#{parent_id}_email", required: (parent_field_required(parent_id))}
 
-      %div.grid_3 Cell Phone
+      %div.grid_3
+        %label{for: "parent#{parent_id}_cell"}
+          = parent_label(parent_id, 'Cell Phone')
       %div.grid_4
-        %input{type: 'text', name: "parent#{parent_id}_cell"}
+        %input{type: 'phone', name: "parent#{parent_id}_cell", required: (parent_field_required(parent_id))}
 
   %div.grid_16.box
     %h2 Consent for Medical Treatment (Minor)
@@ -100,13 +113,15 @@
 
     %div.grid_15 &nbsp;
 
-    %div.grid_6 Name of the Person Completing this Form
+    %div.grid_6
+      %label{for: 'form_completed_by'} Name of the Person Completing this Form *
     %div.grid_4
-      %input{type: 'text', name: "form_completed_by"}
+      %input{type: 'text', name: "form_completed_by", required: true}
 
-    %div.grid_6 Relationship to player
+    %div.grid_6
+      %label{for: 'relationship_to_player'} Relationship to player *
     %div.grid_4
-      %input{type: 'text', name: "relationship_to_player"}
+      %input{type: 'text', name: "relationship_to_player", required: true}
 
     %div.grid_15 &nbsp;
 
@@ -116,7 +131,7 @@
 
     %div.grid_15
       I agree
-      %input{type: 'checkbox', name: 'waiver', value: 'agree'}
+      %input{type: 'checkbox', name: 'waiver', value: 'agree', required: true}
 
     %div.grid_15 &nbsp;
 

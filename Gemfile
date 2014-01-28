@@ -16,6 +16,7 @@ gem 'whenever', :require => false
 #gem 'actionpack-action_caching', '~> 1.1.1'
 gem 'rails-observers', '~>0.1.2'
 gem 'google_drive'
+gem "parsley-rails"
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

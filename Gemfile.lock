@@ -151,6 +151,8 @@ GEM
       multi_xml (~> 0.5)
       rack (~> 1.2)
     orm_adapter (0.5.0)
+    parsley-rails (1.2.3.0)
+      railties (>= 3.0.0)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.3)
@@ -247,6 +249,7 @@ DEPENDENCIES
   jquery-rails
   mini_magick
   mysql2
+  parsley-rails
   rails (= 4.0.2)
   rails-observers (~> 0.1.2)
   sass-rails (~> 4.0.1)
