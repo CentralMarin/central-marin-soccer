@@ -6,10 +6,10 @@ CentralMarinSoccer::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  get '/tryouts', :to => 'home#tryouts', :as => 'tryouts'
+  get '/tryouts', :to => 'tryouts#index', :as => 'tryouts'
 
-  get '/registration', :to => 'registrations#index', :as => 'registration'
-  post '/registration', :to => 'registrations#create', :as => 'registration_create'
+  get '/tryouts/registration', :to => 'tryouts#registration', :as => 'tryouts_registration'
+  post '/tryouts/registration', :to => 'tryouts#registration_create', :as => 'tryouts_registration_create'
 
   get '/news/', :to => 'articles#index', :as => 'articles'
   get '/news/:id', :to => 'articles#show', :as => 'article'

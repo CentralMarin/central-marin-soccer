@@ -1,0 +1,143 @@
+%div.grid_16
+  %h1 2014 Tryouts
+
+%div.grid_16.box
+  %h2
+    Pre-Tryouts
+  %p
+    Want to find out more about Central Marin Tryouts?
+    %br
+      Have a chance to train with our Coaches prior to Tryouts?
+  %p
+    Everyone is welcome to our Free Pre-Tryout Playdates Saturday Feb 1st at
+    %a{href: 'https://maps.google.com/maps?q=37.935639,-122.523947&num=1&t=h&z=18'} New Ghillotti Field at Redwood High School
+
+    %ul
+      %li Boys and Girls U8,9 @1:00-2:30
+      %li Boys and Girls U10 @2:00-3:30
+      %li Boys and Girls U11 @330-5:00
+  %h3{class: 'alt'}
+    Information Meetings
+  %p
+    For parents who would like to come to an information meeting and learn more about Central marin Soccer Club, we will have board members and coaches at the following meetings:
+    %ul
+      %li
+        Jan. 27: 7:00-8:30pm at
+        %a{href: 'https://maps.google.com/maps?q=618+B+St,+San+Rafael,+California+94901'} San Rafael Community Center
+      %li
+        Jan. 30th: 7-8:30pm at
+        %a{href: 'https://maps.google.com/maps?q=50+Canal+St,+Canal+Street,+San+Rafael,+CA+94901'} Picklweed Park Community Center
+
+%div.grid_16.box
+  %h2 Tryouts
+
+  %h2{class: 'alt'}
+    Boys and Girls U8, U9
+  %p
+    Feb 8 9:00-11:00 @ Marin Academy
+    %br
+      Feb 15th 9:00-11:00 @ Marin Academy
+
+  %h2{class: 'alt'}
+    Girls U10
+  %p
+    Feb 8 11:00-1:00 @ Marin Academy
+    %br
+      Feb 15th 11:00-1:00 @ Marin Academy
+
+  %h2{class: 'alt'}
+    Boys U10
+  %p
+    Feb 9th 9:00-11:00 @ Marin Academy
+    %br
+      Feb 16th 9:00-11:00 @ Marin Academy
+
+  %h2{class: 'alt'}
+    Girls U11
+  %p
+    Feb 9th 9:00-11:00 @ Marin Academy
+    %br
+      Feb 16th 11:00-1:00 @ Marin Academy
+
+  %h2{class: 'alt'}
+    Boys U11
+  %p
+    Feb 9th 11:00-1:00 @ Marin Academy
+    %br
+      Feb 16th 11:00-1:00 @ Marin Academy
+
+  %h2{class: 'alt'}
+    Boys and Girls U12-U14
+  %p
+    The tryouts for U12-U14 boys and girls are in process and we will provide the schedule as soon as possible.
+
+  %h2{class: 'alt'}
+    Boys and Girls U15-U19
+  %p
+    The tryouts for U15-U19 boys and girls will be announced in the spring
+
+%div.grid_16.box
+  %h2 Questions
+  %h3 What tryout should I go to?
+  Your child should attend their age group tryout. If they would like to play up, they should attend their age group tryout as well as the play up tryout.
+  %h3 What is a play up?
+  A child who is playing for a team older than their age group.
+  %h3 What age group is my child in? What time is my child's tryout?
+  Select your child's gender and birth date below to figure out which is the appropriate tryout.
+
+  %div.clear
+    &nbsp;
+
+  %div.grid_3
+    %label{for: 'gender'} Gender *
+  %div.grid_4
+    %input{type: "radio", name: 'gender', value: 'Boy', required: true} &nbsp; Boy
+    %input{type: "radio", name: 'gender', value: 'Girl', required: true} &nbsp; Girl
+
+  %div.grid_3
+    %label{for: 'birthdate_month'} Birthday*
+  %div.grid_4
+    %select#birthdate_month{name: 'birthdate_month', required: true}
+      %option
+      -(1..12).each do |month|
+        %option
+          = month
+    /
+    %select#birthdate_day{name: 'birthdate_day', required: true}
+      %option
+      -(1..31).each do |day|
+        %option
+          = day
+    /
+    %select#birthdate_year{name: 'birthdate_year', required: true}
+      %option
+      - (Time.now.year - 19..Time.now.year-6).each do |year|
+        %option
+          = year
+
+  %div.clear
+    &nbsp;
+
+  %div.grid_3
+    Tryout Date and Time:
+  %div.grid_12
+    %h4#tryouts_date_and_times
+    %input#play_up{name: 'play_up', type: 'checkbox'}
+    %input{name: 'tryout', type: 'hidden', value: ''}
+    Play Up
+
+  %div.clear
+    &nbsp;
+
+  %h3 What if it's raining during tryouts?
+  Tryouts are rain or shine, so come one out.
+  %h3 Where can I find out more information on Central Marin Competitive Soccer Club?
+  = link_to 'Click here for more information on Central Marin Competitive Soccer Club', information_path, class: 'alt'
+%div.grid_16.box
+  %h2 Online Registration
+  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, class: 'alt'
+
+- content_for :javascript do
+  = javascript_include_tag "tryouts"
+  %script
+    $(document).ready(soccer.tryouts.init_registration());

@@ -12,13 +12,6 @@ class HomeController < InheritedResources::Base
     end
   end
 
-  def registration
-    #Get all teams
-    @teams = Team.all
-  end
-
-
-
   protected
 
   def set_section_name

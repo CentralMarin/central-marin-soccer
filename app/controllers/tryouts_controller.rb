@@ -1,15 +1,17 @@
-class RegistrationsController < InheritedResources::Base
+class TryoutsController < InheritedResources::Base
 
   @@mutex = Mutex.new
 
-  before_filter :set_section_name
-
   def index
+
+  end
+
+  def registration
     #Get all teams
     @teams = Team.all
   end
 
-  def create
+  def registration_create
     update_spreadsheet '2014 Tryout Registration', params
 
     # TODO: split out playups so coaches know what they're trying out for
@@ -19,10 +21,6 @@ class RegistrationsController < InheritedResources::Base
   end
 
   protected
-
-  def set_section_name
-    @top_level_section_name = 'menu.home'
-  end
 
   def update_spreadsheet(title, params)
 
@@ -53,7 +51,8 @@ class RegistrationsController < InheritedResources::Base
        params['parent2_cell'],
        params['form_completed_by'],
        params['relationship_to_player'],
-       params['agree']
+       params['agree'],
+       request.env['HTTP_USER_AGENT']
       ].each_with_index do |cell, index|
         ws[lastrow, index + 1] = cell
       end

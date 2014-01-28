@@ -9,7 +9,7 @@
 
 (function () {
     namespace("soccer");
-    soccer.registrations = (function () {
+    soccer.tryouts = (function () {
 
         var _current_year = new Date().getFullYear();
 

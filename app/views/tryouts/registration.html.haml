@@ -1,6 +1,15 @@
 %div.grid_16
   %h1
-    2014 Tryout Registration
+    2014 U8-U19 Soccer Tryout Online Registration
+
+%div.grid_16
+  Use the form below to register your child for the Central Marin Competitive Soccer Club tryouts for U8-U19.
+  %br
+  For more information on tryouts, click
+  = link_to 'here.', tryouts_url
+
+%div.grid_16
+  &nbsp;
 
 = form_tag nil, data: {validate: 'parsley' } do
   %div.grid_16.box
@@ -27,7 +36,7 @@
     %div.grid_3
       %label{for: 'home_phone'} Home Phone *
     %div.grid_4
-      %input{type: 'phone', name: 'home_phone', "parsley-trigger"=>"change", required: true}
+      %input{type: 'text', "parsley-type" => 'phone', name: 'home_phone', "parsley-trigger"=>"change", required: true, placeholder: '(XXX) XXX XXXX'}
 
     %div.clear
       &nbsp;
@@ -111,13 +120,13 @@
         %label{for: "parent#{parent_id}_email" }
           = parent_label(parent_id, 'Email')
       %div.grid_4
-        %input{type: 'email', name: "parent#{parent_id}_email", required: (parent_field_required(parent_id))}
+        %input{type: 'text', name: "parent#{parent_id}_email", "parsley-type" => 'email', placeholder: 'someone@example.com', required: (parent_field_required(parent_id))}
 
       %div.grid_3
         %label{for: "parent#{parent_id}_cell"}
           = parent_label(parent_id, 'Cell Phone')
       %div.grid_4
-        %input{type: 'phone', name: "parent#{parent_id}_cell", required: (parent_field_required(parent_id))}
+        %input{type: 'text', name: "parent#{parent_id}_cell", "parsley-type" => 'phone', placeholder: '(XXX) XXX XXXX', required: (parent_field_required(parent_id))}
 
   %div.grid_16.box
     %h2 Consent for Medical Treatment (Minor)
@@ -163,9 +172,20 @@
     %div.grid_15
       %input{type: 'submit'}
 
+    %div.clear
+      %nbsp;
+
+    %div.clear
+      %nbsp;
+
+%div.grid_16
+  If you have any problems registering for tryouts, email:
+  %a{mail_to: 'tryouts@centralmarinsoccer.com'} tryouts@centralmarinsoccer.com
+
+
 - content_for :javascript do
-  = javascript_include_tag "registrations"
+  = javascript_include_tag "tryouts"
   %script
-    $(document).ready(soccer.registrations.init_registration());
+    $(document).ready(soccer.tryouts.init_registration());
 
 
