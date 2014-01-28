@@ -18,6 +18,7 @@
         var _fields = {};
         var _infoWindow = null;
         var _googleMapsLoaded = window.google != undefined;
+        var _icon_map = {'open':'<%= image_path('icons/open.png')%>', 'closed':'<%= image_path('icons/closed.png')%>', 'call': '<%= image_path('icons/call.png')%>'};
 
         var _showMarker = function (field, bounds) {
             $(field.node).show('slideUp');
@@ -57,7 +58,7 @@
 
             var marker = new google.maps.Marker({
                 position:new google.maps.LatLng(field.lat, field.lng),
-                icon: ["/assets/icons/", field.status_name.toLowerCase(), ".png"].join(""),
+                icon: _icon_map[field.status_name.toLowerCase()],
                 animation:google.maps.Animation.DROP,
                 title:field.title
             });
