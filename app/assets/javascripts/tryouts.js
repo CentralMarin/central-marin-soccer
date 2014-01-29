@@ -11,8 +11,6 @@
     namespace("soccer");
     soccer.tryouts = (function () {
 
-        var _current_year = new Date().getFullYear();
-
         var _default_text = "Select the player's birthday and gender";
         var _tryouts_message = {
             "6B": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
@@ -51,9 +49,9 @@
             var year = $('#birthdate_year').val();
             var gender = $('input[name=gender]:checked').val();
 
-            if (month && day && year) {
+            if (month && day && year && gender) {
                 // Handle the year rounding based on July 31 cutoff
-                var age_level = _current_year - year;
+                var age_level = _get_current_year() - year + 1;
                 if (month > 7)
                     age_level--;
                 if ($('#play_up').is(':checked'))
@@ -70,6 +68,20 @@
         var _set_tryout_text = function(text) {
             var tryouts_date_and_time = $('#tryouts_date_and_times');
             tryouts_date_and_time.html(text);
+        };
+
+        var _get_current_year = function() {
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth();
+
+            // Because this is tryouts, we need to move to the next playing year if we're in September or later
+            // month is 0-11, so 7 is August
+            if (month > 7) {
+                year++;
+            }
+
+            return year;
         };
 
         return {
