@@ -51,7 +51,7 @@ class TryoutsController < InheritedResources::Base
        params['parent2_cell'],
        params['form_completed_by'],
        params['relationship_to_player'],
-       params['agree'],
+       params['waiver'],
        request.env['HTTP_USER_AGENT']
       ].each_with_index do |cell, index|
         ws[lastrow, index + 1] = cell
