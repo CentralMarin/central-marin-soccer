@@ -12,7 +12,7 @@ class TryoutsController < InheritedResources::Base
   end
 
   def registration_create
-    update_spreadsheet '2014 Tryout Registration', params
+    update_spreadsheet ENV['GOOGLE_DRIVE_TRYOUTS_DOC'], params
 
     # TODO: split out playups so coaches know what they're trying out for
 
