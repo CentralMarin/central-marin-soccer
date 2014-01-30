@@ -129,6 +129,12 @@
   %div.clear
     &nbsp;
 
+  %div.grid_15#age_group_chart
+    %a{href: '#'}Show Age Group Chart
+
+  %div.clear
+    &nbsp;
+
   %h3 What if it's raining during tryouts?
   Tryouts are rain or shine, so come on out.
   %h3 What if my child's tryouts have not been scheduled yet?
@@ -139,7 +145,10 @@
   %h2 Online Registration
   = link_to 'Click here to fill out the online registration form', tryouts_registration_url, class: 'alt'
 
+%div{id: "dialog", title: "Age Group Chart"}
+
 - content_for :javascript do
   = javascript_include_tag "tryouts"
   %script
     $(document).ready(soccer.tryouts.init_registration());
+    $(document).ready(soccer.tryouts.show_age_group_chart($('#dialog')));

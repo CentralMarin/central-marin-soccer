@@ -1,0 +1,25 @@
+%center
+  %h1.chart_header
+    %center
+      = "#{@season} - #{@season + 1} Season Age Group Chart"
+  %p
+    &nbsp;
+
+  %table{border: 2, cellpadding: 5}
+    %tr
+      %th
+        &nbsp;
+      -@years.reverse_each do |year|
+        %th
+          %h4.col_header
+            = year
+    -['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].each_with_index do |month, index|
+      %tr
+        %td
+          %h4.row_header
+            = month
+        -(8..20).each do |age_level|
+          %td.cell
+            = "U#{index >= 7 ? age_level - 1 : age_level}"
+
+

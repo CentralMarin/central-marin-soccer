@@ -20,6 +20,14 @@ class TryoutsController < InheritedResources::Base
     render action: 'confirmation'
   end
 
+  def agegroupchart
+    @season = params['season'].to_i
+
+    @years = (@season-19..@season-7)
+
+    render :layout => 'frame'
+  end
+
   protected
 
   def update_spreadsheet(title, params)

@@ -100,6 +100,29 @@
 
             init_confirmation: function(tryout) {
                 $('#tryouts_date_and_times').html(_tryouts_message[tryout]);
+            },
+
+            show_age_group_chart: function(e) {
+                $('#age_group_chart').click(function() {
+
+                    $.get('<%= Rails.application.routes.url_helpers.tryouts_agegroupchart_path(:only_path => true) %>?season=' + _get_current_year(), function(data) {
+
+                        e.html(data);
+                        e.dialog({
+                            draggable: false,
+                            width: 960,
+                            height: 'auto',
+                            position: 'center',
+                            modal: true,
+                            zIndex: 4,
+                            show: { effect: 'fade'},
+                            hide: { effect: 'fade'}
+                        });
+                    });
+
+                    return false;
+                    // TODO: Show this information in a floating div
+                });
             }
         };
     }());

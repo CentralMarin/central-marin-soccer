@@ -10,6 +10,7 @@ CentralMarinSoccer::Application.routes.draw do
 
   get '/tryouts/registration', :to => 'tryouts#registration', :as => 'tryouts_registration'
   post '/tryouts/registration', :to => 'tryouts#registration_create', :as => 'tryouts_registration_create'
+  get '/tryouts/agegroupchart', :to => 'tryouts#agegroupchart', :as => 'tryouts_agegroupchart'
 
   get '/news/', :to => 'articles#index', :as => 'articles'
   get '/news/:id', :to => 'articles#show', :as => 'article'
