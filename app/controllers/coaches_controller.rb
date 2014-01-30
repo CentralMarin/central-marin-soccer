@@ -8,7 +8,6 @@ class CoachesController < ApplicationController
     @coaches = Coach.all
 
     @part_name = 'coaching.overview'
-    @editable = can?(:manage, WebPart)
     @web_parts = WebPart.load(@part_name)
 
     # Get the objectives
