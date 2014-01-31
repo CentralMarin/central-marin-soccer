@@ -41,11 +41,11 @@
     %h2= t('team.news')
     - @articles.each do |article|
       - if not article.image.to_s.blank?
-        %div.grid_16=image_tag article.image
-      %h3.grid_16=article.title
+        %div.grid_15=image_tag article.image
+      %h3.grid_15=article.title
       %div.clear
-      %div.grid_16= article.body.html_safe
-      %p.grid_16= "Published: #{article.updated_at.strftime('%m/%d/%Y')}"
+      %div.grid_15= article.body.html_safe
+      %p.grid_15= "Published: #{article.updated_at.strftime('%m/%d/%Y')}"
       %hr
 
 %hr.grid_16
