@@ -6,7 +6,7 @@ gem 'rails', '4.0.2'
 gem 'activeadmin', github: 'gregbell/active_admin'
 #gem 'paper_trail', github: 'airblade/paper_trail'
 #gem 'cancan'
-gem 'ckeditor'
+gem 'ckeditor', '~> 4.0.9'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'globalize', '~> 4.0.0'
@@ -16,7 +16,8 @@ gem 'whenever', :require => false
 #gem 'actionpack-action_caching', '~> 1.1.1'
 gem 'rails-observers', '~>0.1.2'
 gem 'google_drive'
-gem "parsley-rails"
+gem 'parsley-rails'
+#gem 'delayed_job_active_record'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
