@@ -4,6 +4,7 @@
 //= require jsrender
 //= require jquery-ui
 //= require jquery.Jcrop.min
+//= require ckeditor/override
 //= require ckeditor/init
 //= require namespace
 //= require crop
