@@ -15,9 +15,7 @@ class Coach < ActiveRecord::Base
 
   before_validation :downcase_email
 
-  translates :bio, fallbacks_for_empty_translations: true
-  accepts_nested_attributes_for :translations, :allow_destroy => true
-  #has_many :coach_translations, :dependent => :destroy
+  active_admin_translates :bio
 
   has_many :teams
 
@@ -32,10 +30,10 @@ class Coach < ActiveRecord::Base
   validates :email,        :presence => true,
                            :format => { :with => email_regex },
                            :uniqueness => true
-
-  def admin_permalink
-    admin_coach_path(self)
-  end
+  #
+  #def admin_permalink
+  #  admin_coach_path(self)
+  #end
 
   def crop_coach_image
     image.recreate_versions! if crop_x.present?
@@ -54,19 +52,5 @@ class Coach < ActiveRecord::Base
   def downcase_email
     self.email = self.email.downcase if self.email.present?
   end
-
-  #class Translation
-  #  include Rails.application.routes.url_helpers # needed for _path helpers to work in models
-  #
-  #  def admin_permalink
-  #    admin_coach_path(self)
-  #  end
-  #
-  #  def to_s
-  #    coach = Coach.find(self['coach_id'])
-  #    coach.name
-  #  end
-  #
-  #end
 end
 

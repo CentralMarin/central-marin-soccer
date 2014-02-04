@@ -21,8 +21,7 @@ end
 ActiveAdmin.register Article do
 
   menu :label => 'Articles'
-  permit_params :title, :body, :image, :author, :category_id, :team_id, :coach_id, :translations_attributes, :published, :crop_x, :crop_y, :crop_w, :crop_h, :article_id, :carousel_order
-
+  permit_params :title, :body, :image, :author, :category_id, :team_id, :coach_id, :published, :crop_x, :crop_y, :crop_w, :crop_h, :article_id, :carousel_order, :translations_attributes => [:title, :body, :locale, :id]
 
   filter :title
   filter :category
@@ -63,25 +62,56 @@ ActiveAdmin.register Article do
     render "admin/articles/_carousel"
   end
 
-  form :partial => 'form'
+  form do |f|
+    prepare_article
 
-  controller do
-    cache_sweeper :home_sweeper, :only => [:update_carousel_list]
-
-    def show
-      @article = Article.find(params[:id])
-      response.headers['X-XSS-Protection'] = "0"
+    f.translated_inputs "Translated fields", switch_locale: false do |t|
+      t.input :title
+      t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:toolbar => 'Easy', :language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
     end
 
-    def new
-      prepare_article
-      new!
+    f.inputs do
+      f.input :crop_x, :as => :hidden
+      f.input :crop_y, :as => :hidden
+      f.input :crop_w, :as => :hidden
+      f.input :crop_h, :as => :hidden
+      f.input :image, :as => :file, :hint => f.object.image.url().blank? ?  f.template.image_tag("no_image.png", :id => "cropbox") : f.template.image_tag(f.object.image.url(), :id => "cropbox")
+
+      f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
+      f.input :team_id, :collection => @teams, :as => :select, :label => "Team", :include_blank => false
+      f.input :coach_id, :collection => @coaches, :as => :select, :label => "Coach", :include_blank => false
+      f.input :author, :as => :hidden, :input_html => { :value => current_admin_user }
     end
 
-    def edit
-      prepare_article params[:id]
-      edit!
-    end
+    f.actions <<
+
+    "<script>
+      function category_changed() {
+        switch($('#article_category_id option:selected').text()) {
+          case 'team':
+            $('#article_team_id_input').show();
+            $('#article_coach_id_input').hide();
+            break;
+          case 'coach':
+            $('#article_coach_id_input').show();
+            $('#article_team_id_input').hide();
+            break;
+          default:
+            $('#article_team_id_input').hide();
+            $('#article_coach_id_input').hide();
+        }
+      }
+
+      $('#article_category_id').change(category_changed);
+
+      category_changed();
+
+      $(document).ready(soccer.image_crop.init({
+        modelName: 'article',
+        width: #{ArticleImageUploader::ImageSize::WIDTH},
+        height: #{ArticleImageUploader::ImageSize::HEIGHT}
+      }));
+     </script>".html_safe
   end
 
   collection_action :update_carousel_list, :method => :get do
