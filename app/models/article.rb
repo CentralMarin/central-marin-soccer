@@ -17,9 +17,8 @@
 class Article < ActiveRecord::Base
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
-  translates :title, :body, fallbacks_for_empty_translations: true
-  accepts_nested_attributes_for :translations, :allow_destroy => true
-  has_many :article_translations, :dependent => :destroy
+  active_admin_translates :title, :body
+
   has_many :article_carousels, :dependent => :destroy
 
   ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
@@ -37,10 +36,10 @@ class Article < ActiveRecord::Base
     self.to_s
   end
 
-  def admin_permalink
-    admin_article_item_path(self)
-  end
-
+  #def admin_permalink
+  #  admin_article_item_path(self)
+  #end
+  #
   def crop_article_image
     image.recreate_versions! if crop_x.present?
   end
@@ -74,18 +73,5 @@ class Article < ActiveRecord::Base
     "#{id} #{to_s}".parameterize
   end
 
-  class Translation
-    include Rails.application.routes.url_helpers # needed for _path helpers to work in models
-
-    def admin_permalink
-      admin_article_path(self)
-    end
-
-    def to_s
-      article = Article.find(self['article_id'])
-      article.title
-    end
-
-  end
 
 end

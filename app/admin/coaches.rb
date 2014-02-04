@@ -1,6 +1,6 @@
 ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
 
-  permit_params :name, :email, :bio, :translations_attributes, :image, :crop_x, :crop_y, :crop_w, :crop_h
+  permit_params :name, :email, :bio, :image, :crop_x, :crop_y, :crop_w, :crop_h,:translations_attributes => [:bio, :locale, :id]
 
   index do
     column :name
@@ -47,32 +47,34 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
     active_admin_comments
   end
 
-  form :partial => "form"
+  #form :partial => "form"
+
+  form do |f|
+    f.inputs do
+      f.input :name
+      f.input :email
+
+      f.translated_inputs "Translated fields", switch_locale: false do |t|
+        t.input :bio, :as => :ckeditor, :input_html => {:ckeditor => {:toolbar => 'Easy', :language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
+      end
+
+      f.input :crop_x, :as => :hidden
+      f.input :crop_y, :as => :hidden
+      f.input :crop_w, :as => :hidden
+      f.input :crop_h, :as => :hidden
+      f.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.url(), :id => "cropbox")
+    end
+    f.actions     <<
+
+    "<script>
+      $(document).ready(soccer.image_crop.init({
+        modelName: 'coach',
+        width: #{CoachImageUploader::ImageSize::WIDTH},
+        height: #{CoachImageUploader::ImageSize::HEIGHT}
+      }));
+    </script>".html_safe
+  end
 
   #TODO: Attempt to rename the image if the coaches name is changed
-
-  controller do
-    cache_sweeper :coach_sweeper, :only => [:create, :update, :destroy]
-
-    def show
-      @coach = Coach.find(params[:id])
-      show! #it seems to need this
-    end
-    def new
-      @coach = Coach.new
-      ADDITIONAL_LOCALES.each do |lang|
-        @coach.translations.find_or_initialize_by_locale(lang[0])
-      end
-      new!
-    end
-
-    def edit
-      @coach = Coach.find(params[:id])
-      ADDITIONAL_LOCALES.each do |lang|
-        @coach.translations.find_or_initialize_by_locale(lang[0])
-      end
-      edit!
-    end
-  end
 
 end

@@ -16,6 +16,15 @@ GIT
       ransack (~> 1.0)
       sass-rails
 
+GIT
+  remote: git://github.com/stefanoverna/activeadmin-globalize.git
+  revision: a74f6bcd0c72dccf908eb879e5713208d94981a5
+  branch: master
+  specs:
+    activeadmin-globalize (1.0.0)
+      activeadmin
+      globalize (~> 4.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -237,6 +246,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  activeadmin-globalize!
   capistrano (~> 3.1)
   capistrano-bundler (~> 1.1)
   capistrano-rails (~> 1.1)
