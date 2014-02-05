@@ -120,7 +120,10 @@
                         bgFade: true, // use fade effect
                         bgOpacity: .3, // fade opacity
                         onChange: _updateInfo,
-                        onSelect: _updateInfo
+                        onSelect: _updateInfo,
+                        boxWidth: _options.boxWidth,
+                        boxHeight: _options.boxHeight,
+                        allowMove: true
                     }, function(){
 
                         // Store the Jcrop API in the jcrop_api variable
@@ -141,6 +144,8 @@
             _options.fileSelect = $('#' + _options.modelName + '_image');
             _options.minSize = [_options.width, _options.height];
             _options.aspectRatio = _options.width / _options.height;
+            _options.boxWidth = 800;
+            _options.boxHeight = 600;
 
             // Attach form handler
             _options.fileSelect.change(_fileSelectHandler);
