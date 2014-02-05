@@ -1,5 +1,6 @@
 //= require jquery-1.9.0
 //= require active_admin/base
+//= require active_admin/active_admin_globalize
 //= require jquery.multiselect.min
 //= require jsrender
 //= require jquery-ui
