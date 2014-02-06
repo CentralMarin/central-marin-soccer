@@ -62,7 +62,7 @@ class TryoutsController < InheritedResources::Base
        params['waiver'],
        request.env['HTTP_USER_AGENT']
       ].each_with_index do |cell, index|
-        ws[lastrow, index + 1] = cell
+        ws[lastrow, index + 2] = cell     # 1 Based indexing. Skip the first column so we have a place for tryout number assignment
       end
 
       ws.save
