@@ -6,8 +6,7 @@ config.each do |key, value|
   ENV[key] = value.to_s unless value.kind_of? Hash
 end
 
-#server '207.104.28.18', user: "#{ENV['SERVER_USER']}",roles: %w{app, web, db}
-server '192.168.1.12', user: "#{ENV['SERVER_USER']}",roles: %w{app, web, db}
+server '207.104.28.18', user: "#{ENV['SERVER_USER']}",roles: %w{app, web, db}
 
 # Source Control
 set :application, 'centralmarinsoccer'

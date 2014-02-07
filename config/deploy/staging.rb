@@ -2,7 +2,7 @@
 set :rails_env, :staging
 set :stage, :staging
 
-set :deploy_to, "/webapps/centralmarinsoccer-staging"
+server '10.0.2.15', user: "#{ENV['SERVER_USER']}",roles: %w{app, web, db}
 
 
 # Simple Role Syntax
