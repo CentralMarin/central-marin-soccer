@@ -29,6 +29,8 @@ class Field < ActiveRecord::Base
 
   before_save :set_latlng
 
+  has_many :tryouts
+
   def admin_permalink
     admin_field_path(self)
   end
