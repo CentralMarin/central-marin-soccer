@@ -3,7 +3,8 @@ class TryoutsController < InheritedResources::Base
   @@mutex = Mutex.new
 
   def index
-
+    # Combine age and gender tryouts
+    @tryouts = Tryout.by_age_and_gender
   end
 
   def registration

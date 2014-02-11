@@ -3,24 +3,44 @@ class Tryout < ActiveRecord::Base
 
   validates :gender_id, :presence => true
   validates :age, :presence => true
-  validates :date, :presence => true
-  validates :time_start, :presence => true
-  validates :time_end, :presence => true
-  validates :field, :presence => true
 
   def gender
     Gender.new(gender_id).name
   end
 
-  def time_to_s
-    "#{time_start.strftime('%l:%M')} - #{time_end.strftime('%l:%M')}"
-  end
-
   def date_to_s
-    "#{date.strftime('%a %b')} #{date.day.ordinalize}"
+    if (start.nil?)
+      ""
+    else
+      "#{start.strftime('%a %b')} #{start.day.ordinalize} #{start.strftime('%l:%M')} - #{(start + (duration * 60 * 60)).strftime('%l:%M')}"
+    end
   end
 
   def to_s
-    "U#{age} #{gender} #{date_to_s} #{time_to_s} @ #{field.name} - #{field.address}"
+    display_string = "U#{age} #{gender} #{date_to_s} "
+    if (not field.nil?)
+      display_string += " @ #{field.name} - #{field.address}"
+    end
+  end
+
+  def self.by_age_and_gender
+    # Combine age and gender tryouts
+    tryouts = {}
+    Tryout.order("age, gender_id").each do |tryout|
+      if (tryout.age < 10)
+        key = "#{tryout.gender} Academy"
+      else
+        key = "#{tryout.gender} U#{tryout.age}"
+      end
+
+      if tryouts.has_key?(key)
+        tryouts[key].push tryout
+      else
+        # add entry to array
+        tryouts[key] = [tryout]
+      end
+    end
+
+    return tryouts
   end
 end

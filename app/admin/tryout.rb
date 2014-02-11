@@ -1,15 +1,12 @@
 ActiveAdmin.register Tryout do
 
-  permit_params :gender_id, :age, :date, :time_start, :time_end, :field_id, :is_makeup
+  permit_params :gender_id, :age, :start, :duration, :field_id, :is_makeup
 
   index do
     column :gender
     column :age
     column "Date" do |tryout|
       tryout.date_to_s
-    end
-    column "Time" do |tryout|
-      tryout.time_to_s
     end
     column :field
     actions
@@ -22,9 +19,6 @@ ActiveAdmin.register Tryout do
       row "Date" do
         tryout.date_to_s
       end
-      row "Time" do
-        tryout.time_to_s
-      end
       row :field
       row "Display" do
         tryout.to_s
@@ -35,10 +29,9 @@ ActiveAdmin.register Tryout do
   form do |f|
     f.inputs do
       f.input :gender_id, :as => :select, :collection => Gender.all, :label_method => :name, :value_method => :id, :include_blank => false
-      f.input :age
-      f.input :date
-      f.input :time_start
-      f.input :time_end
+      f.input :age, :as => :select, :collection => [9,10,11,12,13,14,15,16,17,18,19]
+      f.input :start, :as => :string, :input_html => {:class => "hasDatetimePicker"}
+      f.input :duration, :as => :select, :collection => [1,2, 3], :label => "Duration (hours)", :selected => 2
       f.input :field
       f.input :is_makeup
     end
