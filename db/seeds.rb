@@ -59,11 +59,11 @@ end
 def field_create(details)
   field = Field.find_by_name(details[:name])
 
-  #if field.nil?
-  #  field = Field.create(details)
-  #else
-  #  field.assign_attributes(details)
-  #end
+  if field.nil?
+    field = Field.create(details)
+  else
+    field.assign_attributes(details)
+  end
 
   field
 end
