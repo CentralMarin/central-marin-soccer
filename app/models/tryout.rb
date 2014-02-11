@@ -17,7 +17,7 @@ class Tryout < ActiveRecord::Base
   end
 
   def date_to_s
-    "#{date.strftime('%b %e')}"
+    "#{date.strftime('%a %b')} #{date.day.ordinalize}"
   end
 
   def to_s
