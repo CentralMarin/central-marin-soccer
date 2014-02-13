@@ -9,11 +9,19 @@ class Tryout < ActiveRecord::Base
   end
 
   def tryout_start=(start)
-    self.start = DateTime.strptime(start, '%m/%d/%Y %H:%M')
+    if start.blank?
+      self.start = nil
+    else
+      self.start = DateTime.strptime(start, '%m/%d/%Y %H:%M')
+    end
   end
 
   def tryout_start
-    "#{start.strftime('%m/%d/%Y')} #{start.strftime('%H:%M')}"
+    if (start.nil?)
+      ""
+    else
+      "#{start.strftime('%m/%d/%Y')} #{start.strftime('%H:%M')}"
+    end
   end
 
   def date_to_s
@@ -34,7 +42,7 @@ class Tryout < ActiveRecord::Base
   def self.by_age_and_gender
     # Combine age and gender tryouts
     tryouts = {}
-    Tryout.order("age, gender_id").each do |tryout|
+    Tryout.order("age, gender_id, start").each do |tryout|
       if (tryout.age < 10)
         key = "#{tryout.gender} Academy"
       else
