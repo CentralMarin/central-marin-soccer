@@ -13,15 +13,14 @@
 
 $(document).ready(function() {
     jQuery('input.hasDatetimePicker').datetimepicker({
-        dateFormat: "yy-mm-dd",
-        timeFormat: "hh:mm",
+        dateFormat: "mm/dd/yy",
+        timeFormat: "HH:mm",
         hourMin: 9,
         hourMax: 17,
         numberOfMonths: 4,
         stepMinute: 15,
         hourGrid: 1,
         minuteGrid: 15,
-        parse: 'loose',
         beforeShow: function () {
             setTimeout(
                 function () {

@@ -8,6 +8,14 @@ class Tryout < ActiveRecord::Base
     Gender.new(gender_id).name
   end
 
+  def tryout_start=(start)
+    self.start = DateTime.strptime(start, '%m/%d/%Y %H:%M')
+  end
+
+  def tryout_start
+    "#{start.strftime('%m/%d/%Y')} #{start.strftime('%H:%M')}"
+  end
+
   def date_to_s
     if (start.nil?)
       ""
