@@ -46,7 +46,7 @@
     %p
       - value.each do |tryout|
         - if (tryout.start.nil?)
-          "Tryouts will be announced shortly. Register online and you will be notified via email when tryouts are posted."
+          Tryouts will be announced shortly. Register online and you will be notified via email when tryouts are posted.
         - else
           = "#{tryout.date_to_s} @"
           %a{href: tryout.field.map_url}
