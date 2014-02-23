@@ -1,5 +1,7 @@
 CentralMarinSoccer::Application.routes.draw do
 
+#  resources :tryout_registrations
+
   root :to => 'home#index'
 
   mount Ckeditor::Engine => '/admin/ckeditor'
@@ -11,6 +13,7 @@ CentralMarinSoccer::Application.routes.draw do
   get '/tryouts/registration', :to => 'tryouts#registration', :as => 'tryouts_registration'
   post '/tryouts/registration', :to => 'tryouts#registration_create', :as => 'tryouts_registration_create'
   get '/tryouts/agegroupchart', :to => 'tryouts#agegroupchart', :as => 'tryouts_agegroupchart'
+  get '/tryouts/agelevel', :to => 'tryouts#agelevel', :as => 'tryouts_agelevel'
 
   get '/news/', :to => 'articles#index', :as => 'articles'
   get '/news/:id', :to => 'articles#show', :as => 'article'
