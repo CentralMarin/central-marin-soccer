@@ -12,54 +12,21 @@
     soccer.tryouts = (function () {
 
         var _default_text = "Select the player's birthday and gender";
-        var _tryouts_message = {
-            "6B": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
-            "7B": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
-            "6G": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
-            "7G": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
-            "8B": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
-            "9B": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
-            "8G": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
-            "9G": "Boys and Girls U8, U9<br>Feb 8 9:00-11:00 @ Marin Academy<br>Feb 15th 9:00-11:00 @ Marin Academy",
-            "10G": "Girls U10<br>Feb 8 11:00-1:00 @ Marin Academy<br>Feb 15th 11:00-1:00 @ Marin Academy",
-            "10B": "Boys U10<br>Feb 9th 9:00-11:00 @ Marin Academy<br>Feb 16th 9:00-11:00 @ Marin Academy",
-            "11G": "Girls U11<br>Feb 9th 9:00-11:00 @ Marin Academy<br>Feb 16th 11:00-1:00 @ Marin Academy",
-            "11B": "Boys U11<br>Feb 9th 11:00-1:00 @ Marin Academy<br>Feb 16th 11:00-1:00 @ Marin Academy",
-            "12G": "Girls U12<br>Feb 23th 9:00-11:00 @ Marin Academy<br>March 1 1:00-3:00 @ San Rafael High School",
-            "12B": "Boys U12<br>Feb 23th 11:00-1:00 @ Marin Academy<br>March 2 1:00-3:00 @ San Rafael High School",
-            "13G": "Girls U13<br>Feb 23th 3:00-5:00 @ Drake High School<br>March 2 3:00-5:00 @ San Rafael High School",
-            "13B": "Boys U13<br>Feb 23th 1:00-3:00 @ Drake High School<br>March 1 3:00-5:00 @ San Rafael High School",
-            "14B": "Boys and Girls U12-U14<br>The tryouts for U12-U14 boys and girls are in process and we will provide the schedule as soon as possible.",
-            "14G": "Boys and Girls U12-U14<br>The tryouts for U12-U14 boys and girls are in process and we will provide the schedule as soon as possible.",
-            "15G": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>",
-            "15B": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>",
-            "16G": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>",
-            "16B": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>",
-            "17G": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>",
-            "17B": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>",
-            "18G": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>",
-            "18B": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>",
-            "19G": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>",
-            "19B": "Boys and Girls U15-U19<br>The tryouts for U15-U19 boys and girls will be announced in the spring<br>"
-        };
+        var _month_node;
+        var _day_node;
+        var _year_node;
+        var _gender_name;
 
         var _birthdate_changed = function(e) {
-            var month = $('#birthdate_month').val();
-            var day = $('#birthdate_day').val();
-            var year = $('#birthdate_year').val();
-            var gender = $('input[name=gender]:checked').val();
+            var month = _month_node.val();
+            var day = _day_node.val();
+            var year = _year_node.val();
+            var gender = $('input[name="' + _gender_name + '"]:checked').val();
 
             if (month && day && year && gender) {
-                // Handle the year rounding based on July 31 cutoff
-                var age_level = _get_current_year() - year + 1;
-                if (month > 7)
-                    age_level--;
-                if ($('#play_up').is(':checked'))
-                    age_level++;
-
-                var tryout = age_level + gender[0];
-                $('input[name=tryout]').val(tryout)
-                _set_tryout_text(_tryouts_message[tryout]);
+                $.get('<%= Rails.application.routes.url_helpers.tryouts_agelevel_path(:only_path => true) %>?month=' + month + '&year=' + year + '&gender=' + gender, function(tryout_info) {
+                    _set_tryout_text(tryout_info);
+                });
             } else {
                 _set_tryout_text(_default_text);
             }
@@ -85,21 +52,21 @@
         };
 
         return {
-            init_registration: function() {
+            init_registration: function(month, day, year, gender) {
+
+                // Save off dom elements
+                _month_node = $('#' + month);
+                _day_node = $('#' + day);
+                _year_node = $('#' + year);
+                _gender_name = gender;
+
                 // Register change handlers for birthdate
-                $('#birthdate_month').change(_birthdate_changed);
-                $('#birthdate_day').change(_birthdate_changed);
-                $('#birthdate_year').change(_birthdate_changed);
-                $('#play_up').change(_birthdate_changed);
-                $('input[name=gender]').change(_birthdate_changed);
+                _month_node.change(_birthdate_changed);
+                _day_node.change(_birthdate_changed);
+                _year_node.change(_birthdate_changed);
+                $('input[name="' + _gender_name + '"]').change(_birthdate_changed);
 
                 _set_tryout_text(_default_text);
-
-                $('input[name=player_first]').focus();
-            },
-
-            init_confirmation: function(tryout) {
-                $('#tryouts_date_and_times').html(_tryouts_message[tryout]);
             },
 
             show_age_group_chart: function(e) {
@@ -121,7 +88,6 @@
                     });
 
                     return false;
-                    // TODO: Show this information in a floating div
                 });
             }
         };

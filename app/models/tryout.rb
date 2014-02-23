@@ -39,15 +39,46 @@ class Tryout < ActiveRecord::Base
     end
   end
 
+  def self.tryouts_for_age_and_gender(age, gender)
+    if age < 10
+      age = 9
+    end
+
+    key = self.tryout_name(age, gender)
+
+    tryouts = {key => []}
+    Tryout.where(age: age).where(gender_id: gender.id).order('start').each do |tryout|
+      tryouts[key].push tryout
+    end
+
+    tryouts
+  end
+
+  def self.tryout_name(age, gender)
+    key = ""
+    if age < 10
+      key = "#{gender} Academy"
+    else
+      key = "#{gender} U#{age}"
+    end
+    key
+  end
+
+  def self.calculate_age_level(month, year)
+
+    age_level = Time.now.year - year + 1;
+    if month > 7
+      age_level = age_level - 1
+    end
+
+    age_level
+  end
+
   def self.by_age_and_gender
     # Combine age and gender tryouts
     tryouts = {}
-    Tryout.order("age, gender_id, start").each do |tryout|
-      if (tryout.age < 10)
-        key = "#{tryout.gender} Academy"
-      else
-        key = "#{tryout.gender} U#{tryout.age}"
-      end
+    Tryout.order('age, gender_id, start').each do |tryout|
+      key = self.tryout_name(tryout.age, tryout.gender)
 
       if tryouts.has_key?(key)
         tryouts[key].push tryout
@@ -58,5 +89,9 @@ class Tryout < ActiveRecord::Base
     end
 
     return tryouts
+  end
+
+  def as_json(options = {})
+    { gender: Gender.new(self.gender_id).name, age: self.age, date: self.date_to_s, field: field.as_json  }
   end
 end

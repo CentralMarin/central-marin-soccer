@@ -1,0 +1,12 @@
+- tryout_name = @tryout_info.keys[0]
+= tryout_name
+- if @tryout_info[tryout_name].empty?
+  <br>Tryouts are not currently scheduled. Register and we'll notify you as soon as they're posted.
+- else
+  %ul
+    - @tryout_info[tryout_name].each do |tryout|
+      %li
+        - if tryout.field.nil?
+          Tryouts will be announced shortly. Register and we'll notify you as soon as they're posted.
+        - else
+          = "#{tryout.date_to_s} @ #{tryout.field.name} - #{tryout.field.address}"

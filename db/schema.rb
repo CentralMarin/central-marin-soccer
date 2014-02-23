@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140211184433) do
+ActiveRecord::Schema.define(version: 20140220011243) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -153,6 +153,30 @@ ActiveRecord::Schema.define(version: 20140211184433) do
     t.datetime "updated_at"
     t.string   "image"
     t.string   "teamsnap_team_id"
+  end
+
+  create_table "tryout_registrations", force: true do |t|
+    t.string   "first"
+    t.string   "last"
+    t.string   "home_address"
+    t.string   "home_phone"
+    t.date     "birthdate"
+    t.integer  "age"
+    t.integer  "gender"
+    t.string   "previous_team"
+    t.string   "parent1_first"
+    t.string   "parent1_last"
+    t.string   "parent1_cell"
+    t.string   "parent1_email"
+    t.string   "parent2_first"
+    t.string   "parent2_last"
+    t.string   "parent2_cell"
+    t.string   "parent2_email"
+    t.string   "completed_by"
+    t.string   "relationship"
+    t.boolean  "waiver"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tryouts", force: true do |t|

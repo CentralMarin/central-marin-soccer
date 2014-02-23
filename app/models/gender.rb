@@ -6,6 +6,14 @@ class Gender
     end
   end
 
+  def self.id (name)
+    self.names.each do |gender_name, index|
+      if (gender_name == name)
+        return index
+      end
+    end
+  end
+
   def initialize(id)
     @id = id
   end
@@ -16,6 +24,10 @@ class Gender
 
   def name
     Gender.names[@id]
+  end
+
+  def to_s
+    name
   end
 
 protected

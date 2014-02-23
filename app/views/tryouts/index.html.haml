@@ -60,7 +60,7 @@
 %div.grid_16.box
   %h2 Questions
   %h3 What tryout should I go to?
-  Your child should attend their age group tryout. If they would like to play up, they should attend their age group tryout as well as the play up tryout.
+  Your child should attend their age group tryout. If they would like to play up, talk to the coaches during your age group tryout and they will advise.
   %h3 What is a play up?
   A child who is playing for a team older than their age group.
   %h3 What age group is my child in? What time is my child's tryout?
@@ -72,8 +72,8 @@
   %div.grid_3
     %label{for: 'gender'} Gender *
   %div.grid_4
-    %input{type: "radio", name: 'gender', value: 'Boy', required: true} &nbsp; Boy
-    %input{type: "radio", name: 'gender', value: 'Girl', required: true} &nbsp; Girl
+    %input{type: "radio", name: 'gender', value: '0', required: true} &nbsp; Boy
+    %input{type: "radio", name: 'gender', value: '1', required: true} &nbsp; Girl
 
   %div.grid_3
     %label{for: 'birthdate_month'} Birthday*
@@ -99,13 +99,9 @@
   %div.clear
     &nbsp;
 
-  %div.grid_3
-    Tryout Date and Time:
-  %div.grid_12
+  %div.grid_15
     %h4#tryouts_date_and_times
-    %input#play_up{name: 'play_up', type: 'checkbox'}
-    %input{name: 'tryout', type: 'hidden', value: ''}
-    Play Up
+    %input{name: 'age', type: 'hidden', value: ''}
 
   %div.clear
     &nbsp;
@@ -131,5 +127,5 @@
 - content_for :javascript do
   = javascript_include_tag "tryouts"
   %script
-    $(document).ready(soccer.tryouts.init_registration());
+    $(document).ready(soccer.tryouts.init_registration('birthdate_month', 'birthdate_day', 'birthdate_year', 'gender'));
     $(document).ready(soccer.tryouts.show_age_group_chart($('#dialog')));

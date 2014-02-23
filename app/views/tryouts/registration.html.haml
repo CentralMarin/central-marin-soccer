@@ -11,87 +11,56 @@
 %div.grid_16
   &nbsp;
 
-= form_tag nil, data: {validate: 'parsley' } do
+  - if @tryout_registration.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@tryout_registration.errors.count, "error")} prohibited your registration from being saved. Please correct them below."
+
+= form_for @tryout_registration, :url => tryouts_registration_create_path, data: {validate: 'parsley' } do |f|
   %div.grid_16.box
     %h2 Player Information
 
-    %div.grid_3
-      %label{for: 'player_first'} First Name *
-    %div.grid_4
-      %input{type: 'text', name: 'player_first', "parsley-trigger"=>"change", required: true}
+    = show_text_field(f, 'First Name', :first, true)
+    = show_text_field(f, 'Last Name', :last, true)
 
-    %div.grid_3
-      %label{for: 'player_last'} Last Name *
-    %div.grid_5
-      %input{type: 'text', name: 'player_last', "parsley-trigger"=>"change", required: true}
+    %div.clear
+      &nbsp;
+
+    = show_text_field(f, 'Home Address', :home_address, true)
+    = show_text_field(f, 'Home Phone', :home_phone, true, '(XXX) XXX XXXX')
 
     %div.clear
       &nbsp;
 
     %div.grid_3
-      %label{for: 'home_address'}Home Address *
+      Gender *
+
     %div.grid_4
-      %input{type: 'text', name: 'home_address', "parsley-trigger"=>"change", required: true}
+      = f.radio_button :gender, 0, {required: true, 'parsley-required' => 'true'}
+      = f.label :gender, 'Boy', value: 0
+      = f.radio_button :gender, 1, {required: true, 'parsley-required' => 'true'}
+      = f.label :gender, 'Girl', value: 1
+      = show_error('Gender', :gender)
 
     %div.grid_3
-      %label{for: 'home_phone'} Home Phone *
+      = f.label :birthdate, 'Birthday *'
     %div.grid_4
-      %input{type: 'text', "parsley-type" => 'phone', name: 'home_phone', "parsley-trigger"=>"change", required: true, placeholder: '(XXX) XXX XXXX'}
-
+      = f.date_select :birthdate, {start_year: Time.now.year - 19, end_year: Time.now.year - 6, use_month_numbers: true, include_blank: true, order: [:month, :day, :year]}, {required: true, 'parsley-required' => 'true'}
+      = show_error('Birthday', :birthdate)
     %div.clear
       &nbsp;
 
-    %div.grid_3
-      %label{for: 'gender'} Gender *
-    %div.grid_4
-      %input{type: "radio", name: 'gender', value: 'Boy', required: true} &nbsp; Boy
-      %input{type: "radio", name: 'gender', value: 'Girl', required: true} &nbsp; Girl
-
-    %div.grid_3
-      %label{for: 'birthdate_month'} Birthday*
-    %div.grid_4
-      %select#birthdate_month{name: 'birthdate_month', required: true}
-        %option
-        -(1..12).each do |month|
-          %option
-            = month
-      /
-      %select#birthdate_day{name: 'birthdate_day', required: true}
-        %option
-        -(1..31).each do |day|
-          %option
-            = day
-      /
-      %select#birthdate_year{name: 'birthdate_year', required: true}
-        %option
-        - (Time.now.year - 19..Time.now.year-6).each do |year|
-          %option
-            = year
-
-    %div.clear
-      &nbsp;
-
-    %div.grid_3
-      %label{for: 'play_up'} Tryout Date and Time:
-    %div.grid_12
+    %div.grid_15
       %h3#tryouts_date_and_times
-      %input#play_up{name: 'play_up', type: 'checkbox'}
-      %input{name: 'tryout', type: 'hidden', value: ''}
-      Play Up
+      = hidden_field_tag :age
 
     %div.clear
       &nbsp;
 
     %div.grid_3
-      %label{for: 'previous_team'} Previous Team *
+      = f.label :previous_team, 'Previous Team *'
     %div.grid_12
-      %select{name: 'previous_team', required: true }
-        %option
-        %option Rec Soccer
-        %option Other Competitive Club
-        - @teams.each do |team|
-          %option
-            = team.to_team_name_with_coach
+      = f.select :previous_team, options_for_select(['Rec Soccer', 'Other Competitive Club'] + @teams), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
+      = show_error('Previous Team', :previous_team)
 
     %div.clear
       &nbsp;
@@ -101,32 +70,14 @@
       %h2
         Parent #{parent_id} Information
 
-      %div.grid_3
-        %label{for: "parent#{parent_id}_first"}
-          = parent_label(parent_id, 'First Name')
-      %div.grid_4
-        %input{type: 'text', name: "parent#{parent_id}_first", required: (parent_field_required(parent_id))}
-
-      %div.grid_3
-        %label{for: "parent#{parent_id}_last"}
-          = parent_label(parent_id, 'Last Name')
-      %div.grid_4
-        %input{type: 'text', name: "parent#{parent_id}_last", required: (parent_field_required(parent_id))}
+      = show_text_field(f, 'First Name', "parent#{parent_id}_first", (parent_field_required(parent_id)))
+      = show_text_field(f, 'Last Name', "parent#{parent_id}_last", (parent_field_required(parent_id)))
 
       %div.clear
         &nbsp;
 
-      %div.grid_3
-        %label{for: "parent#{parent_id}_email" }
-          = parent_label(parent_id, 'Email')
-      %div.grid_4
-        %input{type: 'text', name: "parent#{parent_id}_email", "parsley-type" => 'email', placeholder: 'someone@example.com', required: (parent_field_required(parent_id))}
-
-      %div.grid_3
-        %label{for: "parent#{parent_id}_cell"}
-          = parent_label(parent_id, 'Cell Phone')
-      %div.grid_4
-        %input{type: 'text', name: "parent#{parent_id}_cell", "parsley-type" => 'phone', placeholder: '(XXX) XXX XXXX', required: (parent_field_required(parent_id))}
+      = show_text_field(f, 'Email', "parent#{parent_id}_email", (parent_field_required(parent_id)), 'someone@somewhere.com')
+      = show_text_field(f, 'Cell', "parent#{parent_id}_cell", (parent_field_required(parent_id)), '(XXX) XXX XXXX')
 
   %div.grid_16.box
     %h2 Consent for Medical Treatment (Minor)
@@ -140,18 +91,12 @@
 
     %div.grid_15 &nbsp;
 
-    %div.grid_6
-      %label{for: 'form_completed_by'} Name of the Person Completing this Form *
-    %div.grid_4
-      %input{type: 'text', name: "form_completed_by", required: true}
+    = show_text_field(f, 'Name of the Person Completing this Form', :completed_by, true, '', 6, 8)
 
     %div.clear
       &nbsp;
 
-    %div.grid_6
-      %label{for: 'relationship_to_player'} Relationship to player *
-    %div.grid_4
-      %input{type: 'text', name: "relationship_to_player", required: true}
+    = show_text_field(f, 'Relationship to player', :relationship, true, '', 6, 8)
 
     %div.clear
       &nbsp;
@@ -164,13 +109,14 @@
       By clicking, I represent that I am the parent or guardian of the minor athlete being registered on this form for Central Marin Competitive Soccer Club and my click is my signature for this waiver and release and medical consent.
 
     %div.grid_15
-      I agree
-      %input{type: 'checkbox', name: 'waiver', value: 'agree', required: true}
+      = f.check_box :waiver, "parsley-trigger"=>"change", required: true
+      = label_tag :waiver, 'I agree *'
+      = show_error 'I agree', :waiver
 
     %div.grid_15 &nbsp;
 
     %div.grid_15
-      %input{type: 'submit'}
+      = f.submit 'Submit'
 
     %div.clear
       %nbsp;
@@ -186,6 +132,7 @@
 - content_for :javascript do
   = javascript_include_tag "tryouts"
   %script
-    $(document).ready(soccer.tryouts.init_registration());
+    $(document).ready(soccer.tryouts.init_registration('tryout_registration_birthdate_2i', 'tryout_registration_birthdate_3i', 'tryout_registration_birthdate_1i', 'tryout_registration[gender]'));
+    $(document).ready($('input[name="tryout_registration[first]"]').focus());
 
 

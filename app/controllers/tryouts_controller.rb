@@ -2,23 +2,49 @@ class TryoutsController < InheritedResources::Base
 
   @@mutex = Mutex.new
 
+  #rescue_from(ActionController::ParameterMissing) do |parameter_missing_exception|
+  #  error = []
+  #  error << "#{parameter_missing_exception.param} is required"
+  #
+  #  flash[:error] = error
+  #  redirect_to :back
+  #
+  #end
+
   def index
     # Combine age and gender tryouts
     @tryouts = Tryout.by_age_and_gender
   end
 
   def registration
-    #Get all teams
-    @teams = Team.all
+    @teams = Team.all.map { |team| team.to_team_name_with_coach } || []
+    @tryout_registration = TryoutRegistration.new
   end
 
   def registration_create
-    update_spreadsheet ENV['GOOGLE_DRIVE_TRYOUTS_DOC'], params
 
-    # TODO: split out playups so coaches know what they're trying out for
+    @tryout_registration = TryoutRegistration.new(params.required(:tryout_registration).permit!)
+    if not @tryout_registration.birthdate.nil?
+      @tryout_registration.age = Tryout.calculate_age_level(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
+    end
 
-    @tryout = params['tryout']
-    render action: 'confirmation'
+    if @tryout_registration.save
+
+      # TODO: Save to google spreadsheet - Age Specific Tab
+      update_spreadsheet ENV['GOOGLE_DRIVE_TRYOUTS_DOC'], @tryout_registration
+
+      # TODO: Send confirmation email
+      #TryoutMailer.signup_confirmation(registration_info).deliver
+
+      @tryout_info = lookup_tryout(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year, Gender.new(@tryout_registration.gender))
+      #@tryout_info = Tryout.tryouts_for_age_and_gender(@tryout_registration.age, Gender.new(@tryout_registration.gender))
+
+      render action: 'confirmation'
+    else
+      @teams = Team.all.map { |team| team.to_team_name_with_coach } || []
+      render :registration
+    end
+
   end
 
   def agegroupchart
@@ -29,41 +55,101 @@ class TryoutsController < InheritedResources::Base
     render :layout => 'frame'
   end
 
+  def agelevel
+    # Determine the age level based on birthdate and gender
+    year = params['year'].to_i
+    month = params['month'].to_i
+    gender = Gender.new(params['gender'].to_i)
+
+    @tryout_info = lookup_tryout(month, year, gender)
+
+    render :layout => 'frame'
+  end
+
   protected
 
-  def update_spreadsheet(title, params)
+  def lookup_tryout(month, year, gender)
+    # find the tryout
+    Tryout.tryouts_for_age_and_gender(Tryout.calculate_age_level(month, year), gender)
+  end
+
+  def get_worksheet(ss, sheet_name)
+
+    age_level_sheet = ss.worksheet_by_title(sheet_name);
+
+    if age_level_sheet.nil?
+      # Create the sheet
+      age_level_sheet = ss.add_worksheet(sheet_name)
+      age_level_sheet.save
+
+      # add the header rows
+      ['Bib #',
+       'Date Submitted',
+       'First',
+       'Last',
+       'Home Address',
+       'Home Phone',
+       'Gender',
+       'Birthdate',
+       'Play up',
+       'Level',
+       'Previous Team',
+       'Parent First',
+       'Parent Last',
+       'Parent Email',
+       'Parent Cell',
+       'Parent First',
+       'Parent Last',
+       'Parent Email',
+       'Parent Cell',
+       'Signor',
+       'Relationship',
+       'Agreement'].each_with_index do |cell, index|
+
+        age_level_sheet[1, index + 1] = cell     # 1 Based indexing
+      end
+      age_level_sheet.save
+    end
+
+    return age_level_sheet;
+  end
+
+  def update_spreadsheet(title, registration_info)
 
     @@mutex.synchronize do
 
       session = GoogleDrive.login(ENV['GOOGLE_DRIVE_USER'], ENV['GOOGLE_DRIVE_PWD'])
       ss = session.spreadsheet_by_title(title) || session.create_spreadsheet(title)
-      ws = ss.worksheets[0]
+      ws = get_worksheet(ss, Tryout.tryout_name(registration_info.age, Gender.new(registration_info.gender)))
       lastrow = ws.num_rows + 1
 
-      [Time.now,
-       params['player_first'],
-       params['player_last'],
-       params['home_address'],
-       params['home_phone'],
-       params['gender'],
-       params['birthdate_month'] + '/' + params['birthdate_day'] + '/' + params['birthdate_year'],
-       (params['play_up'] ? 'Yes' : 'No'),
-       params['tryout'],
-       params['previous_team'],
-       params['parent1_first'],
-       params['parent1_last'],
-       params['parent1_email'],
-       params['parent1_cell'],
-       params['parent2_first'],
-       params['parent2_last'],
-       params['parent2_email'],
-       params['parent2_cell'],
-       params['form_completed_by'],
-       params['relationship_to_player'],
-       params['waiver'],
+      gender = Gender.new(registration_info.gender).to_s
+      # Be explicit about order
+      ['',
+       Time.now,
+       registration_info.first,
+       registration_info.last,
+       registration_info.home_address,
+       registration_info.home_phone,
+       gender,
+       registration_info.birthdate,
+       'No',
+       registration_info.age.to_s + gender[0],
+       registration_info.previous_team,
+       registration_info.parent1_first,
+       registration_info.parent1_last,
+       registration_info.parent1_email,
+       registration_info.parent1_cell,
+       registration_info.parent2_first,
+       registration_info.parent2_last,
+       registration_info.parent2_email,
+       registration_info.parent2_cell,
+       registration_info.completed_by,
+       registration_info.relationship,
+       registration_info.waiver,
        request.env['HTTP_USER_AGENT']
       ].each_with_index do |cell, index|
-        ws[lastrow, index + 2] = cell     # 1 Based indexing. Skip the first column so we have a place for tryout number assignment
+        ws[lastrow, index + 1] = cell     # 1 Based indexing
       end
 
       ws.save
