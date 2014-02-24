@@ -1,32 +1,16 @@
 ActiveAdmin.register WebPart do
 
   actions :index, :show, :new, :create, :update, :edit
-  permit_params :html, :name, :translations_attributes
+  permit_params :html, :name, :translations_attributes => [:html, :locale, :id]
 
-  form :partial => "form"
+form do |f|
+    f.inputs do
+      f.input :name
 
-  controller do
-    cache_sweeper :web_part_sweeper, :only => [:create, :update, :destroy]
-
-    def show
-      @web_part = WebPart.find(params[:id])
-      show! #it seems to need this
-    end
-    def new
-      @web_part = WebPart.new
-      ADDITIONAL_LOCALES.each do |lang|
-        @web_part.translations.find_or_initialize_by_locale(lang[0])
+      f.translated_inputs "Translated fields", switch_locale: false do |t|
+        t.input :html, :as => :ckeditor, :input_html => {:ckeditor => {:toolbar => 'Easy', :language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
       end
-      new!
     end
-
-    def edit
-      @web_part = WebPart.find(params[:id])
-      ADDITIONAL_LOCALES.each do |lang|
-        @web_part.translations.find_or_initialize_by_locale(lang[0])
-      end
-      edit!
-    end
+    f.actions
   end
-
 end
