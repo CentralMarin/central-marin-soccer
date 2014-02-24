@@ -47,8 +47,6 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
     active_admin_comments
   end
 
-  #form :partial => "form"
-
   form do |f|
     f.inputs do
       f.input :name
