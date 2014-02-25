@@ -59,7 +59,7 @@
     %div.grid_3
       = f.label :previous_team, 'Previous Team *'
     %div.grid_12
-      = f.select :previous_team, options_for_select(['Rec Soccer', 'Other Competitive Club'] + @teams), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
+      = f.select :previous_team, options_for_select(['Rec Soccer', 'Other Competitive Club', 'Central Marin Soccer Club']), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
       = show_error('Previous Team', :previous_team)
 
     %div.clear
@@ -96,7 +96,11 @@
     %div.clear
       &nbsp;
 
-    = show_text_field(f, 'Relationship to player', :relationship, true, '', 6, 8)
+    %div.grid_6
+      = f.label :relationship, 'Previous Team *'
+    %div.grid_8
+      = f.select :relationship, options_for_select(['Father', 'Mother', 'Guardian']), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
+      = show_error('Previous Team', :relationship)
 
     %div.clear
       &nbsp;

@@ -17,7 +17,6 @@ class TryoutsController < InheritedResources::Base
   end
 
   def registration
-    @teams = Team.all.map { |team| team.to_team_name_with_coach } || []
     @tryout_registration = TryoutRegistration.new
   end
 
@@ -41,7 +40,6 @@ class TryoutsController < InheritedResources::Base
 
       render action: 'confirmation'
     else
-      @teams = Team.all.map { |team| team.to_team_name_with_coach } || []
       render :registration
     end
 
