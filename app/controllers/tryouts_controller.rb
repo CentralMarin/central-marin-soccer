@@ -29,14 +29,14 @@ class TryoutsController < InheritedResources::Base
 
     if @tryout_registration.save
 
-      # TODO: Save to google spreadsheet - Age Specific Tab
-      update_spreadsheet ENV['GOOGLE_DRIVE_TRYOUTS_DOC'], @tryout_registration
+      # Save to google spreadsheet - Age Specific Tab
+#      update_spreadsheet ENV['GOOGLE_DRIVE_TRYOUTS_DOC'], @tryout_registration
 
-      # TODO: Send confirmation email
-      #TryoutMailer.signup_confirmation(registration_info).deliver
-
+      # Tryout info
       @tryout_info = lookup_tryout(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year, Gender.new(@tryout_registration.gender))
-      #@tryout_info = Tryout.tryouts_for_age_and_gender(@tryout_registration.age, Gender.new(@tryout_registration.gender))
+
+      # Send confirmation email
+      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
 
       render action: 'confirmation'
     else
@@ -92,14 +92,14 @@ class TryoutsController < InheritedResources::Base
        'Play up',
        'Level',
        'Previous Team',
-       'Parent First',
-       'Parent Last',
-       'Parent Email',
-       'Parent Cell',
-       'Parent First',
-       'Parent Last',
-       'Parent Email',
-       'Parent Cell',
+       'Parent1 First',
+       'Parent1 Last',
+       'Parent1 Email',
+       'Parent1 Cell',
+       'Parent2 First',
+       'Parent2 Last',
+       'Parent2 Email',
+       'Parent2 Cell',
        'Signor',
        'Relationship',
        'Agreement'].each_with_index do |cell, index|
