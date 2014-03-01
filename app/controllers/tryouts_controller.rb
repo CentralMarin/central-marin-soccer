@@ -30,13 +30,13 @@ class TryoutsController < InheritedResources::Base
     if @tryout_registration.save
 
       # Save to google spreadsheet - Age Specific Tab
-#      update_spreadsheet ENV['GOOGLE_DRIVE_TRYOUTS_DOC'], @tryout_registration
+      update_spreadsheet ENV['GOOGLE_DRIVE_TRYOUTS_DOC'], @tryout_registration
 
       # Tryout info
       @tryout_info = lookup_tryout(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year, Gender.new(@tryout_registration.gender))
 
       # Send confirmation email
-      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
+      #TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
 
       render action: 'confirmation'
     else
@@ -116,6 +116,10 @@ class TryoutsController < InheritedResources::Base
 
     @@mutex.synchronize do
 
+      # make sure we submit everything in English
+      current_locale = I18n.locale
+      I18n.locale = :en
+
       session = GoogleDrive.login(ENV['GOOGLE_DRIVE_USER'], ENV['GOOGLE_DRIVE_PWD'])
       ss = session.spreadsheet_by_title(title) || session.create_spreadsheet(title)
       ws = get_worksheet(ss, Tryout.tryout_name(registration_info.age, Gender.new(registration_info.gender)))
@@ -151,6 +155,10 @@ class TryoutsController < InheritedResources::Base
       end
 
       ws.save
+
+      # revert back to previous locale
+      I18n.locale = current_locale
     end
+
   end
 end
