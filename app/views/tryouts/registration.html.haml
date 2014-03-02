@@ -57,10 +57,10 @@
       &nbsp;
 
     %div.grid_3
-      = f.label :previous_team, 'Previous Team *'
+      = f.label :previous_team, 'Previous Soccer *'
     %div.grid_12
       = f.select :previous_team, options_for_select(['Rec Soccer', 'Other Competitive Club', 'Central Marin Soccer Club']), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
-      = show_error('Previous Team', :previous_team)
+      = show_error('Previous Soccer', :previous_team)
 
     %div.clear
       &nbsp;
