@@ -31,7 +31,7 @@ ActiveAdmin.register Tryout do
       f.input :gender_id, :as => :select, :collection => Gender.all, :label_method => :name, :value_method => :id, :include_blank => false
       f.input :age, :as => :select, :collection => [9,10,11,12,13,14,15,16,17,18,19]
       f.input :tryout_start, :as => :string, :input_html => {:class => "hasDatetimePicker"}
-      f.input :duration, :as => :select, :collection => [1,2, 3], :label => "Duration (hours)", :selected => 2
+      f.input :duration, :as => :select, :collection => [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], :label => "Duration (minutes)", :selected => 120
       f.input :field
       f.input :is_makeup
     end

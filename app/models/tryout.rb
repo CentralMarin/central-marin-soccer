@@ -28,7 +28,7 @@ class Tryout < ActiveRecord::Base
     if (start.nil?)
       ""
     else
-      "#{start.strftime('%a %b')} #{start.day.ordinalize} #{start.strftime('%l:%M')} - #{(start + (duration * 60 * 60)).strftime('%l:%M')}"
+      "#{start.strftime('%a %b')} #{start.day.ordinalize} #{start.strftime('%l:%M')} - #{(start + (duration * 60)).strftime('%l:%M')}"
     end
   end
 
