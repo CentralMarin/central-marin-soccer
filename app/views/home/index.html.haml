@@ -8,23 +8,23 @@
   %a{class: 'right', href: '/information'}= t('home.program.link')
 
 %div{class: 'grid_10 box'}
-  %a{href: '/registration_night.html'}
-    =image_tag '/registration.png', :alt => 'Registration Night', height: "#{ArticleImageUploader::ImageSize::HEIGHT}", width: "#{ArticleImageUploader::ImageSize::WIDTH}", :title => 'Registration Night'
+  -#%a{href: '/registration_night.html'}
+  -#  =image_tag '/registration.png', :alt => 'Registration Night', height: "#{ArticleImageUploader::ImageSize::HEIGHT}", width: "#{ArticleImageUploader::ImageSize::WIDTH}", :title => 'Registration Night'
 
-  -#%div{id: 'slider-container', class: 'grid_10 '}
-  -#  %div{class: 'ws_images'}
-  -#    %ul
-  -#      - @articles.each do |article|
-  -#        %li
-  -#          %a{href: "#{show_article(article)}"}
-  -#            =image_tag article.image, :alt => article.title, height: "#{ArticleImageUploader::ImageSize::HEIGHT}", width: "#{ArticleImageUploader::ImageSize::WIDTH}", :title => article.title, :id => "wow_#{article.id}"
-  -#          =strip_tags(truncate(article.body, length: 50, truncate_string: "..."))
-    -#%div{class: 'ws_bullets'}
-    -#  %div
-    -#    - @articles.each_with_index do |article, index|
-    -#      %a{href: '#'}
-    -#        =image_tag article.image, :alt => article.title, :title => article.title
-    -#        =index + 1
+  %div{id: 'slider-container', class: 'grid_10 '}
+    %div{class: 'ws_images'}
+      %ul
+        - @articles.each do |article|
+          %li
+            %a{href: "#{show_article(article)}"}
+              =image_tag article.image, :alt => article.title, height: "#{ArticleImageUploader::ImageSize::HEIGHT}", width: "#{ArticleImageUploader::ImageSize::WIDTH}", :title => article.title, :id => "wow_#{article.id}"
+            =strip_tags(truncate(article.body, length: 50, truncate_string: "..."))
+    %div{class: 'ws_bullets'}
+      %div
+        - @articles.each_with_index do |article, index|
+          %a{href: '#'}
+            =image_tag article.image, :alt => article.title, :title => article.title
+            =index + 1
 %div{class: 'grid_16'}
   &nbsp;
 
