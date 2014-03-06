@@ -98,6 +98,21 @@ def create_team(name, token)
 
 end
 
+def get_roster(team_id, token)
+  response = http_get("https://api.teamsnap.com/v2/teams/#{team_id}/as_roster/#{ROSTER_ID}/rosters",
+                 {
+                     'Content-Type' =>  'application/json',
+                     'X-Teamsnap-Token' => token
+                 })
+
+  if response.code == '200'
+    JSON.parse(response.body)
+  else
+    puts 'Unable to lookup roster for team'
+    exit -1
+  end
+end
+
 def create_roster(roster_data, team_id, token)
   # TODO: If the player already exists, skip them
   response = http_post("https://api.teamsnap.com/v2/teams/#{team_id}/as_roster/#{ROSTER_ID}/rosters",
@@ -106,59 +121,40 @@ def create_roster(roster_data, team_id, token)
       'X-Teamsnap-Token' => token
     },
     roster_data)
-  #if response.code == '200'
-  #  # Add the phone numbers for contacts
-  #  results = JSON.parse(response.body)
-  #  roster_id = results['roster']['id']
-  #  results['roster']['contacts'].each do |contact|
-  #    # Determine which contact we have and update the telelphone number
-  #    roster_data['roster']['contacts_attributes'].each do |source_contact|
-  #      if source_contact['first'] == contact['first'] && source_contact['last'] == contact['last']
-  #        # update the telelphone number
-  #        id = contact['id']
-  #
-  #        foo = http_get("https://api.teamsnap.com/v2/teams/#{team_id}/as_roster/#{ROSTER_ID}/rosters/#{roster_id}/contacts/#{id}",
-  #                       {
-  #                           'Content-Type' =>  'application/json',
-  #                           'X-Teamsnap-Token' => token
-  #                       })
-  #        foo1 = http_get("https://api.teamsnap.com/v2/teams/#{team_id}/as_roster/#{ROSTER_ID}/rosters/#{roster_id}/contacts",
-  #                       {
-  #                           'Content-Type' =>  'application/json',
-  #                           'X-Teamsnap-Token' => token
-  #                       })
-  #
-  #
-  #        response_telephone = http_put("https://api.teamsnap.com/v2/teams/#{team_id}/as_roster/#{ROSTER_ID}/rosters/#{roster_id}/contacts/#{id}",
-  #                                       {
-  #                                           'Content-Type' =>  'application/json',
-  #                                           'X-Teamsnap-Token' => token
-  #                                       },
-  #                                       {
-  #                                           'contact' =>
-  #                                              {
-  #                                                  'contact_telephone_numbers_attributes' =>
-  #                                                      [
-  #                                                          {
-  #                                                              'phone_number' => '415-258-9079'
-  #                                                          }
-  #                                                      ]
-  #                                              }
-  #                                       }
-  #        )
-  #
-  #        i = 10
-  #      end
-  #    end
-  #  end
-  #else
-  #  puts "Unable to create roster entry for #{token['roster']['first']} #{token['roster']['last']}"
-  #  exit(-1)
-  #end
 
-  code = response.code
+  if response.code != "200"
+    puts "Failed to create player #{roster_data['roster']['first']} #{roster_data['roster']['last']}"
+  end
+
+  response.code
 
 end
+
+def roster_exists?(optimized_roster, roster)
+
+  exists = false
+  key = build_key(roster['roster']['first'], roster['roster']['last'], roster['roster']['contacts_attributes'].length > 0 ? roster['roster']['contacts_attributes'][0]['first'] : '')
+  if optimized_roster[key]
+    exists = true
+  end
+
+  exists
+end
+
+def build_key(first, last, parent_first)
+  "#{first}|#{last}|#{parent_first}"
+end
+
+def optimize_current_roster(current_roster)
+  optimized_roster = {}
+  current_roster.each do |roster|
+    key = build_key(roster['roster']['first'], roster['roster']['last'], roster['roster']['contacts'].length > 0 ? roster['roster']['contacts'][0]['first'] : '')
+    optimized_roster[key] = true
+  end
+  optimized_roster
+end
+
+######################################################################################
 
 # Grab User Name and Password from the command line
 if ARGV.length != 3
@@ -182,12 +178,12 @@ end
 # Create the Team
 team_id = create_team(team_name, token)
 
+current_roster = get_roster(team_id, token)
+optimized_current_roster = optimize_current_roster(current_roster)
+
 # Load a CSV for the team
 CSV.foreach(ARGV[2], headers: true) do |row|
 
-  # TODO: Add parent 1 info for the child (if the child is too young)
-  # TODO: Add parent 1 as the first contact and parent 2 as the second (if exists)
-  # TODO: Update the home address for all registrations
   if row['Selected'] == 'Y'
 
     # Add players to the Team
@@ -235,30 +231,40 @@ CSV.foreach(ARGV[2], headers: true) do |row|
             "first" => parent_first,
             "last" => parent_last,
             "contact_email_addresses_attributes" => [
-                {
-                    "label" => "#{parent_first} #{parent_last}",
-                    "email"=> parent_email,
-                    "receive_team_emails"=> true,
-                    "hide"=> false
-                },
+
             ],
             "contact_telephones_attributes" =>  [
-                {
-                    "label" => "#{parent_first} #{parent_last}'s Cell",
-                    "phone_number" => parent_cell,
-                    "preferred" => false,
-                    "enable_sms" => false,
-                    "sms_carrier" => "",
-                    "hide" =>false
-                }
             ]}
+
+        if parent_email && !parent_email.empty?
+          parent['contact_email_addresses_attributes'] << {
+              "label" => "#{parent_first} #{parent_last}",
+              "email"=> parent_email,
+              "receive_team_emails"=> true,
+              "hide"=> false
+          }
+        end
+
+        if parent_cell && !parent_cell.empty?
+          parent['contact_telephones_attributes'] << {
+              "label" => "#{parent_first} #{parent_last}'s Cell",
+              "phone_number" => parent_cell,
+              "preferred" => false,
+              "enable_sms" => false,
+              "sms_carrier" => "",
+              "hide" =>false
+          }
+
+        end
 
         roster_data['roster']['contacts_attributes'] << parent
       end
     end
 
-
-    create_roster(roster_data, team_id, token)
+    # only create the roster entry if it doesn't already exist
+    if not roster_exists?(optimized_current_roster, roster_data)
+      create_roster(roster_data, team_id, token)
+    end
   end
 end
 
