@@ -17,50 +17,51 @@
 
 = form_for @tryout_registration, :url => tryouts_registration_create_path, data: {validate: 'parsley' } do |f|
   %div.grid_16.box
-    %h2 Player Information
+    %h2
+      = t('registration.form.player_heading')
 
-    = show_text_field(f, 'First Name', :first, true)
-    = show_text_field(f, 'Last Name', :last, true)
+    = show_text_field(f, t('registration.form.first'), :first, true)
+    = show_text_field(f, t('registration.form.last'), :last, true)
 
     %div.clear
       &nbsp;
 
-    = show_text_field(f, 'Home Address', :home_address, true)
-    = show_text_field(f, 'Home Phone', :home_phone, true, '(XXX) XXX XXXX')
+    = show_text_field(f, t('registration.form.address'), :home_address, true)
+    = show_text_field(f, t('registration.form.phone'), :home_phone, true, '(XXX) XXX XXXX')
 
     %div.clear
       &nbsp;
 
     %div.grid_3
-      Gender *
+      = "#{t('registration.form.gender')} *"
 
     %div.grid_4
       = f.radio_button :gender, 0, {required: true, 'parsley-required' => 'true'}
-      = f.label :gender, 'Boy', value: 0
+      = f.label :gender, t('registration.form.gender_boy'), value: 0
       = f.radio_button :gender, 1, {required: true, 'parsley-required' => 'true'}
-      = f.label :gender, 'Girl', value: 1
-      = show_error('Gender', :gender)
+      = f.label :gender, t('registration.form.gender_girl'), value: 1
+      = show_error(t('registration.form.gender'), :gender)
 
     %div.grid_3
-      = f.label :birthdate, 'Birthday *'
+      = f.label :birthdate, "#{t('registration.form.birthdate')} *"
     %div.grid_4
       = f.date_select :birthdate, {start_year: Time.now.year - 19, end_year: Time.now.year - 6, use_month_numbers: true, include_blank: true, order: [:month, :day, :year]}, {required: true, 'parsley-required' => 'true'}
-      = show_error('Birthday', :birthdate)
+      = show_error(t('registration.form.birthdate'), :birthdate)
     %div.clear
       &nbsp;
 
     %div.grid_15
       %h3#tryouts_date_and_times
-      = hidden_field_tag :age
+      -#= hidden_field_tag :age
 
     %div.clear
       &nbsp;
 
     %div.grid_3
-      = f.label :previous_team, 'Previous Soccer *'
+      = f.label :previous_team, "#{t('registration.form.previous')} *"
     %div.grid_12
-      = f.select :previous_team, options_for_select(['Rec Soccer', 'Other Competitive Club', 'Central Marin Soccer Club']), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
-      = show_error('Previous Soccer', :previous_team)
+      = f.select :previous_team, options_for_select({t('registration.form.previous_rec') => 'Rec Soccer', t('registration.form.previous_other') => 'Other Competitive Club', t('registration.form.previous_cm') => 'Central Marin Soccer Club'}), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
+      = show_error(t('registration.form.previous'), :previous_team)
 
     %div.clear
       &nbsp;
@@ -68,39 +69,41 @@
   - (1..2).each do |parent_id|
     %div.grid_16.box
       %h2
-        Parent #{parent_id} Information
+        = t('registration.form.parent_heading')
 
-      = show_text_field(f, 'First Name', "parent#{parent_id}_first", (parent_field_required(parent_id)))
-      = show_text_field(f, 'Last Name', "parent#{parent_id}_last", (parent_field_required(parent_id)))
+      = show_text_field(f, t('registration.form.first'), "parent#{parent_id}_first", (parent_field_required(parent_id)))
+      = show_text_field(f, t('registration.form.last'), "parent#{parent_id}_last", (parent_field_required(parent_id)))
 
       %div.clear
         &nbsp;
 
-      = show_text_field(f, 'Email', "parent#{parent_id}_email", (parent_field_required(parent_id)), 'someone@somewhere.com')
-      = show_text_field(f, 'Cell', "parent#{parent_id}_cell", (parent_field_required(parent_id)), '(XXX) XXX XXXX')
+      = show_text_field(f, t('registration.form.email'), "parent#{parent_id}_email", (parent_field_required(parent_id)), 'xxxxxx@xxxxxxx.xxx')
+      = show_text_field(f, t('registration.form.mobile'), "parent#{parent_id}_cell", (parent_field_required(parent_id)), '(###) ### ####')
 
   %div.grid_16.box
-    %h2 Consent for Medical Treatment (Minor)
+    %h2
+      = t('registration.form.medical.heading')
     %div.grid_15
-      As the parent or legal guardian of the above-named player, I hereby consent for Emergency medical care as prescribed by a duly licensed Doctor of Medicine or Doctor of Dentistry. This care may be given under whatever conditions are necessary to preserve the life, limb or well-being of my dependent.
+      = t('registration.form.medical.body')
     %div.grid_15 &nbsp;
 
-    %h2 Important
+    %h2
+      = t('registration.form.legal.heading')
     %div.grid_15
-      I, the parent/guardian of the registrant, a minor, agree that I and the registrant will abide by the rules of the USYSA, US Club Soccer and Central Marin Competitive Soccer Club (CMCSC), their affiliated organizations and sponsors. Recognizing the possibility of physical injury associated with soccer and in consideration for the USYSA, US Club Soccer and CMCSC accepting the registrant for their soccer programs and activities (the Program), I hereby release, discharge and/or otherwise indemnify the USYSA, the CMCSC, the coaches/evaluators, their affiliated organizations and sponsors, their employees and associated personnel, including the owners of the fields and facilities utilized for the Programs, against any and all claim (s) by or an behalf of the registrant as a result of the s participation in the program and/or being transported to or from the same, which transportation I hereby authorize.
+      = t('registration.form.legal.body')
 
     %div.grid_15 &nbsp;
 
-    = show_text_field(f, 'Name of the Person Completing this Form', :completed_by, true, '', 6, 8)
+    = show_text_field(f, t('registration.form.completed_by'), :completed_by, true, '', 7, 7)
 
     %div.clear
       &nbsp;
 
-    %div.grid_6
-      = f.label :relationship, 'Previous Team *'
-    %div.grid_8
-      = f.select :relationship, options_for_select(['Father', 'Mother', 'Guardian']), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
-      = show_error('Previous Team', :relationship)
+    %div.grid_7
+      = f.label :relationship, "#{t('registration.form.signor.relationship')} *"
+    %div.grid_7
+      = f.select :relationship, options_for_select({t('registration.form.signor.father') => 'Father', t('registration.form.signor.mother') => 'Mother', t('registration.form.signor.guardian') => 'Guardian'}), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
+      = show_error(t('registration.form.signor.relationship'), :relationship)
 
     %div.clear
       &nbsp;
@@ -109,18 +112,17 @@
       &nbsp;
 
     %div.grid_15
-      I have read the above waiver and release, and consent for medical treatment
-      By clicking, I represent that I am the parent or guardian of the minor athlete being registered on this form for Central Marin Competitive Soccer Club and my click is my signature for this waiver and release and medical consent.
+      = t('registration.form.waiver.body')
 
     %div.grid_15
       = f.check_box :waiver, "parsley-trigger"=>"change", required: true
-      = label_tag :waiver, 'I agree *'
-      = show_error 'I agree', :waiver
+      = f.label :waiver, "#{t('registration.form.waiver.agree')} *"
+      = show_error t('registration.form.waiver.agree'), :waiver
 
     %div.grid_15 &nbsp;
 
     %div.grid_15
-      = f.submit 'Submit'
+      = f.submit t('registration.form.submit')
 
     %div.clear
       %nbsp;

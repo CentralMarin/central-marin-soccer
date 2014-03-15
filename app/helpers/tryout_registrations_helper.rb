@@ -12,14 +12,14 @@ module TryoutRegistrationsHelper
     end
   end
 
-  def show_label(label, field, required, label_grid = 3)
+  def show_label(form, label, field, required, label_grid = 3)
     html = content_tag(:div, :class => "grid_#{label_grid}") do
-      label_tag(field, "#{label} #{required ? ' *' : ''}")
+      form.label(field, "#{label} #{required ? ' *' : ''}")
     end
   end
 
   def show_text_field(form, label, field, required, placeholder = '', label_grid = 3, field_grid = 4)
-    html = show_label(label, field, required, label_grid)
+    html = show_label(form, label, field, required, label_grid)
 
     html += content_tag(:div, :class => "grid_#{field_grid}") do
       html_content = form.text_field(field, "parsley-trigger"=>"change", required: required, placeholder: placeholder)
@@ -33,7 +33,7 @@ module TryoutRegistrationsHelper
   def show_checkbox(form, label, field, required, grid = 5)
     html = content_tag(:div, :class => "grid_#{grid}") do
       html_content = form.check_box(field, "parsley-trigger"=>"change", required: required)
-      html_content += label_tag(field, " #{label} #{required ? ' *' : ''}")
+      html_content += label(field, " #{label} #{required ? ' *' : ''}")
       html_content += show_error(label, field)
     end
 
