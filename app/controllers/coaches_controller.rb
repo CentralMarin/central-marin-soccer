@@ -25,7 +25,7 @@ class CoachesController < ApplicationController
   # GET /coaches/1.json
   def show
     coach = Coach.find(params[:id], :include => :teams)
-    json = coach.to_json({image_url: ActionController::Base.helpers.asset_path(coach.image_url)})
+    json = coach.to_json({:image_url => ActionController::Base.helpers.asset_path(coach.image_url)})
 
     respond_to do |format|
       format.json {render :json => json}

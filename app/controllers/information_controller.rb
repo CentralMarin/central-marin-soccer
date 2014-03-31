@@ -59,8 +59,8 @@ class InformationController < ApplicationController
         ]
     )
     @tournaments = [
-        {name: 'Mission Bell', id: 'mission_bell', overview: @part_name_mission_bell},
-        {name: 'Premier Challenge', id: 'premier_challenge', overview: @part_name_premier_challenge }
+        {:name => 'Mission Bell', :id => 'mission_bell', :overview => @part_name_mission_bell},
+        {:name => 'Premier Challenge', :id => 'premier_challenge', :overview => @part_name_premier_challenge }
     ]
     @years = [I18n.t('information.current'), I18n.t('information.previous')]
   end
@@ -76,10 +76,10 @@ class InformationController < ApplicationController
 
     # build our object
     winners = {
-        web_part_name: web_part[part_name]['name'],
-        html: web_part[part_name]['html'],
-        tournament_name: tournament_name.gsub('_', ' ').titleize,
-        year: year.capitalize
+        :web_part_name => web_part[part_name]['name'],
+        :html => web_part[part_name]['html'],
+        :tournament_name => tournament_name.gsub('_', ' ').titleize,
+        :year => year.capitalize
     }
 
     respond_to do |format|

@@ -2,15 +2,6 @@ class TryoutsController < InheritedResources::Base
 
   @@mutex = Mutex.new
 
-  #rescue_from(ActionController::ParameterMissing) do |parameter_missing_exception|
-  #  error = []
-  #  error << "#{parameter_missing_exception.param} is required"
-  #
-  #  flash[:error] = error
-  #  redirect_to :back
-  #
-  #end
-
   def index
     # Combine age and gender tryouts
     @tryouts = Tryout.by_age_and_gender
@@ -36,9 +27,9 @@ class TryoutsController < InheritedResources::Base
       @tryout_info = lookup_tryout(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year, Gender.new(@tryout_registration.gender))
 
       # Send confirmation email
-      #TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
+      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
 
-      render action: 'confirmation'
+      render :action => 'confirmation'
     else
       render :registration
     end
@@ -117,47 +108,44 @@ class TryoutsController < InheritedResources::Base
     @@mutex.synchronize do
 
       # make sure we submit everything in English
-      current_locale = I18n.locale
-      I18n.locale = :en
+      I18n.with_locale(:en) do
 
-      session = GoogleDrive.login(ENV['GOOGLE_DRIVE_USER'], ENV['GOOGLE_DRIVE_PWD'])
-      ss = session.spreadsheet_by_title(title) || session.create_spreadsheet(title)
-      ws = get_worksheet(ss, Tryout.tryout_name(registration_info.age, Gender.new(registration_info.gender)))
-      lastrow = ws.num_rows + 1
+        session = GoogleDrive.login(ENV['GOOGLE_DRIVE_USER'], ENV['GOOGLE_DRIVE_PWD'])
+        ss = session.spreadsheet_by_title(title) || session.create_spreadsheet(title)
+        ws = get_worksheet(ss, Tryout.tryout_name(registration_info.age, Gender.new(registration_info.gender)))
+        lastrow = ws.num_rows + 1
 
-      gender = Gender.new(registration_info.gender).to_s
-      # Be explicit about order
-      ['',
-       Time.now,
-       registration_info.first,
-       registration_info.last,
-       registration_info.home_address,
-       registration_info.home_phone,
-       gender,
-       registration_info.birthdate,
-       'No',
-       registration_info.age.to_s + gender[0],
-       registration_info.previous_team,
-       registration_info.parent1_first,
-       registration_info.parent1_last,
-       registration_info.parent1_email,
-       registration_info.parent1_cell,
-       registration_info.parent2_first,
-       registration_info.parent2_last,
-       registration_info.parent2_email,
-       registration_info.parent2_cell,
-       registration_info.completed_by,
-       registration_info.relationship,
-       registration_info.waiver,
-       request.env['HTTP_USER_AGENT']
-      ].each_with_index do |cell, index|
-        ws[lastrow, index + 1] = cell     # 1 Based indexing
+        gender = Gender.new(registration_info.gender).to_s
+        # Be explicit about order
+        ['',
+         Time.now,
+         registration_info.first,
+         registration_info.last,
+         registration_info.home_address,
+         registration_info.home_phone,
+         gender,
+         registration_info.birthdate,
+         'No',
+         registration_info.age.to_s + gender[0],
+         registration_info.previous_team,
+         registration_info.parent1_first,
+         registration_info.parent1_last,
+         registration_info.parent1_email,
+         registration_info.parent1_cell,
+         registration_info.parent2_first,
+         registration_info.parent2_last,
+         registration_info.parent2_email,
+         registration_info.parent2_cell,
+         registration_info.completed_by,
+         registration_info.relationship,
+         registration_info.waiver,
+         request.env['HTTP_USER_AGENT']
+        ].each_with_index do |cell, index|
+          ws[lastrow, index + 1] = cell     # 1 Based indexing
+        end
+
+        ws.save
       end
-
-      ws.save
-
-      # revert back to previous locale
-      I18n.locale = current_locale
     end
 
   end
