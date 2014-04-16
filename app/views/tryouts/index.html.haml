@@ -34,14 +34,14 @@
 
 %div.grid_16.box
   %h2 Online Registration
-  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, class: 'alt'
+  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, :class => 'alt'
 
 
 %div.grid_16.box
   %h2 Tryouts
 
   - @tryouts.each do |key, value|
-    %h2{class: 'alt'}
+    %h2{:class => 'alt'}
       = key
     %p
       - value.each do |tryout|
@@ -49,13 +49,13 @@
           Tryouts will be announced shortly. Register online and you will be notified via email when tryouts are posted.
         - else
           = "#{tryout.date_to_s} @"
-          %a{href: tryout.field.map_url}
+          %a{:href => tryout.field.map_url}
             = "#{tryout.field.name} - #{tryout.field.address}"
         %br
 
 %div.grid_16.box
   %h2 Online Registration
-  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, class: 'alt'
+  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, :class => 'alt'
 
 %div.grid_16.box
   %h2 Questions
@@ -70,27 +70,27 @@
     &nbsp;
 
   %div.grid_3
-    %label{for: 'gender'} Gender *
+    %label{:for => 'gender'} Gender *
   %div.grid_4
-    %input{type: "radio", name: 'gender', value: '0', required: true} &nbsp; Boy
-    %input{type: "radio", name: 'gender', value: '1', required: true} &nbsp; Girl
+    %input{:type => "radio", :name => 'gender', :value => '0', :required => true} &nbsp; Boy
+    %input{:type => "radio", :name => 'gender', :value => '1', :required => true} &nbsp; Girl
 
   %div.grid_3
-    %label{for: 'birthdate_month'} Birthday*
+    %label{:for => 'birthdate_month'} Birthday*
   %div.grid_4
-    %select#birthdate_month{name: 'birthdate_month', required: true}
+    %select#birthdate_month{:name => 'birthdate_month', :required => true}
       %option
       -(1..12).each do |month|
         %option
           = month
     /
-    %select#birthdate_day{name: 'birthdate_day', required: true}
+    %select#birthdate_day{:name => 'birthdate_day', :required => true}
       %option
       -(1..31).each do |day|
         %option
           = day
     /
-    %select#birthdate_year{name: 'birthdate_year', required: true}
+    %select#birthdate_year{:name => 'birthdate_year', :required => true}
       %option
       - (Time.now.year - 19..Time.now.year-6).each do |year|
         %option
@@ -101,13 +101,13 @@
 
   %div.grid_15
     %h4#tryouts_date_and_times
-    %input{name: 'age', type: 'hidden', value: ''}
+    %input{:name => 'age', :type => 'hidden', :value => ''}
 
   %div.clear
     &nbsp;
 
   %div.grid_15#age_group_chart
-    %a{href: '#'}Show Age Group Chart
+    %a{:href => '#'}Show Age Group Chart
 
   %div.clear
     &nbsp;
@@ -117,12 +117,12 @@
   %h3 What if my child's tryouts have not been scheduled yet?
   Go ahead and register and we'll send you an email when the tryouts are scheduled.
   %h3 Where can I find out more information on Central Marin Competitive Soccer Club?
-  = link_to 'Click here for more information on Central Marin Competitive Soccer Club', information_path, class: 'alt'
+  = link_to 'Click here for more information on Central Marin Competitive Soccer Club', information_path, :class => 'alt'
 %div.grid_16.box
   %h2 Online Registration
-  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, class: 'alt'
+  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, :class => 'alt'
 
-%div{id: "dialog", title: "Age Group Chart"}
+%div{:id => "dialog", :title => "Age Group Chart"}
 
 - content_for :javascript do
   = javascript_include_tag "tryouts"

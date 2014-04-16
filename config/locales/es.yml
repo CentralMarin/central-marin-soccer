@@ -3,7 +3,7 @@
 
 es:
   title: "Bienvenido a Central Marín Club de Fútbol"
-  footer_copy: "Todos los derechos reservados © 2013 - Central Marín Club de Fútbol"
+  footer_copy: "Todos los derechos reservados © 2014 - Central Marín Club de Fútbol"
   header_text_alt: 'Centro Marin Club de fútbol Competitivo'
   menu:
     home: "Casa"
@@ -103,4 +103,37 @@ es:
     doc: 'Director de Entrenamiento'
   news:
     heading: 'Noticias de los Clubes Recientes'
-
+  registration:
+    confirmation:
+      subject: 'Marin Centro Competitiva Registro Confirmación Club de Fútbol ...'
+    form:
+      player_heading: 'Información del Jugador'
+      parent_heading: 'Información para Padres'
+      first: 'Nombre'
+      last: 'Apellido'
+      address: 'Dirección de la Casa'
+      phone: 'Teléfono de la Casa'
+      gender: 'Género'
+      birthdate: 'Cumpleaños'
+      previous: 'Fútbol Anterior'
+      previous_rec: 'Fútbol Recreativo'
+      previous_other: 'Otro Club Competitiva'
+      previous_cm: 'Central Marin Soccer Club'
+      mobile: 'Móvil'
+      email: 'Email'
+      medical:
+        heading: 'Consentimiento para Tratamiento Médico (Menor)'
+        body: 'Como padre o tutor legal del jugador arriba mencionado, doy mi consentimiento para el cuidado médico de emergencia según lo prescrito por un médico debidamente licenciado de Medicina o Doctor en Odontología. Este cuidado se puede dar bajo cualquier condición necesaria para preservar la vida, la integridad física o el bienestar de mi dependiente.'
+      legal:
+        heading: 'Importante'
+        body: 'Yo, el padre / tutor del solicitante de registro, un menor de edad, de acuerdo en que el solicitante de registro y cumpliré con las reglas de la USYSA, EE.UU. Club de fútbol y el centro de Marin Club de fútbol Competitivo (CMCSC), sus organizaciones afiliadas y patrocinadores. Reconociendo la posibilidad de daño físico asociado con el fútbol y en consideración de la USYSA, EE.UU. Club de fútbol y CMCSC aceptar el registrante para sus programas y actividades (el Programa) de fútbol, por la presente libero, descargo y / o de otra manera indemnizar al USYSA, el CMCSC , los entrenadores / evaluadores, sus organizaciones afiliadas y patrocinadores, sus empleados y el personal asociado, incluyendo a los dueños de los campos y las instalaciones utilizadas para los programas, contra cualquier y todo reclamo (s) por, o un nombre de la persona registrada como resultado de la participación s en el programa y / o de ser transportados hacia o desde el mismo, que el transporte por este medio autorizo​​.'
+      completed_by: 'Nombre de la persona que completa este formulario'
+      signor:
+        mother: 'Madre'
+        father: 'Padre'
+        guardian: 'Guardián'
+        relationship: 'Relación'
+      waiver:
+        body: 'He leído la exención de arriba y soltar, y dar su consentimiento para el tratamiento médico Al hacer clic, declaro que soy el padre o tutor del atleta menor de edad está registrada en este formulario para Centro Marin Club de fútbol competitivo y haga clic en mi es mi firma de esta renuncia y descarga, y consentimiento médico.'
+        agree: 'Estoy de acuerdo'
+      submit: 'Presentar'

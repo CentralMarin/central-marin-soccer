@@ -14,6 +14,9 @@ gem 'whenever', :require => false
 gem 'rails-observers', '~>0.1.2'
 gem 'google_drive'
 gem 'parsley-rails'
+gem 'premailer-rails'
+gem 'nokogiri'
+gem 'roadie'
 #gem 'delayed_job_active_record'
 
 # Use sqlite3 as the database for Active Record

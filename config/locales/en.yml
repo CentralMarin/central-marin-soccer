@@ -3,7 +3,7 @@
 
 en:
   title: "Welcome to Central Marin Soccer Club"
-  footer_copy: "All rights Reserved © 2013 - Central Marin Soccer Club"
+  footer_copy: "All rights Reserved © 2014 - Central Marin Soccer Club"
   header_text_alt: 'Central Marin Competitive Soccer Club'
   menu:
     home: "Home"
@@ -103,3 +103,39 @@ en:
     doc: 'Director of Coaching'
   news:
     heading: 'Recent Club News'
+  registration:
+    confirmation:
+      subject: 'Central Marin Competitive Soccer Club Registration Confirmation ...'
+    form:
+      player_heading: 'Player Information'
+      parent_heading: 'Parent Information'
+      first: 'First Name'
+      last: 'Last Name'
+      address: 'Home Address'
+      phone: 'Home Phone'
+      gender: 'Gender'
+      gender_boy: 'Boy'
+      gender_girl: 'Girl'
+      birthdate: 'Birthday'
+      previous: 'Previous Soccer'
+      previous_rec: 'Rec Soccer'
+      previous_other: 'Other Competitive Club'
+      previous_cm: 'Central Marin Soccer Club'
+      mobile: 'Cell'
+      email: 'Email'
+      medical:
+        heading: 'Consent for Medical Treatment (Minor)'
+        body: 'As the parent or legal guardian of the above-named player, I hereby consent for Emergency medical care as prescribed by a duly licensed Doctor of Medicine or Doctor of Dentistry. This care may be given under whatever conditions are necessary to preserve the life, limb or well-being of my dependent.'
+      legal:
+        heading: 'Important'
+        body: 'I, the parent/guardian of the registrant, a minor, agree that I and the registrant will abide by the rules of the USYSA, US Club Soccer and Central Marin Competitive Soccer Club (CMCSC), their affiliated organizations and sponsors. Recognizing the possibility of physical injury associated with soccer and in consideration for the USYSA, US Club Soccer and CMCSC accepting the registrant for their soccer programs and activities (the Program), I hereby release, discharge and/or otherwise indemnify the USYSA, the CMCSC, the coaches/evaluators, their affiliated organizations and sponsors, their employees and associated personnel, including the owners of the fields and facilities utilized for the Programs, against any and all claim (s) by or an behalf of the registrant as a result of the s participation in the program and/or being transported to or from the same, which transportation I hereby authorize.'
+      completed_by: 'Name of the Person Completing this Form'
+      signor:
+        mother: 'Mother'
+        father: 'Father'
+        guardian: 'Guardian'
+        relationship: 'Relationship'
+      waiver:
+        body: 'I have read the above waiver and release, and consent for medical treatment By clicking, I represent that I am the parent or guardian of the minor athlete being registered on this form for Central Marin Competitive Soccer Club and my click is my signature for this waiver and release and medical consent.'
+        agree: 'I agree'
+      submit: 'Submit'

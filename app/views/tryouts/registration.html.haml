@@ -15,7 +15,7 @@
     #error_explanation
       %h2= "#{pluralize(@tryout_registration.errors.count, "error")} prohibited your registration from being saved. Please correct them below."
 
-= form_for @tryout_registration, :url => tryouts_registration_create_path, data: {validate: 'parsley' } do |f|
+= form_for @tryout_registration, :url => tryouts_registration_create_path, :data => {:validate => 'parsley' } do |f|
   %div.grid_16.box
     %h2
       = t('registration.form.player_heading')
@@ -36,16 +36,16 @@
       = "#{t('registration.form.gender')} *"
 
     %div.grid_4
-      = f.radio_button :gender, 0, {required: true, 'parsley-required' => 'true'}
-      = f.label :gender, t('registration.form.gender_boy'), value: 0
-      = f.radio_button :gender, 1, {required: true, 'parsley-required' => 'true'}
-      = f.label :gender, t('registration.form.gender_girl'), value: 1
+      = f.radio_button :gender, 0, {:required => true, 'parsley-required' => 'true'}
+      = f.label :gender, t('registration.form.gender_boy'), :value => 0
+      = f.radio_button :gender, 1, {:required => true, 'parsley-required' => 'true'}
+      = f.label :gender, t('registration.form.gender_girl'), :value => 1
       = show_error(t('registration.form.gender'), :gender)
 
     %div.grid_3
       = f.label :birthdate, "#{t('registration.form.birthdate')} *"
     %div.grid_4
-      = f.date_select :birthdate, {start_year: Time.now.year - 19, end_year: Time.now.year - 6, use_month_numbers: true, include_blank: true, order: [:month, :day, :year]}, {required: true, 'parsley-required' => 'true'}
+      = f.date_select :birthdate, {:start_year => Time.now.year - 19, :end_year => Time.now.year - 6, :use_month_numbers => true, :include_blank => true, :order => [:month, :day, :year]}, {:required => true, 'parsley-required' => 'true'}
       = show_error(t('registration.form.birthdate'), :birthdate)
     %div.clear
       &nbsp;
@@ -60,7 +60,7 @@
     %div.grid_3
       = f.label :previous_team, "#{t('registration.form.previous')} *"
     %div.grid_12
-      = f.select :previous_team, options_for_select({t('registration.form.previous_rec') => 'Rec Soccer', t('registration.form.previous_other') => 'Other Competitive Club', t('registration.form.previous_cm') => 'Central Marin Soccer Club'}), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
+      = f.select :previous_team, options_for_select({t('registration.form.previous_rec') => 'Rec Soccer', t('registration.form.previous_other') => 'Other Competitive Club', t('registration.form.previous_cm') => 'Central Marin Soccer Club'}), {:include_blank => true}, {:required => true, 'parsley-required' => 'true'}
       = show_error(t('registration.form.previous'), :previous_team)
 
     %div.clear
@@ -102,7 +102,7 @@
     %div.grid_7
       = f.label :relationship, "#{t('registration.form.signor.relationship')} *"
     %div.grid_7
-      = f.select :relationship, options_for_select({t('registration.form.signor.father') => 'Father', t('registration.form.signor.mother') => 'Mother', t('registration.form.signor.guardian') => 'Guardian'}), {include_blank: true}, {required: true, 'parsley-required' => 'true'}
+      = f.select :relationship, options_for_select({t('registration.form.signor.father') => 'Father', t('registration.form.signor.mother') => 'Mother', t('registration.form.signor.guardian') => 'Guardian'}), {:include_blank => true}, {:required => true, 'parsley-required' => 'true'}
       = show_error(t('registration.form.signor.relationship'), :relationship)
 
     %div.clear
@@ -115,7 +115,7 @@
       = t('registration.form.waiver.body')
 
     %div.grid_15
-      = f.check_box :waiver, "parsley-trigger"=>"change", required: true
+      = f.check_box :waiver, "parsley-trigger"=>"change", :required => true
       = f.label :waiver, "#{t('registration.form.waiver.agree')} *"
       = show_error t('registration.form.waiver.agree'), :waiver
 
@@ -132,7 +132,7 @@
 
 %div.grid_16
   If you have any problems registering for tryouts, email:
-  %a{mail_to: 'tryouts@centralmarinsoccer.com'} tryouts@centralmarinsoccer.com
+  %a{:mail_to => 'tryouts@centralmarinsoccer.com'} tryouts@centralmarinsoccer.com
 
 
 - content_for :javascript do
