@@ -4,16 +4,19 @@
 %div.grid_16{ editable_attributes(@part_name_overview) }
   = editable_content @part_name_overview
 
+%div.grid_16#age_group_chart
+  %a{:href => '#'}Click here to view the Age Group Chart
+
 %div.grid_16.omega
   %div.omega#tabs
     %ul
       - @tournaments.each do |tournament|
         %li
-          %a{href: "##{tournament[:id]}"}
+          %a{:href => "##{tournament[:id]}"}
             = tournament[:name]
 
     - @tournaments.each do |tournament|
-      %div{id: tournament[:id]}
+      %div{:id => tournament[:id]}
         %div{ editable_attributes(tournament[:overview]) }
           = editable_content tournament[:overview]
         -#%h2= t('information.winners')
@@ -26,11 +29,16 @@
 %div.grid_16{ editable_attributes(@part_name_footer)  }
   = editable_content @part_name_footer
 
-%script#pastWinnersTemplate{type: 'text/html'}
+%script#pastWinnersTemplate{:type => 'text/html'}
   %div
     %h3= '{{:year}} {{:tournament_name}} Winners'
     %div#simplemodal{ editable_attributes("{{:web_part_name}}") }
       = '{{:html}}'
 
+%div{:id => "dialog", :title => "Age Group Chart"}
+
 - content_for :javascript do
-  =javascript_include_tag "information.tournaments"
+  = javascript_include_tag "information.tournaments"
+  = javascript_include_tag "tryouts"
+  %script
+    $(document).ready(soccer.tryouts.show_age_group_chart($('#dialog')));
