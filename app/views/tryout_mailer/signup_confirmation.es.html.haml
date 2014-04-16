@@ -1,0 +1,45 @@
+%html
+  %head
+    %meta{'http-equiv' => 'Content-Type', content: 'text/html; charset=utf-8'}
+    %title
+      Central Marin Soccer Club Registration Confirmation
+  %body
+    TODO: Convert this email to Spanish
+    %p
+      = "Thank you for registering #{@registration.first} #{@registration.last} for the #{@season} Central Marin Soccer Tryouts. Please verify the following information you've provided is correct:"
+    %hr
+      %b
+        Player
+        %ul
+          %li
+            = "First: #{@registration.first}"
+          %li
+            = "Last: #{@registration.last}"
+          %li
+            = "Birthdate: #{@registration.birthdate}"
+          %li
+            = "Gender: #{Gender.new(@registration.gender).to_s}"
+          %li
+            = "Tryout Group: #{Gender.new(@registration.gender).to_s} U#{@registration.age}"
+          %li
+            = "Address: #{@registration.home_address}"
+          %li
+            = "Phone: #{@registration.home_phone}"
+
+      %br
+      - [1,2].each do |parent_id|
+        Parent
+        %ul
+          %li
+            = "Name: #{@registration.parent1_first} #{@registration.parent1_last}"
+          %li
+            = "Cell Phone: #{@registration.parent1_cell}"
+          %li
+            = "Email: #{@registration.parent1_email}"
+
+
+    %p
+      -#= render :partial => 'tryout_info'
+
+
+    Any problems, please contact tryouts@centralmarinsoccer.com

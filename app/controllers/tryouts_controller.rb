@@ -27,7 +27,7 @@ class TryoutsController < InheritedResources::Base
       @tryout_info = lookup_tryout(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year, Gender.new(@tryout_registration.gender))
 
       # Send confirmation email
-      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
+#      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
 
       render :action => 'confirmation'
     else
