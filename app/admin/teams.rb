@@ -19,7 +19,6 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
  form :partial => "form"
 
  controller do
-  cache_sweeper :team_sweeper, :only => [:create, :update, :destroy]
 
     def show
        @team = Team.find(params[:id])
