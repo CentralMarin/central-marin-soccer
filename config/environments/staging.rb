@@ -1,4 +1,4 @@
-CentralMarin::Application.configure do
+CentralMarinSoccer::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -58,16 +58,5 @@ CentralMarin::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # Devise settings
-  config.action_mailer.default_url_options = {:host => 'staging.centralmarinsoccer.com'}
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      :address    => 'smtp.gmail.com',
-      :port       => 587,
-      :user_name  => ENV["SMTP_USER_NAME"],
-      :password   => ENV["SMTP_PASSWORD"],
-      :authentication => 'plain',
-      :enable_starttls_auto => true
-  }
+  config.eager_load = false
 end
