@@ -6,15 +6,12 @@ def prepare_article(article_id = nil)
     @article = Article.find(article_id)
   end
 
-  ADDITIONAL_LOCALES.each do |lang|
-    @article.translations.find_or_initialize_by_locale(lang[0])
-  end
-  @coaches = Coach.all(:order => 'name desc').map {|e| [e.to_s, e.id] }
-  @teams = Team.all(:order => 'year desc').map {|e| [e.to_team_name_with_coach, e.id]}
+  @coaches = Coach.all.order('name desc').map {|e| [e.to_s, e.id] }
+  @teams = Team.all.order('year desc').map {|e| [e.to_team_name_with_coach, e.id]}
 
   # Load the all option
-  @coaches.insert(0, ['All', 0]);
-  @teams.insert(0, ['All', 0]);
+  @coaches.insert(0, ['All', 0])
+  @teams.insert(0, ['All', 0])
 
 end
 
@@ -57,7 +54,7 @@ ActiveAdmin.register Article do
 
   collection_action :article_carousel, :title => "Carousel", :method => :get do
     @articles = Article.all
-    @articles_in_carousel = ArticleCarousel.all(:joins => :article, :order => "carousel_order asc")
+    @articles_in_carousel = ArticleCarousel.all.order("carousel_order asc")
 
     render "admin/articles/_carousel"
   end
@@ -121,7 +118,6 @@ ActiveAdmin.register Article do
     ArticleCarousel.all.each do |carousel_item|
       carousel_item.destroy
     end
-    #all_carousel_items.destroy_all unless all_carousel_items.nil?
 
     # Add carousel items
     carousel_list.each_with_index do |article_id, index|
