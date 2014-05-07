@@ -4,7 +4,7 @@ class HomeController < InheritedResources::Base
 
   def index
     # Get all articles to display in the carousel in the proper order
-    @articles = ArticleCarousel.find(:all, :order => "carousel_order").map {|ac| ac.article}
+    @articles = ArticleCarousel.all.order("carousel_order").map {|ac| ac.article}
     field_status_count = Field.count(:all, :group => 'status')  # Check to see how many fields are open, closed, and call
     @fields_status = {}
     Field.statuses.each_with_index do |status, index|
