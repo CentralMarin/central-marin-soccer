@@ -7,6 +7,7 @@
 //= require plugins
 //= require spin
 //= require jsrender
+//= require jquery.ui.accordion
 //= require jquery.simplemodal.1.4.4.min
 //= require namespace
 

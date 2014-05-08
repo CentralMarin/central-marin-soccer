@@ -1,6 +1,7 @@
 //= require jquery.simplemodal.1.4.4.min
 //= require jsrender
 //= require namespace
+//= require jquery.ui.tabs
 
 (function () {
     namespace("soccer.information");

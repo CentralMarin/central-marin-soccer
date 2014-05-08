@@ -14,8 +14,6 @@
   %meta{name: "description", content: ''}
   %meta{name: 'author', content: ''}
   %meta{name: 'viewport', content: 'width=device-width,initial-scale=1'}
-  -#= stylesheet_link_tag "dark-hive/jquery-ui-1.10.0.custom.css"
-  = stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/dark-hive/jquery-ui.css"
   = stylesheet_link_tag "application"
   = yield :css
   = javascript_include_tag "modernizr-2.6.2.min"
@@ -48,9 +46,7 @@
     %div
       %div{id: 'bottom_padder'}
 
-  = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"
-  = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"
-
+  = javascript_include_tag 'application.js'
   = yield :javascript
 
   :javascript
@@ -64,6 +60,6 @@
     %script
       window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})
 
-  - if @editable
-    = javascript_include_tag "ckeditor/init"
-    = javascript_include_tag "inline_editing"
+  -#- if @editable
+  -#  = javascript_include_tag "ckeditor/init"
+  -#  = javascript_include_tag "inline_editing"
