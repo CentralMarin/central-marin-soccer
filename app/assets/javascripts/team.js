@@ -1,28 +1,10 @@
-    //= require spin
 //= require coaches
 //= require namespace
+//= require jquery.ui.progressbar
 
 (function () {
     namespace("soccer");
     soccer.team = function() {
-
-        var _spinner_opts = {
-            lines: 9, // The number of lines to draw
-            length: 5, // The length of each line
-            width: 4, // The line thickness
-            radius: 5, // The radius of the inner circle
-            corners: 1, // Corner roundness (0..1)
-            rotate: 0, // The rotation offset
-            color: '#fff', // #rgb or #rrggbb
-            speed: 1, // Rounds per second
-            trail: 60, // Afterglow percentage
-            shadow: false, // Whether to render a shadow
-            hwaccel: false, // Whether to use hardware acceleration
-            className: 'spinner', // The CSS class to assign to the spinner
-            zIndex: 2e9, // The z-index (defaults to 2000000000)
-            top: 'auto', // Top position relative to parent in px
-            left: 'auto' // Left position relative to parent in px
-        };
 
         var _schedule = function(schedule) {
             var events = [];
@@ -68,9 +50,9 @@
 
         var init = function() {
             $(document).ready(function() {
-                var record_spinner = new Spinner(_spinner_opts).spin($('#record')[0]);
-                var schedule_spinner = new Spinner(_spinner_opts).spin($('#schedule')[0]);
-                var roster_spinner = new Spinner(_spinner_opts).spin($('#roster')[0]);
+
+                $( "#schedule_progress" ).progressbar({ value: false });
+                $( "#roster_progress" ).progressbar({ value: false });
 
                 $.getJSON(document.URL + '/teamsnap.json', function(teamsnap) {
                     if ($.isEmptyObject(teamsnap)) {
@@ -82,9 +64,8 @@
                     _roster(teamsnap.players, teamsnap.managers);
                     _record(teamsnap.record);
 
-                    record_spinner.stop();
-                    schedule_spinner.stop();
-                    roster_spinner.stop();
+                    $( "#roster_progress").hide();
+                    $( "#schedule_progress").hide();
                 });
             });
         };

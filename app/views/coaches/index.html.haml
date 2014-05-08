@@ -7,12 +7,6 @@
 %div.grid_16{ editable_attributes(@part_name)  }
   = editable_content @part_name
 
--#%div{class: 'grid_16', id: 'accordion'}
--#  - @objectives[:header].each_with_index do |header, index|
--#    %h3
--#      %a{href: '#'}= header
--#    %div= @objectives[:body][index]
-
 %div{class: 'grid_16'}
 %h2= t('coach.staff')
 %div{style: 'padding-top: 5px;'}
@@ -26,6 +20,9 @@
       = image_tag image_path(coach.image_url), alt: coach.name, id: "coach-img-#{coach.id}", height: "#{CoachImageUploader::ImageSize::HEIGHT}", width: "#{CoachImageUploader::ImageSize::WIDTH}"
       %br
       = coach.name
+
+%div#coach_dialog
+  %div#coach_details
 
 %script{id: 'CoachTemplate', type: 'text/html'}
   %div{id: 'simplemodal'}

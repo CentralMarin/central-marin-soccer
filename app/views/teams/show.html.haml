@@ -19,6 +19,7 @@
       = link_to @team.teamsnap_roster_url do
         = t('team.roster')
     %div{id: 'roster', class: 'scroll-box'}
+      %div#roster_progress
 
 %div.grid_11
   %center
@@ -30,10 +31,9 @@
   %h2
     = link_to @team.teamsnap_schedule_url do
       = t('team.schedule')
-    -#%span{id: 'record'}
-    -#  = "#{Time.now.year} #{t('team.record')} "
 
   %div{id: 'schedule', class: 'scroll-box'}
+    %div#schedule_progress
 
 %div.clear
 - if not @articles.nil?

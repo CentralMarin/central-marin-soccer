@@ -114,7 +114,6 @@ class Team < ActiveRecord::Base
 
     mutex = Mutex.new
 
-    #endpoints = [record, schedule, roster]
     endpoints = [schedule, roster]
     threads = []
     json = {}
