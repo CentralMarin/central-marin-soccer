@@ -59,7 +59,7 @@ end
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-gem 'capistrano', '~> 3.2', :require => false, :group => :development
+gem 'capistrano', '3.2.1', :require => false, :group => :development
 group :development do
   gem 'capistrano-rails',   '~> 1.1.1', :require => false
   gem 'capistrano-bundler', '~> 1.1.2', :require => false
