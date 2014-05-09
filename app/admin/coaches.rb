@@ -11,7 +11,7 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
       html_overview(coach.bio)
     end
     column :team do |coach|
-      coach.teams.join("<br/>").html_safe
+      coach.teams.to_a.join("<br/>").html_safe
     end
     default_actions
 
