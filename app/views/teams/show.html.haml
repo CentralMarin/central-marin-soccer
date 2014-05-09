@@ -42,6 +42,7 @@
     - @articles.each do |article|
       - if not article.image.to_s.blank?
         %div.grid_15=image_tag article.image
+      %a{name: article.to_param}
       %h3.grid_15=article.title
       %div.clear
       %div.grid_15= article.body.html_safe
