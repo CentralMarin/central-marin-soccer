@@ -3,8 +3,7 @@ class ArticlesController < ApplicationController
   before_filter :set_section_name
 
   def index
-#    @articles = Article.find_all_by_category_id(Article.category_id(:club)) || []
-    @articles = Article.where(:category_id => Article.category_id(:club)).all || []
+    @articles = Article.where(:category_id => Article.category_id(:club)).all.order('updated_at desc') || []
   end
 
   protected
