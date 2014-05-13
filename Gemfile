@@ -17,7 +17,7 @@ gem 'whenever', '0.9.2', :require => false
 gem 'google_drive', '0.3.9'
 gem 'parsley-rails', '2.0.0.0'
 gem 'premailer-rails', '1.7.0'
-gem 'nokogiri', '1.6.1'
+gem 'nokogiri', '1.6.2'
 gem 'roadie', '2.4.3'
 #gem 'delayed_job_active_record'
 
