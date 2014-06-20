@@ -15,10 +15,11 @@ gem 'globalize', '4.0.1'
 gem 'haml-rails', '0.5.3'
 gem 'whenever', '0.9.2', :require => false
 gem 'google_drive', '0.3.9'
-gem 'parsley-rails', '2.0.0.0'
+gem 'parsley-rails', '2.0.0.1'
 gem 'premailer-rails', '1.7.0'
-gem 'nokogiri', '1.6.2'
+gem 'nokogiri', '1.6.2.1'
 gem 'roadie', '2.4.3'
+gem 'devise', '3.2.4'
 #gem 'delayed_job_active_record'
 
 # Use sqlite3 as the database for Active Record
@@ -28,7 +29,7 @@ gem 'sqlite3'
 gem 'sass-rails', '4.0.3'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '2.5.0'
+gem 'uglifier', '2.5.1'
 
 # Use CoffeeScript for .js.coffee assets and views
 #gem 'coffee-rails', '~> 4.0.1'
