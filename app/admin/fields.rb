@@ -8,7 +8,7 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
     column :rain_line
     column(:map_url) {|field| link_to 'directions', field.map_url}
     column(:status) { |field| field.status_name }
-    default_actions
+    actions
 
   end
 

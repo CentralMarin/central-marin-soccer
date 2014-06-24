@@ -45,7 +45,7 @@ ActiveAdmin.register Article do
       Coach.find(articles.coach_id) unless articles.coach_id == 0
     end
 
-    default_actions
+    actions
   end
 
   show do

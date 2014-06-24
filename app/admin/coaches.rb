@@ -13,7 +13,7 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
     column :team do |coach|
       coach.teams.to_a.join("<br/>").html_safe
     end
-    default_actions
+    actions
 
   end
 

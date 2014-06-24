@@ -10,7 +10,7 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
     column :name
     column(:level, :sortable => :'team_levels.name') {|team| team.team_level.name}
     column(:coach, :sortable => :'coaches.name') {|team| team.coach.to_s}
-    default_actions
+    actions
 
  end
 
