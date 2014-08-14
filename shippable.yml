@@ -1,0 +1,8 @@
+# Build Environment
+build_environment: ubuntu1204
+
+# language setting
+language: ruby
+
+# version numbers
+rvm: 2.1.2
