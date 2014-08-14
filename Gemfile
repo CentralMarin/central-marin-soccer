@@ -18,9 +18,12 @@ gem 'google_drive', '0.3.10'
 gem 'parsley-rails', '2.0.3.0'
 gem 'premailer-rails', '1.7.0'
 gem 'nokogiri', '1.6.3.1'
-gem 'roadie', '3.0.0'
 gem 'devise', '3.2.4'
 #gem 'delayed_job_active_record'
+
+# Email Generation
+gem 'roadie-rails', '1.0.2'
+gem 'roadie', '3.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.9'
