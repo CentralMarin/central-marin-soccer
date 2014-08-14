@@ -1,6 +1,6 @@
 //= require coaches
 //= require namespace
-//= require jquery.ui.progressbar
+//= require jquery-ui/progressbar
 
 (function () {
     namespace("soccer");
