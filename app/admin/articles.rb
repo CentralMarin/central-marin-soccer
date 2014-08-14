@@ -64,7 +64,7 @@ ActiveAdmin.register Article do
 
     f.translated_inputs "Translated fields", switch_locale: false do |t|
       t.input :title
-      t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:toolbar => 'Easy', :language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
+      t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
     end
 
     f.inputs do

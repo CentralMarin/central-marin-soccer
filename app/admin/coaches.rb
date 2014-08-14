@@ -53,7 +53,7 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
       f.input :email
 
       f.translated_inputs "Translated fields", switch_locale: false do |t|
-        t.input :bio, :as => :ckeditor, :input_html => {:ckeditor => {:toolbar => 'Easy', :language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
+        t.input :bio, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
       end
 
       f.input :crop_x, :as => :hidden
