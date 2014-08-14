@@ -1,3 +1,9 @@
+/*
+
+*= require jquery-ui/smoothness
+
+*/
+
 // SASS variable overrides must be declared before loading up Active Admin's styles.
 //
 // To view the variables that Active Admin provides, take a look at
@@ -10,7 +16,6 @@
 // Active Admin's got SASS!
 @import "active_admin/mixins";
 @import "active_admin/base";
-@import url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css);
 @import "jquery.Jcrop.min";
 @import "active_admin/active_admin_globalize";
 @import "jquery-ui-timepicker-addon";
