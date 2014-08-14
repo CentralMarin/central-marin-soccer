@@ -6,8 +6,6 @@ gem 'rails', '4.1.4'
 gem 'activeadmin', :github => 'gregbell/active_admin'
 gem "activeadmin-globalize", :github => 'stefanoverna/activeadmin-globalize', :branch => 'master'
 gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
-#gem 'ransack',     :github => 'activerecord-hackery/ransack'
-#gem 'formtastic',  :github => 'justinfrench/formtastic'
 gem 'ckeditor', '4.1.0'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '3.8.0'
@@ -65,8 +63,8 @@ end
 # Use Capistrano for deployment
 gem 'capistrano', '3.2.1', :require => false, :group => :development
 group :development do
-  gem 'capistrano-rails',   '~> 1.1.1', :require => false
-  gem 'capistrano-bundler', '~> 1.1.2', :require => false
+  gem 'capistrano-rails',   '1.1.1', :require => false
+  gem 'capistrano-bundler', '1.1.3', :require => false
 end
 
 group :staging, :production do
