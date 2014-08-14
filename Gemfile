@@ -38,8 +38,8 @@ gem 'uglifier', '2.5.3'
 gem 'therubyracer', :platforms => :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '3.1.1'
-gem 'jquery-ui-rails', '5.0.0'
+# gem 'jquery-rails', '3.1.1'         # included by ActiveAdmin
+# gem 'jquery-ui-rails', '4.2.1'      # included by ActiveAdmin
 gem 'jquery-ui-themes', '0.0.11'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -55,9 +55,6 @@ end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Use Capistrano for deployment
 gem 'capistrano', '3.2.1', :require => false, :group => :development
