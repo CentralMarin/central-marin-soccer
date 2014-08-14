@@ -52,9 +52,8 @@ CKEDITOR.editorConfig = function( config )
   config.extraPlugins = "youtube";
   
   /* Toolbars */
-  //config.toolbar = 'Easy';
-    config.toolbar = 'toolbar_Full';
-  
+  config.toolbar = 'Easy';
+
   config.toolbar_Easy =
     [
         ['Source','-','Preview'],
@@ -67,4 +66,8 @@ CKEDITOR.editorConfig = function( config )
         ['Image', 'Table','HorizontalRule','PageBreak'],
         ['Format']
     ];
+
+    /* allow grid based layout */
+    config.extraAllowedContent = 'div(grid_1, grid_2, grid_3, grid_4, grid_5, grid_6, grid_7, grid_8, grid_10, grid_11, grid_12, alpha, omega, box)';
+
 };
