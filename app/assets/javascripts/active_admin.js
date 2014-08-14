@@ -1,14 +1,15 @@
-//= require jquery-1.9.0
 //= require active_admin/base
 //= require active_admin/active_admin_globalize
 //= require jquery.multiselect.min
 //= require jsrender
+//= require jquery
+//= require jquery_ujs
 //= require jquery-ui
 //= require jquery.Jcrop.min
 //= require ckeditor/init
 //= require namespace
 //= require crop
-//=require jquery-ui-timepicker-addon
+//= require jquery-ui-timepicker-addon
 
 $(document).ready(function() {
     jQuery('input.hasDatetimePicker').datetimepicker({

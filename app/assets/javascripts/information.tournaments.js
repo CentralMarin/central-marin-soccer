@@ -1,6 +1,6 @@
 //= require jsrender
 //= require namespace
-//= require jquery.ui.tabs
+//= require jquery-ui/tabs
 
 (function () {
     namespace("soccer.information");
