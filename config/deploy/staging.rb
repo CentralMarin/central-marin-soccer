@@ -2,7 +2,7 @@
 set :rails_env, :staging
 set :stage, :staging
 
-server '10.0.2.15', user: "#{ENV['SERVER_USER']}",roles: %w{app, web, db}
+server '10.0.2.15', user: "#{Rails.application.secrets.server_user}",roles: %w{app, web, db}
 
 
 # Simple Role Syntax

@@ -54,14 +54,16 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+# gem 'bcrypt-ruby', '~> 3.1.7'
 
 # Use Capistrano for deployment
-gem 'capistrano', '3.2.1', :require => false, :group => :development
-group :development do
-  gem 'capistrano-rails',   '1.1.1', :require => false
-  gem 'capistrano-bundler', '1.1.3', :require => false
-end
+gem 'capistrano-rails',   '1.1.1', :require => false, :group => :development
+
+#gem 'capistrano', '3.2.1', :require => false, :group => :development
+#group :development do
+#  gem 'capistrano-rails',   '1.1.1', :require => false
+#  gem 'capistrano-bundler', '1.1.3', :require => false
+#end
 
 group :staging, :production do
   gem 'mysql2', '0.3.16'
@@ -69,3 +71,12 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :development, :test do
+  gem 'rspec-rails', '3.0.2'
+  gem 'factory_girl_rails', '4.4.1'
+  gem 'faker', '1.4.2'
+end
+
+# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+gem 'spring', group: :development

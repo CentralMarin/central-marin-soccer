@@ -247,7 +247,5 @@ coach_create(name: 'Adam Dietz', email: 'dietzadam@yahoo.com',
              ]
 )
 
-#AdminUser.create(:email => ENV["DEFAULT_USER"], roles: AdminUser::ROLES) unless User.find_by_email(ENV["DEFAULT_USER"])
-
-AdminUser.create(:email => ENV["DEFAULT_USER"]) unless AdminUser.find_by_email(ENV["DEFAULT_USER"])
+AdminUser.create(:email => Rails.application.secrets.default_user) unless AdminUser.find_by_email(Rails.application.secrets.default_user)
 

@@ -214,7 +214,7 @@ def teamsnap(url)
 
   request = Net::HTTP::Get.new(uri.request_uri)
   request['Content-Type'] = 'application/json'
-  request['X-Teamsnap-Token'] = ENV['TEAMSNAP_TOKEN']
+  request['X-Teamsnap-Token'] = Rails.application.secrets.teamsnap_token
 
   response = http.request(request)
   json = JSON.parse(response.body)

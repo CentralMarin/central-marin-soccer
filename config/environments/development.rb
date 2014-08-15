@@ -1,4 +1,4 @@
-CentralMarinSoccer::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -35,7 +35,7 @@ CentralMarinSoccer::Application.configure do
       domain: "centralmarinsoccer.com",
       authentication: "plain",
       enable_starttls_auto: true,
-      user_name: ENV["GMAIL_USERNAME"],
-      password: ENV["GMAIL_PASSWORD"]
+      :user_name  => Rails.application.secrets.smtp_username,
+      :password   => Rails.application.secrets.smtp_password
   }
 end

@@ -6,7 +6,7 @@ config.each do |key, value|
   ENV[key] = value.to_s unless value.kind_of? Hash
 end
 
-server '207.104.28.18', user: "#{ENV['SERVER_USER']}",roles: %w{app, web, db}
+server '207.104.28.18', user: "#{Rails.application.secrets.server_user}",roles: %w{app, web, db}
 
 # Source Control
 set :application, 'centralmarinsoccer'
@@ -16,7 +16,7 @@ set :branch, 'release'
 #deployment details
 set :deploy_via, :remote_cache
 set :copy_exclude, ['.git']
-set :user, ENV['SERVER_USER']
+set :user, Rails.application.secrets.server_user
 set :use_sudo, false
 set :deploy_to, "/webapps/centralmarinsoccer"
 
