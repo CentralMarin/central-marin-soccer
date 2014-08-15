@@ -2,7 +2,7 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :team_level do |f|
-    f.name { Faker::Company.name }
+  factory :team_level do
+    name { Faker::Company.name }
   end
 end
