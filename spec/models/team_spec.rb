@@ -12,7 +12,7 @@
 #  updated_at    :datetime         not null
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Team do
   it "has a valid factory" do
@@ -20,80 +20,86 @@ describe Team do
   end
 
   it "requires a year" do
-    FactoryGirl.build(:team, year: nil).should_not be_valid
+    expect(FactoryGirl.build(:team, year: nil)).to_not be_valid
   end
 
   it "instance methods should work on a new team" do
     team = Team.new
-    team.gender.should == nil
-    team.age.should == nil
-    team.two_digit_year.should == nil
-    team.page_title.should == nil
+    expect(team.gender).to eq(nil)
+    expect(team.age).to eq(nil)
+    expect(team.two_digit_year).to eq(nil)
+    expect(team.page_title).to eq(nil)
   end
-  #it "requires an age 8 or older" do
-  #  FactoryGirl.build(:team, year: 7).should_not be_valid
-  #  FactoryGirl.build(:team, age: 8).should be_valid
-  #end
+
+  # it "requires an age 8 or older" do
+  #   expect(FactoryGirl.build(:team, year: 7)).to_not be_valid
+  #   expect(FactoryGirl.build(:team, age: 8)).to be_valid
+  # end
   #
-  #it "requires an age 18 or younger" do
-  #  FactoryGirl.build(:team, age: 19).should_not be_valid
-  #  FactoryGirl.build(:team, age:18).should be_valid
-  #end
-  #
-  #it "requires a gender" do
-  #  FactoryGirl.build(:team, gender_id: nil).should_not be_valid
-  #end
-  #
+  # it "requires an age 18 or younger" do
+  #   expect(FactoryGirl.build(:team, age: 19)).to_not be_valid
+  #   expect(FactoryGirl.build(:team, age:18)).to be_valid
+  # end
+
+  it "requires a gender" do
+    expect(FactoryGirl.build(:team, gender_id: nil)).to_not be_valid
+  end
+
   it "requires a coach" do
-    FactoryGirl.build(:team, coach: nil).should_not be_valid
+    expect(FactoryGirl.build(:team, coach: nil)).to_not be_valid
   end
 
   it "requires a team_level" do
-    FactoryGirl.build(:team, team_level: nil).should_not be_valid
+    expect(FactoryGirl.build(:team, team_level: nil)).to_not be_valid
   end
 
-  #describe "associations" do
-  #  before(:each) do
-  #    @team = Team.create!(@attr)
-  #  end
-  #
-  #  describe "coach" do
-  #
-  #    it "should have a coach attribute" do
-  #      @team.should respond_to(:coach)
-  #    end
-  #
-  #    it "should have the right associated coach" do
-  #      @team.coach_id.should == @coach.id
-  #      @team.coach.should == @coach
-  #    end
-  #  end
-  #
-  #  describe "gender" do
-  #
-  #    it "should have a gender attribute" do
-  #      @team.should respond_to(:gender)
-  #    end
-  #
-  #    it "should have the right associated gender" do
-  #      @team.gender.should == Team::GENDERS[0]
-  #    end
-  #  end
-  #
-  #  describe "team_level" do
-  #
-  #    it "should have a team_level attribute" do
-  #      @team.should respond_to(:team_level)
-  #    end
-  #
-  #    it "should have the right associated team_level" do
-  #      @team.team_level_id.should == @team_level.id
-  #      @team.team_level.should == @team_level
-  #    end
-  #  end
-  #
-  #end
-  #
+  describe "associations" do
+    before(:each) do
+      @coach = FactoryGirl.create(:coach)
+      @team_level = FactoryGirl.create(:team_level)
+      @team = FactoryGirl.create(:team)
+      @team.coach = @coach
+      @team.team_level = @team_level
+    end
+
+    describe "coach" do
+
+       it "should have a coach attribute" do
+         expect(@team).to respond_to(:coach)
+       end
+
+       it "should have the right associated coach" do
+         expect(@team.coach_id).to eq(@coach.id)
+         expect(@team.coach).to eq(@coach)
+       end
+    end
+
+    describe "gender" do
+
+       it "should have a gender attribute" do
+         expect(@team).to respond_to(:gender)
+       end
+
+       it "should have the right associated gender" do
+         @team.gender = I18n.t('team.gender.boys')
+         expect(@team.gender).to eq(I18n.t('team.gender.boys'))
+       end
+    end
+
+    describe "team_level" do
+
+       it "should have a team_level attribute" do
+         expect(@team).to respond_to(:team_level)
+       end
+
+       it "should have the right associated team_level" do
+         expect(@team.team_level_id).to eq(@team_level.id)
+         expect(@team.team_level).to eq(@team_level)
+       end
+    end
+
+  end
+
   describe "links" do
     #it "should have a links attribute" do
     #  @team.should respond_to(:links)
