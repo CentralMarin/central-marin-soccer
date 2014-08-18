@@ -14,55 +14,55 @@
 #  address    :string(255)
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Field do
   it "has a valid factory" do
-    FactoryGirl.create(:field)
+    expect(FactoryGirl.create(:field)).to be_valid
   end
 
   it "requires a name" do
-    FactoryGirl.build(:field, name: nil).should_not be_valid
+    expect(FactoryGirl.build(:field, name: nil)).to_not be_valid
   end
 
   it "requires a club" do
-    FactoryGirl.build(:field, club: nil).should_not be_valid
+    expect(FactoryGirl.build(:field, club: nil)).to_not be_valid
   end
 
   it "requires a rain line" do
-    FactoryGirl.build(:field, rain_line: nil).should_not be_valid
+    expect(FactoryGirl.build(:field, rain_line: nil)).to_not be_valid
   end
 
   it "requires an address" do
-    FactoryGirl.build(:field, address: nil).should_not be_valid
+    expect(FactoryGirl.build(:field, address: nil)).to_not be_valid
   end
 
   it "requires a status" do
-    FactoryGirl.build(:field, status: nil).should_not be_valid
+    expect(FactoryGirl.build(:field, status: nil)).to_not be_valid
   end
 
   context "instance methods" do
     it "map_url should properly return a google maps url" do
-      FactoryGirl.create(:field).map_url.starts_with?("http://maps.google.com").should == true
+      expect(FactoryGirl.create(:field).map_url.starts_with?("http://maps.google.com")).to eq(true)
     end
 
     it "object as a string" do
       field = FactoryGirl.create(:field)
-      field.to_s.should == field.name
+      expect(field.to_s).to eq(field.name)
     end
 
     it "json representation of the object should include id, name, club, rain_line, address, lat, lng, and status" do
       field = FactoryGirl.create(:field)
       json = field.as_json
-      json[:id].should == field.id
-      json[:name].should == field.name
-      json[:club].should == field.club
-      json[:rain_line].should == field.rain_line
-      json[:address].should == field.address
-      json[:lat].should == field.lat
-      json[:lng].should == field.lng
-      json[:status].should == field.status
-      json[:status_name].should == field.status_name
+      expect(json[:id]).to eq(field.id)
+      expect(json[:name]).to eq(field.name)
+      expect(json[:club]).to eq(field.club)
+      expect(json[:rain_line]).to eq(field.rain_line)
+      expect(json[:address]).to eq(field.address)
+      expect(json[:lat]).to eq(field.lat)
+      expect(json[:lng]).to eq(field.lng)
+      expect(json[:status]).to eq(field.status)
+      expect(json[:status_name]).to eq(field.status_name)
     end
   end
 
@@ -71,7 +71,11 @@ describe Field do
       I18n.locale = :en
       english = Field.statuses
       I18n.locale = :es
-      Field.statuses.should_not == english
+      expect(Field.statuses).to_not eq(english)
+
+      spanish = Field.statuses
+      I18n.locale = :en
+      expect(Field.statuses).to_not eq(spanish)
     end
   end
 end

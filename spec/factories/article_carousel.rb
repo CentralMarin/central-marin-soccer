@@ -2,9 +2,9 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :article_carousel do |f|
-    f.article { FactoryGirl.create(:article) }
-    f.carousel_order { rand(5) }
+  factory :article_carousel do
+    article { FactoryGirl.create(:article) }
+    carousel_order { rand(5) }
   end
 end
 

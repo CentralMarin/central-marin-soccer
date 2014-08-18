@@ -71,29 +71,29 @@ describe Coach do
 
   end
 
-  NAME_ENGLISH = 'Sample Name'
-  NAME_SPANISH = 'Dónde está el baño'
-  EMAIL = 'test@test.com'
-  BIO = 'Sample bio'
+  C_NAME_ENGLISH = 'Sample Name'
+  C_NAME_SPANISH = 'Dónde está el baño'
+  C_EMAIL = 'test@test.com'
+  C_BIO = 'Sample bio'
 
   context "translations" do
     before(:each) do
       I18n.locale = :en
-      @coach = Coach.create name: NAME_ENGLISH, email: EMAIL, bio: BIO
+      @coach = Coach.create name: C_NAME_ENGLISH, email: C_EMAIL, bio: C_BIO
       I18n.locale = :es
-      @coach.update_attributes bio: NAME_SPANISH
+      @coach.update_attributes bio: C_NAME_SPANISH
     end
 
     it "reads the correct translation" do
       @coach = Coach.last
 
       I18n.locale = :en
-      expect(@coach.name).to eq(NAME_ENGLISH)
-      expect(@coach.email).to eq(EMAIL)
-      expect(@coach.bio).to eq(BIO)
+      expect(@coach.name).to eq(C_NAME_ENGLISH)
+      expect(@coach.email).to eq(C_EMAIL)
+      expect(@coach.bio).to eq(C_BIO)
 
       I18n.locale = :es
-      expect(@coach.bio).to eq(NAME_SPANISH)
+      expect(@coach.bio).to eq(C_NAME_SPANISH)
     end
   end
 end

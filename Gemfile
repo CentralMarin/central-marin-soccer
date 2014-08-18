@@ -76,6 +76,8 @@ group :development, :test do
   gem 'rspec-rails', '3.0.2'
   gem 'factory_girl_rails', '4.4.1'
   gem 'faker', '1.4.2'
+  gem 'capybara', '2.4.1'
+  gem 'selenium-webdriver', '2.42.0'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

@@ -15,24 +15,24 @@
 #  subcategory_id :integer
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe Article do
   it "has a valid factory" do
-    FactoryGirl.create(:article)
+    expect(FactoryGirl.create(:article)).to be_valid
   end
 
   it "requires a title" do
-    FactoryGirl.build(:article, title: nil).should_not be_valid
+    expect(FactoryGirl.build(:article, title: nil)).to_not be_valid
   end
 
   it "rejects titles that are too long" do
     long_title = "a" * 256
-    FactoryGirl.build(:article, title: long_title).should_not be_valid
+    expect(FactoryGirl.build(:article, title: long_title)).to_not be_valid
   end
 
   it "requires body" do
-    FactoryGirl.build(:article, body: nil).should_not be_valid
+    expect(FactoryGirl.build(:article, body: nil)).to_not be_valid
   end
 
   it "saves settings properly" do
@@ -41,36 +41,37 @@ describe Article do
     article.save
 
     db_article = Article.last
-    db_article.title.should == article.title
-    db_article.body.should == article.body
-    db_article.author.should == article.author
-    db_article.category_id.should == article.category_id
-    db_article.team_id.should == article.team_id
-    db_article.coach_id.should == article.coach_id
+    expect(db_article.title).to eq(article.title)
+    expect(db_article.body).to eq(article.body)
+    expect(db_article.author).to eq(article.author)
+    expect(db_article.category_id).to eq(article.category_id)
+    expect(db_article.team_id).to eq(article.team_id)
+    expect(db_article.coach_id).to eq(article.coach_id)
   end
 
-  context "instance methods" do
-
-  end
+  TITLE_ENGLISH = 'Sample Title'
+  TITLE_SPANISH = 'Dónde está el baño'
+  BODY_ENGLISH = '<div class="grid_10 box"><b>Body &nbsp;</b></div>'
+  BODY_SPANISH = '<div class="grid_10 box"><b>Dónde está el baño &nbsp;</b></div>'
 
   context "translations" do
     before(:each) do
       I18n.locale = :en
-      @article = Article.create title: "Sample Title", body: "HTML Body", author: "Sample Author", category_id: Article.category_id(Article::ARTICLE_CATEGORY[0])
+      @article = Article.create title: TITLE_ENGLISH, body: BODY_ENGLISH, author: "Sample Author", category_id: Article.category_id(Article::ARTICLE_CATEGORY[0])
       I18n.locale = :es
-      @article.update_attributes title: "Muestra Título", body: "HTML Cuerpo"
+      @article.update_attributes title: TITLE_SPANISH, body: BODY_SPANISH
     end
 
     it "should read the correct translation" do
       @article = Article.last
 
       I18n.locale = :en
-      @article.title.should == "Sample Title"
-      @article.body.should == "HTML Body"
+      expect(@article.title).to eq(TITLE_ENGLISH)
+      expect(@article.body).to eq(BODY_ENGLISH)
 
       I18n.locale = :es
-      @article.title.should == "Muestra Título"
-      @article.body.should == "HTML Cuerpo"
+      expect(@article.title).to eq(TITLE_SPANISH)
+      expect(@article.body).to eq(BODY_SPANISH)
     end
   end
 end

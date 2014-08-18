@@ -1,8 +1,10 @@
+
 module ActiveAdminMacros
 
   def login_as_admin
-    adminUser = FactoryGirl.create(:user, :admin_user)
-    visit new_user_session_path
+
+    adminUser = FactoryGirl.create(:admin_user)
+    visit new_admin_user_session_path
 
     # should get redirected to login page
     fill_in "Email", :with => adminUser.email

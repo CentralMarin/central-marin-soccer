@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "CoachesActiveAdmins" do
 
@@ -33,10 +33,10 @@ describe "CoachesActiveAdmins" do
 
       assert_path admin_coach_path(Coach.last)
 
-      page.should have_content(coach.name)
-      page.should have_content(html_stripped(coach.bio))
-      page.should have_content(html_stripped(newSpanishBio))
-      page.should have_content(coach.email)
+      expect(page).to have_content(coach.name)
+      expect(page).to have_content(html_stripped(coach.bio))
+      expect(page).to have_content(html_stripped(newSpanishBio))
+      expect(page).to have_content(coach.email)
     end
 
     context "with an existing coach" do
@@ -47,12 +47,12 @@ describe "CoachesActiveAdmins" do
       end
 
       it "it should list a coach and show details" do
-        page.should have_content(@coach.name)
-        page.should have_content(html_overview(@coach.bio))
+        expect(page).to have_content(@coach.name)
+        expect(page).to have_content(html_overview(@coach.bio))
         click_link "View"
         assert_path admin_coach_path(@coach.id)
-        page.should have_content(@coach.name)
-        page.should have_content(@coach.bio)
+        expect(page).to have_content(@coach.name)
+        expect(page).to have_content(@coach.bio)
       end
 
       it "he should be able to edit the coach", :js => true do
@@ -71,15 +71,15 @@ describe "CoachesActiveAdmins" do
         click_button "Update Coach"
 
         assert_path admin_coach_path(@coach.id)
-        page.should have_content(newName)
-        page.should have_content(html_stripped(newBio))
-        page.should have_content(html_stripped(newSpanishBio))
-        page.should have_content(newEmail)
+        expect(page).to have_content(newName)
+        expect(page).to have_content(html_stripped(newBio))
+        expect(page).to have_content(html_stripped(newSpanishBio))
+        expect(page).to have_content(newEmail)
       end
 
       it "he should be able to delete a coach", :js => true do
         click_delete @coach
-        page.should have_no_content(@coach.name)
+        expect(page).to have_no_content(@coach.name)
         assert_path admin_coaches_path
       end
 
