@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.4'
+gem 'rails', '4.1.5'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
 gem "activeadmin-globalize", :github => 'stefanoverna/activeadmin-globalize', :branch => 'master'
@@ -16,7 +16,7 @@ gem 'google_drive', '0.3.10'
 gem 'parsley-rails', '2.0.3.0'
 gem 'premailer-rails', '1.7.0'
 gem 'nokogiri', '1.6.3.1'
-gem 'devise', '3.2.4'
+gem 'devise', '3.3.0'
 #gem 'delayed_job_active_record'
 
 # gem 'roadie-rails', '1.0.2'
