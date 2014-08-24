@@ -2,13 +2,6 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 
-ENV = {}
-config = YAML.load(File.read(File.expand_path('../../config/application.yml', __FILE__)))
-config.merge! config.fetch(Rails.env, {})
-config.each do |key, value|
-  ENV[key] = value.to_s unless value.kind_of? Hash
-end
-
 # Updates / creates coaches based on email address
 def coach_create(details)
   coach = Coach.find_by_email(details[:email])
