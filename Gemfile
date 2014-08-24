@@ -13,7 +13,7 @@ gem 'globalize', '4.0.2'
 gem 'haml-rails', '0.5.3'
 gem 'whenever', '0.9.2', :require => false
 gem 'google_drive', '0.3.10'
-gem 'parsley-rails', '2.0.3.0'
+gem 'parsley-rails', '2.0.4.0'
 gem 'premailer-rails', '1.7.0'
 gem 'nokogiri', '1.6.3.1'
 gem 'devise', '3.3.0'
@@ -43,7 +43,7 @@ gem 'therubyracer', :platforms => :ruby
 gem 'jquery-ui-themes', '0.0.11'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '2.2.2'
+gem 'turbolinks', '2.3.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '2.1.3'
@@ -75,7 +75,7 @@ end
 group :development, :test do
   gem 'rspec-rails', '3.0.2'
   gem 'factory_girl_rails', '4.4.1'
-  gem 'faker', '1.4.2'
+  gem 'faker', '1.4.3'
   gem 'capybara', '2.4.1'
   gem 'selenium-webdriver', '2.42.0'
 end
