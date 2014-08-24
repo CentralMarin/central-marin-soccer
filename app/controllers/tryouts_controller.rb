@@ -21,7 +21,7 @@ class TryoutsController < InheritedResources::Base
     if @tryout_registration.save
 
       # Save to google spreadsheet - Age Specific Tab
-      update_spreadsheet ENV['GOOGLE_DRIVE_TRYOUTS_DOC'], @tryout_registration
+      update_spreadsheet Rails.application.secrets.google_drive_tryouts_doc, @tryout_registration
 
       # Tryout info
       @tryout_info = lookup_tryout(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year, Gender.new(@tryout_registration.gender))
@@ -110,7 +110,7 @@ class TryoutsController < InheritedResources::Base
       # make sure we submit everything in English
       I18n.with_locale(:en) do
 
-        session = GoogleDrive.login(ENV['GOOGLE_DRIVE_USER'], ENV['GOOGLE_DRIVE_PWD'])
+        session = GoogleDrive.login(Rails.application.secrets.google_drive_usr, Rails.application.secrets.google_drive_pwd)
         ss = session.spreadsheet_by_title(title) || session.create_spreadsheet(title)
         ws = get_worksheet(ss, Tryout.tryout_name(registration_info.age, Gender.new(registration_info.gender)))
         lastrow = ws.num_rows + 1
