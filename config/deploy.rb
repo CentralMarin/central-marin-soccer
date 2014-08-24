@@ -1,12 +1,9 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-config = YAML.load(File.read('config/application.yml'))
-config.each do |key, value|
-  ENV[key] = value.to_s unless value.kind_of? Hash
-end
+config = YAML.load_file('config/secrets.yml')
 
-server '207.104.28.18', user: "#{Rails.application.secrets.server_user}",roles: %w{app, web, db}
+server '207.104.28.18', user: "#{config['server_user']}",roles: %w{app, web, db}
 
 # Source Control
 set :application, 'centralmarinsoccer'
@@ -16,11 +13,11 @@ set :branch, 'release'
 #deployment details
 set :deploy_via, :remote_cache
 set :copy_exclude, ['.git']
-set :user, Rails.application.secrets.server_user
+set :user, config['server_user']
 set :use_sudo, false
 set :deploy_to, "/webapps/centralmarinsoccer"
 
-set :linked_files, %w{config/application.yml}
+set :linked_files, %w{config/secrets.yml}
 set :linked_dirs, %w{public/uploads public/assets public/system log}
 #
 #set :ssh_options, {
