@@ -68,6 +68,6 @@ CKEDITOR.editorConfig = function( config )
     ];
 
     /* allow grid based layout */
-    config.extraAllowedContent = 'div(grid_1, grid_2, grid_3, grid_4, grid_5, grid_6, grid_7, grid_8, grid_10, grid_11, grid_12, alpha, omega, box)';
+    config.extraAllowedContent = 'div(grid_1, grid_2, grid_3, grid_4, grid_5, grid_6, grid_7, grid_8, grid_10, grid_11, grid_12, grid_13, grid_14, grid_15, grid_16, alpha, omega, box, clear)';
 
 };
