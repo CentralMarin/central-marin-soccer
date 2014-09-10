@@ -52,16 +52,15 @@ class Team < ActiveRecord::Base
   def age
     return nil if year.nil?
 
-    "#{I18n.t('team.name.under')}#{Time.now.year - year}"
+    age_value = Time.now.year - year
 
     # Age is calculated from Aug 1 - July 31. Aug 1, team ages up. Jan 1 - July 31, Rising
-    #month = Time.now.month
-    #age_value = Time.now.year - year
-    #if (month >= 8)
-    #  "#{I18n.t('team.name.under')}#{age_value + 1}"
-    #else
-    #  "#{I18n.t('team.name.under')}#{age_value} (Rising #{I18n.t('team.name.under')}#{age_value + 1})"
-    #end
+    month = Time.now.month
+    if (month >= 8)
+      "#{I18n.t('team.name.under')}#{age_value + 1}"
+    else
+      "#{I18n.t('team.name.under')}#{age_value} (Rising #{I18n.t('team.name.under')}#{age_value + 1})"
+    end
   end
 
   def two_digit_year
