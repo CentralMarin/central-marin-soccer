@@ -52,6 +52,9 @@
 %hr.grid_16
 %p= link_to t('team.back'), teams_path
 
+%div#coach_dialog
+  %div#coach_details
+
 %script{id: 'CoachTemplate', type: 'text/html'}
   %div{id: 'simplemodal'}
     %img{class: 'coachImage', src: '{{:image_url}}'}
@@ -68,3 +71,4 @@
 
 - content_for :javascript do
   =javascript_include_tag "team"
+  =javascript_include_tag "coaches"

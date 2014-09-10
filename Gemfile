@@ -13,7 +13,7 @@ gem 'globalize', '4.0.2'
 gem 'haml-rails', '0.5.3'
 gem 'whenever', '0.9.2', :require => false
 gem 'google_drive', '0.3.10'
-gem 'parsley-rails', '2.0.4.0'
+gem 'parsley-rails', '2.0.5.0'
 gem 'premailer-rails', '1.8.0'
 gem 'nokogiri', '1.6.3.1'
 gem 'devise', '3.3.0'

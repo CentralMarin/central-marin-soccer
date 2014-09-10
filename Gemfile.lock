@@ -194,7 +194,7 @@ GEM
       multi_xml (~> 0.5)
       rack (~> 1.2)
     orm_adapter (0.5.0)
-    parsley-rails (2.0.4.0)
+    parsley-rails (2.0.5.0)
       railties (>= 3.0.0)
     polyglot (0.3.5)
     premailer (1.8.2)
@@ -326,7 +326,7 @@ DEPENDENCIES
   mini_magick (= 3.8.0)
   mysql2 (= 0.3.16)
   nokogiri (= 1.6.3.1)
-  parsley-rails (= 2.0.4.0)
+  parsley-rails (= 2.0.5.0)
   polyamorous!
   premailer-rails (= 1.8.0)
   rails (= 4.1.5)
