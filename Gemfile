@@ -14,7 +14,7 @@ gem 'haml-rails', '0.5.3'
 gem 'whenever', '0.9.2', :require => false
 gem 'google_drive', '0.3.10'
 gem 'parsley-rails', '2.0.4.0'
-gem 'premailer-rails', '1.7.0'
+gem 'premailer-rails', '1.8.0'
 gem 'nokogiri', '1.6.3.1'
 gem 'devise', '3.3.0'
 #gem 'delayed_job_active_record'
@@ -57,7 +57,7 @@ end
 # gem 'bcrypt-ruby', '~> 3.1.7'
 
 # Use Capistrano for deployment
-gem 'capistrano-rails',   '1.1.1', :require => false, :group => :development
+gem 'capistrano-rails',   '1.1.2', :require => false, :group => :development
 
 #gem 'capistrano', '3.2.1', :require => false, :group => :development
 #group :development do
@@ -73,11 +73,11 @@ end
 # gem 'debugger', group: [:development, :test]
 
 group :development, :test do
-  gem 'rspec-rails', '3.0.2'
+  gem 'rspec-rails', '3.1.0'
   gem 'factory_girl_rails', '4.4.1'
   gem 'faker', '1.4.3'
   gem 'capybara', '2.4.1'
-  gem 'selenium-webdriver', '2.42.0'
+  gem 'selenium-webdriver', '2.43.0'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
