@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.5'
+gem 'rails', '4.1.6'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
 gem "activeadmin-globalize", :github => 'stefanoverna/activeadmin-globalize', :branch => 'master'
 gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
 gem 'ckeditor', '4.1.0'
 gem 'carrierwave', '0.10.0'
-gem 'mini_magick', '3.8.0'
+gem 'mini_magick', '3.8.1'
 gem 'globalize', '4.0.2'
 gem 'haml-rails', '0.5.3'
 gem 'whenever', '0.9.2', :require => false
@@ -76,7 +76,7 @@ group :development, :test do
   gem 'rspec-rails', '3.1.0'
   gem 'factory_girl_rails', '4.4.1'
   gem 'faker', '1.4.3'
-  gem 'capybara', '2.4.1'
+  gem 'capybara', '2.4.3'
   gem 'selenium-webdriver', '2.43.0'
 end
 
