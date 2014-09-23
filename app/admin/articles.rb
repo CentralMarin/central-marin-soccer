@@ -48,8 +48,62 @@ ActiveAdmin.register Article do
     actions
   end
 
-  show do
-    render 'show'
+  show do |article|
+    attributes_table do
+      row :author
+      row :image do
+        image_tag image_path(article.image_url)
+      end
+      row :article do
+        I18n.available_locales.each do |locale|
+          h3 ADDITIONAL_LOCALES[locale]
+          translated_article = article.translations.where(locale: locale).first
+          if (translated_article.nil? || translated_article.title.blank?)
+            h4 b "Translation Missing - considering using google translate to get the point across"
+          else
+            h4 translated_article.title.html_safe
+          end
+          div do
+            if (translated_article.nil? || translated_article.body.blank?)
+              b "Translation Missing - considering using google translate to get the point across"
+            else
+              translated_article.body.html_safe
+            end
+          end
+        end
+      end
+      row :category do
+        subcategory = ''
+        case article.category
+          when :team
+            team = Team.find_by id: article.team_id
+            if team.blank?
+               subcategory = '- Unknown team'
+            else
+              subcategory = "- #{team.to_s}"
+            end
+          when :coach
+            coach = Coach.find_by id: article.coach_id
+            if coach.blank?
+              subcategory = '- Unknown coach'
+            else
+              subcategory = "- #{coach.to_s}"
+            end
+        end
+        "#{article.category} #{subcategory}"
+      end
+      row :carousel do
+        carousel = ArticleCarousel.find_by id: article.id
+        if carousel.blank?
+          'Not in carousel'
+        else
+          "At position #{carousel.carousel_order}"
+        end
+      end
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
   end
 
   collection_action :article_carousel, :title => "Carousel", :method => :get do
@@ -77,7 +131,7 @@ ActiveAdmin.register Article do
       f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
       f.input :team_id, :collection => @teams, :as => :select, :label => "Team", :include_blank => false
       f.input :coach_id, :collection => @coaches, :as => :select, :label => "Coach", :include_blank => false
-      f.input :author, :as => :hidden, :input_html => { :value => current_admin_user }
+      f.input :author, :as => :hidden, :input_html => { :value => current_admin_user.email }
     end
 
     f.actions <<
