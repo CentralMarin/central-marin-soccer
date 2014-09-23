@@ -12,7 +12,7 @@
 %div{class: 'column'}
   %h3{id: 'trash', class: 'carousel_heading'}
     Carousel Items
-    %img{src:'/assets/icons/trashcan.jpeg'}
+    =image_tag '/assets/icons/trashcan.jpeg'
   %ul{id: 'article_carousel_list', class: 'ui-sortable'}
     -@articles_in_carousel.each do |carousel|
       %li{class: 'ui-state-default article_carousel_item', data: {id: carousel.article.id}}
