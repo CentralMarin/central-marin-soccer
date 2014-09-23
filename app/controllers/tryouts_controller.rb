@@ -13,7 +13,12 @@ class TryoutsController < InheritedResources::Base
 
   def registration_create
 
-    @tryout_registration = TryoutRegistration.new(params.required(:tryout_registration).permit!)
+    @tryout_registration = TryoutRegistration.new(params.required(:tryout_registration)
+                                                  .permit(:first, :last, :home_address, :home_phone, :gender, :birthdate,
+                                                          :age, :previous_team, :parent1_first, :parent1_last,
+                                                          :parent1_cell, :parent1_email, :parent2_first, :parent2_last,
+                                                          :parent2_cell, :parent2_email, :completed_by, :relationship, :waiver))
+
     if not @tryout_registration.birthdate.nil?
       @tryout_registration.age = Tryout.calculate_age_level(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
     end
