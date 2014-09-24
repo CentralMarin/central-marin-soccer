@@ -1,6 +1,6 @@
 class CreateCoachTranslation < ActiveRecord::Migration
   def up
-    Coach.create_translation_table!({:bio => :string},
+    Coach.create_translation_table!({:bio => :text},
                                         {:migrate_data => true})
   end
 

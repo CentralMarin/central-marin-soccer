@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20140220011243) do
     t.string   "locale",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "bio"
+    t.text   "bio"
   end
 
   add_index "coach_translations", ["coach_id"], name: "index_coach_translations_on_coach_id"
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 20140220011243) do
     t.string   "locale",                  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "html",        limit: 255
+    t.text     "html"
   end
 
   add_index "web_part_translations", ["locale"], name: "index_web_part_translations_on_locale"
@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(version: 20140220011243) do
 
   create_table "web_parts", force: true do |t|
     t.string   "name"
-    t.text     "html",       limit: 255
+    t.text     "html"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
