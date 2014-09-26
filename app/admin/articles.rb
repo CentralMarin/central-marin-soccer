@@ -18,7 +18,7 @@ end
 ActiveAdmin.register Article do
 
   menu :label => 'Articles'
-  permit_params :title, :body, :image, :author, :category_id, :team_id, :coach_id, :published, :crop_x, :crop_y, :crop_w, :crop_h, :article_id, :carousel_order, :translations_attributes => [:title, :body, :locale, :id]
+  permit_params :title, :body, :author, :category_id, :team_id, :coach_id, :published, :crop_x, :crop_y, :crop_w, :crop_h, :article_id, :carousel_order, :image, :translations_attributes => [:title, :body, :locale, :id]
 
   filter :title
   filter :category

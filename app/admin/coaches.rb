@@ -1,6 +1,6 @@
 ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
 
-  permit_params :name, :email, :bio, :image, :crop_x, :crop_y, :crop_w, :crop_h,:translations_attributes => [:bio, :locale, :id]
+  permit_params :name, :email, :bio, :crop_x, :crop_y, :crop_w, :crop_h, :image, :translations_attributes => [:bio, :locale, :id]
 
   index do
     column :name

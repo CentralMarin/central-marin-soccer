@@ -1,7 +1,7 @@
 ActiveAdmin.register Team, {:sort_order => "year_desc"} do
 
  menu :label => 'Teams', :parent => 'Teams'
- permit_params :coach_id, :team_level_id, :gender, :year, :name, :image, :teamsnap_team_id, :crop_x, :crop_y, :crop_w, :crop_h
+ permit_params :coach_id, :team_level_id, :gender, :year, :name, :teamsnap_team_id, :crop_x, :crop_y, :crop_w, :crop_h, :image
 
  index do
     column :year
@@ -13,26 +13,48 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
     actions
 
  end
-
-  show :title => :page_title
-
- form :partial => "form"
-
- controller do
-
-    def show
-       @team = Team.find(params[:id])
-       show! #it seems to need this
-    end
-
-    def new
-      @team = Team.new
-      new!
-    end
-
-    def edit
-      @team = Team.find(params[:id])
-      edit!
-    end
+  show do |team|
+    attributes_table do
+      row :name
+      row :team_level
+      row :year
+      row :gender
+      row :image do
+        image_tag image_path(team.image_url)
+      end
+      row :coach
+      row :teamsnap_team_id
+      row :created_at
+      row :updated_at
+   end
+   active_admin_comments
  end
+
+
+ form do |f|
+   f.inputs do
+     f.input :name
+     f.input :team_level
+     f.input :year
+     f.input :gender
+     f.input :coach
+     f.input :teamsnap_team_id
+
+     f.input :crop_x, :as => :hidden
+     f.input :crop_y, :as => :hidden
+     f.input :crop_w, :as => :hidden
+     f.input :crop_h, :as => :hidden
+     f.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.url(), :id => "cropbox")
+   end
+   f.actions     <<
+
+       "<script>
+      $(document).ready(soccer.image_crop.init({
+        modelName: 'team',
+        width: #{TeamImageUploader::ImageSize::WIDTH},
+        height: #{TeamImageUploader::ImageSize::HEIGHT}
+      }));
+    </script>".html_safe
+ end
+
 end
