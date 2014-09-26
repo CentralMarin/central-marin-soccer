@@ -20,7 +20,7 @@ class Coach < ActiveRecord::Base
   has_many :teams
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-  after_update :crop_coach_image
+
   mount_uploader :image, CoachImageUploader
 
   email_regex = /\A['\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -30,14 +30,6 @@ class Coach < ActiveRecord::Base
   validates :email,        :presence => true,
                            :format => { :with => email_regex },
                            :uniqueness => true
-  #
-  #def admin_permalink
-  #  admin_coach_path(self)
-  #end
-
-  def crop_coach_image
-    image.recreate_versions! if crop_x.present?
-  end
 
   def to_s
     name

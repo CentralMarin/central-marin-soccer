@@ -34,7 +34,6 @@ class Team < ActiveRecord::Base
   TEAMSNAP_NO_TEAM_ID = '0000'
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-  after_update :crop_team_image
   mount_uploader :image, TeamImageUploader
 
   def gender
@@ -74,10 +73,6 @@ class Team < ActiveRecord::Base
 
   def admin_permalink
     admin_team_path(self)
-  end
-
-  def crop_team_image
-    image.recreate_versions! if crop_x.present?
   end
 
   def as_json(options = {})
