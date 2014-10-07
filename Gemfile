@@ -11,12 +11,12 @@ gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '3.8.1'
 gem 'globalize', '4.0.2'
 gem 'haml-rails', '0.5.3'
-gem 'whenever', '0.9.2', :require => false
+gem 'whenever', '0.9.3', :require => false
 gem 'google_drive', '0.3.10'
 gem 'parsley-rails', '2.0.5.0'
 gem 'premailer-rails', '1.8.0'
 gem 'nokogiri', '1.6.3.1'
-gem 'devise', '3.3.0'
+gem 'devise', '3.4.0'
 #gem 'delayed_job_active_record'
 
 # gem 'roadie-rails', '1.0.2'
@@ -43,10 +43,10 @@ gem 'therubyracer', :platforms => :ruby
 gem 'jquery-ui-themes', '0.0.11'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '2.3.0'
+gem 'turbolinks', '2.4.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.1.3'
+gem 'jbuilder', '2.2.1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
