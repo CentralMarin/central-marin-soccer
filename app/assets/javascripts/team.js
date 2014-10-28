@@ -54,7 +54,9 @@
                 $( "#schedule_progress" ).progressbar({ value: false });
                 $( "#roster_progress" ).progressbar({ value: false });
 
-                $.getJSON(document.URL + '/teamsnap.json', function(teamsnap) {
+                // Get the URL minus the hash
+                var teamsnap_url = document.URL.substring(0, document.URL.length - window.location.hash.length) + '/teamsnap.json'
+                $.getJSON(teamsnap_url, function(teamsnap) {
                     if ($.isEmptyObject(teamsnap)) {
                         // provide defaults
                         teamsnap = {schedule: null, players: null, managers: null, record: null}
