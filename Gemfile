@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.7'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
 gem "activeadmin-globalize", :github => 'stefanoverna/activeadmin-globalize', :branch => 'master'
@@ -11,22 +11,22 @@ gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '3.8.1'
 gem 'globalize', '4.0.2'
 gem 'haml-rails', '0.5.3'
-gem 'whenever', '0.9.3', :require => false
-gem 'google_drive', '0.3.10'
+gem 'whenever', '0.9.4', :require => false
+gem 'google_drive', '0.3.11'
 gem 'parsley-rails', '2.0.5.0'
 gem 'premailer-rails', '1.8.0'
 gem 'nokogiri', '1.6.3.1'
-gem 'devise', '3.4.0'
+gem 'devise', '3.4.1'
 #gem 'delayed_job_active_record'
 
 # gem 'roadie-rails', '1.0.2'
 # gem 'roadie', '3.0.0'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '1.3.9'
+gem 'sqlite3', '1.3.10'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '4.0.3'
+gem 'sass-rails', '4.0.4'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '2.5.3'
@@ -43,10 +43,10 @@ gem 'therubyracer', :platforms => :ruby
 gem 'jquery-ui-themes', '0.0.11'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '2.4.0'
+gem 'turbolinks', '2.5.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.2.1'
+gem 'jbuilder', '2.2.4'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -74,9 +74,9 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '3.1.0'
-  gem 'factory_girl_rails', '4.4.1'
+  gem 'factory_girl_rails', '4.5.0'
   gem 'faker', '1.4.3'
-  gem 'capybara', '2.4.3'
+  gem 'capybara', '2.4.4'
   gem 'selenium-webdriver', '2.43.0'
 end
 
