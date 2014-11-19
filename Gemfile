@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.7'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
-gem "activeadmin-globalize", :github => 'stefanoverna/activeadmin-globalize', :branch => 'master'
+gem "activeadmin-globalize", :github => 'fabn/activeadmin-globalize', :branch => 'develop'
 gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
 gem 'ckeditor', '4.1.0'
 gem 'carrierwave', '0.10.0'
