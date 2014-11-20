@@ -126,8 +126,10 @@ ActiveAdmin.register Article do
       f.input :crop_y, :as => :hidden
       f.input :crop_w, :as => :hidden
       f.input :crop_h, :as => :hidden
-      f.input :image, :as => :file, :hint => f.object.image.url().blank? ?  f.template.image_tag("no_image.png", :id => "cropbox") : f.template.image_tag(f.object.image.url(), :id => "cropbox")
-
+       f.input :image, :as => :file, :hint => f.object.image.present? \
+         ? f.image_tag(f.object.image.url(), :id => "cropbox")
+         : f.image_tag("no_image.png", :id => "cropbox")
+      f.input :image_cache, :as => :hidden
       f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
       f.input :team_id, :collection => @teams, :as => :select, :label => "Team", :include_blank => false
       f.input :coach_id, :collection => @coaches, :as => :select, :label => "Coach", :include_blank => false
