@@ -116,9 +116,21 @@ ActiveAdmin.register Article do
   form do |f|
     prepare_article
 
-    f.translated_inputs "Translated fields", switch_locale: false do |t|
-      t.input :title
-      t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
+    if f.object.errors.size >= 1
+      f.inputs "Errors" do
+        f.object.errors.full_messages.join('|')
+      end
+    end
+
+    # ActiveAdmin-globalize broken
+    # f.translated_inputs "Translated fields", switch_locale: false do |t|
+    #   t.input :title
+    #   t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
+    # end
+    # Templorary Hack
+    f.inputs do
+      f.input :title
+      f.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "en", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[:en]}"}}
     end
 
     f.inputs do
@@ -126,8 +138,9 @@ ActiveAdmin.register Article do
       f.input :crop_y, :as => :hidden
       f.input :crop_w, :as => :hidden
       f.input :crop_h, :as => :hidden
-      f.input :image, :as => :file, :hint => f.object.image.url().blank? ?  f.template.image_tag("no_image.png", :id => "cropbox") : f.template.image_tag(f.object.image.url(), :id => "cropbox")
-
+       f.input :image, :as => :file, :hint => f.object.image.present? \
+         ? f.image_tag(f.object.image.url(), :id => "cropbox")
+         : f.image_tag("no_image.png", :id => "cropbox")
       f.input :category_id, :collection => Article::ARTICLE_CATEGORY.each_with_index.map {|c, index| [c.to_s, index]}, :as => :select, :label => "Category"
       f.input :team_id, :collection => @teams, :as => :select, :label => "Team", :include_blank => false
       f.input :coach_id, :collection => @coaches, :as => :select, :label => "Coach", :include_blank => false
