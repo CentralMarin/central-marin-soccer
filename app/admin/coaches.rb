@@ -47,7 +47,7 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
     active_admin_comments
   end
 
-  form do |f|
+  form :html => { :enctype => "multipart/form-data" } do |f|
     f.inputs do
       f.input :name
       f.input :email
@@ -60,7 +60,7 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
       f.input :crop_y, :as => :hidden
       f.input :crop_w, :as => :hidden
       f.input :crop_h, :as => :hidden
-      f.input :image, :as => :file, :hint => f.template.image_tag(f.object.image.url(), :id => "cropbox")
+      f.input :image, :as => :file, :hint => f.image_tag(f.object.image.url(), :id => "cropbox")
     end
     f.actions     <<
 
