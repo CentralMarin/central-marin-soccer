@@ -113,7 +113,7 @@ ActiveAdmin.register Article do
     render "admin/articles/_carousel"
   end
 
-  form do |f|
+  form :html => { :enctype => "multipart/form-data" } do |f|
     prepare_article
 
     if f.object.errors.size >= 1
