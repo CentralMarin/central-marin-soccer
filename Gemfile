@@ -1,21 +1,21 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.7'
+gem 'rails', '4.1.8'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
-gem "activeadmin-globalize", :github => 'stefanoverna/activeadmin-globalize', :branch => 'master'
+gem "activeadmin-globalize", :github => 'stefanoverna/activeadmin-globalize'#, :branch => 'develop'
 gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
 gem 'ckeditor', '4.1.0'
 gem 'carrierwave', '0.10.0'
-gem 'mini_magick', '3.8.1'
+gem 'mini_magick', '4.0.0'
 gem 'globalize', '4.0.2'
 gem 'haml-rails', '0.5.3'
 gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '0.3.11'
 gem 'parsley-rails', '2.0.5.0'
 gem 'premailer-rails', '1.8.0'
-gem 'nokogiri', '1.6.3.1'
+gem 'nokogiri', '1.6.4.1'
 gem 'devise', '3.4.1'
 #gem 'delayed_job_active_record'
 
@@ -43,10 +43,10 @@ gem 'therubyracer', :platforms => :ruby
 gem 'jquery-ui-themes', '0.0.11'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '2.5.1'
+gem 'turbolinks', '2.5.2'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.2.4'
+gem 'jbuilder', '2.2.5'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -66,7 +66,7 @@ gem 'capistrano-rails',   '1.1.2', :require => false, :group => :development
 #end
 
 group :staging, :production do
-  gem 'mysql2', '0.3.16'
+  gem 'mysql2', '0.3.17'
 end
 
 # Use debugger
@@ -77,7 +77,7 @@ group :development, :test do
   gem 'factory_girl_rails', '4.5.0'
   gem 'faker', '1.4.3'
   gem 'capybara', '2.4.4'
-  gem 'selenium-webdriver', '2.43.0'
+  gem 'selenium-webdriver', '2.44.0'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
