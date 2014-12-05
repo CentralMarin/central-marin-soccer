@@ -6,16 +6,16 @@ gem 'rails', '4.1.8'
 gem 'activeadmin', :github => 'gregbell/active_admin'
 gem "activeadmin-globalize", :github => 'stefanoverna/activeadmin-globalize'#, :branch => 'develop'
 gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
-gem 'ckeditor', '4.1.0'
+gem 'ckeditor', '4.1.1'
 gem 'carrierwave', '0.10.0'
-gem 'mini_magick', '4.0.0'
+gem 'mini_magick', '4.0.1'
 gem 'globalize', '4.0.2'
-gem 'haml-rails', '0.5.3'
+gem 'haml-rails', '0.6.0'
 gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '0.3.11'
-gem 'parsley-rails', '2.0.5.0'
+gem 'parsley-rails', '2.0.6.0'
 gem 'premailer-rails', '1.8.0'
-gem 'nokogiri', '1.6.4.1'
+gem 'nokogiri', '1.6.5'
 gem 'devise', '3.4.1'
 #gem 'delayed_job_active_record'
 
@@ -26,7 +26,7 @@ gem 'devise', '3.4.1'
 gem 'sqlite3', '1.3.10'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '4.0.4'
+gem 'sass-rails', '4.0.5'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '2.5.3'
@@ -81,4 +81,4 @@ group :development, :test do
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', group: :development
+gem 'spring', '1.2.0', group: :development
