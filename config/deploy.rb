@@ -3,7 +3,7 @@ lock '3.2.1'
 
 config = YAML.load_file('config/secrets.yml')
 
-server '207.104.28.18', user: "#{config['server_user']}",roles: %w{app, web, db}
+server '207.104.28.18', user: "#{config['development']['server_user']}",roles: %w{app, web, db}
 
 # Source Control
 set :application, 'centralmarinsoccer'
@@ -13,7 +13,7 @@ set :branch, 'release'
 #deployment details
 set :deploy_via, :remote_cache
 set :copy_exclude, ['.git']
-set :user, config['server_user']
+set :user, config['development']['server_user']
 set :use_sudo, false
 set :deploy_to, "/webapps/centralmarinsoccer"
 
