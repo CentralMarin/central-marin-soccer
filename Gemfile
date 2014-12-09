@@ -29,7 +29,7 @@ gem 'sqlite3', '1.3.10'
 gem 'sass-rails', '4.0.5'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '2.5.3'
+gem 'uglifier', '2.6.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 #gem 'coffee-rails', '~> 4.0.1'
@@ -43,7 +43,7 @@ gem 'therubyracer', :platforms => :ruby
 gem 'jquery-ui-themes', '0.0.11'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '2.5.2'
+gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '2.2.5'
