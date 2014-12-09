@@ -14,7 +14,7 @@ class TryoutsController < InheritedResources::Base
   def registration_create
 
     @tryout_registration = TryoutRegistration.new(params.required(:tryout_registration)
-                                                  .permit(:first, :last, :home_address, :home_phone, :gender, :birthdate,
+                                                  .permit(:first, :last, :home_address, :home_phone, :city, :gender, :birthdate,
                                                           :age, :previous_team, :parent1_first, :parent1_last,
                                                           :parent1_cell, :parent1_email, :parent2_first, :parent2_last,
                                                           :parent2_cell, :parent2_email, :completed_by, :relationship, :waiver))
@@ -82,6 +82,7 @@ class TryoutsController < InheritedResources::Base
        'First',
        'Last',
        'Home Address',
+       'City',
        'Home Phone',
        'Gender',
        'Birthdate',
@@ -115,10 +116,13 @@ class TryoutsController < InheritedResources::Base
       # make sure we submit everything in English
       I18n.with_locale(:en) do
 
-        session = GoogleDrive.login(Rails.application.secrets.google_drive_usr, Rails.application.secrets.google_drive_pwd)
-        ss = session.spreadsheet_by_title(title) || session.create_spreadsheet(title)
+        session = GoogleDrive.login(Rails.application.secrets.google_drive_user, Rails.application.secrets.google_drive_pwd)
+        ss = session.spreadsheet_by_title(title)
+        if ss.nil?
+          ss = session.create_spreadsheet(title)
+        end
         ws = get_worksheet(ss, Tryout.tryout_name(registration_info.age, Gender.new(registration_info.gender)))
-        lastrow = ws.num_rows + 1
+        last_row = ws.num_rows + 1
 
         gender = Gender.new(registration_info.gender).to_s
         # Be explicit about order
@@ -127,6 +131,7 @@ class TryoutsController < InheritedResources::Base
          registration_info.first,
          registration_info.last,
          registration_info.home_address,
+         registration_info.city,
          registration_info.home_phone,
          gender,
          registration_info.birthdate,
@@ -146,7 +151,7 @@ class TryoutsController < InheritedResources::Base
          registration_info.waiver,
          request.env['HTTP_USER_AGENT']
         ].each_with_index do |cell, index|
-          ws[lastrow, index + 1] = cell     # 1 Based indexing
+          ws[last_row, index + 1] = cell     # 1 Based indexing
         end
 
         ws.save

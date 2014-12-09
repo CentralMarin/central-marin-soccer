@@ -9,7 +9,7 @@ gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
 gem 'ckeditor', '4.1.1'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.0.1'
-gem 'globalize', '4.0.2'
+gem 'globalize', '4.0.3'
 gem 'haml-rails', '0.6.0'
 gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '0.3.11'
