@@ -27,7 +27,17 @@
       &nbsp;
 
     = show_text_field(f, t('registration.form.address'), :home_address, true)
+    = show_text_field(f, t('registration.form.city'), :city, true)
+
+    %div.clear
+      &nbsp;
+
     = show_text_field(f, t('registration.form.phone'), :home_phone, true, '(XXX) XXX XXXX')
+
+    %div.clear
+      &nbsp;
+
+    &nbsp;
 
     %div.clear
       &nbsp;

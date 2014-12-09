@@ -112,6 +112,7 @@ en:
       first: 'First Name'
       last: 'Last Name'
       address: 'Home Address'
+      city: 'City'
       phone: 'Home Phone'
       gender: 'Gender'
       gender_boy: 'Boy'

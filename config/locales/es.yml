@@ -112,6 +112,7 @@ es:
       first: 'Nombre'
       last: 'Apellido'
       address: 'Dirección de la Casa'
+      city: 'Ciudad'
       phone: 'Teléfono de la Casa'
       gender: 'Género'
       birthdate: 'Cumpleaños'

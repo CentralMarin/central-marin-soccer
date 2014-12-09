@@ -3,6 +3,7 @@ class TryoutRegistration < ActiveRecord::Base
   validates :first,  :presence => true, allow_blank: false
   validates :last, :presence => true, allow_blank: false
   validates :home_address, :presence => true, allow_blank: false
+  validates :city, :presence => true, allow_blank: false
   validates :home_phone, :presence => true, allow_blank: false
   validates :gender, :presence => true, allow_blank: false
   validates :birthdate, :presence => true, allow_blank: false
