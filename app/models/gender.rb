@@ -7,7 +7,7 @@ class Gender
   end
 
   def self.id (name)
-    self.names.each do |gender_name, index|
+    self.names.each_with_index do |gender_name, index|
       if (gender_name == name)
         return index
       end
