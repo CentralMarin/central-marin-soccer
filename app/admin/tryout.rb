@@ -9,6 +9,7 @@ ActiveAdmin.register Tryout do
       tryout.date_to_s
     end
     column :field
+    column :is_makeup
     actions
   end
 
@@ -37,5 +38,46 @@ ActiveAdmin.register Tryout do
     end
     f.actions
   end
-  
+
+  csv do
+    column :gender
+    column :age
+    column :tryout_start
+    column :duration
+    column :field
+    column :is_makeup
+  end
+
+  collection_action :upload_csv, :title => 'Tryouts Uploads', :method => :get do
+    render 'admin/csv/tryouts_upload_csv'
+  end
+
+  collection_action :import_csv, :method => :post do
+    Tryout.transaction do
+      # remove all the existing records
+      Tryout.destroy_all
+
+      # read the csv
+      csv_data = params[:dump][:file]
+      csv_file = csv_data.read
+      CSV.parse(csv_file, {:headers => true}) do |row|
+        tryout = Tryout.new()
+        tryout.gender_id = Gender.id(row[0])
+        tryout.age = row[1]
+        tryout.tryout_start = row[2]
+        tryout.duration = row[3]
+        tryout.field = Field.where("lower(name) = ?", row[4].downcase).first
+        tryout.is_makeup = row[5]
+        tryout.save!
+
+      end
+
+    end
+
+    redirect_to :action => :index, :notice => 'CSV imported successfully!'
+  end
+
+  action_item :only => :index do
+    link_to 'Upload CSV', :action => 'upload_csv'
+  end
 end

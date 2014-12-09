@@ -22,7 +22,7 @@ module ApplicationHelper
         ['menu.tournaments', tournaments_path],
         ['menu.referees', referees_path],
         ['menu.news', articles_path],
-        # ['menu.tryout', tryouts_path]
+        ['menu.tryout', tryouts_path]
     ].map do |item|
       menu_item item, (@top_level_section_name == item[0]) ? 'current' : 'single-link'
     end
