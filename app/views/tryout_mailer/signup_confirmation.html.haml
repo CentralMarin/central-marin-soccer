@@ -1,26 +1,20 @@
 %html
   %head
+    %style{type:"text/css"}= Rails.application.assets.find_asset('application').to_s
     %meta{'http-equiv' => 'Content-Type', content: 'text/html; charset=utf-8'}
     %title
       Central Marin Soccer Club Registration Confirmation
-    :css
-      body, td { color:#000000; font-size:14px; font-family:Verdana,Helvetica,Arial; }
-      .divider { background-color:#555555; height:2px; }
-      .episode h2 { margin-top:0; margin-bottom:8px; font-size:18px; }
-      .episode p { margin:8px 0; }
-      .episode img { border:solid 1px #777777; }
-      .episode .duration { font-size:11px;color:#555555; }
-      #footer { font-size:11px; color:#555555; }
-      #footer a { color:#555555;}
   %body
     %p
-      = "This email confirms that #{@registration.first} #{@registration.last} has been registered for tryouts."
+      = "This email confirms that your #{@registration.gender}, #{@registration.first} #{@registration.last}, has been registered for tryouts."
 
     %p
       Please verify the following information is correct.
       %ul
         %li
           = "Address: #{@registration.home_address}"
+        %li
+          = "City: #{@registration.city}"
         %li
           = "Home Phone: #{@registration.home_phone}"
         %li
@@ -43,7 +37,9 @@
               = "Parent Email: #{@registration.parent2_email}"
 
     %p
-      -#= render :partial => 'tryout_info'
+      Any problems, please contact tryouts@centralmarinsoccer.com
 
-
-    Any problems, please contact tryouts@centralmarinsoccer.com
+    %p
+      TODO: Put tryout times here @tryout_info
+    %p
+      We look forward to seeing your child at tryouts. Make sure to bring water, shin guards, and cleats.
