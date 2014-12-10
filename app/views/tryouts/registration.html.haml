@@ -15,7 +15,7 @@
     #error_explanation
       %h2= "#{pluralize(@tryout_registration.errors.count, "error")} prohibited your registration from being saved. Please correct them below."
 
-= form_for @tryout_registration, :url => tryouts_registration_create_path, :data => {:validate => 'parsley' } do |f|
+= form_for @tryout_registration, :url => tryouts_registration_create_path do |f|
   %div.grid_16.box
     %h2
       = t('registration.form.player_heading')
@@ -32,7 +32,7 @@
     %div.clear
       &nbsp;
 
-    = show_text_field(f, t('registration.form.phone'), :home_phone, true, '(XXX) XXX XXXX')
+    = show_telephone_field(f, t('registration.form.phone'), :home_phone, true)
 
     %div.clear
       &nbsp;
@@ -46,23 +46,23 @@
       = "#{t('registration.form.gender')} *"
 
     %div.grid_4
-      = f.radio_button :gender, 0, {:required => true, 'parsley-required' => 'true'}
+      = f.radio_button :gender, 0, {:required => true}
       = f.label :gender, t('registration.form.gender_boy'), :value => 0
-      = f.radio_button :gender, 1, {:required => true, 'parsley-required' => 'true'}
+      &nbsp; &nbsp;
+      = f.radio_button :gender, 1, {:required => true}
       = f.label :gender, t('registration.form.gender_girl'), :value => 1
       = show_error(t('registration.form.gender'), :gender)
 
     %div.grid_3
       = f.label :birthdate, "#{t('registration.form.birthdate')} *"
     %div.grid_4
-      = f.date_select :birthdate, {:start_year => Time.now.year - 19, :end_year => Time.now.year - 6, :use_month_numbers => true, :include_blank => true, :order => [:month, :day, :year]}, {:required => true, 'parsley-required' => 'true'}
+      = f.date_select :birthdate, {:start_year => Time.now.year - 19, :end_year => Time.now.year - 6, :use_month_numbers => true, :include_blank => true, :order => [:month, :day, :year]}, {:required => true}
       = show_error(t('registration.form.birthdate'), :birthdate)
     %div.clear
       &nbsp;
 
     %div.grid_15
       %h3#tryouts_date_and_times
-      -#= hidden_field_tag :age
 
     %div.clear
       &nbsp;
@@ -70,7 +70,7 @@
     %div.grid_3
       = f.label :previous_team, "#{t('registration.form.previous')} *"
     %div.grid_12
-      = f.select :previous_team, options_for_select({t('registration.form.previous_rec') => 'Rec Soccer', t('registration.form.previous_other') => 'Other Competitive Club', t('registration.form.previous_cm') => 'Central Marin Soccer Club'}), {:include_blank => true}, {:required => true, 'parsley-required' => 'true'}
+      = f.select :previous_team, options_for_select({t('registration.form.previous_rec') => 'Rec Soccer', t('registration.form.previous_other') => 'Other Competitive Club', t('registration.form.previous_cm') => 'Central Marin Soccer Club'}), {:include_blank => true}, {:required => true}
       = show_error(t('registration.form.previous'), :previous_team)
 
     %div.clear
@@ -87,8 +87,8 @@
       %div.clear
         &nbsp;
 
-      = show_text_field(f, t('registration.form.email'), "parent#{parent_id}_email", (parent_field_required(parent_id)), 'xxxxxx@xxxxxxx.xxx')
-      = show_text_field(f, t('registration.form.mobile'), "parent#{parent_id}_cell", (parent_field_required(parent_id)), '(###) ### ####')
+      = show_email_field(f, t('registration.form.email'), "parent#{parent_id}_email", (parent_field_required(parent_id)))
+      = show_telephone_field(f, t('registration.form.mobile'), "parent#{parent_id}_cell", (parent_field_required(parent_id)))
 
   %div.grid_16.box
     %h2
@@ -112,7 +112,7 @@
     %div.grid_7
       = f.label :relationship, "#{t('registration.form.signor.relationship')} *"
     %div.grid_7
-      = f.select :relationship, options_for_select({t('registration.form.signor.father') => 'Father', t('registration.form.signor.mother') => 'Mother', t('registration.form.signor.guardian') => 'Guardian'}), {:include_blank => true}, {:required => true, 'parsley-required' => 'true'}
+      = f.select :relationship, options_for_select({t('registration.form.signor.father') => 'Father', t('registration.form.signor.mother') => 'Mother', t('registration.form.signor.guardian') => 'Guardian'}), {:include_blank => true}, {:required => true}
       = show_error(t('registration.form.signor.relationship'), :relationship)
 
     %div.clear
@@ -125,7 +125,7 @@
       = t('registration.form.waiver.body')
 
     %div.grid_15
-      = f.check_box :waiver, "parsley-trigger"=>"change", :required => true
+      = f.check_box :waiver, :required => true
       = f.label :waiver, "#{t('registration.form.waiver.agree')} *"
       = show_error t('registration.form.waiver.agree'), :waiver
 
@@ -150,5 +150,8 @@
   %script
     $(document).ready(soccer.tryouts.init_registration('tryout_registration_birthdate_2i', 'tryout_registration_birthdate_3i', 'tryout_registration_birthdate_1i', 'tryout_registration[gender]'));
     $(document).ready($('input[name="tryout_registration[first]"]').focus());
+    $.webshims.setOptions('forms', { lazyCustomMessages: true });
 
+    //start polyfilling
+    $.webshims.polyfill('forms forms-ext');
 
