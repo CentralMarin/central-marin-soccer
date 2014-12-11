@@ -11,6 +11,16 @@ class TryoutsController < InheritedResources::Base
     @tryout_registration = TryoutRegistration.new
   end
 
+  def format_phone_number(phone_number)
+
+    if phone_number.blank?
+      return phone_number
+    end
+
+    # Get the digits
+    phone_number.gsub(/[^\d]/, '')
+  end
+
   def registration_create
 
     @tryout_registration = TryoutRegistration.new(params.required(:tryout_registration)
@@ -25,6 +35,11 @@ class TryoutsController < InheritedResources::Base
 
     if @tryout_registration.save
 
+      # Make phone numbers consistent
+      @tryout_registration.home_phone = format_phone_number(@tryout_registration.home_phone)
+      @tryout_registration.parent1_cell = format_phone_number(@tryout_registration.parent1_cell)
+      @tryout_registration.parent2_cell = format_phone_number(@tryout_registration.parent2_cell)
+
       # Save to google spreadsheet - Age Specific Tab
       update_spreadsheet Rails.application.secrets.google_drive_tryouts_doc, @tryout_registration
 
@@ -32,7 +47,7 @@ class TryoutsController < InheritedResources::Base
       @tryout_info = lookup_tryout(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year, Gender.new(@tryout_registration.gender))
 
       # Send confirmation email
-#      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
+      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
 
       render :action => 'confirmation'
     else

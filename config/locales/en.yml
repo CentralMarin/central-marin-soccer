@@ -106,6 +106,13 @@ en:
   registration:
     confirmation:
       subject: 'Central Marin Competitive Soccer Club Registration Confirmation ...'
+      heading: ' Tryout Confirmation'
+      overview: '    <p>Players should arrive 30 minutes prior to the scheduled start time to checkin and warm-up.  Please wear standard soccer gear, including soccer cleats, shin-guards and a club neutral white or grey T-shirt.  Club uniforms or clothing indicating team or club affiliation is not allowed. There is no tryout fee and all tryout session will take place rain or shine.</p>
+                     <p>If you have questions about our program Members of the Board will be available at the check-in table to answer questions at the start of each tryout session. Thank you for your interest in Central Marin and we look forward to seeing all of you on the field.</p>
+                     <p>Please verify the following information and notify tryouts@centralmarinsoccer.com if anything is incorrect:</p>'
+      tryouts:
+        heading: 'Tryouts'
+        overview: ''
     form:
       player_heading: 'Player Information'
       parent_heading: 'Parent Information'

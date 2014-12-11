@@ -1,0 +1,44 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+*/
+
+.grid_16, .grid_3, .grid_4 {
+  margin-right: 10px;
+  float: left;
+  display: inline;
+  margin-left: 10px;
+  min-height: 1px;
+}
+.grid_3 {
+  width: 160px;
+}
+.grid_4 {
+  width: 220px;
+}
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.box {
+  border: solid 2px #253143;
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  -webkit-box-sizing: border-box;
+
+  h2 {
+    border-bottom: 1px solid rgb(48, 60, 79);
+    margin: 0px;
+    padding: 0px;
+    padding-bottom: 8px;
+    display: block;
+  }
+}
