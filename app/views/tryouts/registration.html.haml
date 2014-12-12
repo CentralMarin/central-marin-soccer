@@ -1,12 +1,9 @@
 %div.grid_16
   %h1
-    2014 U8-U19 Soccer Tryout Online Registration
+    = "2015 #{t('registration.form.heading')}".html_safe
 
 %div.grid_16
-  Use the form below to register your child for the Central Marin Competitive Soccer Club tryouts for U8-U19.
-  %br
-  For more information on tryouts, click
-  = link_to 'here.', tryouts_url
+  = t('registration.form.overview').html_safe
 
 %div.grid_16
   &nbsp;
@@ -92,15 +89,15 @@
 
   %div.grid_16.box
     %h2
-      = t('registration.form.medical.heading')
+      = t('registration.form.medical.heading').html_safe
     %div.grid_15
-      = t('registration.form.medical.body')
+      = t('registration.form.medical.body').html_safe
     %div.grid_15 &nbsp;
 
     %h2
-      = t('registration.form.legal.heading')
+      = t('registration.form.legal.heading').html_safe
     %div.grid_15
-      = t('registration.form.legal.body')
+      = t('registration.form.legal.body').html_safe
 
     %div.grid_15 &nbsp;
 
@@ -141,7 +138,7 @@
       %nbsp;
 
 %div.grid_16
-  If you have any problems registering for tryouts, email:
+  = t('registration.form.footer')
   %a{:mail_to => 'tryouts@centralmarinsoccer.com'} tryouts@centralmarinsoccer.com
 
 

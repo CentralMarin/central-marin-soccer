@@ -104,6 +104,8 @@ en:
   news:
     heading: 'Recent Club News'
   registration:
+    tryouts:
+      heading: "Select the player's birthday and gender"
     confirmation:
       subject: 'Central Marin Competitive Soccer Club Registration Confirmation ...'
       heading: ' Tryout Confirmation'
@@ -111,9 +113,13 @@ en:
                      <p>If you have questions about our program Members of the Board will be available at the check-in table to answer questions at the start of each tryout session. Thank you for your interest in Central Marin and we look forward to seeing all of you on the field.</p>
                      <p>Please verify the following information and notify tryouts@centralmarinsoccer.com if anything is incorrect:</p>'
       tryouts:
-        heading: 'Tryouts'
+        heading: 'Tryout''s Time, Date, and Location'
         overview: ''
+      register_another: 'Click here to register another child'
     form:
+      heading: ' U8-U19 Soccer Tryout Online Registration'
+      overview: '<p>Use the form below to register your child for the Central Marin Competitive Soccer Club tryouts for U8-U19.</p>
+                 <p>For more information on tryouts, click <a href=''/tryouts''>here</a>.</p>'
       player_heading: 'Player Information'
       parent_heading: 'Parent Information'
       first: 'First Name'
@@ -147,3 +153,4 @@ en:
         body: 'I have read the above waiver and release, and consent for medical treatment By clicking, I represent that I am the parent or guardian of the minor athlete being registered on this form for Central Marin Competitive Soccer Club and my click is my signature for this waiver and release and medical consent.'
         agree: 'I agree'
       submit: 'Submit'
+      footer: 'If you have any problems registering for tryouts, email: '

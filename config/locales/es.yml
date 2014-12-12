@@ -18,7 +18,7 @@ es:
     facebook: "Facebook"
     clubInfo: "Información"
     contact: "Contacto"
-    tryout: "Tryouts"
+    tryout: "Probar"
   home:
     title: "Bienvenido a Central Marín Club de Fútbol"
     overview: "El Central Marin Competitiva Club de fútbol (CMCSC) se compone de Oro, Plata y Bronce División de seleccionar los equipos de fútbol al servicio de las comunidades centrales de Marín de San Rafael, Terra Linda (Dixie), Larkspur, San Anselmo, Ross, Greenbrae, Kentfield y Madera Corte. El club es también el hogar de la Academia U9 Desarrollo."
@@ -104,9 +104,22 @@ es:
   news:
     heading: 'Noticias de los Clubes Recientes'
   registration:
+    tryouts:
+      heading: 'Seleccione cumpleaños del jugador y el género'
     confirmation:
       subject: 'Marin Centro Competitiva Registro Confirmación Club de Fútbol ...'
+      heading: ' Prueba Confirmación'
+      overview: '<p>Los jugadores deben llegar 30 minutos antes de la hora de inicio programada para el registro y calentamiento. Por favor, use equipo de fútbol estándar, incluyendo zapatos de fútbol, espinilleras y un club neutral camiseta blanca o gris. Uniformes del club o la ropa que indican equipo o club afiliación no está permitido. No hay cuota de puesta a punto y todo tryout sesión tendrá lugar llueva o haga sol.</p>
+                 <p>Si tiene preguntas sobre nuestros programas Los miembros de la Junta estarán disponibles en la mesa de registro para responder preguntas en el inicio de cada sesión de puesta a punto. Gracias por su interés en Marin Central y esperamos verlos a todos ustedes en el campo.</p>
+                 <p>Por favor, verifique la siguiente información y notificar tryouts@centralmarinsoccer.com si algo es incorrecto:</p>'
+      tryouts:
+        heading: 'Prueba de Tiempo, Fecha y Lugar'
+        overview: ''
+      register_another: 'Haga clic aquí para registrar otro niño'
     form:
+      heading: ' Registro U8-U19 Fútbol Prueba en Línea'
+      overview: '<p>Utilice el siguiente formulario para inscribir a su hijo para las pruebas competitivas de fútbol del Club Marin central para U8-U19.</p>
+                 <p>Para obtener más información sobre las pruebas, haga clic <a href=''/tryouts''>aquí</a>.</p>'
       player_heading: 'Información del Jugador'
       parent_heading: 'Información para Padres'
       first: 'Nombre'
@@ -115,6 +128,8 @@ es:
       city: 'Ciudad'
       phone: 'Teléfono de la Casa'
       gender: 'Género'
+      gender_boy: 'Niño'
+      gender_girl: 'Niña'
       birthdate: 'Cumpleaños'
       previous: 'Fútbol Anterior'
       previous_rec: 'Fútbol Recreativo'
@@ -138,3 +153,4 @@ es:
         body: 'He leído la exención de arriba y soltar, y dar su consentimiento para el tratamiento médico Al hacer clic, declaro que soy el padre o tutor del atleta menor de edad está registrada en este formulario para Centro Marin Club de fútbol competitivo y haga clic en mi es mi firma de esta renuncia y descarga, y consentimiento médico.'
         agree: 'Estoy de acuerdo'
       submit: 'Presentar'
+      footer: 'Si tiene problemas con el registro de las pruebas, el correo electrónico: '
