@@ -22,7 +22,33 @@ module TryoutRegistrationsHelper
     html = show_label(form, label, field, required, label_grid)
 
     html += content_tag(:div, :class => "grid_#{field_grid}") do
-      html_content = form.text_field(field, "parsley-trigger"=>"change", required: required, placeholder: placeholder)
+      html_content = form.text_field(field, required: required, placeholder: placeholder)
+      html_content += show_error(label, field)
+      html_content
+    end
+
+    return html
+  end
+
+
+  def show_telephone_field(form, label, field, required, label_grid = 3, field_grid = 4)
+    html = show_label(form, label, field, required, label_grid)
+
+    html += content_tag(:div, :class => "grid_#{field_grid}") do
+      html_content = form.telephone_field(field, required: required, placeholder: '###-###-####', pattern: '^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$')
+      html_content += show_error(label, field)
+      html_content
+    end
+
+    return html
+  end
+
+
+  def show_email_field(form, label, field, required, label_grid = 3, field_grid = 4)
+    html = show_label(form, label, field, required, label_grid)
+
+    html += content_tag(:div, :class => "grid_#{field_grid}") do
+      html_content = form.telephone_field(field, required: required, placeholder: 'XXXX@XXXXXXX.XXX', pattern: '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')
       html_content += show_error(label, field)
       html_content
     end
@@ -32,7 +58,7 @@ module TryoutRegistrationsHelper
 
   def show_checkbox(form, label, field, required, grid = 5)
     html = content_tag(:div, :class => "grid_#{grid}") do
-      html_content = form.check_box(field, "parsley-trigger"=>"change", required: required)
+      html_content = form.check_box(field, required: required)
       html_content += label(field, " #{label} #{required ? ' *' : ''}")
       html_content += show_error(label, field)
     end

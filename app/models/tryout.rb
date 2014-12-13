@@ -3,7 +3,6 @@ class Tryout < ActiveRecord::Base
 
   validates :gender_id, :presence => true
   validates :age, :presence => true
-  validates :field, :presence => true
 
   def gender
     Gender.new(gender_id).name

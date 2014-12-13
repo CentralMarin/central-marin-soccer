@@ -1,0 +1,136 @@
+%div.grid_16
+  %h1
+    = "2015 #{t('registration.confirmation.heading')}"
+  %div
+    = t('registration.confirmation.overview').html_safe
+%div.grid_16.box
+  %h2
+    = t('registration.form.player_heading')
+  %div.grid_3
+    = "#{t('registration.form.first')}:"
+  %div.grid_4
+    = " #{@tryout_registration.first}"
+
+  %div.grid_3
+    = "#{t('registration.form.last')}:"
+  %div.grid_4
+    = " #{@tryout_registration.last}"
+
+  %div.clear
+    &nbsp;
+
+  %div.grid_3
+    = "#{t('registration.form.address')}:"
+  %div.grid_4
+    = " #{@tryout_registration.home_address}"
+
+  %div.grid_3
+    = "#{t('registration.form.city')}:"
+  %div.grid_4
+    = " #{@tryout_registration.city}"
+
+  %div.clear
+    &nbsp;
+
+  %div.grid_3
+    = "#{t('registration.form.phone')}:"
+  %div.grid_4
+    = " #{number_to_phone(@tryout_registration.home_phone, area_code: true) }"
+
+
+  %div.clear
+    &nbsp;
+
+  %div.grid_3
+    = "#{t('registration.form.gender')}:"
+  %div.grid_4
+    = " #{@tryout_registration.gender == 0 ? t('registration.form.gender_boy') : t('registration.form.gender_girl')}"
+
+  %div.grid_3
+    = "#{t('registration.form.birthdate')}:"
+  %div.grid_4
+    = " #{@tryout_registration.birthdate.strftime('%m-%d-%Y')}"
+
+
+  %div.clear
+    &nbsp;
+
+
+  &nbsp;
+
+  %div.clear
+    &nbsp;
+
+  %h2
+    = t('registration.form.parent_heading')
+
+  %div.grid_3
+    = "#{t('registration.form.first')}:"
+  %div.grid_4
+    = " #{@tryout_registration.parent1_first}"
+
+  %div.grid_3
+    = "#{t('registration.form.last')}:"
+  %div.grid_4
+    = " #{@tryout_registration.parent1_last}"
+
+  %div.clear
+    &nbsp;
+
+  %div.grid_3
+    = "#{t('registration.form.mobile')}:"
+  %div.grid_4
+    = " #{number_to_phone(@tryout_registration.parent1_cell, area_code: true)}"
+
+  %div.grid_3
+    = "#{t('registration.form.email')}:"
+  %div.grid_4
+    = " #{@tryout_registration.parent1_email}"
+
+  %div.clear
+    &nbsp;
+
+
+  &nbsp;
+
+  %div.clear
+    &nbsp;
+
+  -# Show the second parent info if any fields were provided
+  - if not (@tryout_registration.parent2_first.blank? and @tryout_registration.parent2_last.blank? and @tryout_registration.parent2_cell.blank? and @tryout_registration.parent2_email.blank?)
+    %h2
+      = t('registration.form.parent_heading')
+    %div.grid_3
+      = "#{t('registration.form.first')}:"
+    %div.grid_4
+      = " #{@tryout_registration.parent2_first}"
+
+    %div.grid_3
+      = "#{t('registration.form.last')}:"
+    %div.grid_4
+      = " #{@tryout_registration.parent2_last}"
+
+    %div.clear
+      &nbsp;
+
+    %div.grid_3
+      = "#{t('registration.form.mobile')}:"
+    %div.grid_4
+      = " #{number_to_phone(@tryout_registration.parent2_cell, area_code: true)}"
+
+    %div.grid_3
+      = "#{t('registration.form.email')}:"
+    %div.grid_4
+      = " #{@tryout_registration.parent2_email}"
+
+    %div.clear
+      &nbsp;
+
+%div.grid_16.box
+  %h2
+    = t('registration.confirmation.tryouts.heading')
+  %p
+    = t('registration.confirmation.tryouts.overview').html_safe
+  = render :partial => 'tryouts/tryout_info', locals: { tryout_name: tryout_name, locations: locations }
+
+

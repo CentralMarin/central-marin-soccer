@@ -66,7 +66,9 @@ ActiveAdmin.register Tryout do
         tryout.age = row[1]
         tryout.tryout_start = row[2]
         tryout.duration = row[3]
-        tryout.field = Field.where("lower(name) = ?", row[4].downcase).first
+        if not row[4].blank?
+          tryout.field = Field.where("lower(name) = ?", row[4].downcase).first
+        end
         tryout.is_makeup = row[5]
         tryout.save!
 
