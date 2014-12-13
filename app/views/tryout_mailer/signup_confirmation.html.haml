@@ -3,4 +3,4 @@
     %style{type:"text/css"}= Rails.application.assets.find_asset('email.css').to_s
     %meta{'http-equiv' => 'Content-Type', content: 'text/html; charset=utf-8'}
   %body
-    = render :partial => 'tryouts/tryout_confirmation'
+    = render :partial => 'tryouts/tryout_confirmation', locals: { tryout_name: @tryout_info.keys[0], locations: @tryout_info.values[0] }

@@ -1,1 +1,1 @@
-= render :partial => 'tryout_info'
+= render :partial => 'tryout_info', locals: { tryout_name: @tryout_info.keys[0], locations: @tryout_info.values[0] }

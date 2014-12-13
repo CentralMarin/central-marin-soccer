@@ -10,17 +10,7 @@
   %h2 Tryouts
 
   - @tryouts.each do |key, value|
-    %h2{:class => 'alt'}
-      = key
-    %p
-      - value.each do |tryout|
-        - if (tryout.start.nil?)
-          Tryouts will be announced shortly. Register online and you will be notified via email when tryouts are posted.
-        - else
-          = "#{tryout.date_to_s} @"
-          %a{:href => tryout.field.map_url}
-            = "#{tryout.field.name} - #{tryout.field.address}"
-        %br
+    = render partial: 'tryouts/tryout_info', :locals => {tryout_name: key, locations: value}
 
 %div.grid_16.box
   %h2 Online Registration

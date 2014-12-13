@@ -115,6 +115,8 @@ es:
       tryouts:
         heading: 'Prueba de Tiempo, Fecha y Lugar'
         overview: ''
+        not_scheduled: '<br>Las pruebas no están programados actualmente. Regístrese y le notificaremos tan pronto como se publiquen.'
+        soon: 'U8-14 Tryouts habrá más de dos fines de semana a finales de febrero / principios de marzo. A registrarse y le notificaremos tan pronto como las fechas se finalicen.'
       register_another: 'Haga clic aquí para registrar otro niño'
     form:
       heading: ' Registro U8-U19 Fútbol Prueba en Línea'

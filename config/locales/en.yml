@@ -115,6 +115,9 @@ en:
       tryouts:
         heading: 'Tryout''s Time, Date, and Location'
         overview: ''
+        not_scheduled: '<br>Tryouts are not currently scheduled. Register and we''ll notify you as soon as they''re posted.'
+        soon: 'U8-14 Tryouts will be over two weekends at the end of February / Early March. Register now and we''ll notify you as soon as the dates are finalized.'
+
       register_another: 'Click here to register another child'
     form:
       heading: ' U8-U19 Soccer Tryout Online Registration'

@@ -131,6 +131,6 @@
     = t('registration.confirmation.tryouts.heading')
   %p
     = t('registration.confirmation.tryouts.overview').html_safe
-  = render :partial => 'tryouts/tryout_info'
+  = render :partial => 'tryouts/tryout_info', locals: { tryout_name: tryout_name, locations: locations }
 
 
