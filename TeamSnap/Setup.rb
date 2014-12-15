@@ -5,7 +5,7 @@ require 'csv'
 require 'pathname'
 
 DIVISION_ID = 3271
-SEASON = 2014
+SEASON = 2015
 ROSTER_ID = '1893703'
 
 def http_get(url, headers)
