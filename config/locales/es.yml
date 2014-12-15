@@ -4,27 +4,41 @@
 es:
   date:
     abbr_day_names:
-    - Dom
-    - Lun
-    - Mar
-    - Mié
-    - Jue
-    - Vie
-    - Sáb
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
     abbr_month_names:
     -
-    - Ene
-    - Feb
-    - Mar
-    - Abr
-    - May
-    - Jun
-    - Jul
-    - Ago
-    - Sep
-    - Oct
-    - Nov
-    - Dic
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    month_names:
+    -
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
   title: "Bienvenido a Central Marín Club de Fútbol"
   footer_copy: "Todos los derechos reservados © 2014 - Central Marín Club de Fútbol"
   header_text_alt: 'Centro Marin Club de fútbol Competitivo'
@@ -144,6 +158,8 @@ es:
                         Regístrese y le enviaremos un correo electrónico cuando las pruebas están programadas.
                         <h3>¿Dónde puedo encontrar más información sobre Central de Marin Club de fútbol competitivo?</h3>'
       more_info: 'Haga clic aquí para obtener más información sobre Central de Marin Club de Fútbol Competitiva.'
+    age_chart:
+      heading: ' Temporada Grupo de edad Gráfico'
     tryouts:
       heading: 'Seleccione cumpleaños del jugador y el género'
     confirmation:
