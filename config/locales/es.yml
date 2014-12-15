@@ -2,6 +2,29 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 es:
+  date:
+    abbr_day_names:
+    - Dom
+    - Lun
+    - Mar
+    - Mié
+    - Jue
+    - Vie
+    - Sáb
+    abbr_month_names:
+    -
+    - Ene
+    - Feb
+    - Mar
+    - Abr
+    - May
+    - Jun
+    - Jul
+    - Ago
+    - Sep
+    - Oct
+    - Nov
+    - Dic
   title: "Bienvenido a Central Marín Club de Fútbol"
   footer_copy: "Todos los derechos reservados © 2014 - Central Marín Club de Fútbol"
   header_text_alt: 'Centro Marin Club de fútbol Competitivo'
