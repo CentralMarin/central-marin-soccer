@@ -1,7 +1,7 @@
 %center
   %h1.chart_header
     %center
-      = "#{@season} - #{@season + 1} Season Age Group Chart"
+      = "#{@season} - #{@season + 1} #{t('registration.age_chart.heading')}"
   %p
     &nbsp;
 
@@ -13,11 +13,11 @@
         %th
           %h4.col_header
             = year
-    -['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].each_with_index do |month, index|
+    - (1..12).each do |index|
       %tr
         %td
           %h4.row_header
-            = month
+            = t('date.month_names')[index]
         -(8..20).each do |age_level|
           %td.cell
             = "U#{index >= 7 ? age_level - 1 : age_level}"

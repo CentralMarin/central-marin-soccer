@@ -28,7 +28,7 @@ class Tryout < ActiveRecord::Base
     if (start.nil?)
       ""
     else
-      "#{start.strftime('%a %b')} #{start.day.ordinalize} #{start.strftime('%l:%M')} - #{(start + (duration * 60)).strftime('%l:%M')}"
+      "#{I18n.localize(start, format: '%a %b')} #{I18n.locale == :en ? start.day.ordinalize : start.day} #{start.strftime('%l:%M')} - #{(start + (duration * 60)).strftime('%l:%M')}"
     end
   end
 

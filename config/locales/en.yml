@@ -2,6 +2,21 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  date:
+    month_names:
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
   title: "Welcome to Central Marin Soccer Club"
   footer_copy: "All rights Reserved © 2014 - Central Marin Soccer Club"
   header_text_alt: 'Central Marin Competitive Soccer Club'
@@ -104,6 +119,25 @@ en:
   news:
     heading: 'Recent Club News'
   registration:
+    index:
+      heading: ' Tryouts'
+      online: 'Online Registration'
+      online_link: 'Click here to fill out the online registration form'
+      questions: 'Questions'
+      question_age_group: '<h3>What age group is my child in? What time is my child''s tryout?</h3>Select your child''s gender and birth date below to figure out which is the appropriate tryout.'
+      age_group_chart: 'View age group chart'
+      question_others: '<h3>What tryout should my child attend?</h3>
+                        Your child should attend their age group tryouts. If they would like to play up, talk to the coaches during your age group tryout and they will advise.
+                        <h3>What is a play up?</h3>
+                        A child who is playing for a team older than their age group.
+                        <h3>What if it''s raining during tryouts?</h3>
+                        Tryouts are rain or shine, so come on out.
+                        <h3>What if my child''s tryouts have not been scheduled yet?</h3>
+                        Go ahead and register and we''ll send you an email when the tryouts are scheduled.
+                        <h3>Where can I find out more information on Central Marin Competitive Soccer Club?</h3>'
+      more_info: 'Click here for more information on Central Marin Competitive Soccer Club'
+    age_chart:
+      heading: ' Season Age Group Chart'
     tryouts:
       heading: "Select the player's birthday and gender"
     confirmation:

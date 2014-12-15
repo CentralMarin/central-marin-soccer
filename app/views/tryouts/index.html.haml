@@ -1,29 +1,30 @@
 %div.grid_16
-  %h1 2014 Tryouts
+  %h1
+    = "2015 #{t('registration.index.heading')}"
 
 %div.grid_16.box
-  %h2 Online Registration
-  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, :class => 'alt'
+  %h2
+    = t('registration.index.online')
+  = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
 
 
 %div.grid_16.box
-  %h2 Tryouts
+  %h2
+    = t('registration.index.heading')
 
   - @tryouts.each do |key, value|
     = render partial: 'tryouts/tryout_info', :locals => {tryout_name: key, locations: value}
 
-%div.grid_16.box
-  %h2 Online Registration
-  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, :class => 'alt'
+- if @tryouts.count > 4 # Make registering as easy as possible
+  %div.grid_16.box
+    %h2
+      = t('registration.index.online')
+    = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
 
 %div.grid_16.box
-  %h2 Questions
-  %h3 What tryout should I go to?
-  Your child should attend their age group tryout. If they would like to play up, talk to the coaches during your age group tryout and they will advise.
-  %h3 What is a play up?
-  A child who is playing for a team older than their age group.
-  %h3 What age group is my child in? What time is my child's tryout?
-  Select your child's gender and birth date below to figure out which is the appropriate tryout.
+  %h2
+    = t('registration.index.questions')
+  = t('registration.index.question_age_group').html_safe
 
   %div.clear
     &nbsp;
@@ -66,20 +67,18 @@
     &nbsp;
 
   %div.grid_15#age_group_chart
-    %a{:href => '#'}Show Age Group Chart
+    %a{:href => '#'}
+      = t('registration.index.age_group_chart')
 
   %div.clear
     &nbsp;
 
-  %h3 What if it's raining during tryouts?
-  Tryouts are rain or shine, so come on out.
-  %h3 What if my child's tryouts have not been scheduled yet?
-  Go ahead and register and we'll send you an email when the tryouts are scheduled.
-  %h3 Where can I find out more information on Central Marin Competitive Soccer Club?
-  = link_to 'Click here for more information on Central Marin Competitive Soccer Club', information_path, :class => 'alt'
+  = t('registration.index.question_others').html_safe
+  = link_to t('registration.index.more_info'), information_path, :class => 'alt'
 %div.grid_16.box
-  %h2 Online Registration
-  = link_to 'Click here to fill out the online registration form', tryouts_registration_url, :class => 'alt'
+  %h2
+    = t('registration.index.online')
+  = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
 
 %div{:id => "dialog", :title => "Age Group Chart"}
 
