@@ -127,6 +127,23 @@ es:
   news:
     heading: 'Noticias de los Clubes Recientes'
   registration:
+    index:
+      heading: ' Pruebas de fútbol'
+      online: 'Registro en Línea'
+      online_link: 'Haga clic aquí para llenar el formulario de inscripción en línea'
+      questions: 'Preguntas'
+      question_age_group: '<h3>¿Qué grupo de edad es a mi hijo en? ¿Qué hora es tryout de mi hijo?</h3>Seleccionar sexo y fecha de nacimiento de su hijo debajo de averiguar cuál es la puesta a punto adecuada.'
+      age_group_chart: 'Vista de gráfico grupo de edad'
+      question_others: '<h3>¿Qué pruebas debe asistir mi hijo?</h3>
+                        Su hijo debe asistir a sus versiones de prueba del grupo de edad. Si les gustaría jugar hasta, hablar con los entrenadores durante sus audiciones de grupos de edad y van a aconsejar.
+                        <h3>¿Qué es una obra de teatro para arriba?</h3>
+                        Un niño que está jugando para un equipo más viejo que su grupo de edad.
+                        <h3>¿Lo que si está lloviendo durante las pruebas?</h3>
+                        Las pruebas son la lluvia o con sol, así que venga en adelante.
+                        <h3>¿Qué pasa si las pruebas de mi hijo no se han programado todavía?</h3>
+                        Regístrese y le enviaremos un correo electrónico cuando las pruebas están programadas.
+                        <h3>¿Dónde puedo encontrar más información sobre Central de Marin Club de fútbol competitivo?</h3>'
+      more_info: 'Haga clic aquí para obtener más información sobre Central de Marin Club de Fútbol Competitiva.'
     tryouts:
       heading: 'Seleccione cumpleaños del jugador y el género'
     confirmation:
