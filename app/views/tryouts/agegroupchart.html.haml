@@ -20,6 +20,6 @@
             = t('date.month_names')[index]
         -(8..20).each do |age_level|
           %td.cell
-            = "U#{index >= 7 ? age_level - 1 : age_level}"
+            = "U#{index > 7 ? age_level - 1 : age_level}"
 
 
