@@ -143,12 +143,13 @@
 
 
 - content_for :javascript do
+  %script{type: 'text/javascript', src:'/polyfiller.js'}
   = javascript_include_tag "tryouts"
   %script
     $(document).ready(soccer.tryouts.init_registration('tryout_registration_birthdate_2i', 'tryout_registration_birthdate_3i', 'tryout_registration_birthdate_1i', 'tryout_registration[gender]'));
     $(document).ready($('input[name="tryout_registration[first]"]').focus());
-    $.webshims.setOptions('forms', { lazyCustomMessages: true });
+    $(document).ready($.webshims.setOptions('forms', { lazyCustomMessages: true }));
 
     //start polyfilling
-    $.webshims.polyfill('forms forms-ext');
+    $(document).ready($.webshims.polyfill('forms forms-ext'));
 
