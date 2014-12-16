@@ -66,7 +66,7 @@ class Tryout < ActiveRecord::Base
 
   def self.calculate_age_level(month, year)
 
-    age_level = Time.now.year - year + 1;
+    age_level = 2015 - year + 1;
     if month > 7
       age_level = age_level - 1
     end
