@@ -48,7 +48,7 @@ module TryoutRegistrationsHelper
     html = show_label(form, label, field, required, label_grid)
 
     html += content_tag(:div, :class => "grid_#{field_grid}") do
-      html_content = form.telephone_field(field, required: required, placeholder: 'XXXX@XXXXXXX.XXX', pattern: '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')
+      html_content = form.text_field(field, required: required, placeholder: 'XXXX@XXXXXXX.XXX', pattern: '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')
       html_content += show_error(label, field)
       html_content
     end
