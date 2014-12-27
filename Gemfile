@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.8'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
-gem "activeadmin-globalize", :github => 'stefanoverna/activeadmin-globalize'#, :branch => 'develop'
+gem 'activeadmin-globalize', github: 'fabn/activeadmin-globalize', branch: 'develop'
 gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
 gem 'ckeditor', '4.1.1'
 gem 'carrierwave', '0.10.0'
@@ -42,7 +42,7 @@ gem 'jquery-ui-themes', '0.0.11'
 gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.2.5'
+gem 'jbuilder', '2.2.6'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
