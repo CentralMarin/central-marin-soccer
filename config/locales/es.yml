@@ -173,6 +173,7 @@ es:
         overview: ''
         not_scheduled: '<br>Las pruebas no están programados actualmente. Regístrese y le notificaremos tan pronto como se publiquen.'
         soon: 'U8-14 Tryouts habrá más de dos fines de semana a finales de febrero / principios de marzo. A registrarse y le notificaremos tan pronto como las fechas se finalicen.'
+        save_the_date: 'Las fechas para las pruebas para la U8 Marin Central Soccer Club / 9 a U11 Boys and Girls serán sábado 21 de febrero y el sábado 28 de febrero por la tarde. Por favor, mantenga estas fechas y planificar en consecuencia. Vamos a proporcionar tiempos y ubicaciones finales en las próximas semanas.'
       register_another: 'Haga clic aquí para registrar otro niño'
     form:
       heading: ' Registro U8-U19 Fútbol Prueba en Línea'

@@ -6,8 +6,10 @@
   %ul
     - locations.each do |tryout|
       %li
-        - if tryout.field.nil?
+        - if tryout.date_to_s.empty?
           = t('registration.confirmation.tryouts.soon').html_safe
+        - elsif tryout.field.nil?
+          = t('registration.confirmation.tryouts.save_the_date').html_safe
         - else
           = "#{tryout.date_to_s} @"
           %a{:href => tryout.field.map_url}
