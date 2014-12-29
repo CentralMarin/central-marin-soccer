@@ -191,4 +191,5 @@ en:
         body: 'I have read the above waiver and release, and consent for medical treatment By clicking, I represent that I am the parent or guardian of the minor athlete being registered on this form for Central Marin Competitive Soccer Club and my click is my signature for this waiver and release and medical consent.'
         agree: 'I agree'
       submit: 'Submit'
+      processing: 'Processing ...'
       footer: 'If you have any problems registering for tryouts, email: '
