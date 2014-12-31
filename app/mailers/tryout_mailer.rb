@@ -1,5 +1,5 @@
 class TryoutMailer < ActionMailer::Base
-  default from: "tryouts@centralmarinsoccer.com"
+  default from: Rails.application.secrets.google_email_from
 
   def signup_confirmation(registration_info, tryout_info)
 
@@ -7,6 +7,7 @@ class TryoutMailer < ActionMailer::Base
     @tryout_info = tryout_info
 
     mail to: [@tryout_registration[:parent1_email], @tryout_registration[:parent2_email]],
+         from: Rails.application.secrets.google_email_from,
          subject: t('registration.confirmation.subject')
   end
 end
