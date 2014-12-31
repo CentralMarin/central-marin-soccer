@@ -36,7 +36,7 @@ Rails.application.configure do
       domain: "centralmarinsoccer.com",
       authentication: "plain",
       enable_starttls_auto: true,
-      :user_name  => Rails.application.secrets.google_drive_user,
-      :password   => Rails.application.secrets.google_drive_pwd
+      :user_name  => Rails.application.secrets.google_drive_account,
+      :password   => Rails.application.secrets.google_email_app_pwd
   }
 end

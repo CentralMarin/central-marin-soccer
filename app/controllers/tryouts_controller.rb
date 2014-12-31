@@ -131,15 +131,31 @@ class TryoutsController < InheritedResources::Base
       # make sure we submit everything in English
       I18n.with_locale(:en) do
 
-        session = GoogleDrive.login(Rails.application.secrets.google_drive_user, Rails.application.secrets.google_drive_pwd)
+        # Initialize Google Client
+        api_client = Google::APIClient.new(application_name: 'Central Marin Soccer Tryouts', application_version: '1.0.0')
+        drive = api_client.discovered_api('drive', 'v2')
+
+        # Load Credentials
+        key = Google::APIClient::KeyUtils.load_from_pkcs12(Rails.root.join('config', Rails.application.secrets.google_key_file).to_s, Rails.application.secrets.google_key_secret)
+        asserter = Google::APIClient::JWTAsserter.new(
+          Rails.application.secrets.google_service_account_id,
+          'https://www.googleapis.com/auth/drive',
+          key
+        )
+
+        # Authorize
+        api_client.authorization = asserter.authorize(Rails.application.secrets.google_drive_account)
+        session = GoogleDrive.login_with_oauth(api_client.authorization.access_token)
+
         ss = session.spreadsheet_by_title(title)
         if ss.nil?
           ss = session.create_spreadsheet(title)
         end
-        ws = get_worksheet(ss, Tryout.tryout_name(registration_info.age, Gender.new(registration_info.gender)))
-        last_row = ws.num_rows + 1
 
         gender = Gender.new(registration_info.gender).to_s
+        ws = get_worksheet(ss, Tryout.tryout_name(registration_info.age, gender))
+        last_row = ws.num_rows + 1
+
         # Be explicit about order
         ['',
          Time.now,
@@ -148,7 +164,7 @@ class TryoutsController < InheritedResources::Base
          registration_info.home_address,
          registration_info.city,
          registration_info.home_phone,
-         gender,
+         gender.to_s,
          registration_info.birthdate,
          'No',
          registration_info.age.to_s + gender[0],

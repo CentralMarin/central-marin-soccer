@@ -12,17 +12,18 @@ gem 'mini_magick', '4.0.1'
 gem 'globalize', '4.0.3'
 gem 'haml-rails', '0.6.0'
 gem 'whenever', '0.9.4', :require => false
-gem 'google_drive', '0.3.11'
+gem 'google_drive', '1.0.0'
 gem 'premailer-rails', '1.8.0'
 gem 'nokogiri', '1.6.5'
 gem 'devise', '3.4.1'
+gem 'bing_translator', '4.4.1'
 #gem 'delayed_job_active_record'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.10'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '4.0.5'
+gem 'sass-rails', '5.0.1'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '2.6.0'
