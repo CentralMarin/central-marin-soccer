@@ -15,6 +15,7 @@
 .sass-cache
 capybara-*.html
 /vendor/bundle
+/vendor/cache
 /public/system/*
 /coverage/
 /spec/tmp/*
@@ -30,3 +31,4 @@ public/cache/*
 config/secrets.yml
 config/*.p12
 .vagrant
+.capistrano
