@@ -28,4 +28,5 @@ public/assets/*
 public/uploads/*
 public/cache/*
 config/secrets.yml
+config/*.p12
 .vagrant
