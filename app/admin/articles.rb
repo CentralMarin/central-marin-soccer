@@ -122,15 +122,11 @@ ActiveAdmin.register Article do
       end
     end
 
-    # ActiveAdmin-globalize broken
-    # f.translated_inputs "Translated fields", switch_locale: false do |t|
-    #   t.input :title
-    #   t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
-    # end
-    # Templorary Hack
     f.inputs do
-      f.input :title
-      f.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "en", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[:en]}"}}
+      f.translated_inputs "Translated fields", switch_locale: false do |t|
+        t.input :title
+        t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
+      end
     end
 
     f.inputs do

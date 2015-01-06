@@ -20,8 +20,10 @@ ActiveAdmin.register TeamLevel do
   end
 
   form do |f|
-    f.translated_inputs "Translated fields", switch_locale: false do |t|
-      t.input :name
+    f.inputs do
+      f.translated_inputs "Translated fields", switch_locale: false do |t|
+        t.input :name
+      end
     end
     f.actions
   end

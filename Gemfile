@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.8'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
-gem 'activeadmin-globalize', github: 'fabn/activeadmin-globalize', branch: 'develop'
+#gem 'activeadmin-globalize', github: 'CentralMarin/activeadmin-globalize', branch: 'develop'
+gem 'activeadmin-globalize', path: '../activeadmin-globalize'
 gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
 gem 'ckeditor', '4.1.1'
 gem 'carrierwave', '0.10.0'
@@ -17,7 +18,6 @@ gem 'premailer-rails', '1.8.0'
 gem 'nokogiri', '1.6.5'
 gem 'devise', '3.4.1'
 gem 'bing_translator', '4.4.1'
-#gem 'delayed_job_active_record'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.10'
