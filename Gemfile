@@ -9,9 +9,9 @@ gem 'activeadmin-globalize', path: '../activeadmin-globalize'
 gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
 gem 'ckeditor', '4.1.1'
 gem 'carrierwave', '0.10.0'
-gem 'mini_magick', '4.0.1'
+gem 'mini_magick', '4.0.2'
 gem 'globalize', '4.0.3'
-gem 'haml-rails', '0.6.0'
+gem 'haml-rails', '0.7.0'
 gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '1.0.0'
 gem 'premailer-rails', '1.8.0'
@@ -26,7 +26,7 @@ gem 'sqlite3', '1.3.10'
 gem 'sass-rails', '5.0.1'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '2.6.0'
+gem 'uglifier', '2.7.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 #gem 'coffee-rails', '~> 4.0.1'
