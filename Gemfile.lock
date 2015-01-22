@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/CentralMarin/activeadmin-globalize.git
+  revision: 668b76b09fea5995f65812be6ef65208b63afb0e
+  specs:
+    activeadmin-globalize (1.0.0)
+      activeadmin
+      globalize (~> 4.0.0)
+
+GIT
   remote: git://github.com/activerecord-hackery/polyamorous.git
   revision: c54107a5462fc7da39e2231af9ec5f7f610a26b6
   specs:
@@ -22,13 +30,6 @@ GIT
       rails (>= 3.2, < 4.2)
       ransack (~> 1.3)
       sass-rails
-
-PATH
-  remote: ../activeadmin-globalize
-  specs:
-    activeadmin-globalize (1.0.0)
-      activeadmin
-      globalize (~> 4.0.0)
 
 GEM
   remote: https://rubygems.org/
