@@ -63,6 +63,10 @@ es:
       heading: "Programa de Información"
       body: "Centro Marin Soccer Club ofrece varios niveles de liga y torneos. La duración de la temporada, y los costos del programa de participación varía entre cada nivel."
       link: "Más información"
+    tryouts:
+      heading: '2015 Pruebas'
+      body: '2015 Las pruebas están a la vuelta de la esquina. Ven a jugar antes de prueba fechas, reuniones informativas y pruebas.'
+      link: 'Más información'
     donate:
       heading: "Donar"
       body: "En igualdad de condiciones es el programa de ayuda financiera central de Marín para ayudar a los jugadores que no pueden pagar el costo de un programa de fútbol competitivo. Con los años OEF central de Marín ha dado más de 200.000 dólares en ayuda financiera. El año pasado nos dieron 75 becas a aproximadamente el 15% de nuestros jugadores, para un total de más de $ 30.000."
@@ -142,6 +146,15 @@ es:
     heading: 'Noticias de los Clubes Recientes'
   registration:
     index:
+      pretryouts:
+        heading: 'Antes de las Pruebas'
+        body: '<p>¿Quieres saber más sobre Central Marin Tryouts? <br>¿Tener la oportunidad de entrenar con nuestros entrenadores antes de audiciones?
+               <br>Todos son bienvenidos a nuestro gratuito antes Tryout Playdates.</p>
+              <ul><li>Niños - February 7th @ Terra Linda High School</li>
+              <ul><li>A8 / A9 de 3:00 - 4:15</li><li>A10 / A11 de 3:30 - 5:00</li></ul>
+              <li>Niñas - February 8th @ Marin Academy High School</li>
+              <ul><li>A8 / A9 de 11:00 - 12:30</li><li>A10 / A11 de 12:30 - 2:00</li></ul>
+              </ul>'
       heading: ' Pruebas de fútbol'
       online: 'Registro en Línea'
       online_link: 'Haga clic aquí para llenar el formulario de inscripción en línea'

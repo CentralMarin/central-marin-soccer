@@ -20,23 +20,23 @@
 %div{class: 'grid_16'}
   &nbsp;
 
-%div{class: 'grid_16 box'}
-  %h2
-    = "2015 #{t('registration.index.heading')}"
-  %p
-    = t('registration.confirmation.tryouts.save_the_date')
-  %p
-    = link_to t('home.program.link'), '/tryouts/', class: 'right'
-
-
 -#%div{class: 'grid_16 box'}
 -#  %h2
--#    2015 Tryouts
+-#    = "2015 #{t('registration.index.heading')}"
 -#  %p
--#    2015 Tryouts are just around the corner. Come to pre-tryout playdates, informational meetings and tryouts.
+-#    = t('registration.confirmation.tryouts.save_the_date')
 -#  %p
--#    = link_to 'Learn More', '/tryouts/', class: 'right'
--#
+-#    = link_to t('home.program.link'), '/tryouts/', class: 'right'
+
+
+%div{class: 'grid_16 box'}
+  %h2
+    = t('home.tryouts.heading')
+  %p
+    = t('home.tryouts.body')
+  %p
+    = link_to t('home.tryouts.link'), '/tryouts/', class: 'right'
+
 
 -#%div{class: 'grid_16 box'}
 -#  %h2

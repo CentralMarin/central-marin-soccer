@@ -41,6 +41,10 @@ en:
       heading: "Program Information"
       body: "Central Marin Soccer Club offers various levels of league and tournament play. The length of season, and program participation costs varies between each level."
       link: "Learn More"
+    tryouts:
+      heading: '2015 Tryouts'
+      body: '2015 Tryouts are just around the corner. Come to pre-tryout play dates, informational meetings and tryouts.'
+      link: 'Learn More'
     donate:
       heading: "Donate"
       body: "On Equal Footing is Central Marin’s financial aid program to assist players who can’t afford the cost of a competitive soccer program.  Over the years Central Marin’s OEF has given over $200,000 in financial aid.  This past year we gave 75 scholarships to approximately 15% of our players, for a total of over $30,000."
@@ -120,6 +124,16 @@ en:
     heading: 'Recent Club News'
   registration:
     index:
+      pretryouts:
+        heading: 'Pre-tryouts'
+        body: '<p>Want to find out more about Central Marin Tryouts?
+               <br>Have a chance to train with our Coaches prior to Tryouts?
+               <br>Everyone is welcome to our Free pre-tryout play dates</p>
+              <ul><li>Boys - February 7th @ Terra Linda High School</li>
+              <ul><li>U8 / U9 from 3:00 - 4:15</li><li>U10 / U11 from 3:30 - 5:00</li></ul>
+              <li>Girls - February 8th @ Marin Academy High School</li>
+              <ul><li>U8 / U9 from 11:00 - 12:30</li><li>U10 / U11 from 12:30 - 2:00</li></ul>
+              </ul>'
       heading: ' Tryouts'
       online: 'Online Registration'
       online_link: 'Click here to fill out the online registration form'
@@ -152,7 +166,6 @@ en:
         not_scheduled: '<br>Tryouts are not currently scheduled. Register and we''ll notify you as soon as they''re posted.'
         soon: 'U8-14 Tryouts will be over two weekends at the end of February / Early March. Register now and we''ll notify you as soon as the dates are finalized.'
         save_the_date: 'The Dates for Tryouts for the Central Marin Soccer Club U8/9 through U11 Boys and Girls will be Saturday February 21st and Saturday February 28th in the afternoons.  Please hold these dates and plan accordingly.  We will be providing final times and locations in the coming weeks.'
-
       register_another: 'Click here to register another child'
     form:
       heading: ' U8-U19 Soccer Tryout Online Registration'
