@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   get '/tryouts', :to => 'tryouts#index', :as => 'tryouts'
 
+  get '/tryouts/united', :to => 'tryouts#united_index', :as => 'tryouts_united_index'
+
+
   get '/tryouts/registration', :to => 'tryouts#registration', :as => 'tryouts_registration'
   post '/tryouts/registration', :to => 'tryouts#registration_create', :as => 'tryouts_registration_create'
   get '/tryouts/agegroupchart', :to => 'tryouts#agegroupchart', :as => 'tryouts_agegroupchart'

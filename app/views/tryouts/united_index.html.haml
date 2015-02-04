@@ -1,0 +1,21 @@
+%div.grid_16
+  %h1
+    = "#{t('registration.united_index.heading')}"
+
+%div.grid_16.box
+  = t('registration.united_index.body').html_safe
+
+  -#- @tryouts.each do |key, value|
+  -#  = render partial: 'tryouts/tryout_info', :locals => {tryout_name: key, locations: value}
+
+%div.grid_16.box
+  %h2
+    = t('registration.united_index.faq_heading')
+
+  = t('registration.united_index.faq_body').html_safe
+
+%div.grid_16.box
+  %h2
+    = t('registration.index.online')
+  = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
+
