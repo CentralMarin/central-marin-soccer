@@ -17,7 +17,7 @@ set :user, config['development']['server_user']
 set :use_sudo, false
 set :deploy_to, "/webapps/centralmarinsoccer"
 
-set :linked_files, %w{config/secrets.yml}
+set :linked_files, %w{config/secrets.yml config/CentralMarinSoccerTryouts.p12}
 set :linked_dirs, %w{public/uploads public/assets public/system log}
 #
 #set :ssh_options, {
