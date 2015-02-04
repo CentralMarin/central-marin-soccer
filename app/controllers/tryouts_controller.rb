@@ -7,6 +7,10 @@ class TryoutsController < InheritedResources::Base
     @tryouts = Tryout.by_age_and_gender
   end
 
+  def united_index
+
+  end
+
   def registration
     @tryout_registration = TryoutRegistration.new
   end
