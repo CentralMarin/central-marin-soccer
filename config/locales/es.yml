@@ -146,6 +146,11 @@ es:
     heading: 'Noticias de los Clubes Recientes'
   registration:
     index:
+      informational_meetings:
+        heading: 'Reuniones Informativas'
+        body: '<p>Para los padres que deseen asistir a una reunión informativa para aprender más sobre Central Marin Soccer Club, tendremos consejeros y entrenadores para dar un resumen del programa y responder a cualquier pregunta en estas reuniones:</p>
+               <ul><li>05 de febrero: Jueves 7 - 8:30pm at San Rafael Centro de la Comunidad , 618 B St., San Rafael</li>
+               <li>11 de febrero: Miércoles 7 – 8:30pm at Pickleweed Park Centro de la Comunidad, 50 Canal St,. San Rafael</li>'
       pretryouts:
         heading: 'Antes de las Pruebas'
         body: '<p>¿Quieres saber más sobre Central Marin Tryouts? <br>¿Tener la oportunidad de entrenar con nuestros entrenadores antes de audiciones?
