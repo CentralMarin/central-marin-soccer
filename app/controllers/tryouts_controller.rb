@@ -17,6 +17,45 @@ class TryoutsController < InheritedResources::Base
 
   def united_registration_create
 
+    @tryout_registration = TryoutRegistration.new(params.required(:tryout_registration)
+                                                      .permit(:first, :last, :home_address, :home_phone, :city, :gender, :birthdate,
+                                                              :age, :previous_team, :parent1_first, :parent1_last,
+                                                              :parent1_cell, :parent1_email, :parent2_first, :parent2_last,
+                                                              :parent2_cell, :parent2_email, :completed_by, :relationship, :waiver))
+
+    if not @tryout_registration.birthdate.nil?
+      @tryout_registration.age = Tryout.calculate_age_level(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
+    end
+
+    if @tryout_registration.save
+
+      # Make phone numbers consistent
+      @tryout_registration.home_phone = format_phone_number(@tryout_registration.home_phone)
+      @tryout_registration.parent1_cell = format_phone_number(@tryout_registration.parent1_cell)
+      @tryout_registration.parent2_cell = format_phone_number(@tryout_registration.parent2_cell)
+
+      # Tryout info
+
+      #find the fields we need
+      tam = Field.find_by_name('Tamalpais High School')
+      ma = Field.find_by_name('Marin Academy')
+      @tryout_info = {'Boys U12 United Tryouts' => [
+          Tryout.new(field: tam, start: DateTime.parse('22-2-2015 10:30'), duration: 90),
+          Tryout.new(field: tam, start: DateTime.parse('28-2-2015 9:00'), duration: 120),
+          Tryout.new(field: ma, start: DateTime.parse('1-3-2015 17:00'), duration: 90),
+      ]}
+
+      # Save to google spreadsheet - Age Specific Tab
+      update_spreadsheet '2015 United Tryout Registration', @tryout_registration
+
+      # Send confirmation email
+      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
+
+      render :action => 'confirmation'
+    else
+      render :registration
+    end
+
   end
 
   def registration
