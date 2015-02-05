@@ -276,6 +276,7 @@ en:
         heading: ' U12 Boys United Soccer Tryout Online Registration'
         overview: '<p>Use the form below to register your child for the Central Marin Competitive Soccer Club tryouts for U12 Boys United.</p>
                    <p>For more information on united tryouts, click <a href=''/tryouts/united''>here</a>.</p>'
+        birthday_error: 'United tryouts are for U12 only (born from Aug 1, 2003 to July 31, 2004)'
     index:
       informational_meetings:
         heading: 'Information Meetings'

@@ -18,19 +18,19 @@
             var month = _month_node.val();
             var year = _year_node.val();
 
+            // Don't validate if the user hasn't selected a month or year
+            if (month === '' || year === '') return;
+
             if (month && year) {
                 // Verify the date Aug 1, 2003 to July 31, 2004
-                if ((month > 7 && year == 2003) || (month < 8 && year == 2004)) {
-                    _set_tryout_text('')
-                } else {
-                    _set_tryout_text('United tryouts are for U12 only')
+                if (!((month > 7 && year == 2003) || (month < 8 && year == 2004))) {
+                    alert("<%= I18n.t('registration.united.form.birthday_error') %>");
+
+                    // Clear values
+                    _month_node.val('');
+                    _year_node.val('');
                 }
             }
-        };
-
-        var _set_tryout_text = function(text) {
-            var tryouts_date_and_time = $('#tryouts_date_and_times');
-            tryouts_date_and_time.html(text);
         };
 
         return {
