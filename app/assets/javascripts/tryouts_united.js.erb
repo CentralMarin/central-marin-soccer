@@ -1,0 +1,49 @@
+// This is a manifest file that'll be compiled into including all the files listed below.
+// Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
+// be included in the compiled file accessible from http://example.com/assets/application.js
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.
+//
+//= require namespace
+//= require jquery-ui/dialog
+
+(function () {
+    namespace("soccer");
+    soccer.tryouts_united = (function () {
+
+        var _month_node;
+        var _year_node;
+
+        var _birthdate_changed = function(e) {
+            var month = _month_node.val();
+            var year = _year_node.val();
+
+            if (month && year) {
+                // Verify the date Aug 1, 2003 to July 31, 2004
+                if ((month > 7 && year == 2003) || (month < 8 && year == 2004)) {
+                    _set_tryout_text('')
+                } else {
+                    _set_tryout_text('United tryouts are for U12 only')
+                }
+            }
+        };
+
+        var _set_tryout_text = function(text) {
+            var tryouts_date_and_time = $('#tryouts_date_and_times');
+            tryouts_date_and_time.html(text);
+        };
+
+        return {
+            init_registration: function(month, day, year) {
+
+                // Save off dom elements
+                _month_node = $('#' + month);
+                _year_node = $('#' + year);
+
+                // Register change handlers for birthdate
+                _month_node.change(_birthdate_changed);
+                _year_node.change(_birthdate_changed);
+            }
+        };
+    }());
+}());

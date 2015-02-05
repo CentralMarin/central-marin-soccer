@@ -11,6 +11,14 @@ class TryoutsController < InheritedResources::Base
 
   end
 
+  def united_registration
+    @tryout_registration = TryoutRegistration.new
+  end
+
+  def united_registration_create
+
+  end
+
   def registration
     @tryout_registration = TryoutRegistration.new
   end

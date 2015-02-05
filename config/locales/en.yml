@@ -271,6 +271,11 @@ en:
                  <p>Steven Sosa, CMSC''s Director of Coaching and Player Development, at&nbsp;<a href="mailto:stevensosa13@gmail.com">stevensosa13@gmail.com</a>.</p>
 
                  <p>Rick Williams, President, at <a href="mailto:soccer.rick@gmail.com">soccer.rick@gmail.com</a></p>'
+    united:
+      form:
+        heading: ' U12 Boys United Soccer Tryout Online Registration'
+        overview: '<p>Use the form below to register your child for the Central Marin Competitive Soccer Club tryouts for U12 Boys United.</p>
+                   <p>For more information on united tryouts, click <a href=''/tryouts/united''>here</a>.</p>'
     index:
       informational_meetings:
         heading: 'Information Meetings'
