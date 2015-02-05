@@ -274,7 +274,8 @@ en:
     united:
       form:
         heading: ' U12 Boys United Soccer Tryout Online Registration'
-        overview: '<p>Use the form below to register your child for the Central Marin Competitive Soccer Club tryouts for U12 Boys United.</p>
+        overview: '<p>The Central Marin Soccer Club (CMSC) and Mill Valley Soccer Club (MVSC) are pleased to announce that we will be partnering to implement a new soccer program for our U12 competitive soccer players.  This program will be introduced as a PILOT program in 2015. </p>
+                   <p>Use the form below to register your son for U12 Boys United tryouts. To register your daughter, click <a href=''>here</a></p>
                    <p>For more information on united tryouts, click <a href=''/tryouts/united''>here</a>.</p>'
         birthday_error: 'United tryouts are for U12 only (born from Aug 1, 2003 to July 31, 2004)'
     index:

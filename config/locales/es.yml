@@ -275,8 +275,9 @@ es:
     united:
       form:
         heading: ' Registro U12 Chicos Fútbol Unido Prueba en Línea'
-        overview: '<p>Use the form below to register your child for the Central Marin Competitive Soccer Club tryouts for U12 Boys United.</p>
-                   <p>For more information on united tryouts, click <a href=''/tryouts/united''>here</a>.</p>'
+        overview: '<p>El Marin Soccer Club Central (CMSC) y Mill Valley Soccer Club (MVSC) se complacen en anunciar que estaremos cooperando para la aplicación de un nuevo programa de fútbol para nuestros jugadores de fútbol competitivos U12. Este programa se presenta como un programa piloto en 2015.</p>
+                   <p>Utilice el siguiente formulario para registrar su hijo para las pruebas U12 Chicos Unidas. Para registrar su hija, haga clic en <a href=''> aquí </a></p>
+                   <p>Para obtener más información sobre las pruebas unidos, haga clic en <a href=''/tryouts/united''>aquí</a>.</p>'
         birthday_error: 'Pruebas Unidas son para U12 sólo (nacido desde 1 agosto 2003 hasta 31 julio 2004)'
     index:
       informational_meetings:
