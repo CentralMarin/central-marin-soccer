@@ -23,6 +23,7 @@ ActiveAdmin.register Tryout do
         tryout.date_to_s
       end
       row :field
+      row :location
       row "Display" do
         tryout.to_s
       end
@@ -36,9 +37,26 @@ ActiveAdmin.register Tryout do
       f.input :tryout_start, :as => :string, :input_html => {:class => "hasDatetimePicker"}
       f.input :duration, :as => :select, :collection => [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], :label => "Duration (minutes)", :selected => 120
       f.input :field
+      f.input :location
+      f.input :tryout_type
       f.input :is_makeup
     end
-    f.actions
+    f.actions <<
+        "<script>
+      function field_changed() {
+        if ($('#tryout_field_id option:selected').text()) {
+          $('#tryout_location_input').hide();
+        } else {
+          $('#tryout_location').val('');
+          $('#tryout_location_input').show();
+        }
+      }
+
+      $('#tryout_field_id').change(field_changed);
+
+      field_changed();
+
+     </script>".html_safe
   end
 
   csv do
