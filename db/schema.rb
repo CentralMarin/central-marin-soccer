@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209205902) do
+ActiveRecord::Schema.define(version: 20150206173226) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -178,6 +178,26 @@ ActiveRecord::Schema.define(version: 20141209205902) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "city"
+  end
+
+  create_table "tryout_type_translations", force: true do |t|
+    t.integer  "tryout_type_id", null: false
+    t.string   "locale",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "header"
+    t.text     "body"
+  end
+
+  add_index "tryout_type_translations", ["locale"], name: "index_tryout_type_translations_on_locale"
+  add_index "tryout_type_translations", ["tryout_type_id"], name: "index_tryout_type_translations_on_tryout_type_id"
+
+  create_table "tryout_types", force: true do |t|
+    t.string   "name"
+    t.string   "header"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tryouts", force: true do |t|

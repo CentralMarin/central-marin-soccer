@@ -2,6 +2,8 @@ ActiveAdmin.register Tryout do
 
   permit_params :gender_id, :age, :tryout_start, :start, :duration, :field_id, :is_makeup
 
+  menu :label => 'Tryouts', :parent => 'Tryouts'
+
   index do
     column :gender
     column :age
