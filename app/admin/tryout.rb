@@ -1,6 +1,6 @@
 ActiveAdmin.register Tryout do
 
-  permit_params :gender_id, :age, :tryout_start, :start, :duration, :field_id, :is_makeup
+  permit_params :gender_id, :age, :tryout_start, :start, :duration, :field_id, :location, :tryout_type
 
   menu :label => 'Tryouts', :parent => 'Tryouts'
 
@@ -11,7 +11,8 @@ ActiveAdmin.register Tryout do
       tryout.date_to_s
     end
     column :field
-    column :is_makeup
+    column :location
+    column :tryout_type
     actions
   end
 
@@ -39,7 +40,6 @@ ActiveAdmin.register Tryout do
       f.input :field
       f.input :location
       f.input :tryout_type
-      f.input :is_makeup
     end
     f.actions <<
         "<script>
@@ -65,7 +65,8 @@ ActiveAdmin.register Tryout do
     column :tryout_start
     column :duration
     column :field
-    column :is_makeup
+    column :location
+    column :tryout_type
   end
 
   collection_action :upload_csv, :title => 'Tryouts Uploads', :method => :get do
@@ -89,7 +90,10 @@ ActiveAdmin.register Tryout do
         if not row[4].blank?
           tryout.field = Field.where("lower(name) = ?", row[4].downcase).first
         end
-        tryout.is_makeup = row[5]
+        tryout.location = row[5]
+        if not row[6].blank?
+          tryout.tryout_type = TryoutType.where("lower(name) = ?", row[6].downcase).first
+        end
         tryout.save!
 
       end
