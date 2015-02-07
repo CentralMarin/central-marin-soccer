@@ -1,6 +1,6 @@
 ActiveAdmin.register Tryout do
 
-  permit_params :gender_id, :age, :tryout_start, :start, :duration, :field_id, :location, :tryout_type
+  permit_params :gender_id, :age, :tryout_start, :start, :duration, :field_id, :location, :tryout_type_id
 
   menu :label => 'Tryouts', :parent => 'Tryouts'
 
@@ -25,6 +25,7 @@ ActiveAdmin.register Tryout do
       end
       row :field
       row :location
+      row :tryout_type
       row "Display" do
         tryout.to_s
       end
