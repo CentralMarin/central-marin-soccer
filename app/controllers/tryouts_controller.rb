@@ -39,10 +39,11 @@ class TryoutsController < InheritedResources::Base
       #find the fields we need
       tam = Field.find_by_name('Tamalpais High School')
       ma = Field.find_by_name('Marin Academy')
+      rm = Field.find_by_name('Ring Mountain Day School')
       @tryout_info = {'Boys U12 United Tryouts' => [
-          Tryout.new(field: tam, start: DateTime.parse('22-2-2015 10:30'), duration: 90),
           Tryout.new(field: tam, start: DateTime.parse('28-2-2015 9:00'), duration: 120),
           Tryout.new(field: ma, start: DateTime.parse('1-3-2015 17:00'), duration: 90),
+          Tryout.new(field: ma, start: DateTime.parse('4-3-2015 17:00'), duration: 105),
       ]}
 
       # Save to google spreadsheet - Age Specific Tab
