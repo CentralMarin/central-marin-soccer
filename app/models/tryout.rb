@@ -3,6 +3,10 @@ class Tryout < ActiveRecord::Base
 
   validates :gender_id, :presence => true
   validates :age, :presence => true
+  validates :tryout_start, :presence => true
+  validates :duration, :presence => true
+  validates :field_id, :presence => true
+  validates :tryout_type_id, :presence => true
 
   belongs_to :tryout_type
 
@@ -76,10 +80,16 @@ class Tryout < ActiveRecord::Base
     age_level
   end
 
-  def self.by_age_and_gender
+  def self.by_age_and_gender(tryout_type_name)
+
+    result = TryoutType.where(name: tryout_type_name, show: true).first
+    return nil if result.nil?
+
+    info = {id: result.id, header: result.header, body: result.body}
+
     # Combine age and gender tryouts
     tryouts = {}
-    Tryout.order('age, gender_id, start').each do |tryout|
+    Tryout.where(tryout_type_id: info[:id]).order('age, gender_id, start').each do |tryout|
       key = self.tryout_name(tryout.age, tryout.gender)
 
       if tryouts.has_key?(key)
@@ -90,7 +100,18 @@ class Tryout < ActiveRecord::Base
       end
     end
 
-    return tryouts
+    info[:sessions] = tryouts
+    return info
+  end
+
+  def self.by_tryout_type_age_and_gender
+    info = []
+    # Array is walked in reverse order, so put items in reverse chronological order
+    ['Tryout Completed',  'Registration Night', 'Tryout', 'Pre-Tryout', 'Upcoming Tryout', 'Informational Meeting'].each do |name|
+      tryout = by_age_and_gender(name)
+      info.push(tryout) unless tryout.nil?
+    end
+    info
   end
 
   def as_json(options = {})

@@ -1,6 +1,6 @@
 ActiveAdmin.register Tryout do
 
-  permit_params :gender_id, :age, :tryout_start, :start, :duration, :field_id, :location, :tryout_type_id
+  permit_params :gender_id, :age, :tryout_start, :duration, :field_id, :tryout_type_id
 
   menu :label => 'Tryouts', :parent => 'Tryouts'
 
@@ -11,7 +11,6 @@ ActiveAdmin.register Tryout do
       tryout.date_to_s
     end
     column :field
-    column :location
     column :tryout_type
     actions
   end
@@ -24,7 +23,6 @@ ActiveAdmin.register Tryout do
         tryout.date_to_s
       end
       row :field
-      row :location
       row :tryout_type
       row "Display" do
         tryout.to_s
@@ -39,25 +37,9 @@ ActiveAdmin.register Tryout do
       f.input :tryout_start, :as => :string, :input_html => {:class => "hasDatetimePicker"}
       f.input :duration, :as => :select, :collection => [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], :label => "Duration (minutes)", :selected => 120
       f.input :field
-      f.input :location
       f.input :tryout_type
     end
-    f.actions <<
-        "<script>
-      function field_changed() {
-        if ($('#tryout_field_id option:selected').text()) {
-          $('#tryout_location_input').hide();
-        } else {
-          $('#tryout_location').val('');
-          $('#tryout_location_input').show();
-        }
-      }
-
-      $('#tryout_field_id').change(field_changed);
-
-      field_changed();
-
-     </script>".html_safe
+    f.actions
   end
 
   csv do
@@ -66,7 +48,6 @@ ActiveAdmin.register Tryout do
     column :tryout_start
     column :duration
     column :field
-    column :location
     column :tryout_type
   end
 
@@ -91,8 +72,7 @@ ActiveAdmin.register Tryout do
         if not row[4].blank?
           tryout.field = Field.where("lower(name) = ?", row[4].downcase).first
         end
-        tryout.location = row[5]
-        if not row[6].blank?
+        if not row[5].blank?
           tryout.tryout_type = TryoutType.where("lower(name) = ?", row[6].downcase).first
         end
         tryout.save!

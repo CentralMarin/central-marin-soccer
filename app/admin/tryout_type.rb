@@ -15,7 +15,7 @@ ActiveAdmin.register TryoutType do
   # end
 
   menu :label => 'Tryout Type', :parent => 'Tryouts'
-  permit_params :name, :header, :body, :translations_attributes => [:header, :body, :locale, :id]
+  permit_params :name, :header, :body, :show, :translations_attributes => [:header, :body, :locale, :id]
 
   form :html => { :enctype => "multipart/form-data" } do |f|
 
@@ -32,6 +32,7 @@ ActiveAdmin.register TryoutType do
         t.input :header
         t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
       end
+      f.input :show
       f.actions
     end
   end

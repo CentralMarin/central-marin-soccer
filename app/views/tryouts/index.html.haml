@@ -7,28 +7,28 @@
     = t('registration.index.online')
   = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
 
-%div.grid_16.box
-  %h2
-    = t('registration.index.informational_meetings.heading')
-  = t('registration.index.informational_meetings.body').html_safe
+
+- @info.each do |tryout_type|
+  %div.grid_16.box
+    %h2
+      = tryout_type[:header]
+    = tryout_type[:body].html_safe unless tryout_type[:body].nil?
+    %p
+      - tryout_type[:sessions].each do |key, value|
+        = render partial: 'tryouts/tryout_info', :locals => {tryout_name: key, locations: value}
 
 -#%div.grid_16.box
 -#  %h2
--#    = t('registration.index.pretryouts.heading')
--#  = t('registration.index.pretryouts.body').html_safe
+-#    = t('registration.index.heading')
 -#
-%div.grid_16.box
-  %h2
-    = t('registration.index.heading')
-
-  - @tryouts.each do |key, value|
-    = render partial: 'tryouts/tryout_info', :locals => {tryout_name: key, locations: value}
-
-- if @tryouts.count > 4 # Make registering as easy as possible
-  %div.grid_16.box
-    %h2
-      = t('registration.index.online')
-    = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
+-#  - @tryouts.each do |key, value|
+-#    = render partial: 'tryouts/tryout_info', :locals => {tryout_name: key, locations: value}
+-#
+-#- if @tryouts.count > 4 # Make registering as easy as possible
+-#  %div.grid_16.box
+-#    %h2
+-#      = t('registration.index.online')
+-#    = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
 
 %div.grid_16.box
   %h2
