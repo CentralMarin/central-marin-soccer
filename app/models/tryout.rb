@@ -53,7 +53,7 @@ class Tryout < ActiveRecord::Base
     key = self.tryout_name(age, gender)
 
     tryouts = {key => []}
-    Tryout.where(age: age).where(gender_id: gender.id).order('start').each do |tryout|
+    Tryout.includes(:tryout_type).where(age: age).where(gender_id: gender.id).where(:tryout_types => {show: true, name: 'Tryout'}).order('start').each do |tryout|
       tryouts[key].push tryout
     end
 
