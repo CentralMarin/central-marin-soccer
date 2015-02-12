@@ -106,8 +106,7 @@ class Tryout < ActiveRecord::Base
 
   def self.by_tryout_type_age_and_gender
     info = []
-    # Array is walked in reverse order, so put items in reverse chronological order
-    ['Tryout Completed',  'Registration Night', 'Tryout', 'Pre-Tryout', 'Upcoming Tryout', 'Informational Meeting'].each do |name|
+    ['Informational Meeting', 'Pre-Tryout', 'Tryout', 'Registration Night', 'Tryout Completed' ].each do |name|
       tryout = by_age_and_gender(name)
       info.push(tryout) unless tryout.nil?
     end

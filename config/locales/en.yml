@@ -308,6 +308,8 @@ en:
       age_group_chart: 'View age group chart'
       question_others: '<h3>What tryout should my child attend?</h3>
                         Your child should attend their age group tryouts. If they would like to play up, talk to the coaches during your age group tryout and they will advise.
+                        <h3>What if my child can only attend one day of tryouts?</h3>
+                        Please email Steven Sosa, Director of Coaching at stevensosa13@gmail.com so he can inform the coaches performing the evaluation.
                         <h3>What is a play up?</h3>
                         A child who is playing for a team older than their age group.
                         <h3>What if it''s raining during tryouts?</h3>
@@ -329,9 +331,6 @@ en:
       tryouts:
         heading: 'Tryout''s Time, Date, and Location'
         overview: ''
-        not_scheduled: '<br>Tryouts are not currently scheduled. Register and we''ll notify you as soon as they''re posted.'
-        soon: 'U8-14 Tryouts will be over two weekends at the end of February / Early March. Register now and we''ll notify you as soon as the dates are finalized.'
-        save_the_date: 'The Dates for Tryouts for the Central Marin Soccer Club U8/9 through U11 Boys and Girls will be Saturday February 21st and Saturday February 28th in the afternoons.  Please hold these dates and plan accordingly.  We will be providing final times and locations in the coming weeks.'
       register_another: 'Click here to register another child'
     form:
       heading: ' U8-U19 Soccer Tryout Online Registration'
