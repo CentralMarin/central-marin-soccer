@@ -1,5 +1,5 @@
 class RemoveLocationFromTryouts < ActiveRecord::Migration
   def change
-    remove_column :tryout_types, :location
+    remove_column :tryouts, :location
   end
 end
