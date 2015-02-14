@@ -73,7 +73,7 @@ ActiveAdmin.register Tryout do
           tryout.field = Field.where("lower(name) = ?", row[4].downcase).first
         end
         if not row[5].blank?
-          tryout.tryout_type = TryoutType.where("lower(name) = ?", row[6].downcase).first
+          tryout.tryout_type = TryoutType.where("lower(name) = ?", row[5].downcase).first
         end
         tryout.save!
 
