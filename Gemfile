@@ -19,8 +19,7 @@ gem 'nokogiri', '1.6.5'
 gem 'devise', '3.4.1'
 gem 'bing_translator', '4.4.1'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '1.3.10'
+gem 'mysql2', '0.3.17'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.1'
@@ -61,10 +60,6 @@ gem 'capistrano-rails',   '1.1.2', :require => false, :group => :development
 #  gem 'capistrano-rails',   '1.1.1', :require => false
 #  gem 'capistrano-bundler', '1.1.3', :require => false
 #end
-
-group :staging, :production do
-  gem 'mysql2', '0.3.17'
-end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
