@@ -337,7 +337,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.10)
     sshkit (1.6.1)
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
@@ -400,7 +399,6 @@ DEPENDENCIES
   sdoc
   selenium-webdriver (= 2.44.0)
   spring (= 1.2.0)
-  sqlite3 (= 1.3.10)
   therubyracer
   turbolinks (= 2.5.3)
   uglifier (= 2.7.0)
