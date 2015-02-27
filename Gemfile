@@ -5,7 +5,6 @@ gem 'rails', '4.1.8'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
 gem 'activeadmin-globalize', github: 'CentralMarin/activeadmin-globalize'
-#gem 'activeadmin-globalize', path: '../activeadmin-globalize'
 gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
 gem 'ckeditor', '4.1.1'
 gem 'carrierwave', '0.10.0'
@@ -27,15 +26,10 @@ gem 'sass-rails', '5.0.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '2.7.0'
 
-# Use CoffeeScript for .js.coffee assets and views
-#gem 'coffee-rails', '~> 4.0.1'
-
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', :platforms => :ruby
 
 # Use jquery as the JavaScript library
-# gem 'jquery-rails', '3.1.1'         # included by ActiveAdmin
-# gem 'jquery-ui-rails', '4.2.1'      # included by ActiveAdmin
 gem 'jquery-ui-themes', '0.0.11'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -51,15 +45,6 @@ end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.7'
-
-# Use Capistrano for deployment
-gem 'capistrano-rails',   '1.1.2', :require => false, :group => :development
-
-#gem 'capistrano', '3.2.1', :require => false, :group => :development
-#group :development do
-#  gem 'capistrano-rails',   '1.1.1', :require => false
-#  gem 'capistrano-bundler', '1.1.3', :require => false
-#end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
