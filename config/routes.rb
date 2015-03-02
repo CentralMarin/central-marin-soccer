@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   # United Specific Tryouts
   get '/tryouts/united', :to => 'tryouts#united_index', :as => 'tryouts_united_index'
-  get '/tryouts/united/registration', :to => 'tryouts#united_registration', :as => 'tryouts_united_registration'
-  post '/tryouts/united/registration', :to => 'tryouts#united_registration_create', :as => 'tryouts_united_registration_create'
+  # get '/tryouts/united/registration', :to => 'tryouts#united_registration', :as => 'tryouts_united_registration'
+  # post '/tryouts/united/registration', :to => 'tryouts#united_registration_create', :as => 'tryouts_united_registration_create'
 
 
   get '/tryouts/registration', :to => 'tryouts#registration', :as => 'tryouts_registration'
