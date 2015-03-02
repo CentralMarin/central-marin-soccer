@@ -5,4 +5,8 @@ class TryoutType < ActiveRecord::Base
 
   validates :header, :presence => true
 
+  def to_s
+    name
+  end
+
 end
