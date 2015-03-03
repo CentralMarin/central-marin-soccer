@@ -11,11 +11,14 @@
 
 %div{class: 'grid_10 box'}
   %div.slider-container
-    -@articles.each do |article|
-      %div
-        %a{href: "#{show_article(article)}"}
-          =image_tag article.image, :alt => article.title, height: "#{ArticleImageUploader::ImageSize::HEIGHT}", width: "#{ArticleImageUploader::ImageSize::WIDTH}", :title => article.title
-          =truncate(article.title, length: 75, truncate_string: "...")
+    %div
+      %a{href: "http://centralmarinsoccer.com/tryouts#Registration%20Night"}
+        %img{src: "https://docs.google.com/a/centralmarinsoccer.com/uc?id=0B16fN6qYkbqaT1lGbC1qeWw5NWs", height: 420, width: 560 }
+    -#-@articles.each do |article|
+    -#  %div
+    -#    %a{href: "#{show_article(article)}"}
+    -#      =image_tag article.image, :alt => article.title, height: "#{ArticleImageUploader::ImageSize::HEIGHT}", width: "#{ArticleImageUploader::ImageSize::WIDTH}", :title => article.title
+    -#      =truncate(article.title, length: 75, truncate_string: "...")
 
 %div{class: 'grid_16'}
   &nbsp;
