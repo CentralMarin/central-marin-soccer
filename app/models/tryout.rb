@@ -85,7 +85,7 @@ class Tryout < ActiveRecord::Base
     result = TryoutType.where(name: tryout_type_name, show: true).first
     return nil if result.nil?
 
-    info = {id: result.id, header: result.header, body: result.body}
+    info = {id: result.id, name: result.name, header: result.header, body: result.body}
 
     # Combine age and gender tryouts
     tryouts = {}

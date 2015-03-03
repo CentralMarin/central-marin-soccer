@@ -10,6 +10,7 @@
 
 - @info.each do |tryout_type|
   %div.grid_16.box
+    %a{name: tryout_type[:name]}
     %h2
       = tryout_type[:header]
     = tryout_type[:body].html_safe unless tryout_type[:body].nil?
