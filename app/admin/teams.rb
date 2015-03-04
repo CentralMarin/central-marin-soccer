@@ -57,4 +57,14 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
     </script>".html_safe
  end
 
+
+ csv do
+   column :name
+   column :team_level
+   column :year
+   column :gender
+   column :coach
+   column :teamsnap_team_id
+ end
+
 end
