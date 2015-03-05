@@ -8,6 +8,10 @@ DIVISION_ID = 3271
 SEASON = 2015
 ROSTER_ID = '1893703'
 
+def log(message)
+  puts "#{DateTime.now.strftime('%H:%M:%S')} - #{message}"
+end
+
 def http_get(url, headers)
 
   uri = URI.parse(url)
@@ -57,6 +61,7 @@ end
 
 def create_team(name, token)
 
+  log "Checking to see if team already exists"
   # Check if the team already exists
   response = http_get('https://api.teamsnap.com/v2/teams',
                       {
@@ -64,11 +69,13 @@ def create_team(name, token)
                           'X-Teamsnap-Token' => token
                       })
   JSON.parse(response.body).each do |team|
-    if team['team']['team_name'] == name
+    if team['team']['team_name'].strip == name
+      log "Team '#{name}' already exists"
       return team['team']['id']
     end
   end
 
+  log "Creating Team '#{name}'"
   response = http_post('https://api.teamsnap.com/v2/teams',
                        {
                            'Content-Type' =>  'application/json',
@@ -108,13 +115,13 @@ def get_roster(team_id, token)
   if response.code == '200'
     JSON.parse(response.body)
   else
-    puts 'Unable to lookup roster for team'
+    log 'Unable to lookup roster for team'
     exit -1
   end
 end
 
 def create_roster(roster_data, team_id, token)
-  # TODO: If the player already exists, skip them
+
   response = http_post("https://api.teamsnap.com/v2/teams/#{team_id}/as_roster/#{ROSTER_ID}/rosters",
     {
       'Content-Type' =>  'application/json',
@@ -123,8 +130,10 @@ def create_roster(roster_data, team_id, token)
     roster_data)
 
   if response.code != "200"
-    puts "Failed to create player #{roster_data['roster']['first']} #{roster_data['roster']['last']}"
+    log "Failed to create player #{roster_data['roster']['first']} #{roster_data['roster']['last']}"
   end
+
+  log "Created #{roster_data['roster']['first']} #{roster_data['roster']['last']}"
 
   response.code
 
@@ -135,6 +144,7 @@ def roster_exists?(optimized_roster, roster)
   exists = false
   key = build_key(roster['roster']['first'], roster['roster']['last'], roster['roster']['contacts_attributes'].length > 0 ? roster['roster']['contacts_attributes'][0]['first'] : '')
   if optimized_roster[key]
+    log "#{roster['roster']['first']} #{roster['roster']['last']} already exists"
     exists = true
   end
 
@@ -161,28 +171,39 @@ if ARGV.length != 3
   puts 'Usage: Setup.rb <user> <pwd> <csv file>'
   exit(-1)
 end
+
 user = ARGV[0]
 pwd = ARGV[1]
-csv = ARGV[2]
+csv_file = ARGV[2]
+
+# Verify the csv file exists
+if not File.exists? csv_file
+  log "Unable to locate file #{csv_file}"
+  exit -1
+end
 
 # Parse the filename for the name of the team replacing underscore characters with spaces
-team_name = File.basename(ARGV[2], '.csv').gsub!('_', ' ')
+team_name = File.basename(ARGV[2], '.csv').gsub!('_', ' ').gsub!('|','/')
 
 # Login to TeamSnap
+log "Logging into TeamSnap as user: #{user}"
 token = authenticate(user, pwd)
 if token.nil?
-  puts "Invalid user name or password"
+  log "Invalid user name or password"
   exit -1
 end
 
 # Create the Team
+log "Creating team: #{team_name} if necessary"
 team_id = create_team(team_name, token)
 
+log "Retrieving current roster (if it exists)"
 current_roster = get_roster(team_id, token)
 optimized_current_roster = optimize_current_roster(current_roster)
 
 # Load a CSV for the team
-CSV.foreach(ARGV[2], headers: true) do |row|
+log "Reading CSV"
+CSV.foreach(csv_file, headers: true) do |row|
 
   if row['Selected'] == 'Y'
 
@@ -203,7 +224,7 @@ CSV.foreach(ARGV[2], headers: true) do |row|
                         "roster_telephones_attributes" =>
                             [
                                 {
-                                    "label" => "#{row['Parent1 First']} #{row['Parent1 Last']}'s' Cell",
+                                    "label" => "#{row['Parent1 First']} #{row['Parent1 Last']}'s Cell",
                                     "phone_number" => row['Parent1 Cell'],
                                     "enable_sms" => false,
                                     "hide" => false,
