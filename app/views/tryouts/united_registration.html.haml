@@ -1,149 +1,149 @@
-%div.grid_16
-  %h1
-    = "2015 #{t('registration.united.form.heading')}".html_safe
-
-%div.grid_16
-  = t('registration.united.form.overview').html_safe
-
-%div.grid_16
-  &nbsp;
-
-  - if @tryout_registration.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@tryout_registration.errors.count, "error")} prohibited your registration from being saved. Please correct them below."
-
-= form_for @tryout_registration, :url => tryouts_united_registration_create_path do |f|
-  %div.grid_16.box
-    %h2
-      = t('registration.form.player_heading')
-
-    = show_text_field(f, t('registration.form.first'), :first, true)
-    = show_text_field(f, t('registration.form.last'), :last, true)
-
-    %div.clear
-      &nbsp;
-
-    = show_text_field(f, t('registration.form.address'), :home_address, true)
-    = show_text_field(f, t('registration.form.city'), :city, true)
-
-    %div.clear
-      &nbsp;
-
-    = show_telephone_field(f, t('registration.form.phone'), :home_phone, true)
-
-    %div.clear
-      &nbsp;
-
-    &nbsp;
-
-    %div.clear
-      &nbsp;
-
-    %div.grid_3
-      = "#{t('registration.form.gender')} *"
-
-    %div.grid_4
-      = f.radio_button :gender, 0, {:required => true}
-      = f.label :gender, t('registration.form.gender_boy'), :value => 0
-      &nbsp; &nbsp;
-      -#= f.radio_button :gender, 1, {:required => true}
-      -#= f.label :gender, t('registration.form.gender_girl'), :value => 1
-      = show_error(t('registration.form.gender'), :gender)
-
-    %div.grid_3
-      = f.label :birthdate, "#{t('registration.form.birthdate')} *"
-    %div.grid_4
-      = f.date_select :birthdate, {:start_year => Time.now.year - 12, :end_year => Time.now.year - 11, :use_month_numbers => true, :include_blank => true, :order => [:month, :day, :year]}, {:required => true}
-      = show_error(t('registration.form.birthdate'), :birthdate)
-    %div.clear
-      &nbsp;
-
-    %div.grid_3
-      = f.label :previous_team, "#{t('registration.form.previous')} *"
-    %div.grid_12
-      = f.select :previous_team, options_for_select({t('registration.form.previous_rec') => 'Rec Soccer', t('registration.form.previous_other') => 'Other Competitive Club', t('registration.form.previous_cm') => 'Central Marin Soccer Club'}), {:include_blank => true}, {:required => true}
-      = show_error(t('registration.form.previous'), :previous_team)
-
-    %div.clear
-      &nbsp;
-
-  - (1..2).each do |parent_id|
-    %div.grid_16.box
-      %h2
-        = t('registration.form.parent_heading')
-
-      = show_text_field(f, t('registration.form.first'), "parent#{parent_id}_first", (parent_field_required(parent_id)))
-      = show_text_field(f, t('registration.form.last'), "parent#{parent_id}_last", (parent_field_required(parent_id)))
-
-      %div.clear
-        &nbsp;
-
-      = show_email_field(f, t('registration.form.email'), "parent#{parent_id}_email", (parent_field_required(parent_id)))
-      = show_telephone_field(f, t('registration.form.mobile'), "parent#{parent_id}_cell", (parent_field_required(parent_id)))
-
-  %div.grid_16.box
-    %h2
-      = t('registration.form.medical.heading').html_safe
-    %div.grid_15
-      = t('registration.form.medical.body').html_safe
-    %div.grid_15 &nbsp;
-
-    %h2
-      = t('registration.form.legal.heading').html_safe
-    %div.grid_15
-      = t('registration.form.legal.body').html_safe
-
-    %div.grid_15 &nbsp;
-
-    = show_text_field(f, t('registration.form.completed_by'), :completed_by, true, '', 7, 7)
-
-    %div.clear
-      &nbsp;
-
-    %div.grid_7
-      = f.label :relationship, "#{t('registration.form.signor.relationship')} *"
-    %div.grid_7
-      = f.select :relationship, options_for_select({t('registration.form.signor.father') => 'Father', t('registration.form.signor.mother') => 'Mother', t('registration.form.signor.guardian') => 'Guardian'}), {:include_blank => true}, {:required => true}
-      = show_error(t('registration.form.signor.relationship'), :relationship)
-
-    %div.clear
-      &nbsp;
-
-    %div.grid_15
-      &nbsp;
-
-    %div.grid_15
-      = t('registration.form.waiver.body')
-
-    %div.grid_15
-      = f.check_box :waiver, :required => true
-      = f.label :waiver, "#{t('registration.form.waiver.agree')} *"
-      = show_error t('registration.form.waiver.agree'), :waiver
-
-    %div.grid_15 &nbsp;
-
-    %div.grid_15
-      = f.submit t('registration.form.submit'), data: { disable_with: t('registration.form.processing') }
-
-    %div.clear
-      %nbsp;
-
-    %div.clear
-      %nbsp;
-
-%div.grid_16
-  = t('registration.form.footer')
-  %a{:mail_to => 'tryouts@centralmarinsoccer.com'} tryouts@centralmarinsoccer.com
-
-
-- content_for :javascript do
-  %script{type: 'text/javascript', src:'/polyfiller.js'}
-  = javascript_include_tag "tryouts_united"
-  %script
-    $(document).ready(soccer.tryouts_united.init_registration('tryout_registration_birthdate_2i', 'tryout_registration_birthdate_3i', 'tryout_registration_birthdate_1i'));
-    $(document).ready($('input[name="tryout_registration[first]"]').focus());
-    $(document).ready($.webshims.setOptions('forms', { lazyCustomMessages: true }));
-
-    //start polyfilling
-    $(document).ready($.webshims.polyfill('forms forms-ext'));
-
+-#%div.grid_16
+-#  %h1
+-#    = "2015 #{t('registration.united.form.heading')}".html_safe
+-#
+-#%div.grid_16
+-#  = t('registration.united.form.overview').html_safe
+-#
+-#%div.grid_16
+-#  &nbsp;
+-#
+-#  - if @tryout_registration.errors.any?
+-#    #error_explanation
+-#      %h2= "#{pluralize(@tryout_registration.errors.count, "error")} prohibited your registration from being saved. Please correct them below."
+-#
+-#= form_for @tryout_registration, :url => tryouts_united_registration_create_path do |f|
+-#  %div.grid_16.box
+-#    %h2
+-#      = t('registration.form.player_heading')
+-#
+-#    = show_text_field(f, t('registration.form.first'), :first, true)
+-#    = show_text_field(f, t('registration.form.last'), :last, true)
+-#
+-#    %div.clear
+-#      &nbsp;
+-#
+-#    = show_text_field(f, t('registration.form.address'), :home_address, true)
+-#    = show_text_field(f, t('registration.form.city'), :city, true)
+-#
+-#    %div.clear
+-#      &nbsp;
+-#
+-#    = show_telephone_field(f, t('registration.form.phone'), :home_phone, true)
+-#
+-#    %div.clear
+-#      &nbsp;
+-#
+-#    &nbsp;
+-#
+-#    %div.clear
+-#      &nbsp;
+-#
+-#    %div.grid_3
+-#      = "#{t('registration.form.gender')} *"
+-#
+-#    %div.grid_4
+-#      = f.radio_button :gender, 0, {:required => true}
+-#      = f.label :gender, t('registration.form.gender_boy'), :value => 0
+-#      &nbsp; &nbsp;
+-#      -#= f.radio_button :gender, 1, {:required => true}
+-#      -#= f.label :gender, t('registration.form.gender_girl'), :value => 1
+-#      = show_error(t('registration.form.gender'), :gender)
+-#
+-#    %div.grid_3
+-#      = f.label :birthdate, "#{t('registration.form.birthdate')} *"
+-#    %div.grid_4
+-#      = f.date_select :birthdate, {:start_year => Time.now.year - 12, :end_year => Time.now.year - 11, :use_month_numbers => true, :include_blank => true, :order => [:month, :day, :year]}, {:required => true}
+-#      = show_error(t('registration.form.birthdate'), :birthdate)
+-#    %div.clear
+-#      &nbsp;
+-#
+-#    %div.grid_3
+-#      = f.label :previous_team, "#{t('registration.form.previous')} *"
+-#    %div.grid_12
+-#      = f.select :previous_team, options_for_select({t('registration.form.previous_rec') => 'Rec Soccer', t('registration.form.previous_other') => 'Other Competitive Club', t('registration.form.previous_cm') => 'Central Marin Soccer Club'}), {:include_blank => true}, {:required => true}
+-#      = show_error(t('registration.form.previous'), :previous_team)
+-#
+-#    %div.clear
+-#      &nbsp;
+-#
+-#  - (1..2).each do |parent_id|
+-#    %div.grid_16.box
+-#      %h2
+-#        = t('registration.form.parent_heading')
+-#
+-#      = show_text_field(f, t('registration.form.first'), "parent#{parent_id}_first", (parent_field_required(parent_id)))
+-#      = show_text_field(f, t('registration.form.last'), "parent#{parent_id}_last", (parent_field_required(parent_id)))
+-#
+-#      %div.clear
+-#        &nbsp;
+-#
+-#      = show_email_field(f, t('registration.form.email'), "parent#{parent_id}_email", (parent_field_required(parent_id)))
+-#      = show_telephone_field(f, t('registration.form.mobile'), "parent#{parent_id}_cell", (parent_field_required(parent_id)))
+-#
+-#  %div.grid_16.box
+-#    %h2
+-#      = t('registration.form.medical.heading').html_safe
+-#    %div.grid_15
+-#      = t('registration.form.medical.body').html_safe
+-#    %div.grid_15 &nbsp;
+-#
+-#    %h2
+-#      = t('registration.form.legal.heading').html_safe
+-#    %div.grid_15
+-#      = t('registration.form.legal.body').html_safe
+-#
+-#    %div.grid_15 &nbsp;
+-#
+-#    = show_text_field(f, t('registration.form.completed_by'), :completed_by, true, '', 7, 7)
+-#
+-#    %div.clear
+-#      &nbsp;
+-#
+-#    %div.grid_7
+-#      = f.label :relationship, "#{t('registration.form.signor.relationship')} *"
+-#    %div.grid_7
+-#      = f.select :relationship, options_for_select({t('registration.form.signor.father') => 'Father', t('registration.form.signor.mother') => 'Mother', t('registration.form.signor.guardian') => 'Guardian'}), {:include_blank => true}, {:required => true}
+-#      = show_error(t('registration.form.signor.relationship'), :relationship)
+-#
+-#    %div.clear
+-#      &nbsp;
+-#
+-#    %div.grid_15
+-#      &nbsp;
+-#
+-#    %div.grid_15
+-#      = t('registration.form.waiver.body')
+-#
+-#    %div.grid_15
+-#      = f.check_box :waiver, :required => true
+-#      = f.label :waiver, "#{t('registration.form.waiver.agree')} *"
+-#      = show_error t('registration.form.waiver.agree'), :waiver
+-#
+-#    %div.grid_15 &nbsp;
+-#
+-#    %div.grid_15
+-#      = f.submit t('registration.form.submit'), data: { disable_with: t('registration.form.processing') }
+-#
+-#    %div.clear
+-#      %nbsp;
+-#
+-#    %div.clear
+-#      %nbsp;
+-#
+-#%div.grid_16
+-#  = t('registration.form.footer')
+-#  %a{:mail_to => 'tryouts@centralmarinsoccer.com'} tryouts@centralmarinsoccer.com
+-#
+-#
+-#- content_for :javascript do
+-#  %script{type: 'text/javascript', src:'/polyfiller.js'}
+-#  = javascript_include_tag "tryouts_united"
+-#  %script
+-#    $(document).ready(soccer.tryouts_united.init_registration('tryout_registration_birthdate_2i', 'tryout_registration_birthdate_3i', 'tryout_registration_birthdate_1i'));
+-#    $(document).ready($('input[name="tryout_registration[first]"]').focus());
+-#    $(document).ready($.webshims.setOptions('forms', { lazyCustomMessages: true }));
+-#
+-#    //start polyfilling
+-#    $(document).ready($.webshims.polyfill('forms forms-ext'));
+-#
