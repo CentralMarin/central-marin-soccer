@@ -183,7 +183,9 @@ if not File.exists? csv_file
 end
 
 # Parse the filename for the name of the team replacing underscore characters with spaces
-team_name = File.basename(ARGV[2], '.csv').gsub!('_', ' ').gsub!('|','/')
+team_name = File.basename(ARGV[2], '.csv')
+team_name = team_name.gsub!('_', ' ') unless not team_name.include? '_'
+team_name = team_name.gsub!('|','/') unless not team_name.include? '|'
 
 # Login to TeamSnap
 log "Logging into TeamSnap as user: #{user}"
