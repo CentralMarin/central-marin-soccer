@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   actions :index, :show, :update, :edit
   config.filters = false
-  permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id]
+  permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_details_attributes => [:id, :start, :duration, :field_id]
 
   form :html => { :enctype => "multipart/form-data" } do |f|
 
