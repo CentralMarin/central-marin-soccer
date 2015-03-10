@@ -4,6 +4,23 @@ ActiveAdmin.register Event do
   config.filters = false
   permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_details_attributes => [:id, :start, :duration, :field_id]
 
+  show do |event|
+    attributes_table do
+      row :type
+      row :heading
+      row :body
+      row :tout
+      row :status
+    end
+    panel "Event Details" do
+      table_for event.event_details do
+        column :start
+        column :duration
+        column :field
+      end
+    end
+  end
+
   form :html => { :enctype => "multipart/form-data" } do |f|
 
     if f.object.errors.size >= 1
