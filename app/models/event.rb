@@ -4,4 +4,6 @@ class Event < ActiveRecord::Base
 
   self.inheritance_column = 'does_not_have_one'
 
+  active_admin_translates :heading, :body, :tout
+
 end
