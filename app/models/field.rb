@@ -30,6 +30,7 @@ class Field < ActiveRecord::Base
   before_save :set_latlng
 
   has_many :tryouts
+  has_many :event_details
 
   def admin_permalink
     admin_field_path(self)

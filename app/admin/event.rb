@@ -19,7 +19,14 @@ ActiveAdmin.register Event do
         t.input :tout, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
       end
 
-      f.input :status, label: 'Status', collection: Event.statuses.keys, as: :radio
+      f.input :status, label: 'Status', collection: Event.statuses.keys, as: :select
+
+      f.has_many :event_details do |event_detail|
+        event_detail.input :start, :as => :string, :input_html => {:class => "hasDatetimePicker"}
+        event_detail.input :duration, :as => :select, :collection => [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], :label => "Duration (minutes)", :selected => 120
+        event_detail.input :field
+      end
+
       f.actions
     end
   end

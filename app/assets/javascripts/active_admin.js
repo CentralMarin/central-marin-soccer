@@ -12,21 +12,24 @@
 //= require jquery-ui-timepicker-addon
 
 $(document).ready(function() {
-    jQuery('input.hasDatetimePicker').datetimepicker({
-        dateFormat: "mm/dd/yy",
-        timeFormat: "HH:mm",
-        hourMin: 9,
-        hourMax: 17,
-        numberOfMonths: 4,
-        stepMinute: 15,
-        hourGrid: 1,
-        minuteGrid: 15,
-        beforeShow: function () {
-            setTimeout(
-                function () {
-                    $('#ui-datepicker-div').css("z-index", "3000");
-                }, 100
-            );
-        }
+
+    $(document).on('has_many_add:after', '.has_many_container', function(e, elem){
+        $('input.hasDatetimePicker').datetimepicker({
+            dateFormat: "mm/dd/yy",
+            timeFormat: "HH:mm",
+            hourMin: 9,
+            hourMax: 17,
+            numberOfMonths: 4,
+            stepMinute: 15,
+            hourGrid: 1,
+            minuteGrid: 15,
+            beforeShow: function () {
+                setTimeout(
+                    function () {
+                        $('#ui-datepicker-div').css("z-index", "3000");
+                    }, 100
+                );
+            }
+        });
     });
 });
