@@ -13,12 +13,12 @@
 
 $(document).ready(function() {
 
-    $(document).on('has_many_add:after', '.has_many_container', function(e, elem){
+    datetimepicker_func = function(e, elem){
         $('input.hasDatetimePicker').datetimepicker({
             dateFormat: "mm/dd/yy",
             timeFormat: "HH:mm",
             hourMin: 9,
-            hourMax: 17,
+            hourMax: 20,
             numberOfMonths: 4,
             stepMinute: 15,
             hourGrid: 1,
@@ -31,5 +31,9 @@ $(document).ready(function() {
                 );
             }
         });
-    });
+    };
+
+    datetimepicker_func();
+
+    $(document).on('has_many_add:after', '.has_many_container', datetimepicker_func);
 });
