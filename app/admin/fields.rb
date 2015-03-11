@@ -1,5 +1,7 @@
 ActiveAdmin.register Field, {:sort_order => "name_asc"} do
 
+  menu :label => 'Fields', :parent => 'Locations'
+
   permit_params :name, :club, :rain_line, :address, :status
 
   index do

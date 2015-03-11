@@ -1,4 +1,7 @@
 ActiveAdmin.register Room do
+
+  menu :label => 'Rooms', :parent => 'Locations'
+
   permit_params :name, :address
   config.filters = false
 
