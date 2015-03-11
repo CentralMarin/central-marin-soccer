@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   actions :index, :show, :update, :edit
   config.filters = false
-  permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_details_attributes => [:id, :start, :duration, :field_id]
+  permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_details_attributes => [:id, :start, :duration, :location_id]
 
   show do |event|
     attributes_table do
@@ -16,7 +16,7 @@ ActiveAdmin.register Event do
       table_for event.event_details do
         column :start
         column :duration
-        column :field
+        column :location
       end
     end
   end
@@ -41,7 +41,7 @@ ActiveAdmin.register Event do
       f.has_many :event_details do |event_detail|
         event_detail.input :start, :as => :string, :input_html => {:class => "hasDatetimePicker"}
         event_detail.input :duration, :as => :select, :collection => [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], :label => "Duration (minutes)", :selected => 120
-        event_detail.input :field
+        event_detail.input :location
       end
 
       f.actions

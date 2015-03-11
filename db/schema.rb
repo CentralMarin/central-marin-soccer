@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310222247) do
+ActiveRecord::Schema.define(version: 20150311045347) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20150310222247) do
     t.string   "locale",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "bio"
+    t.string   "bio"
   end
 
   add_index "coach_translations", ["coach_id"], name: "index_coach_translations_on_coach_id"
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20150310222247) do
   create_table "event_details", force: true do |t|
     t.datetime "start"
     t.integer  "duration"
-    t.integer  "field_id"
+    t.integer  "location_id"
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -246,11 +246,11 @@ ActiveRecord::Schema.define(version: 20150310222247) do
   end
 
   create_table "web_part_translations", force: true do |t|
-    t.integer  "web_part_id", null: false
-    t.string   "locale",      null: false
+    t.integer  "web_part_id",             null: false
+    t.string   "locale",                  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "html"
+    t.text     "html",        limit: 255
   end
 
   add_index "web_part_translations", ["locale"], name: "index_web_part_translations_on_locale"

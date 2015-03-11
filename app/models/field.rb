@@ -22,7 +22,6 @@ class Field < Location
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
   validates :name,  :presence => true
-  validates :club, :presence => true
   validates :rain_line, :presence => true
   validates :address, :presence => true
   validates :status, :presence => true
