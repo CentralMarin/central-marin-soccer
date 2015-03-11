@@ -18,7 +18,7 @@ require "net/http"
 require "uri"
 require "json"
 
-class Field < ActiveRecord::Base
+class Field < Location
   include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
   validates :name,  :presence => true

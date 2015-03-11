@@ -12,7 +12,7 @@ ActiveAdmin.register Event do
       row :tout
       row :status
     end
-    panel "Event Details" do
+    panel "Event Item Details" do
       table_for event.event_details do
         column :start
         column :duration
