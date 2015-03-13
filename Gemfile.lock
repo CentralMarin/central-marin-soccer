@@ -76,6 +76,8 @@ GEM
       json (~> 1.8.0)
       nokogiri (~> 1.6.0)
       savon (~> 2.0)
+    bitmask_attributes (1.0.0)
+      activerecord (>= 3.1)
     bourbon (4.1.0)
       sass (~> 3.3)
       thor
@@ -377,6 +379,7 @@ DEPENDENCIES
   activeadmin!
   activeadmin-globalize!
   bing_translator (= 4.4.1)
+  bitmask_attributes (= 1.0.0)
   capistrano-rails (= 1.1.2)
   capybara (= 2.4.4)
   carrierwave (= 0.10.0)

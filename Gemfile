@@ -18,6 +18,7 @@ gem 'premailer-rails', '1.8.0'
 gem 'nokogiri', '1.6.5'
 gem 'devise', '3.4.1'
 gem 'bing_translator', '4.4.1'
+gem 'bitmask_attributes', '1.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.10'
