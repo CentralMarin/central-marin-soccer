@@ -37,3 +37,26 @@ $(document).ready(function() {
 
     $(document).on('has_many_add:after', '.has_many_container', datetimepicker_func);
 });
+
+$( document ).ready(function() {
+    var $select_btns = $('<li class="choice"><div class="select-btn-container"><button class="select_all">Select all</button><button class="select_none">Deselect all</button></div></li>');
+    $('.inputs .has_many_fields').each(function (i, el) {
+        $(el).find('.choices-group').prepend($select_btns.clone());
+    });
+
+    $('.inputs')
+        .on('click', '.select_all', function () {
+            var $check_boxes = $(this).parents('.choices-group').find('input');
+            $check_boxes.each(function () {
+                this.checked = true;
+            });
+            return false;
+        })
+        .on('click', '.select_none', function () {
+            var $check_boxes = $(this).parents('.choices-group').find('input');
+            $check_boxes.each(function () {
+                this.checked = false;
+            });
+            return false;
+        });
+});
