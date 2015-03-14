@@ -24,3 +24,29 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+body.active_admin {
+  form {
+
+    fieldset.has_many_fields {
+
+      li li {
+        margin: 1em 0;
+      }
+
+      & > ol > li {
+
+        fieldset {
+
+          ol {
+            width: 80%;
+            padding-left: 20%;
+            li > label > input {
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
