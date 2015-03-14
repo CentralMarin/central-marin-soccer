@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
 
   actions :index, :show, :update, :edit
   config.filters = false
-  permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_details_attributes => [:id, :formated_start, :duration, :location_id, :groups, :_destroy]
+  permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_details_attributes => [:id, :formatted_start, :duration, :location_id, :_destroy, :groups => []]
 
   show do |event|
     attributes_table do
@@ -40,10 +40,10 @@ ActiveAdmin.register Event do
       f.input :status, label: 'Status', collection: Event.statuses.keys, as: :select
 
       f.has_many :event_details, heading: 'Event Details', allow_destroy: true do |event_detail|
-        event_detail.input :formated_start, :as => :string, :input_html => {:class => "hasDatetimePicker"}
+        event_detail.input :formatted_start, :as => :string, :input_html => {:class => "hasDatetimePicker"}, label: 'Start'
         event_detail.input :duration, :as => :select, :collection => [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], :label => "Duration (minutes)", :selected => 120
         event_detail.input :location
-        event_detail.input :groups, :label => 'Age Groups', multiple: true, collection: EventDetail::AGE_GROUP, as: :check_boxes
+        event_detail.input :groups, :label => 'Age Groups', collection: EventDetail.values_for_groups.each.map{|c| [c.to_s.gsub!('_', ' '), c]}, multiple: true, as: :bitmask_attributes
       end
 
       f.actions
