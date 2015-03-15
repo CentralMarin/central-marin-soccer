@@ -14,7 +14,7 @@ ActiveAdmin.register Event do
     end
     panel "Event Item Details" do
       table_for event.event_details do
-        column :formated_start
+        column :formatted_start
         column :duration
         column :location
         column :groups
@@ -71,6 +71,71 @@ ActiveAdmin.register Event do
 
   action_item :only => :index do
     link_to 'Seed Events', :action => 'create_events'
+  end
+
+  collection_action :download_csv, method: :get do
+
+    file = CSV.generate do |csv|
+      csv << ['start', 'duration', 'location', 'groups']
+
+      event_details = EventDetail.where(:event_id => params[:event_id])
+      event_details.each do |event_detail|
+        row = []
+        row << event_detail.formatted_start
+        row << event_detail.duration
+        row << event_detail.location.name
+        row << event_detail.groups.join(', ')
+        csv << row
+      end
+    end
+
+    send_data file, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment;filename=event-details#{params[:id]}.csv"
+  end
+
+  collection_action :upload_csv, method: :get do
+    @event_id = params[:event_id]
+    render 'admin/csv/event_details_upload_csv'
+  end
+
+  collection_action :import_csv, :method => :post do
+
+    event_id = params[:event][:id].to_i
+
+    EventDetail.transaction do
+      # remove all the existing records for the specified event
+      EventDetail.delete_all(:event_id => event_id)
+
+      event = Event.find_by_id(event_id)
+
+      # read the csv
+      csv_data = params[:event][:file]
+      csv_file = csv_data.read
+      CSV.parse(csv_file, {:headers => true}) do |row|
+        event_detail = EventDetail.new()
+        event_detail.formatted_start = row[0]
+        event_detail.duration = row[1]
+        event_detail.location = Location.find_by_name(row[2])
+
+        groups = row[3].gsub(' ', '').split(',')
+
+        event_detail.groups = groups
+        event_detail.event = event
+
+        event_detail.save!
+      end
+
+    end
+
+    flash[:notice] = 'CSV imported successfully!'
+    redirect_to admin_event_path(params[:event][:id])
+  end
+
+  action_item :only => :show do
+    link_to 'Download Event Item CSV', :action => 'download_csv', :event_id => event.id
+  end
+
+  action_item :only => :show do
+    link_to 'Upload Event Item CSV', :action => 'upload_csv', :event_id => event.id
   end
 
 end

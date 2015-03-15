@@ -1,0 +1,17 @@
+= form_for :event, :url=>{:action=>"import_csv"}, :html => { :multipart => true } do |f|
+  = f.hidden_field :id, value: @event_id
+  %h3
+    Warning: All tryout records are replaced during this operation.
+    %br
+      If you'd like to update existing event details, click the CSV link on the previous screen to download the existing event details first.
+  %table
+    %tr
+      %td
+        %label{:for => "dump_file"}
+          Select a CSV File :
+      %td
+        = f.file_field :file
+    %tr
+      %td
+        = submit_tag 'Submit'
+

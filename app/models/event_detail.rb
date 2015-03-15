@@ -24,9 +24,7 @@ class EventDetail < ActiveRecord::Base
   end
 
   def to_s
-    # "U#{age} #{gender} #{date_to_s} @ #{field.name} - #{field.address}"
-
-    "#{values_for_groups.to_s} #{date_to_s} @ #{location.name} - #{location.address}"
+    "#{groups} #{date_to_s} @ #{location.name} - #{location.address}"
   end
 end
 
