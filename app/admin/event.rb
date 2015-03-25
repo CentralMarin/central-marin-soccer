@@ -14,10 +14,10 @@ ActiveAdmin.register Event do
     end
     panel "Event Item Details" do
       table_for event.event_details do
-        column :formatted_start
+        column 'Start', :formatted_start
         column :duration
         column :location
-        column :groups
+        column('Age Groups') { |event_detail| "Boys: #{event_detail.boys_age_range}<br>Girls: #{event_detail.girls_age_range}".html_safe }
       end
     end
   end
