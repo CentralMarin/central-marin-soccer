@@ -10,13 +10,12 @@
 
 - @info.each do |tryout_type|
   %div.grid_16.box
-    %a{name: tryout_type[:name]}
+    %a{name: tryout_type.type}
     %h2
-      = tryout_type[:header]
-    = tryout_type[:body].html_safe unless tryout_type[:body].nil?
+      = tryout_type.heading
+    = tryout_type.body.html_safe unless tryout_type.body.nil?
     %p
-      - tryout_type[:sessions].each do |key, value|
-        = render partial: 'tryouts/tryout_info', :locals => {tryout_name: key, locations: value}
+      = render partial: 'tryouts/tryout_info', :locals => {event_name: tryout_type.heading, event_details: tryout_type.event_details}
 
 %div.grid_16.box
   %h2

@@ -1,11 +1,8 @@
 %h2{:class => 'alt'}
-  = tryout_name
-- if locations.empty?
-  = t('registration.confirmation.tryouts.not_scheduled').html_safe
-- else
+  = event_name
   %ul
-    - locations.each do |tryout|
+    - event_details.each do |event_detail|
       %li
-        = "#{tryout.date_to_s} @"
-        %a{:href => tryout.field.map_url}
-          = "#{tryout.field.name} - #{tryout.field.address}"
+        = "#{event_detail.date_to_s} @"
+        %a{:href => event_detail.location.map_url}
+          = "#{event_detail.location.name} - #{event_detail.location.address}"

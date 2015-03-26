@@ -4,7 +4,7 @@ class TryoutsController < InheritedResources::Base
 
   def index
     # Combine age and gender tryouts
-    @info = Tryout.by_tryout_type_age_and_gender
+    @info = Event.tryout_events
   end
 
   def united_index
