@@ -5,13 +5,35 @@ ActiveAdmin.register Event do
   # permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_details_attributes => [:id, :formatted_start, :duration, :location_id, :_destroy, :groups => []]
   permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_groups_attributes => [:id, :_destroy, :event_details_attributes => [:id, :formatted_start, :duration, :location_id, :_destroy], :groups => []]
 
+  index do
+    column :type
+    column :heading
+    column :status do |event|
+
+      case event.status
+        when "hide"
+          status_tag "Hide Event", :warn, class: 'important'
+        when "show"
+          status_tag "Show Event", :ok
+        when "show_and_tout"
+          status_tag "Show Event and Tout on Home Page", :ok
+      end
+
+    end
+
+    actions
+  end
+
   show do |event|
     attributes_table do
       row :type
       row :heading
-      row :body
-      row :tout
+      row (:body) { |event| event.body.html_safe }
+      row (:tout)  { |event| event.tout.html_safe }
       row :status
+      row :created_at
+      row :updated_at
+
     end
     panel "Event Group Details" do
       table_for event.event_groups do
@@ -25,6 +47,8 @@ ActiveAdmin.register Event do
         end
       end
     end
+
+
   end
 
   form :html => { :enctype => "multipart/form-data" } do |f|
