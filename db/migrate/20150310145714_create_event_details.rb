@@ -3,8 +3,8 @@ class CreateEventDetails < ActiveRecord::Migration
     create_table :event_details do |t|
       t.datetime :start
       t.integer :duration
-      t.integer :field_id
-      t.integer :event_id
+      t.integer :location_id
+      t.integer :event_group_id
 
       t.timestamps
     end
