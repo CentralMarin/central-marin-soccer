@@ -107,21 +107,24 @@ ActiveAdmin.register Event do
 
   collection_action :download_csv, method: :get do
 
+    event =  Event.includes( { event_groups: [:event_details] }).find_by_id(params[:event_id])
     file = CSV.generate do |csv|
-      csv << ['start', 'duration', 'location', 'groups']
+      csv << ['groups', 'start', 'duration', 'location']
 
-      event_details = EventDetail.where(:event_id => params[:event_id])
-      event_details.each do |event_detail|
-        row = []
-        row << event_detail.formatted_start
-        row << event_detail.duration
-        row << event_detail.location.name
-        row << event_detail.groups.join(', ')
-        csv << row
+      event.event_groups.each do |event_group|
+        groups = event_group.groups
+        event_group.event_details.each do |event_detail|
+            row = []
+            row << groups.join(', ')
+            row << event_detail.formatted_start
+            row << event_detail.duration
+            row << event_detail.location.name
+            csv << row
+        end
       end
     end
 
-    send_data file, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment;filename=event-details#{params[:id]}.csv"
+    send_data file, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment;filename=#{event.heading}.csv"
   end
 
   collection_action :upload_csv, method: :get do
@@ -133,29 +136,32 @@ ActiveAdmin.register Event do
 
     event_id = params[:event][:id].to_i
 
-    EventDetail.transaction do
-      # remove all the existing records for the specified event
-      EventDetail.delete_all(:event_id => event_id)
+    EventGroup.transaction do
+      EventGroup.delete_all(:event_id => event_id)
 
       event = Event.find_by_id(event_id)
 
       # read the csv
       csv_data = params[:event][:file]
       csv_file = csv_data.read
+      previous_groups = ''
+      event_group = nil
       CSV.parse(csv_file, {:headers => true}) do |row|
+        groups = row[0].gsub(' ', '').split(',')
+        if groups != previous_groups
+          event_group = EventGroup.new(groups: groups, event_id: event_id)
+          previous_groups = groups
+        end
+
         event_detail = EventDetail.new()
-        event_detail.formatted_start = row[0]
-        event_detail.duration = row[1]
-        event_detail.location = Location.find_by_name(row[2])
+        event_detail.formatted_start = row[1]
+        event_detail.duration = row[2]
+        event_detail.location = Location.find_by_name(row[3])
 
-        groups = row[3].gsub(' ', '').split(',')
+        event_group.event_details << event_detail
 
-        event_detail.groups = groups
-        event_detail.event = event
-
-        event_detail.save!
+        event_group.save!
       end
-
     end
 
     flash[:notice] = 'CSV imported successfully!'
