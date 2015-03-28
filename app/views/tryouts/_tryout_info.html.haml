@@ -1,7 +1,8 @@
 %h2{:class => 'alt'}
-  = event_name
+  = "#{t('team.gender.boys')}: U#{event_group.boys_age_range}<br>".html_safe unless event_group.boys_age_range.nil?
+  = "#{t('team.gender.girls')}: U#{event_group.girls_age_range}" unless event_group.girls_age_range.nil?
   %ul
-    - event_details.each do |event_detail|
+    - event_group.event_details.each do |event_detail|
       %li
         = "#{event_detail.date_to_s} @"
         %a{:href => event_detail.location.map_url}

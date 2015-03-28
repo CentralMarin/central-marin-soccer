@@ -8,14 +8,15 @@
   = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
 
 
-- @info.each do |tryout_type|
+- @info.each do |event|
   %div.grid_16.box
-    %a{name: tryout_type.type}
+    %a{name: event.type}
     %h2
-      = tryout_type.heading
-    = tryout_type.body.html_safe unless tryout_type.body.nil?
+      = event.heading
+    = event.body.html_safe unless event.body.nil?
     %p
-      = render partial: 'tryouts/tryout_info', :locals => {event_name: tryout_type.heading, event_details: tryout_type.event_details}
+      - event.event_groups.each do |event_group|
+        = render partial: 'tryouts/tryout_info', :locals => {event_group: event_group}
 
 %div.grid_16.box
   %h2

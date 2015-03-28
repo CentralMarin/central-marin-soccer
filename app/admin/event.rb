@@ -5,7 +5,7 @@ ActiveAdmin.register Event do
   # permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_details_attributes => [:id, :formatted_start, :duration, :location_id, :_destroy, :groups => []]
   permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_groups_attributes => [:id, :_destroy, :event_details_attributes => [:id, :formatted_start, :duration, :location_id, :_destroy], :groups => []]
 
-  index do
+  index :download_links => false do
     column :type
     column :heading
     column :status do |event|
@@ -92,6 +92,8 @@ ActiveAdmin.register Event do
       unless Event.where("type = ?", value).exists?
         event = Event.new
         event.type = key.to_sym
+        event.heading = key.humanize.titleize
+        event.body = "TODO: Fill out"
         event.status= :hide
         event.save!
       end
@@ -107,7 +109,7 @@ ActiveAdmin.register Event do
 
   collection_action :download_csv, method: :get do
 
-    event =  Event.includes( { event_groups: [:event_details] }).find_by_id(params[:event_id])
+    event =  Event.find_by_id(params[:event_id])
     file = CSV.generate do |csv|
       csv << ['groups', 'start', 'duration', 'location']
 
