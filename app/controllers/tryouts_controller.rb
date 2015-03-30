@@ -2,10 +2,6 @@ class TryoutsController < InheritedResources::Base
 
   @@mutex = Mutex.new
 
-  def index
-    @info = Event.tryout_related_events
-  end
-
   def united_index
 
   end
@@ -58,18 +54,12 @@ class TryoutsController < InheritedResources::Base
 
   end
 
-  def registration
-    @tryout_registration = TryoutRegistration.new
+  def index
+    @info = Event.tryout_related_events
   end
 
-  def format_phone_number(phone_number)
-
-    if phone_number.blank?
-      return phone_number
-    end
-
-    # Get the digits
-    phone_number.gsub(/[^\d]/, '')
+  def registration
+    @tryout_registration = TryoutRegistration.new
   end
 
   def registration_create
@@ -121,16 +111,21 @@ class TryoutsController < InheritedResources::Base
     month = params['month'].to_i
     gender = Gender.new(params['gender'].to_i)
 
-    @tryout_info = lookup_tryout(month, year, gender)
+    @events = Event.tryouts_for_age(gender, month, year)
 
     render :layout => 'frame'
   end
 
   protected
 
-  def lookup_tryout(month, year, gender)
-    # find the tryout
-    Tryout.tryouts_for_age_and_gender(Tryout.calculate_age_level(month, year), gender)
+  def format_phone_number(phone_number)
+
+    if phone_number.blank?
+      return phone_number
+    end
+
+    # Get the digits
+    phone_number.gsub(/[^\d]/, '')
   end
 
   def get_worksheet(ss, sheet_name)

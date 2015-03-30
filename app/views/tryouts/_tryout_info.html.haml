@@ -1,6 +1,6 @@
 %h2{:class => 'alt'}
-  = "#{t('team.gender.boys')}: U#{event_group.boys_age_range}<br>".html_safe unless event_group.boys_age_range.nil?
-  = "#{t('team.gender.girls')}: U#{event_group.girls_age_range}" unless event_group.girls_age_range.nil?
+  = "#{t('team.gender.boys')}: U#{event_group.boys_age_range}<br>".html_safe if event_group.boys_age_range.present?
+  = "#{t('team.gender.girls')}: U#{event_group.girls_age_range}" if event_group.girls_age_range.present?
   %ul
     - event_group.event_details.each do |event_detail|
       %li

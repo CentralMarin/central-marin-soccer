@@ -1,1 +1,6 @@
-= render :partial => 'tryout_info', locals: { tryout_name: @tryout_info.keys[0], locations: @tryout_info.values[0] }
+- @events.each do |event|
+  %h2
+    = event.heading
+  - event.event_groups.each do |event_group|
+    = render partial: 'tryouts/tryout_info', :locals => {event_group: event_group}
+
