@@ -1,6 +1,2 @@
-- @events.each do |event|
-  %h2
-    = event.heading
-  - event.event_groups.each do |event_group|
-    = render partial: 'tryouts/tryout_info', :locals => {event_group: event_group}
 
+= render partial: 'tryouts/tryout_info', :locals => {events: @events, hide_event_body: true, grid_cols: 15}

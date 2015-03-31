@@ -7,16 +7,7 @@
     = t('registration.index.online')
   = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
 
-
-- @info.each do |event|
-  %div.grid_16.box
-    %a{name: event.type}
-    %h2
-      = event.heading
-    = event.body.html_safe unless event.body.nil?
-    %p
-      - event.event_groups.each do |event_group|
-        = render partial: 'tryouts/tryout_info', :locals => {event_group: event_group}
+= render partial: 'tryouts/tryout_info', :locals => {events: @info, hide_event_body: false, grid_cols: 16}
 
 %div.grid_16.box
   %h2

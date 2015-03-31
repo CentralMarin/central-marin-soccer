@@ -16,33 +16,40 @@ class Event < ActiveRecord::Base
 
   TRYOUT_YEAR = 2015
 
-  def self.tryouts
-    events(:tryout, :tryout)
+  def self.tryouts(gender = nil, month = nil, year = nil)
+    events(:tryout, :tryout, gender, month, year)
   end
 
-  def self.tryouts_for_age(gender, month, year)
-    events = tryouts
-
-    # find the tryouts for the specified gender and birthday
-    find_age_group(events, gender, month, year) unless events.nil? or events.count == 0
+  def self.tryout_related_events(gender, month, year)
+    events(:upcoming_tryout, :tryout_complete, gender, month, year)
   end
 
-  def self.tryout_related_events
-    events(:upcoming_tryout, :tryout_complete)
-  end
-
-  def self.tryout_related_events_for_age(gender, month, year)
-    events = tryout_related_events
-    find_age_group(events, gender, month, year) unless events.nil? or events.count == 0
-  end
-
-  def self.united_related_events
-    events(:united_upcoming_tryout, :united_upcoming_tryout)
+  def self.united_related_events(gender, month, year)
+    events(:united_upcoming_tryout, :united_upcoming_tryout, gender, month, year)
   end
 
   protected
 
-  def self.events(start_type, end_type)
+  def self.events(start_type, end_type, gender = nil, month = nil, year = nil)
+    event_types = self.types.select { |k,v| v >= self.types[start_type] && v <= self.types[end_type]}.values
+
+    query = Event.joins(:event_groups).where(:type => event_types).where.not(status: self.statuses[:hide])
+
+    if gender.present? and month.present? and year.present?
+      age_level = TRYOUT_YEAR - year + 1;
+      if month > 7
+        age_level = age_level - 1
+      end
+
+      age_group = "U#{age_level}_#{gender}"
+
+      query = query.where('groups & ? > 0', EventGroup.bitmasks[:groups][age_group])
+    end
+
+    query
+  end
+
+  def self.events_for_age(start_type, end_type, gender, month, year)
     event_types = self.types.select { |k,v| v >= self.types[start_type] && v <= self.types[end_type]}.values
 
     Event.where(:type => event_types).where.not(status: self.statuses[:hide])
@@ -62,6 +69,8 @@ class Event < ActiveRecord::Base
     end
 
     events
+
   end
 
 end
+# EventGroup.where("groups & ? > 0", 1).count

@@ -111,7 +111,7 @@ class TryoutsController < InheritedResources::Base
     month = params['month'].to_i
     gender = Gender.new(params['gender'].to_i)
 
-    @events = Event.tryouts_for_age(gender, month, year)
+    @events = Event.tryouts(gender, month, year)
 
     render :layout => 'frame'
   end
