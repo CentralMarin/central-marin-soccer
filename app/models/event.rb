@@ -20,11 +20,11 @@ class Event < ActiveRecord::Base
     events(:tryout, :tryout, gender, month, year)
   end
 
-  def self.tryout_related_events(gender, month, year)
+  def self.tryout_related_events(gender = nil, month = nil, year = nil)
     events(:upcoming_tryout, :tryout_complete, gender, month, year)
   end
 
-  def self.united_related_events(gender, month, year)
+  def self.united_related_events(gender = nil, month = nil, year = nil)
     events(:united_upcoming_tryout, :united_upcoming_tryout, gender, month, year)
   end
 
