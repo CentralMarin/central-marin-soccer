@@ -38,11 +38,19 @@ $(document).ready(function() {
     $(document).on('has_many_add:after', '.has_many_container', datetimepicker_func);
 });
 
-$( document ).ready(function() {
+function add_select_deselect_all_buttons() {
     var $select_btns = $('<li class="choice"><div class="select-btn-container"><button class="select_all">Select all</button><button class="select_none">Deselect all</button></div></li>');
+
+    // Check if the buttons already exist
     $('.inputs .has_many_fields').each(function (i, el) {
-        $(el).find('.choices-group').prepend($select_btns.clone());
+        var $choices_groups = $(el).find('.choices-group');
+        if ($choices_groups.find('.select-btn-container').length == 0)
+            $choices_groups.prepend($select_btns.clone());
     });
+}
+
+$( document ).ready(function() {
+    add_select_deselect_all_buttons();
 
     $('.inputs')
         .on('click', '.select_all', function () {
@@ -59,4 +67,13 @@ $( document ).ready(function() {
             });
             return false;
         });
+
+    // Add buttons to templates
+    var $buttons = $('.has_many_container > .button.has_many_add');
+    $.each($buttons, function(index, button) {
+        var $button = $(button);
+        var html = $button.data('html');
+        $button.data('html', html + '<script>add_select_deselect_all_buttons();</script>');
+    });
+
 });
