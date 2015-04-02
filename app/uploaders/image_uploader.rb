@@ -9,7 +9,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
 
   def filename
-    if (defined? model.image_base_filename).nil?
+    if (defined? model.image_base_filename).nil? or file.nil?
       super
     else
       "#{model.image_base_filename}.#{file.extension}"

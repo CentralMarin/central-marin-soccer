@@ -13,7 +13,7 @@ module ImageProcessing
   protected
 
   def process_image
-    unless image.nil?
+    if image?
       crop_image
       scale(self.class::IMAGE_WIDTH, self.class::IMAGE_HEIGHT)
     end
