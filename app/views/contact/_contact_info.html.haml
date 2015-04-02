@@ -1,0 +1,2 @@
+= "#{contact.position} - #{contact.name.nil? ? "Open" : contact.name}"
+= mail_to " - #{contact.email}" unless contact.email.nil?

@@ -1,53 +1,22 @@
-%h1.grid_16= t('contact.board.name')
-%div.grid_16.box
-  %h2= t('contact.board.voting.name')
-  %ul
-    %li
-      ="#{t('contact.board.voting.president')} - Rick Williams"
-    %li
-      ="#{t('contact.board.voting.treasurer')} - James McLean"
-    %li
-      ="#{t('contact.board.voting.registrar')} - Colleen Bertigilia"
-    %li
-      ="#{t('contact.board.voting.team_comm')} - Open"
-    %li
-      ="#{t('contact.board.voting.secretary')} - Lynn Oldham Robinett"
-    %li
-      ="#{t('contact.board.voting.comm')} - Open"
-    %li
-      ="#{t('contact.board.voting.at_large')} - Mark Bloomberg"
+%h1.grid_16= t('contact.heading')
 
-%div.grid_16.box
-  %h2= t('contact.board.nonvoting.name')
-  %ul
-    %li
-      ="#{t('contact.board.nonvoting.scholarship')} - Mark Bloomberg"
-    %li
-      ="#{t('contact.board.nonvoting.marinfc_rep')} - Rick Williams"
-    %li
-      ="#{t('contact.board.nonvoting.marinfc_rep')} - Greg Capitolo"
-    %li
-      ="#{t('contact.board.nonvoting.volunteer_coord')} - Open"
-    %li
-      ="#{t('contact.board.nonvoting.fund_raising')} - Open"
+- Contact.categories.each do |symbol, value|
+  %div.grid_16.box
+    %h2= t('contact.' + symbol)
+    %ul
+      - @contacts_by_category[symbol.to_sym].each do |contact|
+        %li
+          = render partial: 'contact_info', :locals => {contact: contact }
 
-%div.grid_16.box
-  %h2= t('contact.board.others.name')
-  %ul
-    %li
-      ="#{t('contact.board.others.srysc')} - David Gess"
-    %li
-      ="#{t('contact.board.others.rvys')} - Open"
-    %li
-      ="#{t('contact.board.others.referee_mentor')} - Rick Williams / Open"
-    %li
-      ="#{t('contact.board.others.scheduling')} - Lynetta Matteo"
-    %li
-      ="#{t('contact.board.others.accounting')} - Leslie Schneider"
-    %li
-      ="#{t('contact.board.others.website')} - Ryan Robinett"
-
-%div.grid_16.box
-  %h2= t('contact.doc')
-  %p
-    Steven Sosa
+-#%div.grid_16.box
+-#  %h2= t('contact.board.others.name')
+-#  %ul
+-#    - @other_assistance.each do |symbol, name|
+-#      %li
+-#        = render partial: 'contact_info', :locals => {base_localization: 'contact.board.others.', symbol: symbol, name: name}
+-#
+-#%div.grid_16.box
+-#  %h2= t('contact.doc')
+-#  - @coaching.each do |symbol, name|
+-#    %p
+-#      = render partial: 'contact_info', :locals => {base_localization: 'contact.board.others.', symbol: symbol, name: name}

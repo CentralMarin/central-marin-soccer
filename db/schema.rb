@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212171205) do
+ActiveRecord::Schema.define(version: 20150402025143) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20150212171205) do
     t.string   "locale",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "bio"
+    t.text     "bio"
   end
 
   add_index "coach_translations", ["coach_id"], name: "index_coach_translations_on_coach_id"
@@ -114,7 +114,72 @@ ActiveRecord::Schema.define(version: 20150212171205) do
 
   add_index "coaches", ["email"], name: "index_coaches_on_email", unique: true
 
-  create_table "fields", force: true do |t|
+  create_table "contact_translations", force: true do |t|
+    t.integer  "contact_id",  null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "position"
+    t.text     "description"
+    t.text     "bio"
+  end
+
+  add_index "contact_translations", ["contact_id"], name: "index_contact_translations_on_contact_id"
+  add_index "contact_translations", ["locale"], name: "index_contact_translations_on_locale"
+
+  create_table "contacts", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "bio"
+    t.string   "position"
+    t.text     "description"
+    t.integer  "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "event_details", force: true do |t|
+    t.datetime "start"
+    t.integer  "duration"
+    t.integer  "location_id"
+    t.integer  "event_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "event_groups", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "groups",          default: 0
+    t.string   "boys_age_range"
+    t.string   "girls_age_range"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "event_translations", force: true do |t|
+    t.integer  "event_id",   null: false
+    t.string   "locale",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "heading"
+    t.text     "body"
+    t.text     "tout"
+  end
+
+  add_index "event_translations", ["event_id"], name: "index_event_translations_on_event_id"
+  add_index "event_translations", ["locale"], name: "index_event_translations_on_locale"
+
+  create_table "events", force: true do |t|
+    t.integer  "type",       default: 0, null: false
+    t.string   "heading"
+    t.text     "body"
+    t.text     "tout"
+    t.integer  "status",     default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", force: true do |t|
     t.string   "name"
     t.string   "club"
     t.string   "rain_line"
@@ -124,6 +189,7 @@ ActiveRecord::Schema.define(version: 20150212171205) do
     t.decimal  "lat",        precision: 15, scale: 10
     t.decimal  "lng",        precision: 15, scale: 10
     t.string   "address"
+    t.string   "type",                                 default: "Field"
   end
 
   create_table "team_level_translations", force: true do |t|
@@ -210,15 +276,14 @@ ActiveRecord::Schema.define(version: 20150212171205) do
     t.datetime "updated_at"
     t.integer  "duration"
     t.integer  "tryout_type_id"
-    t.string   "location"
   end
 
   create_table "web_part_translations", force: true do |t|
-    t.integer  "web_part_id",             null: false
-    t.string   "locale",                  null: false
+    t.integer  "web_part_id", null: false
+    t.string   "locale",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "html",        limit: 255
+    t.text     "html"
   end
 
   add_index "web_part_translations", ["locale"], name: "index_web_part_translations_on_locale"
