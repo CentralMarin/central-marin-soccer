@@ -8,11 +8,7 @@ ActiveAdmin.register TeamLevel do
   show do |level|
     attributes_table do
       row :name do
-        level.name
-      end
-      row 'Nombre' do
-        translation = level.translations.find_by_locale('es')
-        translation.name if translation
+        show_translated_model_field(level, :name)
       end
       row :created_at
       row :updated_at

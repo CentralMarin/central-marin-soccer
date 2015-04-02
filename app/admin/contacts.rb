@@ -1,16 +1,3 @@
-def translated_contact(field)
-  I18n.available_locales.each do |locale|
-    translated_contact = contact.translations.where(locale: locale).first
-    div do
-      if (translated_contact.nil? || translated_contact.send(field).blank?)
-        b 'Translation Missing - considering using google translate to get the point across'
-      else
-        translated_contact.send(field).html_safe
-      end
-    end
-  end
-end
-
 ActiveAdmin.register Contact do
 
   permit_params :name, :email, :bio, :position, :description, :category, :image, :crop_x, :crop_y, :crop_w, :crop_h, :translations_attributes => [:bio, :position, :description, :locale, :id]
@@ -21,10 +8,10 @@ ActiveAdmin.register Contact do
     attributes_table do
       row :category
       row :position do
-        translated_contact(:position)
+        show_translated_model_field(contact, :position)
       end
       row :description do
-        translated_contact(:description)
+        show_translated_model_field(contact, :description)
       end
       row :name
       row :image do
@@ -32,7 +19,7 @@ ActiveAdmin.register Contact do
       end
       row :email
       row :bio do
-        translated_contact(:bio)
+        show_translated_model_field(contact, :bio)
       end
       row :created_at
       row :updated_at

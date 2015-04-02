@@ -27,7 +27,6 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
       row :created_at
       row :updated_at
    end
-   active_admin_comments
  end
 
 

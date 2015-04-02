@@ -26,17 +26,7 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
         image_tag image_path(coach.image_url)
       end
       row :bio do
-        I18n.available_locales.each do |locale|
-          h3 I18n.t( "coach.bio", locale: locale)
-          div do
-            translated_coach = coach.translations.where(locale: locale).first
-            if (translated_coach.nil? || translated_coach.bio.nil?)
-              h4 b "Missing"
-            else
-              h4 translated_coach.bio.html_safe
-            end
-          end
-        end
+        show_translated_model_field(coach, :bio)
       end
       row :team do
         coach.teams.join("<br/>").html_safe
@@ -44,7 +34,6 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
       row :created_at
       row :updated_at
     end
-    active_admin_comments
   end
 
   form :html => { :enctype => "multipart/form-data" } do |f|
