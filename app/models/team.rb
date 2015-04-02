@@ -15,7 +15,6 @@
 
 
 class Team < ActiveRecord::Base
-  include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
   belongs_to :coach
   belongs_to :team_level
@@ -33,8 +32,16 @@ class Team < ActiveRecord::Base
   TEAMSNAP_ROSTER_ID = '1893703'
   TEAMSNAP_NO_TEAM_ID = '0000'
 
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-  mount_uploader :image, TeamImageUploader
+  # Include the image processing module
+  include ImageProcessing
+
+  # Define Image dimensions
+  IMAGE_WIDTH = 600
+  IMAGE_HEIGHT = 400
+
+  def default_image_url
+    "default_team_photo.jpeg"
+  end
 
   def gender
     Team.genders[self.gender_id] unless gender_id.nil?

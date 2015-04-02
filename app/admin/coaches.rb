@@ -67,8 +67,8 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
     "<script>
       $(document).ready(soccer.image_crop.init({
         modelName: 'coach',
-        width: #{CoachImageUploader::ImageSize::WIDTH},
-        height: #{CoachImageUploader::ImageSize::HEIGHT}
+        width: #{Coach::IMAGE_WIDTH},
+        height: #{Coach::IMAGE_HEIGHT}
       }));
     </script>".html_safe
   end

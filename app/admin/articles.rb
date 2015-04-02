@@ -168,8 +168,8 @@ ActiveAdmin.register Article do
 
       $(document).ready(soccer.image_crop.init({
         modelName: 'article',
-        width: #{ArticleImageUploader::ImageSize::WIDTH},
-        height: #{ArticleImageUploader::ImageSize::HEIGHT}
+        width: #{Article::IMAGE_WIDTH},
+        height: #{Article::IMAGE_HEIGHT}
       }));
      </script>".html_safe
   end

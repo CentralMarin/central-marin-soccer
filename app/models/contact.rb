@@ -1,13 +1,7 @@
 class Contact < ActiveRecord::Base
 
-  active_admin_translates :position, :description, :bio
 
-  IMAGE_WIDTH = 100
-  IMAGE_HEIGHT = 121
-  mount_uploader :image, ContactImageUploader
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-  after_update :process_image
-  after_create :process_image
+  active_admin_translates :position, :description, :bio
 
   validates :position, :presence => true
   validates :category, :presence => true
@@ -24,29 +18,21 @@ class Contact < ActiveRecord::Base
     }
   end
 
-protected
-  def process_image
-    unless image.nil?
-      crop_image
-      scale(IMAGE_WIDTH, IMAGE_HEIGHT)
-    end
+  # Include the image processing module
+  include ImageProcessing
+
+  # Define Image dimensions
+  IMAGE_WIDTH = 100
+  IMAGE_HEIGHT = 121
+
+  # Base file name for uploaded image
+  def image_base_filename
+    position
   end
 
-  def crop_image
-    if crop_x.present?
-      image.manipulate! do |img|
-        x = crop_x.to_i
-        y = crop_y.to_i
-        w = crop_w.to_i
-        h = crop_h.to_i
-        img.crop("#{w}x#{h}+#{x}+#{y}")
-        img
-      end
-    end
-  end
-
-  def scale(width, height)
-    image.resize_and_pad(width, height)
+  # Location to store images
+  def image_store_dir
+    "#{self.class.to_s.underscore}"
   end
 
 end

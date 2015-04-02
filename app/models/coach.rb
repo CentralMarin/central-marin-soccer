@@ -11,17 +11,12 @@
 #
 
 class Coach < ActiveRecord::Base
-  include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
   before_validation :downcase_email
 
   active_admin_translates :bio
 
   has_many :teams
-
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
-  mount_uploader :image, CoachImageUploader
 
   email_regex = /\A['\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -37,6 +32,17 @@ class Coach < ActiveRecord::Base
 
   def as_json(options = {})
     { :name => self.name, :bio => self.bio, :teams => teams.as_json, :image_url => options[:image_url] }
+  end
+
+  # Include the image processing module
+  include ImageProcessing
+
+  # Define Image dimensions
+  IMAGE_WIDTH = 100
+  IMAGE_HEIGHT = 118
+
+  def default_image_url
+    "default_coach_photo.jpeg"
   end
 
   private
