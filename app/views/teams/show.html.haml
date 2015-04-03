@@ -23,7 +23,7 @@
 
 %div.grid_11
   %center
-    = image_tag image_path(@team.image), alt: "Team Photo", height: "#{TeamImageUploader::ImageSize::HEIGHT}", width: "#{TeamImageUploader::ImageSize::WIDTH}"
+    = image_tag image_path(@team.image), alt: "Team Photo", height: "#{Team::IMAGE_HEIGHT}", width: "#{Team::IMAGE_WIDTH}"
 
 %div.clear
 

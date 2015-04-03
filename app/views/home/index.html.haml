@@ -17,7 +17,7 @@
     -@articles.each do |article|
       %div
         %a{href: "#{show_article(article)}"}
-          =image_tag article.image, :alt => article.title, height: "#{ArticleImageUploader::ImageSize::HEIGHT}", width: "#{ArticleImageUploader::ImageSize::WIDTH}", :title => article.title
+          =image_tag article.image, :alt => article.title, height: "#{Article::IMAGE_HEIGHT}", width: "#{Article::IMAGE_WIDTH}", :title => article.title
           =truncate(article.title, length: 75, truncate_string: "...")
 
 %div{class: 'grid_16'}
