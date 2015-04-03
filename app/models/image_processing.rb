@@ -1,6 +1,6 @@
 module ImageProcessing
 
-  mattr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   def self.included(base)
     base.class_eval do
@@ -27,6 +27,9 @@ module ImageProcessing
         w = crop_w.to_i
         h = crop_h.to_i
         img.crop("#{w}x#{h}+#{x}+#{y}")
+
+        # Clear the crop data
+        crop_x = crop_y = crop_w = crop_h = nil
         img
       end
     end
