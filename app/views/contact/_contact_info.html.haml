@@ -1,2 +1,9 @@
-= "#{contact.position} - #{contact.name.nil? ? "Open" : contact.name}"
-= mail_to " - #{contact.email}" unless contact.email.nil?
+%h3
+  = image_tag image_path(contact.image), alt: contact.name, height: Contact::IMAGE_HEIGHT, width: Contact::IMAGE_WIDTH if contact.image?
+  = succeed ',' do
+    %b= "#{contact.name.blank? ? "Open" : contact.name}"
+  = contact.position
+%div
+  %p
+    = contact.bio.html_safe unless contact.bio.blank?
+    = mail_to "#{contact.email}" unless contact.email.blank?

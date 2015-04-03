@@ -3,20 +3,15 @@
 - Contact.categories.each do |symbol, value|
   %div.grid_16.box
     %h2= t('contact.' + symbol)
-    %ul
+    %div{id: "accordion#{value}"}
       - @contacts_by_category[symbol.to_sym].each do |contact|
-        %li
-          = render partial: 'contact_info', :locals => {contact: contact }
+        = render partial: 'contact_info', :locals => {contact: contact }
 
--#%div.grid_16.box
--#  %h2= t('contact.board.others.name')
--#  %ul
--#    - @other_assistance.each do |symbol, name|
--#      %li
--#        = render partial: 'contact_info', :locals => {base_localization: 'contact.board.others.', symbol: symbol, name: name}
--#
--#%div.grid_16.box
--#  %h2= t('contact.doc')
--#  - @coaching.each do |symbol, name|
--#    %p
--#      = render partial: 'contact_info', :locals => {base_localization: 'contact.board.others.', symbol: symbol, name: name}
+TODO: Add text about who to contact if you are interested in any open board positions
+
+- content_for :javascript do
+  =javascript_include_tag "contacts"
+  %script
+    $(document).ready(soccer.contacts.init(#{Contact.categories.length}));
+
+
