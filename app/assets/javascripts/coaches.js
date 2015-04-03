@@ -42,7 +42,7 @@
         return {
             init:init
         };
-    };
+    }();
 }());
 
 soccer.coaches().init();
