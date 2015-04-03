@@ -22,7 +22,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     if (defined? model.image_store_dir).nil?
       "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
     else
-      "uploads/#{defined? model.image_store_dir}"
+      "uploads/#{model.image_store_dir}"
     end
   end
 
