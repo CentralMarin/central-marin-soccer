@@ -2,16 +2,8 @@
 
 - Contact.categories.each do |symbol, value|
   %div.grid_16.box
-    %h2= t('contact.' + symbol)
-    %div{id: "accordion#{value}"}
-      - @contacts_by_category[symbol.to_sym].each do |contact|
-        = render partial: 'contact_info', :locals => {contact: contact }
+    %h2.alt= t('contact.' + symbol)
+    - @contacts_by_category[symbol.to_sym].each do |contact|
+      = render partial: 'contact_info', :locals => {contact: contact }
 
 TODO: Add text about who to contact if you are interested in any open board positions
-
-- content_for :javascript do
-  =javascript_include_tag "contacts"
-  %script
-    $(document).ready(soccer.contacts.init(#{Contact.categories.length}));
-
-

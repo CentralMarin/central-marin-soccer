@@ -13,10 +13,10 @@ class Contact < ActiveRecord::Base
 
   def self.by_category
     results = {
-        voting_board_member: Contact.where("category = ?", Contact.categories[:voting_board_member]),
-        nonvoting_board_member: Contact.where("category = ?", Contact.categories[:nonvoting_board_member]),
-        other_assistance: Contact.where("category = ?", Contact.categories[:other_assistance]),
-        coaching: Contact.where("category = ?", Contact.categories[:coaching]),
+        voting_board_member: Contact.where("category = ?", Contact.categories[:voting_board_member]).order(:row_order),
+        nonvoting_board_member: Contact.where("category = ?", Contact.categories[:nonvoting_board_member]).order(:row_order),
+        other_assistance: Contact.where("category = ?", Contact.categories[:other_assistance]).order(:row_order),
+        coaching: Contact.where("category = ?", Contact.categories[:coaching]).order(:row_order),
     }
   end
 
