@@ -45,4 +45,4 @@
     }();
 }());
 
-soccer.coaches().init();
+soccer.coaches.init();
