@@ -3,6 +3,18 @@ ActiveAdmin.register Contact do
   permit_params :name, :email, :bio, :position, :description, :category, :image, :crop_x, :crop_y, :crop_w, :crop_h, :translations_attributes => [:bio, :position, :description, :locale, :id]
 
   config.filters = false
+  config.sort_order = ['category_asc', 'position_asc']
+
+  index do
+    column :category do |contact|
+      contact.category.humanize.titleize
+    end
+    column :position
+    column :name
+    column :email
+    column :image
+    actions
+  end
 
   show do |contact|
     attributes_table do
