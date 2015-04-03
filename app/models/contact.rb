@@ -1,9 +1,11 @@
 class Contact < ActiveRecord::Base
 
+  include RankedModel
+  ranks :row_order
 
-  active_admin_translates :position, :description, :bio
+  active_admin_translates :club_position, :description, :bio
 
-  validates :position, :presence => true
+  validates :club_position, :presence => true
   validates :category, :presence => true
   validates :description, :presence => true
 
@@ -27,7 +29,7 @@ class Contact < ActiveRecord::Base
 
   # Base file name for uploaded image
   def image_base_filename
-    position
+    club_position
   end
 
   # Location to store images

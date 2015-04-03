@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402163152) do
+ActiveRecord::Schema.define(version: 20150403204557) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -115,11 +115,11 @@ ActiveRecord::Schema.define(version: 20150402163152) do
   add_index "coaches", ["email"], name: "index_coaches_on_email", unique: true
 
   create_table "contact_translations", force: true do |t|
-    t.integer  "contact_id",  null: false
-    t.string   "locale",      null: false
+    t.integer  "contact_id",    null: false
+    t.string   "locale",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "position"
+    t.string   "club_position"
     t.text     "description"
     t.text     "bio"
   end
@@ -131,12 +131,13 @@ ActiveRecord::Schema.define(version: 20150402163152) do
     t.string   "name"
     t.string   "email"
     t.text     "bio"
-    t.string   "position"
+    t.string   "club_position"
     t.text     "description"
     t.integer  "category"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image"
+    t.integer  "row_order"
   end
 
   create_table "event_details", force: true do |t|

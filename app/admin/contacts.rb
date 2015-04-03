@@ -1,15 +1,26 @@
 ActiveAdmin.register Contact do
 
-  permit_params :name, :email, :bio, :position, :description, :category, :image, :crop_x, :crop_y, :crop_w, :crop_h, :translations_attributes => [:bio, :position, :description, :locale, :id]
+  permit_params :name, :email, :bio, :club_position, :description, :category, :image, :crop_x, :crop_y, :crop_w, :crop_h, :translations_attributes => [:bio, :club_position, :description, :locale, :id]
 
   config.filters = false
-  config.sort_order = ['category_asc', 'position_asc']
+  config.sort_order = 'row_order_asc'
+  config.paginate = false
+
+  ranked(:row_order)
+
+  scope :all, default: true
+  scope :voting_board_member
+  scope :nonvoting_board_member
+  scope :other_assistance
+  scope :coaching
 
   index do
+    ranked_handle_column(:row_order)
+    column :id
     column :category do |contact|
       contact.category.humanize.titleize
     end
-    column :position
+    column :club_position
     column :name
     column :email
     column :image
@@ -19,8 +30,8 @@ ActiveAdmin.register Contact do
   show do |contact|
     attributes_table do
       row :category
-      row :position do
-        show_translated_model_field(contact, :position)
+      row :club_position do
+        show_translated_model_field(contact, :club_position)
       end
       row :description do
         show_translated_model_field(contact, :description)
@@ -51,7 +62,7 @@ ActiveAdmin.register Contact do
       f.input :category, label: 'Category', collection: Contact.categories.keys, as: :select, include_blank: false
 
       f.translated_inputs "Translated fields", switch_locale: false do |t|
-        t.input :position
+        t.input :club_position
         t.input :description, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
       end
 
