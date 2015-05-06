@@ -3,12 +3,13 @@ lock '3.3.5'
 
 config = YAML.load_file('config/secrets.yml')
 
-server '207.104.28.18', user: "#{config['development']['server_user']}",roles: %w{app, web, db}
+#server '207.104.28.18', user: "#{config['development']['server_user']}",roles: %w{app, web, db}
+server '192.168.1.17', user: "#{config['development']['server_user']}",roles: %w{app, web, db}
 
 # Source Control
 set :application, 'centralmarinsoccer'
 set :repo_url, 'git@github.com:CentralMarin/central-marin-soccer.git'
-set :branch, 'release'
+set :branch, 'tryouts'
 
 #deployment details
 set :deploy_via, :remote_cache

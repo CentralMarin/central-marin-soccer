@@ -10,6 +10,7 @@
 //= require namespace
 //= require crop
 //= require jquery-ui-timepicker-addon
+//= require activeadmin-ranked-model
 
 $(document).ready(function() {
 

@@ -160,7 +160,12 @@ class TryoutsController < InheritedResources::Base
        'Parent2 Cell',
        'Signor',
        'Relationship',
-       'Agreement'].each_with_index do |cell, index|
+       'Agreement',
+       'User Agent',
+       'Selected',
+       'Birth Certificate',
+       'USClub Form',
+       'Amount Paid & Check #'].each_with_index do |cell, index|
 
         age_level_sheet[1, index + 1] = cell     # 1 Based indexing
       end

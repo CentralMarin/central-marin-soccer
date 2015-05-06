@@ -27,7 +27,6 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
       row :created_at
       row :updated_at
    end
-   active_admin_comments
  end
 
 
@@ -51,8 +50,8 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
        "<script>
       $(document).ready(soccer.image_crop.init({
         modelName: 'team',
-        width: #{TeamImageUploader::ImageSize::WIDTH},
-        height: #{TeamImageUploader::ImageSize::HEIGHT}
+        width: #{Team::IMAGE_WIDTH},
+        height: #{Team::IMAGE_HEIGHT}
       }));
     </script>".html_safe
  end

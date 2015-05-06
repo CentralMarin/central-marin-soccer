@@ -54,23 +54,11 @@ ActiveAdmin.register Article do
       row :image do
         image_tag image_path(article.image_url)
       end
-      row :article do
-        I18n.available_locales.each do |locale|
-          h3 ADDITIONAL_LOCALES[locale]
-          translated_article = article.translations.where(locale: locale).first
-          if (translated_article.nil? || translated_article.title.blank?)
-            h4 b "Translation Missing - considering using google translate to get the point across"
-          else
-            h4 translated_article.title.html_safe
-          end
-          div do
-            if (translated_article.nil? || translated_article.body.blank?)
-              b "Translation Missing - considering using google translate to get the point across"
-            else
-              translated_article.body.html_safe
-            end
-          end
-        end
+      row :title do
+        show_translated_model_field(article, :title)
+      end
+      row :body do
+        show_translated_model_field(article, :body)
       end
       row :category do
         subcategory = ''
@@ -103,7 +91,6 @@ ActiveAdmin.register Article do
       row :created_at
       row :updated_at
     end
-    active_admin_comments
   end
 
   collection_action :article_carousel, :title => "Carousel", :method => :get do
@@ -168,8 +155,8 @@ ActiveAdmin.register Article do
 
       $(document).ready(soccer.image_crop.init({
         modelName: 'article',
-        width: #{ArticleImageUploader::ImageSize::WIDTH},
-        height: #{ArticleImageUploader::ImageSize::HEIGHT}
+        width: #{Article::IMAGE_WIDTH},
+        height: #{Article::IMAGE_HEIGHT}
       }));
      </script>".html_safe
   end

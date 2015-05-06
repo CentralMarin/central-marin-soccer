@@ -17,7 +17,7 @@
     %div{class: 'clear'}
   %div{class: ['grid_2 coach', ('omega' if mod == image_count - 1)]}
     = link_to "##{coach.id}", :class => 'coachlink', :rel => "#coach#{coach.id}", :data => {:coach_id => "#{coach.id}"} do
-      = image_tag image_path(coach.image_url), alt: coach.name, id: "coach-img-#{coach.id}", height: "#{CoachImageUploader::ImageSize::HEIGHT}", width: "#{CoachImageUploader::ImageSize::WIDTH}"
+      = image_tag image_path(coach.image_url), alt: coach.name, id: "coach-img-#{coach.id}", height: "#{Coach::IMAGE_HEIGHT}", width: "#{Coach::IMAGE_WIDTH}"
       %br
       = coach.name
 

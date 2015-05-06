@@ -5,8 +5,6 @@ gem 'rails', '4.1.8'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
 gem 'activeadmin-globalize', github: 'CentralMarin/activeadmin-globalize'
-#gem 'activeadmin-globalize', path: '../activeadmin-globalize'
-gem 'polyamorous', :github => 'activerecord-hackery/polyamorous'
 gem 'ckeditor', '4.1.1'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.0.2'
@@ -19,6 +17,8 @@ gem 'nokogiri', '1.6.5'
 gem 'devise', '3.4.1'
 gem 'bing_translator', '4.4.1'
 gem 'bitmask_attributes', '1.0.0'
+gem 'ranked-model', '0.4.0'
+gem 'activeadmin-ranked-model', :github => 'CentralMarin/activeadmin-ranked-model'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.10'
@@ -36,8 +36,6 @@ gem 'uglifier', '2.7.0'
 gem 'therubyracer', :platforms => :ruby
 
 # Use jquery as the JavaScript library
-# gem 'jquery-rails', '3.1.1'         # included by ActiveAdmin
-# gem 'jquery-ui-rails', '4.2.1'      # included by ActiveAdmin
 gem 'jquery-ui-themes', '0.0.11'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

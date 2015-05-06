@@ -15,17 +15,12 @@
 #
 
 class Article < ActiveRecord::Base
-  include Rails.application.routes.url_helpers # needed for _path helpers to work in models
 
   active_admin_translates :title, :body
 
   has_many :article_carousels, :dependent => :destroy
 
   ARTICLE_CATEGORY = [:club, :team, :coach, :referee, :tournament]
-
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
-  mount_uploader :image, ArticleImageUploader
 
   validates :title,         :presence => true,
                            :length => { :maximum => 255 }
@@ -65,5 +60,11 @@ class Article < ActiveRecord::Base
     "#{id} #{to_s}".parameterize
   end
 
+  # Include the image processing module
+  include ImageProcessing
+
+  # Define Image dimensions
+  IMAGE_WIDTH = 560
+  IMAGE_HEIGHT = 420
 
 end
