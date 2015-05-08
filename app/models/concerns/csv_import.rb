@@ -1,4 +1,4 @@
-module ActiveAdminCsvImport
+module CsvImport
 
   def import_csv_file(csv_data)
     transaction do
