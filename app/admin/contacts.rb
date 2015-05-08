@@ -108,17 +108,20 @@ ActiveAdmin.register Contact do
     column :row_order
   end
 
+  controller do
+    def process_csv_row(contact, row)
+      contact.name = row[0]
+      contact.email = row[1]
+      contact.bio = row[2]
+      contact.club_position = row[3]
+      contact.description = row[4]
+      contact.category = row[5]
+      contact.row_order = row[6]
+
+      contact.save!
+    end
+  end
+
 end
 
 
-def process_csv_row(contact, row)
-    contact.name = row[0]
-    contact.email = row[1]
-    contact.bio = row[2]
-    contact.club_position = row[3]
-    contact.description = row[4]
-    contact.category = row[5]
-    contact.row_order = row[6]
-
-    contact.save!
-end

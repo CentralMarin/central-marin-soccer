@@ -32,9 +32,6 @@ class Team < ActiveRecord::Base
   TEAMSNAP_ROSTER_ID = '1893703'
   TEAMSNAP_NO_TEAM_ID = '0000'
 
-  # Allow for bulk uploading of CSV files
-  include CsvImport
-
   # Include the image processing module
   include ImageProcessing
 

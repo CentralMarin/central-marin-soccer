@@ -3,8 +3,10 @@ module ActiveAdminCsvUpload
   # Shared member actions. Using "send" due to "_action" and "_item" are a private methods
   def self.included(base)
 
-    base.send(:collection_action, :upload_csv, :title => 'Contacts Upload', :method => :get) do
-      render 'admin/csv/contacts_upload_csv'
+    base.send(:collection_action, :upload_csv, :method => :get) do
+      @page_title = "Upload #{resource_class.to_s} CSV"
+      @model = resource_class.to_s
+      render 'admin/csv/upload_csv'
     end
 
     base.send(:action_item, :only => :index) do
