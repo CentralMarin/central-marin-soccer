@@ -107,11 +107,11 @@ ActiveAdmin.register Contact do
     column :category
     column :row_order
   end
+
 end
 
 
-def process_csv(csv_data)
-  Contact.import_csv_file(csv_data) do |contact, row|
+def process_csv_row(contact, row)
     contact.name = row[0]
     contact.email = row[1]
     contact.bio = row[2]
@@ -121,5 +121,4 @@ def process_csv(csv_data)
     contact.row_order = row[6]
 
     contact.save!
-  end
 end
