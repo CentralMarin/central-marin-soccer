@@ -1,13 +1,15 @@
 %h1.grid_16= t('contact.heading')
 
 - Contact.categories.each do |symbol, value|
-  %div.grid_16.box
-    %h2.alt= t('contact.' + symbol)
-    %ul
-      - @contacts_by_category[symbol.to_sym].each do |contact|
-        %li
-          %a{href: "##{contact.club_position}"}
-            = "#{contact.club_position} - #{contact_name(contact.name)}"
+  -# Only show the category if we have contacts in it
+  - if @contacts_by_category[symbol.to_sym].count > 0
+    %div.grid_16.box
+      %h2.alt= t('contact.' + symbol)
+      %ul
+        - @contacts_by_category[symbol.to_sym].each do |contact|
+          %li
+            %a{href: "##{contact.club_position}"}
+              = "#{contact.club_position} - #{contact_name(contact.name)}"
 
 = render partial: 'apply_position'
 

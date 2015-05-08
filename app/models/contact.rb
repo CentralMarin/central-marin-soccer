@@ -1,5 +1,6 @@
 class Contact < ActiveRecord::Base
 
+  extend ActiveAdminCsvImport
   include RankedModel
   ranks :row_order
 

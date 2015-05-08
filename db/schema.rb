@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20150402163152) do
     t.string   "club_position"
     t.text     "description"
     t.integer  "category"
+    t.integer  "row_order"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image"

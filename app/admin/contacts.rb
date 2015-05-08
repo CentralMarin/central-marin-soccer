@@ -96,4 +96,38 @@ ActiveAdmin.register Contact do
        </script>".html_safe
   end
 
+  csv do
+    column :name
+    column :email
+    column :bio
+    column :club_position
+    column :description
+    column :category
+    column :row_order
+  end
+
+  collection_action :upload_csv, :title => 'Contacts Upload', :method => :get do
+    render 'admin/csv/contacts_upload_csv'
+  end
+
+  collection_action :import_csv, :method => :post do
+    Contact.import_csv_file(params[:dump][:file]) do |contact, row|
+      contact.name = row[0]
+      contact.email = row[1]
+      contact.bio = row[2]
+      contact.club_position = row[3]
+      contact.description = row[4]
+      contact.category = row[5]
+      contact.row_order = row[6]
+
+      contact.save!
+    end
+
+    flash[:notice] = 'CSV imported successfully!'
+    redirect_to :action => :index
+  end
+
+  action_item :only => :index do
+    link_to 'Upload CSV', :action => 'upload_csv'
+  end
 end
