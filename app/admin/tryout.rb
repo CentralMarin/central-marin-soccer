@@ -42,6 +42,8 @@ ActiveAdmin.register Tryout do
     f.actions
   end
 
+  include ActiveAdminCsvUpload
+
   csv do
     column :gender
     column :age
@@ -51,40 +53,21 @@ ActiveAdmin.register Tryout do
     column :tryout_type
   end
 
-  collection_action :upload_csv, :title => 'Tryouts Uploads', :method => :get do
-    render 'admin/csv/tryouts_upload_csv'
-  end
-
-  collection_action :import_csv, :method => :post do
-    Tryout.transaction do
-      # remove all the existing records
-      Tryout.destroy_all
-
-      # read the csv
-      csv_data = params[:dump][:file]
-      csv_file = csv_data.read
-      CSV.parse(csv_file, {:headers => true}) do |row|
-        tryout = Tryout.new()
-        tryout.gender_id = Gender.id(row[0])
-        tryout.age = row[1]
-        tryout.tryout_start = row[2]
-        tryout.duration = row[3]
-        if not row[4].blank?
-          tryout.field = Field.where("lower(name) = ?", row[4].downcase).first
-        end
-        if not row[5].blank?
-          tryout.tryout_type = TryoutType.where("lower(name) = ?", row[5].downcase).first
-        end
-        tryout.save!
-
+  controller do
+    def process_csv_row(tryout, row)
+      tryout.gender_id = Gender.id(row[0])
+      tryout.age = row[1]
+      tryout.tryout_start = row[2]
+      tryout.duration = row[3]
+      if not row[4].blank?
+        tryout.field = Field.where("lower(name) = ?", row[4].downcase).first
       end
+      if not row[5].blank?
+        tryout.tryout_type = TryoutType.where("lower(name) = ?", row[5].downcase).first
+      end
+      tryout.save!
 
     end
-
-    redirect_to :action => :index, :notice => 'CSV imported successfully!'
   end
 
-  action_item :only => :index do
-    link_to 'Upload CSV', :action => 'upload_csv'
-  end
 end

@@ -19,7 +19,7 @@ module ActiveAdminCsvUpload
         # remove all the existing records
         resource_class.destroy_all
 
-        csv_data = params[:dump][:file]
+        csv_data = params[:csv][:file]
         csv_file = csv_data.read
         CSV.parse(csv_file, {:headers => true}) do |row|
           process_csv_row(resource_class.new(), row)
