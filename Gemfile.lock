@@ -1,10 +1,10 @@
 GIT
   remote: git://github.com/CentralMarin/activeadmin-globalize.git
-  revision: 668b76b09fea5995f65812be6ef65208b63afb0e
+  revision: 08c870443f26cd5c3b080b983cef077397c55248
   specs:
     activeadmin-globalize (1.0.0)
       activeadmin
-      globalize (~> 4.0.0)
+      globalize (~> 5.0.0)
 
 GIT
   remote: git://github.com/CentralMarin/activeadmin-ranked-model.git
@@ -159,9 +159,9 @@ GEM
     formtastic_i18n (0.3.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
-    globalize (4.0.3)
-      activemodel (>= 4.0.0, < 5)
-      activerecord (>= 4.0.0, < 5)
+    globalize (5.0.1)
+      activemodel (>= 4.2.0, < 4.3)
+      activerecord (>= 4.2.0, < 4.3)
     google-api-client (0.8.6)
       activesupport (>= 3.2)
       addressable (~> 2.3)
@@ -423,7 +423,7 @@ DEPENDENCIES
   devise (= 3.4.1)
   factory_girl_rails (= 4.5.0)
   faker (= 1.4.3)
-  globalize (= 4.0.3)
+  globalize (= 5.0.1)
   google_drive (= 1.0.1)
   haml-rails (= 0.9.0)
   jbuilder (= 2.2.13)

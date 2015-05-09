@@ -8,7 +8,7 @@ gem 'activeadmin-globalize', github: 'CentralMarin/activeadmin-globalize'
 gem 'ckeditor', '4.1.1'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.2.3'
-gem 'globalize', '4.0.3'
+gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '1.0.1'
