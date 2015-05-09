@@ -22,7 +22,7 @@ module ActiveAdminCsvUpload
         csv_data = params[:csv][:file]
         csv_file = csv_data.read
         CSV.parse(csv_file, {:headers => true}) do |row|
-          process_csv_row(resource_class.new(), row)
+          process_csv_row(resource_class.new, row)
         end
 
       end
