@@ -1,18 +1,17 @@
 - events.each do |event|
-  - if not event.event_groups.nil? and event.event_groups.count > 0
-    %div.box{class: "grid_#{grid_cols}"}
-      %a{name: event.type}
-      %h2
-        = event.heading
-      = event.body.html_safe unless event.body.nil? or hide_event_body
-      %p
-        - event.event_groups.each do |event_group|
-          %h2{:class => 'alt'}
-            = "#{t('team.gender.boys')}: U#{event_group.boys_age_range}<br>".html_safe if event_group.boys_age_range.present?
-            = "#{t('team.gender.girls')}: U#{event_group.girls_age_range}" if event_group.girls_age_range.present?
-            %ul
-              - event_group.event_details.each do |event_detail|
-                %li
-                  = "#{event_detail.date_to_s} @"
-                  %a{:href => event_detail.location.map_url}
-                    = "#{event_detail.location.name} - #{event_detail.location.address}"
+  %div.box{class: "grid_#{grid_cols}"}
+    %a{name: event.type}
+    %h2
+      = event.heading
+    = event.body.html_safe unless event.body.nil? or hide_event_body
+    %p
+      - event.event_groups.each do |event_group|
+        %h2{:class => 'alt'}
+          = "#{t('team.gender.boys')}: U#{event_group.boys_age_range}<br>".html_safe if event_group.boys_age_range.present?
+          = "#{t('team.gender.girls')}: U#{event_group.girls_age_range}" if event_group.girls_age_range.present?
+          %ul
+            - event_group.event_details.each do |event_detail|
+              %li
+                = "#{event_detail.date_to_s} @"
+                %a{:href => event_detail.location.map_url}
+                  = "#{event_detail.location.name} - #{event_detail.location.address}"
