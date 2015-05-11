@@ -63,7 +63,7 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
   end
 
   collection_action :fields_status, :title => "Field Status", :method => :get do
-    @fields = Field.all #Field.find_all_by_club('San Rafael')
+    @fields = Field.all
 
     render "admin/fields/_show_statuses"
   end
