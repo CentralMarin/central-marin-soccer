@@ -33,7 +33,7 @@ class Event < ActiveRecord::Base
   def self.events(start_type, end_type, gender = nil, month = nil, year = nil)
     event_types = self.types.select { |k,v| v >= self.types[start_type] && v <= self.types[end_type]}.values
 
-    query = Event.joins(:event_groups).where(:type => event_types).where.not(status: self.statuses[:hide])
+    query = Event.includes(:event_groups).where(:type => event_types).where.not(status: self.statuses[:hide])
 
     if gender.present? and month.present? and year.present?
       age_level = TRYOUT_YEAR - year + 1;
