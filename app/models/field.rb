@@ -28,8 +28,9 @@ class Field < Location
 
   before_save :set_latlng
 
-  has_many :tryouts
   has_many :event_details
+
+  default_scope { order('name') }
 
   def admin_permalink
     admin_field_path(self)
