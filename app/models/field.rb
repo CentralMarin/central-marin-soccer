@@ -30,7 +30,7 @@ class Field < Location
 
   has_many :event_details
 
-  default_scope { order('name') }
+  default_scope { order('name asc') }
 
   def admin_permalink
     admin_field_path(self)
