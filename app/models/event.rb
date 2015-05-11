@@ -28,6 +28,10 @@ class Event < ActiveRecord::Base
     events(:united_upcoming_tryout, :united_upcoming_tryout, gender, month, year)
   end
 
+  def self.touts
+    events(:upcoming_tryout, :united_upcoming_tryout, nil, nil, nil).where(status: self.statuses[:show_and_tout])
+  end
+
   protected
 
   def self.events(start_type, end_type, gender = nil, month = nil, year = nil)
@@ -73,4 +77,3 @@ class Event < ActiveRecord::Base
   end
 
 end
-# EventGroup.where("groups & ? > 0", 1).count

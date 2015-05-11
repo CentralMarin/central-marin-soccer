@@ -20,39 +20,15 @@
           =image_tag article.image, :alt => article.title, height: "#{Article::IMAGE_HEIGHT}", width: "#{Article::IMAGE_WIDTH}", :title => article.title
           =truncate(article.title, length: 75, truncate_string: "...")
 
+-# Spacer
 %div{class: 'grid_16'}
   &nbsp;
 
--#%div{class: 'grid_16 box'}
--#  %h2 U12 Premier Level Teams
--#  %p The final rosters have been posted.
--#  %p
--#    = link_to t('home.tryouts.link'), '/tryouts/united', class: 'right'
-
--#%div{class: 'grid_16 box'}
--#  %h2
--#    = "2015 #{t('registration.index.heading')}"
--#  %p
--#    = t('registration.confirmation.tryouts.save_the_date')
--#  %p
--#    = link_to t('home.program.link'), '/tryouts/', class: 'right'
-
-
--#%div{class: 'grid_16 box'}
--#  %h2
--#    = t('home.tryouts.heading')
--#  %p
--#    = t('home.tryouts.body').html_safe
--#  %p
--#    = link_to t('home.tryouts.link'), '/tryouts/', class: 'right'
--#
-
--#%div{class: 'grid_16 box'}
--#  %h2
--#    Field Closures
--#  %p
--#    Pickleweed 1 and 2 fields are closed Friday October 31st and Saturday November 1st. Many games scheduled for Pickleweed 1 on Saturday have been moved to Kent.
--#    Check TeamSnap or look for an email from your coach or manager to see if your game has been moved.
+- @events.each do |event|
+  %div{class: 'grid_16 box'}
+    %h2= event.heading
+    %p= event.tout.html_safe
+    = link_to t('home.learn_more'), tryouts_url(anchor: "#{event.type}"), class: 'right'
 
 %div{class: 'grid_10'}
   %div{class: 'box'}
