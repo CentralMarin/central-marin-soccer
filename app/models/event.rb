@@ -17,26 +17,24 @@ class Event < ActiveRecord::Base
   TRYOUT_YEAR = 2015
 
   def self.tryouts(gender = nil, month = nil, year = nil)
-    events(:tryout, :tryout, gender, month, year)
+    events_for_range(:tryout, :tryout, gender, month, year)
   end
 
   def self.tryout_related_events(gender = nil, month = nil, year = nil)
-    events(:upcoming_tryout, :tryout_complete, gender, month, year)
+    events_for_range(:upcoming_tryout, :tryout_complete, gender, month, year)
   end
 
   def self.united_related_events(gender = nil, month = nil, year = nil)
-    events(:united_upcoming_tryout, :united_upcoming_tryout, gender, month, year)
+    events_for_range(:united_upcoming_tryout, :united_upcoming_tryout, gender, month, year)
   end
 
   def self.touts
-    events(:upcoming_tryout, :united_upcoming_tryout, nil, nil, nil).where(status: self.statuses[:show_and_tout])
+    events_for_types(self.types.values, nil, nil, nil).where(status: self.statuses[:show_and_tout])
   end
 
   protected
 
-  def self.events(start_type, end_type, gender = nil, month = nil, year = nil)
-    event_types = self.types.select { |k,v| v >= self.types[start_type] && v <= self.types[end_type]}.values
-
+  def self.events_for_types(event_types, gender = nil, month = nil, year = nil)
     query = Event.includes(:event_groups).where(:type => event_types).where.not(status: self.statuses[:hide])
 
     if gender.present? and month.present? and year.present?
@@ -47,10 +45,16 @@ class Event < ActiveRecord::Base
 
       age_group = "U#{age_level}_#{gender}"
 
-      query = query.where('groups & ? > 0', EventGroup.bitmasks[:groups][age_group])
+      query = query.joins(:event_groups).where('groups & ? > 0', EventGroup.bitmasks[:groups][age_group])
     end
 
     query
+  end
+
+  def self.events_for_range(start_type, end_type, gender = nil, month = nil, year = nil)
+    event_types = self.types.select { |k,v| v >= self.types[start_type] && v <= self.types[end_type]}.values
+
+    self.events_for_types(event_types, gender, month, year)
   end
 
   def self.events_for_age(start_type, end_type, gender, month, year)
