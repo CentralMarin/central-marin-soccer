@@ -11,6 +11,21 @@ class EventGroup < ActiveRecord::Base
 
   before_save :set_age_ranges
 
+  TRYOUT_YEAR = 2015
+
+  def self.age_group(month, year)
+    age_level = TRYOUT_YEAR - year + 1;
+    if month > 7
+      age_level = age_level - 1
+    end
+
+    age_level
+  end
+
+  def self.age_group_name(gender, month, year)
+    "U#{self.age_group(month, year)}_#{gender}"
+  end
+
   protected
 
   # Group by gener and age ranges (so we can say Boys U9 - U12)

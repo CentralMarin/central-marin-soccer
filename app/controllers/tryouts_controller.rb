@@ -2,60 +2,60 @@ class TryoutsController < InheritedResources::Base
 
   @@mutex = Mutex.new
 
-  def united_index
-
-  end
-
-  def united_registration
-    @tryout_registration = TryoutRegistration.new
-  end
-
-  def united_registration_create
-
-    @tryout_registration = TryoutRegistration.new(params.required(:tryout_registration)
-                                                      .permit(:first, :last, :home_address, :home_phone, :city, :gender, :birthdate,
-                                                              :age, :previous_team, :parent1_first, :parent1_last,
-                                                              :parent1_cell, :parent1_email, :parent2_first, :parent2_last,
-                                                              :parent2_cell, :parent2_email, :completed_by, :relationship, :waiver))
-
-    if not @tryout_registration.birthdate.nil?
-      @tryout_registration.age = Tryout.calculate_age_level(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
-    end
-
-    if @tryout_registration.save
-
-      # Make phone numbers consistent
-      @tryout_registration.home_phone = format_phone_number(@tryout_registration.home_phone)
-      @tryout_registration.parent1_cell = format_phone_number(@tryout_registration.parent1_cell)
-      @tryout_registration.parent2_cell = format_phone_number(@tryout_registration.parent2_cell)
-
-      # Tryout info
-
-      #find the fields we need
-      tam = Field.find_by_name('Tamalpais High School')
-      ma = Field.find_by_name('Marin Academy')
-      rm = Field.find_by_name('Ring Mountain Day School')
-      @tryout_info = {'Boys U12 United Tryouts' => [
-          Tryout.new(field: tam, start: DateTime.parse('28-2-2015 9:00'), duration: 120),
-          Tryout.new(field: ma, start: DateTime.parse('1-3-2015 17:00'), duration: 90),
-          Tryout.new(field: ma, start: DateTime.parse('4-3-2015 17:00'), duration: 105),
-      ]}
-
-      # Save to google spreadsheet - Age Specific Tab
-      update_spreadsheet '2015 United Tryout Registration', @tryout_registration
-
-      # Send confirmation email
-      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
-
-      render :action => 'confirmation'
-    else
-      render :registration
-    end
-
-  end
+  # def united_index
+  #
+  # end
+  #
+  # def united_registration
+  #   @tryout_registration = TryoutRegistration.new
+  # end
+  #
+  # def united_registration_create
+  #
+  #   @tryout_registration = TryoutRegistration.new(params.required(:tryout_registration)
+  #                                                     .permit(:first, :last, :home_address, :home_phone, :city, :gender, :birthdate,
+  #                                                             :age, :previous_team, :parent1_first, :parent1_last,
+  #                                                             :parent1_cell, :parent1_email, :parent2_first, :parent2_last,
+  #                                                             :parent2_cell, :parent2_email, :completed_by, :relationship, :waiver))
+  #
+  #   if not @tryout_registration.birthdate.nil?
+  #     @tryout_registration.age = Tryout.calculate_age_level(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
+  #   end
+  #
+  #   if @tryout_registration.save
+  #
+  #     # Make phone numbers consistent
+  #     @tryout_registration.home_phone = format_phone_number(@tryout_registration.home_phone)
+  #     @tryout_registration.parent1_cell = format_phone_number(@tryout_registration.parent1_cell)
+  #     @tryout_registration.parent2_cell = format_phone_number(@tryout_registration.parent2_cell)
+  #
+  #     # Tryout info
+  #
+  #     #find the fields we need
+  #     tam = Field.find_by_name('Tamalpais High School')
+  #     ma = Field.find_by_name('Marin Academy')
+  #     rm = Field.find_by_name('Ring Mountain Day School')
+  #     @tryout_info = {'Boys U12 United Tryouts' => [
+  #         Tryout.new(field: tam, start: DateTime.parse('28-2-2015 9:00'), duration: 120),
+  #         Tryout.new(field: ma, start: DateTime.parse('1-3-2015 17:00'), duration: 90),
+  #         Tryout.new(field: ma, start: DateTime.parse('4-3-2015 17:00'), duration: 105),
+  #     ]}
+  #
+  #     # Save to google spreadsheet - Age Specific Tab
+  #     update_spreadsheet '2015 United Tryout Registration', @tryout_registration
+  #
+  #     # Send confirmation email
+  #     TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
+  #
+  #     render :action => 'confirmation'
+  #   else
+  #     render :registration
+  #   end
+  #
+  # end
 
   def index
-    @info = Event.tryout_related_events
+    @info, age_group  = Event.tryout_related_events
   end
 
   def registration
@@ -71,7 +71,7 @@ class TryoutsController < InheritedResources::Base
                                                           :parent2_cell, :parent2_email, :completed_by, :relationship, :waiver))
 
     if not @tryout_registration.birthdate.nil?
-      @tryout_registration.age = Tryout.calculate_age_level(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
+      @tryout_registration.age = EventGroup.age_group(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
     end
 
     if @tryout_registration.save
@@ -85,10 +85,10 @@ class TryoutsController < InheritedResources::Base
       update_spreadsheet Rails.application.secrets.google_drive_tryouts_doc, @tryout_registration
 
       # Tryout info
-      @tryout_info = lookup_tryout(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year, Gender.new(@tryout_registration.gender))
+      @tryout, @age_group = lookup_tryout(Gender.new(@tryout_registration.gender), @tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
 
       # Send confirmation email
-      TryoutMailer.signup_confirmation(@tryout_registration, @tryout_info).deliver
+      TryoutMailer.signup_confirmation(@tryout_registration, @tryout).deliver
 
       render :action => 'confirmation'
     else
@@ -111,13 +111,18 @@ class TryoutsController < InheritedResources::Base
     month = params['month'].to_i
     gender = Gender.new(params['gender'].to_i)
 
-    events = Event.tryouts(gender, month, year)
-    @tryout = (events.empty? ? nil : events[0])
+    @tryout, @age_group = lookup_tryout(gender, month, year)
 
     render :layout => 'frame'
   end
 
   protected
+
+  def lookup_tryout(gender, month, year)
+    events, age_group = Event.tryouts(gender, month, year)
+
+    return (events.empty? ? nil : events[0]), age_group
+  end
 
   def format_phone_number(phone_number)
 
@@ -205,7 +210,7 @@ class TryoutsController < InheritedResources::Base
         end
 
         gender = Gender.new(registration_info.gender).to_s
-        ws = get_worksheet(ss, Tryout.tryout_name(registration_info.age, gender))
+        ws = get_worksheet(ss, "#{gender} U#{registration_info.age}")
         last_row = ws.num_rows + 1
 
         # Be explicit about order

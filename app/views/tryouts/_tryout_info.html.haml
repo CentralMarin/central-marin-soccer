@@ -1,12 +1,15 @@
-- if event.nil?
+- if tryout.nil?
   No tryouts currently scheduled
 - else
-  - event.event_groups.each do |event_group|
+  - tryout.event_groups.each do |event_age_group|
     %h2{:class => 'alt'}
-      = "#{t('team.gender.boys')}: U#{event_group.boys_age_range}<br>".html_safe if event_group.boys_age_range.present?
-      = "#{t('team.gender.girls')}: U#{event_group.girls_age_range}" if event_group.girls_age_range.present?
+      - if @age_group.nil?
+        = "#{t('team.gender.boys')}: U#{event_age_group.boys_age_range}<br>".html_safe if event_age_group.boys_age_range.present?
+        = "#{t('team.gender.girls')}: U#{event_age_group.girls_age_range}" if event_age_group.girls_age_range.present?
+      - else
+        = @age_group.to_s.humanize.titleize
       %ul
-        - event_group.event_details.each do |event_detail|
+        - event_age_group.event_details.each do |event_detail|
           %li
             = "#{event_detail.date_to_s} @"
             %a{:href => event_detail.location.map_url}

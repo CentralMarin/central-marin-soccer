@@ -14,8 +14,6 @@ class Event < ActiveRecord::Base
 
   default_scope { includes( { event_groups: [:event_details] }) }
 
-  TRYOUT_YEAR = 2015
-
   def self.tryouts(gender = nil, month = nil, year = nil)
     events_for_range(:tryout, :tryout, gender, month, year)
   end
@@ -37,47 +35,20 @@ class Event < ActiveRecord::Base
   def self.events_for_types(event_types, gender = nil, month = nil, year = nil)
     query = Event.includes(:event_groups).where(:type => event_types).where.not(status: self.statuses[:hide])
 
+    age_group = nil
     if gender.present? and month.present? and year.present?
-      age_level = TRYOUT_YEAR - year + 1;
-      if month > 7
-        age_level = age_level - 1
-      end
-
-      age_group = "U#{age_level}_#{gender}"
+      age_group = EventGroup.age_group_name(gender, month, year).to_sym
 
       query = query.joins(:event_groups).where('groups & ? > 0', EventGroup.bitmasks[:groups][age_group])
     end
 
-    query
+    return query, age_group
   end
 
   def self.events_for_range(start_type, end_type, gender = nil, month = nil, year = nil)
     event_types = self.types.select { |k,v| v >= self.types[start_type] && v <= self.types[end_type]}.values
 
     self.events_for_types(event_types, gender, month, year)
-  end
-
-  def self.events_for_age(start_type, end_type, gender, month, year)
-    event_types = self.types.select { |k,v| v >= self.types[start_type] && v <= self.types[end_type]}.values
-
-    Event.where(:type => event_types).where.not(status: self.statuses[:hide])
-  end
-
-  def self.find_age_group(events, gender, month, year)
-
-    age_level = TRYOUT_YEAR - year + 1;
-    if month > 7
-      age_level = age_level - 1
-    end
-
-    age_group = "U#{age_level}_#{gender}".to_sym
-
-    events.each do |event|
-      event.event_groups = event.event_groups.select {|event_group| event_group.groups?(age_group) }
-    end
-
-    events
-
   end
 
 end

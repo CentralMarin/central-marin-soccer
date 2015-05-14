@@ -14,7 +14,7 @@
       = event.heading
     = event.body.html_safe unless event.body.nil?
     %p
-      = render partial: 'tryouts/tryout_info', :locals => {event: event}
+      = render partial: 'tryouts/tryout_info', :locals => {tryout: event}
 
 %div.grid_16.box
   %h2
