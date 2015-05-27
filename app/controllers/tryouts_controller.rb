@@ -113,7 +113,13 @@ class TryoutsController < InheritedResources::Base
 
     @tryout, @age_group = lookup_tryout(gender, month, year)
 
-    render :layout => 'frame'
+    # Minify the HTML so we can make it part of the JSON
+    html = render_to_string :partial => 'tryout_info.html', :locals => {tryout: @tryout}
+    minified = HtmlPress.press html
+
+    respond_to do |format|
+      format.json { render json: { html: minified, status: @tryout != nil }}
+    end
   end
 
   protected

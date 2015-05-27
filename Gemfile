@@ -19,6 +19,7 @@ gem 'bing_translator', '4.4.1'
 gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :github => 'CentralMarin/activeadmin-ranked-model'
+gem 'html_press', '0.8.2'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.10'

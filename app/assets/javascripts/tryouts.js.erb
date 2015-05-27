@@ -11,7 +11,6 @@
     namespace("soccer");
     soccer.tryouts = (function () {
 
-        var _default_text = "<%= I18n.t('registration.tryouts.heading') %>";
         var _month_node;
         var _day_node;
         var _year_node;
@@ -24,19 +23,45 @@
             var gender = $('input[name="' + _gender_name + '"]:checked').val();
 
             if (month && day && year && gender) {
-                $.get('<%= Rails.application.routes.url_helpers.tryouts_agelevel_path(:only_path => true) %>?month=' + month + '&year=' + year + '&gender=' + gender, function(tryout_info) {
-                    _set_tryout_text(tryout_info);
-                });
+                var ageLevelApi = '<%= Rails.application.routes.url_helpers.tryouts_agelevel_path(:only_path => true, format: 'json') %>?month=' + month + '&year=' + year + '&gender=' + gender;
+                $.getJSON(ageLevelApi, { month: month, year: year, gender: gender })
+                  .done(function(json) {
+                    _show_tryout(json);
+                  })
+                  .fail(function( jqxhr, textStatus, error ) {
+                    var err = textStatus + ", " + error;
+                    console.log( "Request Failed: " + err );
+                  });
             } else {
-                _set_tryout_text(_default_text);
+                _show_tryout(null);
             }
         };
 
-        var _set_tryout_text = function(text) {
+        var _show_tryout = function(tryout_info) {
             var tryouts_date_and_time = $('#tryouts_date_and_times');
-            tryouts_date_and_time.html(text);
+            if (tryout_info != null) {
+                tryouts_date_and_time.html(tryout_info.html);
+                _show_tryout_form(tryout_info.status);
+            } else {
+                tryouts_date_and_time.html('');
+                _show_tryout_form(false);
+            }
+
         };
 
+        var _show_tryout_form = function(show) {
+            // Enable tryout registration form if we have it
+            var tryout_form = $('#tryout_form');
+            if (tryout_form != null) {
+                if (show) {
+                    tryout_form.show();
+                } else {
+                    tryout_form.hide();
+                }
+            }
+        };
+
+        // TODO: Move season to the server
         var _get_current_year = function() {
             var date = new Date();
             var year = date.getFullYear();
@@ -65,8 +90,6 @@
                 _day_node.change(_birthdate_changed);
                 _year_node.change(_birthdate_changed);
                 $('input[name="' + _gender_name + '"]').change(_birthdate_changed);
-
-                _set_tryout_text(_default_text);
             },
 
             show_age_group_chart: function(e) {
