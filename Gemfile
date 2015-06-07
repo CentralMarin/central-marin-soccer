@@ -5,7 +5,7 @@ gem 'rails', '4.2.1'
 
 gem 'activeadmin', :github => 'gregbell/active_admin'
 gem 'activeadmin-globalize', github: 'CentralMarin/activeadmin-globalize'
-gem 'ckeditor', '4.1.1'
+gem 'ckeditor', '4.1.2'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.2.3'
 gem 'globalize', '5.0.1'
