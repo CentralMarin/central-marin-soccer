@@ -9,7 +9,7 @@ server '192.168.1.17', user: "#{config['development']['server_user']}",roles: %w
 # Source Control
 set :application, 'centralmarinsoccer'
 set :repo_url, 'git@github.com:CentralMarin/central-marin-soccer.git'
-set :branch, 'tryouts'
+set :branch, 'release'
 
 #deployment details
 set :deploy_via, :remote_cache
