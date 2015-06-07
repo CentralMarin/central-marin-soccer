@@ -8,6 +8,7 @@ ActiveAdmin.register Room do
   index do
     column :name
     column :address
+    actions
   end
 
   show do |room|
