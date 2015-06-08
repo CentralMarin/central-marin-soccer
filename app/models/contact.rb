@@ -18,6 +18,12 @@ class Contact < ActiveRecord::Base
         other_assistance: Contact.where("category = ?", Contact.categories[:other_assistance]).order(:row_order),
         coaching: Contact.where("category = ?", Contact.categories[:coaching]).order(:row_order),
     }
+
+    results.each do |category, contacts|
+      results.delete(category) if contacts.count == 0
+    end
+
+    results
   end
 
   # Include the image processing module
