@@ -11,14 +11,14 @@
 
 %div{class: 'grid_10 box'}
   %div.slider-container
-    -#%div
-      -#%a{href: "/tryouts#Registration%20Night"}
-      -#  %img{src: "/Registration_NightU12.jpg", height: 420, width: 560 }
-    -@articles.each do |article|
-      %div
-        %a{href: "#{show_article(article)}"}
-          =image_tag article.image, :alt => article.title, height: "#{Article::IMAGE_HEIGHT}", width: "#{Article::IMAGE_WIDTH}", :title => article.title
-          =truncate(article.title, length: 75, truncate_string: "...")
+    %div
+      %a{href: "/tryouts#Registration%20Night"}
+        %img{src: "/Registration_Night.jpg", height: 420, width: 560 }
+    -#-@articles.each do |article|
+    -#  %div
+    -#    %a{href: "#{show_article(article)}"}
+    -#      =image_tag article.image, :alt => article.title, height: "#{Article::IMAGE_HEIGHT}", width: "#{Article::IMAGE_WIDTH}", :title => article.title
+    -#      =truncate(article.title, length: 75, truncate_string: "...")
 
 -# Spacer
 %div{class: 'grid_16'}
