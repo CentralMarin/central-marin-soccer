@@ -27,15 +27,15 @@ class Event < ActiveRecord::Base
   end
 
   def self.touts
-    results, age_group = events_for_types(self.types.values, nil, nil, nil)
-    results.where(status: self.statuses[:show_and_tout]) unless results.nil?
+    results, age_group = events_for_types(self.types.values, nil, nil, nil, self.statuses[:show_and_tout])
+    #results.where(status: self.statuses[:show_and_tout]) unless results.nil?
 
     return results
   end
 
   protected
 
-  def self.events_for_types(event_types, gender = nil, month = nil, year = nil)
+  def self.events_for_types(event_types, gender = nil, month = nil, year = nil, status = nil)
     query = Event.includes(:event_groups).where(:type => event_types).where.not(status: self.statuses[:hide])
 
     age_group = nil
@@ -44,6 +44,8 @@ class Event < ActiveRecord::Base
 
       query = query.joins(:event_groups).where('groups & ? > 0', EventGroup.bitmasks[:groups][age_group])
     end
+
+    query = query.where(status: status) unless status.nil?
 
     return query, age_group
   end
