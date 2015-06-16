@@ -43,34 +43,26 @@ gem 'jquery-ui-themes', '0.0.11'
 gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.2.16'
+gem 'jbuilder', '2.3.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', :require => false
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.7'
-
 # Use Capistrano for deployment
-gem 'capistrano-rails',   '1.1.3', :require => false, :group => :development
-
-#gem 'capistrano', '3.2.1', :require => false, :group => :development
-#group :development do
-#  gem 'capistrano-rails',   '1.1.1', :require => false
-#  gem 'capistrano-bundler', '1.1.3', :require => false
-#end
+group :development do
+  gem 'capistrano-rails',   '1.1.3'
+  gem 'capistrano-faster-assets', '1.0.2'
+  gem 'capistrano-passenger', '0.0.5'
+end
 
 group :staging, :production do
   gem 'mysql2', '0.3.18'
 end
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
 group :development, :test do
-  gem 'rspec-rails', '3.2.3'
+  gem 'rspec-rails', '3.3.1'
   gem 'factory_girl_rails', '4.5.0'
   gem 'faker', '1.4.3'
   gem 'capybara', '2.4.4'
