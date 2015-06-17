@@ -54,7 +54,7 @@ end
 group :development do
   gem 'capistrano-rails',   '1.1.3'
   gem 'capistrano-faster-assets', '1.0.2'
-  gem 'capistrano-passenger', '0.0.5'
+  gem 'capistrano-passenger', '0.1.0'
 end
 
 group :staging, :production do
