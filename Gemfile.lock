@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/CentralMarin/activeadmin-globalize.git
+  remote: http://github.com/CentralMarin/activeadmin-globalize
   revision: 08c870443f26cd5c3b080b983cef077397c55248
   specs:
     activeadmin-globalize (1.0.0)
@@ -7,7 +7,7 @@ GIT
       globalize (~> 5.0.0)
 
 GIT
-  remote: git://github.com/CentralMarin/activeadmin-ranked-model.git
+  remote: http://github.com/CentralMarin/activeadmin-ranked-model
   revision: 060e680886bad2daf0b7bc08fb479125083faf1b
   specs:
     activeadmin-ranked-model (0.0.1)
@@ -15,7 +15,7 @@ GIT
       ranked-model
 
 GIT
-  remote: git://github.com/gregbell/active_admin.git
+  remote: http://github.com/gregbell/active_admin
   revision: 433e95a2df18ef2555bc952db60bc0535259ed3b
   specs:
     activeadmin (1.0.0.pre1)
