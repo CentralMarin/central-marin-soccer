@@ -14,7 +14,7 @@ gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '1.0.1'
 gem 'premailer-rails', '1.8.2'
 gem 'nokogiri', '1.6.6.2'
-gem 'devise', '3.4.1'
+gem 'devise', '3.5.1'
 gem 'bing_translator', '4.4.1'
 gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
@@ -62,7 +62,7 @@ group :staging, :production do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '3.3.1'
+  gem 'rspec-rails', '3.3.2'
   gem 'factory_girl_rails', '4.5.0'
   gem 'faker', '1.4.3'
   gem 'capybara', '2.4.4'
