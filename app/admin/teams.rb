@@ -69,11 +69,15 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
 
  controller do
    def process_csv_row(team, row)
+     puts row
      team.name = row[0]
-     team.team_level = TeamLevel.find_by_name(row[1])
+     if row[1].nil?
+       row[1] = ''
+     end
+     team.team_level = TeamLevel.where(name: row[1]).first
      team.year = row[2]
      team.gender_id = Gender.id(row[3])
-     team.coach = Coach.find_by_name(row[4])
+     team.coach = Coach.where(name: row[4]).first
      team.teamsnap_team_id = row[5]
 
      team.save!
