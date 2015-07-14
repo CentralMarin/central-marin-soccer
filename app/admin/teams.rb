@@ -80,6 +80,14 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
      team.coach = Coach.where(name: row[4]).first
      team.teamsnap_team_id = row[5]
 
+     if team.coach.nil?
+       logger.info "Coach: #{row[4]}"
+     end
+
+     if team.team_level.nil?
+       logger.info "TeamLevel: #{row[1]}"
+     end
+
      team.save!
    end
 
