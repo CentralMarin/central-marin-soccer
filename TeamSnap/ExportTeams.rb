@@ -55,9 +55,6 @@ CSV.open(csv_file, "wb") do |csv|
         else
           year = "20#{partial_year}".to_i
         end
-
-        # Increment the year to match Rails code's handling of year
-        year = year + 1
       end
 
       # Pull Team Level - pool or blank
@@ -78,7 +75,7 @@ CSV.open(csv_file, "wb") do |csv|
       end
 
       coach = ''
-      # TODO: Pull rosters to find any non-players labeled coach
+      # Pull rosters to find any non-players labeled coach
       roster = get_roster(team['id'], token)
       roster.each do |roster|
         player = roster['roster']
