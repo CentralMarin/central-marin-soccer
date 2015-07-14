@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.2'
+gem 'rails', '4.2.3'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
@@ -43,7 +43,7 @@ gem 'jquery-ui-themes', '0.0.11'
 gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.3.0'
+gem 'jbuilder', '2.3.1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -54,7 +54,7 @@ end
 group :development do
   gem 'capistrano-rails',   '1.1.3'
   gem 'capistrano-faster-assets', '1.0.2'
-  gem 'capistrano-passenger', '0.1.0'
+  gem 'capistrano-passenger', '0.1.1'
 end
 
 group :staging, :production do
