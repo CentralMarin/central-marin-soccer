@@ -108,7 +108,7 @@ ActiveAdmin.register Event do
 
   collection_action :download_csv, method: :get do
 
-    event =  Event.where(id: params[:event_id])
+    event =  Event.find_by(id: params[:event_id])
     file = CSV.generate do |csv|
       csv << ['groups', 'start', 'duration', 'location']
 
@@ -157,7 +157,7 @@ ActiveAdmin.register Event do
         event_detail = EventDetail.new()
         event_detail.formatted_start = row[1]
         event_detail.duration = row[2]
-        event_detail.location = Location.where(name: row[3])
+        event_detail.location = Location.find_by(name: row[3])
 
         event_group.event_details << event_detail
 

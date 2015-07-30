@@ -74,10 +74,10 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
      if row[1].nil?
        row[1] = ''
      end
-     team.team_level = TeamLevel.where(name: row[1]).first
+     team.team_level = TeamLevel.find_by(name: row[1])
      team.year = row[2]
      team.gender_id = Gender.id(row[3])
-     team.coach = Coach.where(name: row[4]).first
+     team.coach = Coach.find_by(name: row[4])
      team.teamsnap_team_id = row[5]
 
      if team.coach.nil?

@@ -42,7 +42,7 @@ namespace :html do
         I18n.locale = locale
 
         # see if the name already exists and either add or update
-        web_part = WebPart.where(name: name)
+        web_part = WebPart.find_by(name: name)
         if web_part.nil?
           web_part = WebPart.new
           web_part.name = name
