@@ -58,15 +58,15 @@ group :development do
 end
 
 group :staging, :production do
-  gem 'mysql2', '0.3.18'
+  gem 'mysql2', '0.3.19'
 end
 
 group :development, :test do
-  gem 'rspec-rails', '3.3.2'
+  gem 'rspec-rails', '3.3.3'
   gem 'factory_girl_rails', '4.5.0'
   gem 'faker', '1.4.3'
   gem 'capybara', '2.4.4'
-  gem 'selenium-webdriver', '2.46.2'
+  gem 'selenium-webdriver', '2.47.0'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
