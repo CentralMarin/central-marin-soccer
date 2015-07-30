@@ -29,7 +29,7 @@ ActiveAdmin.register Article do
 
   index do
     column :title do |articles|
-      articles.translations.find_by_locale('en').title
+      articles.translations.where(locale: 'en').title
     end
     column :author
     column 'Has Translation', :sortable => :"article.has_translation()" do |articles|
@@ -71,7 +71,7 @@ ActiveAdmin.register Article do
               subcategory = "- #{team.to_s}"
             end
           when :coach
-            coach = Coach.find_by id: article.coach_id
+            coach = Coach.where(id: article.coach_id)
             if coach.blank?
               subcategory = '- Unknown coach'
             else
@@ -81,7 +81,7 @@ ActiveAdmin.register Article do
         "#{article.category} #{subcategory}"
       end
       row :carousel do
-        carousel = ArticleCarousel.find_by id: article.id
+        carousel = ArticleCarousel.where(id: article.id)
         if carousel.blank?
           'Not in carousel'
         else

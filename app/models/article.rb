@@ -52,7 +52,7 @@ class Article < ActiveRecord::Base
   end
 
   def has_translation
-    translation = translations.find_by_locale('es')
+    translation = translations.where(locale: 'es')
     translation.blank?
   end
 

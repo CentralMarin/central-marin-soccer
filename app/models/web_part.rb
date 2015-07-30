@@ -20,7 +20,7 @@ class WebPart < ActiveRecord::Base
 
     web_parts = {}
     names.each do |name|
-      web_parts[name] = WebPart.find_by_name(name)
+      web_parts[name] = WebPart.where(name: name)
     end
 
     web_parts

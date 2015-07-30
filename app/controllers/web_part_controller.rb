@@ -8,7 +8,7 @@ class WebPartController < ApplicationController
     #end
 
     # Lookup the name
-    web_part = WebPart.find_by_name(params[:name])
+    web_part = WebPart.where(name: params[:name])
     if web_part.nil?
       render :json => { :errors => "Unable to update - #2"}, :status => 422
       return
