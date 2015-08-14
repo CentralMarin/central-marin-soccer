@@ -43,11 +43,6 @@ class InformationController < ApplicationController
     init_web_parts(@part_name)
   end
 
-  def referees_2_man_ref_system
-    @part_name = 'information.referee.2-man-ref-system'
-    init_web_parts(@part_name)
-  end
-
   def tournaments
     @top_level_section_name = 'menu.tournaments'
 
