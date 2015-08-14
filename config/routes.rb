@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get '/tournaments/:name/:year', to: 'information#tournaments_previous_winners', as: 'tournaments_previous_winners'
 
   get '/referees', to: 'information#referees', as: 'referees'
+  get '/referees/2-man-ref-system', to: 'information#referees_2_man_ref_system', as: 'referees_2_man_ref_system'
   get '/tournaments', to: 'information#tournaments', as: 'tournaments'
 
   post '/web_part/save', to: 'web_part#save', as: 'web_part'
