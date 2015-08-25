@@ -60,6 +60,6 @@
     %script
       window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})
 
-  -#- if @editable
-  -#  = javascript_include_tag "ckeditor/init"
-  -#  = javascript_include_tag "inline_editing"
+  - if session[:edit_pages] == true
+    = javascript_include_tag "ckeditor/init"
+    = javascript_include_tag "inline_editing"

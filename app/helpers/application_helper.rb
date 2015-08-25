@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
   def editable_attributes(part_name)
-    if @editable && Rails.env != 'production'
+    if session[:edit_pages] == true
       {:class => 'editable', contenteditable: true, :data => {:name => part_name}}
     else
       {}

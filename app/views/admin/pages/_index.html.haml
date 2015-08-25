@@ -1,0 +1,22 @@
+
+%div{id: "available-locales"}
+  %ul
+    %li
+      %a{href: "#locale-en"}
+        English
+    %li
+      %a{href: "#locale-es"}
+        Spanish
+
+  %div{id: "locale-en"}
+    %iframe{id: 'CMSWindow', name: 'CMSWindow', width: '100%', height: '800px', onLoad: "navigateSpanish()"}
+
+  %div{id: "locale-es"}
+    %iframe{id: 'CMSWindow-es', name: 'CMSWindow-es', width: '100%', height: '800px'}
+
+
+
+
+%script
+  $("#available-locales").tabs();
+  function navigateSpanish() { $('#CMSWindow-es')[0].contentDocument.location.href = $('#CMSWindow')[0].contentDocument.location.href }

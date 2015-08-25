@@ -2,45 +2,38 @@ class InformationController < ApplicationController
 
   def init_web_parts(web_parts)
     # Determine if the current user can edit the page
-    #@editable = can?(:manage, WebPart)
-    @editable = false
+    @part_name = web_parts
     @web_parts = WebPart.load(web_parts)
   end
 
   def index
-    @part_name = 'information.overview'
-    init_web_parts(@part_name)
+    init_web_parts('information.overview')
   end
 
   def gold
-    @part_name = 'information.gold'
-    init_web_parts(@part_name)
+    init_web_parts('information.gold')
 
     render :action => 'level'
   end
 
   def silver
-    @part_name = 'information.silver'
-    init_web_parts(@part_name)
+    init_web_parts('information.silver')
 
     render :action => 'level'
   end
 
   def academy
-    @part_name = 'information.academy'
-    init_web_parts(@part_name)
+    init_web_parts('information.academy')
 
     @academy_teams = Team.academy(Time.now.year)
   end
 
   def scholarship
-    @part_name = 'information.scholarship'
-    init_web_parts(@part_name)
+    init_web_parts('information.scholarship')
   end
 
   def referees
-    @part_name = 'information.referee'
-    init_web_parts(@part_name)
+    init_web_parts('information.referee')
   end
 
   def tournaments
