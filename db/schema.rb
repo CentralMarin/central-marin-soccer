@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511170854) do
+ActiveRecord::Schema.define(version: 20150820153037) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -192,6 +192,13 @@ ActiveRecord::Schema.define(version: 20150511170854) do
     t.decimal  "lng",                    precision: 15, scale: 10
     t.string   "address",    limit: 255
     t.string   "type",       limit: 255,                           default: "Field"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "team_level_translations", force: :cascade do |t|
