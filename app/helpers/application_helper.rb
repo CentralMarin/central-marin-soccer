@@ -43,23 +43,7 @@ module ApplicationHelper
     .join('')
     .html_safe
   end
-
-  def editable_attributes(part_name)
-    if session[:edit_pages] == true
-      {:class => 'editable', contenteditable: true, :data => {:name => part_name}}
-    else
-      {}
-    end
-  end
-
-  def editable_content(part_name)
-    if @web_parts[part_name].nil? || @web_parts[part_name].html.nil?
-      "<H1><B>Load HTML Content</B></H1>".html_safe
-    else
-      @web_parts[part_name].html.html_safe
-    end
-  end
-
+  
   def cms_region(web_parts, part_name, tag, tag_class)
 
     # Make sure we have an array of classes
