@@ -8,10 +8,10 @@ ActiveAdmin.register Page do
   index pagination_total: false, :download_links => false do
     column :name
     column "English" do |page|
-      link_to "edit", page.url
+      link_to "edit", page.url if session[:edit_pages]
     end
     column "Spanish" do |page|
-      link_to "editar", page.url
+      link_to "editar", "#{request.protocol}es.#{request.host_with_port}#{page.url}" if session[:edit_pages]
     end
     column "Last Updated", :updated_at
 
