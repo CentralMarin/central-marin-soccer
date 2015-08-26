@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.4'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
@@ -15,7 +15,7 @@ gem 'google_drive', '1.0.1'
 gem 'premailer-rails', '1.8.2'
 gem 'nokogiri', '1.6.6.2'
 gem 'devise', '3.5.2'
-gem 'bing_translator', '4.4.1'
+gem 'bing_translator', '4.5.0'
 gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activeadmin-ranked-model'
@@ -58,14 +58,14 @@ group :development do
 end
 
 group :staging, :production do
-  gem 'mysql2', '0.3.19'
+  gem 'mysql2', '0.3.20'
 end
 
 group :development, :test do
   gem 'rspec-rails', '3.3.3'
   gem 'factory_girl_rails', '4.5.0'
-  gem 'faker', '1.4.3'
-  gem 'capybara', '2.4.4'
+  gem 'faker', '1.5.0'
+  gem 'capybara', '2.5.0'
   gem 'selenium-webdriver', '2.47.1'
 end
 
