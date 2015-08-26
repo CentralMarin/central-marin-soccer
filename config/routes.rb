@@ -42,7 +42,6 @@ Rails.application.routes.draw do
   get '/information/silver', to: 'information#silver', as: 'silver'
   get '/information/academy', to: 'information#academy', as: 'academy'
   get '/information/on-equal-footing', to: 'information#scholarship', as: 'scholarship'
-  get '/tournaments/:name/:year', to: 'information#tournaments_previous_winners', as: 'tournaments_previous_winners'
 
   get '/referees', to: 'information#referees', as: 'referees'
   get '/referees/2-man-ref-system', to: 'information#referees', as: 'old-2-man-referees'

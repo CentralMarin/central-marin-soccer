@@ -57,26 +57,4 @@ class InformationController < ApplicationController
     ]
     @years = [I18n.t('information.current'), I18n.t('information.previous')]
   end
-
-  def tournaments_previous_winners
-    # tournament name and (current or past) to build name
-    tournament_name = params[:name]
-    year = params[:year]
-    part_name = "information.tournaments.#{tournament_name}.#{year}"
-
-    # Load the web part
-    web_part = WebPart.load(part_name)
-
-    # build our object
-    winners = {
-        :web_part_name => web_part[part_name]['name'],
-        :html => web_part[part_name]['html'],
-        :tournament_name => tournament_name.gsub('_', ' ').titleize,
-        :year => year.capitalize
-    }
-
-    respond_to do |format|
-      format.json {render :json => winners}
-    end
-  end
 end
