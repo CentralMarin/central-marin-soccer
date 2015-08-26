@@ -60,6 +60,28 @@ module ApplicationHelper
     end
   end
 
+  def cms_region(web_parts, part_name, tag, tag_class)
+
+    # Make sure we have an array of classes
+    if tag_class.kind_of? String
+      tag_class = [tag_class]
+    end
+
+    tag_attributes = {class: tag_class}
+    if session[:edit_pages]
+      tag_attributes[:class].push('editable')
+      tag_attributes[:data] = {name: part_name }
+      tag_attributes[:contenteditable] = true
+    end
+    if web_parts[part_name].nil? || web_parts[part_name].html.nil?
+      html = "<H1><B>Load HTML Content</B></H1>".html_safe
+    else
+      html = web_parts[part_name].html.html_safe
+    end
+
+    content_tag(tag, html, tag_attributes)
+  end
+
   def show_article(article)
 
     case article.category

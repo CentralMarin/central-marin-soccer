@@ -1,5 +1,4 @@
-%div.grid_16{ editable_attributes(@part_name) }
-  = editable_content @part_name
+= cms_region(@web_parts, @part_name, :div, 'grid_16')
 
 %div.grid_16
   %p=link_to t('information.back'), information_path

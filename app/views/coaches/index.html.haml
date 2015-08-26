@@ -4,8 +4,7 @@
 %h2{class: 'grid_16'}= t('coach.heading')
 %div{class: 'clear'}
 %div{class: 'margin10'}
-%div.grid_16{ editable_attributes(@part_name)  }
-  = editable_content @part_name
+= cms_region(@web_parts, 'coaching.overview', :div, 'grid_16')
 
 %div{class: 'grid_16'}
 %h2= t('coach.staff')

@@ -1,7 +1,9 @@
-%div.grid_16{ editable_attributes(@part_name)  }
-  = editable_content @part_name
+= cms_region(@web_parts, 'information.academy', :div, 'grid_16')
+
 %hr
-%h2 Teams
+%h2
+  = t('coach.teams')
+
 -@academy_teams.each do |team|
   %ul
     %li=link_to team, team

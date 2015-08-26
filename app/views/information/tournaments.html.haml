@@ -1,22 +1,18 @@
 - content_for :css do
   = stylesheet_link_tag "information"
 
-%div.grid_16{ editable_attributes(@part_name_overview) }
-  = editable_content @part_name_overview
+= cms_region(@web_parts, 'information.tournaments', :div, 'grid_16')
 
 %div.grid_16#age_group_chart
   %h2
     %center
       %a{:href => '#'}Click here to view the Age Group Chart
 
-%div.grid_16.box{ editable_attributes(@part_name_mission_bell) }
-  = editable_content(@part_name_mission_bell)
+= cms_region(@web_parts, 'information.tournaments.mission_bell', :div, 'grid_16')
 
-%div.grid_16.box{ editable_attributes(@part_name_premier_challenge) }
-  = editable_content(@part_name_premier_challenge)
+= cms_region(@web_parts, 'information.tournaments.premier_challenge', :div, 'grid_16')
 
-%div.grid_16{ editable_attributes(@part_name_footer)  }
-  = editable_content @part_name_footer
+= cms_region(@web_parts, 'information.tournaments.footer', :div, 'grid_16')
 
 %div{:id => "dialog", :title => "Age Group Chart"}
 
