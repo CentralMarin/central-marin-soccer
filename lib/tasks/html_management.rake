@@ -48,7 +48,7 @@ namespace :html do
           web_part.name = name
         end
         web_part.html = html
-        web_part.save
+        web_part.save!
       end
 
     end
@@ -67,6 +67,7 @@ namespace :html do
     create_page('Referees', '/referees', ['information.referee'])
     create_page('Tournaments', '/tournaments', ['information.tournaments', 'information.tournaments.mission_bell', 'information.tournaments.premier_challenge', 'information.tournaments.footer'])
     create_page('Coaching', '/coaching', ['coaching.overview'])
+    create_page('Home', '/', ['home.overview', 'home.program_overview', 'home.donate', 'home.sponsors'])
   end
 
   def create_page(name, url, web_part_names)
@@ -80,7 +81,7 @@ namespace :html do
       web_part = WebPart.find_by(name: web_part_name)
       if not web_part.nil?
         web_part.page = page
-        web_part.save
+        web_part.save!
       else
         puts "Unable to locate web_part #{web_part_name} to associate with page #{name}"
       end
