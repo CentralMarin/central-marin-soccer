@@ -1,12 +1,7 @@
 development: &DEVELOPMENT
-  switch_hosts: { es: "www.localhost", en: "es.localhost" }
+  switch_hosts: { es: "centralmarinsoccer.local", en: "es.centralmarinsoccer.local" }
 test:
   <<: *DEVELOPMENT
-vagrant:
-  switch_hosts: { es: 'www.localhost', en: 'es.localhost' }
-
-staging:
-  switch_hosts: { es: "staging.centralmarinsoccer.com", en: "es.staging.centralmarinsoccer.com" }
 
 production:
   switch_hosts: { es: "centralmarinsoccer.com", en: "es.centralmarinsoccer.com" }
