@@ -5,6 +5,8 @@ class WebPart < ActiveRecord::Base
   translates :html, fallbacks_for_empty_translations: true
   accepts_nested_attributes_for :translations, :allow_destroy => true
 
+  belongs_to :page
+
   validates :name, :presence => true, :uniqueness => true
   validates :html, :presence => true
 

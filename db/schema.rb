@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820153037) do
+ActiveRecord::Schema.define(version: 20150826001441) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -271,6 +271,9 @@ ActiveRecord::Schema.define(version: 20150820153037) do
     t.text     "html",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "page_id"
   end
+
+  add_index "web_parts", ["page_id"], name: "index_web_parts_on_page_id"
 
 end

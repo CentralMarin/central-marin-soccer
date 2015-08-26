@@ -2,6 +2,7 @@ ActiveAdmin.register Page do
 
   menu :label => 'CMS'
   config.filters = false
+  config.sort_order = "name_asc"
 
   actions :index
 
@@ -12,6 +13,10 @@ ActiveAdmin.register Page do
     end
     column "Spanish" do |page|
       link_to "editar", "#{request.protocol}es.#{request.host_with_port}#{page.url}" if session[:edit_pages]
+    end
+    column "Parts" do |page|
+      html = page.web_parts.map {|part| part.name}.join ('<br>')
+      html.html_safe
     end
     column "Last Updated", :updated_at
 
