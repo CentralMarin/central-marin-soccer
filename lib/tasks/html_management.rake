@@ -56,4 +56,34 @@ namespace :html do
 
   desc "First exports existing content and then imports all content. Useful when creating new nodes"
   task :export_import => [:export, :import]
+
+  desc "Create page and web part associations"
+  task :setup_cms => :environment do
+    create_page('Information', '/information', ['information.overview'])
+    create_page('Gold', '/information/gold', ['information.gold'])
+    create_page('Silver', '/information/silver', ['information.silver'])
+    create_page('Academy', '/information/academy', ['information.academy'])
+    create_page('On Equal Footing', '/information/on-equal-footing', ['information.scholarship'])
+    create_page('Referees', '/referees', ['information.referee'])
+    create_page('Tournaments', '/tournaments', ['information.tournaments', 'information.tournaments.mission_bell', 'information.tournaments.premier_challenge', 'information.tournaments.footer'])
+    create_page('Coaching', '/coaching', ['coaching.overview'])
+  end
+
+  def create_page(name, url, web_part_names)
+    page = Page.find_by(name: name)
+    if page.nil?
+      page = Page.create(name: name, url: url)
+    end
+
+    # Associate web parts
+    web_part_names.each do |web_part_name|
+      web_part = WebPart.find_by(name: web_part_name)
+      if not web_part.nil?
+        web_part.page = page
+        web_part.save
+      else
+        puts "Unable to locate web_part #{web_part_name} to associate with page #{name}"
+      end
+    end
+  end
 end
