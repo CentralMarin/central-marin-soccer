@@ -54,7 +54,7 @@ module ApplicationHelper
 
   def editable_content(part_name)
     if @web_parts[part_name].nil? || @web_parts[part_name].html.nil?
-      "<H1><B>Load HTML Content</B></H1>"
+      "<H1><B>Load HTML Content</B></H1>".html_safe
     else
       @web_parts[part_name].html.html_safe
     end

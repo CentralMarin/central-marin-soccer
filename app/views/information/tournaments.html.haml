@@ -9,53 +9,14 @@
     %center
       %a{:href => '#'}Click here to view the Age Group Chart
 
-%div.grid_16.box
-  %h2 Mission Bell Classic - August 15th & 16th
-  %p
-    %center The Mission Bell Classic was inaugurated in 1997 in memory of Claire Ann O'Neil, a well-respected member of the Marin Soccer Community.  The 18th annual Mission Bell Classic, will be held August 15th and 16th and is a US Club & CYSA sanctioned Silver/Bronze/Div. 3 level event for Boys & Girls U-12, U-13, U-14, U-15. Tournament cost is $650.
-  %p
-    %center
-      Early registration by June 15th: $600
-      %br
-      %a{href: 'https://www.gotsport.com/forms/app/?EventID=45216'}Click here to register
+%div.grid_16.box{ editable_attributes(@part_name_mission_bell) }
+  = editable_content(@part_name_mission_bell)
 
-%div.grid_16.box
-  %h2 Premier Challenge - August 15th & 16th
-  %p
-    %center The 7th annual Premier Challenge will be held August 15th and 16th. The Premier Challenge is a US Club & CYSA sanctioned Gold/Silver/Bronze(Div 3) level Event for Boys & girls U-8, U-9, U-10, U-11. Tournament cost is $500.
-  %p
-    %center
-      Early registration by June 15th: $450
-      %br
-      %a{href: 'https://www.gotsport.com/forms/app/?EventID=45216'}Click here to register
-
--#%div.grid_16.omega
--#  %div.omega#tabs
--#    %ul
--#      - @tournaments.each do |tournament|
--#        %li
--#          %a{:href => "##{tournament[:id]}"}
--#            = tournament[:name]
--#
--#    - @tournaments.each do |tournament|
--#      %div{:id => tournament[:id]}
--#        %div{ editable_attributes(tournament[:overview]) }
--#          = editable_content tournament[:overview]
--#        -#%h2= t('information.winners')
--#        -#%ul
--#        -#  - @years.each do |year|
--#        -#    %li
--#        -#      =link_to "##{tournament[:id]}", :rel => "#winners", :data => {tournament: tournament[:id], year: year} do
--#        -#        = year.capitalize
+%div.grid_16.box{ editable_attributes(@part_name_premier_challenge) }
+  = editable_content(@part_name_premier_challenge)
 
 %div.grid_16{ editable_attributes(@part_name_footer)  }
   = editable_content @part_name_footer
-
-%script#pastWinnersTemplate{:type => 'text/html'}
-  %div
-    %h3= '{{:year}} {{:tournament_name}} Winners'
-    %div#simplemodal{ editable_attributes("{{:web_part_name}}") }
-      = '{{:html}}'
 
 %div{:id => "dialog", :title => "Age Group Chart"}
 

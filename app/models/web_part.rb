@@ -16,6 +16,8 @@ class WebPart < ActiveRecord::Base
 
   def self.load(names)
 
+    return nil if names.nil?
+
     if (names.kind_of? String)
       names = [names]
     end
