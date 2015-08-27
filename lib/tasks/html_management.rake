@@ -67,7 +67,7 @@ namespace :html do
     create_page('Referees', '/referees', ['information.referee'])
     create_page('Tournaments', '/tournaments', ['information.tournaments', 'information.tournaments.mission_bell', 'information.tournaments.premier_challenge', 'information.tournaments.footer'])
     create_page('Coaching', '/coaching', ['coaching.overview'])
-    create_page('Home', '/', ['home.overview', 'home.program_overview', 'home.donate', 'home.sponsors'])
+    create_page('Home', '/', ['home.overview', 'home.donate', 'home.sponsors'])
   end
 
   def create_page(name, url, web_part_names)
