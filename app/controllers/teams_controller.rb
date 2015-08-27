@@ -1,10 +1,12 @@
 require "net/https"
 require "json"
 
-class TeamsController < ApplicationController
+class TeamsController < CmsController
 
   # GET /teams
   def index
+
+    init_web_parts('Teams')
 
     @top_level_section_name = 'menu.teams'
 
