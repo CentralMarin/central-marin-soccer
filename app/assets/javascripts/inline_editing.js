@@ -41,6 +41,11 @@
 
         var init = function() {
             $(document).ready(function() {
+                CKEDITOR.stylesSet.add('CM Styles', [
+                    { name: 'Blue Heading', element: 'h2', attributes: { 'class': 'alt' }}
+                ]);
+                CKEDITOR.config.stylesSet = 'CM Styles';
+
                 $('.editable').each(function(index, elem) {
                     enable_inline(elem);
                 });
