@@ -1,8 +1,11 @@
-class HomeController < InheritedResources::Base
+# class HomeController < InheritedResources::Base
+class HomeController < CmsController
 
-  before_filter :set_section_name
+    before_filter :set_section_name
 
   def index
+    init_web_parts('Home')
+
     # Get all articles to display in the carousel in the proper order
     @articles = ArticleCarousel.all.order("carousel_order").map {|ac| ac.article}
 

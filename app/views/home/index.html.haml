@@ -2,12 +2,8 @@
   = stylesheet_link_tag "home"
 
 %div{class: 'grid_6'}
-  %h1= t('home.title')
-  %p= t('home.overview')
-  %hr
-  %h2{class: 'alt'}= t('home.program.heading')
-  %p= t('home.program.body')
-  %a{class: 'right', href: '/information'}= t('home.program.link')
+  = cms_region(@web_parts, 'home.overview', :div)
+  %a{class: 'right', href: "#{information_path}"}= t('home.program.link')
 
 %div{class: 'grid_10 box'}
   %div.slider-container
@@ -33,10 +29,8 @@
 
 %div{class: 'grid_10'}
   %div{class: 'box'}
-    %h2= t('home.donate.heading')
-    %p= t('home.donate.body')
-
-    = link_to t('home.donate.link'), '/information/on-equal-footing', class: 'right'
+    = cms_region(@web_parts, 'home.donate', :div)
+    %a{class: 'right', href: "#{scholarship_path}"}= t('home.donate.link')
 
     -#%form{class: 'right', action: 'https://www.sandbox.paypal.com/cgi-bin/webscr', method: 'post'}
     -#  %input{type: 'hidden', name: 'cmd', value: '_s-xclick'}
@@ -47,12 +41,7 @@
     %div{class: 'clear'}
 
   %div{class: 'box'}
-    %h2= t('home.sponsors.heading')
-    %p{class: 'text-center'}
-      = image_tag 'sample_sponsors1.png', class: 'pad5'
-      = image_tag 'sample_sponsors4.png', class: 'pad5'
-      %a{href: "http://www.soccer.com/playerpassnav/teamGateway_2.0.php?club_id=8805289"}
-        = image_tag 'getGearLogo.png', class: 'pad5', alt: 'Get Central Marin Gear'
+    = cms_region(@web_parts, 'home.sponsors', :div)
 
 %div{id: 'field_status', class: 'grid_6 box relative'}
   %div{class: 'bg_inlay'}
