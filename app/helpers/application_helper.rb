@@ -44,7 +44,7 @@ module ApplicationHelper
     .html_safe
   end
   
-  def cms_region(web_parts, part_name, tag, tag_class)
+  def cms_region(web_parts, part_name, tag, tag_class = '')
 
     # Make sure we have an array of classes
     if tag_class.kind_of? String
