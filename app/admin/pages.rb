@@ -18,7 +18,10 @@ ActiveAdmin.register Page do
       html = page.web_parts.map {|part| part.name}.join ('<br>')
       html.html_safe
     end
-    column "Last Updated", :updated_at
+    column "Last Updated" do |page|
+      last_updated = page.web_parts.order("updated_at DESC").first.updated_at
+      last_updated.in_time_zone('Pacific Time (US & Canada)').strftime("%m/%d/%Y %l:%M %Z")
+    end
 
   end
 
@@ -38,5 +41,11 @@ ActiveAdmin.register Page do
   collection_action :cancel_edit_pages, :method => :get do
     session[:edit_pages] = false
     redirect_to collection_path
+  end
+
+  controller do
+    def scoped_collection
+      super.includes :web_parts # prevents N+1 queries to your database
+    end
   end
 end
