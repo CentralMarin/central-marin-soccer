@@ -18,7 +18,7 @@ set :use_sudo, false
 set :deploy_to, "/webapps/centralmarinsoccer"
 
 set :linked_files, %w{config/secrets.yml config/CentralMarinSoccerTryouts.p12}
-set :linked_dirs, %w{public/uploads public/assets public/system log}
+set :linked_dirs, %w{public/uploads public/assets public/system log public/ckeditor_assets}
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
