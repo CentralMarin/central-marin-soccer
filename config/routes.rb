@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-#  resources :tryout_registrations
-
   root :to => 'home#index'
 
   mount Ckeditor::Engine => '/admin/ckeditor'
@@ -9,12 +7,6 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   get '/tryouts', :to => 'tryouts#index', :as => 'tryouts'
-
-  # United Specific Tryouts
-  get '/tryouts/united', :to => 'tryouts#united_index', :as => 'tryouts_united_index'
-  # get '/tryouts/united/registration', :to => 'tryouts#united_registration', :as => 'tryouts_united_registration'
-  # post '/tryouts/united/registration', :to => 'tryouts#united_registration_create', :as => 'tryouts_united_registration_create'
-
 
   get '/tryouts/registration', :to => 'tryouts#registration', :as => 'tryouts_registration'
   post '/tryouts/registration', :to => 'tryouts#registration_create', :as => 'tryouts_registration_create'
@@ -44,8 +36,9 @@ Rails.application.routes.draw do
   get '/information/on-equal-footing', to: 'information#scholarship', as: 'scholarship'
 
   get '/referees', to: 'information#referees', as: 'referees'
-  get '/referees/2-man-ref-system', to: 'information#referees', as: 'old-2-man-referees'
+  get '/referees/2-man-ref-system', to: redirect('/referees')
   get '/tournaments', to: 'information#tournaments', as: 'tournaments'
 
-  post '/web_part/save', to: 'web_part#save', as: 'web_part'
+  post '/web_part/save', to: 'web_part#update', as: 'update_web_part'
+  get '/web_part/:locale', to: 'web_part#show', as: 'web_part'
 end

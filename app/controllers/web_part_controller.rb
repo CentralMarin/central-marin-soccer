@@ -1,5 +1,15 @@
 class WebPartController < ApplicationController
-  def save
+  def show
+    html = nil
+    I18n.with_locale(params[:locale].to_sym) do
+      web_part = WebPart.find_by(name: params[:name])
+      html = web_part.html unless web_part.nil?
+    end
+
+    render json: {html: html}
+  end
+
+  def update
 
     # verify the current user has the appropriate permissions
     if session[:edit_pages] != true
