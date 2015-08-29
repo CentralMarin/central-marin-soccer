@@ -60,6 +60,15 @@
             */
         };
 
+        var _loadContent = function(locale, name, elem) {
+            $.get('/web_part/' + locale, {name: name} )
+                .done(function(data) {
+                    // Update the element
+                    elem.innerHTML = data.html;
+                } )
+                .fail(function(jqXHR, status, error) { alert("Error: " + status + " " + error)})
+        };
+
         var _addTabs = function(elem, event) {
 
             // Make sure we only have one set of tabs at a time
@@ -87,6 +96,10 @@
 
             // show tabs
             $( "#tabs" ).tabs();
+            
+            var webPartName = $(elem).data('name');
+            _loadContent('en', webPartName, elem);
+            _loadContent('es', webPartName, document.getElementById('tabs-spanish'));
         };
 
         var _removeTabs = function() {
