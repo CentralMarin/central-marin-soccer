@@ -94,12 +94,15 @@
 
             elem.setAttribute('id', 'tabs-english');
 
+            es_elem = document.getElementById('tabs-spanish');
+            es_elem.setAttribute('class', elem.getAttribute('class'));
+
             // show tabs
             $( "#tabs" ).tabs();
-            
+
             var webPartName = $(elem).data('name');
             _loadContent('en', webPartName, elem);
-            _loadContent('es', webPartName, document.getElementById('tabs-spanish'));
+            _loadContent('es', webPartName, es_elem);
         };
 
         var _removeTabs = function() {
