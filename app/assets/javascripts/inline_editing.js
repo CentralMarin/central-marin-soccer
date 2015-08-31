@@ -65,6 +65,13 @@
                 .done(function(data) {
                     // Update the element
                     elem.innerHTML = data.html;
+
+                    // Show tabs
+                    $( "#tabs" ).tabs();
+
+                    // Enable CKEditor
+                    _showCKEditor(elem);
+
                 } )
                 .fail(function(jqXHR, status, error) { alert("Error: " + status + " " + error)})
         };
@@ -97,12 +104,21 @@
             es_elem = document.getElementById('tabs-spanish');
             es_elem.setAttribute('class', elem.getAttribute('class'));
 
-            // show tabs
-            $( "#tabs" ).tabs();
-
             var webPartName = $(elem).data('name');
             _loadContent('en', webPartName, elem);
             _loadContent('es', webPartName, es_elem);
+        };
+
+        var _showCKEditor = function(elem) {
+            elem.contentEditable = true;
+            CKEDITOR.inline(elem, {
+               toolbar: null,
+                on: {
+                    focus: function(event) {
+                        event.editor.setReadOnly(false);
+                    }
+                }
+            });
         };
 
         var _removeTabs = function() {
