@@ -4,8 +4,7 @@
     namespace("soccer");
     soccer.inline_editing = function() {
 
-        var tabsHTML = "<ul><li><a href='#tabs-english'>English</a></li><li><a href='#tabs-spanish'>Spanish</a></li></ul><div id='tabs-spanish'><p>TEST Content - Replace w/ CKEDITOR</p></div><span style='position: absolute; right: 20px; top: 10px'><a href='#' id='save'>Save</a>&nbsp;<a href='#' id='cancel'>Cancel</a></a></span>";
-        var closeTabsHTML = "<span style='position: absolute; right: 20px; top: 10px'>Text Here...</span>";
+        var tabsHTML = "<ul><li><a href='#tabs-english'>English</a></li><li><a href='#tabs-spanish'>Spanish</a></li></ul><div id='tabs-spanish'><p>SPANISH</p></div><span style='position: absolute; right: 5px; top: 10px'><a href='#' id='save'>Save</a><a href='#' id='cancel'>Cancel</a></a></span>";
 
         var enable_inline = function(elem) {
             var $elem = $(elem);
@@ -139,14 +138,9 @@
                     { name: 'Blue Heading', element: 'h2', attributes: { 'class': 'alt' }}
                 ]);
                 CKEDITOR.config.stylesSet = 'CM Styles';
-                CKEDITOR.config.toolbarLocation = 'bottom';
 
                 $('.editable').each(function(index, elem) {
                     enable_inline(elem);
-                });
-
-                $(document).click(function(e) {
-                   _removeTabs();
                 });
             });
         };
