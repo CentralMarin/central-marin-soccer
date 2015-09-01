@@ -17,18 +17,25 @@ class WebPartController < ApplicationController
      return
     end
 
-    # Lookup the name
-    web_part = WebPart.find_by(name: params[:name])
-    if web_part.nil?
-      render :json => { :errors => "Unable to update - #2"}, :status => 422
-      return
+    name = params[:name]
+    render :json => { :errors => "Unable to update - #2"}, :status => 422 unless save_content(:en, name, params[:en_html])
+    render :json => { :errors => "Unable to update - #3"}, :status => 422 unless save_content(:es, name, params[:es_html])
+
+    head :ok
+  end
+
+  protected
+
+  def save_content(locale, name, html)
+    I18n.with_locale(locale) do
+      web_part = WebPart.find_by(name: name)
+      return false if web_part.nil?
+
+      web_part.html = html;
+      return true if web_part.save
     end
 
-    web_part.html = params[:html]
-    if web_part.save
-      head :ok
-    else
-      render :json => { :errors => "Unable to update - #3"}, :status => 422
-    end
+    false
+
   end
 end

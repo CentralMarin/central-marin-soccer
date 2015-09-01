@@ -4,7 +4,8 @@
     namespace("soccer");
     soccer.inline_editing = function() {
 
-        var tabsHTML = "<ul><li><a href='#tabs-english'>English</a></li><li><a href='#tabs-spanish'>Spanish</a></li></ul><div id='tabs-spanish'><p>TEST Content - Replace w/ CKEDITOR</p></div>";
+        var tabsHTML = "<ul><li><a href='#tabs-english'>English</a></li><li><a href='#tabs-spanish'>Spanish</a></li></ul><div id='tabs-spanish'><p>TEST Content - Replace w/ CKEDITOR</p></div><span style='position: absolute; right: 20px; top: 10px'><a href='#' id='save'>Save</a>&nbsp;<a href='#' id='cancel'>Cancel</a></a></span>";
+        var closeTabsHTML = "<span style='position: absolute; right: 20px; top: 10px'>Text Here...</span>";
 
         var enable_inline = function(elem) {
             var $elem = $(elem);
@@ -19,45 +20,27 @@
                 //_removeTags(elem);
                console.log('Focus out');
             });
-/*
-            elem.contentEditable = true;
+        };
 
-            CKEDITOR.inline(elem, {
-                toolbar: null,
-                on: {
-                    focus: function(event) {
+        var _saveContent = function(name, english_content, spanish_content) {
 
-                        _addTabs(elem);
-
-                        // Necessary for hidden dom elements to work properly
-                        event.editor.setReadOnly(false);
-                    },
-                    blur: function(event) {
-
-                        // Grab the name
-                        var name = $(elem).data('name');
-                        var html = event.editor.getData();
-
-                        var data = {
-                            name: name,
-                            html: html
-                        };
-
-                        // Save the data back to the server
-                        $.ajax({
-                            type: 'POST',
-                            url: '/web_part/save',
-                            data: data,
-                            beforeSend: function(jqXHR, settings) {
-                                jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-                            }
-                        })
-                            .fail(function(jqXHR, status, error) { alert("Error: " + status + " " + error)})
-                            .always(function(jqXHR, status, error) { _removeTabs(elem); });
-                    }
+            // Save the data back to the server
+            $.ajax({
+                type: 'POST',
+                url: '/web_part/save',
+                data: {name: name, en_html: english_content, es_html: spanish_content},
+                beforeSend: function(jqXHR, settings) {
+                    jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
                 }
-            });
-            */
+            })
+            .fail(function(jqXHR, status, error) { alert("Error: " + status + " " + error)})
+            .always(function(jqXHR, status, error) { _removeTabs(); });
+        };
+
+        var _cancelEdit = function(webPartName, elem) {
+            // Reload the original saved content
+            _loadContent('en', webPartName, elem);
+            _removeTabs();
         };
 
         var _loadContent = function(locale, name, elem) {
@@ -65,9 +48,6 @@
                 .done(function(data) {
                     // Update the element
                     elem.innerHTML = data.html;
-
-                    // Show tabs
-                    $( "#tabs" ).tabs();
 
                     // Enable CKEditor
                     _showCKEditor(elem);
@@ -83,7 +63,7 @@
             if (tabElem) {
                 if (elem != tabElem) {
                     // Remove the other tabs
-                    _removeTabs(tabElem);
+                    _removeTabs();
                 } else {
                     return; // Do nothing. Tabs already setup
                 }
@@ -104,9 +84,22 @@
             es_elem = document.getElementById('tabs-spanish');
             es_elem.setAttribute('class', elem.getAttribute('class'));
 
+            // Show tabs
+            $( "#tabs" ).tabs();
+
+            // Reload content to make sure we have the latest
             var webPartName = $(elem).data('name');
             _loadContent('en', webPartName, elem);
             _loadContent('es', webPartName, es_elem);
+
+            // Cancel and Save Tabs Button
+            $('#save').button().click(function(event) {
+                _saveContent(webPartName, elem.innerHTML, es_elem.innerHTML);
+            });
+
+            $('#cancel').button().click(function(event) {
+                _cancelEdit(webPartName, elem);
+            });
         };
 
         var _showCKEditor = function(elem) {
@@ -146,6 +139,7 @@
                     { name: 'Blue Heading', element: 'h2', attributes: { 'class': 'alt' }}
                 ]);
                 CKEDITOR.config.stylesSet = 'CM Styles';
+                CKEDITOR.config.toolbarLocation = 'bottom';
 
                 $('.editable').each(function(index, elem) {
                     enable_inline(elem);
