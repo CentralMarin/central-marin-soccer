@@ -38,7 +38,7 @@ module CentralMarinSoccer
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif active_admin.css active_admin.js modernizr-2.6.2.min.js jquery-1.9.0.js jquery-ui.js home.css coach.css coaches.js fields.css fields.js information.css home.js tryouts.js jquery.js inline_editing.js information.tournaments.js ckeditor/*.js ckeditor/*.css ckeditor/**/*.js ckeditor/**/*.css dark-hive/jquery-ui-1.10.0.custom.css team.js team.css tryouts.css)
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif active_admin.css active_admin.js modernizr-2.6.2.min.js jquery-1.9.0.js jquery-ui.js home.css coach.css coaches.js fields.css fields.js information.css home.js tryouts.js jquery.js inline_editing.js ckeditor/*.js ckeditor/*.css ckeditor/**/*.js ckeditor/**/*.css dark-hive/jquery-ui-1.10.0.custom.css team.js team.css tryouts.css)
 
   end
 end
