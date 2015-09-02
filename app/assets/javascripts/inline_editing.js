@@ -4,7 +4,7 @@
     namespace("soccer");
     soccer.inline_editing = function() {
 
-        var tabsHTML = "<ul><li><a href='#tabs-english'>English</a></li><li><a href='#tabs-spanish'>Spanish</a></li></ul><div id='tabs-spanish'><p>SPANISH</p></div><span style='position: absolute; right: 5px; top: 10px'><a href='#' id='save'>Save</a><a href='#' id='cancel'>Cancel</a></a></span>";
+        var tabsHTML = $('#tabsTemplate').render({});
 
         var _enable_inline = function(elem) {
             var $elem = $(elem);

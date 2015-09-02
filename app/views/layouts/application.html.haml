@@ -60,7 +60,30 @@
     %script
       window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})
 
-  - if session[:edit_pages] == true
+  - if session[:edit_pages]
+    %script{id: 'tabsTemplate', type: 'text/x-jsrender'}
+      %ul
+        %li
+          %a{href: '#tabs-english'}
+            English
+        %li
+          %a{href: '#tabs-spanish'}
+            Spanish
+
+      %div{id: 'tabs-spanish'}
+        %p
+          SPANISH
+
+      %span{style: 'position: absolute; right: 5px; top: 10px'}
+        %a{id: 'save', href: '#'}
+          Save
+        %a{id: 'cancel', href: '#'}
+          Cancel
+
+
+  - if session[:edit_pages]
     = javascript_include_tag "ckeditor/init"
+    = javascript_include_tag "jsrender"
     = javascript_include_tag "inline_editing"
     = javascript_include_tag "jquery-ui"
+
