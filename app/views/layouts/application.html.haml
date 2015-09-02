@@ -75,10 +75,12 @@
           SPANISH
 
       %span{style: 'position: absolute; right: 5px; top: 10px'}
-        %a{id: 'save', href: '#'}
-          %span{class: 'ui-button-icon-primary ui-icon-disk'}
-        %a{id: 'cancel', href: '#'}
-          %span{class: 'ui-icon ui-icon-circle-close'}
+        %a{id: 'cms-translate', href: '#'}
+          %span{class: 'ui-icon ui-icon-transferthick-e-w', title: 'Translate to Spanish'}
+        %a{id: 'cms-save', href: '#'}
+          %span{class: 'ui-icon ui-icon-disk', title: 'Save'}
+        %a{id: 'cms-cancel', href: '#'}
+          %span{class: 'ui-icon ui-icon-circle-close', title: 'Cancel'}
 
 
   - if session[:edit_pages]

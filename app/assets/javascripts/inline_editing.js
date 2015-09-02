@@ -4,22 +4,23 @@
     namespace("soccer");
     soccer.inline_editing = function() {
 
+        // Load the HTML template from layouts/application.html.haml
         var tabsHTML = $('#tabsTemplate').render({});
 
+        // Make element clickable for CMS
         var _enable_inline = function(elem) {
             var $elem = $(elem);
 
             $elem.click(function(event) {
                 _addTabs(elem);
-                console.log('Focus in');
                 event.stopPropagation();
             });
         };
 
+        // Save both English and Spanish web part content and hide tabs
         var _saveContent = function(name, english_content, spanish_content) {
 
-            // Save the data back to the server
-            $.ajax({
+            return $.ajax({
                 type: 'POST',
                 url: '/web_part/save',
                 data: {name: name, en_html: english_content, es_html: spanish_content},
@@ -31,76 +32,34 @@
             .always(function(jqXHR, status, error) { _removeTabs(); });
         };
 
+        // Hide tabs and reload original content
         var _cancelEdit = function(webPartName, elem) {
-            // Reload the original saved content
-            _removeTabs();
 
-            _loadContent('en', webPartName, elem, false);
+            _removeTabs();
+            _loadContent('en', webPartName, elem);
+
         };
 
-        var _loadContent = function(locale, name, elem, editor) {
-            $.get('/web_part/' + locale, {name: name} )
+        // Translate the english text to spanish
+        var _translateContentToSpanish = function(elem, es_elem) {
+
+        };
+
+        // Load the content for the specified locale
+        var _loadContent = function(locale, name, elem) {
+            return $.get('/web_part/' + locale, {name: name} )
                 .done(function(data) {
                     // Update the element
                     elem.innerHTML = data.html;
-
-                    // Enable CKEditor
-                    if (editor) _showCKEditor(elem);
-
                 } )
                 .fail(function(jqXHR, status, error) { alert("Error: " + status + " " + error)})
         };
 
-        var _addTabs = function(elem, event) {
-
-            // Make sure we only have one set of tabs at a time
-            var tabElem = document.getElementById('tabs-english');
-            if (tabElem) {
-                if (elem != tabElem) {
-                    // Remove the other tabs
-                    _removeTabs();
-                } else {
-                    return; // Do nothing. Tabs already setup
-                }
-            }
-
-            var parent = elem.parentNode;
-            $(parent).click(function(event) { event.stopPropagation(); });
-
-            var wrapper = document.createElement('div');
-            wrapper.setAttribute('id', 'tabs');
-
-            parent.replaceChild(wrapper, elem);
-            wrapper.innerHTML = tabsHTML;
-            wrapper.appendChild(elem);
-
-            elem.setAttribute('id', 'tabs-english');
-
-            es_elem = document.getElementById('tabs-spanish');
-            es_elem.setAttribute('class', elem.getAttribute('class'));
-
-            // Show tabs
-            $( "#tabs" ).tabs();
-
-            // Reload content to make sure we have the latest
-            var webPartName = $(elem).data('name');
-            _loadContent('en', webPartName, elem, true);
-            _loadContent('es', webPartName, es_elem, true);
-
-            // Cancel and Save Tabs Button
-            $('#save').button().click(function(event) {
-                _saveContent(webPartName, elem.innerHTML, es_elem.innerHTML);
-            });
-
-            $('#cancel').button().click(function(event) {
-                _cancelEdit(webPartName, elem);
-            });
-        };
-
+        // Show the CKEditor and make the content editable
         var _showCKEditor = function(elem) {
             elem.contentEditable = true;
             CKEDITOR.inline(elem, {
-               toolbar: null,
+                toolbar: null,
                 on: {
                     focus: function(event) {
                         event.editor.setReadOnly(false);
@@ -109,6 +68,54 @@
             });
         };
 
+        // Add Tabs
+        var _addTabs = function(elem, event) {
+
+            // Make sure we only have one set of tabs at a time
+            var tabElem = document.getElementById('tabs-english');
+            if (tabElem) {
+               return; // Do nothing. Tabs already setup
+            }
+
+            var wrapper = document.createElement('div');
+            wrapper.setAttribute('id', 'tabs');
+
+            // Move element under wrapper as the english tab
+            elem.parentNode.replaceChild(wrapper, elem);
+            wrapper.innerHTML = tabsHTML;
+            wrapper.appendChild(elem);
+            elem.setAttribute('id', 'tabs-english');
+
+            // Make sure we have the same classes on the spanish tab content
+            var es_elem = document.getElementById('tabs-spanish');
+            es_elem.setAttribute('class', elem.getAttribute('class'));
+
+            // Show tabs
+            $( "#tabs" ).tabs();
+
+            // Reload content to make sure we have the latest
+            var webPartName = $(elem).data('name');
+            $.when(_loadContent('en', webPartName, elem), _loadContent('es', webPartName, es_elem))
+                .done(function() {
+                    _showCKEditor(elem);
+                    _showCKEditor(es_elem);
+                });
+
+            // Toolbar Tab Buttons
+            $('#cms-save').button().click(function(event) {
+                _saveContent(webPartName, elem.innerHTML, es_elem.innerHTML);
+            });
+
+            $('#cms-cancel').button().click(function(event) {
+                _cancelEdit(webPartName, elem);
+            });
+
+            $('#cms-translate').button().click(function(event) {
+                _translateContentToSpanish(elem, es_elem);
+            });
+        };
+
+        // Remove the tabs
         var _removeTabs = function() {
 
             // clean up CKEditors
@@ -133,6 +140,7 @@
             parent.replaceChild(content, tabs);
         };
 
+        // Initialize the CMS
         var init = function() {
             $(document).ready(function() {
                 CKEDITOR.stylesSet.add('CM Styles', [
