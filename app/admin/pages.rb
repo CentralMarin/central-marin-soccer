@@ -7,12 +7,12 @@ ActiveAdmin.register Page do
   actions :index
 
   index pagination_total: false, :download_links => false do
-    column :name
-    column "English" do |page|
-      link_to "edit", page.url if session[:edit_pages]
-    end
-    column "Spanish" do |page|
-      link_to "editar", "#{request.protocol}es.#{request.host_with_port}#{page.url}" if session[:edit_pages]
+    column :name do |page|
+      if session[:edit_pages]
+        link_to page.name, page.url
+      else
+        page.name
+      end
     end
     column "Parts" do |page|
       html = page.web_parts.map {|part| part.name}.join ('<br>')
