@@ -7,7 +7,7 @@ gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
 gem 'ckeditor', '4.1.3'
 gem 'carrierwave', '0.10.0'
-gem 'mini_magick', '4.2.10'
+gem 'mini_magick', '4.3.0'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
