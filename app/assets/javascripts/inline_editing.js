@@ -33,16 +33,26 @@
         };
 
         // Hide tabs and reload original content
-        var _cancelEdit = function(webPartName, elem) {
+        var _cancelEdit = function(webPartName) {
 
-            _removeTabs();
-            _loadContent('en', webPartName, elem);
+            _loadContent('en', webPartName, _removeTabs());
 
         };
 
         // Translate the english text to spanish
         var _translateContentToSpanish = function(elem, es_elem) {
-
+            return $.ajax({
+                type: 'POST',
+                url: '/web_part/translate',
+                data: {html: elem.innerHTML},
+                beforeSend: function(jqXHR, settings) {
+                    jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                }
+            })
+            .done(function(data) {
+               es_elem.innerHTML = data.html;
+            })
+            .fail(function(jqXHR, status, error) { alert("Error: " + status + " " + error)})
         };
 
         // Load the content for the specified locale
@@ -138,6 +148,8 @@
 
             // Swap elements
             parent.replaceChild(content, tabs);
+
+            return content;
         };
 
         // Initialize the CMS

@@ -24,6 +24,14 @@ class WebPartController < ApplicationController
     head :ok
   end
 
+  def translate
+    html = params[:html]
+
+    html = 'Spanish - ' + html;
+
+    render json: {html: html}
+  end
+
   protected
 
   def save_content(locale, name, html)

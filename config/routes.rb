@@ -40,5 +40,6 @@ Rails.application.routes.draw do
   get '/tournaments', to: 'information#tournaments', as: 'tournaments'
 
   post '/web_part/save', to: 'web_part#update', as: 'update_web_part'
+  post '/web_part/translate', to: 'web_part#translate', as: 'translate_content'
   get '/web_part/:locale', to: 'web_part#show', as: 'web_part'
 end
