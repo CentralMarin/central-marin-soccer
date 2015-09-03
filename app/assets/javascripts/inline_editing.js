@@ -142,6 +142,7 @@
 
             var content = document.getElementById('tabs-english').cloneNode(true);
             content.removeAttribute('id');
+            content.removeAttribute('contenteditable');
 
             // Add our click handler
             _enable_inline(content);
