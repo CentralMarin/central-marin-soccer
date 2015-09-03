@@ -35,32 +35,17 @@ en:
     contact: "Contact"
     tryout: "Tryouts"
   home:
-    title: "Welcome to Central Marin Soccer Club"
-    overview: "The Central Marin Competitive Soccer Club (CMCSC) is comprised of Gold, Silver and Bronze Division select soccer teams serving the central Marin communities of San Rafael, Terra Linda, Larkspur, San Anselmo, Ross, Greenbrae, Kentfield and Corte Madera. The club is also home to the U9 Developmental Academy."
     learn_more: 'Learn More'
     program:
-      heading: "Program Information"
-      body: "Central Marin Soccer Club offers various levels of league and tournament play. The length of season, and program participation costs varies between each level."
       link: "Learn More"
-    tryouts:
-      heading: '2015 Tryouts'
-      body: '<p>U12-U14 Tryouts March 7-15</p><p>Academy - U11 tryouts complete. Thanks to everyone who came out.</p>'
-      link: 'Learn More'
     donate:
-      heading: "Donate"
-      body: "On Equal Footing is Central Marin’s financial aid program to assist players who can’t afford the cost of a competitive soccer program.  Over the years Central Marin’s OEF has given over $200,000 in financial aid.  This past year we gave 75 scholarships to approximately 15% of our players, for a total of over $30,000."
       link: "Learn More"
     fields:
       heading: "Fields Statuses"
       body: "For full status visit the fields page"
       link: "Fields Page"
-    sponsors:
-      heading: "Support Our Sponsors and Affiliates"
   information:
     back: "Back to program overview..."
-    winners: "Winners"
-    current: "current"
-    previous: "previous"
   coach:
      heading: "Coaching Philosophy"
      teams: "Teams"
@@ -91,7 +76,6 @@ en:
     manager: "Manager:"
     roster: "Roster"
     schedule: "Schedule"
-    record: "Record: "
     news: "Team News"
     back: "Return to Teams"
   contact:
