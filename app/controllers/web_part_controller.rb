@@ -27,9 +27,10 @@ class WebPartController < ApplicationController
   def translate
     html = params[:html]
 
-    html = 'Spanish - ' + html;
+    translator = BingTranslator.new(Rails.application.secrets.bing_client_id, Rails.application.secrets.bing_client_secret);
+    spanish = translator.translate(html, from: 'en', to: 'es')
 
-    render json: {html: html}
+    render json: {html: spanish}
   end
 
   protected
