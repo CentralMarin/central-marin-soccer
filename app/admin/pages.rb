@@ -25,7 +25,7 @@ ActiveAdmin.register Page do
 
   end
 
-  action_item :only => :index do
+  action_item :edit_pages, :only => :index do
     if session[:edit_pages] == true
       link_to "Cancel Edit", :action => "cancel_edit_pages"
     else

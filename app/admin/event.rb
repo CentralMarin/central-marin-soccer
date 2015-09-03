@@ -102,7 +102,7 @@ ActiveAdmin.register Event do
     redirect_to collection_path
   end
 
-  action_item :only => :index do
+  action_item :seed, :only => :index do
     link_to 'Seed Events', :action => 'create_events'
   end
 
@@ -169,11 +169,11 @@ ActiveAdmin.register Event do
     redirect_to admin_event_path(params[:event][:id])
   end
 
-  action_item :only => :show do
+  action_item :download_csv, :only => :show do
     link_to 'Download Event Item CSV', :action => 'download_csv', :event_id => event.id
   end
 
-  action_item :only => :show do
+  action_item :upload_csv, :only => :show do
     link_to 'Upload Event Item CSV', :action => 'upload_csv', :event_id => event.id
   end
 

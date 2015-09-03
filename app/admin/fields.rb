@@ -85,7 +85,7 @@ ActiveAdmin.register Field, {:sort_order => "name_asc"} do
     head :ok
   end
 
-  action_item :only => :index do
+  action_item :update_fields, :only => :index do
     link_to "Update fields", :action => "fields_status"
   end
 end
