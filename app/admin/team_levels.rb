@@ -2,6 +2,8 @@
 
 ActiveAdmin.register TeamLevel do
 
+  include ActiveAdminTranslate
+
   menu :label => 'Level', :parent => 'Teams'
   permit_params :name, :translations_attributes => [:name, :locale, :id]
 
@@ -22,6 +24,13 @@ ActiveAdmin.register TeamLevel do
       end
     end
     f.actions
+  end
+
+
+  controller do
+    def translation_fields
+      [:name]
+    end
   end
 
 end

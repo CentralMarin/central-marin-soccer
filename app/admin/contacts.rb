@@ -1,6 +1,7 @@
 ActiveAdmin.register Contact do
 
   include ActiveAdminCsvUpload
+  include ActiveAdminTranslate
 
   permit_params :name, :email, :bio, :club_position, :description, :category, :image, :crop_x, :crop_y, :crop_w, :crop_h, :translations_attributes => [:bio, :club_position, :description, :locale, :id]
 
@@ -122,6 +123,11 @@ ActiveAdmin.register Contact do
     end
   end
 
+  controller do
+    def translation_fields
+      [:bio, :club_position, :description]
+    end
+  end
 end
 
 

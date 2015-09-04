@@ -5,13 +5,17 @@ module ActiveAdminTranslate
 
     base.send(:collection_action, :translate, :method => :get) do
       id = params[:id]
-      model =  Article.find_by(id: id)
+      model =  resource_class.find_by(id: id)
       fields = translation_fields
 
       translator = BingTranslator.new(Rails.application.secrets.bing_client_id, Rails.application.secrets.bing_client_secret)
 
       english_translations = model.translations.find_by(locale: :en)
       spanish_translation = model.translations.find_by(locale: :es)
+      if spanish_translation.nil?
+        spanish_translation = model.translations.new
+        spanish_translation.locale = :es
+      end
 
       fields.each do |field|
         content = english_translations.send(field)

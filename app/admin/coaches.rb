@@ -2,6 +2,8 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
 
   permit_params :name, :email, :bio, :crop_x, :crop_y, :crop_w, :crop_h, :image, :translations_attributes => [:bio, :locale, :id]
 
+  include ActiveAdminTranslate
+
   index do
     column :name
     column :image do |coach|
@@ -63,5 +65,10 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
   end
 
   #TODO: Attempt to rename the image if the coaches name is changed
+  controller do
+    def translation_fields
+      [:bio]
+    end
+  end
 
 end

@@ -17,6 +17,8 @@ end
 
 ActiveAdmin.register Article do
 
+  include ActiveAdminTranslate
+
   menu :label => 'Articles'
   permit_params :title, :body, :author, :category_id, :team_id, :coach_id, :published, :crop_x, :crop_y, :crop_w, :crop_h, :article_id, :carousel_order, :image, :translations_attributes => [:title, :body, :locale, :id]
 
@@ -49,6 +51,7 @@ ActiveAdmin.register Article do
   end
 
   show do |article|
+
     attributes_table do
       row :author
       row :image do
@@ -91,13 +94,6 @@ ActiveAdmin.register Article do
       row :created_at
       row :updated_at
     end
-  end
-
-  collection_action :article_carousel, :title => "Carousel", :method => :get do
-    @articles = Article.all
-    @articles_in_carousel = ArticleCarousel.all.order("carousel_order asc")
-
-    render "admin/articles/_carousel"
   end
 
   form :html => { :enctype => "multipart/form-data" } do |f|
@@ -180,7 +176,20 @@ ActiveAdmin.register Article do
     head :ok
   end
 
-  action_item :only => :index do
+  action_item :carousel, :only => :index do
     link_to "Carousel", :action => "article_carousel"
+  end
+
+  collection_action :article_carousel, :title => "Carousel", :method => :get do
+    @articles = Article.all
+    @articles_in_carousel = ArticleCarousel.all.order("carousel_order asc")
+
+    render "admin/articles/_carousel"
+  end
+
+  controller do
+    def translation_fields
+      [:title, :body]
+    end
   end
 end
