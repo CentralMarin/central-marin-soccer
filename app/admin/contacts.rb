@@ -31,25 +31,69 @@ ActiveAdmin.register Contact do
   end
 
   show do |contact|
-    attributes_table do
-      row :category
-      row :club_position do
-        show_translated_model_field(contact, :club_position)
+    columns do
+      column do
+        attributes_table do
+          row :category
+          row :club_position do
+            show_translation :en, contact, :club_position
+          end
+          row :description do
+            show_translation :en, contact, :description
+          end
+          row :name
+          row :image do
+            image_tag image_path(contact.image_url)
+          end
+          row :email
+          row :bio do
+            show_translation :en, contact, :bio
+          end
+          row :created_at
+          row :updated_at
+        end
       end
-      row :description do
-        show_translated_model_field(contact, :description)
+      column do
+        attributes_table do
+          row :category
+          row :club_position do
+            show_translation :es, contact, :club_position
+          end
+          row :description do
+            show_translation :es, contact, :description
+          end
+          row :name
+          row :image do
+            image_tag image_path(contact.image_url)
+          end
+          row :email
+          row :bio do
+            show_translation  :es, contact, :bio
+          end
+          row :created_at
+          row :updated_at
+        end
       end
-      row :name
-      row :image do
-        image_tag image_path(contact.image_url)
-      end
-      row :email
-      row :bio do
-        show_translated_model_field(contact, :bio)
-      end
-      row :created_at
-      row :updated_at
     end
+    # attributes_table do
+    #   row :category
+    #   row :club_position do
+    #     show_translated_model_field(contact, :club_position)
+    #   end
+    #   row :description do
+    #     show_translated_model_field(contact, :description)
+    #   end
+    #   row :name
+    #   row :image do
+    #     image_tag image_path(contact.image_url)
+    #   end
+    #   row :email
+    #   row :bio do
+    #     show_translated_model_field(contact, :bio)
+    #   end
+    #   row :created_at
+    #   row :updated_at
+    # end
   end
 
   form :html => { :enctype => "multipart/form-data" } do |f|

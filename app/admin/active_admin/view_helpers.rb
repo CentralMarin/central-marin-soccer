@@ -19,17 +19,15 @@ module ActiveAdmin::ViewHelpers
     english
   end
 
-  protected
-
-  def show_translated_model_field_for_locale(locale, model, field)
-      if (model.nil? || model.send(field).blank?)
-        if locale == :es
-          return '<div><b>Spanish Translation Missing - considering using google translate to get the point across</b></div>'.html_safe, true
-        else
-          return '<div><span class="empty">Empty</span></div>'.html_safe, false
-        end
+  def show_translation(locale, model, field)
+    model = model.translations.find_by(locale: locale)
+    if model.nil? || model.send(field).blank?
+      if locale == :es
+        return '<div><b>Spanish Translation Missing - Use Translate to Spanish</b></div>'.html_safe
       else
-        return model.send(field).html_safe, true
+        return '<div><span class="empty">Empty</span></div>'.html_safe
       end
+    end
+    model.send(field).html_safe
   end
 end
