@@ -28,9 +28,15 @@ ActiveAdmin.register Event do
   show do |event|
     attributes_table do
       row :type
-      row :heading
-      row (:body) { |event| event.body.html_safe }
-      row (:tout)  { |event| event.tout.html_safe }
+      row :heading do
+        show_tanslated(self, event, :heading)
+      end
+      row :body do
+        show_tanslated(self, event, :body)
+      end
+      row :tout do
+        show_tanslated(self, event, :tout)
+      end
       row :status
       row :created_at
       row :updated_at

@@ -28,7 +28,7 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
         image_tag image_path(coach.image_url)
       end
       row :bio do
-        show_translated_model_field(coach, :bio)
+        show_tanslated(self, coach, :bio)
       end
       row :team do
         coach.teams.join("<br/>").html_safe

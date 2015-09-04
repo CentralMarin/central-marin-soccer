@@ -58,10 +58,10 @@ ActiveAdmin.register Article do
         image_tag image_path(article.image_url)
       end
       row :title do
-        show_translated_model_field(article, :title)
+        show_tanslated(self, article, :title)
       end
       row :body do
-        show_translated_model_field(article, :body)
+        show_tanslated(self, article, :body)
       end
       row :category do
         subcategory = ''

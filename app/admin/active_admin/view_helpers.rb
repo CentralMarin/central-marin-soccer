@@ -8,26 +8,45 @@ module ActiveAdmin::ViewHelpers
     strip_tags(html)
   end
 
-  def show_translated_model_field(model, field)
-    # If English is empty, no reason to show suggestion about Spanish
-    english, result = show_translated_model_field_for_locale(:en, model.translations.where(locale: :en).first, field)
-    if result
-      spanish, result = show_translated_model_field_for_locale(:es, model.translations.where(locale: :es).first, field)
-      english = english + spanish
-    end
+  def show_tanslated(context, model, field)
+    english_model = translation_model(:en, model)
+    spanish_model = translation_model(:es, model)
 
-    english
-  end
+    has_english = translation?(english_model, field)
+    has_spanish = translation?(spanish_model, field)
 
-  def show_translation(locale, model, field)
-    model = model.translations.find_by(locale: locale)
-    if model.nil? || model.send(field).blank?
-      if locale == :es
-        return '<div><b>Spanish Translation Missing - Use Translate to Spanish</b></div>'.html_safe
-      else
-        return '<div><span class="empty">Empty</span></div>'.html_safe
+    english_translation = translation(english_model, field)
+    spanish_translation = translation(spanish_model, field)
+
+    empty = '<div><span class="empty">Empty</span></div>'.html_safe
+
+    context.instance_exec do
+      columns do
+        column do
+          has_english ? english_translation : empty
+        end
+        column do
+          if has_spanish
+            spanish_translation
+          else
+            has_english ? '<div><b>Spanish Translation Missing - Use Translate to Spanish button</b></div>'.html_safe : empty
+          end
+        end
       end
     end
-    model.send(field).html_safe
+  end
+
+  protected
+
+  def translation_model(locale, model)
+    model.translations.find_by(locale: locale)
+  end
+
+  def translation(translation_model, field)
+    translation_model.send(field).html_safe if translation?(translation_model, field)
+  end
+
+  def translation?(translation_model, field)
+    !(translation_model.nil? || translation_model.send(field).blank?)
   end
 end

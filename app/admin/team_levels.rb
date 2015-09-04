@@ -10,7 +10,7 @@ ActiveAdmin.register TeamLevel do
   show do |level|
     attributes_table do
       row :name do
-        show_translated_model_field(level, :name)
+        show_tanslated(self, level, :name)
       end
       row :created_at
       row :updated_at
