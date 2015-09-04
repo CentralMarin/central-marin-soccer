@@ -1,5 +1,7 @@
 ActiveAdmin.register Event do
 
+  include ActiveAdminTranslate
+
   actions :index, :show, :update, :edit
   config.filters = false
   permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_groups_attributes => [:id, :_destroy, :event_details_attributes => [:id, :formatted_start, :duration, :location_id, :_destroy], :groups => []]
@@ -175,6 +177,12 @@ ActiveAdmin.register Event do
 
   action_item :upload_csv, :only => :show do
     link_to 'Upload Event Item CSV', :action => 'upload_csv', :event_id => event.id
+  end
+
+  controller do
+    def translation_fields
+      [:heading, :body, :tout]
+    end
   end
 
 end
