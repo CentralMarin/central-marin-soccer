@@ -98,10 +98,12 @@
 
             // Toolbar Tab Buttons
             $('#cms-save').button().click(function(event) {
+                event.preventDefault();
                 _saveContent(webPartName, elem.innerHTML, es_elem.innerHTML);
             });
 
             $('#cms-cancel').button().click(function(event) {
+                event.preventDefault();
                 _cancelEdit(webPartName, elem);
             });
 

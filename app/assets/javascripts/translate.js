@@ -9,6 +9,7 @@
             var button = _addTranslateButtonToToolbar(_getTabsToolbar(tabElem));
 
             button.click(function(event) {
+                event.preventDefault();
                 _translateContentToSpanish(english, spanish);
             });
         };
