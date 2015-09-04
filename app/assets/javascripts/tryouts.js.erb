@@ -76,43 +76,46 @@
             return year;
         };
 
-        return {
-            init_registration: function(month, day, year, gender) {
+        var init_registration = function(month, day, year, gender) {
 
-                // Save off dom elements
-                _month_node = $('#' + month);
-                _day_node = $('#' + day);
-                _year_node = $('#' + year);
-                _gender_name = gender;
+            // Save off dom elements
+            _month_node = $('#' + month);
+            _day_node = $('#' + day);
+            _year_node = $('#' + year);
+            _gender_name = gender;
 
-                // Register change handlers for birthdate
-                _month_node.change(_birthdate_changed);
-                _day_node.change(_birthdate_changed);
-                _year_node.change(_birthdate_changed);
-                $('input[name="' + _gender_name + '"]').change(_birthdate_changed);
-            },
+            // Register change handlers for birthdate
+            _month_node.change(_birthdate_changed);
+            _day_node.change(_birthdate_changed);
+            _year_node.change(_birthdate_changed);
+            $('input[name="' + _gender_name + '"]').change(_birthdate_changed);
+        };
 
-            show_age_group_chart: function(e) {
-                $('#age_group_chart').click(function() {
+        var show_age_group_chart = function(e) {
+            $('#age_group_chart').click(function() {
 
-                    $.get('<%= Rails.application.routes.url_helpers.tryouts_agegroupchart_path(:only_path => true) %>?season=' + _get_current_year(), function(data) {
+                $.get('<%= Rails.application.routes.url_helpers.tryouts_agegroupchart_path(:only_path => true) %>?season=' + _get_current_year(), function(data) {
 
-                        e.html(data);
-                        e.dialog({
-                            draggable: false,
-                            width: 960,
-                            height: 'auto',
-                            position: 'center',
-                            modal: true,
-                            zIndex: 4,
-                            show: { effect: 'fade'},
-                            hide: { effect: 'fade'}
-                        });
+                    e.html(data);
+                    e.dialog({
+                        draggable: false,
+                        width: 960,
+                        height: 'auto',
+                        position: 'center',
+                        modal: true,
+                        zIndex: 4,
+                        show: { effect: 'fade'},
+                        hide: { effect: 'fade'}
                     });
-
-                    return false;
                 });
-            }
+
+                return false;
+            });
+        };
+
+        return {
+            init_registration: init_registration,
+            show_age_group_chart: show_age_group_chart
         };
     }());
 }());

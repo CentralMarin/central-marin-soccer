@@ -1,8 +1,10 @@
-class TryoutsController < InheritedResources::Base
+class TryoutsController < CmsController
 
   @@mutex = Mutex.new
 
   def index
+    init_web_parts('Tryouts Overview')
+
     @info, age_group  = Event.tryout_related_events
   end
 
@@ -18,9 +20,7 @@ class TryoutsController < InheritedResources::Base
                                                           :parent1_cell, :parent1_email, :parent2_first, :parent2_last,
                                                           :parent2_cell, :parent2_email, :completed_by, :relationship, :waiver))
 
-    if not @tryout_registration.birthdate.nil?
-      @tryout_registration.age = EventGroup.age_group(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
-    end
+    @tryout_registration.age = EventGroup.age_group(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year) unless @tryout_registration.birthdate.nil?
 
     if @tryout_registration.save
 

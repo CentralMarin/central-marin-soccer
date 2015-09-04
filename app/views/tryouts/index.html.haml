@@ -17,21 +17,24 @@
       = render partial: 'tryouts/tryout_info', :locals => {tryout: event}
 
 %div.grid_16.box
-  %h2
-    = t('registration.index.questions')
-  = t('registration.index.question_age_group').html_safe
+  = cms_region(@web_parts, 'tryouts.faq1', :div)
 
   %div.clear
     &nbsp;
 
   %div.grid_3
-    %label{:for => 'gender'} Gender *
+    %label{:for => 'gender'}
+      = "#{t('registration.form.gender')} *"
+
   %div.grid_4
-    %input{:type => "radio", :name => 'gender', :value => '0', :required => true} &nbsp; Boy
-    %input{:type => "radio", :name => 'gender', :value => '1', :required => true} &nbsp; Girl
+    %input{:type => "radio", :name => 'gender', :value => '0', :required => true}
+      = " #{t('registration.form.gender_boy')}"
+    %input{:type => "radio", :name => 'gender', :value => '1', :required => true}
+      = " #{t('registration.form.gender_girl')}"
 
   %div.grid_3
-    %label{:for => 'birthdate_month'} Birthday*
+    %label{:for => 'birthdate_month'}
+      = "#{t('registration.form.birthdate')} *"
   %div.grid_4
     %select#birthdate_month{:name => 'birthdate_month', :required => true}
       %option
@@ -68,8 +71,7 @@
   %div.clear
     &nbsp;
 
-  = t('registration.index.question_others').html_safe
-  = link_to t('registration.index.more_info'), information_path, :class => 'alt'
+  = cms_region(@web_parts, 'tryouts.faq2', :div)
 %div.grid_16.box
   %h2
     = t('registration.index.online')
