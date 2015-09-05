@@ -1,5 +1,6 @@
 //= require namespace
 //= require translate
+//= require jsrender
 
 (function () {
     namespace("soccer");
