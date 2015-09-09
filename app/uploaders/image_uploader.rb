@@ -35,4 +35,11 @@ class ImageUploader < CarrierWave::Uploader::Base
       model.default_image_url
     end
   end
+
+  def scale(width, height)
+    if file && model
+      current_width, current_height = ::MiniMagick::Image.open(file.file)[:dimensions]
+      resize_and_pad(width, height) unless width == current_width && height == current_height
+    end
+  end
 end

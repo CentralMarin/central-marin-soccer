@@ -15,7 +15,7 @@ module ImageProcessing
   def process_image
     if image?
       crop_image
-      scale(self.class::IMAGE_WIDTH, self.class::IMAGE_HEIGHT)
+      image.scale(self.class::IMAGE_WIDTH, self.class::IMAGE_HEIGHT)
     end
   end
 
@@ -34,9 +34,4 @@ module ImageProcessing
       end
     end
   end
-
-  def scale(width, height)
-    image.resize_and_pad(width, height)
-  end
-
 end
