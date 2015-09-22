@@ -5,8 +5,7 @@ module ImageProcessing
   def self.included(base)
     base.class_eval do
       mount_uploader :image, ImageUploader
-      after_update :process_image
-      after_create :process_image
+      before_validation :process_image
     end
   end
 
