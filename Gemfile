@@ -58,7 +58,7 @@ group :development do
 end
 
 group :staging, :production do
-  gem 'mysql2', '0.4.1'
+  gem 'mysql2', '0.3.20'
 end
 
 group :development, :test do
@@ -71,4 +71,4 @@ group :development, :test do
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '1.4.0', group: :development
+gem 'spring', '1.3.6', group: :development
