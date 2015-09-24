@@ -71,6 +71,7 @@ namespace :html do
     create_page('Teams', '/teams', ['teams.overview'])
     create_page('Tryouts Overview', '/tryouts', ['tryouts.faq1', 'tryouts.faq2'])
     create_page('Contacts', '/contact', ['contacts.overview', 'contacts.volunteer'])
+    create_page('Field Setup', '/field-setup', ['fields.setup'])
   end
 
   def create_page(name, url, web_part_names)

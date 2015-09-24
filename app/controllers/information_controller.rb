@@ -35,4 +35,8 @@ class InformationController < CmsController
 
     init_web_parts('Tournaments')
   end
+
+  def field_setup
+    init_web_parts('Field Setup')
+  end
 end

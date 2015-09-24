@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get '/referees', to: 'information#referees', as: 'referees'
   get '/referees/2-man-ref-system', to: redirect('/referees')
   get '/tournaments', to: 'information#tournaments', as: 'tournaments'
+  get '/field-setup', to: 'information#field_setup'
 
   post '/web_part/save', to: 'web_part#update', as: 'update_web_part'
   post '/web_part/translate', to: 'web_part#translate', as: 'translate_content'
