@@ -7,7 +7,7 @@ gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
 gem 'ckeditor', '4.1.4'
 gem 'carrierwave', '0.10.0'
-gem 'mini_magick', '4.3.3'
+gem 'mini_magick', '4.3.6'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
@@ -58,7 +58,7 @@ group :development do
 end
 
 group :staging, :production do
-  gem 'mysql2', '0.3.20'
+  gem 'mysql2', '0.4.1'
 end
 
 group :development, :test do
