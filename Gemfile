@@ -5,7 +5,7 @@ gem 'rails', '4.2.4'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
-gem 'ckeditor', '4.1.3'
+gem 'ckeditor', '4.1.4'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.3.3'
 gem 'globalize', '5.0.1'
@@ -22,7 +22,7 @@ gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activead
 gem 'html_press', '0.8.2'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '1.3.10'
+gem 'sqlite3', '1.3.11'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.4'
@@ -43,7 +43,7 @@ gem 'jquery-ui-themes', '0.0.11'
 gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.3.1'
+gem 'jbuilder', '2.3.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -52,7 +52,7 @@ end
 
 # Use Capistrano for deployment
 group :development do
-  gem 'capistrano-rails',   '1.1.3'
+  gem 'capistrano-rails',   '1.1.5'
   gem 'capistrano-faster-assets', '1.0.2'
   gem 'capistrano-passenger', '0.1.1'
 end
@@ -67,8 +67,8 @@ group :development, :test do
   gem 'factory_girl_rails', '4.5.0'
   gem 'faker', '1.5.0'
   gem 'capybara', '2.5.0'
-  gem 'selenium-webdriver', '2.47.1'
+  gem 'selenium-webdriver', '2.48.1'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '1.3.6', group: :development
+gem 'spring', '1.4.0', group: :development
