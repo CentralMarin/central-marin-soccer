@@ -11,7 +11,7 @@ gem 'mini_magick', '4.3.6'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
-gem 'google_drive', '1.0.1'
+gem 'google_drive', '1.0.2'
 gem 'premailer-rails', '1.8.2'
 gem 'nokogiri', '1.6.6.2'
 gem 'devise', '3.5.2'
