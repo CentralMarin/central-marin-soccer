@@ -1,19 +1,19 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
-gem 'ckeditor', '4.1.4'
+gem 'ckeditor', '4.1.5'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.3.6'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
-gem 'google_drive', '1.0.2'
+gem 'google_drive', '1.0.4'
 gem 'premailer-rails', '1.8.2'
-gem 'nokogiri', '1.6.6.2'
+gem 'nokogiri', '1.6.6.4'
 gem 'devise', '3.5.2'
 gem 'bing_translator', '4.5.0'
 gem 'bitmask_attributes', '1.0.0'
@@ -62,8 +62,8 @@ group :staging, :production do
 end
 
 group :development, :test do
-  gem 'i18n-tasks', '~> 0.8.7'
-  gem 'rspec-rails', '3.3.3'
+  gem 'i18n-tasks', '~> 0.9.1'
+  gem 'rspec-rails', '3.4.0'
   gem 'factory_girl_rails', '4.5.0'
   gem 'faker', '1.5.0'
   gem 'capybara', '2.5.0'
@@ -71,4 +71,4 @@ group :development, :test do
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '1.4.0', group: :development
+gem 'spring', '1.4.4', group: :development
