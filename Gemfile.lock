@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: http://github.com/gregbell/active_admin
-  revision: c6510db25864c869256f5ba34120c5f7c8ada825
+  revision: d787029e5523be2eb2ed99816eb0cecca2b72862
   specs:
     activeadmin (1.0.0.pre2)
       arbre (~> 1.0, >= 1.0.2)
@@ -162,7 +162,7 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    faker (1.5.0)
+    faker (1.6.1)
       i18n (~> 0.5)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
@@ -228,7 +228,7 @@ GEM
     httpi (2.4.1)
       rack
     i18n (0.7.0)
-    i18n-tasks (0.9.1)
+    i18n-tasks (0.9.2)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
       easy_translate (>= 0.5.0)
@@ -456,12 +456,12 @@ DEPENDENCIES
   ckeditor (= 4.1.5)
   devise (= 3.5.2)
   factory_girl_rails (= 4.5.0)
-  faker (= 1.5.0)
+  faker (= 1.6.1)
   globalize (= 5.0.1)
   google_drive (= 1.0.4)
   haml-rails (= 0.9.0)
   html_press (= 0.8.2)
-  i18n-tasks (~> 0.9.1)
+  i18n-tasks (~> 0.9.2)
   jbuilder (= 2.3.2)
   jquery-ui-themes (= 0.0.11)
   mini_magick (= 4.3.6)

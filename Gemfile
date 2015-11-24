@@ -63,10 +63,10 @@ group :staging, :production do
 end
 
 group :development, :test do
-  gem 'i18n-tasks', '~> 0.9.1'
+  gem 'i18n-tasks', '~> 0.9.2'
   gem 'rspec-rails', '3.4.0'
   gem 'factory_girl_rails', '4.5.0'
-  gem 'faker', '1.5.0'
+  gem 'faker', '1.6.1'
   gem 'capybara', '2.5.0'
   gem 'selenium-webdriver', '2.48.1'
 end
