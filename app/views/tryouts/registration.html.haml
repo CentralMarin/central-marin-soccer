@@ -3,7 +3,7 @@
 
 %div.grid_16
   %h1
-    = "2015 #{t('registration.form.heading')}".html_safe
+    = "#{t('registration.form.heading')}".html_safe
 
 %div.grid_16
   = t('registration.form.overview').html_safe
@@ -18,7 +18,7 @@
 = form_for @tryout_registration, :url => tryouts_registration_create_path do |f|
   %div.grid_16.box
     %h2
-      ="Player Birthday and Gender"
+      = t('registration.form.birthday_heading')
     %div.grid_3
       = "#{t('registration.form.gender')} *"
 
