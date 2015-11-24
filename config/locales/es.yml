@@ -144,15 +144,16 @@ es:
       register_another: 'Haga clic aquí para registrar otro niño'
     form:
       heading: ' Registro U8-U19 Fútbol Prueba en Línea'
-      overview: '<p>Utilice el siguiente formulario para inscribir a su hijo para las pruebas competitivas de fútbol del Club Marin central para U8-U19.</p>
+      overview: '<p>Utilice el siguiente formulario para inscribir a su hijo para las pruebas competitivas de fútbol del Club de Central Marin para U8-U19.</p>
                  <p>Para obtener más información sobre las pruebas, haga clic <a href=''/tryouts''>aquí</a>.</p>'
       player_heading: 'Información del Jugador'
       parent_heading: 'Información para Padres'
       first: 'Nombre'
       last: 'Apellido'
+      email: 'Email'
       address: 'Dirección de la Casa'
       city: 'Ciudad'
-      phone: 'Teléfono de la Casa'
+      zip: 'Código Postal'
       gender: 'Género'
       gender_boy: 'Niño'
       gender_girl: 'Niña'
@@ -161,14 +162,32 @@ es:
       previous_rec: 'Fútbol Recreativo'
       previous_other: 'Otro Club Competitiva'
       previous_cm: 'Central Marin Soccer Club'
-      mobile: 'Móvil'
+      home: 'Teléfono de la Casa'
+      business: 'Teléfono de Negocios'
+      mobile: 'Teléfono de Móvil'
       email: 'Email'
       medical:
         heading: 'Consentimiento para Tratamiento Médico (Menor)'
-        body: 'Como padre o tutor legal del jugador arriba mencionado, doy mi consentimiento para el cuidado médico de emergencia según lo prescrito por un médico debidamente licenciado de Medicina o Doctor en Odontología. Este cuidado se puede dar bajo cualquier condición necesaria para preservar la vida, la integridad física o el bienestar de mi dependiente.'
+        body: 'Como padre o tutor legal del jugador mencionado arriba, doy mi consentimiento para el cuidado médico de emergencia según lo prescrito por un médico debidamente licenciado de Medicina o Doctor en Odontología. Este cuidado se puede dar bajo cualquier condición necesaria para preservar la vida, la integridad física o el bienestar de mi dependiente.<p><br/>
+        En caso de emergencia, cuando no se puede encontrar a los padres / tutores, por favor póngase en contacto con el siguiente:'
+        alergies: 'Alergias del jugador'
+        conditions: 'Otras condiciones médicas'
+        heading2: 'Información médica'
+      emergency:
+        heading: 'Contacto de emergencia'
+        name: 'Nombre'
+        phone: 'Teléfono'
+      physician:
+        name: 'Médico'
+        phone: 'Teléfono'
+      insurance:
+        name: 'La Compañía de Seguros'
+        phone: 'Teléfono'
+        policy_name: 'Nombre del titular de la póliza'
+        policy_number: 'Número de póliza'
       legal:
         heading: 'Importante'
-        body: 'Yo, el padre / tutor del solicitante de registro, un menor de edad, de acuerdo en que el solicitante de registro y cumpliré con las reglas de la USYSA, EE.UU. Club de fútbol y el centro de Marin Club de fútbol Competitivo (CMCSC), sus organizaciones afiliadas y patrocinadores. Reconociendo la posibilidad de daño físico asociado con el fútbol y en consideración de la USYSA, EE.UU. Club de fútbol y CMCSC aceptar el registrante para sus programas y actividades (el Programa) de fútbol, por la presente libero, descargo y / o de otra manera indemnizar al USYSA, el CMCSC , los entrenadores / evaluadores, sus organizaciones afiliadas y patrocinadores, sus empleados y el personal asociado, incluyendo a los dueños de los campos y las instalaciones utilizadas para los programas, contra cualquier y todo reclamo (s) por, o un nombre de la persona registrada como resultado de la participación s en el programa y / o de ser transportados hacia o desde el mismo, que el transporte por este medio autorizo​​.'
+        body: 'Yo, el padre / tutor del solicitante de registro, un menor de edad, estoy de acuerdo en que el solicitante de registro y yo cumplirémos con las reglas de la USYSA, EE.UU. Club de fútbol y el Club de Central Marin Fútbol Competitivo (CMCSC), sus organizaciones afiliadas y patrocinadores. Reconociendo la posibilidad de daño físico asociado con el fútbol y en consideración de la USYSA, EE.UU. Club de fútbol y CMCSC aceptar el registrante para sus programas y actividades (el Programa) de fútbol, por la presente libero, descargo y / o de otra manera indemnizar al USYSA, el CMCSC , los entrenadores / evaluadores, sus organizaciones afiliadas y patrocinadores, sus empleados y el personal asociado, incluyendo a los dueños de los campos y las instalaciones utilizadas para los programas, contra cualquier y todo reclamo (s) por, o un nombre de la persona registrada como resultado de la participación s en el programa y / o de ser transportados hacia o desde el mismo, que el transporte por este medio autorizo​​.'
       completed_by: 'Nombre de la persona que completa este formulario'
       signor:
         mother: 'Madre'
@@ -176,7 +195,7 @@ es:
         guardian: 'Guardián'
         relationship: 'Relación'
       waiver:
-        body: 'He leído la exención de arriba y soltar, y dar su consentimiento para el tratamiento médico Al hacer clic, declaro que soy el padre o tutor del atleta menor de edad está registrada en este formulario para Centro Marin Club de fútbol competitivo y haga clic en mi es mi firma de esta renuncia y descarga, y consentimiento médico.'
+        body: 'He leído la exención de arriba y soltar, y dar su consentimiento para el tratamiento médico Al hacer clic, declaro que soy el padre o tutor del atleta menor de edad está registrada en este formulario para el Club de Central Marin de Fútbol Competitivo y haga clic en mi es mi firma de esta renuncia y descarga, y consentimiento médico.'
         agree: 'Estoy de acuerdo'
       submit: 'Presentar'
       processing: 'Tratamiento ...'

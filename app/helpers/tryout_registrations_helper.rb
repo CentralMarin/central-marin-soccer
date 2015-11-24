@@ -65,4 +65,44 @@ module TryoutRegistrationsHelper
 
     return html
   end
+
+  def show_column(heading, value, heading_grid = 3, value_grid = 4)
+    html = content_tag(:div, :class => "grid_#{heading_grid}") do
+      t("registration.form.#{heading}")
+    end
+
+    html += content_tag(:div, :class => "grid_#{value_grid}") do
+      value
+    end
+  end
+
+  def end_row()
+    content_tag(:div, :class => 'clear') do
+      '&nbsp;'
+    end
+  end
+
+  def show_blank_row
+    html = "&nbsp;".html_safe
+    html += end_row
+  end
+
+  def show_one_column(heading, value)
+    html = show_column(heading, value, 3, 12)
+    html += end_row
+  end
+
+  def show_two_column(heading1, value1, heading2, value2)
+
+    html = show_column(heading1, value1)
+    html += show_column(heading2, value2)
+    html += end_row
+  end
+
+  def show_three_columns(heading1, value1, heading2, value2, heading3, value3)
+    html = show_column(heading1, value1, 2, 3)
+    html += show_column(heading2, value2, 2, 3)
+    html += show_column(heading3, value3, 2, 3)
+    html += end_row
+  end
 end

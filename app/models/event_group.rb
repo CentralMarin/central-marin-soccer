@@ -11,15 +11,10 @@ class EventGroup < ActiveRecord::Base
 
   before_save :set_age_ranges
 
-  TRYOUT_YEAR = 2015
+  TRYOUT_YEAR = 2016
 
   def self.age_group(month, year)
-    age_level = TRYOUT_YEAR - year + 1;
-    if month > 7
-      age_level = age_level - 1
-    end
-
-    age_level
+    TRYOUT_YEAR - year;
   end
 
   def self.age_group_name(gender, month, year)

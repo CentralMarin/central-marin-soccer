@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826001441) do
+ActiveRecord::Schema.define(version: 20151122194413) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -231,28 +231,50 @@ ActiveRecord::Schema.define(version: 20150826001441) do
   end
 
   create_table "tryout_registrations", force: :cascade do |t|
-    t.string   "first",         limit: 255
-    t.string   "last",          limit: 255
-    t.string   "home_address",  limit: 255
-    t.string   "home_phone",    limit: 255
+    t.string   "first",                     limit: 255
+    t.string   "last",                      limit: 255
+    t.string   "home_address",              limit: 255
     t.date     "birthdate"
     t.integer  "age"
     t.integer  "gender"
-    t.string   "previous_team", limit: 255
-    t.string   "parent1_first", limit: 255
-    t.string   "parent1_last",  limit: 255
-    t.string   "parent1_cell",  limit: 255
-    t.string   "parent1_email", limit: 255
-    t.string   "parent2_first", limit: 255
-    t.string   "parent2_last",  limit: 255
-    t.string   "parent2_cell",  limit: 255
-    t.string   "parent2_email", limit: 255
-    t.string   "completed_by",  limit: 255
-    t.string   "relationship",  limit: 255
+    t.string   "previous_team",             limit: 255
+    t.string   "parent1_first",             limit: 255
+    t.string   "parent1_last",              limit: 255
+    t.string   "parent1_cell",              limit: 255
+    t.string   "parent1_email",             limit: 255
+    t.string   "parent2_first",             limit: 255
+    t.string   "parent2_last",              limit: 255
+    t.string   "parent2_cell",              limit: 255
+    t.string   "parent2_email",             limit: 255
+    t.string   "completed_by",              limit: 255
+    t.string   "relationship",              limit: 255
     t.boolean  "waiver"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "city",          limit: 255
+    t.string   "city",                      limit: 255
+    t.string   "playerEmail"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "email"
+    t.string   "parent1_homePhone"
+    t.string   "parent2_homePhone"
+    t.string   "parent1_businessPhone"
+    t.string   "parent2_businessPhone"
+    t.string   "emergency_contact1_name"
+    t.string   "emergency_contact1_phone1"
+    t.string   "emergency_contact1_phone2"
+    t.string   "emergency_contact2_name"
+    t.string   "emergency_contact2_phone1"
+    t.string   "emergency_contact2_phone2"
+    t.string   "alergies"
+    t.string   "medical_conditions"
+    t.string   "physician_name"
+    t.string   "physician_phone1"
+    t.string   "physician_phone2"
+    t.string   "insurance_name"
+    t.string   "insurance_phone"
+    t.string   "policy_holder"
+    t.string   "policy_number"
   end
 
   create_table "web_part_translations", force: :cascade do |t|

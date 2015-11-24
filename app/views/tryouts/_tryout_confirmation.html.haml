@@ -6,125 +6,58 @@
 %div.grid_16.box
   %h2
     = t('registration.form.player_heading')
-  %div.grid_3
-    = "#{t('registration.form.first')}:"
-  %div.grid_4
-    = " #{@tryout_registration.first}"
-
-  %div.grid_3
-    = "#{t('registration.form.last')}:"
-  %div.grid_4
-    = " #{@tryout_registration.last}"
-
-  %div.clear
-    &nbsp;
-
-  %div.grid_3
-    = "#{t('registration.form.address')}:"
-  %div.grid_4
-    = " #{@tryout_registration.home_address}"
-
-  %div.grid_3
-    = "#{t('registration.form.city')}:"
-  %div.grid_4
-    = " #{@tryout_registration.city}"
-
-  %div.clear
-    &nbsp;
-
-  %div.grid_3
-    = "#{t('registration.form.phone')}:"
-  %div.grid_4
-    = " #{number_to_phone(@tryout_registration.home_phone, area_code: true) }"
-
-
-  %div.clear
-    &nbsp;
-
-  %div.grid_3
-    = "#{t('registration.form.gender')}:"
-  %div.grid_4
-    = " #{@tryout_registration.gender == 0 ? t('registration.form.gender_boy') : t('registration.form.gender_girl')}"
-
-  %div.grid_3
-    = "#{t('registration.form.birthdate')}:"
-  %div.grid_4
-    = " #{@tryout_registration.birthdate.strftime('%m-%d-%Y')}"
-
-
-  %div.clear
-    &nbsp;
-
-
-  &nbsp;
-
-  %div.clear
-    &nbsp;
+  = show_two_column('first', @tryout_registration.first, 'last', @tryout_registration.last)
+  = show_two_column('gender', @tryout_registration.gender == 0 ? t('registration.form.gender_boy') : t('registration.form.gender_girl'), 'birthdate', @tryout_registration.birthdate.strftime('%m-%d-%Y'))
+  = show_one_column('email', @tryout_registration.email)
+  = show_blank_row
+  = show_one_column('address', @tryout_registration.home_address)
+  = show_two_column('city', @tryout_registration.city, 'zip', @tryout_registration.zip)
+  = show_blank_row
 
   %h2
     = t('registration.form.parent_heading')
 
-  %div.grid_3
-    = "#{t('registration.form.first')}:"
-  %div.grid_4
-    = " #{@tryout_registration.parent1_first}"
+  = show_two_column('first', @tryout_registration.parent1_first, 'last', @tryout_registration.parent1_last)
+  = show_two_column('business', number_to_phone(@tryout_registration.parent1_businessPhone, area_code: true), 'home', number_to_phone(@tryout_registration.parent1_homePhone, area_code: true))
+  = show_two_column('mobile', number_to_phone(@tryout_registration.parent1_cell, area_code: true), 'email', @tryout_registration.parent1_email)
+  = show_blank_row
 
-  %div.grid_3
-    = "#{t('registration.form.last')}:"
-  %div.grid_4
-    = " #{@tryout_registration.parent1_last}"
-
-  %div.clear
-    &nbsp;
-
-  %div.grid_3
-    = "#{t('registration.form.mobile')}:"
-  %div.grid_4
-    = " #{number_to_phone(@tryout_registration.parent1_cell, area_code: true)}"
-
-  %div.grid_3
-    = "#{t('registration.form.email')}:"
-  %div.grid_4
-    = " #{@tryout_registration.parent1_email}"
-
-  %div.clear
-    &nbsp;
-
-
-  &nbsp;
-
-  %div.clear
-    &nbsp;
 
   -# Show the second parent info if any fields were provided
-  - if not (@tryout_registration.parent2_first.blank? and @tryout_registration.parent2_last.blank? and @tryout_registration.parent2_cell.blank? and @tryout_registration.parent2_email.blank?)
+  - if not (@tryout_registration.parent2_first.blank? |
+    and @tryout_registration.parent2_last.blank? |
+    and @tryout_registration.parent2_cell.blank? |
+    and @tryout_registration.parent2_homePhone.blank? |
+    and @tryout_registration.parent2_businessPhone.blank? |
+    and @tryout_registration.parent2_email.blank?) |
     %h2
       = t('registration.form.parent_heading')
-    %div.grid_3
-      = "#{t('registration.form.first')}:"
-    %div.grid_4
-      = " #{@tryout_registration.parent2_first}"
+    = show_two_column('first', @tryout_registration.parent1_first, 'last', @tryout_registration.parent1_last)
+    = show_two_column('business', number_to_phone(@tryout_registration.parent1_businessPhone, area_code: true), 'home', number_to_phone(@tryout_registration.parent1_homePhone, area_code: true))
+    = show_two_column('mobile', number_to_phone(@tryout_registration.parent1_cell, area_code: true), 'email', @tryout_registration.parent1_email)
+    = show_blank_row
 
-    %div.grid_3
-      = "#{t('registration.form.last')}:"
-    %div.grid_4
-      = " #{@tryout_registration.parent2_last}"
+    %h2
+      = t('registration.form.emergency.heading')
+    = show_three_columns('emergency.name', @tryout_registration.emergency_contact1_name,
+        'emergency.phone', number_to_phone(@tryout_registration.emergency_contact1_phone1, area_code: true),
+        'emergency.phone', number_to_phone(@tryout_registration.emergency_contact1_phone2, area_code: true))
+    = show_three_columns('emergency.name', @tryout_registration.emergency_contact2_name,
+        'emergency.phone', number_to_phone(@tryout_registration.emergency_contact2_phone1, area_code: true),
+        'emergency.phone', number_to_phone(@tryout_registration.emergency_contact2_phone2, area_code: true))
+    = show_three_columns('physician.name', @tryout_registration.physician_name,
+        'physician.phone', number_to_phone(@tryout_registration.physician_phone1, area_code: true),
+        'physician.phone', number_to_phone(@tryout_registration.physician_phone2, area_code: true))
+    = show_blank_row
 
-    %div.clear
-      &nbsp;
-
-    %div.grid_3
-      = "#{t('registration.form.mobile')}:"
-    %div.grid_4
-      = " #{number_to_phone(@tryout_registration.parent2_cell, area_code: true)}"
-
-    %div.grid_3
-      = "#{t('registration.form.email')}:"
-    %div.grid_4
-      = " #{@tryout_registration.parent2_email}"
-
-    %div.clear
-      &nbsp;
+    %h2
+      = t('registration.form.medical.heading2')
+    = show_two_column('insurance.name', @tryout_registration.insurance_name, 'insurance.phone', number_to_phone(@tryout_registration.insurance_phone, area_code: true))
+    = show_two_column('insurance.policy_name', @tryout_registration.policy_holder, 'insurance.policy_number', @tryout_registration.policy_number)
+    = show_blank_row
+    = show_one_column('medical.alergies', @tryout_registration.alergies)
+    = show_one_column('medical.conditions', @tryout_registration.medical_conditions)
+    = show_blank_row
 
 %div.grid_16.box
   %h2

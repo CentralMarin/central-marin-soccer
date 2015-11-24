@@ -15,22 +15,36 @@ class TryoutsController < CmsController
   def registration_create
 
     @tryout_registration = TryoutRegistration.new(params.required(:tryout_registration)
-                                                  .permit(:first, :last, :home_address, :home_phone, :city, :gender, :birthdate,
-                                                          :age, :previous_team, :parent1_first, :parent1_last,
-                                                          :parent1_cell, :parent1_email, :parent2_first, :parent2_last,
-                                                          :parent2_cell, :parent2_email, :completed_by, :relationship, :waiver))
+                                                  .permit(:first, :last, :email, :home_address, :city, :zip, :gender, :birthdate,
+                                                          :age, :previous_team, :parent1_first, :parent1_last, :parent1_homePhone, :parent1_businessPhone,
+                                                          :parent1_cell, :parent1_email, :parent2_first, :parent2_last, :parent2_homePhone, :parent2_businessPhone,
+                                                          :parent2_cell, :parent2_email, :emergency_contact1_name, :emergency_contact1_phone1, :emergency_contact1_phone2,
+                                                          :emergency_contact2_name, :emergency_contact2_phone1, :emergency_contact2_phone2,
+                                                          :physician_name, :physician_phone1, :physician_phone2, :insurance_name, :insurance_phone,
+                                                          :policy_holder, :policy_number, :alergies, :medical_conditions,
+                                                          :completed_by, :relationship, :waiver))
 
     @tryout_registration.age = EventGroup.age_group(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year) unless @tryout_registration.birthdate.nil?
 
     if @tryout_registration.save
 
       # Make phone numbers consistent
-      @tryout_registration.home_phone = format_phone_number(@tryout_registration.home_phone)
+      @tryout_registration.parent1_homePhone = format_phone_number(@tryout_registration.parent1_homePhone)
+      @tryout_registration.parent1_businessPhone = format_phone_number(@tryout_registration.parent1_businessPhone)
       @tryout_registration.parent1_cell = format_phone_number(@tryout_registration.parent1_cell)
+      @tryout_registration.parent2_homePhone = format_phone_number(@tryout_registration.parent2_homePhone)
+      @tryout_registration.parent2_businessPhone = format_phone_number(@tryout_registration.parent2_businessPhone)
       @tryout_registration.parent2_cell = format_phone_number(@tryout_registration.parent2_cell)
+      @tryout_registration.emergency_contact1_phone1 = format_phone_number(@tryout_registration.emergency_contact1_phone1)
+      @tryout_registration.emergency_contact1_phone2 = format_phone_number(@tryout_registration.emergency_contact1_phone2)
+      @tryout_registration.emergency_contact2_phone1 = format_phone_number(@tryout_registration.emergency_contact2_phone1)
+      @tryout_registration.emergency_contact2_phone2 = format_phone_number(@tryout_registration.emergency_contact2_phone2)
+      @tryout_registration.physician_phone1 = format_phone_number(@tryout_registration.physician_phone1)
+      @tryout_registration.physician_phone2 = format_phone_number(@tryout_registration.physician_phone2)
+      @tryout_registration.insurance_phone = format_phone_number(@tryout_registration.insurance_phone)
 
       # Save to google spreadsheet - Age Specific Tab
-      update_spreadsheet Rails.application.secrets.google_drive_tryouts_doc, @tryout_registration
+      update_spreadsheet "#{EventGroup::TRYOUT_YEAR} #{Rails.application.secrets.google_drive_tryouts_doc}", @tryout_registration
 
       # Tryout info
       @tryout, @age_group = lookup_tryout(Gender.new(@tryout_registration.gender), @tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
@@ -46,7 +60,7 @@ class TryoutsController < CmsController
   end
 
   def agegroupchart
-    @season = params['season'].to_i
+    @season = EventGroup::TRYOUT_YEAR
 
     @years = (@season-19..@season-7)
 
@@ -102,9 +116,11 @@ class TryoutsController < CmsController
        'Date Submitted',
        'First',
        'Last',
+       'Email',
        'Home Address',
        'City',
-       'Home Phone',
+       'State',
+       'Zip',
        'Gender',
        'Birthdate',
        'Play up',
@@ -113,11 +129,30 @@ class TryoutsController < CmsController
        'Parent1 First',
        'Parent1 Last',
        'Parent1 Email',
+       'Parent1 Home Phone',
+       'Parent1 Business Phone',
        'Parent1 Cell',
        'Parent2 First',
        'Parent2 Last',
        'Parent2 Email',
+       'Parent2 Home Phone',
+       'Parent2 Business Phone',
        'Parent2 Cell',
+       'Emergency Contact1',
+       'Emergency Contact1 Phone1',
+       'Emergency Contact1 Phone2',
+       'Emergency Contact2',
+       'Emergency Contact2 Phone1',
+       'Emergency Contact2 Phone2',
+       'Physician',
+       'Physician Phone1',
+       'Physician Phone2',
+       'Insurance Name',
+       'Insurance Phone',
+       'Policy Holder',
+       'Policy Number',
+       'Alergies',
+       'Medical Conditions',
        'Signor',
        'Relationship',
        'Agreement',
@@ -172,9 +207,11 @@ class TryoutsController < CmsController
          Time.now,
          registration_info.first,
          registration_info.last,
+         registration_info.email,
          registration_info.home_address,
          registration_info.city,
-         registration_info.home_phone,
+         'CA',
+         registration_info.zip,
          gender.to_s,
          registration_info.birthdate,
          'No',
@@ -183,11 +220,30 @@ class TryoutsController < CmsController
          registration_info.parent1_first,
          registration_info.parent1_last,
          registration_info.parent1_email,
+         registration_info.parent1_homePhone,
+         registration_info.parent1_businessPhone,
          registration_info.parent1_cell,
          registration_info.parent2_first,
          registration_info.parent2_last,
          registration_info.parent2_email,
+         registration_info.parent2_homePhone,
+         registration_info.parent2_businessPhone,
          registration_info.parent2_cell,
+         registration_info.emergency_contact1_name,
+         registration_info.emergency_contact1_phone1,
+         registration_info.emergency_contact1_phone2,
+         registration_info.emergency_contact2_name,
+         registration_info.emergency_contact2_phone1,
+         registration_info.emergency_contact2_phone2,
+         registration_info.physician_name,
+         registration_info.physician_phone1,
+         registration_info.physician_phone2,
+         registration_info.insurance_name,
+         registration_info.insurance_phone,
+         registration_info.policy_holder,
+         registration_info.policy_number,
+         registration_info.alergies,
+         registration_info.medical_conditions,
          registration_info.completed_by,
          registration_info.relationship,
          registration_info.waiver,

@@ -1,5 +1,6 @@
 class TryoutMailer < ActionMailer::Base
   default from: Rails.application.secrets.google_email_from
+  helper TryoutRegistrationsHelper
 
   def signup_confirmation(registration_info, tryout_info)
 

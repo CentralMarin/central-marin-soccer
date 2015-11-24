@@ -52,13 +52,18 @@
       %div.clear
         &nbsp;
 
-      = show_text_field(f, t('registration.form.address'), :home_address, true)
-      = show_text_field(f, t('registration.form.city'), :city, true)
+      = show_email_field(f, t('registration.form.email'), :email, false)
 
       %div.clear
         &nbsp;
 
-      = show_telephone_field(f, t('registration.form.phone'), :home_phone, true)
+      = show_text_field(f, t('registration.form.address'), :home_address, true, '', 3, 10)
+
+      %div.clear
+        &nbsp;
+
+      = show_text_field(f, t('registration.form.city'), :city, true)
+      = show_text_field(f, t('registration.form.zip'), :zip, true)
 
       %div.clear
         &nbsp;
@@ -92,14 +97,70 @@
           &nbsp;
 
         = show_email_field(f, t('registration.form.email'), "parent#{parent_id}_email", (parent_field_required(parent_id)))
-        = show_telephone_field(f, t('registration.form.mobile'), "parent#{parent_id}_cell", (parent_field_required(parent_id)))
+        = show_telephone_field(f, t('registration.form.home'), "parent#{parent_id}_homePhone", (parent_field_required(parent_id)))
+
+        %div.clear
+          &nbsp;
+
+        = show_telephone_field(f, t('registration.form.mobile'), "parent#{parent_id}_cell", false)
+        = show_telephone_field(f, t('registration.form.business'), "parent#{parent_id}_businessPhone", false)
 
     %div.grid_16.box
       %h2
         = t('registration.form.medical.heading').html_safe
       %div.grid_15
         = t('registration.form.medical.body').html_safe
-      %div.grid_15 &nbsp;
+
+      - (1..2).each do |contact_id|
+        = show_text_field(f, t('registration.form.emergency.name'), "emergency_contact#{contact_id}_name", parent_field_required(contact_id), '', 2, 3)
+        = show_telephone_field(f, "#{t('registration.form.emergency.phone')} 1", "emergency_contact#{contact_id}_phone1", parent_field_required(contact_id), 2, 3)
+        = show_telephone_field(f, "#{t('registration.form.emergency.phone')} 2", "emergency_contact#{contact_id}_phone2", false, 2, 2)
+
+      %div.clear
+        &nbsp;
+
+    %div.grid_16.box
+      %h2
+        = t('registration.form.medical.heading2')
+
+      %div.clear
+        &nbsp;
+
+
+      = show_text_field(f, t('registration.form.physician.name'), :physician_name, true, '', 2, 3)
+      = show_telephone_field(f, "#{t('registration.form.physician.phone')} 1", :physician_phone1, false, 2, 3)
+      = show_telephone_field(f, "#{t('registration.form.physician.phone')} 2", :physician_phone2, false, 2, 2)
+
+      %div.clear
+        &nbsp;
+
+      &nbsp;
+
+      %div.clear
+        &nbsp;
+
+      = show_text_field(f, t('registration.form.insurance.name'), :insurance_name, true, '', 5, 3)
+      = show_telephone_field(f, t('registration.form.insurance.phone'), :insurance_phone, false, 4, 3)
+
+      %div.clear
+        &nbsp;
+
+      = show_text_field(f, t('registration.form.insurance.policy_name'), :policy_holder, true, '', 5, 3)
+      = show_text_field(f, t('registration.form.insurance.policy_number'), :policy_number, true, '', 4, 3)
+
+      %div.clear
+        &nbsp;
+
+      = show_text_field(f, t('registration.form.medical.alergies'), :alergies, true, '', 5, 3)
+      = show_text_field(f, t('registration.form.medical.conditions'), :medical_conditions, true, '', 4, 3)
+
+      %div.clear
+        &nbsp;
+
+      &nbsp;
+
+      %div.clear
+        &nbsp;
 
       %h2
         = t('registration.form.legal.heading').html_safe

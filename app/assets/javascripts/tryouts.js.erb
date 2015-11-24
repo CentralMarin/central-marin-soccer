@@ -61,21 +61,6 @@
             }
         };
 
-        // TODO: Move season to the server
-        var _get_current_year = function() {
-            var date = new Date();
-            var year = date.getFullYear();
-            var month = date.getMonth();
-
-            // Because this is tryouts, we need to move to the next playing year if we're in September or later
-            // month is 0-11, so 7 is August
-            if (month > 7) {
-                year++;
-            }
-
-            return year;
-        };
-
         var init_registration = function(month, day, year, gender) {
 
             // Save off dom elements
@@ -94,7 +79,7 @@
         var show_age_group_chart = function(e) {
             $('#age_group_chart').click(function() {
 
-                $.get('<%= Rails.application.routes.url_helpers.tryouts_agegroupchart_path(:only_path => true) %>?season=' + _get_current_year(), function(data) {
+                $.get('<%= Rails.application.routes.url_helpers.tryouts_agegroupchart_path(:only_path => true) %>', function(data) {
 
                     e.html(data);
                     e.dialog({

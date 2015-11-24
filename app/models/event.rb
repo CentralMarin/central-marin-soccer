@@ -28,7 +28,6 @@ class Event < ActiveRecord::Base
 
   def self.touts
     results, age_group = events_for_types(self.types.values, nil, nil, nil, self.statuses[:show_and_tout])
-    #results.where(status: self.statuses[:show_and_tout]) unless results.nil?
 
     return results
   end
