@@ -121,12 +121,12 @@ en:
         overview: ''
       register_another: 'Click here to register another child'
     form:
-      heading: ' U8-U19 Soccer Tryout Online Registration'
+      heading: 'U8-U19 Soccer Tryout Online Registration'
       overview: '<p>Use the form below to register your child for the Central Marin Competitive Soccer Club tryouts for U8-U19.</p>
                  <p>For more information on tryouts, click <a href=''/tryouts''>here</a>.</p>'
+      birthday_heading: 'Player Birthday and Gender'
       player_heading: 'Player Information'
       parent_heading: 'Parent Information'
-      email: 'Email'
       first: 'First Name'
       last: 'Last Name'
       address: 'Home Address'
