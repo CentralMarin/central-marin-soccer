@@ -18,7 +18,9 @@ class EventGroup < ActiveRecord::Base
   end
 
   def self.age_group_name(gender, month, year)
-    "U#{self.age_group(month, year)}_#{gender}"
+    I18n.with_locale(:en) do
+      "U#{self.age_group(month, year)}_#{gender}"
+    end
   end
 
   protected
