@@ -14,7 +14,7 @@ gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '1.0.4'
 gem 'premailer-rails', '1.8.2'
 gem 'nokogiri', '1.6.7'
-gem 'devise', '3.5.2'
+gem 'devise', '3.5.3'
 gem 'bing_translator', '4.5.0'
 gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
@@ -54,7 +54,7 @@ end
 group :development do
   gem 'capistrano-rails',   '1.1.5'
   gem 'capistrano-faster-assets', '1.0.2'
-  gem 'capistrano-passenger', '0.1.1'
+  gem 'capistrano-passenger', '0.2.0'
 end
 
 group :staging, :production do
