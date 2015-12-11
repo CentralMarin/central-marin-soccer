@@ -108,6 +108,14 @@ en:
       more_info: 'Click here for more information on Central Marin Competitive Soccer Club'
     age_chart:
       heading: ' Season Age Group Chart'
+      birth_year: 'Birth Year'
+      age_group: 'Age Group'
+      players: 'Number of Players'
+      length: 'Game Length'
+      ball: 'Ball Size'
+      referees: 'Number of Referees'
+      born: 'Born in '
+      minute: ' min'
     tryouts:
       heading: "Select the player's birthday and gender"
     confirmation:

@@ -12,14 +12,23 @@ class EventGroup < ActiveRecord::Base
   before_save :set_age_ranges
 
   TRYOUT_YEAR = 2016
+  MIN_AGE = 7
+  MAX_AGE = 19
 
-  def self.age_group(month, year)
-    TRYOUT_YEAR - year;
+  def self.age_group(year)
+    age = TRYOUT_YEAR - year + 1;
+
+    # U18 and U19 are grouped together
+    if age == 18
+      age = age + 1
+    end
+
+    age
   end
 
-  def self.age_group_name(gender, month, year)
+  def self.age_group_name(gender, year)
     I18n.with_locale(:en) do
-      "U#{self.age_group(month, year)}_#{gender}"
+      "U#{self.age_group(year)}_#{gender}"
     end
   end
 

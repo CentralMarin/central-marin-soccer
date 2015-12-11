@@ -24,7 +24,7 @@ class TryoutsController < CmsController
                                                           :policy_holder, :policy_number, :alergies, :medical_conditions,
                                                           :completed_by, :relationship, :waiver))
 
-    @tryout_registration.age = EventGroup.age_group(@tryout_registration.birthdate.month, @tryout_registration.birthdate.year) unless @tryout_registration.birthdate.nil?
+    @tryout_registration.age = EventGroup.age_group(@tryout_registration.birthdate.year) unless @tryout_registration.birthdate.nil?
 
     if @tryout_registration.save
 
@@ -47,7 +47,7 @@ class TryoutsController < CmsController
       update_spreadsheet "#{EventGroup::TRYOUT_YEAR} #{Rails.application.secrets.google_drive_tryouts_doc}", @tryout_registration
 
       # Tryout info
-      @tryout, @age_group = lookup_tryout(Gender.new(@tryout_registration.gender), @tryout_registration.birthdate.month, @tryout_registration.birthdate.year)
+      @tryout, @age_group = lookup_tryout(Gender.new(@tryout_registration.gender), @tryout_registration.birthdate.year)
 
       # Send confirmation email
       TryoutMailer.signup_confirmation(@tryout_registration, @tryout).deliver
@@ -60,9 +60,32 @@ class TryoutsController < CmsController
   end
 
   def agegroupchart
-    @season = EventGroup::TRYOUT_YEAR
 
-    @years = (@season-19..@season-7)
+    age_group_info = {
+        'U8' => ['4x4', '3 x 15', '4', '0'],
+        'U9' => ['7x7', '2 x 25', '4', '1'],
+        'U10' => ['7x7', '2 x 25', '4', '1'],
+        'U11' => ['9x9', '2 x 30', '4', '1'],
+        'U12' => ['9x9', '2 x 30', '4', '1'],
+        'U13' => ['11x11', '2 x 35', '5', '3'],
+        'U14' => ['11x11', '2 x 40', '5', '3'],
+        'U15' => ['11x11', '2 x 40', '5', '3'],
+        'U16' => ['11x11', '2 x 40', '5', '3'],
+        'U17' => ['11x11', '2 x 45', '5', '3'],
+        'U19' => ['11x11', '2 x 45', '5', '3'],
+    }
+
+    @season = EventGroup::TRYOUT_YEAR
+    @chart_info = []
+
+    # Calculate matrix information
+    (EventGroup::MIN_AGE..EventGroup::MAX_AGE - 1).each do |age|
+      chart_row = []
+      chart_row[0] = @season - age
+      chart_row[1] = "U#{EventGroup.age_group(chart_row[0])}"
+
+      @chart_info.append chart_row + age_group_info[chart_row[1]]
+    end
 
     render :layout => 'frame'
   end
@@ -70,10 +93,9 @@ class TryoutsController < CmsController
   def agelevel
     # Determine the age level based on birthdate and gender
     year = params['year'].to_i
-    month = params['month'].to_i
     gender = Gender.new(params['gender'].to_i)
 
-    @tryout, @age_group = lookup_tryout(gender, month, year)
+    @tryout, @age_group = lookup_tryout(gender, year)
 
     # Minify the HTML so we can make it part of the JSON
     html = render_to_string :partial => 'tryout_info.html', :locals => {tryout: @tryout}
@@ -86,8 +108,8 @@ class TryoutsController < CmsController
 
   protected
 
-  def lookup_tryout(gender, month, year)
-    events, age_group = Event.tryouts(gender, month, year)
+  def lookup_tryout(gender, year)
+    events, age_group = Event.tryouts(gender, year)
 
     return (events.empty? ? nil : events[0]), age_group
   end

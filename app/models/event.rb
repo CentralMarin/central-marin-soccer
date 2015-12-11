@@ -14,32 +14,32 @@ class Event < ActiveRecord::Base
 
   default_scope { includes( { event_groups: [:event_details] }) }
 
-  def self.tryouts(gender = nil, month = nil, year = nil)
-    events_for_range(:tryout, :tryout, gender, month, year)
+  def self.tryouts(gender = nil, year = nil)
+    events_for_range(:tryout, :tryout, gender, year)
   end
 
-  def self.tryout_related_events(gender = nil, month = nil, year = nil)
-    events_for_range(:upcoming_tryout, :tryout_complete, gender, month, year)
+  def self.tryout_related_events(gender = nil, year = nil)
+    events_for_range(:upcoming_tryout, :tryout_complete, gender, year)
   end
 
-  def self.united_related_events(gender = nil, month = nil, year = nil)
-    events_for_range(:united_upcoming_tryout, :united_upcoming_tryout, gender, month, year)
+  def self.united_related_events(gender = nil, year = nil)
+    events_for_range(:united_upcoming_tryout, :united_upcoming_tryout, gender, year)
   end
 
   def self.touts
-    results, age_group = events_for_types(self.types.values, nil, nil, nil, self.statuses[:show_and_tout])
+    results, age_group = events_for_types(self.types.values, nil, nil, self.statuses[:show_and_tout])
 
     return results
   end
 
   protected
 
-  def self.events_for_types(event_types, gender = nil, month = nil, year = nil, status = nil)
+  def self.events_for_types(event_types, gender = nil, year = nil, status = nil)
     query = Event.includes(:event_groups).where(:type => event_types).where.not(status: self.statuses[:hide])
 
     age_group = nil
-    if gender.present? and month.present? and year.present?
-      age_group = EventGroup.age_group_name(gender, month, year).to_sym
+    if gender.present? and year.present?
+      age_group = EventGroup.age_group_name(gender, year).to_sym
 
       query = query.joins(:event_groups).where('groups & ? > 0', EventGroup.bitmasks[:groups][age_group])
     end
@@ -49,10 +49,10 @@ class Event < ActiveRecord::Base
     return query, age_group
   end
 
-  def self.events_for_range(start_type, end_type, gender = nil, month = nil, year = nil)
+  def self.events_for_range(start_type, end_type, gender = nil, year = nil)
     event_types = self.types.select { |k,v| v >= self.types[start_type] && v <= self.types[end_type]}.values
 
-    self.events_for_types(event_types, gender, month, year)
+    self.events_for_types(event_types, gender, year)
   end
 
 end

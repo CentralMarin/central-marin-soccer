@@ -1,25 +1,48 @@
 %center
   %h1.chart_header
     %center
-      = "#{@season} - #{@season + 1} #{t('registration.age_chart.heading')}"
+      = "NorCal Premier #{@season} #{t('registration.age_chart.heading')}"
   %p
     &nbsp;
 
   %table{border: 2, cellpadding: 5}
     %tr
       %th
-        &nbsp;
-      -@years.reverse_each do |year|
-        %th
-          %h4.col_header
-            = year
-    - (1..12).each do |index|
+        %h4.col_header
+          = t('registration.age_chart.birth_year')
+      %th
+        %h4.col_header
+          = t('registration.age_chart.age_group')
+      %th
+        %h4.col_header
+          = t('registration.age_chart.players')
+      %th
+        %h4.col_header
+          = t('registration.age_chart.length')
+      %th
+        %h4.col_header
+          = t('registration.age_chart.ball')
+      %th
+        %h4.col_header
+          = t('registration.age_chart.referees')
+    -@chart_info.each do |row|
       %tr
         %td
           %h4.row_header
-            = t('date.month_names')[index]
-        -(7..19).each do |age_level|
-          %td.cell
-            = "U#{age_level}"
+            = "#{t('registration.age_chart.born')} #{row[0]}"
+        %td.cell
+          = row[1]
+        %td.cell
+          = row[2]
+        %td.cell
+          = "#{row[3]} #{t('registration.age_chart.minute')}"
+        %td.cell
+          = row[4]
+        %td.cell
+          = row[5]
 
+  %p
+    &nbsp;
 
+  %a{href: 'http://norcalpremier.com/home/894044.html', target: '_blank'}
+    For more information

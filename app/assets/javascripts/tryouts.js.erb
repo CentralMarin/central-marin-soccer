@@ -23,8 +23,8 @@
             var gender = $('input[name="' + _gender_name + '"]:checked').val();
 
             if (month && day && year && gender) {
-                var ageLevelApi = '<%= Rails.application.routes.url_helpers.tryouts_agelevel_path(:only_path => true, format: 'json') %>?month=' + month + '&year=' + year + '&gender=' + gender;
-                $.getJSON(ageLevelApi, { month: month, year: year, gender: gender })
+                var ageLevelApi = '<%= Rails.application.routes.url_helpers.tryouts_agelevel_path(:only_path => true, format: 'json') %>?&year=' + year + '&gender=' + gender;
+                $.getJSON(ageLevelApi, { year: year, gender: gender })
                   .done(function(json) {
                     _show_tryout(json);
                   })

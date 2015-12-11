@@ -130,6 +130,14 @@ es:
       more_info: 'Haga clic aquí para obtener más información sobre Central de Marin Club de Fútbol Competitiva.'
     age_chart:
       heading: ' Temporada Grupo de edad Gráfico'
+      birth_year: 'Año de nacimiento'
+      age_group: 'Grupo de Edad'
+      players: 'Número de jugadores'
+      length: 'Duración del juego'
+      ball: 'Tamaño de la bola'
+      referees: 'Número de Árbitros'
+      born: 'Nacido en '
+      minute: ' minutos'
     tryouts:
       heading: 'Seleccione cumpleaños del jugador y el género'
     confirmation:
