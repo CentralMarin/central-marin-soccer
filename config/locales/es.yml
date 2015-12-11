@@ -140,6 +140,8 @@ es:
       minute: ' minutos'
     tryouts:
       heading: 'Seleccione cumpleaños del jugador y el género'
+      no_tryouts: 'No hay pruebas programadas actualmente'
+      future_tryouts: "Registrar para las pruebas y yo te enviará un mail cuando se finalicen las fechas, horas y lugares"
     confirmation:
       subject: 'Marin Centro Competitiva Registro Confirmación Club de Fútbol ...'
       heading: ' Prueba Confirmación'

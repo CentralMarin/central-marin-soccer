@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   default_scope { includes( { event_groups: [:event_details] }) }
 
   def self.tryouts(gender = nil, year = nil)
-    events_for_range(:tryout, :tryout, gender, year)
+    events_for_range(:upcoming_tryout, :tryout, gender, year)
   end
 
   def self.tryout_related_events(gender = nil, year = nil)

@@ -1,5 +1,5 @@
 - if tryout.nil?
-  No tryouts currently scheduled
+  = t('registration.tryouts.no_tryouts')
 - else
   - tryout.event_groups.each do |event_age_group|
     %h2{:class => 'alt'}
@@ -9,8 +9,11 @@
       - else
         = @age_group.to_s.humanize.titleize
       %ul
-        - event_age_group.event_details.each do |event_detail|
-          %li
-            = "#{event_detail.date_to_s} @"
-            %a{:href => event_detail.location.map_url}
-              = "#{event_detail.location.name} - #{event_detail.location.address}"
+        - if event_age_group.event_details.empty?
+          = t('registration.tryouts.future_tryouts')
+        - else
+          - event_age_group.event_details.each do |event_detail|
+            %li
+              = "#{event_detail.date_to_s} @"
+              %a{:href => event_detail.location.map_url}
+                = "#{event_detail.location.name} - #{event_detail.location.address}"
