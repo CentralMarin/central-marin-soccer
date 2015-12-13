@@ -32,9 +32,9 @@
     and @tryout_registration.parent2_email.blank?) |
     %h2
       = t('registration.form.parent_heading')
-    = show_two_column('first', @tryout_registration.parent1_first, 'last', @tryout_registration.parent1_last)
-    = show_two_column('business', number_to_phone(@tryout_registration.parent1_businessPhone, area_code: true), 'home', number_to_phone(@tryout_registration.parent1_homePhone, area_code: true))
-    = show_two_column('mobile', number_to_phone(@tryout_registration.parent1_cell, area_code: true), 'email', @tryout_registration.parent1_email)
+    = show_two_column('first', @tryout_registration.parent2_first, 'last', @tryout_registration.parent2_last)
+    = show_two_column('business', number_to_phone(@tryout_registration.parent2_businessPhone, area_code: true), 'home', number_to_phone(@tryout_registration.parent2_homePhone, area_code: true))
+    = show_two_column('mobile', number_to_phone(@tryout_registration.parent2_cell, area_code: true), 'email', @tryout_registration.parent2_email)
     = show_blank_row
 
     %h2
