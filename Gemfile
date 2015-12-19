@@ -11,9 +11,9 @@ gem 'mini_magick', '4.3.6'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
-gem 'google_drive', '1.0.4'
+gem 'google_drive', '1.0.5'
 gem 'premailer-rails', '1.8.2'
-gem 'nokogiri', '1.6.7'
+gem 'nokogiri', '1.6.7.1'
 gem 'devise', '3.5.3'
 gem 'bing_translator', '4.5.0'
 gem 'bitmask_attributes', '1.0.0'
@@ -71,4 +71,4 @@ group :development, :test do
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '1.4.4', group: :development
+gem 'spring', '1.6.0', group: :development
