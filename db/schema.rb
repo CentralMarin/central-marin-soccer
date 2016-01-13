@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113201118) do
+ActiveRecord::Schema.define(version: 20151122194413) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -275,7 +275,6 @@ ActiveRecord::Schema.define(version: 20160113201118) do
     t.string   "insurance_phone"
     t.string   "policy_holder"
     t.string   "policy_number"
-    t.integer  "year"
   end
 
   create_table "web_part_translations", force: :cascade do |t|

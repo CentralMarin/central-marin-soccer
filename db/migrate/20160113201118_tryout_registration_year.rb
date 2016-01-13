@@ -24,7 +24,7 @@ class TryoutRegistrationYear < ActiveRecord::Migration
       else
         puts "#{registration.updated_at.to_s}: Unknown season"
       end
-      #registration.save!
+      registration.save!
     end
   end
 end
