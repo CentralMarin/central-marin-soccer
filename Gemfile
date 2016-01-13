@@ -5,14 +5,14 @@ gem 'rails', '4.2.5'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
-gem 'ckeditor', '4.1.5'
+gem 'ckeditor', '4.1.6'
 gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '4.3.6'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '1.0.5'
-gem 'premailer-rails', '1.8.2'
+gem 'premailer-rails', '1.9.0'
 gem 'nokogiri', '1.6.7.1'
 gem 'devise', '3.5.3'
 gem 'bing_translator', '4.5.0'
@@ -43,7 +43,7 @@ gem 'jquery-ui-themes', '0.0.11'
 gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.3.2'
+gem 'jbuilder', '2.4.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -67,8 +67,8 @@ group :development, :test do
   gem 'factory_girl_rails', '4.5.0'
   gem 'faker', '1.6.1'
   gem 'capybara', '2.5.0'
-  gem 'selenium-webdriver', '2.48.1'
+  gem 'selenium-webdriver', '2.49.0'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '1.6.0', group: :development
+gem 'spring', '1.6.2', group: :development
