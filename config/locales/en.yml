@@ -18,7 +18,7 @@ en:
     - November
     - December
   title: "Welcome to Central Marin Soccer Club"
-  footer_copy: "All rights reserved © 2016 - Central Marin Soccer Club"
+  footer_copy: "All rights reserved © %{year} - Central Marin Soccer Club"
   header_text_alt: 'Central Marin Competitive Soccer Club'
   menu:
     home: "Home"

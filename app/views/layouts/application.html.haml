@@ -41,7 +41,7 @@
       %div{id: 'main', role: 'main', class: ""}
         = yield
       %footer{id: 'footer'}
-        %span= t('footer_copy')
+        %span= t('footer_copy', year: Time.now.year)
       %div{class: 'clear'}
     %div
       %div{id: 'bottom_padder'}
