@@ -5,6 +5,7 @@ class TryoutsController < CmsController
   def index
     init_web_parts('Tryouts Overview')
 
+    @year = EventGroup::TRYOUT_YEAR
     @info, age_group  = Event.tryout_related_events
   end
 

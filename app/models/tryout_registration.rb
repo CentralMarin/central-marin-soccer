@@ -1,5 +1,7 @@
 class TryoutRegistration < ActiveRecord::Base
 
+  after_initialize :init
+
   validates :first,  :presence => true, allow_blank: false
   validates :last, :presence => true, allow_blank: false
   validates :home_address, :presence => true, allow_blank: false
@@ -25,4 +27,7 @@ class TryoutRegistration < ActiveRecord::Base
   validates :relationship, :presence => true, allow_blank: false
   validates :waiver, :presence => true, allow_blank: false
 
+  def init
+    self.year = EventGroup::TRYOUT_YEAR
+  end
 end
