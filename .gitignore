@@ -33,3 +33,6 @@ config/secrets.yml
 config/*.p12
 .vagrant
 .capistrano
+
+# Ignore Google config
+USClubForms/config.json
