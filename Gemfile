@@ -13,8 +13,8 @@ gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '1.0.5'
 gem 'premailer-rails', '1.9.0'
-gem 'nokogiri', '1.6.7.1'
-gem 'devise', '3.5.3'
+gem 'nokogiri', '1.6.7.2'
+gem 'devise', '3.5.4'
 gem 'bing_translator', '4.5.0'
 gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
@@ -52,7 +52,7 @@ end
 
 # Use Capistrano for deployment
 group :development do
-  gem 'capistrano-rails',   '1.1.5'
+  gem 'capistrano-rails',   '1.1.6'
   gem 'capistrano-faster-assets', '1.0.2'
   gem 'capistrano-passenger', '0.2.0'
 end
@@ -66,7 +66,7 @@ group :development, :test do
   gem 'rspec-rails', '3.4.0'
   gem 'factory_girl_rails', '4.5.0'
   gem 'faker', '1.6.1'
-  gem 'capybara', '2.5.0'
+  gem 'capybara', '2.6.0'
   gem 'selenium-webdriver', '2.49.0'
 end
 
