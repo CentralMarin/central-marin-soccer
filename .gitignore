@@ -36,3 +36,9 @@ config/*.p12
 
 # Ignore Google config
 USClubForms/config.json
+USClubForms/Boys
+USClubForms/Girls
+Tryouts/config.json
+Tryouts/*.xlsx
+Tryouts/client_secret.json
+Tryouts/.credentials
