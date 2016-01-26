@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.5.1'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
@@ -14,7 +14,7 @@ gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '1.0.5'
 gem 'premailer-rails', '1.9.0'
 gem 'nokogiri', '1.6.7.2'
-gem 'devise', '3.5.4'
+gem 'devise', '3.5.5'
 gem 'bing_translator', '4.5.0'
 gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
