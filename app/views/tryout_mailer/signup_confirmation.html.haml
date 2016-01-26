@@ -1,6 +1,6 @@
 %html
   %head
-    %style{type:"text/css"}= Rails.application.assets.find_asset('email.css').to_s
+    %style{type:"text/css"}= Rails.application.assets_manifest.assets["email.css"]
     %meta{'http-equiv' => 'Content-Type', content: 'text/html; charset=utf-8'}
   %body
     = render :partial => 'tryouts/tryout_confirmation'
