@@ -81,7 +81,7 @@ ActiveAdmin.register Event do
         event_group.has_many :event_details, heading: 'Details', allow_destroy: true do |event_detail|
           event_detail.input :formatted_start, :as => :string, :input_html => {:class => "hasDatetimePicker"}, label: 'Start'
           event_detail.input :duration, :as => :select, :collection => [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], :label => "Duration (minutes)"
-          event_detail.input :location, as: :select, :collection => Location.all
+          event_detail.input :location, as: :select, :collection => Location.all.order(name: :asc)
         end
       end
 
