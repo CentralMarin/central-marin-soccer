@@ -33,7 +33,7 @@
     %div.grid_3
       = f.label :birthdate, "#{t('registration.form.birthdate')} *"
     %div.grid_4
-      = f.date_select :birthdate, {:start_year => Time.now.year - 19, :end_year => Time.now.year - 6, :use_month_numbers => true, :include_blank => true, :order => [:month, :day, :year]}, {:required => true}
+      = f.date_select :birthdate, {:start_year => Time.now.year - 18, :end_year => Time.now.year - 7, :use_month_numbers => true, :include_blank => true, :order => [:month, :day, :year]}, {:required => true}
       = show_error(t('registration.form.birthdate'), :birthdate)
     %div.clear
       &nbsp;

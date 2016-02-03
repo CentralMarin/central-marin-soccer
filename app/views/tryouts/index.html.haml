@@ -50,7 +50,7 @@
     /
     %select#birthdate_year{:name => 'birthdate_year', :required => true}
       %option
-      - (Time.now.year - 19..Time.now.year-6).each do |year|
+      - (Time.now.year - 18..Time.now.year-7).each do |year|
         %option
           = year
 
