@@ -96,14 +96,14 @@ class TryoutsController < CmsController
     year = params['year'].to_i
     gender = Gender.new(params['gender'].to_i)
 
-    @tryout, @age_group = lookup_tryout(gender, year)
+    tryout, @age_group = lookup_tryout(gender, year)
 
     # Minify the HTML so we can make it part of the JSON
-    html = render_to_string :partial => 'tryout_info.html', :locals => {tryout: @tryout}
+    html = render_to_string :partial => 'tryout_info.html', locals: {tryout: tryout}, format: :html
     minified = HtmlPress.press html
 
     respond_to do |format|
-      format.json { render json: { html: minified, status: @tryout != nil }}
+      format.json { render json: { html: minified, status: tryout != nil }}
     end
   end
 
