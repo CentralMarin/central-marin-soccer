@@ -44,3 +44,4 @@ Tryouts/client_secret.json
 Tryouts/.credentials
 
 docker
+.env.web
