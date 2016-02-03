@@ -1,0 +1,18 @@
+db:
+  image: mysql
+  env_file:
+    - '.env.web'
+  volumes:
+    - ./docker/data:/docker-entrypoint-initdb.d
+web:
+  build: .
+  volumes:
+    - .:/myapp
+    - ./docker/public/ckeditor_assets:/myapp/public/ckeditor_assets
+    - ./docker/public/uploads:/myapp/public/uploads
+  ports:
+    - "3000:3000"
+  links:
+    - db:DBHOST
+  env_file:
+    - '.env.web'
