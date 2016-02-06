@@ -30,4 +30,8 @@ class TryoutRegistration < ActiveRecord::Base
   def init
     self.year = EventGroup::TRYOUT_YEAR
   end
+
+  def self.sheet_name
+    "#{EventGroup::TRYOUT_YEAR} #{Rails.application.secrets.google_drive_tryouts_doc}"
+  end
 end

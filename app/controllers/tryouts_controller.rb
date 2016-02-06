@@ -45,7 +45,7 @@ class TryoutsController < CmsController
       @tryout_registration.insurance_phone = format_phone_number(@tryout_registration.insurance_phone)
 
       # Save to google spreadsheet - Age Specific Tab
-      update_spreadsheet "#{EventGroup::TRYOUT_YEAR} #{Rails.application.secrets.google_drive_tryouts_doc}", @tryout_registration
+      update_spreadsheet TryoutRegistration.sheet_name, @tryout_registration
 
       # Tryout info
       @tryout, @age_group = lookup_tryout(Gender.new(@tryout_registration.gender), @tryout_registration.birthdate.year)
@@ -193,6 +193,24 @@ class TryoutsController < CmsController
     return age_level_sheet;
   end
 
+  def self.authorize
+    # Initialize Google Client
+    api_client = Google::APIClient.new(application_name: 'Central Marin Soccer Tryouts', application_version: '1.0.0')
+    drive = api_client.discovered_api('drive', 'v2')
+
+    # Load Credentials
+    key = Google::APIClient::KeyUtils.load_from_pkcs12(Rails.root.join('config', Rails.application.secrets.google_key_file).to_s, Rails.application.secrets.google_key_secret)
+    asserter = Google::APIClient::JWTAsserter.new(
+        Rails.application.secrets.google_service_account_id,
+        'https://www.googleapis.com/auth/drive',
+        key
+    )
+
+    # Authorize
+    api_client.authorization = asserter.authorize(Rails.application.secrets.google_drive_account)
+    session = GoogleDrive.login_with_oauth(api_client.authorization.access_token)
+  end
+
   def update_spreadsheet(title, registration_info)
 
     @@mutex.synchronize do
@@ -200,21 +218,7 @@ class TryoutsController < CmsController
       # make sure we submit everything in English
       I18n.with_locale(:en) do
 
-        # Initialize Google Client
-        api_client = Google::APIClient.new(application_name: 'Central Marin Soccer Tryouts', application_version: '1.0.0')
-        drive = api_client.discovered_api('drive', 'v2')
-
-        # Load Credentials
-        key = Google::APIClient::KeyUtils.load_from_pkcs12(Rails.root.join('config', Rails.application.secrets.google_key_file).to_s, Rails.application.secrets.google_key_secret)
-        asserter = Google::APIClient::JWTAsserter.new(
-          Rails.application.secrets.google_service_account_id,
-          'https://www.googleapis.com/auth/drive',
-          key
-        )
-
-        # Authorize
-        api_client.authorization = asserter.authorize(Rails.application.secrets.google_drive_account)
-        session = GoogleDrive.login_with_oauth(api_client.authorization.access_token)
+        session = TryoutsController.authorize
 
         ss = session.spreadsheet_by_title(title)
         if ss.nil?
