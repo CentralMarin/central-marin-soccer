@@ -17,6 +17,17 @@ ActiveAdmin.register PlayerPortal do
     actions
   end
 
+  form :html => { :enctype => "multipart/form-data" } do |f|
+    f.inputs do
+      f.input :uid
+      f.input :first
+      f.input :last
+      f.input :birthday, start_year: Time.now.year - EventGroup::MAX_AGE, end_year: Time.now.year - EventGroup::MIN_AGE
+
+      f.actions
+    end
+  end
+
   action_item :import, :only => :index do
     link_to "Import Players", :action => "player_portal_import"
   end
