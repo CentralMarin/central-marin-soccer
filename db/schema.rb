@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151122194413) do
+ActiveRecord::Schema.define(version: 20160206155949) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -201,6 +201,15 @@ ActiveRecord::Schema.define(version: 20151122194413) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "player_portals", force: :cascade do |t|
+    t.string   "uid"
+    t.date     "birthday"
+    t.string   "first"
+    t.string   "last"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "team_level_translations", force: :cascade do |t|
     t.integer  "team_level_id",             null: false
     t.string   "locale",        limit: 255, null: false
@@ -275,6 +284,7 @@ ActiveRecord::Schema.define(version: 20151122194413) do
     t.string   "insurance_phone"
     t.string   "policy_holder"
     t.string   "policy_number"
+    t.integer  "year"
   end
 
   create_table "web_part_translations", force: :cascade do |t|

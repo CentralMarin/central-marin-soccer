@@ -13,6 +13,12 @@ Rails.application.routes.draw do
   get '/tryouts/agegroupchart', :to => 'tryouts#agegroupchart', :as => 'tryouts_agegroupchart'
   get '/tryouts/agelevel', :to => 'tryouts#agelevel', :as => 'tryouts_agelevel'
 
+
+  get '/portal/:uid/login', :to => 'player_portals#session_new', :as => 'player_portal_login'
+  post '/portal/:uid/login', :to => 'player_portals#session_create', :as => 'player_portal_create'
+  get '/portal/:uid/logout', :to => 'player_portals#session_destroy', :as => 'player_portal_logout'
+  get '/portal/:uid', :to => 'player_portals#index', :as => 'player_portal'
+
   get '/news/', :to => 'articles#index', :as => 'articles'
   get '/news/:id', :to => 'articles#show', :as => 'article'
 

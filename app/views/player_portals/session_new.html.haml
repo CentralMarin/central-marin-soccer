@@ -1,0 +1,7 @@
+%h1 Login
+
+= @message
+= form_tag player_portal_create_path
+Please enter your players birthday:
+= date_field(:PlayerPortal, :birthday)
+= submit_tag "Login"
