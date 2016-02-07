@@ -45,28 +45,49 @@ ActiveAdmin.register PlayerPortal do
       return
     end
 
-    # TODO: Send email for every player we import
-
     imported = 0
+    skipped = 0
 
     # Iterate over all rows in each checking for columns that have selected = Y
     ss.worksheets.each do |sheet|
       sheet.rows.each do |row|
         selected = row[45]
         if selected == 'Y' || selected == 'y'
-          pp = PlayerPortal.new
-          pp.birthday= row[10]
-          pp.first= row[2]
-          pp.last= row[3]
-          pp.uid= SecureRandom.uuid
-          pp.save!
 
-          imported += 1
+          first = row[2]
+          last = row[3]
+          birthday = row[10]
+          md5 = Digest::MD5.hexdigest("#{first}|#{last}|#{birthday}")
+
+          # Check if we already have this record
+          pp = PlayerPortal.find_by_md5(md5)
+          if pp.nil?
+
+
+            # TODO: Transaction this in case we fail to send the email
+            pp = PlayerPortal.new
+            pp.birthday= birthday
+            pp.first= first
+            pp.last= last
+            pp.uid= SecureRandom.uuid
+            pp.year= EventGroup::TRYOUT_YEAR
+            pp.md5= md5
+
+            pp.save!
+
+            imported += 1
+
+            # TODO: Send email for every player we import
+
+          else
+            skipped += 1
+          end
+
         end
       end
     end
 
-    flash[:notice] = "Imported #{imported} players"
+    flash[:notice] = "Imported #{imported} players. Skipped #{skipped} already imported players."
     redirect_to :action => :index
   end
 end

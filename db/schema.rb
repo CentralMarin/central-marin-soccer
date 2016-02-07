@@ -206,6 +206,8 @@ ActiveRecord::Schema.define(version: 20160206155949) do
     t.date     "birthday"
     t.string   "first"
     t.string   "last"
+    t.string   "md5"
+    t.integer  "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

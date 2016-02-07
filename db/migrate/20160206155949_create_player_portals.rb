@@ -5,7 +5,8 @@ class CreatePlayerPortals < ActiveRecord::Migration
       t.date :birthday
       t.string :first
       t.string :last
-
+      t.string :md5
+      t.integer :year
       t.timestamps null: false
     end
   end
