@@ -1,5 +1,11 @@
 class PlayerPortalsController < InheritedResources::Base
 
+  before_filter except: [:session_new, :session_create] do |controller|
+    redirect_to player_portal_login_path unless session[:is_authenticated] == params[:uid]
+  end
+
+  PDFTK_PATH = '/usr/local/bin/pdftk'
+
   def session_new
 
   end
@@ -11,7 +17,7 @@ class PlayerPortalsController < InheritedResources::Base
     birthday = params[:PlayerPortal][:birthday]
 
     if !birthday.blank? && player.birthday == Date.parse(birthday)
-      session[:is_authenticated] = true
+      session[:is_authenticated] = params[:uid]
 
       redirect_to player_portal_path
     else
@@ -32,11 +38,28 @@ class PlayerPortalsController < InheritedResources::Base
   # TODO: Track failed logins - After XXX for a given uid, disable that account
   def index
 
-    redirect_to player_portal_login_path unless session[:is_authenticated]
-
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
 
-    # See if we already have a session
+  end
+
+  def club_form
+
+    player = PlayerPortal.find_by(uid: params[:uid])
+
+    # tmp file to store pdf
+    tmp_form = "#{Rails.root}/tmp/pdfs/#{SecureRandom.uuid}.pdf"
+
+    # Fill in PDF Form
+    pdftk = PdfForms.new(PDFTK_PATH)
+
+    pdftk.fill_form "#{Rails.root}/lib/pdf_templates/club_form.pdf", tmp_form, player.to_hash, flatten: true
+
+    # Stream the form the user
+    File.open(tmp_form, 'r') do |f|
+      send_data f.read.force_encoding('BINARY'), filename: "#{player.first} #{player.last} club_form.pdf", disposition: 'inline', type: 'application/pdf'
+    end
+    File.delete(tmp_form)
+
   end
 
   private

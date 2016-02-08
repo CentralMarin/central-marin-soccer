@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/tryouts/agelevel', :to => 'tryouts#agelevel', :as => 'tryouts_agelevel'
 
 
+  get '/portal/:uid/clubform', :to => 'player_portals#club_form', :as => 'player_portal_club_form'
   get '/portal/:uid/login', :to => 'player_portals#session_new', :as => 'player_portal_login'
   post '/portal/:uid/login', :to => 'player_portals#session_create', :as => 'player_portal_create'
   get '/portal/:uid/logout', :to => 'player_portals#session_destroy', :as => 'player_portal_logout'
