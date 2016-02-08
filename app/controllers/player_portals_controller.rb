@@ -56,7 +56,7 @@ class PlayerPortalsController < InheritedResources::Base
 
     # Stream the form the user
     File.open(tmp_form, 'r') do |f|
-      send_data f.read.force_encoding('BINARY'), filename: "#{player.first} #{player.last} club_form.pdf", disposition: 'inline', type: 'application/pdf'
+      send_data f.read.force_encoding('BINARY'), filename: "#{player.first} #{player.last} US Club Form.pdf", disposition: 'inline', type: 'application/pdf'
     end
     File.delete(tmp_form)
 
