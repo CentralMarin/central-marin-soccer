@@ -7,7 +7,7 @@ gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
 gem 'ckeditor', '4.1.6'
 gem 'carrierwave', '0.10.0'
-gem 'mini_magick', '4.3.6'
+gem 'mini_magick', '4.4.0'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
@@ -63,13 +63,13 @@ group :staging, :production do
 end
 
 group :development, :test do
-  gem 'i18n-tasks', '~> 0.9.2'
+  gem 'i18n-tasks', '~> 0.9.4'
   gem 'rspec-rails', '3.4.2'
   gem 'factory_girl_rails', '4.6.0'
   gem 'faker', '1.6.1'
   gem 'capybara', '2.6.2'
-  gem 'selenium-webdriver', '2.50.0'
+  gem 'selenium-webdriver', '2.51.0'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '1.6.2', group: :development
+gem 'spring', '1.6.3', group: :development
