@@ -20,6 +20,7 @@ gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activeadmin-ranked-model'
 gem 'html_press', '0.8.2'
+gem 'pdf-forms', '1.0.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.11'
