@@ -74,6 +74,7 @@ ActiveAdmin.register PlayerPortal do
               pp.city= row[6]
               pp.state= row[7]
               pp.zip= row[8]
+              pp.gender= row[9]
               pp.birthday= birthday
 
               pp.parent1_first= row[14]
@@ -83,12 +84,12 @@ ActiveAdmin.register PlayerPortal do
               pp.parent1_business= row[18]
               pp.parent1_cell= row[19]
 
-              pp.parent1_first= row[20]
-              pp.parent1_last= row[21]
-              pp.parent1_email= row[22]
-              pp.parent1_home= row[23]
-              pp.parent1_business= row[24]
-              pp.parent1_cell= row[25]
+              pp.parent2_first= row[20]
+              pp.parent2_last= row[21]
+              pp.parent2_email= row[22]
+              pp.parent2_home= row[23]
+              pp.parent2_business= row[24]
+              pp.parent2_cell= row[25]
 
               pp.ec1_name= row[26]
               pp.ec1_phone1= row[27]
