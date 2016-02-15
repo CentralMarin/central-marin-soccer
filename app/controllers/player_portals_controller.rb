@@ -1,5 +1,7 @@
 class PlayerPortalsController < InheritedResources::Base
 
+  layout 'player_portal'
+
   before_filter except: [:session_new, :session_create] do |controller|
     redirect_to player_portal_login_path unless session[:is_authenticated] == params[:uid]
   end
@@ -59,6 +61,10 @@ class PlayerPortalsController < InheritedResources::Base
       send_data f.read.force_encoding('BINARY'), filename: "#{player.first} #{player.last} US Club Form.pdf", disposition: 'inline', type: 'application/pdf'
     end
     File.delete(tmp_form)
+
+  end
+
+  def registration
 
   end
 

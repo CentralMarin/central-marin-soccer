@@ -1,0 +1,117 @@
+- content_for :css do
+  = stylesheet_link_tag "player_portals"
+
+/ Creative Tim Branding
+%a{:href => "/"}
+  .logo-container
+    .logo
+      = image_tag "logo.png"
+
+/ Big container
+.container
+  .row
+    .col-sm-8.col-sm-offset-2
+      / Wizard container
+      .wizard-container
+        #wizard.card.wizard-card.ct-wizard-green
+          %form{:action => "", :method => ""}
+            .wizard-header
+              %h3
+                %b REGISTER
+                YOUR PLAYER
+                %br
+                  = "<small>This information will let us register your player for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
+            %ul
+              %li
+                %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
+              %li
+                %a{"data-toggle" => "tab", :href => "#player-picture"} Player Picture
+              %li
+                %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer
+              %li
+                %a{"data-toggle" => "tab", :href => "#payment"} Payment
+            .tab-content
+              #us-club-form.tab-pane
+                .row
+                  .col-sm-12
+                    .card-container.manual-flip
+                      .card
+                        .front
+                          %h4.info-text Verify your registration information
+                          .embed-responsive.embed-responsive-4by3
+                            %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}"} this is not working as expected. Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
+
+              #player-picture.tab-pane
+                %h4.info-text What type of location do you have?
+                .row
+                  .col-sm-10.col-sm-offset-1
+                    .col-sm-4.col-sm-offset-2
+                      .choice{"data-toggle" => "wizard-radio", :rel => "tooltip", :title => "Select this option if you have a house."}
+                        %input{:name => "type", :type => "radio", :value => "House"}
+                          .icon
+                            %i.fa.fa-home
+                          %h6 House
+                    .col-sm-4
+                      .choice{"data-toggle" => "wizard-radio", :rel => "tooltip", :title => "Select this option if you have an appartment"}
+                        %input{:name => "type", :type => "radio", :value => "Appartment"}
+                          .icon
+                            %i.fa.fa-building
+                          %h6 Appartment
+              #volunteer.tab-pane
+                %h4.info-text Tell us more about facilities.
+                .row
+                  .col-sm-5.col-sm-offset-1
+                    .form-group
+                      %label Your place is good for
+                      %select.form-control
+                        %option{:disabled => "", :selected => ""} - type -
+                        %option Business
+                        %option Vacation
+                        %option Work
+                  .col-sm-5
+                    .form-group
+                      %label Is air conditioning included ?
+                      %select.form-control
+                        %option{:disabled => "", :selected => ""} - response -
+                        %option Yes
+                        %option No
+                  .col-sm-5.col-sm-offset-1
+                    .form-group
+                      %label Does your place have wi-fi?
+                      %select.form-control
+                        %option{:disabled => "", :selected => ""} - response -
+                        %option Yes
+                        %option No
+                  .col-sm-5
+                    .form-group
+                      %label Is breakfast included?
+                      %select.form-control
+                        %option{:disabled => "", :selected => ""} - response -
+                        %option Yes
+                        %option No
+              #payment.tab-pane
+                .row
+                  %h4.info-text Drop us a small description.
+                  .col-sm-6.col-sm-offset-1
+                    .form-group
+                      %label Place description
+                      %textarea.form-control{:placeholder => "", :rows => "9"}
+                        :preserve
+
+                  .col-sm-4
+                    .form-group
+                      %label Example
+                      %p.description "The place is really nice. We use it every sunday when we go fishing. It is so awesome."
+            .wizard-footer
+              .pull-right
+                %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:name => "next", :type => "button", :value => "Next"}/
+                %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:name => "finish", :type => "button", :value => "Finish"}/
+              .pull-left
+                %input.btn.btn-previous.btn-fill.btn-default.btn-wd.btn-sm{:name => "previous", :type => "button", :value => "Previous"}/
+              .clearfix
+            / wizard container
+        / row
+      / big container
+
+- content_for :javascript do
+  = javascript_include_tag "player_portals"
