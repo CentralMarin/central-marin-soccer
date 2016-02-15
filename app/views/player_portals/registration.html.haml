@@ -18,9 +18,9 @@
             .wizard-header
               %h3
                 %b REGISTER
-                YOUR PLAYER
+                = "#{@player_portal[:first]} #{@player_portal[:last]}"
                 %br
-                  = "<small>This information will let us register your player for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
+                  = "<small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
             %ul
               %li
                 %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
@@ -34,12 +34,12 @@
               #us-club-form.tab-pane
                 .row
                   .col-sm-12
-                    .card-container.manual-flip
-                      .card
-                        .front
-                          %h4.info-text Verify your registration information
-                          .embed-responsive.embed-responsive-4by3
-                            %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}"} this is not working as expected. Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
+                    %h4.info-text
+                      Verify your registration information.
+                      %br
+                      <a href='mailto:rrobinett@centralmarinsoccer.com?subject=#{@player_portal[:first]} #{@player_portal[:last]} CM Registration Changes&body=The following information needs to be updated: '>Click here</a> if any information is incorrect.
+                    .embed-responsive.embed-responsive-4by3
+                      %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
 
               #player-picture.tab-pane
                 %h4.info-text What type of location do you have?

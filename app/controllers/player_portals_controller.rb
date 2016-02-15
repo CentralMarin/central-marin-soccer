@@ -65,6 +65,7 @@ class PlayerPortalsController < InheritedResources::Base
   end
 
   def registration
+    @player_portal = PlayerPortal.find_by(uid: params[:uid])
 
   end
 
