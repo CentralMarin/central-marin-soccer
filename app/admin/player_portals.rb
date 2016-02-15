@@ -4,9 +4,15 @@ ActiveAdmin.register PlayerPortal do
 
   permit_params :uid, :first, :last, :birthday
 
+  member_action :impersonate do
+    uid = params[:id]
+    session[:is_authenticated] = uid
+    redirect_to player_portal_path(uid)
+  end
+
   index :download_links => false do
     column :uid do |portal|
-      link_to portal.uid, player_portal_path(portal.uid)
+      link_to portal.uid, impersonate_admin_player_portal_path(portal.uid), target: '_blank'
     end
     column :first
     column :last
@@ -76,6 +82,7 @@ ActiveAdmin.register PlayerPortal do
               pp.zip= row[8]
               pp.gender= row[9]
               pp.birthday= birthday
+              pp.have_birth_certificate = row[13] == 'Central Marin Soccer Club'
 
               pp.parent1_first= row[14]
               pp.parent1_last= row[15]

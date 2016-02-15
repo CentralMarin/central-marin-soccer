@@ -10,6 +10,7 @@ class CreatePlayerPortals < ActiveRecord::Migration
       t.string :zip
       t.string :gender
       t.date :birthday
+      t.boolean :have_birth_certificate
 
       t.string :parent1_first
       t.string :parent1_last

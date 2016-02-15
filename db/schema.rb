@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 20160206155949) do
     t.string   "zip"
     t.string   "gender"
     t.date     "birthday"
+    t.boolean  "have_birth_certificate"
     t.string   "parent1_first"
     t.string   "parent1_last"
     t.string   "parent1_email"
@@ -241,8 +242,8 @@ ActiveRecord::Schema.define(version: 20160206155949) do
     t.string   "uid"
     t.string   "md5"
     t.integer  "season"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "team_level_translations", force: :cascade do |t|
