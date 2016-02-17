@@ -9,7 +9,6 @@
 //= require jquery.Jcrop.min
 //= require namespace
 
-// TODO: Fix selecting a new photo
 // TODO: Size picture to fit in the box  Currently 8 pixels too wide
 // TODO: Make the preview look a like a player card
 // TODO: Upload birth certificate
@@ -22,13 +21,16 @@
         var PREVIEW_HEIGHT = 150;
         var CROP_WIDTH = 300;
         var CROP_HEIGHT = 300;
+        var _jcrop_api;
 
         var picture = function(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var img = $("#jcrop");
-                    img.attr("src", e.target.result);
+                    img.attr('src', e.target.result);
+
+                    if (_jcrop_api) _jcrop_api.destroy();
 
                     img.Jcrop({
                         onChange: canvas,
@@ -39,6 +41,7 @@
                         aspectRatio: 1
                     }, function() {
                         this.setSelect([0,0,CROP_WIDTH,CROP_HEIGHT]);
+                        _jcrop_api = this;
                     });
                 };
                 reader.readAsDataURL(input.files[0]);
