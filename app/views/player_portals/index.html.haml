@@ -1,3 +1,6 @@
+- content_for :css do
+  = stylesheet_link_tag 'jquery.Jcrop.min'
+
 %h1
   = "Player Portal for #{@player_portal.first} #{@player_portal.last}"
 
@@ -15,9 +18,7 @@
     %li Player & Parent code of conduct acknoledged
     %li Volunteer selected - Show volunteer category selected
 
-Generate US Club Form PDF on the fly based on the information we have. Need to import more information from
-%iframe{src: "#{player_portal_club_form_path}", width: "100%", height: "50%"}
-
-
-
 = link_to "Logout", player_portal_logout_path
+
+- content_for :javascript do
+  = javascript_include_tag "player_portals"

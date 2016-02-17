@@ -22,41 +22,46 @@
                 %br
                   = "<small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
             %ul
+              -#%li
+              -#  %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
               %li
-                %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
-              %li
-                %a{"data-toggle" => "tab", :href => "#player-picture"} Player Picture
+                %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal[:have_birth_certificate] ? '' : ' & Birth Certificate'}
               %li
                 %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer
               %li
                 %a{"data-toggle" => "tab", :href => "#payment"} Payment
             .tab-content
-              #us-club-form.tab-pane
-                .row
-                  .col-sm-12
-                    %h4.info-text
-                      Verify your registration information.
-                      %br
-                      <a href='mailto:rrobinett@centralmarinsoccer.com?subject=#{@player_portal[:first]} #{@player_portal[:last]} CM Registration Changes&body=The following information needs to be updated: '>Click here</a> if any information is incorrect.
-                    .embed-responsive.embed-responsive-4by3
-                      %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
+              -##us-club-form.tab-pane
+              -#  .row
+              -#    .col-sm-12
+              -#      %h4.info-text
+              -#        Verify your registration information.
+              -#        %br
+              -#        <a href='mailto:rrobinett@centralmarinsoccer.com?subject=#{@player_portal[:first]} #{@player_portal[:last]} CM Registration Changes&body=The following information needs to be updated: '>Click here</a> if any information is incorrect.
+              -#      .embed-responsive.embed-responsive-4by3
+              -#        %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
 
               #player-picture.tab-pane
-                %h4.info-text What type of location do you have?
+                - if @player_portal[:have_birth_certificate]
+                  %h4.info-text You previously played for Central Marin, so we only need an updated photo.
+                - else
+                  %h4.info-text Since you're new to the club, we need #{@player_portal[:first]}'s birth certificate & photo.
                 .row
-                  .col-sm-10.col-sm-offset-1
-                    .col-sm-4.col-sm-offset-2
-                      .choice{"data-toggle" => "wizard-radio", :rel => "tooltip", :title => "Select this option if you have a house."}
-                        %input{:name => "type", :type => "radio", :value => "House"}
-                          .icon
-                            %i.fa.fa-home
-                          %h6 House
-                    .col-sm-4
-                      .choice{"data-toggle" => "wizard-radio", :rel => "tooltip", :title => "Select this option if you have an appartment"}
-                        %input{:name => "type", :type => "radio", :value => "Appartment"}
-                          .icon
-                            %i.fa.fa-building
-                          %h6 Appartment
+                  .col-sm-4.col-sm-offset-1
+                    .picture-container
+                      .picture
+                        %img#jcrop{src: "#{image_path('default-avatar.png')}", title: ''}
+                        %input#wizard-picture{type: "file"}
+                      %h6
+                        Choose & Crop Picture
+                        %br
+                        <small>Drag on picture to select crop region</small>
+
+                  .col-sm-6
+                    .form-group
+                      %canvas#canvas
+                      %input#png{type: 'hidden'}
+
               #volunteer.tab-pane
                 %h4.info-text Tell us more about facilities.
                 .row
@@ -115,3 +120,5 @@
 
 - content_for :javascript do
   = javascript_include_tag "player_portals"
+  %script
+    $(document).ready(player_portal.image_crop.init());
