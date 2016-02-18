@@ -34,17 +34,41 @@
               - if @player_portal[:have_birth_certificate]
                 %h4.info-text You previously played for Central Marin, so we only need an updated photo.
               - else
-                %h4.info-text Since you're new to the club, we need #{@player_portal[:first]}'s birth certificate & photo.
+                %h4.info-text Since you're new to the club, we need #{@player_portal[:first]}'s date of birth proof & photo.
               .row
+                - unless @player_portal[:have_birth_certificate]
+                  .col-sm-12
+                    .panel.panel-danger#proof-Of-birth
+                      .panel-heading
+                        .panel-title
+                          %span.glyphicon.glyphicon-upload{'aria-hidden':"true"}
+                          Upload Date of Birth Proof
+                      .panel-body
+                        Acceptable date of birth proof includes:
+                        %ul
+                          %li birth certificate
+                          %li birth registration issued by the appropriate government agency
+                          %li passport
+                          %li alien registration card issued by the U.S. Government
+                          %li certificate issued by the INS attesting to age
+                          %li certification of a United States citizen born abroad issued by the appropriate govenment agency
+                          %li or a current driver's license.
+                        %p
+                          <b>Hospital, baptismal, or religious certificates are not accepted by US Club Soccer.</b>
+
                 .col-sm-5.col-xs-12
-                  .panel.panel-default
+                  .panel.panel-danger#upload-photo
+                    .panel-heading
+                      .panel-title
+                        %span.glyphicon.glyphicon-alert{'aria-hidden':"true"}
+                        Upload and Crop Photo
                     .picture-container
                       .panel-body
                         .picture
                           %img#jcrop.img-responsive.center-block{title: ''}
                           %input#wizard-picture{type: "file"}
                         %h6
-                          Select & Crop Picture
+                          Click Photo to Select & Crop Picture
                           %br
                           <small>Drag on picture to adjust crop region</small>
 
@@ -79,11 +103,6 @@
                             <small>Expires:</small>
                           .col-xs-4
                             %b 01/01/2017
-              .row
-                %br TODO: Figure out call to action text for upload birth certificate
-                %br TODO: Add button to upload
-                %br TODO: Show preview of image
-
 
             #volunteer.tab-pane
               %h4.info-text Tell us more about facilities.

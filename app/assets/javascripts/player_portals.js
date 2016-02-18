@@ -52,6 +52,9 @@
                             // put the crop box in the center of the image
                             this.setSelect([x1,y1,x2,y2]);
                             _jcrop_api = this;
+
+                            // Turn heading to completed
+                            _taskCompleted($('#upload-photo'));
                         });
                     };
 
@@ -59,6 +62,18 @@
                 reader.readAsDataURL(input.files[0]);
             }
         };
+
+        var _taskCompleted = function(elem) {
+
+            // Swap the color and the icon
+            _swapClass(elem, 'panel-danger', 'panel-success');
+            _swapClass(elem.find('.panel-title').find('.glyphicon-alert'), 'glyphicon-alert', 'glyphicon-ok');
+        };
+
+        var _swapClass = function(elem, removeClass, addClass) {
+            elem.removeClass(removeClass).addClass(addClass);
+        };
+
 
         var canvas = function (coords){
             var imageObj = $("#jcrop")[0];
