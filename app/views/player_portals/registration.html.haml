@@ -47,25 +47,52 @@
                 - else
                   %h4.info-text Since you're new to the club, we need #{@player_portal[:first]}'s birth certificate & photo.
                 .row
-                  .col-sm-4.col-sm-offset-1
+                  .col-sm-5
                     .picture-container
                       .picture
-                        %img#jcrop{src: "#{image_path('default-avatar.png')}", title: ''}
+                        %img#jcrop.img-responsive.center-block{src: "#{image_path('default-avatar.png')}", title: ''}
                         %input#wizard-picture{type: "file"}
                       %h6
-                        Choose & Crop Picture
+                        Select & Crop Picture
                         %br
-                        <small>Drag on picture to select crop region</small>
+                        <small>Drag on picture to adjust crop region</small>
 
                   .col-sm-6
-                    .form-group
-                      %canvas#canvas
-                      %input#png{type: 'hidden'}
+                    .panel.panel-default
+                      .panel-heading
+                        .panel-title
+                          Example US Club Player Pass
+                      .panel-body
+                        .col-sm-3.nopadding
+                          %canvas#canvas.img-responsive
+                          %input#png{type: 'hidden'}
+                        .col-sm-9
+                          .row
+                            .col-sm-2
+                              <small>Last:</small>
+                            .col-sm-4
+                              %b Robinett
+                          .row
+                            .col-sm-2
+                              <small>First:</small>
+                            .col-sm-4
+                              %b Ryan
+                          .row
+                            &nbsp;
+                          .row
+                            .col-sm-2
+                              <small>DOB:</small>
+                            .col-sm-4
+                              %b 01/02/1999
+                            .col-sm-2
+                              <small>Expires:</small>
+                            .col-sm-3
+                              %b 01/01/2017
 
               #volunteer.tab-pane
                 %h4.info-text Tell us more about facilities.
                 .row
-                  .col-sm-5.col-sm-offset-1
+                  .col-sm-5
                     .form-group
                       %label Your place is good for
                       %select.form-control
