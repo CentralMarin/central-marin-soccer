@@ -48,14 +48,16 @@
                   %h4.info-text Since you're new to the club, we need #{@player_portal[:first]}'s birth certificate & photo.
                 .row
                   .col-sm-5
-                    .picture-container
-                      .picture
-                        %img#jcrop.img-responsive.center-block{src: "#{image_path('default-avatar.png')}", title: ''}
-                        %input#wizard-picture{type: "file"}
-                      %h6
-                        Select & Crop Picture
-                        %br
-                        <small>Drag on picture to adjust crop region</small>
+                    .panel.panel-default
+                      .picture-container
+                        .panel-body
+                          .picture
+                            %img#jcrop.img-responsive.center-block{src: "#{image_path('default-avatar.png')}", title: ''}
+                            %input#wizard-picture{type: "file"}
+                          %h6
+                            Select & Crop Picture
+                            %br
+                            <small>Drag on picture to adjust crop region</small>
 
                   .col-sm-6
                     .panel.panel-default
@@ -71,19 +73,19 @@
                             .col-sm-2
                               <small>Last:</small>
                             .col-sm-4
-                              %b Robinett
+                              %b #{@player_portal[:last]}
                           .row
                             .col-sm-2
                               <small>First:</small>
                             .col-sm-4
-                              %b Ryan
+                              %b #{@player_portal[:first]}
                           .row
                             &nbsp;
                           .row
                             .col-sm-2
                               <small>DOB:</small>
                             .col-sm-4
-                              %b 01/02/1999
+                              %b #{@player_portal[:birthday].strftime('%m/%d/%Y')}
                             .col-sm-2
                               <small>Expires:</small>
                             .col-sm-3
