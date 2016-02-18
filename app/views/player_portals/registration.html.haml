@@ -1,153 +1,145 @@
-- content_for :css do
-  = stylesheet_link_tag "player_portals"
+.row
+  .col-sm-12
+    / Wizard container
+    .wizard-container
+      #wizard.card.wizard-card.ct-wizard-green
+        %form{:action => "", :method => ""}
+          .wizard-header
+            %h3
+              %b REGISTER
+              = "#{@player_portal[:first]} #{@player_portal[:last]}"
+              %br
+                = "<small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
+          %ul
+            -#%li
+            -#  %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
+            %li
+              %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal[:have_birth_certificate] ? '' : ' & Birth Certificate'}
+            %li
+              %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer
+            %li
+              %a{"data-toggle" => "tab", :href => "#payment"} Payment
+          .tab-content
+            -##us-club-form.tab-pane
+            -#  .row
+            -#    .col-sm-12
+            -#      %h4.info-text
+            -#        Verify your registration information.
+            -#        %br
+            -#        <a href='mailto:rrobinett@centralmarinsoccer.com?subject=#{@player_portal[:first]} #{@player_portal[:last]} CM Registration Changes&body=The following information needs to be updated: '>Click here</a> if any information is incorrect.
+            -#      .embed-responsive.embed-responsive-4by3
+            -#        %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
 
-/ Creative Tim Branding
-%a{:href => "/"}
-  .logo-container
-    .logo
-      = image_tag "logo.png"
-
-/ Big container
-.container
-  .row
-    .col-sm-12
-      / Wizard container
-      .wizard-container
-        #wizard.card.wizard-card.ct-wizard-green
-          %form{:action => "", :method => ""}
-            .wizard-header
-              %h3
-                %b REGISTER
-                = "#{@player_portal[:first]} #{@player_portal[:last]}"
-                %br
-                  = "<small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
-            %ul
-              -#%li
-              -#  %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
-              %li
-                %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal[:have_birth_certificate] ? '' : ' & Birth Certificate'}
-              %li
-                %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer
-              %li
-                %a{"data-toggle" => "tab", :href => "#payment"} Payment
-            .tab-content
-              -##us-club-form.tab-pane
-              -#  .row
-              -#    .col-sm-12
-              -#      %h4.info-text
-              -#        Verify your registration information.
-              -#        %br
-              -#        <a href='mailto:rrobinett@centralmarinsoccer.com?subject=#{@player_portal[:first]} #{@player_portal[:last]} CM Registration Changes&body=The following information needs to be updated: '>Click here</a> if any information is incorrect.
-              -#      .embed-responsive.embed-responsive-4by3
-              -#        %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
-
-              #player-picture.tab-pane
-                - if @player_portal[:have_birth_certificate]
-                  %h4.info-text You previously played for Central Marin, so we only need an updated photo.
-                - else
-                  %h4.info-text Since you're new to the club, we need #{@player_portal[:first]}'s birth certificate & photo.
-                .row
-                  .col-sm-5
-                    .panel.panel-default
-                      .picture-container
-                        .panel-body
-                          .picture
-                            %img#jcrop.img-responsive.center-block{src: "#{image_path('default-avatar.png')}", title: ''}
-                            %input#wizard-picture{type: "file"}
-                          %h6
-                            Select & Crop Picture
-                            %br
-                            <small>Drag on picture to adjust crop region</small>
-
-                  .col-sm-6
-                    .panel.panel-default
-                      .panel-heading
-                        .panel-title
-                          Example US Club Player Pass
+            #player-picture.tab-pane
+              - if @player_portal[:have_birth_certificate]
+                %h4.info-text You previously played for Central Marin, so we only need an updated photo.
+              - else
+                %h4.info-text Since you're new to the club, we need #{@player_portal[:first]}'s birth certificate & photo.
+              .row
+                .col-sm-5
+                  .panel.panel-default
+                    .picture-container
                       .panel-body
-                        .col-sm-3.nopadding
-                          %canvas#canvas.img-responsive
-                          %input#png{type: 'hidden'}
-                        .col-sm-9
-                          .row
-                            .col-sm-2
-                              <small>Last:</small>
-                            .col-sm-4
-                              %b #{@player_portal[:last]}
-                          .row
-                            .col-sm-2
-                              <small>First:</small>
-                            .col-sm-4
-                              %b #{@player_portal[:first]}
-                          .row
-                            &nbsp;
-                          .row
-                            .col-sm-2
-                              <small>DOB:</small>
-                            .col-sm-4
-                              %b #{@player_portal[:birthday].strftime('%m/%d/%Y')}
-                            .col-sm-2
-                              <small>Expires:</small>
-                            .col-sm-3
-                              %b 01/01/2017
+                        .picture
+                          %img#jcrop.img-responsive.center-block{title: ''}
+                          %input#wizard-picture{type: "file"}
+                        %h6
+                          Select & Crop Picture
+                          %br
+                          <small>Drag on picture to adjust crop region</small>
 
-              #volunteer.tab-pane
-                %h4.info-text Tell us more about facilities.
-                .row
-                  .col-sm-5
-                    .form-group
-                      %label Your place is good for
-                      %select.form-control
-                        %option{:disabled => "", :selected => ""} - type -
-                        %option Business
-                        %option Vacation
-                        %option Work
-                  .col-sm-5
-                    .form-group
-                      %label Is air conditioning included ?
-                      %select.form-control
-                        %option{:disabled => "", :selected => ""} - response -
-                        %option Yes
-                        %option No
-                  .col-sm-5.col-sm-offset-1
-                    .form-group
-                      %label Does your place have wi-fi?
-                      %select.form-control
-                        %option{:disabled => "", :selected => ""} - response -
-                        %option Yes
-                        %option No
-                  .col-sm-5
-                    .form-group
-                      %label Is breakfast included?
-                      %select.form-control
-                        %option{:disabled => "", :selected => ""} - response -
-                        %option Yes
-                        %option No
-              #payment.tab-pane
-                .row
-                  %h4.info-text Drop us a small description.
-                  .col-sm-6.col-sm-offset-1
-                    .form-group
-                      %label Place description
-                      %textarea.form-control{:placeholder => "", :rows => "9"}
-                        :preserve
+                .col-sm-6
+                  .panel.panel-default
+                    .panel-heading
+                      .panel-title
+                        Example US Club Player Pass
+                    .panel-body
+                      .col-sm-3.nopadding
+                        %canvas#canvas.img-responsive
+                        %input#png{type: 'hidden'}
+                      .col-sm-9
+                        .row
+                          .col-sm-2
+                            <small>Last:</small>
+                          .col-sm-4
+                            %b #{@player_portal[:last]}
+                        .row
+                          .col-sm-2
+                            <small>First:</small>
+                          .col-sm-4
+                            %b #{@player_portal[:first]}
+                        .row
+                          &nbsp;
+                        .row
+                          .col-sm-2
+                            <small>DOB:</small>
+                          .col-sm-4
+                            %b #{@player_portal[:birthday].strftime('%m/%d/%Y')}
+                          .col-sm-2
+                            <small>Expires:</small>
+                          .col-sm-3
+                            %b 01/01/2017
+              .row
+                TODO: Figure out call to action text for upload birth certificate
+                TODO: Add button to upload
+                TODO: Show preview of image
 
-                  .col-sm-4
-                    .form-group
-                      %label Example
-                      %p.description "The place is really nice. We use it every sunday when we go fishing. It is so awesome."
-            .wizard-footer
-              .pull-right
-                %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:name => "next", :type => "button", :value => "Next"}/
-                %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:name => "finish", :type => "button", :value => "Finish"}/
-              .pull-left
-                %input.btn.btn-previous.btn-fill.btn-default.btn-wd.btn-sm{:name => "previous", :type => "button", :value => "Previous"}/
-              .clearfix
-            / wizard container
-        / row
-      / big container
+
+            #volunteer.tab-pane
+              %h4.info-text Tell us more about facilities.
+              .row
+                .col-sm-5
+                  .form-group
+                    %label Your place is good for
+                    %select.form-control
+                      %option{:disabled => "", :selected => ""} - type -
+                      %option Business
+                      %option Vacation
+                      %option Work
+                .col-sm-5
+                  .form-group
+                    %label Is air conditioning included ?
+                    %select.form-control
+                      %option{:disabled => "", :selected => ""} - response -
+                      %option Yes
+                      %option No
+                .col-sm-5.col-sm-offset-1
+                  .form-group
+                    %label Does your place have wi-fi?
+                    %select.form-control
+                      %option{:disabled => "", :selected => ""} - response -
+                      %option Yes
+                      %option No
+                .col-sm-5
+                  .form-group
+                    %label Is breakfast included?
+                    %select.form-control
+                      %option{:disabled => "", :selected => ""} - response -
+                      %option Yes
+                      %option No
+            #payment.tab-pane
+              .row
+                %h4.info-text Drop us a small description.
+                .col-sm-6.col-sm-offset-1
+                  .form-group
+                    %label Place description
+                    %textarea.form-control{:placeholder => "", :rows => "9"}
+                      :preserve
+
+                .col-sm-4
+                  .form-group
+                    %label Example
+                    %p.description "The place is really nice. We use it every sunday when we go fishing. It is so awesome."
+          .wizard-footer
+            .pull-right
+              %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:name => "next", :type => "button", :value => "Next"}/
+              %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:name => "finish", :type => "button", :value => "Finish"}/
+            .pull-left
+              %input.btn.btn-previous.btn-fill.btn-default.btn-wd.btn-sm{:name => "previous", :type => "button", :value => "Previous"}/
+            .clearfix
+          / wizard container
+      / row
 
 - content_for :javascript do
-  = javascript_include_tag "player_portals"
   %script
-    $(document).ready(player_portal.image_crop.init());
+    $(document).ready(player_portal.image_crop.init("#{image_path('default-avatar.png')}"));

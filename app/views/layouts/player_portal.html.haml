@@ -7,13 +7,38 @@
     %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0", :name => "viewport"}/
     %meta{:content => "width=device-width", :name => "viewport"}/
     %link{:href => "assets/img/favicon.ico", :rel => "icon", :type => "image/png"}
+    = stylesheet_link_tag "player_portals"
     = yield :css
     = csrf_meta_tags
   %body
-    %div.image-container.set-full-height
+    .image-container.set-full-height
 
-      = yield
+      %nav.navbar.navbar-default{role: "navigation"}
+        .navbar-header
+          %button.navbar-toggle{type: "button", data: {target: "#navbarCollapse", toggle: "collapse"} }
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          .navbar-brand
+            = image_tag "logo.png", width: 86, height: 100
 
+
+        #navbarCollapse.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.active
+              %a{href: "#{player_portal_path}"} Home
+            %li
+              %a{href: "#{player_portal_registration_path}"} Registration
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %a{href: "#{player_portal_logout_path}"} Logout
+
+      / Big container
+      .container
+        = yield
+
+  = javascript_include_tag "player_portals"
   = yield :javascript
 
   :javascript

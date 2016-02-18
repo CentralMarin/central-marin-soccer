@@ -9,10 +9,8 @@
 //= require jquery.Jcrop.min
 //= require namespace
 
-// TODO: Make the preview look a like a player card
 // TODO: Upload birth certificate
 // TODO: Upload cropped photo
-// TODO: Size box to uploaded picture aspect ratio
 
 (function () {
     namespace('player_portal');
@@ -76,15 +74,21 @@
             $("#png").val(png);
         };
 
-        var init = function() {
+        var init = function(defaultImageSrc) {
             $("#wizard-picture").change(function(){
                 picture(this);
             });
 
+
             // Show default image on the player card
-            var canvas = $("#canvas")[0];
-            canvas.height = canvas.width;   // Keep our aspect ratio
-            canvas.getContext("2d").drawImage($("#jcrop")[0], 0, 0);
+            $("#jcrop")
+                .one('load', function() {
+                    var canvas = $("#canvas")[0];
+                    canvas.height = canvas.width;   // Keep our aspect ratio
+                    var context = canvas.getContext("2d");
+                    context.drawImage($("#jcrop")[0], 0, 0);
+                })
+                .attr('src', defaultImageSrc);
         };
 
         return {
