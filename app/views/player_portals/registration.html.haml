@@ -36,7 +36,7 @@
               - else
                 %h4.info-text Since you're new to the club, we need #{@player_portal[:first]}'s birth certificate & photo.
               .row
-                .col-sm-5
+                .col-sm-5.col-xs-12
                   .panel.panel-default
                     .picture-container
                       .panel-body
@@ -48,41 +48,41 @@
                           %br
                           <small>Drag on picture to adjust crop region</small>
 
-                .col-sm-6
+                .col-sm-7.col-xs-12
                   .panel.panel-default
                     .panel-heading
                       .panel-title
                         Example US Club Player Pass
                     .panel-body
-                      .col-sm-3.nopadding
+                      .col-xs-3.nopadding
                         %canvas#canvas.img-responsive
                         %input#png{type: 'hidden'}
-                      .col-sm-9
+                      .col-xs-9
                         .row
-                          .col-sm-2
+                          .col-xs-1
                             <small>Last:</small>
-                          .col-sm-4
+                          .col-xs-4
                             %b #{@player_portal[:last]}
                         .row
-                          .col-sm-2
+                          .col-xs-1
                             <small>First:</small>
-                          .col-sm-4
+                          .col-xs-4
                             %b #{@player_portal[:first]}
                         .row
                           &nbsp;
                         .row
-                          .col-sm-2
+                          .col-xs-1
                             <small>DOB:</small>
-                          .col-sm-4
+                          .col-xs-4
                             %b #{@player_portal[:birthday].strftime('%m/%d/%Y')}
-                          .col-sm-2
+                          .col-xs-2
                             <small>Expires:</small>
-                          .col-sm-3
+                          .col-xs-4
                             %b 01/01/2017
               .row
-                TODO: Figure out call to action text for upload birth certificate
-                TODO: Add button to upload
-                TODO: Show preview of image
+                %br TODO: Figure out call to action text for upload birth certificate
+                %br TODO: Add button to upload
+                %br TODO: Show preview of image
 
 
             #volunteer.tab-pane
