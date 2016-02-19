@@ -9,8 +9,9 @@
 //= require jquery.Jcrop.min
 //= require namespace
 
-// TODO: Upload birth certificate
-// TODO: Upload cropped photo
+// TODO: Validate information has been uploaded before proceeding
+// TODO: Make sure the user has selected a crop region - or don't allow them to deselect?
+// TODO: Scroll to top of the page on next button
 
 (function () {
     namespace('player_portal');
@@ -19,10 +20,28 @@
         var CROP_HEIGHT = 300;
         var _jcrop_api;
 
-        var picture = function(input) {
+        var _file_selected = function(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
+                    var $input = $(input);
+                    $input.siblings('img').attr('src', e.target.result);
+
+                    // Update the heading
+                    _taskCompleted($input.closest('.panel'));
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        };
+
+        var _picture = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+
+                    var $input = $(input);
+                    var $img = $input.siblings('img');
+                    $img.attr('src', e.target.result);
 
                     // Clean up any old jcrops so the image updates
                     if (_jcrop_api) _jcrop_api.destroy();
@@ -35,9 +54,7 @@
                         var img_width = this.width;
                         var img_height = this.height;
 
-                        var jcrop_img = $("#jcrop");
-                        jcrop_img.attr('src', e.target.result);
-                        jcrop_img.Jcrop({
+                        $img.Jcrop({
                             onChange: canvas,
                             onSelect: canvas,
                             trueSize: [img_width, img_height],
@@ -54,7 +71,7 @@
                             _jcrop_api = this;
 
                             // Turn heading to completed
-                            _taskCompleted($('#upload-photo'));
+                            _taskCompleted($input.closest('.panel'));
                         });
                     };
 
@@ -74,6 +91,10 @@
             elem.removeClass(removeClass).addClass(addClass);
         };
 
+        var _scrollToTop = function() {
+            $('html, body').animate({scrollTop : 0},800);
+            return false;
+        };
 
         var canvas = function (coords){
             var imageObj = $("#jcrop")[0];
@@ -91,9 +112,16 @@
 
         var init = function(defaultImageSrc) {
             $("#wizard-picture").change(function(){
-                picture(this);
+                _picture(this);
             });
 
+            $("#wizard-birth").change(function() {
+                _file_selected(this);
+            });
+
+            //Click event to scroll to top
+            $('input[name="next"]').click(_scrollToTop);
+            $('input[name="previous"]').click(_scrollToTop);
 
             // Show default image on the player card
             $("#jcrop")

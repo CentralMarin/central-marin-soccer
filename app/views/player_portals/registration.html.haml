@@ -11,8 +11,8 @@
               %br
                 = "<small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
           %ul
-            -#%li
-            -#  %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
+            %li
+              %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
             %li
               %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal[:have_birth_certificate] ? '' : ' & Birth Certificate'}
             %li
@@ -20,50 +20,57 @@
             %li
               %a{"data-toggle" => "tab", :href => "#payment"} Payment
           .tab-content
-            -##us-club-form.tab-pane
-            -#  .row
-            -#    .col-sm-12
-            -#      %h4.info-text
-            -#        Verify your registration information.
-            -#        %br
-            -#        <a href='mailto:rrobinett@centralmarinsoccer.com?subject=#{@player_portal[:first]} #{@player_portal[:last]} CM Registration Changes&body=The following information needs to be updated: '>Click here</a> if any information is incorrect.
-            -#      .embed-responsive.embed-responsive-4by3
-            -#        %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
+            #us-club-form.tab-pane
+              .row
+                .col-sm-12
+                  %h4.info-text
+                    Verify your registration information.
+                    %br
+                    <a href='mailto:rrobinett@centralmarinsoccer.com?subject=#{@player_portal[:first]} #{@player_portal[:last]} CM Registration Changes&body=The following information needs to be updated: '>Click here</a> if any information is incorrect.
+                  .embed-responsive.embed-responsive-4by3
+                    %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
 
             #player-picture.tab-pane
               - if @player_portal[:have_birth_certificate]
                 %h4.info-text You previously played for Central Marin, so we only need an updated photo.
               - else
-                %h4.info-text Since you're new to the club, we need #{@player_portal[:first]}'s date of birth proof & photo.
+                %h4.info-text Since you're new to the club, we need proof of #{@player_portal[:first]}'s date of birth & a photo.
               .row
                 - unless @player_portal[:have_birth_certificate]
                   .col-sm-12
-                    .panel.panel-danger#proof-Of-birth
+                    .panel.panel-danger
                       .panel-heading
                         .panel-title
-                          %span.glyphicon.glyphicon-upload{'aria-hidden':"true"}
+                          %span.glyphicon.glyphicon-alert{'aria-hidden':"true"}
                           Upload Date of Birth Proof
                       .panel-body
-                        Acceptable date of birth proof includes:
-                        %ul
-                          %li birth certificate
-                          %li birth registration issued by the appropriate government agency
-                          %li passport
-                          %li alien registration card issued by the U.S. Government
-                          %li certificate issued by the INS attesting to age
-                          %li certification of a United States citizen born abroad issued by the appropriate govenment agency
-                          %li or a current driver's license.
-                        %p
-                          <b>Hospital, baptismal, or religious certificates are not accepted by US Club Soccer.</b>
-
-                .col-sm-5.col-xs-12
-                  .panel.panel-danger#upload-photo
+                        .col-sm-5.picture-container
+                          .picture
+                            %img.img-responsive.center-block{src: "#{image_path('sample_birth_certificate.jpg')}"}
+                            %input#wizard-birth{type: 'file'}
+                          %h6
+                            Click Photo to Select
+                        .col-sm-7
+                          .well
+                            Acceptable date of birth proof includes:
+                            %ul
+                              %li birth certificate
+                              %li birth registration issued by the appropriate government agency
+                              %li passport
+                              %li alien registration card issued by the U.S. Government
+                              %li certificate issued by the INS attesting to age
+                              %li certification of a United States citizen born abroad issued by the appropriate govenment agency
+                              %li or a current driver's license.
+                            %p
+                              <b>Hospital, baptismal, or religious certificates are not accepted by US Club Soccer.</b>
+                .col-sm-12
+                  .panel.panel-danger
                     .panel-heading
                       .panel-title
                         %span.glyphicon.glyphicon-alert{'aria-hidden':"true"}
                         Upload and Crop Photo
-                    .picture-container
-                      .panel-body
+                    .panel-body.picture-container
+                      .col-sm-5.col-xs-12
                         .picture
                           %img#jcrop.img-responsive.center-block{title: ''}
                           %input#wizard-picture{type: "file"}
@@ -72,37 +79,37 @@
                           %br
                           <small>Drag on picture to adjust crop region</small>
 
-                .col-sm-7.col-xs-12
-                  .panel.panel-default
-                    .panel-heading
-                      .panel-title
-                        Example US Club Player Pass
-                    .panel-body
-                      .col-xs-3.nopadding
-                        %canvas#canvas.img-responsive
-                        %input#png{type: 'hidden'}
-                      .col-xs-9
-                        .row
-                          .col-xs-1
-                            <small>Last:</small>
-                          .col-xs-4
-                            %b #{@player_portal[:last]}
-                        .row
-                          .col-xs-1
-                            <small>First:</small>
-                          .col-xs-4
-                            %b #{@player_portal[:first]}
-                        .row
-                          &nbsp;
-                        .row
-                          .col-xs-1
-                            <small>DOB:</small>
-                          .col-xs-4
-                            %b #{@player_portal[:birthday].strftime('%m/%d/%Y')}
-                          .col-xs-2
-                            <small>Expires:</small>
-                          .col-xs-4
-                            %b 01/01/2017
+                      .col-sm-7.col-xs-12
+                        .panel.panel-default
+                          .panel-heading
+                            .panel-title
+                              Example US Club Player Pass
+                          .panel-body
+                            .col-xs-3.nopadding
+                              %canvas#canvas.img-responsive
+                              %input#png{type: 'hidden'}
+                            .col-xs-9.text-left
+                              .row
+                                .col-xs-1
+                                  <small>Last:</small>
+                                .col-xs-4
+                                  %b #{@player_portal[:last]}
+                              .row
+                                .col-xs-1
+                                  <small>First:</small>
+                                .col-xs-4
+                                  %b #{@player_portal[:first]}
+                              .row
+                                &nbsp;
+                              .row
+                                .col-xs-1
+                                  <small>DOB:</small>
+                                .col-xs-4
+                                  %b #{@player_portal[:birthday].strftime('%m/%d/%Y')}
+                                .col-xs-2
+                                  <small>Expires:</small>
+                                .col-xs-4
+                                  %b 01/01/2017
 
             #volunteer.tab-pane
               %h4.info-text Tell us more about facilities.
