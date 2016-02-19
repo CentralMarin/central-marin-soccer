@@ -4,10 +4,13 @@
 %h1
   = "Player Portal for #{@player_portal.first} #{@player_portal.last}"
 
-%div
-  %h2 US Club Form
-
-= link_to "Registration", player_portal_registration_path
+.jumbotron
+  %h2 Register for the 2016 Season
+  %p
+    Congratulations and Welcome to Central Marin Soccer Club.
+  %p
+    %a.btn.btn-primary.btn-lg{href: "#{player_portal_registration_path}", role: "button"}
+      Register
 
 //TODO: Notify the user what documents they'll need to complete registration
 
