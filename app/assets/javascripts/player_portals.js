@@ -11,7 +11,7 @@
 
 // TODO: Validate information has been uploaded before proceeding
 // TODO: Make sure the user has selected a crop region - or don't allow them to deselect?
-// TODO: Scroll to top of the page on next button
+// TODO: Set active menu item
 
 (function () {
     namespace('player_portal');
@@ -123,13 +123,14 @@
             $('input[name="next"]').click(_scrollToTop);
             $('input[name="previous"]').click(_scrollToTop);
 
+            var $jcrop = $("#jcrop");
             // Show default image on the player card
-            $("#jcrop")
+            $jcrop
                 .one('load', function() {
                     var canvas = $("#canvas")[0];
                     canvas.height = canvas.width;   // Keep our aspect ratio
                     var context = canvas.getContext("2d");
-                    context.drawImage($("#jcrop")[0], 0, 0);
+                    context.drawImage($jcrop[0], 0, 0);
                 })
                 .attr('src', defaultImageSrc);
         };
