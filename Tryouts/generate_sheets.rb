@@ -12,7 +12,6 @@ COLUMNS = [
     {index: 0, width: 4}, # Bib #
     {index: 2, width: 15}, # First Name
     {index: 3, width: 15}, # Last Name
-#    {index: 4}, # Kid Email
     {index: 10, right_align: true, width: 9}, # Birthdate
     {index: 16, right_align: true, width: 25}, # Parent 1 Email
     {index: 17, phone: true, right_align: true, width: 12}, # Parent 1 Home Phone
@@ -28,11 +27,17 @@ DEFAULT_STYLE = {
 
 def copy_worksheet(workbook, google_sheet)
 
+  # Skip non player registration shees
+  return unless google_sheet.title.downcase.start_with?('boys') || google_sheet.title.downcase.start_with?('girls')
+
+  puts "Processing #{google_sheet.title}"
+
   # Set margins, header, and page
   margins = {left: 0.05, right: 0.05, bottom: 0.25, footer: 0.25, top: 0.5, header: 0.25}
   setup = {orientation: :landscape }
   header_footer = {different_first: false, odd_header: "&C&H &18 &B&A: Sheet &P of &N"}
 
+  puts "  Adding and formattting worksheet for excel"
   workbook.add_worksheet(name: google_sheet.title, page_margins: margins, header_footer: header_footer, page_setup: setup) do |sheet|
 
     # Create new style for our header row
@@ -45,7 +50,14 @@ def copy_worksheet(workbook, google_sheet)
 
     # Sort google spreadsheet
     rows = google_sheet.rows
-    sorted_rows = rows[1..-1].sort_by {|row|row[COLUMNS[1][:index]]}
+    sorted_rows = rows[1..-1].sort! do |row1, row2|
+      result = row1[COLUMNS[1][:index]].downcase <=> row2[COLUMNS[1][:index]].downcase
+      result = row1[COLUMNS[2][:index]].downcase <=> row2[COLUMNS[2][:index]].downcase if result == 0
+
+      puts "Possible duplicate #{row1[COLUMNS[1][:index]]} #{row1[COLUMNS[2][:index]]}" if result == 0
+
+      result
+    end
     rows = sorted_rows.insert(0, rows[0])
 
     # Copy google rows to local spreadsheet
@@ -76,18 +88,20 @@ end
 secrets = YAML::load(File.open('../config/secrets.yml'))
 title = "#{TRYOUT_YEAR} #{secrets[ENVIRONMENT]['google_drive_tryouts_doc']}"
 
-# TODO: backup the old tryout page
-
+puts "Creating Excel Workbook"
 # Create the new Excel Workbook
 p = Axlsx::Package.new
 p.use_autowidth = true
 wb = p.workbook
+
+puts "Establishing google drive session and finding spreadsheet"
 
 # Creates a session. This will prompt the credential via command line for the
 # first time and save it to config.json file for later usages.
 session = GoogleDrive.saved_session("config.json")
 ws = session.spreadsheet_by_title(title)
 
+puts "Iterating over worksheets"
 # find the worksheet(s) we're interested in
 ws.worksheets.each do |sheet|
   copy_worksheet(wb, sheet)
