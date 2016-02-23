@@ -1,3 +1,19 @@
+.modal.fade#myModal{tabindex: '-1', role: 'dialog'}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %button.close{data: {dismiss: 'modal'}, aria: {label: 'Close'}}
+          %span{aria: {hidden: 'true'}} &times;
+        %h4.modal-title
+          On Equal Footing
+        .modal-body
+          .embed-responsive.embed-responsive-4by3
+            %object.embed-responsive-item{type: "application/pdf", data: "#{url_to_asset('on equal footing 2016 - en.pdf')}"} Please <a href="#{url_to_asset('friends.jpg')}">click here</a> to view the PDF.
+        .modal-footer
+          %a.btn.btn-primary{href: "#{url_to_asset('on equal footing 2016 - en.pdf')}", download: true}
+            Download
+          %button.btn.btn-default{data: {dismiss: 'modal'}}
+            Close
 .row
   .col-sm-12
     / Wizard container
@@ -11,16 +27,16 @@
               %br
                 = "<small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
           %ul
-            %li
+            -#%li
               %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
-            %li
+            -#%li
               %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal[:have_birth_certificate] ? '' : ' & Birth Certificate'}
             %li
-              %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer
+              %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer & Scholarship
             %li
               %a{"data-toggle" => "tab", :href => "#payment"} Payment
           .tab-content
-            #us-club-form.tab-pane
+            -##us-club-form.tab-pane
               .row
                 .col-sm-12
                   %h4.info-text
@@ -30,7 +46,7 @@
                   .embed-responsive.embed-responsive-4by3
                     %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
 
-            #player-picture.tab-pane
+            -##player-picture.tab-pane
               - if @player_portal[:have_birth_certificate]
                 %h4.info-text You previously played for Central Marin, so we only need an updated photo.
               - else
@@ -112,37 +128,44 @@
                                   %b 01/01/2017
 
             #volunteer.tab-pane
-              %h4.info-text Tell us more about facilities.
-              .row
-                .col-sm-5
-                  .form-group
-                    %label Your place is good for
-                    %select.form-control
-                      %option{:disabled => "", :selected => ""} - type -
-                      %option Business
-                      %option Vacation
-                      %option Work
-                .col-sm-5
-                  .form-group
-                    %label Is air conditioning included ?
-                    %select.form-control
-                      %option{:disabled => "", :selected => ""} - response -
-                      %option Yes
-                      %option No
-                .col-sm-5.col-sm-offset-1
-                  .form-group
-                    %label Does your place have wi-fi?
-                    %select.form-control
-                      %option{:disabled => "", :selected => ""} - response -
-                      %option Yes
-                      %option No
-                .col-sm-5
-                  .form-group
-                    %label Is breakfast included?
-                    %select.form-control
-                      %option{:disabled => "", :selected => ""} - response -
-                      %option Yes
-                      %option No
+              .panel.panel-default
+                .panel-body
+                  .row
+                    .col-sm-10.col-sm-offset-1
+                      .media
+                        .media-left
+                          %img.media-object{src: "#{image_path('friends.jpg')}"}
+                        .media-body
+                          %h4.media-heading Volunteer Preference
+                          This year Central Marin has instituted a policy that requires a family member of each player to volunteer during the soccer season. This allows the club to put your fees to work in the best possible way; coaching and fields. We will be announcing volunteer opportunities throughout the season.
+                  .row
+                    .col-sm-10.col-sm-offset-1
+                      .form-group
+                        %h5
+                          Volunteer Preference:
+                        %select.form-control{name: "volunteer"}
+                          %option{value: 100, selected: ""} Pay $100 instead of volunteering
+                          %option{disabled: ""} -
+                          %option Field Maintenance - lining and installing nets
+                          %option Team Manager
+                          %option Travel Coordinator
+                          %option Voting and / or Non Voting Board Members
+                          %option Tournament Volunteer
+                          %option Tryout Registration
+                          %option No Preference - Let me know where I can help
+              .panel.panel-default
+                .panel-body
+                  .row
+                    .col-sm-10.col-sm-offset-1
+                      .media
+                        .media-body
+                          %h4.media-heading On Equal Footing Scholarship
+                          TODO: Talk about On Equal footing
+                          Include the documents for viewing in modal popup
+                          %button.btn.btn-primary.btn-lg{type: 'button', data: {toggle: 'modal', target: '#myModal'}}
+                            Launch demo modal
+                        .media-right
+                          %img.media-object{src: "#{image_path('friends.jpg')}"}
             #payment.tab-pane
               .row
                 %h4.info-text Drop us a small description.
