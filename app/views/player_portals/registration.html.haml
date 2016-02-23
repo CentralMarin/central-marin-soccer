@@ -1,19 +1,4 @@
-.modal.fade#myModal{tabindex: '-1', role: 'dialog'}
-  .modal-dialog.modal-lg
-    .modal-content
-      .modal-header
-        %button.close{data: {dismiss: 'modal'}, aria: {label: 'Close'}}
-          %span{aria: {hidden: 'true'}} &times;
-        %h4.modal-title
-          On Equal Footing
-        .modal-body
-          .embed-responsive.embed-responsive-4by3
-            %object.embed-responsive-item{type: "application/pdf", data: "#{url_to_asset('on equal footing 2016 - en.pdf')}"} Please <a href="#{url_to_asset('friends.jpg')}">click here</a> to view the PDF.
-        .modal-footer
-          %a.btn.btn-primary{href: "#{url_to_asset('on equal footing 2016 - en.pdf')}", download: true}
-            Download
-          %button.btn.btn-default{data: {dismiss: 'modal'}}
-            Close
+= render partial: 'document_modal'
 .row
   .col-sm-12
     / Wizard container
@@ -162,7 +147,7 @@
                           %h4.media-heading On Equal Footing Scholarship
                           TODO: Talk about On Equal footing
                           Include the documents for viewing in modal popup
-                          %button.btn.btn-primary.btn-lg{type: 'button', data: {toggle: 'modal', target: '#myModal'}}
+                          %button.btn.btn-primary.btn-lg{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: "#{url_to_asset('on equal footing 2016 - en.pdf')}", title: 'On Equal Footing'}}
                             Launch demo modal
                         .media-right
                           %img.media-object{src: "#{image_path('friends.jpg')}"}

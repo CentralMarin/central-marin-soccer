@@ -133,6 +133,23 @@
                     context.drawImage($jcrop[0], 0, 0);
                 })
                 .attr('src', defaultImageSrc);
+
+            // setup document modal
+            $('#documentModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // button that triggered the modal
+                var document = button.data('document');
+                var title = button.data('title');
+                var modal = $(this);
+
+                // Set the title
+                modal.find('.modal-title').text(title);
+
+                // Set the document links
+                modal.find('.modal-footer a').attr('href', document);
+                var obj = modal.find('.modal-body object');
+                obj.attr('data', document);
+                obj.find('a').attr('href', document);
+            });
         };
 
         return {
