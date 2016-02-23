@@ -147,10 +147,12 @@
                           %h4.media-heading On Equal Footing Scholarship
                           TODO: Talk about On Equal footing
                           Include the documents for viewing in modal popup
-                          %button.btn.btn-primary.btn-lg{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: "#{url_to_asset('on equal footing 2016 - en.pdf')}", title: 'On Equal Footing'}}
-                            Launch demo modal
                         .media-right
-                          %img.media-object{src: "#{image_path('friends.jpg')}"}
+                          %img.media-object{src: "#{image_path('scholarship.jpg')}"}
+                  .row
+                    .col-sm-10.col-sm-offset-1
+                      %button.btn.btn-primary.btn{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: "#{url_to_asset('on equal footing 2016 - en.pdf')}", title: 'On Equal Footing'}}
+                        More Information
             #payment.tab-pane
               .row
                 %h4.info-text Drop us a small description.
