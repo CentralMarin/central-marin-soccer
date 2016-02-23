@@ -11,6 +11,21 @@
     = yield :css
     = csrf_meta_tags
   %body
+    .modal.fade#documentModal{tabindex: '-1', role: 'dialog'}
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            %button.close{data: {dismiss: 'modal'}, aria: {label: 'Close'}}
+              %span{aria: {hidden: 'true'}} &times;
+            %h4.modal-title
+          .modal-body
+            .embed-responsive.embed-responsive-4by3
+              %object.embed-responsive-item{type: "application/pdf", data: '#'} Please <a href='#'>click here</a> to view the PDF.
+          .modal-footer
+            %a.btn.btn-primary{href: "#", download: true}
+              Download
+            %button.btn.btn-default{data: {dismiss: 'modal'}}
+              Close
     .image-container.set-full-height
 
       %nav.navbar.navbar-default{role: "navigation"}
