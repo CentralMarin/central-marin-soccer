@@ -9,10 +9,6 @@
 //= require jquery.Jcrop.min
 //= require namespace
 
-// TODO: Validate information has been uploaded before proceeding
-// TODO: Make sure the user has selected a crop region - or don't allow them to deselect?
-// TODO: Set active menu item
-
 (function () {
     namespace('player_portal');
     player_portal.image_crop = (function() {
@@ -97,10 +93,15 @@
         };
 
         var canvas = function (coords){
+            console.log('canvas');
             var imageObj = $("#jcrop")[0];
             var canvas = $("#canvas")[0];
             canvas.height = canvas.width;   // Keep our aspect ratio
             var context = canvas.getContext("2d");
+            if (coords.w == 0 && coords.h == 0) {
+                coords.w = CROP_WIDTH;
+                coords.h = CROP_HEIGHT;
+            }
             context.drawImage(imageObj, coords.x, coords.y, coords.w, coords.h, 0, 0, canvas.width, canvas.height);
             png();
         };
