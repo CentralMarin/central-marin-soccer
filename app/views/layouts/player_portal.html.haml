@@ -41,9 +41,9 @@
 
         #navbarCollapse.collapse.navbar-collapse
           %ul.nav.navbar-nav
-            %li.active
+            %li{class: ('active' if current_page?(action: 'index'))}
               %a{href: "#{player_portal_path}"} Home
-            %li
+            %li{class: ('active' if current_page?(action: 'registration'))}
               %a{href: "#{player_portal_registration_path}"} Registration
           %ul.nav.navbar-nav.navbar-right
             %li
