@@ -1,14 +1,24 @@
 - content_for :css do
   = stylesheet_link_tag 'jquery.Jcrop.min'
 
+- if flash[:notice].present?
+  .alert.alert-success.alert-dismissible.fade.in{role: "alert"}
+    %button.close{type: "button", data: {dismiss: "alert"}, 'aria-label': "Close"}
+      %span{'aria-hidden': "true"}
+        &times;
+    %p.text-center
+      = flash[:notice]
+
+
 %h1
   = "Player Portal for #{@player_portal.first} #{@player_portal.last}"
 
 .jumbotron
-  %h2 Register for the 2016 Season
+  %h2 Register #{@player_portal.first} for the #{EventGroup::TRYOUT_YEAR} Season
   %p
     Congratulations and Welcome to Central Marin Soccer Club.
-  %p
+
+  %p.text-right
     %a.btn.btn-primary.btn-lg{href: "#{player_portal_registration_path}", role: "button"}
       Register
 

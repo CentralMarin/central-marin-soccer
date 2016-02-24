@@ -76,7 +76,37 @@ class PlayerPortalsController < InheritedResources::Base
   end
 
   def registration_create
+    @player_portal = PlayerPortal.find_by(uid: params[:uid])
 
+    # Determine volunteer selection
+    fees = calculate_fees(@player_portal.club_registration_fee, params[:volunteer].empty?)
+
+    # TODO: Save off volunteer preference
+
+    # TODO: Save off photo
+
+    # TODO: Save off birth certificate
+
+    # TODO: Calculate the amount paid
+
+    customer = Stripe::Customer.create(
+        :email => params[:stripeEmail],
+        :source  => params[:stripeToken]
+    )
+
+    charge = Stripe::Charge.create(
+        :customer    => customer.id,
+        :amount      => fees[:total],
+        :description => "#{EventGroup::TRYOUT_YEAR} Club Registration Fee",
+        :currency    => 'usd'
+    )
+
+    flash[:notice] = 'Registration Successful'
+    redirect_to player_portal_path
+
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to player_portal_registration_path
   end
 
   private

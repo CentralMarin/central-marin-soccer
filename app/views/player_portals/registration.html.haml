@@ -1,9 +1,13 @@
+- if flash[:error].present?
+  #error_explanation
+    %p
+      = flash[:error]
 .row
   .col-sm-12
     / Wizard container
     .wizard-container
       #wizard.card.wizard-card.ct-wizard-green
-        %form{:action => "", :method => ""}
+        = form_tag player_portal_registration_create_path do
           .wizard-header
             %h3
               %b REGISTER
@@ -11,16 +15,16 @@
               %br
                 = "<small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
           %ul
-            -#%li
+            %li
               %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
-            -#%li
+            %li
               %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal[:have_birth_certificate] ? '' : ' & Birth Certificate'}
             %li
               %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer & Scholarship
             %li
               %a{"data-toggle" => "tab", :href => "#payment"} Payment
           .tab-content
-            -##us-club-form.tab-pane
+            #us-club-form.tab-pane
               .row
                 .col-sm-12
                   %h4.info-text
@@ -30,7 +34,7 @@
                   .embed-responsive.embed-responsive-4by3
                     %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
 
-            -##player-picture.tab-pane
+            #player-picture.tab-pane
               - if @player_portal[:have_birth_certificate]
                 %h4.info-text You previously played for Central Marin, so we only need an updated photo.
               - else
@@ -73,7 +77,7 @@
                       .col-sm-5.col-xs-12
                         .picture
                           %img#jcrop.img-responsive.center-block{title: ''}
-                          %input#wizard-picture{type: "file"}
+                          %input#wizard-picture{name: 'birth-certificate', type: "file"}
                         %h6
                           Click Photo to Select & Crop Picture
                           %br
@@ -87,7 +91,7 @@
                           .panel-body
                             .col-xs-3.nopadding
                               %canvas#canvas.img-responsive
-                              %input#png{type: 'hidden'}
+                              %input#png{name: 'player-image', type: 'hidden'}
                             .col-xs-9.text-left
                               .row
                                 .col-xs-1
@@ -128,7 +132,7 @@
                         %h5
                           Volunteer Preference:
                         %select.form-control{name: "volunteer"}
-                          %option{value: 100, selected: ""} Volunteer Opt Out - $100
+                          %option{value: '', selected: ""} Volunteer Opt Out - $100
                           %option{disabled: ""} -
                           %option Field Maintenance - equipment storage, lining and installing nets
                           %option Team Manager
@@ -174,11 +178,11 @@
                         %td.text-right{colspan: 2}
                           %script{ src: "https://checkout.stripe.com/checkout.js",
                             class: "stripe-button",
-                            data: {key: "pk_test_a8BCpdJQi4NYHJWwKre1XUD3",
+                            data: {key: (Rails.application.secrets.stripe_key),
                               image: (image_path('logo.png')),
                               name: "Central Marin Soccer Club",
                               description: "2016 Season Club Registration Fees",
-                              amount: (@fees[:total]),
+                              amount: (fees_info[:total]),
                               'panel-label': "Pay {{amount}}",
                               'data-label': "Complete Registration",
                               locale: "auto"}}
