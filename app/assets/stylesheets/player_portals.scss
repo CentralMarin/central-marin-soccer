@@ -7,6 +7,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.hidden {
+  display: none;
+}
 .form-control::-moz-placeholder{
   color: #DDDDDD;
   opacity: 1;
@@ -664,26 +667,6 @@ label small{
   top: 0;
   margin-left: 0;
 }
-//
-//.logo-container{
-//  left: 50px;
-//  position: absolute;
-//  top: 20px;
-//  z-index: 3;
-//}
-//.logo-container .logo{
-//  float: left;
-//}
-//.logo-container .brand{
-//  font-size: 18px;
-//  color: #FFFFFF;
-//  line-height: 20px;
-//  float: left;
-//  margin-left: 10px;
-//  margin-top: 10px;
-//  width: 120px
-//}
-
 
 .card{
   background-color: #FFFFFF;

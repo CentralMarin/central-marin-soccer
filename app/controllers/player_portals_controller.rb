@@ -67,9 +67,32 @@ class PlayerPortalsController < InheritedResources::Base
   def registration
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
 
+    @fees = calculate_fees(@player_portal.club_registration_fee, false)
+    @fees_with_opt_out = calculate_fees(@player_portal.club_registration_fee, true)
+  end
+
+  def registration_create
+
   end
 
   private
+
+    def calculate_fees(registration_fee, volunteer_opt_out)
+
+      goal = registration_fee
+      goal += PlayerPortal::VOLUNTEER_OPT_OUT_FEE if volunteer_opt_out
+
+      total = (goal + PlayerPortal::CC_FIXED) / (1-PlayerPortal::CC_PERCENTAGE)
+      cc_fees = total - goal
+
+      fees = []
+      fees << ['Club Registration', "$#{'%.2f' % registration_fee}"]
+      fees << ['Volunteer Opt Out', "$#{'%.2f' % PlayerPortal::VOLUNTEER_OPT_OUT_FEE}"] if volunteer_opt_out
+      fees << ['Credit Card Processing', "$#{'%.2f' %cc_fees}"]
+      fees << ['Total', "$#{'%.2f' %total}"]
+
+      fees
+    end
 
     def player_portal_params
       params.require(:player_portal).permit(:id, :birthday, :first, :last)

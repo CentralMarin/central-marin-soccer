@@ -13,7 +13,7 @@
           %ul
             -#%li
               %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
-            %li
+            -#%li
               %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal[:have_birth_certificate] ? '' : ' & Birth Certificate'}
             %li
               %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer & Scholarship
@@ -30,7 +30,7 @@
                   .embed-responsive.embed-responsive-4by3
                     %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
 
-            #player-picture.tab-pane
+            -##player-picture.tab-pane
               - if @player_portal[:have_birth_certificate]
                 %h4.info-text You previously played for Central Marin, so we only need an updated photo.
               - else
@@ -128,9 +128,9 @@
                         %h5
                           Volunteer Preference:
                         %select.form-control{name: "volunteer"}
-                          %option{value: 100, selected: ""} Pay $100 instead of volunteering
+                          %option{value: 100, selected: ""} Volunteer Opt Out - $100
                           %option{disabled: ""} -
-                          %option Field Maintenance - lining and installing nets
+                          %option Field Maintenance - equipment storage, lining and installing nets
                           %option Team Manager
                           %option Travel Coordinator
                           %option Voting and / or Non Voting Board Members
@@ -154,21 +154,34 @@
                         More Information
             #payment.tab-pane
               .row
-                %h4.info-text Drop us a small description.
-                .col-sm-6.col-sm-offset-1
-                  .form-group
-                    %label Place description
-                    %textarea.form-control{:placeholder => "", :rows => "9"}
-                      :preserve
+                %h4.info-text Charges Summary
+                .col-sm-5.col-sm-offset-1
+                  %p
+                    TODO: Description here on how we use your club fees. We're a volunteer run organization. Use the money for Fields, Referees, DOC, field / referee coordinator
+                .col-sm-5
+                  %table.table.table-striped.hidden#fees
+                    - @fees.each do |fee|
+                      %tr
+                        %td
+                          .text-nowrap{class: ('text-danger' if @fees.last[0] == fee[0])}
+                            = fee[0]
+                        %td
+                          .text-right{class: ('text-danger' if @fees.last[0] == fee[0])}
+                            = fee[1]
+                  %table.table.table-striped#feesWithOptOut
+                    - @fees_with_opt_out.each do |fee|
+                      %tr
+                        %td
+                          .text-nowrap{class: ('text-danger' if @fees.last[0] == fee[0])}
+                            = fee[0]
+                        %td
+                          .text-right{class: ('text-danger' if @fees.last[0] == fee[0])}
+                            = fee[1]
 
-                .col-sm-4
-                  .form-group
-                    %label Example
-                    %p.description "The place is really nice. We use it every sunday when we go fishing. It is so awesome."
           .wizard-footer
             .pull-right
               %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:name => "next", :type => "button", :value => "Next"}/
-              %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:name => "finish", :type => "button", :value => "Finish"}/
+              %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:name => "finish", :type => "button", :value => "Complete Registration"}/
             .pull-left
               %input.btn.btn-previous.btn-fill.btn-default.btn-wd.btn-sm{:name => "previous", :type => "button", :value => "Previous"}/
             .clearfix

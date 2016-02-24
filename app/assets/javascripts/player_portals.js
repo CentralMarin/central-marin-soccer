@@ -93,7 +93,6 @@
         };
 
         var canvas = function (coords){
-            console.log('canvas');
             var imageObj = $("#jcrop")[0];
             var canvas = $("#canvas")[0];
             canvas.height = canvas.width;   // Keep our aspect ratio
@@ -109,6 +108,16 @@
         var png = function () {
             var png = $("#canvas")[0].toDataURL('image/png');
             $("#png").val(png);
+        };
+
+        var _toggleVolunteerFee = function(show) {
+            if (show) {
+                $('#feesWithOptOut').removeClass('hidden');
+                $('#fees').addClass('hidden');
+            } else {
+                $('#fees').removeClass('hidden');
+                $('#feesWithOptOut').addClass('hidden');
+            }
         };
 
         var init = function(defaultImageSrc) {
@@ -150,6 +159,11 @@
                 var obj = modal.find('.modal-body object');
                 obj.attr('data', document);
                 obj.find('a').attr('href', document);
+            });
+
+            // volunteer event handler
+            $('select[name="volunteer"]').on('change', function() {
+                _toggleVolunteerFee(this.selectedIndex == 0);
             });
         };
 
