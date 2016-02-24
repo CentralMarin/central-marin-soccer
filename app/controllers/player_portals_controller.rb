@@ -37,7 +37,11 @@ class PlayerPortalsController < InheritedResources::Base
     redirect_to root_path
   end
 
-  # TODO: Track failed logins - After XXX for a given uid, disable that account
+  # TODO: Show if we have a birth certificate
+  # TODO: Show if we have a picture for the player pass
+  # TODO: Show current US Club form
+  # TODO: Show other documents uploaded from the admin console, e.g. Concusion protocol, positive coaching, etc.
+  # TODO: Allow registration of goalie and striker trainings
   def index
 
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
@@ -76,10 +80,10 @@ class PlayerPortalsController < InheritedResources::Base
   end
 
   def registration_create
-    @player_portal = PlayerPortal.find_by(uid: params[:uid])
+    player_portal = PlayerPortal.find_by(uid: params[:uid])
 
-    # Determine volunteer selection
-    fees = calculate_fees(@player_portal.club_registration_fee, params[:volunteer].empty?)
+    # Determine volunteer selection and calculate amount due
+    fees = calculate_fees(player_portal.club_registration_fee, params[:volunteer].empty?)
 
     # TODO: Save off volunteer preference
 
@@ -87,7 +91,10 @@ class PlayerPortalsController < InheritedResources::Base
 
     # TODO: Save off birth certificate
 
-    # TODO: Calculate the amount paid
+    # TODO: Save off US Club form
+
+    # TODO: Move strings to localization file and translate
+
 
     customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
@@ -101,7 +108,7 @@ class PlayerPortalsController < InheritedResources::Base
         :currency    => 'usd'
     )
 
-    flash[:notice] = 'Registration Successful'
+    flash[:notice] = "Congratulations, #{player_portal.first} has been successfully registered for the #{EventGroup::TRYOUT_YEAR}!"
     redirect_to player_portal_path
 
   rescue Stripe::CardError => e
