@@ -15,7 +15,7 @@
               %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
             -#%li
               %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal[:have_birth_certificate] ? '' : ' & Birth Certificate'}
-            %li
+            -#%li
               %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer & Scholarship
             %li
               %a{"data-toggle" => "tab", :href => "#payment"} Payment
@@ -111,7 +111,7 @@
                                 .col-xs-4
                                   %b 01/01/2017
 
-            #volunteer.tab-pane
+            -##volunteer.tab-pane
               .panel.panel-default
                 .panel-body
                   .row
@@ -160,28 +160,52 @@
                     TODO: Description here on how we use your club fees. We're a volunteer run organization. Use the money for Fields, Referees, DOC, field / referee coordinator
                 .col-sm-5
                   %table.table.table-striped.hidden#fees
-                    - @fees.each do |fee|
+                    - @fees_summary.each do |fee|
                       %tr
                         %td
-                          .text-nowrap{class: ('text-danger' if @fees.last[0] == fee[0])}
+                          .text-nowrap{class: ('text-danger' if @fees_summary.last[0] == fee[0])}
                             = fee[0]
                         %td
-                          .text-right{class: ('text-danger' if @fees.last[0] == fee[0])}
+                          .text-right{class: ('text-danger' if @fees_summary.last[0] == fee[0])}
                             = fee[1]
+                    %tr
+                      %td.text-right{colspan: 2}
+                        %script#stripe{ src: "https://checkout.stripe.com/checkout.js",
+                          class: "stripe-button",
+                          data: {key: "pk_test_a8BCpdJQi4NYHJWwKre1XUD3",
+                            image: (image_path('logo.png')),
+                            name: "Central Marin Soccer Club",
+                            description: "2016 Season Club Registration Fees",
+                            amount: (@fees_total),
+                            'panel-label': "Pay {{amount}}",
+                            'data-label': "Complete Registration",
+                            locale: "auto"}}
                   %table.table.table-striped#feesWithOptOut
-                    - @fees_with_opt_out.each do |fee|
+                    - @fees_with_opt_out_summary.each do |fee|
                       %tr
                         %td
-                          .text-nowrap{class: ('text-danger' if @fees.last[0] == fee[0])}
+                          .text-nowrap{class: ('text-danger' if @fees_with_opt_out_summary.last[0] == fee[0])}
                             = fee[0]
                         %td
-                          .text-right{class: ('text-danger' if @fees.last[0] == fee[0])}
+                          .text-right{class: ('text-danger' if @fees_with_opt_out_summary.last[0] == fee[0])}
                             = fee[1]
+                    %tr
+                      %td.text-right{colspan: 2}
+                        %script#stripe{ src: "https://checkout.stripe.com/checkout.js",
+                          class: "stripe-button",
+                          data: {key: "pk_test_a8BCpdJQi4NYHJWwKre1XUD3",
+                            image: (image_path('logo.png')),
+                            name: "Central Marin Soccer Club",
+                            description: "2016 Season Club Registration Fees",
+                            amount: (@fees_with_opt_out_total),
+                            'panel-label': "Pay {{amount}}",
+                            'data-label': "Complete Registration",
+                            locale: "auto"}}
 
           .wizard-footer
             .pull-right
               %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:name => "next", :type => "button", :value => "Next"}/
-              %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:name => "finish", :type => "button", :value => "Complete Registration"}/
+              -#%input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:name => "finish", :type => "button", :value => "Complete Registration"}/
             .pull-left
               %input.btn.btn-previous.btn-fill.btn-default.btn-wd.btn-sm{:name => "previous", :type => "button", :value => "Previous"}/
             .clearfix
@@ -191,3 +215,4 @@
 - content_for :javascript do
   %script
     $(document).ready(player_portal.image_crop.init("#{image_path('default-avatar.png')}"));
+
