@@ -12,9 +12,11 @@ class PlayerPortal < ActiveRecord::Base
   VOLUNTEER_OPT_OUT_FEE = 100
 
   def init
-    self.birth_year= birthday.year
-    self.team_year= "U#{Time.now.year - birth_year + 1}"
-    self.club_registration_fee=  TEAM_COSTS[team_year.to_sym]
+    unless birthday.nil?
+      self.birth_year= birthday.year
+      self.team_year= "U#{Time.now.year - birth_year + 1}"
+      self.club_registration_fee=  TEAM_COSTS[team_year.to_sym]
+    end
   end
 
   def to_hash
