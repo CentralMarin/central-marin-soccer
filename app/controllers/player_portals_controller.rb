@@ -67,8 +67,12 @@ class PlayerPortalsController < InheritedResources::Base
   def registration
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
 
-    @fees_summary, @fees_total = calculate_fees(@player_portal.club_registration_fee, false)
-    @fees_with_opt_out_summary, @fees_with_opt_out_total = calculate_fees(@player_portal.club_registration_fee, true)
+    @fees = {}
+
+    @fees[:volunteer] = calculate_fees(@player_portal.club_registration_fee, false)
+    @fees[:volunteer][:id] = 'fees'
+    @fees[:opt_out] = calculate_fees(@player_portal.club_registration_fee, true)
+    @fees[:opt_out][:id] = 'feesWithOptOut'
   end
 
   def registration_create
@@ -91,7 +95,7 @@ class PlayerPortalsController < InheritedResources::Base
       fees << ['Credit Card Processing', "$#{'%.2f' %cc_fees}"]
       fees << ['Total', "$#{'%.2f' %total}"]
 
-      return fees, (total * 100).round # convert to cents
+      return {fees: fees, total: (total * 100).round} # convert to cents
     end
 
     def player_portal_params
