@@ -1,6 +1,10 @@
 - content_for :css do
   = stylesheet_link_tag 'jquery.Jcrop.min'
 
+/ Declare status tags
+- icon_ok = {class: 'glyphicon-ok', style: 'color:green'}
+- icon_missing = {class: 'glyphicon-remove', style: 'color:red'}
+
 - if flash[:notice].present?
   .alert.alert-success.alert-dismissible.fade.in{role: "alert"}
     %button.close{type: "button", data: {dismiss: "alert"}, 'aria-label': "Close"}
@@ -30,12 +34,40 @@
   .panel-heading
     %h3.panel-title
       Status
+      .progress
+        .progress-bar{class: (@progress == 100 ? 'progress-bar-success' : 'progress-bar-info'), role: 'progressbar', aria: {valuenow: @progress, valuemin: '0', valuemax: '100'}, style: "width: #{@progress}%"}
+          %span.sr-only
+            #{@progress}% Complete
   .panel-body
     %ul
-      %li US Club form complete - Show link to US Club form
-      %li Club registration paid - TODO: Show date paid
-      %li Concussion document acknowledged
-      %li Player & Parent code of conduct acknoledged
-      %li Volunteer selected - Show volunteer category selected
+      %li
+        %span.glyphicon{(icon_ok)}
+        %a{href: '#', data: {toggle: 'modal', target: '#documentModal', document: "#{player_portal_club_form_path}#Fit", title: 'US Club Form'}}
+          US Club Form
+      %li
+        %span.glyphicon{(@player_portal.picture.present? ? icon_ok : icon_missing)}
+        Player Pass Picture
+        - if @player_portal.picture.present?
+          %a{href: '#', data: {toggle: 'modal', target: '#imageModal', document: "https://docs.google.com/uc?id=#{@player_portal.picture}", title: 'Player Pass Picture'}}
+            View
+      %li
+        %span.glyphicon{(@player_portal.have_birth_certificate ? icon_ok : icon_missing)}
+        Proof of Birth on record
+      %li
+        %span.glyphicon{(@player_portal.amount_paid.blank? ? icon_missing : icon_ok)}
+        Club registration paid
+      %li
+        %span.glyphicon{(@player_portal.volunteer_choice.blank? ? icon_missing : icon_ok)}
+        Volunteer Selection - #{@player_portal.volunteer_choice}
+      %li
+        %span.glyphicon{icon_missing}
+        Concussion document acknowledged
+      %li
+        %span.glyphicon{icon_missing}
+        Player & Parent code of conduct acknoledged
 
 
+- content_for :javascript do
+  %script
+    $(document).ready(player_portal.modalPdf.init());
+    $(document).ready(player_portal.modalImg.init());

@@ -37,9 +37,18 @@ class PlayerPortalsController < InheritedResources::Base
     redirect_to root_path
   end
 
+  PROGRESS_STEPS = 5.0
   def index
 
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
+
+    # Calculate progress percentage.
+    completed = 1 # US Club form assumed done
+    completed += 1 if @player_portal.have_birth_certificate
+    completed += 1 if @player_portal.picture.present?
+    completed += 1 if @player_portal.volunteer_choice.present?
+    completed += 1 if @player_portal.amount_paid.present?
+    @progress = (completed / PROGRESS_STEPS * 100).round
 
   end
 
@@ -84,7 +93,7 @@ class PlayerPortalsController < InheritedResources::Base
       file.acl.push({:scope_type => "anyone", :withLink => true, :role => "reader"}, {:sendNotificationEmails => false})
 
       # Get the URL for the picture
-      player_portal.picture = file.human_url
+      player_portal.picture = file.id
     end
 
     unless params['birth-certificate'].nil?

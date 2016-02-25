@@ -26,6 +26,18 @@
               Download
             %button.btn.btn-default{data: {dismiss: 'modal'}}
               Close
+    .modal.fade#imageModal{tabindex: '-1', role: 'dialog'}
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            %button.close{data: {dismiss: 'modal'}, aria: {label: 'Close'}}
+              %span{aria: {hidden: 'true'}} &times;
+            %h4.modal-title
+          .modal-body
+            %img{width: '300'}
+          .modal-footer
+            %button.btn.btn-default{data: {dismiss: 'modal'}}
+              Close
     .image-container.set-full-height
 
       %nav.navbar.navbar-default{role: "navigation"}
