@@ -7,7 +7,7 @@
     / Wizard container
     .wizard-container
       #wizard.card.wizard-card.ct-wizard-green
-        = form_tag player_portal_registration_create_path do
+        = form_tag player_portal_registration_create_path, multipart: true do
           .wizard-header
             %h3
               %b REGISTER
@@ -51,7 +51,7 @@
                         .col-sm-5.picture-container
                           .picture
                             %img.img-responsive.center-block{src: "#{image_path('sample_birth_certificate.jpg')}"}
-                            %input#wizard-birth{type: 'file'}
+                            %input#wizard-birth{name: 'birth-certificate', type: 'file'}
                           %h6
                             Click Photo to Select
                         .col-sm-7
@@ -77,7 +77,7 @@
                       .col-sm-5.col-xs-12
                         .picture
                           %img#jcrop.img-responsive.center-block{title: ''}
-                          %input#wizard-picture{name: 'birth-certificate', type: "file"}
+                          %input#wizard-picture{type: "file"}
                         %h6
                           Click Photo to Select & Crop Picture
                           %br

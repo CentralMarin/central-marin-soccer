@@ -10,7 +10,6 @@ class CreatePlayerPortals < ActiveRecord::Migration
       t.string :zip
       t.string :gender
       t.date :birthday
-      t.boolean :have_birth_certificate
 
       t.string :parent1_first
       t.string :parent1_last
@@ -47,6 +46,10 @@ class CreatePlayerPortals < ActiveRecord::Migration
       t.string :uid
       t.string :md5
       t.integer :season
+      t.string :volunteer_choice
+      t.boolean :have_birth_certificate
+      t.string :picture
+      t.string :amount_paid
       t.timestamps null: false
     end
   end

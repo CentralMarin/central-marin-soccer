@@ -1,5 +1,17 @@
 require 'securerandom'
 
+# Generate the USClub Form PDF and save to Google Drive
+def generate_pdf(pp, session)
+  pdf_file_name = PlayerPortalsController.generate_file_name(pp, 'USClub.pdf')
+  folder = PlayerPortalsController.usclub_assets_path(session, pp)
+  local_path = PlayerPortalsController.generate_club_form(pp)
+
+  TryoutsController.upload_local_file(session, local_path, folder, pdf_file_name, 'application/pdf')
+
+  # Clean up the local file system
+  File.delete(local_path)
+end
+
 ActiveAdmin.register PlayerPortal do
 
   permit_params :uid, :first, :last, :birthday
@@ -123,22 +135,8 @@ ActiveAdmin.register PlayerPortal do
 
               pp.save!
 
-              #####
-              # Generate the USClub Form PDF and save to Google Drive
-              pdf_file_name = "#{pp.first} #{pp.last} USClub.pdf"
-
-              folder = TryoutsController.create_path(session, 'USClub', pp.gender, pp.birthday.year.to_s)
-
-              # See if the file already exists
-              local_path = PlayerPortalsController.generate_club_form(pp)
-              file = folder.file_by_title(pdf_file_name)
-              if file.nil?
-                file = session.upload_from_file(local_path, pdf_file_name, convert: false, content_type: 'application/pdf')
-              else
-                file.update_from_file(local_path)
-              end
-              File.delete(local_path)
-              folder.add(file)
+              # Generate the US Club Form PDF
+              generate_pdf(pp, session)
 
               imported += 1
 

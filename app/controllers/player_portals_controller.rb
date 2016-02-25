@@ -54,7 +54,7 @@ class PlayerPortalsController < InheritedResources::Base
     # stream down the pdf
     tmp_form = PlayerPortalsController.generate_club_form(player)
     File.open(tmp_form, 'r') do |f|
-      send_data f.read.force_encoding('BINARY'), filename: "#{player.first} #{player.last} US Club Form.pdf", disposition: 'inline', type: 'application/pdf'
+      send_data f.read.force_encoding('BINARY'), filename: PlayerPortalsController.generate_file_name(player, "- US Club Form.pdf"), disposition: 'inline', type: 'application/pdf'
     end
     File.delete(tmp_form)
 
@@ -76,25 +76,40 @@ class PlayerPortalsController < InheritedResources::Base
 
     # Determine volunteer selection and calculate amount due
     fees = calculate_fees(player_portal.club_registration_fee, params[:volunteer].empty?)
-
-    # TODO: Save off volunteer preference
+    player_portal.volunteer_choice = params[:volunteer]
 
     # Hookup to the Google Drive
     session = TryoutsController.authorize
 
     # Create the folder structure
-    folder = TryoutsController.create_path(session, 'USClub', player_portal.gender, player_portal.birthday.year.to_s)
-            # First-Last-USClub
-            # First-Last-Picture
-            # First-Last-BirthCertificate
+    folder = PlayerPortalsController.usclub_assets_path(session, player_portal)
+    unless params['player-image'].empty?
+      # Save off the player's image
+      filename = PlayerPortalsController.generate_file_name(player_portal, "Image.png")
+      image_data = Base64.decode64(params['player-image']['data:image/png;base64,'.length .. -1])
+      file = TryoutsController.upload_string(session, image_data, folder, filename)
 
-    # Save off US Club form
-    # session.
+      # Share with anyone with the link
+      file.acl.push({:scope_type => "anyone", :withLink => true, :role => "reader"}, {:sendNotificationEmails => false})
 
-    # TODO: Save off birth certificate
+      # TODO: Get the URL for the picture
+      player_portal.picture = file.human_url
+    end
 
+    unless params['birth-certificate'].nil?
+      # Save off birth certificate
+      filename = PlayerPortalsController.generate_file_name(player_portal, "Birth Certificate.jpg")
+      TryoutsController.upload_string(session, params['birth-certificate'].read, folder, filename)
+
+      player_portal.have_birth_certificate = true
+    end
+
+    player_portal.save!
     # TODO: Move strings to localization file and translate
 
+#############
+# Force Crash
+player_portal.foo.bar
 
     customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
@@ -107,6 +122,9 @@ class PlayerPortalsController < InheritedResources::Base
         :description => "#{EventGroup::TRYOUT_YEAR} Club Registration Fee",
         :currency    => 'usd'
     )
+
+    player_portal.amount_paid = fees
+    player_portal.save!
 
     flash[:notice] = "Congratulations, #{player_portal.first} has been successfully registered for the #{EventGroup::TRYOUT_YEAR} season!"
     redirect_to player_portal_path
@@ -130,6 +148,13 @@ class PlayerPortalsController < InheritedResources::Base
     tmp_form
   end
 
+  def self.generate_file_name(player, suffix)
+    "#{player.first} #{player.last} - #{suffix}"
+  end
+
+  def self.usclub_assets_path(session, player_portal)
+    TryoutsController.create_path(session, 'USClub', player_portal.gender, player_portal.birthday.year.to_s)
+  end
   private
 
     def calculate_fees(registration_fee, volunteer_opt_out)

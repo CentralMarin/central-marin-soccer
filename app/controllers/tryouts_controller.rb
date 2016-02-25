@@ -227,6 +227,44 @@ class TryoutsController < CmsController
     folder
   end
 
+  # TODO: DRY these methods
+  def self.upload_string(session, data, folder, filename)
+    # See if the file already exists
+    file = folder.file_by_title(filename)
+    if file.nil?
+      file = session.upload_from_string(data, filename, convert: false)
+    else
+      file.update_from_string(data)
+    end
+
+    # move to the folder
+    folder.add(file)
+
+    # clean up the root
+    session.root_collection.remove(file)
+
+    file
+  end
+
+  def self.upload_local_file(session, local_path, folder, filename, content_type)
+
+    # See if the file already exists
+    file = folder.file_by_title(filename)
+    if file.nil?
+      file = session.upload_from_file(local_path, filename, convert: false, content_type: content_type)
+    else
+      file.update_from_file(local_path)
+    end
+
+    # move to the folder
+    folder.add(file)
+
+    # clean up the root
+    session.root_collection.remove(file)
+
+    file
+  end
+
   def update_spreadsheet(title, registration_info)
 
     @@mutex.synchronize do
