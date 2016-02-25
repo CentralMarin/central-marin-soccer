@@ -37,11 +37,6 @@ class PlayerPortalsController < InheritedResources::Base
     redirect_to root_path
   end
 
-  # TODO: Show if we have a birth certificate
-  # TODO: Show if we have a picture for the player pass
-  # TODO: Show current US Club form
-  # TODO: Show other documents uploaded from the admin console, e.g. Concusion protocol, positive coaching, etc.
-  # TODO: Allow registration of goalie and striker trainings
   def index
 
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
@@ -74,16 +69,12 @@ class PlayerPortalsController < InheritedResources::Base
   def registration_create
     player_portal = PlayerPortal.find_by(uid: params[:uid])
 
-    # Determine volunteer selection and calculate amount due
-    fees = calculate_fees(player_portal.club_registration_fee, params[:volunteer].empty?)
-    player_portal.volunteer_choice = params[:volunteer]
-
     # Hookup to the Google Drive
     session = TryoutsController.authorize
 
     # Create the folder structure
     folder = PlayerPortalsController.usclub_assets_path(session, player_portal)
-    unless params['player-image'].empty?
+    unless params['player-image'].blank?
       # Save off the player's image
       filename = PlayerPortalsController.generate_file_name(player_portal, "Image.png")
       image_data = Base64.decode64(params['player-image']['data:image/png;base64,'.length .. -1])
@@ -92,7 +83,7 @@ class PlayerPortalsController < InheritedResources::Base
       # Share with anyone with the link
       file.acl.push({:scope_type => "anyone", :withLink => true, :role => "reader"}, {:sendNotificationEmails => false})
 
-      # TODO: Get the URL for the picture
+      # Get the URL for the picture
       player_portal.picture = file.human_url
     end
 
@@ -104,12 +95,13 @@ class PlayerPortalsController < InheritedResources::Base
       player_portal.have_birth_certificate = true
     end
 
+    # Save that we have images in case the credit card gets rejected
     player_portal.save!
-    # TODO: Move strings to localization file and translate
 
-#############
-# Force Crash
-player_portal.foo.bar
+    # Determine volunteer selection and calculate amount due
+    fees = calculate_fees(player_portal.club_registration_fee, params[:volunteer].empty?)[:total]
+    volunteer_choice = params[:volunteer].presence || "Opt out - paid $#{PlayerPortal::VOLUNTEER_OPT_OUT_FEE}"
+    player_portal.volunteer_choice = volunteer_choice
 
     customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
@@ -118,12 +110,12 @@ player_portal.foo.bar
 
     charge = Stripe::Charge.create(
         :customer    => customer.id,
-        :amount      => fees[:total],
+        :amount      => fees,
         :description => "#{EventGroup::TRYOUT_YEAR} Club Registration Fee",
         :currency    => 'usd'
     )
 
-    player_portal.amount_paid = fees
+    player_portal.amount_paid = "$#{'%.2f' % (fees / 100.0)}"
     player_portal.save!
 
     flash[:notice] = "Congratulations, #{player_portal.first} has been successfully registered for the #{EventGroup::TRYOUT_YEAR} season!"
