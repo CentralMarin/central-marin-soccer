@@ -116,15 +116,10 @@ class PlayerPortalsController < InheritedResources::Base
     volunteer_choice = params[:volunteer].presence || "Opt out - paid $#{PlayerPortal::VOLUNTEER_OPT_OUT_FEE}"
     player_portal.volunteer_choice = volunteer_choice
 
-    customer = Stripe::Customer.create(
-        :email => params[:stripeEmail],
-        :source  => params[:stripeToken]
-    )
-
     charge = Stripe::Charge.create(
-        :customer    => customer.id,
         :amount      => fees,
         :description => "#{EventGroup::TRYOUT_YEAR} Club Registration Fee",
+        :source => params[:stripeToken],
         :currency    => 'usd'
     )
 
