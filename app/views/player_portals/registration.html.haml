@@ -29,9 +29,13 @@
               .row
                 .col-sm-12
                   %h4.info-text
-                    Verify your registration information.
-                    %br
-                    <a href='mailto:rrobinett@centralmarinsoccer.com?subject=#{@player_portal[:first]} #{@player_portal[:last]} CM Registration Changes&body=The following information needs to be updated: '>Click here</a> if any information is incorrect.
+                    Information in this US Club Form is:
+                    %label
+                      %input.radio-inline{style: 'margin: 0px;', type: 'radio', name: 'USClub_complete', value: 1, checked: true} &nbsp;correct
+                    %label
+                      %input.radio-inline{style: 'margin: 0px;', type: 'radio', name: 'USClub_complete', value: 0} &nbsp;incorrect.
+                    .small
+                      Email tryouts@centralmarinsoccer.com with any necessary updates.
                   .embed-responsive.embed-responsive-4by3
                     %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
 
@@ -192,7 +196,7 @@
           .wizard-footer
             .pull-right
               %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:name => "next", :type => "button", :value => "Next"}/
-              -#%input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:name => "finish", :type => "button", :value => "Complete Registration"}/
+              %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:name => "finish", :type => "button", :value => "Complete Registration"}/
             .pull-left
               %input.btn.btn-previous.btn-fill.btn-default.btn-wd.btn-sm{:name => "previous", :type => "button", :value => "Previous"}/
             .clearfix
@@ -201,6 +205,6 @@
 
 - content_for :javascript do
   %script
-    $(document).ready(player_portal.image_crop.init("#{image_path('default-avatar.png')}"));
+    $(document).ready(player_portal.registration_wizard.init("#{image_path('default-avatar.png')}"));
     $(document).ready(player_portal.modalPdf.init());
 

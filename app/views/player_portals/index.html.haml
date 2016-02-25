@@ -28,7 +28,7 @@
 
   %p.text-right
     %a.btn.btn-primary.btn-lg{href: "#{player_portal_registration_path}", role: "button"}
-      Register
+      Complete Registration
 
 .panel.panel-default
   .panel-heading
@@ -41,9 +41,10 @@
   .panel-body
     %ul
       %li
-        %span.glyphicon{(icon_ok)}
+        %span.glyphicon{(@player_portal.usclub_complete ? icon_ok : icon_missing)}
+        US Club Form
         %a{href: '#', data: {toggle: 'modal', target: '#documentModal', document: "#{player_portal_club_form_path}#Fit", title: 'US Club Form'}}
-          US Club Form
+          View
       %li
         %span.glyphicon{(@player_portal.picture.present? ? icon_ok : icon_missing)}
         Player Pass Picture

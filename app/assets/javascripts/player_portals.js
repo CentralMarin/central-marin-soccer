@@ -61,7 +61,7 @@
         };
     }());
 
-    player_portal.image_crop = (function() {
+    player_portal.registration_wizard = (function() {
         var CROP_WIDTH = 300;
         var CROP_HEIGHT = 300;
         var _jcrop_api;

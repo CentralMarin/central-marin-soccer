@@ -43,7 +43,8 @@ class PlayerPortalsController < InheritedResources::Base
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
 
     # Calculate progress percentage.
-    completed = 1 # US Club form assumed done
+    completed = 0
+    completed += 1 if @player_portal.usclub_complete
     completed += 1 if @player_portal.have_birth_certificate
     completed += 1 if @player_portal.picture.present?
     completed += 1 if @player_portal.volunteer_choice.present?
@@ -80,6 +81,9 @@ class PlayerPortalsController < InheritedResources::Base
 
     # Hookup to the Google Drive
     session = TryoutsController.authorize
+
+    player_portal.usclub_complete = params[:USClub_complete]
+
 
     # Create the folder structure
     folder = PlayerPortalsController.usclub_assets_path(session, player_portal)

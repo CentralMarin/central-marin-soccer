@@ -241,6 +241,7 @@ ActiveRecord::Schema.define(version: 20160206155949) do
     t.string   "uid"
     t.string   "md5"
     t.integer  "season"
+    t.boolean  "usclub_complete"
     t.string   "volunteer_choice"
     t.boolean  "have_birth_certificate"
     t.string   "picture"

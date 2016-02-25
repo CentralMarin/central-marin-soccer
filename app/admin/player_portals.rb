@@ -30,6 +30,7 @@ ActiveAdmin.register PlayerPortal do
     column :first
     column :last
     column :birthday
+    column 'US Club Form', :usclub_complete
     column 'Proof of Birth', :have_birth_certificate
     column :volunteer_choice
     column :picture do |portal|
