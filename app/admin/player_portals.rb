@@ -30,9 +30,12 @@ ActiveAdmin.register PlayerPortal do
     column :first
     column :last
     column :birthday
-    column :created_at
-    column :updated_at
-
+    column 'Proof of Birth', :have_birth_certificate
+    column :volunteer_choice
+    column :picture do |portal|
+      portal.picture.blank? ? status_tag('no') : status_tag( 'yes', :ok)
+    end
+    column :amount_paid
     actions
   end
 
