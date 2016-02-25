@@ -211,6 +211,22 @@ class TryoutsController < CmsController
     session = GoogleDrive.login_with_oauth(api_client.authorization.access_token)
   end
 
+  def self.create_path(session, *args)
+
+    folder = session.collection_by_title(args[0])
+    folder = session.root_collection.create_subcollection(args[0]) if folder.nil?
+    args.shift  # remove the first folder since we've processed it
+
+    args.each do |subfolder|
+      new_folder = folder.subcollection_by_title(subfolder)
+      new_folder = folder.create_subcollection(subfolder) if new_folder.nil?
+
+      folder = new_folder
+    end
+
+    folder
+  end
+
   def update_spreadsheet(title, registration_info)
 
     @@mutex.synchronize do

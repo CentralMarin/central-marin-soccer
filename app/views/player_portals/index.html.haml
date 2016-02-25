@@ -17,23 +17,25 @@
   %h2 Register #{@player_portal.first} for the #{EventGroup::TRYOUT_YEAR} Season
   %p
     Congratulations and Welcome to Central Marin Soccer Club.
+  %p
+    TODO: Tell the user what documents they'll need to register
+  %p
+    TODO: Hide the registration once they've completed it
 
   %p.text-right
     %a.btn.btn-primary.btn-lg{href: "#{player_portal_registration_path}", role: "button"}
       Register
 
-//TODO: Notify the user what documents they'll need to complete registration
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      Status
+  .panel-body
+    %ul
+      %li US Club form complete - Show link to US Club form
+      %li Club registration paid - TODO: Show date paid
+      %li Concussion document acknowledged
+      %li Player & Parent code of conduct acknoledged
+      %li Volunteer selected - Show volunteer category selected
 
-%h2 Status
-%div
-  %ul
-    %li US Club form complete - Show link to US Club form
-    %li Club registration paid - TODO: Show date paid
-    %li Concussion document acknowledged
-    %li Player & Parent code of conduct acknoledged
-    %li Volunteer selected - Show volunteer category selected
-
-= link_to "Logout", player_portal_logout_path
-
-TODO: Add bootstrap Jumbotron
 

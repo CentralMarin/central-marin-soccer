@@ -49,18 +49,10 @@ class PlayerPortalsController < InheritedResources::Base
   end
 
   def club_form
-
     player = PlayerPortal.find_by(uid: params[:uid])
 
-    # tmp file to store pdf
-    tmp_form = "#{Rails.root}/tmp/pdfs/#{SecureRandom.uuid}.pdf"
-
-    # Fill in PDF Form
-    pdftk = PdfForms.new(PDFTK_PATH)
-
-    pdftk.fill_form "#{Rails.root}/lib/pdf_templates/club_form.pdf", tmp_form, player.to_hash, flatten: true
-
-    # Stream the form the user
+    # stream down the pdf
+    tmp_form = PlayerPortalsController.generate_club_form(player)
     File.open(tmp_form, 'r') do |f|
       send_data f.read.force_encoding('BINARY'), filename: "#{player.first} #{player.last} US Club Form.pdf", disposition: 'inline', type: 'application/pdf'
     end
@@ -87,11 +79,19 @@ class PlayerPortalsController < InheritedResources::Base
 
     # TODO: Save off volunteer preference
 
-    # TODO: Save off photo
+    # Hookup to the Google Drive
+    session = TryoutsController.authorize
+
+    # Create the folder structure
+    folder = TryoutsController.create_path(session, 'USClub', player_portal.gender, player_portal.birthday.year.to_s)
+            # First-Last-USClub
+            # First-Last-Picture
+            # First-Last-BirthCertificate
+
+    # Save off US Club form
+    # session.
 
     # TODO: Save off birth certificate
-
-    # TODO: Save off US Club form
 
     # TODO: Move strings to localization file and translate
 
@@ -108,12 +108,26 @@ class PlayerPortalsController < InheritedResources::Base
         :currency    => 'usd'
     )
 
-    flash[:notice] = "Congratulations, #{player_portal.first} has been successfully registered for the #{EventGroup::TRYOUT_YEAR}!"
+    flash[:notice] = "Congratulations, #{player_portal.first} has been successfully registered for the #{EventGroup::TRYOUT_YEAR} season!"
     redirect_to player_portal_path
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to player_portal_registration_path
+  end
+
+
+  def self.generate_club_form(player)
+
+    # tmp file to store pdf
+    tmp_form = "#{Rails.root}/tmp/pdfs/#{SecureRandom.uuid}.pdf"
+
+    # Fill in PDF Form
+    pdftk = PdfForms.new(PDFTK_PATH)
+
+    pdftk.fill_form "#{Rails.root}/lib/pdf_templates/club_form.pdf", tmp_form, player.to_hash, flatten: true
+
+    tmp_form
   end
 
   private

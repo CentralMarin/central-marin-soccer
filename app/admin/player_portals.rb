@@ -3,6 +3,7 @@ require 'securerandom'
 ActiveAdmin.register PlayerPortal do
 
   permit_params :uid, :first, :last, :birthday
+  actions :index, :show, :update, :edit, :destroy
 
   member_action :impersonate do
     uid = params[:id]
@@ -11,8 +12,8 @@ ActiveAdmin.register PlayerPortal do
   end
 
   index :download_links => false do
-    column :uid do |portal|
-      link_to portal.uid, impersonate_admin_player_portal_path(portal.uid), target: '_blank'
+    column :portal do |portal|
+      link_to 'Launch', impersonate_admin_player_portal_path(portal.uid), target: '_blank'
     end
     column :first
     column :last
@@ -70,7 +71,6 @@ ActiveAdmin.register PlayerPortal do
           if pp.nil?
 
             PlayerPortal.transaction do
-              # TODO: Transaction this in case we fail to send the email
               # TODO: Move away from Google Sheets for next season
               pp = PlayerPortal.new
               pp.first= first
@@ -122,6 +122,23 @@ ActiveAdmin.register PlayerPortal do
               pp.md5= md5
 
               pp.save!
+
+              #####
+              # Generate the USClub Form PDF and save to Google Drive
+              pdf_file_name = "#{pp.first} #{pp.last} USClub.pdf"
+
+              folder = TryoutsController.create_path(session, 'USClub', pp.gender, pp.birthday.year.to_s)
+
+              # See if the file already exists
+              local_path = PlayerPortalsController.generate_club_form(pp)
+              file = folder.file_by_title(pdf_file_name)
+              if file.nil?
+                file = session.upload_from_file(local_path, pdf_file_name, convert: false, content_type: 'application/pdf')
+              else
+                file.update_from_file(local_path)
+              end
+              File.delete(local_path)
+              folder.add(file)
 
               imported += 1
 
