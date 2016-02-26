@@ -32,7 +32,9 @@ ActiveAdmin.register PlayerPortal do
     column :birthday
     column 'US Club Form', :usclub_complete
     column 'Proof of Birth', :have_birth_certificate
-    column :volunteer_choice
+    column :volunteer do |portal|
+      portal.volunteer_choice.titleize if portal.volunteer_choice.present?
+    end
     column :picture do |portal|
       portal.picture.blank? ? status_tag('no') : status_tag( 'yes', :ok)
     end

@@ -11,6 +11,18 @@ class PlayerPortal < ActiveRecord::Base
   CC_FIXED = 0.3
   VOLUNTEER_OPT_OUT_FEE = 100
 
+  # Volunteer Options - i18n string lookup
+  VOLUNTEER_OPTIONS = {
+      opt_out: 'volunteer.options.opt_out',
+      fields: 'volunteer.options.fields',
+      manager: 'volunteer.options.manager',
+      travel: 'volunteer.options.travel',
+      board: 'volunteer.options.board',
+      tournament: 'volunteer.options.tournament',
+      tryout: 'volunteer.options.tryout',
+      no_preference: 'volunteer.options.no_preference'
+  }
+
   def init
     unless birthday.nil?
       self.birth_year= birthday.year

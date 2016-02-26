@@ -150,15 +150,9 @@
                         %h5
                           Volunteer Preference:
                         %select.form-control{name: "volunteer"}
-                          %option{value: '', selected: ""} Volunteer Opt Out - $100
-                          %option{disabled: ""} -
-                          %option Field Maintenance - equipment storage, lining and installing nets
-                          %option Team Manager
-                          %option Travel Coordinator
-                          %option Voting and / or Non Voting Board Members
-                          %option Tournament Volunteer
-                          %option Tryout Registration
-                          %option No Preference - Let me know where I can help
+                          - PlayerPortal::VOLUNTEER_OPTIONS.each_with_index do |(value, i18n), index|
+                            %option{value: value, selected: ('' if index == 0)}
+                              = t(i18n)
               .panel.panel-default
                 .panel-body
                   .row

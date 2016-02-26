@@ -112,8 +112,9 @@ class PlayerPortalsController < InheritedResources::Base
     player_portal.save!
 
     # Determine volunteer selection and calculate amount due
-    fees = calculate_fees(player_portal.club_registration_fee, params[:volunteer].empty?)[:total]
-    volunteer_choice = params[:volunteer].presence || "Opt out - paid $#{PlayerPortal::VOLUNTEER_OPT_OUT_FEE}"
+    volunteer_choice = params[:volunteer].to_sym
+
+    fees = calculate_fees(player_portal.club_registration_fee, volunteer_choice == :opt_out)[:total]
     player_portal.volunteer_choice = volunteer_choice
 
     charge = Stripe::Charge.create(

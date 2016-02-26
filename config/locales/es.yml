@@ -108,6 +108,16 @@ es:
     coaching: 'Entrenamiento'
   news:
     heading: 'Noticias de los Clubes Recientes'
+  volunteer:
+    options:
+      opt_out: 'Usted paga un extra de $ 100 en lugar de ser voluntario'
+      fields: 'Mantenimiento de campo - almacenamiento de equipos, forro de campo, y la instalación de redes'
+      manager: 'jefe de equipo'
+      travel: 'Coordinador de viajes'
+      board: 'Miembro de la Junta'
+      tournament: 'Voluntario de torneo'
+      tryout: 'Ayuda con puesta a punto de registro'
+      no_preference: 'Sin preferencias - Me gustaría saber donde puedo ayudar'
   registration:
     index:
       heading: ' Pruebas de fútbol'

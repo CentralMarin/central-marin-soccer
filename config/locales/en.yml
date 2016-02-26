@@ -86,6 +86,16 @@ en:
     coaching: 'Coaching'
   news:
     heading: 'Recent Club News'
+  volunteer:
+    options:
+      opt_out: 'Opt out and pay an additional $100'
+      fields: 'Field Maintenance - equipment storage, lining, and installing nets'
+      manager: 'Team Manager'
+      travel: 'Travel Coordinator'
+      board: 'Voting / Non Voting Board Member'
+      tournament: 'Tournament Volunteer'
+      tryout: 'Tryout Registration'
+      no_preference: 'No Preference - Let me know where I can help'
   registration:
     index:
       heading: ' Tryouts'
