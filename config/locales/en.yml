@@ -86,6 +86,20 @@ en:
     coaching: 'Coaching'
   news:
     heading: 'Recent Club News'
+  player_portal:
+    bad_browser: 'You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.'
+    close: 'Close'
+    menu:
+      home: 'Home'
+      registration: 'Registration'
+      logout: 'Logout'
+    doc_modal:
+      pdf: 'Please <a href="#">click here</a> to view the PDF.'
+      download: 'Download'
+    sr_toggle_nav: 'Toggle navigation'
+    index:
+      registration_success: 'Success'
+      heading: "Player Portal for %{first} %{last}"
   volunteer:
     options:
       opt_out: 'Opt out and pay an additional $100'
