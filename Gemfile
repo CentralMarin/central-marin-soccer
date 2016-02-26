@@ -45,7 +45,7 @@ gem 'jquery-ui-themes', '0.0.11'
 gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.4.0'
+gem 'jbuilder', '2.4.1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -60,17 +60,17 @@ group :development do
 end
 
 group :staging, :production do
-  gem 'mysql2', '0.4.2'
+  gem 'mysql2', '0.4.3'
 end
 
 group :development, :test do
   gem 'i18n-tasks', '~> 0.9.4'
   gem 'rspec-rails', '3.4.2'
   gem 'factory_girl_rails', '4.6.0'
-  gem 'faker', '1.6.1'
+  gem 'faker', '1.6.3'
   gem 'capybara', '2.6.2'
-  gem 'selenium-webdriver', '2.51.0'
+  gem 'selenium-webdriver', '2.52.0'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '1.6.3', group: :development
+gem 'spring', '1.6.4', group: :development

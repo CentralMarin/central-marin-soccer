@@ -25,7 +25,7 @@
               %b REGISTER
               = "#{@player_portal[:first]} #{@player_portal[:last]}"
               %br
-                = "<small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>".html_safe
+                <small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>
           %ul
             %li
               %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
