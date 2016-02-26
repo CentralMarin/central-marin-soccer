@@ -87,7 +87,7 @@ class PlayerPortalsController < InheritedResources::Base
 
     # Create the folder structure
     folder = PlayerPortalsController.usclub_assets_path(session, player_portal)
-    unless params['player-image'].blank?
+    if params['player-image'].present?
       # Save off the player's image
       filename = PlayerPortalsController.generate_file_name(player_portal, "Image.png")
       image_data = Base64.decode64(params['player-image']['data:image/png;base64,'.length .. -1])
@@ -100,7 +100,7 @@ class PlayerPortalsController < InheritedResources::Base
       player_portal.picture = file.id
     end
 
-    unless params['birth-certificate'].nil?
+    if params['birth-certificate'].present?
       # Save off birth certificate
       filename = PlayerPortalsController.generate_file_name(player_portal, "Birth Certificate.jpg")
       TryoutsController.upload_string(session, params['birth-certificate'].read, folder, filename)

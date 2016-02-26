@@ -3,7 +3,7 @@
     %span{aria: {hidden: "true"}}
       &times;
   .message
-    foo
+
 
 .modal.fade#pleaseWaitDialog{tabindex: '-1', role: 'dialog', data: {backdrop: 'static', keyboard: 'false'}}
   .modal-dialog.modal-lg
@@ -20,8 +20,6 @@
     .wizard-container
       #wizard.card.wizard-card.ct-wizard-green
         = form_tag player_portal_registration_create_path, multipart: true do
-          %input{type: 'hidden', name: 'stripeToken', value: ''}
-          %input{type: 'hidden', name: 'stripeEmail', value: ''}
           .wizard-header
             %h3
               %b REGISTER

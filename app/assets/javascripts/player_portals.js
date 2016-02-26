@@ -194,26 +194,30 @@
                     pleaseWait.modal('show');
 
                     var form = $('#finish').parents('form');
-                    form.find('input[name="stripeToken"]').attr('value', token.id);
-                    form.find('input[name="stripeEmail"]').attr('value', token.email);
+                    var formData = new FormData(form[0]);
+                    formData.append('stripeToken', token.id);
+                    formData.append('stripeEmail', token.email);
 
-                    $.post(
-                        form.attr('action'),
-                        form.serialize()
-                        )
-                        .done(function(data) {
-                            window.location.href = success + '?success=1';
-                        })
-                        .fail(function(data) {
-                            var error = JSON.parse(data.responseText).error;
+                    $.ajax({
+                        url: form.attr('action'),
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        type: 'POST'
+                    })
+                    .done(function(data) {
+                        window.location.href = success + '?success=1';
+                    })
+                    .fail(function(data) {
+                        var error = JSON.parse(data.responseText).error;
 
-                            var alert = $('#alert');
-                            alert.find('.message').html(error);
+                        var alert = $('#alert');
+                        alert.find('.message').html(error);
 
-                            // Dismiss the modal and show the error message
-                            pleaseWait.modal('hide');
-                            alert.show();
-                        });
+                        // Dismiss the modal and show the error message
+                        pleaseWait.modal('hide');
+                        alert.show();
+                    });
                 }
             });
 

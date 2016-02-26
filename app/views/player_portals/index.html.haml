@@ -72,3 +72,6 @@
   %script
     $(document).ready(player_portal.modalPdf.init());
     $(document).ready(player_portal.modalImg.init());
+    if (!("FormData" in window)) {
+    // FormData is not supported; degrade gracefully/ alert the user as appropiate
+    }
