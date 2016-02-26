@@ -100,6 +100,15 @@ en:
     index:
       registration_success: 'Success'
       heading: "Player Portal for %{first} %{last}"
+      jumbo:
+        heading: "Register %{first} for the %{year} Season"
+        body: "<p>Congratulations and Welcome to Central Marin Soccer Club.</p>
+                   <p>TODO: Tell the user what documents they'll need to register</p>
+                   <p>TODO: Hide the registration once they've completed it</p>"
+        button: 'Complete Registration'
+      panel:
+        heading: 'Status'
+        sr_status: '%{progress}% Complete'
   volunteer:
     options:
       opt_out: 'Opt out and pay an additional $100'

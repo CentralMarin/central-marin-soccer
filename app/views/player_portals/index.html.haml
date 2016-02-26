@@ -11,61 +11,56 @@
       %span{'aria-hidden': "true"}
         &times;
     %p.text-center
-      Success
-
+      = t 'player_portal.index.registration_success'
 
 %h1
-  = "Player Portal for #{@player_portal.first} #{@player_portal.last}"
+  = t 'player_portal.index.heading', first: @player_portal.first, last: @player_portal.last
 
 .jumbotron
-  %h2 Register #{@player_portal.first} for the #{EventGroup::TRYOUT_YEAR} Season
-  %p
-    Congratulations and Welcome to Central Marin Soccer Club.
-  %p
-    TODO: Tell the user what documents they'll need to register
-  %p
-    TODO: Hide the registration once they've completed it
+  %h2
+    = t 'player_portal.index.jumbo.heading', first: @player_portal.first, year: EventGroup::TRYOUT_YEAR
+  = t('player_portal.index.jumbo.body').html_safe
 
   %p.text-right
     %a.btn.btn-primary.btn-lg{href: "#{player_portal_registration_path}", role: "button"}
-      Complete Registration
+      = t 'player_portal.index.jumbo.button'
 
-.panel.panel-default
-  .panel-heading
-    %h3.panel-title
-      Status
-      .progress
-        .progress-bar{class: (@progress == 100 ? 'progress-bar-success' : 'progress-bar-info'), role: 'progressbar', aria: {valuenow: @progress, valuemin: '0', valuemax: '100'}, style: "width: #{@progress}%"}
-          %span.sr-only
-            #{@progress}% Complete
-  .panel-body
-    %ul
-      %li
-        %span.glyphicon{(@player_portal.usclub_complete ? icon_ok : icon_missing)}
-        US Club Form
-        %a{href: '#', data: {toggle: 'modal', target: '#documentModal', document: "#{player_portal_club_form_path}#Fit", title: 'US Club Form'}}
-          View
-      %li
-        %span.glyphicon{(@player_portal.picture.present? ? icon_ok : icon_missing)}
-        Player Pass Picture
-        - if @player_portal.picture.present?
-          %a{href: '#', data: {toggle: 'modal', target: '#imageModal', document: "https://docs.google.com/uc?id=#{@player_portal.picture}", title: 'Player Pass Picture'}}
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title
+        = t 'player_portal.index.panel.heading'
+        .progress
+          .progress-bar{class: (@progress == 100 ? 'progress-bar-success' : 'progress-bar-info'), role: 'progressbar', aria: {valuenow: @progress, valuemin: '0', valuemax: '100'}, style: "width: #{@progress}%"}
+            %span.sr-only
+              = t 'player_portal.index.panel.sr_status', progress: @progress
+    .panel-body
+      %ul
+        %li
+          %span.glyphicon{(@player_portal.usclub_complete ? icon_ok : icon_missing)}
+          US Club Form
+          %a{href: '#', data: {toggle: 'modal', target: '#documentModal', document: "#{player_portal_club_form_path}#Fit", title: 'US Club Form'}}
             View
-      %li
-        %span.glyphicon{(@player_portal.have_birth_certificate ? icon_ok : icon_missing)}
-        Proof of Birth on record
-      %li
-        %span.glyphicon{(@player_portal.amount_paid.blank? ? icon_missing : icon_ok)}
-        Club registration paid
-      %li
-        %span.glyphicon{(@player_portal.volunteer_choice.blank? ? icon_missing : icon_ok)}
-        Volunteer Selection - #{@player_portal.volunteer_choice}
-      %li
-        %span.glyphicon{icon_missing}
-        Concussion document acknowledged
-      %li
-        %span.glyphicon{icon_missing}
-        Player & Parent code of conduct acknoledged
+        %li
+          %span.glyphicon{(@player_portal.picture.present? ? icon_ok : icon_missing)}
+          Player Pass Picture
+          - if @player_portal.picture.present?
+            %a{href: '#', data: {toggle: 'modal', target: '#imageModal', document: "https://docs.google.com/uc?id=#{@player_portal.picture}", title: 'Player Pass Picture'}}
+              View
+        %li
+          %span.glyphicon{(@player_portal.have_birth_certificate ? icon_ok : icon_missing)}
+          Proof of Birth on record
+        %li
+          %span.glyphicon{(@player_portal.amount_paid.blank? ? icon_missing : icon_ok)}
+          Club registration paid
+        %li
+          %span.glyphicon{(@player_portal.volunteer_choice.blank? ? icon_missing : icon_ok)}
+          Volunteer Selection - #{@player_portal.volunteer_choice}
+        %li
+          %span.glyphicon{icon_missing}
+          Concussion document acknowledged
+        %li
+          %span.glyphicon{icon_missing}
+          Player & Parent code of conduct acknoledged
 
 
 - content_for :javascript do
