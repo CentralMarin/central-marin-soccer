@@ -5,13 +5,13 @@
 - icon_ok = {class: 'glyphicon-ok', style: 'color:green'}
 - icon_missing = {class: 'glyphicon-remove', style: 'color:red'}
 
-- if flash[:notice].present?
+- if params[:success].present?
   .alert.alert-success.alert-dismissible.fade.in{role: "alert"}
     %button.close{type: "button", data: {dismiss: "alert"}, 'aria-label': "Close"}
       %span{'aria-hidden': "true"}
         &times;
     %p.text-center
-      = flash[:notice]
+      Success
 
 
 %h1

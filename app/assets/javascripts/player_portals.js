@@ -161,16 +161,81 @@
         };
 
         var _toggleVolunteerFee = function(show) {
+
+            var tableShow;
+            var tableHide;
             if (show) {
-                $('#feesWithOptOut').removeClass('hidden');
-                $('#fees').addClass('hidden');
+                tableShow = $('#feesWithOptOut');
+                tableHide = $('#fees');
             } else {
-                $('#fees').removeClass('hidden');
-                $('#feesWithOptOut').addClass('hidden');
+                tableShow = $('#fees');
+                tableHide = $('#feesWithOptOut');
             }
+
+            tableShow.removeClass('hidden');
+            tableHide.addClass('hidden');
+
+            var complete = $('#finish');
+            complete.data('amount', tableShow.data('amount'));
+            complete.data('description', tableShow.data('description'));
         };
 
-        var init = function(defaultImageSrc) {
+        var _setupStripe = function(key, success) {
+
+            var pleaseWait = $('#pleaseWaitDialog');
+
+            // Setup Stripe
+            var handler = StripeCheckout.configure({
+                key: key,
+                image: 'https://s3.amazonaws.com/stripe-uploads/acct_17gopvKdw52ZEJhQmerchant-icon-1456253746398-logo.png',
+                locale: 'auto',
+                token: function(token) {
+                    // Show the pleaseWaitDialog
+                    pleaseWait.modal('show');
+
+                    var form = $('#finish').parents('form');
+                    form.find('input[name="stripeToken"]').attr('value', token.id);
+                    form.find('input[name="stripeEmail"]').attr('value', token.email);
+
+                    $.post(
+                        form.attr('action'),
+                        form.serialize()
+                        )
+                        .done(function(data) {
+                            window.location.href = success + '?success=1';
+                        })
+                        .fail(function(data) {
+                            var error = JSON.parse(data.responseText).error;
+
+                            var alert = $('#alert');
+                            alert.find('.message').html(error);
+
+                            // Dismiss the modal and show the error message
+                            pleaseWait.modal('hide');
+                            alert.show();
+                        });
+                }
+            });
+
+            var button = $('#finish');
+            button.on('click', function(e) {
+
+                // Open Checkout with further options
+                handler.open({
+                    name: 'Central Marin Soccer Club',
+                    description: button.data('description'),
+                    amount: button.data('amount')
+                });
+                e.preventDefault();
+            });
+
+            // Close Checkout on page navigation
+            $(window).on('popstate', function() {
+                handler.close();
+            });
+        };
+
+        var init = function(defaultImageSrc, key, success) {
             $("#wizard-picture").change(function(){
                 _picture(this);
             });
@@ -195,9 +260,13 @@
                 .attr('src', defaultImageSrc);
 
             // volunteer event handler
-            $('select[name="volunteer"]').on('change', function() {
+            var volunteer = $('select[name="volunteer"]');
+            volunteer.on('change', function() {
                 _toggleVolunteerFee(this.selectedIndex == 0);
             });
+            _toggleVolunteerFee(volunteer[0].selectedIndex == 0);
+
+            _setupStripe(key, success);
         };
 
         return {
@@ -206,4 +275,3 @@
 
     }());
 }());
-

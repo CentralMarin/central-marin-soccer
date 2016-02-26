@@ -126,12 +126,10 @@ class PlayerPortalsController < InheritedResources::Base
     player_portal.amount_paid = "$#{'%.2f' % (fees / 100.0)}"
     player_portal.save!
 
-    flash[:notice] = "Congratulations, #{player_portal.first} has been successfully registered for the #{EventGroup::TRYOUT_YEAR} season!"
-    redirect_to player_portal_path
+    render json: {}, status: 200
 
   rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to player_portal_registration_path
+    render json: { :error => e.message }, :status => 402
   end
 
 
