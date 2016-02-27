@@ -86,7 +86,7 @@ class PlayerPortalsController < InheritedResources::Base
 
       # Get the URL for the picture
       player_portal.picture = file.id
-      player_portal.status << :pass_picture
+      player_portal.status << :picture
     end
 
     if params['birth-certificate'].present?

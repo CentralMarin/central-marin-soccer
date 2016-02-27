@@ -209,14 +209,18 @@
                         window.location.href = success + '?success=1';
                     })
                     .fail(function(data) {
-                        var error = JSON.parse(data.responseText).error;
+                        if (data.status == 402) {
+                            var error = JSON.parse(data.responseText).error;
 
-                        var alert = $('#alert');
-                        alert.find('.message').html(error);
+                            var alert = $('#alert');
+                            alert.find('.message').html(error);
 
-                        // Dismiss the modal and show the error message
-                        pleaseWait.modal('hide');
-                        alert.show();
+                            // Dismiss the modal and show the error message
+                            pleaseWait.modal('hide');
+                            alert.show();
+                        } else {
+                            window.alert('An error occurred submitting your data. Please contact tryouts@centralmarinsoccer.com so the problem can be fixed. Thank you.')
+                        }
                     });
                 }
             });

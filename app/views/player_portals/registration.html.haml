@@ -31,7 +31,7 @@
               %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
             - if @player_portal.picture.blank? || !@player_portal.have_birth_certificate
               %li
-                %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal[:have_birth_certificate] ? '' : ' & Birth Certificate'}
+                %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal.status?(:proof_of_birth) ? '' : ' & Birth Certificate'}
             %li
               %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer & Scholarship
             %li
