@@ -1,0 +1,34 @@
+.panel.panel-default
+  .panel-body
+    .row
+      .col-sm-10.col-sm-offset-1
+        .media
+          .media-left
+            %img.media-object{src: "#{image_path('friends.jpg')}"}
+          .media-body
+            %h4.media-heading Volunteer Preference
+            This year Central Marin has instituted a policy that requires a family member of each player to volunteer during the soccer season. This allows the club to put your fees to work in the best possible way; coaching and fields. We will be announcing volunteer opportunities throughout the season.
+    .row
+      .col-sm-10.col-sm-offset-1
+        .form-group
+          %h5
+            Volunteer Preference:
+          %select.form-control{name: "volunteer"}
+            - PlayerPortal::VOLUNTEER_OPTIONS.each_with_index do |(value, i18n), index|
+              %option{value: value, selected: ('' if index == 0)}
+                = t(i18n)
+  .panel.panel-default
+    .panel-body
+      .row
+        .col-sm-10.col-sm-offset-1
+          .media
+            .media-body
+              %h4.media-heading On Equal Footing Scholarship
+              TODO: Talk about On Equal footing
+              Include the documents for viewing in modal popup
+            .media-right
+              %img.media-object{src: "#{image_path('scholarship.jpg')}"}
+      .row
+        .col-sm-10.col-sm-offset-1
+          %button.btn.btn-primary.btn{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: "#{url_to_asset('on equal footing 2016 - en.pdf')}", title: 'On Equal Footing'}}
+            More Information

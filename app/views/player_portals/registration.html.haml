@@ -28,165 +28,24 @@
                 <small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>
           %ul
             %li
-              %a{"data-toggle" => "tab", :href => "#us-club-form"} US Club Form
+              %a{data: {toggle: "tab"}, :href => "#us-club-form"} US Club Form
             %li
-              %a{"data-toggle" => "tab", :href => "#player-picture"} Picture #{@player_portal.status?(:proof_of_birth) ? '' : ' & Birth Certificate'}
+              %a{data: {toggle: "tab"}, :href => "#player-picture"} Picture #{@player_portal.status?(:proof_of_birth) ? '' : ' & Birth Certificate'}
             - unless @player_portal.status?(:paid)
               %li
-                %a{"data-toggle" => "tab", :href => "#volunteer"} Volunteer & Scholarship
+                %a{data: {toggle: "tab"}, :href => "#volunteer"} Volunteer & Scholarship
               %li
-                %a{"data-toggle" => "tab", :href => "#payment"} Payment
+                %a{data: {toggle: "tab"}, :href => "#payment"} Payment
           .tab-content
             #us-club-form.tab-pane
-              .row
-                .col-sm-12
-                  %h4.info-text
-                    Information in this US Club Form is:
-                    %label
-                      %input.radio-inline{style: 'margin: 0px;', type: 'radio', name: 'USClub_complete', value: 1, checked: (@player_portal.status?(:form))} &nbsp;correct
-                    %label
-                      %input.radio-inline{style: 'margin: 0px;', type: 'radio', name: 'USClub_complete', value: 0, checked: (!@player_portal.status?(:form))} &nbsp;incorrect.
-                    .small
-                      Email tryouts@centralmarinsoccer.com with any necessary updates.
-                  .embed-responsive.embed-responsive-4by3
-                    %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
-
+              = render partial: 'club_form'
             #player-picture.tab-pane
-              - if @player_portal[:have_birth_certificate]
-                %h4.info-text You previously played for Central Marin, so we only need an updated photo.
-              - else
-                %h4.info-text Since you're new to the club, we need proof of #{@player_portal[:first]}'s date of birth & a photo.
-              .row
-                - unless @player_portal.status?(:proof_of_birth)
-                  .col-sm-12
-                    .panel.panel-danger
-                      .panel-heading
-                        .panel-title
-                          %span.glyphicon.glyphicon-alert{'aria-hidden':"true"}
-                          Upload Date of Birth Proof
-                      .panel-body
-                        .col-sm-5.picture-container
-                          .picture
-                            %img.img-responsive.center-block{src: "#{image_path('sample_birth_certificate.jpg')}"}
-                            %input#wizard-birth{name: 'birth-certificate', type: 'file'}
-                          %h6
-                            Click Photo to Select
-                        .col-sm-7
-                          .well
-                            Acceptable date of birth proof includes:
-                            %ul
-                              %li birth certificate
-                              %li birth registration issued by the appropriate government agency
-                              %li passport
-                              %li alien registration card issued by the U.S. Government
-                              %li certificate issued by the INS attesting to age
-                              %li certification of a United States citizen born abroad issued by the appropriate govenment agency
-                              %li or a current driver's license.
-                            %p
-                              <b>Hospital, baptismal, or religious certificates are not accepted by US Club Soccer.</b>
-                .col-sm-12
-                  .panel.panel-danger
-                    .panel-heading
-                      .panel-title
-                        %span.glyphicon.glyphicon-alert{'aria-hidden':"true"}
-                        Upload and Crop Photo
-                    .panel-body.picture-container
-                      .col-sm-5.col-xs-12
-                        .picture
-                          %img#jcrop.img-responsive.center-block{title: ''}
-                          %input#wizard-picture{type: "file"}
-                        %h6
-                          Click Photo to Select & Crop Picture
-                          %br
-                          <small>Drag on picture to adjust crop region</small>
-
-                      .col-sm-7.col-xs-12
-                        .panel.panel-default
-                          .panel-heading
-                            .panel-title
-                              Example US Club Player Pass
-                          .panel-body
-                            .col-xs-3.nopadding
-                              %canvas#canvas.img-responsive
-                              %input#png{name: 'player-image', type: 'hidden'}
-                            .col-xs-9.text-left
-                              .row
-                                .col-xs-1
-                                  <small>Last:</small>
-                                .col-xs-4
-                                  %b #{@player_portal[:last]}
-                              .row
-                                .col-xs-1
-                                  <small>First:</small>
-                                .col-xs-4
-                                  %b #{@player_portal[:first]}
-                              .row
-                                &nbsp;
-                              .row
-                                .col-xs-1
-                                  <small>DOB:</small>
-                                .col-xs-4
-                                  %b #{@player_portal[:birthday].strftime('%m/%d/%Y')}
-                                .col-xs-2
-                                  <small>Expires:</small>
-                                .col-xs-4
-                                  %b 01/01/2017
-
+              = render partial: 'proof_and_picture'
             - unless @player_portal.status?(:paid)
               #volunteer.tab-pane
-                .panel.panel-default
-                  .panel-body
-                    .row
-                      .col-sm-10.col-sm-offset-1
-                        .media
-                          .media-left
-                            %img.media-object{src: "#{image_path('friends.jpg')}"}
-                          .media-body
-                            %h4.media-heading Volunteer Preference
-                            This year Central Marin has instituted a policy that requires a family member of each player to volunteer during the soccer season. This allows the club to put your fees to work in the best possible way; coaching and fields. We will be announcing volunteer opportunities throughout the season.
-                    .row
-                      .col-sm-10.col-sm-offset-1
-                        .form-group
-                          %h5
-                            Volunteer Preference:
-                          %select.form-control{name: "volunteer"}
-                            - PlayerPortal::VOLUNTEER_OPTIONS.each_with_index do |(value, i18n), index|
-                              %option{value: value, selected: ('' if index == 0)}
-                                = t(i18n)
-                .panel.panel-default
-                  .panel-body
-                    .row
-                      .col-sm-10.col-sm-offset-1
-                        .media
-                          .media-body
-                            %h4.media-heading On Equal Footing Scholarship
-                            TODO: Talk about On Equal footing
-                            Include the documents for viewing in modal popup
-                          .media-right
-                            %img.media-object{src: "#{image_path('scholarship.jpg')}"}
-                    .row
-                      .col-sm-10.col-sm-offset-1
-                        %button.btn.btn-primary.btn{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: "#{url_to_asset('on equal footing 2016 - en.pdf')}", title: 'On Equal Footing'}}
-                          More Information
-
+                = render partial: 'volunteer_oef'
               #payment.tab-pane
-                .row
-                  %h4.info-text Charges Summary
-                  .col-sm-5.col-sm-offset-1
-                    %p
-                      TODO: Description here on how we use your club fees. We're a volunteer run organization. Use the money for Fields, Referees, DOC, field / referee coordinator
-                  .col-sm-5
-                    - @fees.each do |type, fees_info|
-                      %table.table.table-striped{id: (fees_info[:id]), class: ('hidden' if type == :volunteer), data: {description: '2016 Season Club Registration Fees', amount: fees_info[:total]}}
-                        - total_row = fees_info[:fees].last
-                        - fees_info[:fees].each do |fee|
-                          %tr
-                            %td
-                              .text-nowrap{class: ('text-danger' if total_row[0] == fee[0])}
-                                = fee[0]
-                            %td
-                              .text-right{class: ('text-danger' if total_row[0] == fee[0])}
-                                = fee[1]
+                = render partial: 'payment'
 
           .wizard-footer
             .pull-right
