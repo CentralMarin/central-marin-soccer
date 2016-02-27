@@ -37,20 +37,8 @@ class PlayerPortalsController < InheritedResources::Base
     redirect_to root_path
   end
 
-  PROGRESS_STEPS = 5.0
   def index
-
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
-
-    # Calculate progress percentage.
-    completed = 0
-    completed += 1 if @player_portal.usclub_complete
-    completed += 1 if @player_portal.have_birth_certificate
-    completed += 1 if @player_portal.picture.present?
-    completed += 1 if @player_portal.volunteer_choice.present?
-    completed += 1 if @player_portal.amount_paid.present?
-    @progress = (completed / PROGRESS_STEPS * 100).round
-
   end
 
   def club_form
@@ -82,8 +70,8 @@ class PlayerPortalsController < InheritedResources::Base
     # Hookup to the Google Drive
     session = TryoutsController.authorize
 
-    player_portal.usclub_complete = params[:USClub_complete]
-
+    # US Club Form Status
+    player_portal.toggle_status(:form, params[:USClub_complete] == '1')
 
     # Create the folder structure
     folder = PlayerPortalsController.usclub_assets_path(session, player_portal)
@@ -98,6 +86,7 @@ class PlayerPortalsController < InheritedResources::Base
 
       # Get the URL for the picture
       player_portal.picture = file.id
+      player_portal.status << :pass_picture
     end
 
     if params['birth-certificate'].present?
@@ -105,7 +94,7 @@ class PlayerPortalsController < InheritedResources::Base
       filename = PlayerPortalsController.generate_file_name(player_portal, "Birth Certificate.jpg")
       TryoutsController.upload_string(session, params['birth-certificate'].read, folder, filename)
 
-      player_portal.have_birth_certificate = true
+      player_portal.status << :proof_of_birth
     end
 
     # Save that we have images in case the credit card gets rejected
@@ -116,6 +105,7 @@ class PlayerPortalsController < InheritedResources::Base
 
     fees = calculate_fees(player_portal.club_registration_fee, volunteer_choice == :opt_out)[:total]
     player_portal.volunteer_choice = volunteer_choice
+    player_portal.status << :volunteer
 
     charge = Stripe::Charge.create(
         :amount      => fees,
@@ -123,6 +113,8 @@ class PlayerPortalsController < InheritedResources::Base
         :source => params[:stripeToken],
         :currency    => 'usd'
     )
+
+    player_portal.status << :paid
 
     player_portal.amount_paid = "$#{'%.2f' % (fees / 100.0)}"
     player_portal.save!
@@ -154,6 +146,7 @@ class PlayerPortalsController < InheritedResources::Base
   def self.usclub_assets_path(session, player_portal)
     TryoutsController.create_path(session, 'USClub', player_portal.gender, player_portal.birthday.year.to_s)
   end
+
   private
 
     def calculate_fees(registration_fee, volunteer_opt_out)

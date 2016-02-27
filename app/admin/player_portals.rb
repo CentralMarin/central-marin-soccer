@@ -30,13 +30,17 @@ ActiveAdmin.register PlayerPortal do
     column :first
     column :last
     column :birthday
-    column 'US Club Form', :usclub_complete
-    column 'Proof of Birth', :have_birth_certificate
-    column :volunteer do |portal|
-      portal.volunteer_choice.titleize if portal.volunteer_choice.present?
+    column 'Club Form', :usclub_complete do |portal|
+      portal.status?(:form) ? status_tag( 'yes', :ok) : status_tag('no')
+    end
+    column 'Birth Proof', :have_birth_certificate do |portal|
+      portal.status?(:proof_of_birth) ? status_tag( 'yes', :ok) : status_tag('no')
     end
     column :picture do |portal|
-      portal.picture.blank? ? status_tag('no') : status_tag( 'yes', :ok)
+      portal.status?(:pass_picture) ? status_tag( 'yes', :ok) : status_tag('no')
+    end
+    column :volunteer do |portal|
+      portal.volunteer_choice.titleize if portal.volunteer_choice.present?
     end
     column :amount_paid
     actions
@@ -100,7 +104,7 @@ ActiveAdmin.register PlayerPortal do
               pp.zip= row[8]
               pp.gender= row[9]
               pp.birthday= birthday
-              pp.have_birth_certificate = row[13] == 'Central Marin Soccer Club'
+              pp.status << :proof_of_birth if row[13] == 'Central Marin Soccer Club'
 
               pp.parent1_first= row[14]
               pp.parent1_last= row[15]

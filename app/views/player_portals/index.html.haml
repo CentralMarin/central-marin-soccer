@@ -30,31 +30,27 @@
       %h3.panel-title
         = t 'player_portal.index.panel.heading'
         .progress
-          .progress-bar{class: (@progress == 100 ? 'progress-bar-success' : 'progress-bar-info'), role: 'progressbar', aria: {valuenow: @progress, valuemin: '0', valuemax: '100'}, style: "width: #{@progress}%"}
+          .progress-bar{class: (@player_portal.status.progress == 100 ? 'progress-bar-success' : 'progress-bar-info'), role: 'progressbar', aria: {valuenow: @player_portal.status.progress, valuemin: '0', valuemax: '100'}, style: "width: #{@player_portal.status.progress}%"}
             %span.sr-only
-              = t 'player_portal.index.panel.sr_status', progress: @progress
+              = t 'player_portal.index.panel.sr_status', progress: @player_portal.status.progress
     .panel-body
       %ul
-        %li
-          %span.glyphicon{(@player_portal.usclub_complete ? icon_ok : icon_missing)}
-          US Club Form
-          %a{href: '#', data: {toggle: 'modal', target: '#documentModal', document: "#{player_portal_club_form_path}#Fit", title: 'US Club Form'}}
-            View
-        %li
-          %span.glyphicon{(@player_portal.picture.present? ? icon_ok : icon_missing)}
-          Player Pass Picture
-          - if @player_portal.picture.present?
-            %a{href: '#', data: {toggle: 'modal', target: '#imageModal', document: "https://docs.google.com/uc?id=#{@player_portal.picture}", title: 'Player Pass Picture'}}
-              View
-        %li
-          %span.glyphicon{(@player_portal.have_birth_certificate ? icon_ok : icon_missing)}
-          Proof of Birth on record
-        %li
-          %span.glyphicon{(@player_portal.amount_paid.blank? ? icon_missing : icon_ok)}
-          Club registration paid
-        %li
-          %span.glyphicon{(@player_portal.volunteer_choice.blank? ? icon_missing : icon_ok)}
-          Volunteer Selection - #{@player_portal.volunteer_choice}
+        - PlayerPortal.values_for_status.each do |status|
+          %li
+            %span.glyphicon{(@player_portal.status?(status) ? icon_ok : icon_missing)}
+            = t @player_portal.status.i18n(status)
+            - case status
+              - when :form
+                %a{href: '#', data: {toggle: 'modal', target: '#documentModal', document: "#{player_portal_club_form_path}#Fit", title: 'US Club Form'}}
+                  = t 'player_portal.view'
+              - when :picture
+                - if @player_portal.picture.present?
+                  %a{href: '#', data: {toggle: 'modal', target: '#imageModal', document: "https://docs.google.com/uc?id=#{@player_portal.picture}", title: 'Player Pass Picture'}}
+                    = t 'player_portal.view'
+              - when :proof_of_birth
+              - when :paid
+              - when :volunteer
+                = "- #{t(PlayerPortal::VOLUNTEER_OPTIONS[@player_portal.volunteer_choice.to_sym])}"
         %li
           %span.glyphicon{icon_missing}
           Concussion document acknowledged
@@ -62,11 +58,10 @@
           %span.glyphicon{icon_missing}
           Player & Parent code of conduct acknoledged
 
-
 - content_for :javascript do
   %script
     $(document).ready(player_portal.modalPdf.init());
     $(document).ready(player_portal.modalImg.init());
     if (!("FormData" in window)) {
-    // FormData is not supported; degrade gracefully/ alert the user as appropiate
+    // TODO: Pop a modal and force the user to use another browser
     }

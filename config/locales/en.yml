@@ -89,10 +89,17 @@ en:
   player_portal:
     bad_browser: 'You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.'
     close: 'Close'
+    view: 'View'
     menu:
       home: 'Home'
       registration: 'Registration'
       logout: 'Logout'
+    status:
+      form: 'US Club Form'
+      pass_picture: 'Player Pass Picture'
+      proof_of_birth: 'Proof of Birth'
+      paid: 'Club Registration Paid'
+      volunteer: 'Volunteer Selection'
     doc_modal:
       pdf: 'Please <a href="#">click here</a> to view the PDF.'
       download: 'Download'

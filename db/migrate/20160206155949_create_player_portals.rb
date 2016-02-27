@@ -46,9 +46,8 @@ class CreatePlayerPortals < ActiveRecord::Migration
       t.string :uid
       t.string :md5
       t.integer :season
-      t.boolean :usclub_complete
+      t.integer :status
       t.string :volunteer_choice
-      t.boolean :have_birth_certificate
       t.string :picture
       t.string :amount_paid
       t.timestamps null: false

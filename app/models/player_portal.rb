@@ -23,6 +23,22 @@ class PlayerPortal < ActiveRecord::Base
       no_preference: 'volunteer.options.no_preference'
   }
 
+  # Use Bit Mask to set player status. These must be kept in sync
+  bitmask :status, as: [:form, :picture, :proof_of_birth, :paid, :volunteer] do
+    def progress
+      return 0 if self.nil?
+
+      # TODO: Determine which items have been set
+      total = PlayerPortal.values_for_status.length.to_f  # Needs to be a float so we can get a percentage
+      count = self.length
+
+      (count / total * 100).round
+    end
+    def i18n(id)
+      PLAYER_STATUS_I18N[id]
+    end
+  end
+
   def init
     unless birthday.nil?
       self.birth_year= birthday.year
@@ -59,7 +75,23 @@ class PlayerPortal < ActiveRecord::Base
     hash
   end
 
+  def toggle_status(sym, enable)
+    if enable
+      status << sym
+    else
+      status.delete(sym)
+    end
+  end
+
   protected
+
+  PLAYER_STATUS_I18N = {
+      form: 'player_portal.status.form',
+      picture: 'player_portal.status.pass_picture',
+      proof_of_birth: 'player_portal.status.proof_of_birth',
+      paid: 'player_portal.status.paid',
+      volunteer: 'player_portal.status.volunteer'
+  }
 
   TEAM_COSTS = {
       U8: 1050,
