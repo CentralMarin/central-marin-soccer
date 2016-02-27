@@ -51,8 +51,8 @@ def copy_worksheet(workbook, google_sheet)
     # Sort google spreadsheet
     rows = google_sheet.rows
     sorted_rows = rows[1..-1].sort! do |row1, row2|
-      result = row1[COLUMNS[1][:index]].downcase <=> row2[COLUMNS[1][:index]].downcase
-      result = row1[COLUMNS[2][:index]].downcase <=> row2[COLUMNS[2][:index]].downcase if result == 0
+      result = row1[COLUMNS[1][:index]].downcase.strip <=> row2[COLUMNS[1][:index]].downcase.strip
+      result = row1[COLUMNS[2][:index]].downcase.strip <=> row2[COLUMNS[2][:index]].downcase.strip if result == 0
 
       puts "Possible duplicate #{row1[COLUMNS[1][:index]]} #{row1[COLUMNS[2][:index]]}" if result == 0
 
