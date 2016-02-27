@@ -201,6 +201,7 @@
 - content_for :javascript do
   %script{src: "https://checkout.stripe.com/checkout.js"}
   %script
-    $(document).ready(player_portal.registration_wizard.init("#{image_path('default-avatar.png')}", "#{Rails.application.secrets.stripe_key}", "#{player_portal_path}", #{@player_portal.status?(:paid)}));
+    var defaultImage = "#{@player_portal.status?(:picture) ? @player_portal.picture :  image_path('default-avatar.png')}";
+    $(document).ready(player_portal.registration_wizard.init(defaultImage, "#{Rails.application.secrets.stripe_key}", "#{player_portal_path}", #{@player_portal.status?(:paid)}));
     $(document).ready(player_portal.modalPdf.init());
 

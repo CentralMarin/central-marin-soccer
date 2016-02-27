@@ -81,6 +81,19 @@
             }
         };
 
+        // Destroy the current canvas and create a new one
+        var _swapCanvas = function() {
+            var $canvas = $('#canvas');
+            var $parent = $canvas.parent();
+            $canvas.remove();
+
+            $('<canvas>').attr({
+                id: 'canvas',
+                class: 'img-responsive',
+                height: 300
+            }).appendTo($parent);
+        };
+
         var _picture = function(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -98,12 +111,14 @@
                     image.src = e.target.result;
                     image.onload = function() {
 
+                        _swapCanvas();
+
                         var img_width = this.width;
                         var img_height = this.height;
 
                         $img.Jcrop({
-                            onChange: canvas,
-                            onSelect: canvas,
+                            onChange: _canvas,
+                            onSelect: _canvas,
                             trueSize: [img_width, img_height],
                             aspectRatio: 1
                         }, function() {
@@ -143,7 +158,7 @@
             return false;
         };
 
-        var canvas = function (coords){
+        var _canvas = function (coords){
             var imageObj = $("#jcrop")[0];
             var canvas = $("#canvas")[0];
             canvas.height = canvas.width;   // Keep our aspect ratio

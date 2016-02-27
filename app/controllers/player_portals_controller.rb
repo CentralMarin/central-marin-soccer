@@ -85,7 +85,7 @@ class PlayerPortalsController < InheritedResources::Base
       file.acl.push({:scope_type => "anyone", :withLink => true, :role => "reader"}, {:sendNotificationEmails => false})
 
       # Get the URL for the picture
-      player_portal.picture = file.id
+      player_portal.picture = "https://docs.google.com/uc?id=#{file.id}"
       player_portal.status << :picture
     end
 
