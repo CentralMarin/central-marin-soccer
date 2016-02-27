@@ -27,11 +27,27 @@ class TryoutRegistration < ActiveRecord::Base
   validates :relationship, :presence => true, allow_blank: false
   validates :waiver, :presence => true, allow_blank: false
 
+  before_validation :strip_string_fields
+
   def init
     self.year = EventGroup::TRYOUT_YEAR
   end
 
   def self.sheet_name
     "#{EventGroup::TRYOUT_YEAR} #{Rails.application.secrets.google_drive_tryouts_doc}"
+  end
+
+  private
+
+  def strip_string_fields
+    string_columns = self.class.columns.select {|column| column.type == :string }
+    string_columns.each do |string_column|
+      attribute = string_column.name
+      value = send(attribute)
+      if value.present?
+        send("#{attribute}=", value.strip)
+      end
+    end
+    true
   end
 end
