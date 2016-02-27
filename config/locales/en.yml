@@ -112,7 +112,8 @@ en:
         body: "<p>Congratulations and Welcome to Central Marin Soccer Club.</p>
                    <p>TODO: Tell the user what documents they'll need to register</p>
                    <p>TODO: Hide the registration once they've completed it</p>"
-        button: 'Complete Registration'
+        button_complete: 'Complete Registration'
+        button_update: 'Update Registration'
       panel:
         heading: 'Status'
         sr_status: '%{progress}% Complete'
