@@ -100,24 +100,27 @@ class PlayerPortalsController < InheritedResources::Base
     # Save that we have images in case the credit card gets rejected
     player_portal.save!
 
-    # Determine volunteer selection and calculate amount due
-    volunteer_choice = params[:volunteer].to_sym
+    unless player_portal.status?(:paid)
+      # Determine volunteer selection and calculate amount due
+      volunteer_choice = params[:volunteer].to_sym
+      player_portal.status << :volunteer
 
-    fees = calculate_fees(player_portal.club_registration_fee, volunteer_choice == :opt_out)[:total]
-    player_portal.volunteer_choice = volunteer_choice
-    player_portal.status << :volunteer
+      fees = calculate_fees(player_portal.club_registration_fee, volunteer_choice == :opt_out)[:total]
+      player_portal.volunteer_choice = volunteer_choice
 
-    charge = Stripe::Charge.create(
-        :amount      => fees,
-        :description => "#{EventGroup::TRYOUT_YEAR} Club Registration Fee",
-        :source => params[:stripeToken],
-        :currency    => 'usd'
-    )
+      charge = Stripe::Charge.create(
+          :amount      => fees,
+          :description => "#{EventGroup::TRYOUT_YEAR} Club Registration Fee",
+          :source => params[:stripeToken],
+          :currency    => 'usd'
+      )
 
-    player_portal.status << :paid
+      player_portal.status << :paid
 
-    player_portal.amount_paid = "$#{'%.2f' % (fees / 100.0)}"
-    player_portal.save!
+      player_portal.amount_paid = "$#{'%.2f' % (fees / 100.0)}"
+
+      player_portal.save!
+    end
 
     render json: {}, status: 200
 

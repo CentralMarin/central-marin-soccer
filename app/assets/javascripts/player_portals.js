@@ -65,6 +65,7 @@
         var CROP_WIDTH = 300;
         var CROP_HEIGHT = 300;
         var _jcrop_api;
+        var _success;
 
         var _file_selected = function(input) {
             if (input.files && input.files[0]) {
@@ -180,9 +181,40 @@
             complete.data('description', tableShow.data('description'));
         };
 
-        var _setupStripe = function(key, success) {
+        var _submitForm = function(url, formData) {
 
             var pleaseWait = $('#pleaseWaitDialog');
+
+            // Show the pleaseWaitDialog
+            pleaseWait.modal('show');
+
+            $.ajax({
+                url: url,
+                data: formData,
+                contentType: false,
+                processData: false,
+                type: 'POST'
+            })
+            .done(function(data) {
+                window.location.href = _success + '?success=1';
+            })
+            .fail(function(data) {
+                if (data.status == 402) {
+                    var error = JSON.parse(data.responseText).error;
+
+                    var alert = $('#alert');
+                    alert.find('.message').html(error);
+
+                    // Dismiss the modal and show the error message
+                    pleaseWait.modal('hide');
+                    alert.show();
+                } else {
+                    window.alert('An error occurred submitting your data. Please contact tryouts@centralmarinsoccer.com so the problem can be fixed. Thank you.')
+                }
+            });
+        };
+
+        var _setupStripe = function(key, success) {
 
             // Setup Stripe
             var handler = StripeCheckout.configure({
@@ -190,38 +222,12 @@
                 image: 'https://s3.amazonaws.com/stripe-uploads/acct_17gopvKdw52ZEJhQmerchant-icon-1456253746398-logo.png',
                 locale: 'auto',
                 token: function(token) {
-                    // Show the pleaseWaitDialog
-                    pleaseWait.modal('show');
-
                     var form = $('#finish').parents('form');
                     var formData = new FormData(form[0]);
                     formData.append('stripeToken', token.id);
                     formData.append('stripeEmail', token.email);
 
-                    $.ajax({
-                        url: form.attr('action'),
-                        data: formData,
-                        contentType: false,
-                        processData: false,
-                        type: 'POST'
-                    })
-                    .done(function(data) {
-                        window.location.href = success + '?success=1';
-                    })
-                    .fail(function(data) {
-                        if (data.status == 402) {
-                            var error = JSON.parse(data.responseText).error;
-
-                            var alert = $('#alert');
-                            alert.find('.message').html(error);
-
-                            // Dismiss the modal and show the error message
-                            pleaseWait.modal('hide');
-                            alert.show();
-                        } else {
-                            window.alert('An error occurred submitting your data. Please contact tryouts@centralmarinsoccer.com so the problem can be fixed. Thank you.')
-                        }
-                    });
+                    _submitForm(form.attr('action'), formData);
                 }
             });
 
@@ -243,7 +249,9 @@
             });
         };
 
-        var init = function(defaultImageSrc, key, success) {
+        var init = function(defaultImageSrc, key, success, hidePayment) {
+            _success = success;
+
             $("#wizard-picture").change(function(){
                 _picture(this);
             });
@@ -267,14 +275,25 @@
                 })
                 .attr('src', defaultImageSrc);
 
-            // volunteer event handler
-            var volunteer = $('select[name="volunteer"]');
-            volunteer.on('change', function() {
-                _toggleVolunteerFee(this.selectedIndex == 0);
-            });
-            _toggleVolunteerFee(volunteer[0].selectedIndex == 0);
+            if (!hidePayment) {
 
-            _setupStripe(key, success);
+                // volunteer event handler
+                var volunteer = $('select[name="volunteer"]');
+                volunteer.on('change', function () {
+                    _toggleVolunteerFee(this.selectedIndex == 0);
+                });
+                _toggleVolunteerFee(volunteer[0].selectedIndex == 0);
+
+                _setupStripe(key, success);
+            } else {
+                var finish = $('#finish')
+                finish.on('click', function (e) {
+                    var form = finish.parents('form');
+                    var formData = new FormData(form[0]);
+
+                    _submitForm(form.attr('action'), formData);
+                });
+            }
         };
 
         return {
