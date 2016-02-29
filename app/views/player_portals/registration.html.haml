@@ -5,7 +5,7 @@
   .message
 
 .alert.alert-danger.alert-dismissible.collapse#amex{role: "alert"}
-  %button.close{type: "button", data: {dismiss: "alert"}, aria: {label: "Close"}}
+  %button.close{type: "button", data: {hide: "alert"}, aria: {label: "Close"}}
     %span{aria: {hidden: "true"}}
       &times;
   .message
@@ -43,7 +43,7 @@
             - unless @player_portal.status?(:paid)
               %li
                 %a{data: {toggle: "tab"}, :href => "#volunteer"}
-                = t 'player_portal.registration.tab.volunteer'
+                  = t 'player_portal.registration.tab.volunteer'
               %li
                 %a{data: {toggle: "tab"}, :href => "#payment"}
                   = t 'player_portal.registration.tab.payment'
