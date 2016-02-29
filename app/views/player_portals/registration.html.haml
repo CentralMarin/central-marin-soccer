@@ -9,14 +9,14 @@
     %span{aria: {hidden: "true"}}
       &times;
   .message
-    Due to high credit card processing costs, we do not accept American Express. Please use Visa, MasterCard, Discover, or Diners.
+    = t 'player_portal.registration.no_amex'
 
 .modal.fade#pleaseWaitDialog{tabindex: '-1', role: 'dialog', data: {backdrop: 'static', keyboard: 'false'}}
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
         %h3
-          Processing...
+          = t 'player_portal.registration.processing'
       .modal-body
         .progress{style: 'height: 20px;'}
           .progress-bar.progress-bar-success.progress-bar-striped.active{role: 'progressbar', style: "width: 100%;"}
@@ -28,20 +28,25 @@
         = form_tag player_portal_registration_create_path, multipart: true do
           .wizard-header
             %h3
-              %b REGISTER
+              %b
+                = t 'player_portal.registration.heading'
               = "#{@player_portal[:first]} #{@player_portal[:last]}"
               %br
-                <small>This information will let us register #{@player_portal[:first]} for the #{EventGroup::TRYOUT_YEAR} season.</small>
+                = t('player_portal.registration.sub_heading', first: @player_portal[:first], year: EventGroup::TRYOUT_YEAR).html_safe
           %ul
             %li
-              %a{data: {toggle: "tab"}, :href => "#us-club-form"} US Club Form
+              %a{data: {toggle: "tab"}, :href => "#us-club-form"}
+                = t 'player_portal.registration.tab.form'
             %li
-              %a{data: {toggle: "tab"}, :href => "#player-picture"} Picture #{@player_portal.status?(:proof_of_birth) ? '' : ' & Birth Certificate'}
+              %a{data: {toggle: "tab"}, :href => "#player-picture"}
+                = t 'player_portal.registration.tab.picture', proof: (t('player_portal.registration.tab.birth_proof') if @player_portal.status?(:proof_of_birth))
             - unless @player_portal.status?(:paid)
               %li
-                %a{data: {toggle: "tab"}, :href => "#volunteer"} Volunteer & Scholarship
+                %a{data: {toggle: "tab"}, :href => "#volunteer"}
+                = t 'player_portal.registration.tab.volunteer'
               %li
-                %a{data: {toggle: "tab"}, :href => "#payment"} Payment
+                %a{data: {toggle: "tab"}, :href => "#payment"}
+                  = t 'player_portal.registration.tab.payment'
           .tab-content
             #us-club-form.tab-pane
               = render partial: 'club_form'
@@ -55,10 +60,10 @@
 
           .wizard-footer
             .pull-right
-              %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:name => "next", :type => "button", :value => "Next"}/
-              %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:id => 'finish', :name => "finish", :type => "button", :value => "Complete Registration"}/
+              %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:name => "next", :type => "button", :value => t('player_portal.registration.button.next')}/
+              %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:id => 'finish', :name => "finish", :type => "button", :value => t('player_portal.registration.button.complete')}/
             .pull-left
-              %input.btn.btn-previous.btn-fill.btn-default.btn-wd.btn-sm{:name => "previous", :type => "button", :value => "Previous"}/
+              %input.btn.btn-previous.btn-fill.btn-default.btn-wd.btn-sm{:name => "previous", :type => "button", :value => t('player_portal.registration.button.previous')}/
             .clearfix
           / wizard container
       / row

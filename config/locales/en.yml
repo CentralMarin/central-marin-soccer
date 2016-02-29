@@ -117,6 +117,21 @@ en:
       panel:
         heading: 'Status'
         sr_status: '%{progress}% Complete'
+    registration:
+        no_amex: 'Due to high credit card processing costs, we do not accept American Express. Please use Visa, MasterCard, Discover, or Diners.'
+        processing: 'Processing...'
+        heading: 'REGISTER'
+        sub_heading: '<small>This information will let us register %{first} for the %{year} season.</small>'
+        tab:
+          form: 'US Club Form'
+          picture: 'Picture%{proof}'
+          birth_proof: ' & Birth Proof'
+          volunteer: 'Volunteer & Scholarship'
+          payment: 'Payment'
+        button:
+          next: 'Next'
+          previous: 'Previous'
+          complete: 'Complete Registration'
   volunteer:
     options:
       opt_out: 'Opt out and pay an additional $100'
