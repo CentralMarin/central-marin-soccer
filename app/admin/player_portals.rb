@@ -37,7 +37,7 @@ ActiveAdmin.register PlayerPortal do
       portal.status?(:proof_of_birth) ? status_tag( 'yes', :ok) : status_tag('no')
     end
     column :picture do |portal|
-      portal.status?(:pass_picture) ? status_tag( 'yes', :ok) : status_tag('no')
+      portal.status?(:picture) ? status_tag( 'yes', :ok) : status_tag('no')
     end
     column :volunteer do |portal|
       portal.volunteer_choice.titleize if portal.volunteer_choice.present?
