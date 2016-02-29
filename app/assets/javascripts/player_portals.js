@@ -237,6 +237,12 @@
                 image: 'https://s3.amazonaws.com/stripe-uploads/acct_17gopvKdw52ZEJhQmerchant-icon-1456253746398-logo.png',
                 locale: 'auto',
                 token: function(token) {
+                    // Due to high fees, we do not accept American Express cards
+                    if (token.card.brand == 'American Express') {
+                        $('#amex').show();
+                        return;
+                    }
+
                     var form = $('#finish').parents('form');
                     var formData = new FormData(form[0]);
                     formData.append('stripeToken', token.id);

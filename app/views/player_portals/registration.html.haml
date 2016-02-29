@@ -4,6 +4,12 @@
       &times;
   .message
 
+.alert.alert-danger.alert-dismissible.collapse#amex{role: "alert"}
+  %button.close{type: "button", data: {dismiss: "alert"}, aria: {label: "Close"}}
+    %span{aria: {hidden: "true"}}
+      &times;
+  .message
+    Due to high credit card processing costs, we do not accept American Express. Please use Visa, MasterCard, Discover, or Diners.
 
 .modal.fade#pleaseWaitDialog{tabindex: '-1', role: 'dialog', data: {backdrop: 'static', keyboard: 'false'}}
   .modal-dialog.modal-lg
