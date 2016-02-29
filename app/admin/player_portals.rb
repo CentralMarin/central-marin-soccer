@@ -14,7 +14,17 @@ end
 
 ActiveAdmin.register PlayerPortal do
 
-  permit_params :uid, :first, :last, :birthday
+
+  permit_params :uid, :first, :last, :email, :address, :city, :state, :zip, :gender, :birthday,
+                :parent1_first, :parent1_last, :parent1_email, :parent1_cell, :parent1_home, :parent1_business,
+                :parent2_first, :parent2_last, :parent2_email, :parent2_cell, :parent2_home, :parent2_business,
+                :ec1_name, :ec1_phone1, :ec1_phone2,
+                :ec2_name, :ec2_phone1, :ec2_phone2,
+                :physician_name, :physician_phone1, :physician_phone2,
+                :insurance_name, :insurance_phone, :policy_holder, :policy_number,
+                :alergies, :conditions,
+                :volunteer_choice, :picture, :amount_paid, :status =>[]
+
   actions :index, :show, :update, :edit, :destroy
 
   member_action :impersonate do
@@ -37,7 +47,7 @@ ActiveAdmin.register PlayerPortal do
       portal.status?(:proof_of_birth) ? status_tag( 'yes', :ok) : status_tag('no')
     end
     column :picture do |portal|
-      portal.status?(:pass_picture) ? status_tag( 'yes', :ok) : status_tag('no')
+      portal.status?(:picture) ? status_tag( 'yes', :ok) : status_tag('no')
     end
     column :volunteer do |portal|
       portal.volunteer_choice.titleize if portal.volunteer_choice.present?
@@ -51,7 +61,45 @@ ActiveAdmin.register PlayerPortal do
       f.input :uid
       f.input :first
       f.input :last
+      f.input :email
+      f.input :address
+      f.input :city
+      f.input :state
+      f.input :zip
+      f.input :gender
       f.input :birthday, start_year: Time.now.year - EventGroup::MAX_AGE, end_year: Time.now.year - EventGroup::MIN_AGE
+      f.input :parent1_first
+      f.input :parent1_last
+      f.input :parent1_email
+      f.input :parent1_home
+      f.input :parent1_cell
+      f.input :parent1_business
+      f.input :parent2_first
+      f.input :parent2_last
+      f.input :parent2_email
+      f.input :parent2_home
+      f.input :parent2_cell
+      f.input :parent2_business
+      f.input :ec1_name, label: 'Emergency Contact Name'
+      f.input :ec1_phone1, label: 'Emergency Contact Phone'
+      f.input :ec1_phone2, label: 'Emergency Contact Phone'
+      f.input :ec2_name, label: 'Emergency Contact Name'
+      f.input :ec2_phone1, label: 'Emergency Contact Phone'
+      f.input :ec2_phone2, label: 'Emergency Contact Phone'
+      f.input :physician_name
+      f.input :physician_phone1
+      f.input :physician_phone2
+      f.input :insurance_name
+      f.input :insurance_phone
+      f.input :policy_holder
+      f.input :policy_number
+      f.input :alergies
+      f.input :conditions
+      # f.input :status, as: :check_boxes, collection: PlayerPortal.values_for_status
+      f.input :status, collection: PlayerPortal.values_for_status.each.map{|c| [c.to_s.gsub('_', ' '), c]}, multiple: true, as: :bitmask_attributes
+      f.input :volunteer_choice
+      f.input :picture
+      f.input :amount_paid
 
       f.actions
     end

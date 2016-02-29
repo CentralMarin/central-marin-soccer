@@ -112,7 +112,8 @@ class PlayerPortalsController < InheritedResources::Base
           :amount      => fees,
           :description => "#{EventGroup::TRYOUT_YEAR} Club Registration Fee",
           :source => params[:stripeToken],
-          :currency    => 'usd'
+          :currency    => 'usd',
+          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, volunteer: volunteer_choice, md5: player_portal.md5}
       )
 
       player_portal.status << :paid

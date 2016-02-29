@@ -31,10 +31,10 @@
               %p
                 <b>Hospital, baptismal, or religious certificates are not accepted by US Club Soccer.</b>
   .col-sm-12
-    .panel.panel-danger
+    .panel{class: (@player_portal.status?(:picture) ? 'panel-success' : 'panel-danger')}
       .panel-heading
         .panel-title
-          %span.glyphicon.glyphicon-alert{'aria-hidden':"true"}
+          %span.glyphicon{class: (@player_portal.status?(:picture) ? 'glyphicon-ok' : 'glyphicon-alert'), 'aria-hidden':"true"}
           Upload and Crop Photo
       .panel-body.picture-container
         .col-sm-5.col-xs-12
