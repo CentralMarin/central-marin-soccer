@@ -137,6 +137,13 @@ en:
           next: 'Next'
           previous: 'Previous'
           complete: 'Complete Registration'
+        club_form:
+          heading: 'Information in this US Club Form is:'
+          subheading: 'Email tryouts@centralmarinsoccer.com with any necessary updates.'
+          radio_correct: '&nbsp;correct'
+          radio_incorrect: '&nbsp;incorrect.'
+          fallback: 'Please <a href="%{path}">click here</a> to view the PDF.'
+
   volunteer:
     options:
       opt_out: 'Opt out and pay an additional $100'

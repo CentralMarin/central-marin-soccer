@@ -1,12 +1,15 @@
 .row
   .col-sm-12
     %h4.info-text
-      Information in this US Club Form is:
+      = t 'player_portal.registration.club_form.heading'
       %label
-        %input.radio-inline{style: 'margin: 0px;', type: 'radio', name: 'USClub_complete', value: 1, checked: (@player_portal.status?(:form))} &nbsp;correct
+        %input.radio-inline{style: 'margin: 0px;', type: 'radio', name: 'USClub_complete', value: 1, checked: (@player_portal.status?(:form))}
+          = t 'player_portal.registration.club_form.radio_correct'
       %label
-        %input.radio-inline{style: 'margin: 0px;', type: 'radio', name: 'USClub_complete', value: 0, checked: (!@player_portal.status?(:form))} &nbsp;incorrect.
+        %input.radio-inline{style: 'margin: 0px;', type: 'radio', name: 'USClub_complete', value: 0, checked: (!@player_portal.status?(:form))}
+          = t 'player_portal.registration.club_form.radio_incorrect'
       .small
-        Email tryouts@centralmarinsoccer.com with any necessary updates.
+        = t 'player_portal.registration.club_form.subheading'
     .embed-responsive.embed-responsive-4by3
-      %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"} Please <a href="#{player_portal_club_form_path}">click here</a> to view the PDF.
+      %object.embed-responsive-item{type: "application/pdf", data: "#{player_portal_club_form_path}#Fit"}
+        = t('player_portal.registration.club_form.fallback', path: player_portal_club_form_path).html_safe
