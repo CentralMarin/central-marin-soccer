@@ -171,7 +171,14 @@ en:
             last: '<small>Last:</small>'
             dob: '<small>DOB:</small>'
             expires: '<small>Expires:</small>'
-
+        volunteer:
+          heading: 'Volunteer Preference'
+          overview: 'This year Central Marin has instituted a policy that requires a family member of each player to volunteer during the soccer season. This allows the club to put your fees to work in the best possible way; coaching and fields. We will be announcing volunteer opportunities throughout the season.'
+          preference: 'Volunteer Preference:'
+        oef:
+          heading: 'On Equal Footing Scholarship'
+          overview: "On Equal Footing is Central Marin’s financial aid program to assist players who can’t afford the cost of a competitive soccer program. Over the years Central Marin’s OEF has given over $200,000 in financial aid. This past year we gave 75 scholarships to approximately 15% of our players, for a total of over $30,000."
+          info: 'More Information'
   volunteer:
     options:
       opt_out: 'Opt out and pay an additional $100'
