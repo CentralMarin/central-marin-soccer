@@ -160,6 +160,17 @@ en:
                        </ul>
                        <p>
                          <strong>Hospital, baptismal, or religious certificates are not accepted by US Club Soccer.</strong></p>"
+        picture:
+          upload: 'Upload and Crop Photo'
+          upload_directions: "Click Photo to Select & Crop Picture
+            <br/>
+            <small>Drag on picture to adjust crop region</small>"
+          player_pass:
+            title: 'Example US Club Player Pass'
+            first: '<small>First:</small>'
+            last: '<small>Last:</small>'
+            dob: '<small>DOB:</small>'
+            expires: '<small>Expires:</small>'
 
   volunteer:
     options:
