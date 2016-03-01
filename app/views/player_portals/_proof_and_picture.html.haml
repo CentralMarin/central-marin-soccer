@@ -47,19 +47,19 @@
                 %input#png{name: 'player-image', type: 'hidden'}
               .col-xs-9.text-left
                 .row
-                  .col-xs-1
+                  .col-xs-2
                     = t('player_portal.registration.picture.player_pass.last').html_safe
                   .col-xs-4
                     %b #{@player_portal[:last]}
                 .row
-                  .col-xs-1
+                  .col-xs-2
                     = t('player_portal.registration.picture.player_pass.first').html_safe
                   .col-xs-4
                     %b #{@player_portal[:first]}
                 .row
                   &nbsp;
                 .row
-                  .col-xs-1
+                  .col-xs-2
                     = t('player_portal.registration.picture.player_pass.dob').html_safe
                   .col-xs-4
                     %b #{@player_portal[:birthday].strftime('%m/%d/%Y')}

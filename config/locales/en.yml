@@ -122,6 +122,9 @@ en:
       panel:
         heading: 'Status'
         sr_status: '%{progress}% Complete'
+      modal:
+        player_pass: 'Player Pass Picture'
+        club_form: 'US Club Form'
     registration:
         no_amex: 'Due to high credit card processing costs, we do not accept American Express. Please use Visa, MasterCard, Discover, or Diners.'
         processing: 'Processing...'

@@ -31,5 +31,6 @@
               %img.media-object{src: "#{image_path('scholarship.jpg')}"}
       .row
         .col-sm-10.col-sm-offset-1
-          %button.btn.btn-primary.btn{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: "#{url_to_asset('on equal footing 2016 - en.pdf')}", title: 'On Equal Footing'}}
-            = t 'player_portal.registration.oef.info'
+          %p.text-right
+            %button.btn.btn-primary.btn{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: "#{url_to_asset('on equal footing 2016 - en.pdf')}", title: 'On Equal Footing'}}
+              = t 'player_portal.registration.oef.info'
