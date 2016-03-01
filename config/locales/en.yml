@@ -140,9 +140,26 @@ en:
         club_form:
           heading: 'Information in this US Club Form is:'
           subheading: 'Email tryouts@centralmarinsoccer.com with any necessary updates.'
-          radio_correct: '&nbsp;correct'
-          radio_incorrect: '&nbsp;incorrect.'
+          radio_correct: 'correct'
+          radio_incorrect: 'incorrect.'
           fallback: 'Please <a href="%{path}">click here</a> to view the PDF.'
+        proof_of_birth:
+          have_heading: 'We have your proof of birth, so all we need is a photo'
+          need_heading: "Since you're new to the club, we need proof of birth and a photo"
+          upload: 'Upload Date of Birth Proof'
+          upload_directions: 'Click Photo to Select'
+          acceptable: "Acceptable date of birth proof includes:
+                       <ul>
+                         <li> birth certificate</li>
+                         <li> birth registration issued by the appropriate government agency</li>
+                         <li> passport</li>
+                         <li> alien registration card issued by the U.S. Government</li>
+                         <li> certificate issued by the INS attesting to age</li>
+                         <li> certification of a United States citizen born abroad issued by the appropriate govenment agency</li>
+                         <li> or a current driver's license.</li>
+                       </ul>
+                       <p>
+                         <strong>Hospital, baptismal, or religious certificates are not accepted by US Club Soccer.</strong></p>"
 
   volunteer:
     options:

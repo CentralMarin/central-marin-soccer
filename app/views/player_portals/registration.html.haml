@@ -32,14 +32,14 @@
                 = t 'player_portal.registration.heading'
               = "#{@player_portal[:first]} #{@player_portal[:last]}"
               %br
-                = t('player_portal.registration.sub_heading', first: @player_portal[:first], year: EventGroup::TRYOUT_YEAR).html_safe
+                = t('player_portal.registration.sub_heading', first: h(@player_portal[:first]), year: EventGroup::TRYOUT_YEAR).html_safe
           %ul
             %li
               %a{data: {toggle: "tab"}, :href => "#us-club-form"}
                 = t 'player_portal.registration.tab.form'
             %li
               %a{data: {toggle: "tab"}, :href => "#player-picture"}
-                = t 'player_portal.registration.tab.picture', proof: (t('player_portal.registration.tab.birth_proof') if @player_portal.status?(:proof_of_birth))
+                = t 'player_portal.registration.tab.picture', proof: (t('player_portal.registration.tab.birth_proof') unless @player_portal.status?(:proof_of_birth))
             - unless @player_portal.status?(:paid)
               %li
                 %a{data: {toggle: "tab"}, :href => "#volunteer"}
