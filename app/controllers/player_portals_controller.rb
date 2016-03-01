@@ -6,8 +6,6 @@ class PlayerPortalsController < InheritedResources::Base
     redirect_to player_portal_login_path unless session[:is_authenticated] == params[:uid]
   end
 
-  PDFTK_PATH = '/usr/local/bin/pdftk'
-
   def session_new
 
   end
@@ -132,11 +130,17 @@ class PlayerPortalsController < InheritedResources::Base
 
   def self.generate_club_form(player)
 
+    # Make sure the tmp folder exists
+    path = "#{Rails.root}/tmp/pdfs"
+    unless Dir.exist?(path)
+      Dir.mkdir path
+    end
+
     # tmp file to store pdf
-    tmp_form = "#{Rails.root}/tmp/pdfs/#{SecureRandom.uuid}.pdf"
+    tmp_form = "#{path}/#{SecureRandom.uuid}.pdf"
 
     # Fill in PDF Form
-    pdftk = PdfForms.new(PDFTK_PATH)
+    pdftk = PdfForms.new(Rails.configuration.x.pdftk_path)
 
     pdftk.fill_form "#{Rails.root}/lib/pdf_templates/club_form.pdf", tmp_form, player.to_hash, flatten: true
 
