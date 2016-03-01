@@ -111,13 +111,13 @@ en:
       failure: 'Birthday does not match birthday on file. Please try again or contact tryouts@centralmarinsoccer.com to update this information'
     index:
       registration_success: 'Success'
-      heading: "Player Portal for %{first} %{last}"
+      heading: "Player Portal"
       jumbo:
         heading: "Register %{first} for the %{year} Season"
         body: "<p>Congratulations and Welcome to Central Marin Soccer Club.</p>
-                   <p>TODO: Tell the user what documents they'll need to register</p>
-                   <p>TODO: Hide the registration once they've completed it</p>"
-        button_complete: 'Complete Registration'
+               <p>To register, you'll need to verify your information on the US Club Form, upload a picture, and pay club registration fees.
+               If you are new to the club, you'll also need to provide proof of birth. Click the registration button below to begin the process.</p>"
+        button_complete: 'Register'
         button_update: 'Update Registration'
       panel:
         heading: 'Status'

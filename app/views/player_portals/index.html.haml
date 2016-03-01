@@ -13,17 +13,19 @@
     %p.text-center
       = t 'player_portal.index.registration_success'
 
-%h1
-  = t 'player_portal.index.heading', first: @player_portal.first, last: @player_portal.last
+.panel.panel-default
+  .panel-body
+    .page-header
+      %h1
+        = "#{@player_portal.first} #{@player_portal.last}"
+        %small
+          = t 'player_portal.index.heading'
+
 
 .jumbotron
   %h2
     = t 'player_portal.index.jumbo.heading', first: @player_portal.first, year: EventGroup::TRYOUT_YEAR
   = t('player_portal.index.jumbo.body').html_safe
-
-  %p.text-right
-    %a.btn.btn-primary.btn-lg{href: "#{player_portal_registration_path}", role: "button"}
-      = t(@player_portal.status.progress != 100 ? 'player_portal.index.jumbo.button_complete' : 'player_portal.index.jumbo.button_update')
 
   .panel.panel-default
     .panel-heading
@@ -58,6 +60,11 @@
         %li
           %span.glyphicon{icon_missing}
           Player & Parent code of conduct acknoledged
+
+  %p.text-right
+    %a.btn.btn-primary.btn-lg{href: "#{player_portal_registration_path}", role: "button"}
+      = t(@player_portal.status.progress != 100 ? 'player_portal.index.jumbo.button_complete' : 'player_portal.index.jumbo.button_update')
+
 
 - content_for :javascript do
   %script
