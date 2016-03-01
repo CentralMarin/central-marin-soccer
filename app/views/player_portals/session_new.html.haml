@@ -1,7 +1,21 @@
-%h1 Login
+- if @failed
+  .alert.alert-danger.alert-dismissible.collapse#failed{role: "alert"}
+    %button.close{type: "button", data: {hide: "alert"}, aria: {label: "Close"}}
+      %span{aria: {hidden: "true"}}
+        &times;
+    .message
+      = t 'player_portal.login.failure'
 
-= @message
-= form_tag player_portal_create_path
-Please enter your players birthday:
-= date_field(:PlayerPortal, :birthday)
-= submit_tag "Login"
+.jumbotron
+  %h1
+    = t 'player_portal.login.heading'
+
+  = form_tag player_portal_create_path
+  = t 'player_portal.login.label'
+  = date_field(:PlayerPortal, :birthday)
+  = submit_tag t('player_portal.login.submit')
+
+- content_for :javascript do
+  %script
+    - if @failed
+      $('#failed').show();

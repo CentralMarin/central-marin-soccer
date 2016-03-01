@@ -104,6 +104,11 @@ en:
       pdf: 'Please <a href="#">click here</a> to view the PDF.'
       download: 'Download'
     sr_toggle_nav: 'Toggle navigation'
+    login:
+      heading: 'Player Portal Login'
+      label: "Please enter player's birthday:"
+      submit: 'Login'
+      failure: 'Birthday does not match birthday on file. Please try again or contact tryouts@centralmarinsoccer.com to update this information'
     index:
       registration_success: 'Success'
       heading: "Player Portal for %{first} %{last}"

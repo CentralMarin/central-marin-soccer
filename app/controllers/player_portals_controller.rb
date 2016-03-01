@@ -21,7 +21,7 @@ class PlayerPortalsController < InheritedResources::Base
 
       redirect_to player_portal_path
     else
-      @message = "Birthday does not match birthday on file. Please try again or contact tryouts@centralmarinsoccer.com to update this information"
+      @failed = true
       render :session_new
     end
 
