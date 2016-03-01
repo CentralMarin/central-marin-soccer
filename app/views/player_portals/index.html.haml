@@ -43,7 +43,7 @@
             = t @player_portal.status.i18n(status)
             - case status
               - when :form
-                %a{href: '#', data: {toggle: 'modal', target: '#documentModal', document: "#{player_portal_club_form_path}#Fit", title: t('player_portal.index.modal.player_pass')}}
+                %a{href: '#', data: {toggle: 'modal', target: '#documentModal', document: "#{player_portal_club_form_path}#Fit", title: t('player_portal.index.modal.club_form')}}
                   = t 'player_portal.view'
               - when :picture
                 - if @player_portal.picture.present?
