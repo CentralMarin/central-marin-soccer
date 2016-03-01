@@ -131,7 +131,7 @@ class PlayerPortalsController < InheritedResources::Base
   def self.generate_club_form(player)
 
     # Make sure the tmp folder exists
-    path = "#{Rails.root}/tmp/pdfs"
+    path = "/tmp/pdfs"
     unless Dir.exist?(path)
       Dir.mkdir path
     end
