@@ -49,7 +49,7 @@ ActiveAdmin.register PlayerPortal do
     column :picture do |portal|
       portal.status?(:picture) ? status_tag( 'yes', :ok) : status_tag('no')
     end
-    column :volunteer do |portal|
+    column :volunteer, sortable: 'volunteer_choice' do |portal|
       portal.volunteer_choice.titleize if portal.volunteer_choice.present?
     end
     column :amount_paid
@@ -95,7 +95,6 @@ ActiveAdmin.register PlayerPortal do
       f.input :policy_number
       f.input :alergies
       f.input :conditions
-      # f.input :status, as: :check_boxes, collection: PlayerPortal.values_for_status
       f.input :status, collection: PlayerPortal.values_for_status.each.map{|c| [c.to_s.gsub('_', ' '), c]}, multiple: true, as: :bitmask_attributes
       f.input :volunteer_choice
       f.input :picture
