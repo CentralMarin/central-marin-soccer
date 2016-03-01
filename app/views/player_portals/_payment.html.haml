@@ -1,8 +1,9 @@
 .row
-  %h4.info-text Charges Summary
+  %h4.info-text
+    = t 'player_portal.registration.payment.charges'
   .col-sm-5.col-sm-offset-1
-    %p
-      TODO: Description here on how we use your club fees. We're a volunteer run organization. Use the money for Fields, Referees, DOC, field / referee coordinator
+    .well
+      = t('player_portal.registration.payment.overview').html_safe
   .col-sm-5
     - @fees.each do |type, fees_info|
       %table.table.table-striped{id: (fees_info[:id]), class: ('hidden' if type == :volunteer), data: {description: '2016 Season Club Registration Fees', amount: fees_info[:total]}}
@@ -15,4 +16,4 @@
             %td
               .text-right{class: ('text-danger' if total_row[0] == fee[0])}
                 = fee[1]
-    Online payment methods: <strong>Visa, MasterCard, Discover, and Diners.</strong>
+    = t('player_portal.registration.payment.types').html_safe

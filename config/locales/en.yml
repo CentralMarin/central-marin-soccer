@@ -179,6 +179,21 @@ en:
           heading: 'On Equal Footing Scholarship'
           overview: "On Equal Footing is Central Marin’s financial aid program to assist players who can’t afford the cost of a competitive soccer program. Over the years Central Marin’s OEF has given over $200,000 in financial aid. This past year we gave 75 scholarships to approximately 15% of our players, for a total of over $30,000."
           info: 'More Information'
+        payment:
+          overview: 'Club registration fees cover fall league
+                <ul>
+                  <li>registration</li>
+                  <li>field rentals</li>
+                  <li>referees</li>
+                  <li>field and referee coordinator</li>
+                  <li>Director of Coaching</li>
+                </ul>'
+          charges: 'Charges Summary'
+          club: 'Club Registration'
+          opt_out: 'Volunteer Opt Out'
+          cc_fee: 'Credit Card Processing'
+          total: 'Total'
+          types: 'Online payment types: <strong>Visa, MasterCard, Discover, and Diners.</strong>'
   volunteer:
     options:
       opt_out: 'Opt out and pay an additional $100'
