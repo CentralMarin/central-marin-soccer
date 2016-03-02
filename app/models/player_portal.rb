@@ -28,7 +28,6 @@ class PlayerPortal < ActiveRecord::Base
     def progress
       return 0 if self.nil?
 
-      # TODO: Determine which items have been set
       total = PlayerPortal.values_for_status.length.to_f  # Needs to be a float so we can get a percentage
       count = self.length
 
