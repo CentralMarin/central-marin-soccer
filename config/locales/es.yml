@@ -156,7 +156,7 @@ es:
           form: 'Forma de US Club'
           picture: 'Imagen%{proof}'
           birth_proof: ' y Nacimiento'
-          volunteer: 'Voluntariado y Becas'
+          volunteer: 'Voluntariado y Documentos'
           payment: 'Pago'
         button:
           next: 'Siguiente'

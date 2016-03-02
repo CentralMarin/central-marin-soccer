@@ -134,7 +134,7 @@ en:
           form: 'US Club Form'
           picture: 'Picture%{proof}'
           birth_proof: ' & Birth Proof'
-          volunteer: 'Volunteer & Scholarship'
+          volunteer: 'Volunteer & Documents'
           payment: 'Payment'
         button:
           next: 'Next'
