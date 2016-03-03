@@ -24,7 +24,7 @@ class PlayerPortal < ActiveRecord::Base
   }
 
   # Use Bit Mask to set player status. These must be kept in sync
-  bitmask :status, as: [:form, :picture, :proof_of_birth, :paid, :volunteer] do
+  bitmask :status, as: [:form, :picture, :proof_of_birth, :paid, :volunteer, :docs_reviewed] do
     def progress
       return 0 if self.nil?
 
@@ -34,7 +34,7 @@ class PlayerPortal < ActiveRecord::Base
       (count / total * 100).round
     end
     def i18n(id)
-      PLAYER_STATUS_I18N[id]
+      "player_portal.status.#{id.to_s}"
     end
   end
 
@@ -83,14 +83,6 @@ class PlayerPortal < ActiveRecord::Base
   end
 
   protected
-
-  PLAYER_STATUS_I18N = {
-      form: 'player_portal.status.form',
-      picture: 'player_portal.status.pass_picture',
-      proof_of_birth: 'player_portal.status.proof_of_birth',
-      paid: 'player_portal.status.paid',
-      volunteer: 'player_portal.status.volunteer'
-  }
 
   TEAM_COSTS = {
       U8: 1050,

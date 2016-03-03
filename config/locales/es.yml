@@ -149,6 +149,8 @@ es:
         club_form: 'Forma de US Club'
     registration:
         no_amex: 'Debido a los costes de procesamiento de alta tarjeta de crédito, no aceptamos American Express. Utilice Visa, MasterCard, Discover o Diners.'
+        read_docs: "Por favor, reconoce que ha leído los documentos"
+        fiveHundred: 'Error al enviar tus datos. Póngase en contacto con tryouts@centralmarinsoccer.com para que el problema puede ser fijo. Gracias.'
         processing: 'Procesamiento de...'
         heading: 'REGISTRO'
         sub_heading: '<small>Esta información nos registrará %{first} para la temporada %{year}.</small>'
@@ -200,6 +202,19 @@ es:
           heading: 'Voluntario de preferencia'
           overview: 'Este año el Central Marin ha instituido una política que requiere a un miembro de la familia de cada jugador como voluntario durante la temporada de fútbol. Esto permite que el club a sus honorarios para trabajar de la mejor manera posible; Coaching y campos. Anunciaremos con oportunidades de voluntariado a lo largo de la temporada.'
           preference: 'Voluntario de preferencia:'
+        documents:
+          concussion:
+            button: 'Protocolo de conmoción cerebral'
+            heading: 'Protocolo de conmoción cerebral'
+            pdf: 'es.concussion protocol.pdf'
+          post_concussion:
+            button: 'Lista de síntomas post concusión'
+            heading: 'Lista de síntomas post concusión'
+            pdf: 'es.post concussion symptom checklist.pdf'
+          code_of_conduct:
+            button: 'Código de conducta'
+            heading: 'Jugador y código de conducta de los padres'
+            pdf: 'es.code of conduct.pdf'
         oef:
           heading: 'En igualdad de condiciones beca'
           overview: "En igualdad de condiciones es programa de ayuda financiera Central de Marin para ayudar a los jugadores que no pueden pagar el costo de un programa de fútbol competitivo. Durante los años Central de Marin OEF ha dado más de $200.000 en ayuda financiera. El año pasado nos dio 75 becas a aproximadamente el 15% de nuestros jugadores, para un total de más de $30.000."

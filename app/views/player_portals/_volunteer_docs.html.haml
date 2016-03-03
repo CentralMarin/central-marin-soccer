@@ -18,3 +18,27 @@
             - PlayerPortal::VOLUNTEER_OPTIONS.each_with_index do |(value, i18n), index|
               %option{value: value, selected: ('' if index == 0)}
                 = t(i18n)
+.panel.panel-default
+  .panel-body
+    .row
+      .col-sm-10.col-sm-offset-1
+        .media
+          .media-body
+            %h4.media-heading
+              Please review the following important documents
+              %br
+            %button.btn.btn-primary{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.concussion.pdf')), title: t('player_portal.registration.documents.concussion.heading')}}
+              = t 'player_portal.registration.documents.concussion.button'
+            &nbsp;
+            %button.btn.btn-primary{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.post_concussion.pdf')), title: t('player_portal.registration.documents.post_concussion.heading')}}
+              = t 'player_portal.registration.documents.post_concussion.button'
+            &nbsp;
+            %button.btn.btn-primary{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.code_of_conduct.pdf')), title: t('player_portal.registration.documents.code_of_conduct.heading')}}
+              = t 'player_portal.registration.documents.code_of_conduct.button'
+          .media-right
+            %img.media-object{src: "#{image_path('reading.jpg')}"}
+      .col-sm-10.col-sm-offset-1
+        .well
+          %label
+            %input.radio-inline{style: 'margin: 0px;', type: 'checkbox', name: 'documents', value: 1, checked: (@player_portal.status?(:docs_reviewed))}
+              I have reviewed all of the documents

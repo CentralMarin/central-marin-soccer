@@ -127,6 +127,8 @@ en:
         club_form: 'US Club Form'
     registration:
         no_amex: 'Due to high credit card processing costs, we do not accept American Express. Please use Visa, MasterCard, Discover, or Diners.'
+        read_docs: "Please acknowledge that you've read the documents"
+        fiveHundred: 'An error occurred submitting your data. Please contact tryouts@centralmarinsoccer.com so the problem can be fixed. Thank you.'
         processing: 'Processing...'
         heading: 'REGISTER'
         sub_heading: '<small>This information will let us register %{first} for the %{year} season.</small>'
@@ -178,6 +180,19 @@ en:
           heading: 'Volunteer Preference'
           overview: 'This year Central Marin has instituted a policy that requires a family member of each player to volunteer during the soccer season. This allows the club to put your fees to work in the best possible way; coaching and fields. We will be announcing volunteer opportunities throughout the season.'
           preference: 'Volunteer Preference:'
+        documents:
+          concussion:
+            button: 'Concussion Protocol'
+            heading: 'Concussion Protocol'
+            pdf: 'concussion protocol.pdf'
+          post_concussion:
+            button: 'Post Concussion Symptom Checklist'
+            heading: 'Post Concussion Symptom Checklist'
+            pdf: 'post concussion symptom checklist.pdf'
+          code_of_conduct:
+            button: 'Code of Conduct'
+            heading: 'Player and Parent Code of Conduct'
+            pdf: 'code of conduct.pdf'
         oef:
           heading: 'On Equal Footing Scholarship'
           overview: "On Equal Footing is Central Marin’s financial aid program to assist players who can’t afford the cost of a competitive soccer program. Over the years Central Marin’s OEF has given over $200,000 in financial aid. This past year we gave 75 scholarships to approximately 15% of our players, for a total of over $30,000."

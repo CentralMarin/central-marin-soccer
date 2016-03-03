@@ -49,6 +49,9 @@ ActiveAdmin.register PlayerPortal do
     column :picture do |portal|
       portal.status?(:picture) ? status_tag( 'yes', :ok) : status_tag('no')
     end
+    column :docs_reviewed do |portal|
+      portal.status?(:docs_reviewed) ? status_tag( 'yes', :ok) : status_tag('no')
+    end
     column :volunteer, sortable: 'volunteer_choice' do |portal|
       portal.volunteer_choice.titleize if portal.volunteer_choice.present?
     end

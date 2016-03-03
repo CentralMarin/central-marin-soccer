@@ -118,6 +118,9 @@ class PlayerPortalsController < InheritedResources::Base
 
       player_portal.amount_paid = "$#{'%.2f' % (fees / 100.0)}"
 
+      # Documents read
+      player_portal.toggle_status(:docs_reviewed, params[:documents] == '1')
+
       player_portal.save!
     end
 

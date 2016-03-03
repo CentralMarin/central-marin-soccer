@@ -66,6 +66,7 @@
         var CROP_HEIGHT = 300;
         var _jcrop_api;
         var _success;
+        var _errorMsgs;
 
         var _file_selected = function(input) {
             if (input.files && input.files[0]) {
@@ -217,16 +218,21 @@
                 if (data.status == 402) {
                     var error = JSON.parse(data.responseText).error;
 
-                    var alert = $('#alert');
-                    alert.find('.message').html(error);
-
                     // Dismiss the modal and show the error message
                     pleaseWait.modal('hide');
-                    alert.show();
+
+                    _showAlert(error);
                 } else {
-                    window.alert('An error occurred submitting your data. Please contact tryouts@centralmarinsoccer.com so the problem can be fixed. Thank you.')
+                    window.alert(_errorMsgs.fiveHundred);
                 }
             });
+        };
+
+        var _showAlert = function(mesg) {
+            var alert = $('#alert');
+            alert.find('.message').html(mesg);
+            alert.show();
+            _scrollToTop();
         };
 
         var _setupStripe = function(key, success) {
@@ -239,7 +245,7 @@
                 token: function(token) {
                     // Due to high fees, we do not accept American Express cards
                     if (token.card.brand == 'American Express') {
-                        $('#amex').show();
+                        _showAlert(_errorMsgs.amex);
                         return;
                     }
 
@@ -254,6 +260,12 @@
 
             var button = $('#finish');
             button.on('click', function(e) {
+
+                // make sure the user has read the documents
+                if ($('#volunteer').find('input:checked').length == 0) {
+                    _showAlert(_errorMsgs.docs);
+                    return false;
+                }
 
                 // Open Checkout with further options
                 handler.open({
@@ -270,8 +282,9 @@
             });
         };
 
-        var init = function(defaultImageSrc, key, success, hidePayment) {
+        var init = function(defaultImageSrc, key, success, hidePayment, errorMsgs) {
             _success = success;
+            _errorMsgs = errorMsgs;
 
             $("#wizard-picture").change(function(){
                 _picture(this);
@@ -307,7 +320,7 @@
 
                 _setupStripe(key, success);
             } else {
-                var finish = $('#finish')
+                var finish = $('#finish');
                 finish.on('click', function (e) {
                     var form = finish.parents('form');
                     var formData = new FormData(form[0]);

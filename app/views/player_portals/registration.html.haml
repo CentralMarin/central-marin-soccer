@@ -1,15 +1,8 @@
 .alert.alert-danger.alert-dismissible.collapse#alert{role: "alert"}
-  %button.close{type: "button", data: {dismiss: "alert"}, aria: {label: "Close"}}
-    %span{aria: {hidden: "true"}}
-      &times;
-  .message
-
-.alert.alert-danger.alert-dismissible.collapse#amex{role: "alert"}
   %button.close{type: "button", data: {hide: "alert"}, aria: {label: "Close"}}
     %span{aria: {hidden: "true"}}
       &times;
   .message
-    = t 'player_portal.registration.no_amex'
 
 .modal.fade#pleaseWaitDialog{tabindex: '-1', role: 'dialog', data: {backdrop: 'static', keyboard: 'false'}}
   .modal-dialog.modal-lg
@@ -34,10 +27,10 @@
               %br
                 = t('player_portal.registration.sub_heading', first: h(@player_portal[:first]), year: EventGroup::TRYOUT_YEAR).html_safe
           %ul
-            -#%li
+            %li
               %a{data: {toggle: "tab"}, :href => "#us-club-form"}
                 = t 'player_portal.registration.tab.form'
-            -#%li
+            %li
               %a{data: {toggle: "tab"}, :href => "#player-picture"}
                 = t 'player_portal.registration.tab.picture', proof: (t('player_portal.registration.tab.birth_proof') unless @player_portal.status?(:proof_of_birth))
             - unless @player_portal.status?(:paid)
@@ -60,7 +53,7 @@
 
           .wizard-footer
             .pull-right
-              %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:name => "next", :type => "button", :value => t('player_portal.registration.button.next')}/
+              %input.btn.btn-next.btn-fill.btn-success.btn-wd.btn-sm{:id => 'next', :name => "next", :type => "button", :value => t('player_portal.registration.button.next')}/
               %input.btn.btn-finish.btn-fill.btn-success.btn-wd.btn-sm{:id => 'finish', :name => "finish", :type => "button", :value => t('player_portal.registration.button.complete')}/
             .pull-left
               %input.btn.btn-previous.btn-fill.btn-default.btn-wd.btn-sm{:name => "previous", :type => "button", :value => t('player_portal.registration.button.previous')}/
@@ -72,6 +65,7 @@
   %script{src: "https://checkout.stripe.com/checkout.js"}
   %script
     var defaultImage = "#{@player_portal.status?(:picture) ? @player_portal.picture :  image_path('default-avatar.png')}";
-    $(document).ready(player_portal.registration_wizard.init(defaultImage, "#{Rails.application.secrets.stripe_key}", "#{player_portal_path}", #{@player_portal.status?(:paid)}));
+    var errors = {'amex': "#{t('player_portal.registration.no_amex')}", 'docs': "#{t('player_portal.registration.read_docs')}", 'fiveHundred': "#{t('player_portal.registration.read_docs')}"}
+    $(document).ready(player_portal.registration_wizard.init(defaultImage, "#{Rails.application.secrets.stripe_key}", "#{player_portal_path}", #{@player_portal.status?(:paid)}, errors));
     $(document).ready(player_portal.modalPdf.init());
 
