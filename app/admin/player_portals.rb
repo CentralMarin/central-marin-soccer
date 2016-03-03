@@ -27,6 +27,18 @@ ActiveAdmin.register PlayerPortal do
 
   actions :index, :show, :update, :edit, :destroy
 
+  action_item :resend, :only => :show do
+    link_to "Resend Welcome Email", :action => "resend_welcome"
+  end
+
+  member_action :resend_welcome do
+    player_portal = PlayerPortal.find(params[:id])
+    PlayerPortalMailer.welcome(player_portal).deliver
+
+    flash[:notice] = "Email successfully sent"
+    redirect_to :action => :show
+  end
+
   member_action :impersonate do
     uid = params[:id]
     session[:is_authenticated] = uid
@@ -200,7 +212,8 @@ ActiveAdmin.register PlayerPortal do
 
               imported += 1
 
-              # TODO: Send email for every player we import
+              # Send email for every player we import
+              PlayerPortalMailer.welcome
 
             end
           else

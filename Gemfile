@@ -57,6 +57,7 @@ group :development do
   gem 'capistrano-rails',   '1.1.6'
   gem 'capistrano-faster-assets', '1.0.2'
   gem 'capistrano-passenger', '0.2.0'
+  gem 'letter_opener_web', '1.3.0'
 end
 
 group :staging, :production do

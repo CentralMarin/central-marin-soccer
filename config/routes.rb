@@ -52,4 +52,8 @@ Rails.application.routes.draw do
   post '/web_part/save', to: 'web_part#update', as: 'update_web_part'
   post '/web_part/translate', to: 'web_part#translate', as: 'translate_content'
   get '/web_part/:locale', to: 'web_part#show', as: 'web_part'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/devel/emails"
+  end
 end

@@ -85,7 +85,7 @@ class PlayerPortal < ActiveRecord::Base
   protected
 
   TEAM_COSTS = {
-      U8: 1050,
+      U8: 350,
       U9: 500,
       U10: 500,
       U11: 550,

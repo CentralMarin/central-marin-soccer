@@ -1,0 +1,75 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %style{type:"text/css"}= Rails.application.assets_manifest.assets["player_portal_email.scss"]
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Central Marin Soccer Club
+  %body{:leftmargin => "0", :marginheight => "0", :marginwidth => "0", :offset => "0", :topmargin => "0"}
+  %center
+    %table#bodyTable{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :height => "100%", :width => "100%"}
+      %tr
+        %td#bodyCell{:align => "center", :valign => "top"}
+          / BEGIN TEMPLATE //
+          %table#templateContainer{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+            %tr
+              %td{:align => "center", :valign => "top"}
+                / BEGIN PREHEADER //
+                %table#templatePreheader{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                  %tr
+                    %td.preheaderContent{:style => "padding-top:10px; padding-right:20px; padding-bottom:10px; padding-left:20px;", :valign => "top"}
+                      Welcome to Central Marin Soccer Club
+            / // END PREHEADER
+            %tr
+              %td{:align => "center", :valign => "top"}
+                / BEGIN HEADER //
+                %table#templateHeader{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                  %tr
+                    %td.headerContent{:valign => "top"}
+                      %img#headerImage{:src => image_path('email_header.jpg'), :style => "max-width:600px;"}/
+            / // END HEADER
+            %tr
+              %td{:align => "center", :valign => "top"}
+                / BEGIN COLUMNS //
+                %table#templateColumns{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                  %tr
+                    %td.templateColumnContainer{:align => "center", :style => "padding-top:20px;", :valign => "top"}
+                      %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
+                        %tr
+                          %td.leftColumnContent{:valign => "top"}
+                            %h3 Player Portal
+                            %a{:href => player_portal_url(@player_portal.uid), :target => "_blank"} Player Portal
+                            You'll can use this to register for the 2016 season.
+                            %br/
+                            %br/
+                            We also have an in person registration night on Thursday, March 16th.
+                    %td.templateColumnContainer{:align => "center", :style => "padding-top:20px;", :valign => "top"}
+                      %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
+                        %tr
+                          %td.rightColumnContent{:valign => "top"}
+                            %h3 Spanish Goes here
+                            %a{:href => "http://kb.mailchimp.com/article/how-do-i-work-with-repeatable-content-blocks", :target => "_blank"} Repeatable sections
+                            are noted with plus and minus signs so that you can add and subtract content blocks.
+                            %br/
+                            %br/
+                            You can also get a little fancy; repeat blocks and remove all text to make image galleries, or do the opposite and remove images for text-only blocks.
+            / // END COLUMNS
+            %tr
+              %td{:align => "center", :valign => "top"}
+                / BEGIN FOOTER //
+                %table#templateFooter{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                  %tr
+                    %td.footerContent{:style => "padding-top:0;", :valign => "top"}
+                      %em Copyright &copy; *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.
+                      %br/
+                      *|IFNOT:ARCHIVE_PAGE|* *|LIST:DESCRIPTION|*
+                      %br/
+                      %br/
+                      %strong Our mailing address is:
+                      %br/
+                      PO Box
+                  %tr
+                    %td.footerContent{ :style => "padding-top:0;", :valign => "top"}
+                      %a{:href => "*|UNSUB|*"}> unsubscribe from this list
+                      \&nbsp;&nbsp;&nbsp;
+                      %a{:href => "*|UPDATE_PROFILE|*"}> update subscription preferences
+                      \&nbsp;
