@@ -222,11 +222,13 @@ es:
         payment:
           overview: 'Club registro honorarios cubierta caída Liga
                      <ul>
-                     <li>registro</li>
+                     <li>registro de la Liga</li>
+                     <li>seguros y registro de jugador</li>
                      <li>casas de campo</li>
                      <li>árbitros</li>
                      <li>Coordinador de campo y árbitro</li>
                      <li>Director de Coaching</li>
+                     <li>Director técnico</li>
                      </ul>'
           charges: 'Resumen de cargos'
           club: 'Registro de Club'

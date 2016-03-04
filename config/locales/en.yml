@@ -200,11 +200,13 @@ en:
         payment:
           overview: 'Club registration fees cover fall league
                 <ul>
-                  <li>registration</li>
+                  <li>league registration</li>
+                  <li>player registration / insurance</li>
                   <li>field rentals</li>
                   <li>referees</li>
                   <li>field and referee coordinator</li>
                   <li>Director of Coaching</li>
+                  <li>Technical Director</li>
                 </ul>'
           charges: 'Charges Summary'
           club: 'Club Registration'
