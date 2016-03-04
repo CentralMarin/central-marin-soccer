@@ -62,7 +62,7 @@
       / row
 
 - content_for :javascript do
-  %script{src: "https://checkout.stripe.com/checkout.js"}
+  %script{src: "https://checkout.stripe.com/checkout.js", defer: true}
   %script
     var defaultImage = "#{@player_portal.status?(:picture) ? @player_portal.picture :  image_path('default-avatar.png')}";
     var errors = {'amex': "#{t('player_portal.registration.no_amex')}", 'docs': "#{t('player_portal.registration.read_docs')}", 'fiveHundred': "#{t('player_portal.registration.read_docs')}"}
