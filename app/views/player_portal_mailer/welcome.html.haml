@@ -37,7 +37,7 @@
                         %tr
                           %td.leftColumnContent{:valign => "top"}
                             %h3 Player Portal
-                            %a{:href => player_portal_url(@player_portal.uid), :target => "_blank"} Player Portal
+                            %a{:href => player_portal_url(@player_portal.uid, host: 'https://centralmarinsoccer.com'), :target => "_blank"} Player Portal
                             You'll can use this to register for the 2016 season.
                             %br/
                             %br/
@@ -47,7 +47,8 @@
                         %tr
                           %td.rightColumnContent{:valign => "top"}
                             %h3 Spanish Goes here
-                            %a{:href => "http://kb.mailchimp.com/article/how-do-i-work-with-repeatable-content-blocks", :target => "_blank"} Repeatable sections
+                            %a{:href => player_portal_url(@player_portal.uid, host: 'https://es.centralmarinsoccer.com'), :target => "_blank"} Spanish Portal
+
                             are noted with plus and minus signs so that you can add and subtract content blocks.
                             %br/
                             %br/
@@ -59,17 +60,13 @@
                 %table#templateFooter{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
                   %tr
                     %td.footerContent{:style => "padding-top:0;", :valign => "top"}
-                      %em Copyright &copy; *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.
+                      %em
+                        Copyright &copy;
+                        = "#{Time.now.year} Central Marin Soccer Club, "
+                        All rights reserved.
                       %br/
-                      *|IFNOT:ARCHIVE_PAGE|* *|LIST:DESCRIPTION|*
                       %br/
                       %br/
                       %strong Our mailing address is:
                       %br/
                       PO Box
-                  %tr
-                    %td.footerContent{ :style => "padding-top:0;", :valign => "top"}
-                      %a{:href => "*|UNSUB|*"}> unsubscribe from this list
-                      \&nbsp;&nbsp;&nbsp;
-                      %a{:href => "*|UPDATE_PROFILE|*"}> update subscription preferences
-                      \&nbsp;

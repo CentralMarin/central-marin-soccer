@@ -70,7 +70,11 @@
                 = t('player_portal.menu.registration')
           %ul.nav.navbar-nav.navbar-right
             %li
-              %a{href: "#{player_portal_logout_path}"}
+              %a{href: "#{request.protocol}#{AppConfig[:switch_hosts][I18n.locale]}:#{request.port}#{request.fullpath}"}
+                = t 'menu.language'
+
+            %li
+              %a{href: player_portal_logout_path}
                 = t('player_portal.menu.logout')
 
       / Big container
