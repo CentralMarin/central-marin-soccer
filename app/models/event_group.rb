@@ -34,7 +34,7 @@ class EventGroup < ActiveRecord::Base
 
   protected
 
-  # Group by gener and age ranges (so we can say Boys U9 - U12)
+  # Group by gender and age ranges (so we can say Boys U9 - U12)
   def set_age_ranges
     # Loop over all the boys
     self.boys_age_range = create_age_range('Boys')
@@ -70,12 +70,16 @@ class EventGroup < ActiveRecord::Base
       end
 
       if range.min == range.max
-        display_string = display_string + "#{range.min}"
+        display_string = display_string + "#{range.min} (#{age_year(range.min)})"
       else
-        display_string = display_string + "#{range.min} - #{range.max}"
+        display_string = display_string + "#{range.min} - #{range.max} (#{age_year(range.min)} - #{age_year(range.max)})"
       end
 
       display_string
     end
+  end
+
+  def age_year(age)
+    TRYOUT_YEAR - age + 1
   end
 end

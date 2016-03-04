@@ -190,7 +190,7 @@ class TryoutsController < CmsController
       age_level_sheet.save
     end
 
-    return age_level_sheet;
+    age_level_sheet
   end
 
   def self.authorize
