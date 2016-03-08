@@ -186,13 +186,17 @@ en:
             heading: 'Concussion Protocol'
             pdf: 'concussion protocol.pdf'
           post_concussion:
-            button: 'Post Concussion Symptom Checklist'
+            button: 'Concussion Symptom Checklist'
             heading: 'Post Concussion Symptom Checklist'
             pdf: 'post concussion symptom checklist.pdf'
-          code_of_conduct:
-            button: 'Code of Conduct'
-            heading: 'Player and Parent Code of Conduct'
-            pdf: 'code of conduct.pdf'
+          player_code_of_conduct:
+            button: 'Player Code of Conduct'
+            heading: 'Player Code of Conduct'
+            pdf: 'player code of conduct.pdf'
+          parent_code_of_conduct:
+            button: 'Parent Code of Conduct'
+            heading: 'Parent Code of Conduct'
+            pdf: 'parent code of conduct.pdf'
         oef:
           heading: 'On Equal Footing Scholarship'
           overview: "On Equal Footing is Central Marin’s financial aid program to assist players who can’t afford the cost of a competitive soccer program. Over the years Central Marin’s OEF has given over $200,000 in financial aid. This past year we gave 75 scholarships to approximately 15% of our players, for a total of over $30,000."

@@ -62,8 +62,11 @@
                 %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.post_concussion.pdf')), title: t('player_portal.registration.documents.post_concussion.heading')}}
                   = t 'player_portal.registration.documents.post_concussion.button'
                 &nbsp;
-                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.code_of_conduct.pdf')), title: t('player_portal.registration.documents.code_of_conduct.heading')}}
-                  = t 'player_portal.registration.documents.code_of_conduct.button'
+                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.parent_code_of_conduct.pdf')), title: t('player_portal.registration.documents.parent_code_of_conduct.heading')}}
+                  = t 'player_portal.registration.documents.parent_code_of_conduct.button'
+                &nbsp;
+                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.player_code_of_conduct.pdf')), title: t('player_portal.registration.documents.player_code_of_conduct.heading')}}
+                  = t 'player_portal.registration.documents.player_code_of_conduct.button'
 
   %p.text-right
     %a.btn.btn-primary.btn-lg{href: "#{player_portal_registration_path}", role: "button"}
