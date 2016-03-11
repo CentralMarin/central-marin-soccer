@@ -109,146 +109,146 @@ es:
   news:
     heading: 'Noticias de los Clubes Recientes'
   player_portal:
-    bad_browser: 'Usted está utilizando un navegador <strong>anticuado</strong>. Por favor, <a href="http://browsehappy.com/"> actualice su navegador</a> para mejorar tu experiencia.'
+    bad_browser: 'Usted está utilizando un navegador <strong>anticuado</strong>. Por favor, <a href="http://browsehappy.com/"> actualice su navegador</a> para mejorar su experiencia.'
     close: 'Cerrar'
     view: 'Ver'
     menu:
       home: 'Inicio'
-      registration: 'Registro'
-      logout: 'Cierre de sesión'
+      registration: 'Registración'
+      logout: 'Cerrar la sesión'
     status:
-      form: 'Forma de US Club'
-      pass_picture: 'Cuadro reproductor pase'
-      proof_of_birth: 'Prueba de nacimiento'
-      paid: 'Registro club pagado'
-      volunteer: 'Selección de voluntarios'
+      form: 'Formulario de US Club'
+      pass_picture: 'Foto'
+      proof_of_birth: 'Prueba de fecha de nacimiento'
+      paid: 'Registracion Pagada'
+      volunteer: 'Opción voluntaria'
     doc_modal:
       pdf: 'Por favor <a href="#"> haga clic aquí</a> para ver el PDF.'
       download: 'Descargar'
-    sr_toggle_nav: 'Navegación de la palanca'
+    sr_toggle_nav: 'Selección de Navegación'
     login:
-      heading: 'Reproductor Portal Login'
-      label: "Por favor ingrese cumpleaños del jugador:"
+      heading: 'Usuario del jugador'
+      label: 'Por favor ingrese fecha de nacimiento del jugador:'
       submit: 'Inicio de sesión'
-      failure: 'Cumpleaños no coincide con cumpleaños en archivo. Por favor, inténtelo de nuevo o póngase en contacto con tryouts@centralmarinsoccer.com para actualizar esta información'
+      failure: 'Fecha de nacimiento no coincide con la del archivo. Por favor, inténtelo de nuevo o póngase en contacto con tryouts@centralmarinsoccer.com para actualizar esta información'
     index:
       registration_success: 'Éxito'
       heading: "Portal de jugador"
       jumbo:
         heading: "Registro de %{first} para la temporada %{year}"
-        body: "<p>Felicidades y Bienvenido a Central de Marin Futbol Club.</p>
-               <p>Para registrarse, usted tendrá que verificar su información de nosotros Club formulario, subir una foto y pagar cuotas de inscripción de club.
-               Si eres nuevo en el club, usted también tendrá que proporcionar la prueba de nacimiento. Haga clic en el botón Registro siguiente para iniciar el proceso.</p>"
-        button_complete: 'Registro'
-        button_update: 'Actualizar registro'
+        body: "<p>Felicidades y Bienvenido a Central Marin Club de Fútbol.</p>
+                              <p>Para registrarse, usted tendrá que verificar su información en el formulario del Club, subir una foto y pagar  la cuota de inscripción del club.
+                              Si eres nuevo al club, usted también tendrá que proporcionar prueba de nacimiento. Haga clic en el botón Registración para iniciar el proceso.</p>"
+        button_complete: 'Registración'
+        button_update: 'Actualizar registración'
       panel:
         heading: 'Estado'
-        sr_status: '%{progress}% Completo'
+        sr_status: '%{progress}% Completado'
       modal:
-        player_pass: 'Cuadro Reproductor Pase'
-        club_form: 'Forma de US Club'
+        player_pass: 'Foto de Pase del Jugador'
+        club_form: 'Formulario de US Club'
     registration:
-        no_amex: 'Debido a los costes de procesamiento de alta tarjeta de crédito, no aceptamos American Express. Utilice Visa, MasterCard, Discover o Diners.'
-        read_docs: "Por favor, reconoce que ha leído los documentos"
-        fiveHundred: 'Error al enviar tus datos. Póngase en contacto con tryouts@centralmarinsoccer.com para que el problema puede ser fijo. Gracias.'
-        processing: 'Procesamiento de...'
+        no_amex: 'Debido a los altos costos de procesamiento de tarjeta de crédito, no aceptamos American Express. Utilice Visa, MasterCard, Discover o Diners.'
+        read_docs: 'Por favor, confirmar que ha leído los documentos'
+        fiveHundred: 'Ha ocurrido un error al enviar tus datos. Póngase en contacto con tryouts@centralmarinsoccer.com para resolver el problema. Gracias.'
+        processing: 'Procesando...'
         heading: 'REGISTRO'
-        sub_heading: '<small>Esta información nos registrará %{first} para la temporada %{year}.</small>'
+        sub_heading: '<small>Esta información nos permitirá registrar a %{first} para la temporada %{year}.</small>'
         tab:
-          form: 'Forma de US Club'
-          picture: 'Imagen%{proof}'
-          birth_proof: ' y Nacimiento'
+          form: 'Formulario de US Club'
+          picture: 'Foto%{proof}'
+          birth_proof: ' y Fecha de Nacimiento'
           volunteer: 'Voluntariado y Documentos'
           payment: 'Pago'
         button:
           next: 'Siguiente'
           previous: 'Anterior'
-          complete: 'Completar el registro'
+          complete: 'Completar la Registración'
         club_form:
-          heading: 'Información en este formulario de Club de nosotros es:'
-          subheading: 'Correo electrónico tryouts@centralmarinsoccer.com con las actualizaciones necesarias.'
-          radio_correct: 'correcta'
-          radio_incorrect: 'incorrecta.'
+          heading: 'Información en este formulario de US Club es:'
+          subheading: 'Envíe correo electrónico a tryouts@centralmarinsoccer.com con las actualizaciones necesarias.'
+          radio_correct: 'correcto'
+          radio_incorrect: 'incorrecto.'
           fallback: 'Por favor <a href="%{path}"> haga clic aquí</a> para ver el PDF.'
         proof_of_birth:
           have_heading: 'Tenemos la prueba de nacimiento, así que todo lo que necesitamos es una foto.'
-          need_heading: "Ya que eres nuevo en el club, tenemos prueba de nacimiento y una foto"
-          upload: 'Cargar fecha de nacimiento prueba'
+          need_heading: 'Ya que eres nuevo en el club, necesitamas prueba de nacimiento y una foto'
+          upload: 'Subir prueba de fecha de nacimiento'
           upload_directions: 'Haga clic en la foto para seleccionar'
-          acceptable: "Fecha aceptable de prueba de nacimiento incluye:
-                       <ul>
-                       <li>certificado de nacimiento</li>
-                       <li>registro de nacimiento emitida por la agencia gubernamental apropiada</li>
-                       <li>pasaporte</li>
-                       <li>tarjeta de registro de extranjero expedido por el gobierno de Estados Unidos</li>
-                       <li>certificado emitido por el INS que edad</li>
-                       <li>certificación de un ciudadano de Estados Unidos nacidos en el extranjero emitida por la agencia gubernamental apropiada</li>
-                       <li>o licencia de conducir actual.</li>
-                       </ul>
-                       <p>
-                       <strong>Hospital, bautismal, o certificados de religiosos no son aceptados por US Club Soccer.</strong></p>"
+          acceptable: "Prueba aceptable para fecha de nacimiento incluye:
+                                              <ul>
+                                              <li>certificado de nacimiento</li>
+                                              <li>registro de nacimiento emitido por una agencia gubernamental apropiada</li>
+                                              <li>pasaporte</li>
+                                              <li>tarjeta de residencia de extranjero expedido por el gobierno de Estados Unidos</li>
+                                              <li>certificado emitido por el INS que certifica su edad</li>
+                                              <li>certificación de un ciudadano de Estados Unidos nacidos en el extranjero emitido por una agencia gubernamental apropiada</li>
+                                              <li>o licencia de conducir actual.</li>
+                                              </ul>
+                                              <p>
+                                              <strong>Certificados de Hospital, de bautismo, o religiosos no son aceptados por US Club Soccer.</strong></p>"
         picture:
-          upload: 'Carga y Cultivo Foto'
+          upload: 'Subir y Recortar Foto'
           upload_directions: "Haga clic en la foto para seleccionar y recortar imagen
                               <br/>
-                              <small>Arrastre el cuadro para ajustar la región de cultivo</small>"
+                              <small>Mueva la foto para ajustar la región de recorte</small>"
           player_pass:
-            title: 'Ejemplo U.S. Club reproductor pase'
+            title: 'Ejemplo de  Pase U.S. Club del Jugador'
             first: '<small>Nombre:</small>'
             last: '<small>Apellido:</small>'
             dob: '<small>Nac:</small>'
-            expires: '<small>Vence:</small>'
+            expires: '<small>Vencimiento:</small>'
         volunteer:
-          heading: 'Voluntario de preferencia'
-          overview: 'Este año el Central Marin ha instituido una política que requiere a un miembro de la familia de cada jugador como voluntario durante la temporada de fútbol. Esto permite que el club a sus honorarios para trabajar de la mejor manera posible; Coaching y campos. Anunciaremos con oportunidades de voluntariado a lo largo de la temporada.'
-          preference: 'Voluntario de preferencia:'
+          heading: 'Preferencia de Voluntariado'
+          overview: 'Este año Central Marin ha instituido una política que requiere a un miembro de la familia de cada jugador como voluntario durante la temporada de fútbol. Esto permite que el club utilice sus contribuciones para emplearlos de la mejor manera posible; Entrenamiento y campos. Anunciaremos las diferentes oportunidades de voluntariado a lo largo de la temporada'
+          preference: 'Preferencia de Voluntariado:'
         documents:
           concussion:
             button: 'Protocolo de conmoción cerebral'
             heading: 'Protocolo de conmoción cerebral'
             pdf: 'es.concussion protocol.pdf'
           post_concussion:
-            button: 'Lista de síntomas concusión'
-            heading: 'Lista de síntomas concusión'
+            button: 'Lista de síntomas conmoción cerebral'
+            heading: 'Lista de síntomas conmoción cerebral'
             pdf: 'es.post concussion symptom checklist.pdf'
           player_code_of_conduct:
-            button: 'Código de conducta de jugador'
-            heading: 'Código de conducta de jugador'
+            button: 'Código de conducta del jugador'
+            heading: 'Código de conducta del jugador'
             pdf: 'player code of conduct.pdf'
           parent_code_of_conduct:
             button: 'Código de conducta de los padres'
             heading: 'Código de conducta de los padres'
             pdf: 'parent code of conduct.pdf'
         oef:
-          heading: 'En igualdad de condiciones beca'
+          heading: 'Beca con igualdad de condiciones'
           overview: "En igualdad de condiciones es programa de ayuda financiera Central de Marin para ayudar a los jugadores que no pueden pagar el costo de un programa de fútbol competitivo. Durante los años Central de Marin OEF ha dado más de $200.000 en ayuda financiera. El año pasado nos dio 75 becas a aproximadamente el 15% de nuestros jugadores, para un total de más de $30.000."
           info: 'Más información'
         payment:
-          overview: 'Club registro honorarios cubierta caída Liga
-                     <ul>
-                     <li>registro de la Liga</li>
-                     <li>seguros y registro de jugador</li>
-                     <li>casas de campo</li>
-                     <li>árbitros</li>
-                     <li>Coordinador de campo y árbitro</li>
-                     <li>Director de Coaching</li>
-                     <li>Director técnico</li>
-                     </ul>'
-          charges: 'Resumen de cargos'
-          club: 'Registro de Club'
-          opt_out: 'Exclusión voluntaria'
+          overview: 'Costo de registración del Club para temporada de otono’
+                                          <ul>
+                                          <li>registro de la Liga</li>
+                                          <li>seguros y registro de jugador</li>
+                                          <li>alquileres de campo</li>
+                                          <li>árbitros</li>
+                                          <li>Coordinador de campo y árbitro</li>
+                                          <li>Director de Entrenamiento</li>
+                                          <li>Director técnico</li>
+                                          </ul>'
+          charges: 'Resumen de costos'
+          club: 'Registración de Club'
+          opt_out: 'Exclusión de voluntariado'
           cc_fee: 'Procesamiento de tarjetas de crédito'
           total: 'Total'
-          types: 'Formas de pago en línea: <strong>Visa, MasterCard, Discover y Diners.</strong>'
+          types: 'Maneras de pagar en línea: <strong>Visa, MasterCard, Discover y Diners.</strong>'
   volunteer:
     options:
-      opt_out: 'Usted paga un extra de $ 100 en lugar de ser voluntario'
-      fields: 'Mantenimiento de campo - almacenamiento de equipos, forro de campo, y la instalación de redes'
-      manager: 'jefe de equipo'
+      opt_out: 'Pagar $100 extra en lugar de ser voluntario'
+      fields: 'Mantenimiento de campo - almacenamiento de equipos, rallado e instalación de redes'
+      manager: 'Jefe de equipo'
       travel: 'Coordinador de viajes'
-      board: 'Miembro de la Junta'
+      board: 'Miembro de Junta'
       tournament: 'Voluntario de torneo'
-      tryout: 'Ayuda con puesta a punto de registro'
+      tryout: 'Registración para prueba'
       no_preference: 'Sin preferencias - Me gustaría saber donde puedo ayudar'
   registration:
     index:
