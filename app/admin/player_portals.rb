@@ -213,8 +213,7 @@ ActiveAdmin.register PlayerPortal do
               imported += 1
 
               # Send email for every player we import
-              PlayerPortalMailer.welcome
-
+              PlayerPortalMailer.welcome(pp).deliver
             end
           else
             skipped += 1

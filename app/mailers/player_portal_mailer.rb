@@ -5,6 +5,6 @@ class PlayerPortalMailer < ApplicationMailer
 
     mail to: 'ryan@robinett.org',
          from: Rails.application.secrets.google_email_from,
-         subject: t('registration.confirmation.subject')
+         subject: "Register now for Central Marin! / Inscribense ahora para Central Marin!"
   end
 end

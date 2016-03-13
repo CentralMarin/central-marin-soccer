@@ -13,14 +13,6 @@
           %table#templateContainer{:border => "0", :cellpadding => "0", :cellspacing => "0"}
             %tr
               %td{:align => "center", :valign => "top"}
-                / BEGIN PREHEADER //
-                %table#templatePreheader{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
-                  %tr
-                    %td.preheaderContent{:style => "padding-top:10px; padding-right:20px; padding-bottom:10px; padding-left:20px;", :valign => "top"}
-                      Welcome to Central Marin Soccer Club
-            / // END PREHEADER
-            %tr
-              %td{:align => "center", :valign => "top"}
                 / BEGIN HEADER //
                 %table#templateHeader{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
                   %tr
@@ -36,37 +28,28 @@
                       %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
                         %tr
                           %td.leftColumnContent{:valign => "top"}
-                            %h3 Player Portal
-                            %a{:href => player_portal_url(@player_portal.uid, host: 'https://centralmarinsoccer.com'), :target => "_blank"} Player Portal
-                            You'll can use this to register for the 2016 season.
-                            %br/
-                            %br/
-                            We also have an in person registration night on Thursday, March 16th.
+                            %h3 Congratulations on your child being selected to a Central Marin soccer team!
+                            %p
+                              This year we have a new online registration system. All players may register online, but new players must have a representative at the club information presentation at 7:30pm on Thursday, March 17th at the San Rafael Community Center. Registration is available at the Community Center from 7-7:30 or 8-8:30 for anyone having trouble registering online. If your family is applying for financial aid, you must attend the information night.
+                            %p
+                              Board members will be available that night from 7-8:30 to answer any questions families have.
+                            %p
+                              Please
+                              %a{:href => player_portal_url(@player_portal.uid, host: 'https://centralmarinsoccer.com'), :target => "_blank"}
+                                click on the link
+                              and enter your child’s birthday to begin registering your child.
                     %td.templateColumnContainer{:align => "center", :style => "padding-top:20px;", :valign => "top"}
                       %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
                         %tr
                           %td.rightColumnContent{:valign => "top"}
-                            %h3 Spanish Goes here
-                            %a{:href => player_portal_url(@player_portal.uid, host: 'https://es.centralmarinsoccer.com'), :target => "_blank"} Spanish Portal
-
-                            are noted with plus and minus signs so that you can add and subtract content blocks.
-                            %br/
-                            %br/
-                            You can also get a little fancy; repeat blocks and remove all text to make image galleries, or do the opposite and remove images for text-only blocks.
+                            %h3 Felicidades a su hijo/hija en su seleccion a un equipo de futbol de Central Marin.
+                            %p
+                              Este año tenemos una systema nueva en linea para inscribir su hijo/hija. Todos los jugadores pueden inscribirse en linea, pero jugadores nuevos tienen que tener una representativa presente en la presentacion de la informacion del club en el Jueves, el 17 de Marzo a las 7:30pm en el Centro Comunitario de San Rafael. La inscripcion estara disponible en el Centro Communitario de las 7-7:30pm o 8-8:30 para cualquiera que tenga problemas con la inscripcion en linea. Si su familia esta aplicando para una beca, tiene que assistir a la noche registro.
+                            %p
+                              Miembros de la junta de Central Marin van a estar disponibles de 7-8:30 esa noche para contester todas las preguntas que tengan.
+                            %p
+                              Por favor
+                              %a{:href => player_portal_url(@player_portal.uid, host: 'https://es.centralmarinsoccer.com'), :target => "_blank"}
+                                haga clic en el enlace
+                              y registre el cumpleaños de su hijo/hija para iniciar la inscripcion de su hijo/hija.
             / // END COLUMNS
-            %tr
-              %td{:align => "center", :valign => "top"}
-                / BEGIN FOOTER //
-                %table#templateFooter{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
-                  %tr
-                    %td.footerContent{:style => "padding-top:0;", :valign => "top"}
-                      %em
-                        Copyright &copy;
-                        = "#{Time.now.year} Central Marin Soccer Club, "
-                        All rights reserved.
-                      %br/
-                      %br/
-                      %br/
-                      %strong Our mailing address is:
-                      %br/
-                      PO Box
