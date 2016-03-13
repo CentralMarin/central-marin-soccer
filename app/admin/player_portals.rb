@@ -165,7 +165,7 @@ ActiveAdmin.register PlayerPortal do
               pp.state= row[7]
               pp.zip= row[8]
               pp.gender= row[9]
-              pp.birthday= birthday
+              pp.birthday= Date.strptime(birthday, "%m/%d/%Y")
               pp.status << :proof_of_birth if row[13] == 'Central Marin Soccer Club'
 
               pp.parent1_first= row[14]
