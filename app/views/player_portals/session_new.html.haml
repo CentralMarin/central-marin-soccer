@@ -12,10 +12,14 @@
 
   = form_tag player_portal_create_path
   = t 'player_portal.login.label'
-  = date_field(:PlayerPortal, :birthday)
+  = date_field(:PlayerPortal, :birthday, required: true, playerholder: 'mm/dd/yyyy')
   = submit_tag t('player_portal.login.submit')
 
 - content_for :javascript do
+  %script{type: 'text/javascript', src:'/polyfiller.js'}
   %script
     - if @failed
       $('#failed').show();
+
+    //start polyfilling
+    $(document).ready($.webshims.polyfill('forms forms-ext'));

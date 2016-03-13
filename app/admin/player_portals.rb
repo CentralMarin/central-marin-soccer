@@ -14,6 +14,9 @@ end
 
 ActiveAdmin.register PlayerPortal do
 
+  filter :first_or_parent1_first_or_parent2_first_cont, as: :string, label: 'First Name'
+  filter :last_or_parent1_last_or_parent2_last_cont, as: :string, label: 'Last Name'
+  filter :email_or_parent1_email_or_parent2_email_cont, as: :string, label: 'Email'
 
   permit_params :uid, :first, :last, :email, :address, :city, :state, :zip, :gender, :birthday,
                 :parent1_first, :parent1_last, :parent1_email, :parent1_cell, :parent1_home, :parent1_business,
