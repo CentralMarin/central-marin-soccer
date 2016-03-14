@@ -178,7 +178,7 @@ en:
             expires: '<small>Expires:</small>'
         volunteer:
           heading: 'Volunteer Preference'
-          overview: 'This year Central Marin has instituted a policy that requires a family member of each player to volunteer during the soccer season. This allows the club to put your fees to work in the best possible way; coaching and fields. We will be announcing volunteer opportunities throughout the season.'
+          overview: 'This year Central Marin has instituted a policy that requires a family member of each player to volunteer during the soccer season. This allows the club to put your fees to work in the best possible way; coaching and fields. We will be announcing volunteer opportunities throughout the season. Please select your preference below.'
           preference: 'Volunteer Preference:'
         documents:
           concussion:
@@ -197,11 +197,15 @@ en:
             button: 'Parent Code of Conduct'
             heading: 'Parent Code of Conduct'
             pdf: 'parent code of conduct.pdf'
+          team_fees:
+            button: 'Projected Team Fees'
+            heading: 'Projected Team Fees'
+            pdf: 'team fees.pdf'
         oef:
           heading: 'On Equal Footing Scholarship'
           overview: "On Equal Footing is Central Marin’s financial aid program to assist players who can’t afford the cost of a competitive soccer program. Over the years Central Marin’s OEF has given over $200,000 in financial aid. This past year we gave 75 scholarships to approximately 15% of our players, for a total of over $30,000."
           info: 'More Information'
-          pdf: 'on equal footing 2016 - en.pdf'
+          pdf: 'on equal footing 2016.pdf'
         payment:
           overview: 'Club registration fees cover fall league
                 <ul>

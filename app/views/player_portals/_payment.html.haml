@@ -4,6 +4,9 @@
   .col-sm-5.col-sm-offset-1
     .well
       = t('player_portal.registration.payment.overview').html_safe
+      %p.text-right
+        %button.btn.btn-primary.btn{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: "#{url_to_asset(t('player_portal.registration.documents.team_fees.pdf'))}", title: "#{t('player_portal.registration.documents.team_fees.heading')}"}}
+          = t 'player_portal.registration.documents.team_fees.button'
   .col-sm-5
     - @fees.each do |type, fees_info|
       %table.table.table-striped{id: (fees_info[:id]), class: ('hidden' if type == :volunteer), data: {description: '2016 Season Club Registration Fees', amount: fees_info[:total]}}

@@ -210,20 +210,24 @@ es:
           post_concussion:
             button: 'Lista de síntomas conmoción cerebral'
             heading: 'Lista de síntomas conmoción cerebral'
-            pdf: 'post concussion symptom checklist.pdf'
+            pdf: 'es.post concussion symptom checklist.pdf'
           player_code_of_conduct:
             button: 'Código de conducta del jugador'
             heading: 'Código de conducta del jugador'
-            pdf: 'player code of conduct.pdf'
+            pdf: 'es.player code of conduct.pdf'
           parent_code_of_conduct:
             button: 'Código de conducta de los padres'
             heading: 'Código de conducta de los padres'
-            pdf: 'parent code of conduct.pdf'
+            pdf: 'es.parent code of conduct.pdf'
+          team_fees:
+            button: 'Honorarios del equipo proyectados'
+            heading: 'Honorarios del equipo proyectados'
+            pdf: 'es.team fees.pdf'
         oef:
           heading: 'Beca con igualdad de condiciones'
           overview: "En igualdad de condiciones es programa de ayuda financiera Central de Marin para ayudar a los jugadores que no pueden pagar el costo de un programa de fútbol competitivo. Durante los años Central de Marin OEF ha dado más de $200.000 en ayuda financiera. El año pasado nos dio 75 becas a aproximadamente el 15% de nuestros jugadores, para un total de más de $30.000."
           info: 'Más información'
-          pdf: 'on equal footing 2016 - es.pdf'
+          pdf: 'es.on equal footing 2016.pdf'
         payment:
           overview: 'Costo de registración del Club para temporada de otono’
                                           <ul>
