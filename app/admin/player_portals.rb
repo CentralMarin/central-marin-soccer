@@ -114,12 +114,22 @@ ActiveAdmin.register PlayerPortal do
       f.input :alergies
       f.input :conditions
       f.input :status, collection: PlayerPortal.values_for_status.each.map{|c| [c.to_s.gsub('_', ' '), c]}, multiple: true, as: :bitmask_attributes
-      f.input :volunteer_choice
+      f.input :volunteer_choice, as: :select, collection: PlayerPortal::VOLUNTEER_OPTIONS.map {|key,value| [key.to_s.humanize, key]}
       f.input :picture
       f.input :amount_paid
 
       f.actions
     end
+  end
+
+  action_item :registration_night_link, only: :index do
+    link_to "Registration Night", action: 'registration_night'
+  end
+
+  collection_action :registration_night, title: 'Generate Registration Night Spreadsheets', method: :get do
+
+    @players = PlayerPortal.all
+    render xlsx: 'registration_night', formats: 'xlsx'
   end
 
   action_item :import, :only => :index do

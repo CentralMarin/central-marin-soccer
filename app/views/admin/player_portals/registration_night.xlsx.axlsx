@@ -1,0 +1,81 @@
+font_size = 13
+row_height = 30
+
+default_style = { border: Axlsx::STYLE_THIN_BORDER }
+
+# TOTAL Page Width = 92
+columns = [
+    {align: :left, width: 15}, # First Name
+    {align: :left, width: 15}, # Last Name
+    {align: :right, width: 9}, # Birthdate
+    {align: :center, width: 7}, # birth proof
+    {align: :center, width: 7}, # picture
+    {align: :center, width: 7}, # docs
+    {align: :right, width: 12}, # volunteer
+    {align: :right, width: 10}, # amount
+    {align: :right, width: 10}, # check #
+]
+
+wb = xlsx_package.workbook
+
+sheets = {}
+
+# Set margins, header, and page
+margins = {left: 0.05, right: 0.05, bottom: 0.25, footer: 0.25, top: 0.5, header: 0.25}
+setup = {orientation: :landscape }
+header_footer = {different_first: false, odd_header: "&C&H &18 &B&A: Sheet &P of &N"}
+
+@players.each do |player|
+    # Create sheet if it doesn't exist already
+    tab_name = "#{player.gender} #{player.birthday.year}"
+    unless sheets.key?(tab_name)
+
+      # Add sheet and header
+      sheet = wb.add_worksheet(name: tab_name, page_margins: margins, header_footer: header_footer, page_setup: setup)
+      header_row = sheet.styles.add_style default_style.merge({b: true, alignment: {horizontal: :center}})
+      sheet.styles.fonts.first.sz = font_size
+
+      sheet.add_row ['First', 'Last', 'Birthday', 'Birth', 'Picture', 'Docs', 'Volunteer', 'Amount Paid', 'Check #'], :style => header_row, widths: [:ignore], height: row_height
+
+      sheets[tab_name] = sheet
+    end
+
+    sheet = sheets[tab_name]
+
+    sheet.add_row [player.first,
+        player.last,
+        player.birthday.strftime('%m/%d/%Y'),
+        (player.status?(:proof_of_birth) ? '✔' : ''),
+        (player.status?(:picture) ? '✔' : ''),
+        (player.status?(:docs_reviewed) ? '✔' : ''),
+        (player.status?(:volunteer) ? player.volunteer_choice.to_s.humanize : ''),
+        player.amount_paid,
+        (player.amount_paid.present? ? 'online' : '')
+        ], height: row_height
+
+end
+
+# Adjust formating
+sheets.each do |name, sheet|
+    cell_left_align = sheet.styles.add_style default_style.merge({alignment: {horizontal: :left}})
+    cell_right_align = sheet.styles.add_style default_style.merge({alignment: {horizontal: :right}})
+    cell_center_align = sheet.styles.add_style default_style.merge({alignment: {horizontal: :center}})
+
+    # Set column formatting
+    columns.each_with_index do |column, index|
+      case column[:align]
+        when :left
+          sheet.col_style index, cell_left_align
+        when :center
+          sheet.col_style index, cell_center_align
+        when :right
+          sheet.col_style index, cell_right_align
+      end
+    end
+
+    # Set column widths
+    widths = columns.collect {|meta_data| meta_data[:width]}
+    sheet.column_widths *widths
+
+end
+
