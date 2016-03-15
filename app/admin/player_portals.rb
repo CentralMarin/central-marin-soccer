@@ -128,7 +128,10 @@ ActiveAdmin.register PlayerPortal do
 
   collection_action :registration_night, title: 'Generate Registration Night Spreadsheets', method: :get do
 
-    @players = PlayerPortal.all
+    # TODO: Sorty by Birthyear, first, and last name
+    @players = PlayerPortal.all.order(:first, :last)
+    @years = @players.map {|pp| pp.birthday.year}.uniq{|year| year}.sort!
+
     render xlsx: 'registration_night', formats: 'xlsx'
   end
 
