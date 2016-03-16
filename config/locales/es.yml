@@ -253,7 +253,7 @@ es:
       travel: 'Coordinador de viajes'
       board: 'Miembro de Junta'
       tournament: 'Voluntario de torneo'
-      tryout: 'Registración para prueba'
+      tryout: 'Registración para prueba / Registración para club'
       no_preference: 'Sin preferencias - Me gustaría saber donde puedo ayudar'
   registration:
     index:

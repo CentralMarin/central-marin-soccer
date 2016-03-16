@@ -231,7 +231,7 @@ en:
       travel: 'Travel Coordinator'
       board: 'Voting / Non Voting Board Member'
       tournament: 'Tournament Volunteer'
-      tryout: 'Tryout Registration'
+      tryout: 'Tryout Checkin / Registration Night'
       no_preference: 'No Preference - Let me know where I can help'
   registration:
     index:
