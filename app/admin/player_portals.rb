@@ -35,6 +35,10 @@ end
 
 ActiveAdmin.register PlayerPortal do
 
+  before_filter only: :index do
+    @per_page = 10_000 if request.format == 'application/pdf'
+  end
+
   filter :first_or_parent1_first_or_parent2_first_cont, as: :string, label: 'First Name'
   filter :last_or_parent1_last_or_parent2_last_cont, as: :string, label: 'Last Name'
   filter :email_or_parent1_email_or_parent2_email_cont, as: :string, label: 'Email'

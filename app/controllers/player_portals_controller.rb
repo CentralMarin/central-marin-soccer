@@ -153,7 +153,8 @@ class PlayerPortalsController < InheritedResources::Base
   end
 
   def self.usclub_assets_path(session, player_portal)
-    TryoutsController.create_path(session, 'USClub', player_portal.gender, player_portal.birthday.year.to_s)
+    club_folder = "USClub#{' - Development' if Rails.env.development?}"
+    TryoutsController.create_path(session, club_folder, player_portal.gender, player_portal.birthday.year.to_s)
   end
 
   private
