@@ -6,6 +6,12 @@ class PlayerPortal < ActiveRecord::Base
                 :team_year,
                 :birth_year
 
+  scope :birth_year, lambda {|year| where("birthday >= ? and birthday <= ?", "#{year}-01-01", "#{year}-12-31")}
+
+  def self.ransackable_scopes(_opts)
+    [:birth_year]
+  end
+
   # Credit Card Processing Fees
   CC_PERCENTAGE = 0.022
   CC_FIXED = 0.3
