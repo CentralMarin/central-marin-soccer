@@ -36,6 +36,9 @@ end
 
 ActiveAdmin.register PlayerPortal do
 
+  filter :first_or_parent1_first_or_parent2_first_cont, as: :string, label: 'First Name'
+  filter :last_or_parent1_last_or_parent2_last_cont, as: :string, label: 'Last Name'
+  filter :email_or_parent1_email_or_parent2_email_cont, as: :string, label: 'Email'
 
   permit_params :uid, :first, :last, :email, :address, :city, :state, :zip, :gender, :birthday,
                 :parent1_first, :parent1_last, :parent1_email, :parent1_cell, :parent1_home, :parent1_business,
@@ -133,12 +136,25 @@ ActiveAdmin.register PlayerPortal do
       f.input :alergies
       f.input :conditions
       f.input :status, collection: PlayerPortal.values_for_status.each.map{|c| [c.to_s.gsub('_', ' '), c]}, multiple: true, as: :bitmask_attributes
-      f.input :volunteer_choice
+      f.input :volunteer_choice, as: :select, collection: PlayerPortal::VOLUNTEER_OPTIONS.map {|key,value| [key.to_s.humanize, key]}
       f.input :picture
       f.input :amount_paid
 
       f.actions
     end
+  end
+
+  action_item :registration_night_link, only: :index do
+    link_to "Registration Night", action: 'registration_night'
+  end
+
+  collection_action :registration_night, title: 'Generate Registration Night Spreadsheets', method: :get do
+
+    # TODO: Sorty by Birthyear, first, and last name
+    @players = PlayerPortal.all.order(:first, :last)
+    @years = @players.map {|pp| pp.birthday.year}.uniq{|year| year}.sort!
+
+    render xlsx: 'registration_night', formats: 'xlsx'
   end
 
   action_item :import, :only => :index do
@@ -187,7 +203,7 @@ ActiveAdmin.register PlayerPortal do
               pp.state= row[7]
               pp.zip= row[8]
               pp.gender= row[9]
-              pp.birthday= birthday
+              pp.birthday= Date.strptime(birthday, "%m/%d/%Y")
               pp.status << :proof_of_birth if row[13] == 'Central Marin Soccer Club'
 
               pp.parent1_first= row[14]
@@ -235,8 +251,7 @@ ActiveAdmin.register PlayerPortal do
               imported += 1
 
               # Send email for every player we import
-              PlayerPortalMailer.welcome
-
+              PlayerPortalMailer.welcome(pp).deliver
             end
           else
             skipped += 1

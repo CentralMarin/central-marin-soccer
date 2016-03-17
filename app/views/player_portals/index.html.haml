@@ -51,6 +51,8 @@
                     = t 'player_portal.view'
               - when :proof_of_birth
               - when :paid
+                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.team_fees.pdf')), title: t('player_portal.registration.documents.team_fees.heading')}}
+                  = t 'player_portal.registration.documents.team_fees.button'
               - when :volunteer
                 - if @player_portal.volunteer_choice.present?
                   = "- #{t(PlayerPortal::VOLUNTEER_OPTIONS[@player_portal.volunteer_choice.to_sym])}"

@@ -277,8 +277,9 @@ function makeid()
             var button = $('#finish');
             button.on('click', function(e) {
 
-                // make sure the user has read the documents
-                if ($('#volunteer').find('input:checked').length == 0) {
+                // Check if the user has read the docs
+                var volunteer = $('#volunteer');
+                if (volunteer.length != 0 && volunteer.find('input:checked').length == 0) {
                     _showAlert(_errorMsgs.docs);
                     return false;
                 }

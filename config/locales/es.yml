@@ -200,7 +200,7 @@ es:
             expires: '<small>Vencimiento:</small>'
         volunteer:
           heading: 'Preferencia de Voluntariado'
-          overview: 'Este año Central Marin ha instituido una política que requiere a un miembro de la familia de cada jugador como voluntario durante la temporada de fútbol. Esto permite que el club utilice sus contribuciones para emplearlos de la mejor manera posible; Entrenamiento y campos. Anunciaremos las diferentes oportunidades de voluntariado a lo largo de la temporada'
+          overview: 'Este año Central Marin ha instituido una política que requiere a un miembro de la familia de cada jugador como voluntario durante la temporada de fútbol. Esto permite que el club utilice sus contribuciones para emplearlos de la mejor manera posible; Entrenamiento y campos. Anunciaremos las diferentes oportunidades de voluntariado a lo largo de la temporada. Por favor, seleccione su preferencia a continuación.'
           preference: 'Preferencia de Voluntariado:'
         documents:
           concussion:
@@ -214,15 +214,20 @@ es:
           player_code_of_conduct:
             button: 'Código de conducta del jugador'
             heading: 'Código de conducta del jugador'
-            pdf: 'player code of conduct.pdf'
+            pdf: 'es.player code of conduct.pdf'
           parent_code_of_conduct:
             button: 'Código de conducta de los padres'
             heading: 'Código de conducta de los padres'
-            pdf: 'parent code of conduct.pdf'
+            pdf: 'es.parent code of conduct.pdf'
+          team_fees:
+            button: 'Cuotas del equipo proyectadas'
+            heading: 'Cuotas del equipo proyectadas'
+            pdf: 'es.team fees.pdf'
         oef:
           heading: 'Beca con igualdad de condiciones'
           overview: "En igualdad de condiciones es programa de ayuda financiera Central de Marin para ayudar a los jugadores que no pueden pagar el costo de un programa de fútbol competitivo. Durante los años Central de Marin OEF ha dado más de $200.000 en ayuda financiera. El año pasado nos dio 75 becas a aproximadamente el 15% de nuestros jugadores, para un total de más de $30.000."
           info: 'Más información'
+          pdf: 'es.on equal footing 2016.pdf'
         payment:
           overview: 'Costo de registración del Club para temporada de otono’
                                           <ul>
@@ -248,7 +253,7 @@ es:
       travel: 'Coordinador de viajes'
       board: 'Miembro de Junta'
       tournament: 'Voluntario de torneo'
-      tryout: 'Registración para prueba'
+      tryout: 'Registración para prueba / Registración para club'
       no_preference: 'Sin preferencias - Me gustaría saber donde puedo ayudar'
   registration:
     index:

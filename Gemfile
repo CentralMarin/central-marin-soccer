@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.2'
+gem 'rails', '4.2.6'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
@@ -21,7 +21,7 @@ gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activeadmin-ranked-model'
 gem 'html_press', '0.8.2'
 gem 'pdf-forms', '1.0.0'
-gem 'stripe', '1.36.0'
+gem 'stripe', '1.36.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.11'
 
@@ -47,6 +47,9 @@ gem 'turbolinks', '2.5.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '2.4.1'
 
+gem 'axlsx', '2.0.1'
+gem 'axlsx_rails', '0.4.0'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', :require => false
@@ -65,7 +68,7 @@ group :staging, :production do
 end
 
 group :development, :test do
-  gem 'i18n-tasks', '~> 0.9.4'
+  gem 'i18n-tasks', '~> 0.9.5'
   gem 'rspec-rails', '3.4.2'
   gem 'factory_girl_rails', '4.6.0'
   gem 'faker', '1.6.3'
