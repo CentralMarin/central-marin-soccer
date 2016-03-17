@@ -21,16 +21,16 @@ workbook = xlsx_package.workbook
 @ws.worksheets.each do |google_sheet|
 
   # Skip non player registration shees
-  return unless google_sheet.title.downcase.start_with?('boys') || google_sheet.title.downcase.start_with?('girls')
+  next unless google_sheet.title.downcase.start_with?('boys') || google_sheet.title.downcase.start_with?('girls')
 
-  puts "Processing #{google_sheet.title}"
+  Rails.logger.info "Processing #{google_sheet.title}"
 
   # Set margins, header, and page
   margins = {left: 0.05, right: 0.05, bottom: 0.25, footer: 0.25, top: 0.5, header: 0.25}
   setup = {orientation: :landscape }
   header_footer = {different_first: false, odd_header: "&C&H &18 &B&A: Sheet &P of &N"}
 
-  puts "  Adding and formattting worksheet for excel"
+  Rails.logger.info "  Adding and formattting worksheet for excel"
   workbook.add_worksheet(name: google_sheet.title, page_margins: margins, header_footer: header_footer, page_setup: setup) do |sheet|
 
     # Create new style for our header row
@@ -47,7 +47,7 @@ workbook = xlsx_package.workbook
       result = row1[columns[1][:index]].downcase.strip <=> row2[columns[1][:index]].downcase.strip
       result = row1[columns[2][:index]].downcase.strip <=> row2[columns[2][:index]].downcase.strip if result == 0
 
-      puts "Possible duplicate #{row1[columns[1][:index]]} #{row1[columns[2][:index]]}" if result == 0
+      Rails.logger.info "Possible duplicate #{row1[columns[1][:index]]} #{row1[columns[2][:index]]}" if result == 0
 
       result
     end
@@ -73,3 +73,4 @@ workbook = xlsx_package.workbook
 
   end
 end
+
