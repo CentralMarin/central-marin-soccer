@@ -6,6 +6,19 @@ ActiveAdmin.register Event do
   config.filters = false
   permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_groups_attributes => [:id, :_destroy, :event_details_attributes => [:id, :formatted_start, :duration, :location_id, :_destroy], :groups => []]
 
+  action_item :tryout, only: :index do
+    link_to "Tryout Sheets", action: 'tryout_sheets'
+  end
+
+  collection_action :tryout_sheets, title: 'Generate Tryout Spreadsheets', method: :get do
+
+    # Hookup to the Google Drive
+    session = TryoutsController.authorize
+    @ws = session.spreadsheet_by_title TryoutRegistration.sheet_name
+
+    render xlsx: 'tryouts', formats: 'xlsx'
+  end
+
   index :download_links => false do
     column :type
     column :heading
@@ -143,7 +156,7 @@ ActiveAdmin.register Event do
 
   collection_action :import_csv, :method => :post do
 
-    event_id = params[:event][:id].to_i
+    event_id = params[:events][:id].to_i
 
     EventGroup.transaction do
       EventGroup.delete_all(:event_id => event_id)
@@ -151,7 +164,7 @@ ActiveAdmin.register Event do
       event = Event.find_by_id(event_id)
 
       # read the csv
-      csv_data = params[:event][:file]
+      csv_data = params[:events][:file]
       csv_file = csv_data.read
       previous_groups = ''
       event_group = nil
@@ -174,7 +187,7 @@ ActiveAdmin.register Event do
     end
 
     flash[:notice] = 'CSV imported successfully!'
-    redirect_to admin_event_path(params[:event][:id])
+    redirect_to admin_event_path(params[:events][:id])
   end
 
   action_item :download_csv, :only => :show do
