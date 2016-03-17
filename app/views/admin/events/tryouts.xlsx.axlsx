@@ -17,6 +17,7 @@ default_style = {
 }
 
 workbook = xlsx_package.workbook
+dups = workbook.add_worksheet(name: 'Possible Duplicates')
 
 @ws.worksheets.each do |google_sheet|
 
@@ -47,7 +48,7 @@ workbook = xlsx_package.workbook
       result = row1[columns[1][:index]].downcase.strip <=> row2[columns[1][:index]].downcase.strip
       result = row1[columns[2][:index]].downcase.strip <=> row2[columns[2][:index]].downcase.strip if result == 0
 
-      Rails.logger.info "Possible duplicate #{row1[columns[1][:index]]} #{row1[columns[2][:index]]}" if result == 0
+      dups.add_row row1 if result == 0
 
       result
     end
