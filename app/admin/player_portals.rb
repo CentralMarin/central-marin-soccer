@@ -1,15 +1,37 @@
 require 'securerandom'
 
 # Generate the USClub Form PDF and save to Google Drive
-def generate_pdf(pp, session)
+def generate_pdf(pp, google_session)
   pdf_file_name = PlayerPortalsController.generate_file_name(pp, 'USClub.pdf')
-  folder = PlayerPortalsController.usclub_assets_path(session, pp)
+  folder = PlayerPortalsController.usclub_assets_path(google_session, pp)
   local_path = PlayerPortalsController.generate_club_form(pp)
 
-  TryoutsController.upload_local_file(session, local_path, folder, pdf_file_name, 'application/pdf')
+  TryoutsController.upload_local_file(google_session, local_path, folder, pdf_file_name, 'application/pdf')
 
   # Clean up the local file system
   File.delete(local_path)
+end
+
+def generate_pdfs(player_portals)
+  pdfs = []
+  Dir.mktmpdir do |dir|
+    player_portals.each do |player_portal|
+      filename = "#{player_portal.first} #{player_portal.last}.pdf"
+      PlayerPortalsController.generate_club_form(player_portal, filename, dir)
+      pdfs << "#{dir}/#{filename}"
+    end
+
+    # Concatenate the pdfs together
+    pdftk = PdfForms.new(Rails.configuration.x.pdftk_path)
+    output = "#{dir}/output.pdf"
+    pdftk.cat(pdfs, output)
+    # pdftk.cat("#{dir}/*.pdf", output)
+
+    File.open(output, 'r') do |f|
+      send_data f.read.force_encoding('BINARY'), filename: 'US Club Forms.pdf', disposition: 'downloaded', type: 'application/pdf'
+    end
+
+  end
 end
 
 ActiveAdmin.register PlayerPortal do
@@ -45,7 +67,7 @@ ActiveAdmin.register PlayerPortal do
     redirect_to player_portal_path(uid)
   end
 
-  index :download_links => false do
+  index :download_links => [:pdf, :csv] do
     column :portal do |portal|
       link_to 'Launch', impersonate_admin_player_portal_path(portal.uid), target: '_blank'
     end
@@ -226,5 +248,16 @@ ActiveAdmin.register PlayerPortal do
 
     flash[:notice] = "Imported #{imported} players. Skipped #{skipped} already imported players."
     redirect_to :action => :index
+  end
+
+  controller do
+    def index
+      index! do |format|
+        format.pdf {
+          # generate US Club forms for all selected players
+          generate_pdfs(@player_portals)
+        }
+      end
+    end
   end
 end

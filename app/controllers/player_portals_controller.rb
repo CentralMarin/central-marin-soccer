@@ -130,17 +130,15 @@ class PlayerPortalsController < InheritedResources::Base
     render json: { :error => e.message }, :status => 402
   end
 
-
-  def self.generate_club_form(player)
+  def self.generate_club_form(player, filename = "#{SecureRandom.uuid}.pdf", path = '/tmp/pdfs')
 
     # Make sure the tmp folder exists
-    path = "/tmp/pdfs"
     unless Dir.exist?(path)
       Dir.mkdir path
     end
 
     # tmp file to store pdf
-    tmp_form = "#{path}/#{SecureRandom.uuid}.pdf"
+    tmp_form = "#{path}/#{filename}"
 
     # Fill in PDF Form
     pdftk = PdfForms.new(Rails.configuration.x.pdftk_path)
