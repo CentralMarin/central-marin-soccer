@@ -36,7 +36,7 @@ end
 ActiveAdmin.register PlayerPortal do
 
   before_filter only: :index do
-    @per_page = 10_000 if request.format == 'application/pdf'
+    @per_page = 10_000 if request.format == 'application/pdf' || request.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   end
 
   filter :first_or_parent1_first_or_parent2_first_cont, as: :string, label: 'First Name'
@@ -75,7 +75,7 @@ ActiveAdmin.register PlayerPortal do
     redirect_to player_portal_path(uid)
   end
 
-  index :download_links => [:pdf, :csv] do
+  index :download_links => [:pdf, :xlsx] do
     column :portal do |portal|
       link_to 'Launch', impersonate_admin_player_portal_path(portal.uid), target: '_blank'
     end
@@ -276,6 +276,9 @@ ActiveAdmin.register PlayerPortal do
         format.pdf {
           # generate US Club forms for all selected players
           generate_pdfs(@player_portals)
+        }
+        format.xlsx {
+          render xlsx: 'index', formats: 'xlsx'
         }
       end
     end
