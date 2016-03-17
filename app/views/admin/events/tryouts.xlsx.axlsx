@@ -1,0 +1,75 @@
+blank_rows = 10
+font_size = 13
+
+# TOTAL Page Width = 92
+columns = [
+    {index: 0, width: 4}, # Bib #
+    {index: 2, width: 15}, # First Name
+    {index: 3, width: 15}, # Last Name
+    {index: 10, right_align: true, width: 9}, # Birthdate
+    {index: 16, right_align: true, width: 25}, # Parent 1 Email
+    {index: 17, phone: true, right_align: true, width: 12}, # Parent 1 Home Phone
+    {index: 19, phone: true, right_align: true, width: 12}, # Parent 1 Cell Phone
+]
+
+default_style = {
+    border: Axlsx::STYLE_THIN_BORDER
+}
+
+workbook = xlsx_package.workbook
+
+@ws.worksheets.each do |google_sheet|
+
+  # Skip non player registration shees
+  return unless google_sheet.title.downcase.start_with?('boys') || google_sheet.title.downcase.start_with?('girls')
+
+  puts "Processing #{google_sheet.title}"
+
+  # Set margins, header, and page
+  margins = {left: 0.05, right: 0.05, bottom: 0.25, footer: 0.25, top: 0.5, header: 0.25}
+  setup = {orientation: :landscape }
+  header_footer = {different_first: false, odd_header: "&C&H &18 &B&A: Sheet &P of &N"}
+
+  puts "  Adding and formattting worksheet for excel"
+  workbook.add_worksheet(name: google_sheet.title, page_margins: margins, header_footer: header_footer, page_setup: setup) do |sheet|
+
+    # Create new style for our header row
+    header_row = sheet.styles.add_style default_style.merge({b: true, alignment: {horizontal: :center}})
+    cell = sheet.styles.add_style default_style.merge({alignment: {horizontal: :left}})
+
+    cell_right_align = sheet.styles.add_style default_style.merge({alignment: {horizontal: :right}})
+    phone_right_align = sheet.styles.add_style default_style.merge({alignment: {horizontal: :right}, format_code: "(###) ###-####"})
+    sheet.styles.fonts.first.sz = font_size
+
+    # Sort google spreadsheet
+    rows = google_sheet.rows
+    sorted_rows = rows[1..-1].sort! do |row1, row2|
+      result = row1[columns[1][:index]].downcase.strip <=> row2[columns[1][:index]].downcase.strip
+      result = row1[columns[2][:index]].downcase.strip <=> row2[columns[2][:index]].downcase.strip if result == 0
+
+      puts "Possible duplicate #{row1[columns[1][:index]]} #{row1[columns[2][:index]]}" if result == 0
+
+      result
+    end
+    rows = sorted_rows.insert(0, rows[0])
+
+    # Copy google rows to local spreadsheet
+    rows.each_with_index do |row, index|
+      sheet.add_row columns.collect { |meta_data| row[meta_data[:index]]}, :style => index == 0 ? header_row : cell, widths: [:ignore]
+    end
+
+    # Add 10 blank rows for walk ups
+    (1..blank_rows).each { |index| sheet.add_row [" "] * columns.length, style: Axlsx::STYLE_THIN_BORDER }
+
+    # Right align specified columns
+    columns.each_with_index do |column, index|
+      sheet.col_style index, cell_right_align, row_offset: 1 if column[:right_align]
+      sheet.col_style index, phone_right_align, row_offset: 1 if column[:phone]
+    end
+
+    # Set column widths to fit the text
+    widths = columns.collect {|meta_data| meta_data[:width]}
+    sheet.column_widths *widths
+
+  end
+end
