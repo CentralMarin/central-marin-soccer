@@ -39,7 +39,7 @@ optimized_current_roster = optimize_current_roster(current_roster)
 
 # Load a CSV for the team
 log "Reading CSV"
-CSV.foreach(csv_file, headers: true) do |row|
+CSV.foreach(csv_file, encoding: 'windows-1251:utf-8', headers: true) do |row|
 
   if row['Selected'] == 'Y'
 
