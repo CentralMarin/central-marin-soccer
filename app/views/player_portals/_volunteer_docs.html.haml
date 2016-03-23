@@ -10,14 +10,17 @@
               = t 'player_portal.registration.volunteer.heading'
             = t 'player_portal.registration.volunteer.overview'
     .row
+      &nbsp;
+    .row
       .col-sm-10.col-sm-offset-1
-        .form-group
-          %h5
-            = t 'player_portal.registration.volunteer.preference'
-          %select.form-control{name: "volunteer"}
-            - PlayerPortal::VOLUNTEER_OPTIONS.each_with_index do |(value, i18n), index|
-              %option{value: value, selected: ('' if index == 0)}
-                = t(i18n)
+        .well
+          .form-group
+            %h5
+              = t 'player_portal.registration.volunteer.preference'
+            %select.form-control{name: "volunteer"}
+              - PlayerPortal::VOLUNTEER_OPTIONS.each_with_index do |(value, i18n), index|
+                %option{value: value, selected: ('' if index == 0)}
+                  = t(i18n)
 .panel.panel-default
   .panel-body
     .row
@@ -39,6 +42,9 @@
                 = t 'player_portal.registration.documents.player_code_of_conduct.button'
           .media-right
             %img.media-object{src: "#{image_path('reading.jpg')}"}
+    .row
+      &nbsp;
+    .row
       .col-sm-10.col-sm-offset-1
         .well
           %label
