@@ -7,12 +7,12 @@ gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
 gem 'ckeditor', '4.1.6'
 gem 'carrierwave', '0.10.0'
-gem 'mini_magick', '4.4.0'
+gem 'mini_magick', '4.5.0'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '1.0.6'
-gem 'premailer-rails', '1.9.0'
+gem 'premailer-rails', '1.9.1'
 gem 'nokogiri', '1.6.7.2'
 gem 'devise', '3.5.6'
 gem 'bing_translator', '4.5.0'
@@ -21,7 +21,7 @@ gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activeadmin-ranked-model'
 gem 'html_press', '0.8.2'
 gem 'pdf-forms', '1.0.0'
-gem 'stripe', '1.36.2'
+gem 'stripe', '1.38.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.11'
 
@@ -73,7 +73,7 @@ group :development, :test do
   gem 'factory_girl_rails', '4.6.0'
   gem 'faker', '1.6.3'
   gem 'capybara', '2.6.2'
-  gem 'selenium-webdriver', '2.52.0'
+  gem 'selenium-webdriver', '2.53.0'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
