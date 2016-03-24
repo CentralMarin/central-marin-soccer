@@ -97,19 +97,57 @@ function makeid()
     player_portal.registration_wizard = (function() {
         var CROP_WIDTH = 300;
         var CROP_HEIGHT = 300;
+        var OPT_OUT_INDEX = 1;
         var _jcrop_api;
         var _success;
         var _errorMsgs;
+
+        var _invalid_file = function(msg, elem) {
+            _showAlert(msg);
+
+            // reset the input
+            elem.value = '';
+        };
+
+        var _isImage = function(input) {
+
+            var fileElem = input.files[0];
+
+            // Verify the size of the file
+            var size = fileElem.size;
+            if (size > 6000000) {
+                _invalid_file('File too large.', fileElem);
+                return;
+            }
+
+            // Verify the file extension
+            var ext = input.value.match(/\.(.+)$/)[1];
+            switch(ext)
+            {
+                case 'jpg':
+                case 'bmp':
+                case 'png':
+                case 'tif':
+                    return true;
+                default:
+                    _invalid_file('Invalid file type. Please upload an image.', fileElem);
+                    return false;
+            }
+        };
 
         var _file_selected = function(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    var $input = $(input);
-                    $input.siblings('img').attr('src', e.target.result);
 
-                    // Update the heading
-                    _taskCompleted($input.closest('.panel'));
+                    if (_isImage(input)) {
+                        var $input = $(input);
+                        $input.siblings('img').attr('src', e.target.result);
+
+                        // Update the heading
+                        _taskCompleted($input.closest('.panel'));
+                    }
+
                 };
                 reader.readAsDataURL(input.files[0]);
             }
@@ -133,43 +171,45 @@ function makeid()
                 var reader = new FileReader();
                 reader.onload = function (e) {
 
-                    var $input = $(input);
-                    var $img = $input.siblings('img');
-                    $img.attr('src', e.target.result);
+                    if (_isImage(input)) {
+                        var $input = $(input);
+                        var $img = $input.siblings('img');
+                        $img.attr('src', e.target.result);
 
-                    // Clean up any old jcrops so the image updates
-                    if (_jcrop_api) _jcrop_api.destroy();
+                        // Clean up any old jcrops so the image updates
+                        if (_jcrop_api) _jcrop_api.destroy();
 
-                    // Load the image so we can determine it's dimensions
-                    var image = new Image();
-                    image.src = e.target.result;
-                    image.onload = function() {
+                        // Load the image so we can determine it's dimensions
+                        var image = new Image();
+                        image.src = e.target.result;
+                        image.onload = function () {
 
-                        _swapCanvas();
+                            _swapCanvas();
 
-                        var img_width = this.width;
-                        var img_height = this.height;
+                            var img_width = this.width;
+                            var img_height = this.height;
 
-                        $img.Jcrop({
-                            onChange: _canvas,
-                            onSelect: _canvas,
-                            trueSize: [img_width, img_height],
-                            aspectRatio: 1
-                        }, function() {
+                            $img.Jcrop({
+                                onChange: _canvas,
+                                onSelect: _canvas,
+                                trueSize: [img_width, img_height],
+                                aspectRatio: 1
+                            }, function () {
 
-                            x1 = img_width /4;
-                            x2 = x1*3;
-                            y1 = img_height/4;
-                            y2 = y1 * 3;
+                                x1 = img_width / 4;
+                                x2 = x1 * 3;
+                                y1 = img_height / 4;
+                                y2 = y1 * 3;
 
-                            // put the crop box in the center of the image
-                            this.setSelect([x1,y1,x2,y2]);
-                            _jcrop_api = this;
+                                // put the crop box in the center of the image
+                                this.setSelect([x1, y1, x2, y2]);
+                                _jcrop_api = this;
 
-                            // Turn heading to completed
-                            _taskCompleted($input.closest('.panel'));
-                        });
-                    };
+                                // Turn heading to completed
+                                _taskCompleted($input.closest('.panel'));
+                            });
+                        };
+                    }
 
                 };
                 reader.readAsDataURL(input.files[0]);
@@ -348,9 +388,9 @@ function makeid()
                 // volunteer event handler
                 var volunteer = $('select[name="volunteer"]');
                 volunteer.on('change', function () {
-                    _toggleVolunteerFee(this.selectedIndex == 0);
+                    _toggleVolunteerFee(this.selectedIndex == OPT_OUT_INDEX);
                 });
-                _toggleVolunteerFee(volunteer[0].selectedIndex == 0);
+                _toggleVolunteerFee(volunteer[0].selectedIndex == OPT_OUT_INDEX);
 
                 _setupStripe(key, success);
             } else {

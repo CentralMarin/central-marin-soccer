@@ -27,12 +27,12 @@ $(document).ready(function(){
         },
         onNext: function(tab, navigation, index){
             if(index == 1){
-                return validateFirstStep();
+                return true;
             } else if(index == 2){
-                return validateSecondStep();
+                return true;
             } else if(index == 3){
-                return validateThirdStep();
-            } //etc. 
+                return validateVolunteerAndDocs();
+            }
               
         },
         onTabClick : function(tab, navigation, index){
@@ -56,11 +56,6 @@ $(document).ready(function(){
         }
     });
 
-    // Prepare the preview for profile picture
-    $("#wizard-picture").change(function(){
-        readURL(this);
-    });
-    
     $('[data-toggle="wizard-radio"]').click(function(){
         wizard = $(this).closest('.wizard-card');
         wizard.find('[data-toggle="wizard-radio"]').removeClass('active');
@@ -85,114 +80,32 @@ $(document).ready(function(){
     
 });
 
-function validateFirstStep(){
-    
-    $(".wizard-card form").validate({
-		rules: {
-			firstname: "required",
-			lastname: "required",
-			email: {
-				required: true,
-				email: true
-			}
-			
-/*  other possible input validations
-			,username: {
-				required: true,
-				minlength: 2
-			},
-			password: {
-				required: true,
-				minlength: 5
-			},
-			confirm_password: {
-				required: true,
-				minlength: 5,
-				equalTo: "#password"
-			},
-		
-			topic: {
-				required: "#newsletter:checked",
-				minlength: 2
-			},
-			agree: "required"
-*/			
+function validateVolunteerAndDocs(){
 
+    var $form = $(".wizard-card form");
+    $form.validate({
+		rules: {
+
+            volunteer: "required",
+            documents: "required"
 		},
 		messages: {
-			firstname: "Please enter your First Name",
-			lastname: "Please enter your Last Name",
-			email: "Please enter a valid email address",
-
-/*   other posible validation messages
-			username: {
-				required: "Please enter a username",
-				minlength: "Your username must consist of at least 2 characters"
-			},
-			password: {
-				required: "Please provide a password",
-				minlength: "Your password must be at least 5 characters long"
-			},
-			confirm_password: {
-				required: "Please provide a password",
-				minlength: "Your password must be at least 5 characters long",
-				equalTo: "Please enter the same password as above"
-			},
-			email: "Please enter a valid email address",
-			agree: "Please accept our policy",
-			topic: "Please select at least 2 topics"
-*/
-				
-		}
-	}); 
-	
-	if(!$(".wizard-card form").valid()){
-    	//form is invalid
-    	return false;
-	}
-	
-	return true;
-}
-
-function validateSecondStep(){
-   
-    //code here for second step
-    $(".wizard-card form").validate({
-		rules: {
-			
+			volunteer: "Please specify your volunteer choice",
+			documents: "Please acknowledge that you've read the documents"
 		},
-		messages: {
-			
-		}
-	}); 
-	
-	if(!$(".wizard-card form").valid()){
-    	console.log('invalid');
-    	return false;
-	}
-	return true;
-    
-}
-
-function validateThirdStep(){
-    //code here for third step
-    
-    
-}
-
- //Function to show image before upload
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
+        errorPlacement: function(error, element) {
+            if (element.attr("name") == 'documents') {
+                error.insertAfter('#docs-reviewed');
+            } else {
+                error.insertAfter(element);
+            }
         }
-        reader.readAsDataURL(input.files[0]);
-    }
+	}); 
+	
+	return $form.valid();
 }
-    
+
+
 
 
 

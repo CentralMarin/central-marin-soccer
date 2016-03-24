@@ -16,7 +16,7 @@
           .col-sm-5.picture-container
             .picture
               %img.img-responsive.center-block{src: "#{image_path('sample_birth_certificate.jpg')}"}
-              %input#wizard-birth{name: 'birth-certificate', type: 'file'}
+              %input#wizard-birth{name: 'birth-certificate', type: 'file', accept: 'image/*'}
             %h6
               = t 'player_portal.registration.proof_of_birth.upload_directions'
           .col-sm-7
@@ -32,7 +32,7 @@
         .col-sm-5.col-xs-12
           .picture
             %img#jcrop.img-responsive.center-block{title: ''}
-            %input#wizard-picture{type: "file"}
+            %input#wizard-picture{type: "file", accept: 'image/*'}
           %h6
             = t('player_portal.registration.picture.upload_directions').html_safe
 
