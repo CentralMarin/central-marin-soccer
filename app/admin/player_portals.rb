@@ -45,6 +45,7 @@ ActiveAdmin.register PlayerPortal do
   filter :gender, as: :check_boxes, label: 'Gender', collection: ['Boys', 'Girls']
   filter :birth_year, as: :select, label: 'Year', collection: proc {PlayerPortal.all.map {|pp| pp.birthday.year}.uniq{|year| year}.sort}
   filter :paid_club_fees, as: :select, collection: ['Yes', 'No']
+  filter :oef, as: :select, collection: ['Yes', 'No']
 
   permit_params :uid, :first, :last, :email, :address, :city, :state, :zip, :gender, :birthday,
                 :parent1_first, :parent1_last, :parent1_email, :parent1_cell, :parent1_home, :parent1_business,
@@ -97,6 +98,9 @@ ActiveAdmin.register PlayerPortal do
     end
     column :volunteer, sortable: 'volunteer_choice' do |portal|
       portal.volunteer_choice.titleize if portal.volunteer_choice.present?
+    end
+    column :oef do |portal|
+      portal.status?(:oef) ? status_tag( 'yes', :ok) : status_tag('no')
     end
     column :amount_paid
     actions

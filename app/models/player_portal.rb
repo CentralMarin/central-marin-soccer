@@ -7,7 +7,6 @@ class PlayerPortal < ActiveRecord::Base
                 :birth_year
 
   scope :birth_year, lambda {|year| where("birthday >= ? and birthday <= ?", "#{year}-01-01", "#{year}-12-31")}
-  # scope :paid_club_fees, -> { where.not(amount_paid: nil).where.not(amount_paid: '') }
 
   def self.paid_club_fees(paid)
     if paid == 'Yes'
@@ -17,8 +16,16 @@ class PlayerPortal < ActiveRecord::Base
     end
   end
 
+  def self.oef(oef)
+    if oef == 'Yes'
+      with_status(:oef)
+    else
+      without_status(:oef)
+    end
+  end
+
   def self.ransackable_scopes(_opts)
-    [:birth_year, :paid_club_fees]
+    [:birth_year, :paid_club_fees, :oef]
   end
 
   # Credit Card Processing Fees
@@ -39,7 +46,7 @@ class PlayerPortal < ActiveRecord::Base
   }
 
   # Use Bit Mask to set player status. These must be kept in sync
-  bitmask :status, as: [:form, :picture, :proof_of_birth, :paid, :volunteer, :docs_reviewed] do
+  bitmask :status, as: [:form, :picture, :proof_of_birth, :paid, :volunteer, :docs_reviewed, :oef] do
     def progress
       return 0 if self.nil?
 
