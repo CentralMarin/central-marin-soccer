@@ -3,6 +3,7 @@ class PlayerPortal < ActiveRecord::Base
   after_initialize :init
 
   attr_accessor :club_registration_fee,
+                :amount_due,
                 :team_year,
                 :birth_year
 
@@ -65,6 +66,13 @@ class PlayerPortal < ActiveRecord::Base
       self.birth_year= birthday.year
       self.team_year= "U#{Time.now.year - birth_year + 1}"
       self.club_registration_fee=  TEAM_COSTS[team_year.to_sym]
+
+      # Calculate amount due
+      paid = 0
+      paid = self.amount_paid.gsub(/[^\d\.]/, '').to_f unless self.amount_paid.blank?
+      val = (self.club_registration_fee.to_f - paid).round(2)
+
+      self.amount_due = (val < 0 ? 0 : val)
     end
   end
 

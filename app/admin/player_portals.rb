@@ -102,7 +102,18 @@ ActiveAdmin.register PlayerPortal do
     column :oef do |portal|
       portal.status?(:oef) ? status_tag( 'yes', :ok) : status_tag('no')
     end
+    column :club_registration_fee
     column :amount_paid
+    column :due do |portal|
+      paid = 0
+      paid = portal.amount_paid.gsub(/[^\d\.]/, '').to_f unless portal.amount_paid.blank?
+      val = (portal.club_registration_fee.to_f - paid).round(2)
+      if (val < 0)
+        0
+      else
+        val
+      end
+    end
     actions
   end
 
