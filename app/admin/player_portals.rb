@@ -44,6 +44,7 @@ ActiveAdmin.register PlayerPortal do
   filter :email_or_parent1_email_or_parent2_email_cont, as: :string, label: 'Email'
   filter :gender, as: :check_boxes, label: 'Gender', collection: ['Boys', 'Girls']
   filter :birth_year, as: :select, label: 'Year', collection: proc {PlayerPortal.all.map {|pp| pp.birthday.year}.uniq{|year| year}.sort}
+  filter :paid_club_fees, as: :select, collection: ['Yes', 'No']
 
   permit_params :uid, :first, :last, :email, :address, :city, :state, :zip, :gender, :birthday,
                 :parent1_first, :parent1_last, :parent1_email, :parent1_cell, :parent1_home, :parent1_business,

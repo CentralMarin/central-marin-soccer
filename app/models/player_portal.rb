@@ -7,9 +7,18 @@ class PlayerPortal < ActiveRecord::Base
                 :birth_year
 
   scope :birth_year, lambda {|year| where("birthday >= ? and birthday <= ?", "#{year}-01-01", "#{year}-12-31")}
+  # scope :paid_club_fees, -> { where.not(amount_paid: nil).where.not(amount_paid: '') }
+
+  def self.paid_club_fees(paid)
+    if paid == 'Yes'
+      where.not(amount_paid: nil).where.not(amount_paid: '')
+    else
+      where("amount_paid is null or amount_paid=''")
+    end
+  end
 
   def self.ransackable_scopes(_opts)
-    [:birth_year]
+    [:birth_year, :paid_club_fees]
   end
 
   # Credit Card Processing Fees
