@@ -54,6 +54,9 @@ class PlayerPortal < ActiveRecord::Base
       total = PlayerPortal.values_for_status.length.to_f  # Needs to be a float so we can get a percentage
       count = self.length
 
+      # oef is optional
+      total = total - 1 if self.exclude?(:oef) && self.include?(:paid)
+
       (count / total * 100).round
     end
     def i18n(id)
