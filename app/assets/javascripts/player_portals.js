@@ -121,9 +121,10 @@ function makeid()
             }
 
             // Verify the file extension
-            var ext = input.value.match(/\.(.+)$/)[1];
+            var ext = input.value.match(/\.(.+)$/)[1].toLowerCase();
             switch(ext)
             {
+                case 'jpeg':
                 case 'jpg':
                 case 'bmp':
                 case 'png':
