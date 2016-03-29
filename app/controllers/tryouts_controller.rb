@@ -5,7 +5,7 @@ class TryoutsController < CmsController
   def index
     init_web_parts('Tryouts Overview')
 
-    @year = EventGroup::TRYOUT_YEAR
+    @year = Event::TRYOUT_YEAR
     @info, age_group  = Event.tryout_related_events
   end
 
@@ -76,11 +76,11 @@ class TryoutsController < CmsController
         'U19' => ['11x11', '2 x 45', '5', '3'],
     }
 
-    @season = EventGroup::TRYOUT_YEAR
+    @season = Event::TRYOUT_YEAR
     @chart_info = []
 
     # Calculate matrix information
-    (EventGroup::MIN_AGE..EventGroup::MAX_AGE - 1).each do |age|
+    (Event::MIN_AGE..Event::MAX_AGE - 1).each do |age|
       chart_row = []
       chart_row[0] = @season - age
       chart_row[1] = "U#{EventGroup.age_group(chart_row[0])}"

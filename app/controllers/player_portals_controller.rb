@@ -108,7 +108,7 @@ class PlayerPortalsController < InheritedResources::Base
 
       charge = Stripe::Charge.create(
           :amount      => fees,
-          :description => "#{EventGroup::TRYOUT_YEAR} Club Registration Fee",
+          :description => "#{Event::TRYOUT_YEAR} Club Registration Fee",
           :source => params[:stripeToken],
           :currency    => 'usd',
           :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, volunteer: volunteer_choice, md5: player_portal.md5}

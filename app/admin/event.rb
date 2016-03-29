@@ -2,9 +2,7 @@ ActiveAdmin.register Event do
 
   include ActiveAdminTranslate
 
-  actions :index, :show, :update, :edit
-  config.filters = false
-  permit_params :heading, :body, :tout, :status, :translations_attributes => [:heading, :body, :tout, :locale, :id], :event_groups_attributes => [:id, :_destroy, :event_details_attributes => [:id, :formatted_start, :duration, :location_id, :_destroy], :groups => []]
+  permit_params :category, :title, :description, :image_url, :cost, :translations_attributes => [:title, :description, :locale, :id], :event_details_attributes => [:id, :start, :length, :location_id, :_destroy, :boys_age_groups => [], :girls_age_groups => []]
 
   action_item :tryout, only: :index do
     link_to "Tryout Sheets", action: 'tryout_sheets'
@@ -19,20 +17,17 @@ ActiveAdmin.register Event do
     render xlsx: 'tryouts', formats: 'xlsx'
   end
 
-  index :download_links => false do
-    column :type
-    column :heading
-    column :status do |event|
-
-      case event.status
-        when "hide"
-          status_tag "Hide Event", :warn, class: 'important'
-        when "show"
-          status_tag "Show Event", :ok
-        when "show_and_tout"
-          status_tag "Show Event and Tout on Home Page", :ok
+  index do
+    column :category
+    column :title
+    column :cost do |event|
+      number_to_currency event.cost
+    end
+    column :details do |event|
+      event.event_details.each do |event_detail|
+        div event_detail.age_groups
       end
-
+      nil
     end
 
     actions
@@ -40,35 +35,20 @@ ActiveAdmin.register Event do
 
   show do |event|
     attributes_table do
-      row :type
-      row :heading do
-        show_tanslated(self, event, :heading)
-      end
-      row :body do
-        show_tanslated(self, event, :body)
-      end
-      row :tout do
-        show_tanslated(self, event, :tout)
-      end
-      row :status
-      row :created_at
-      row :updated_at
-
+      row :category
+      row :title
+      row :description
+      row :cost
     end
-    panel "Event Group Details" do
-      table_for event.event_groups do
-        column('Age Groups') { |event_group| "Boys: #{event_group.boys_age_range}<br>Girls: #{event_group.girls_age_range}".html_safe }
-        column('Details') do |event_group|
-          table_for event_group.event_details do
-            column 'Start', :formatted_start
-            column :duration
-            column :location
-          end
-        end
+    panel "Event Details" do
+      table_for event.event_details do
+        column :boys_age_groups
+        column :girls_age_groups
+        column :start
+        column :length
+        column :location
       end
     end
-
-
   end
 
   form :html => { :enctype => "multipart/form-data" } do |f|
@@ -80,52 +60,28 @@ ActiveAdmin.register Event do
     end
 
     f.inputs do
+      f.input :category, as: :select, collection: Event.categories.keys
+      f.input :cost
       f.translated_inputs "Translated fields", switch_locale: false do |t|
-        t.input :heading
-        t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
-        t.input :tout, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
+        t.input :title
+        t.input :description, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
       end
 
-      f.input :status, label: 'Status', collection: Event.statuses.keys, as: :select
+      # f.input :status, label: 'Status', collection: Event.statuses.keys, as: :select
 
-      f.has_many :event_groups, heading: 'Groups', allow_destroy: true do |event_group|
-        event_group.input :groups, :label => 'Age Groups', collection: EventGroup.values_for_groups.each.map{|c| [c.to_s.gsub!('_', ' '), c]}, multiple: true, as: :bitmask_attributes
-
-        event_group.has_many :event_details, heading: 'Details', allow_destroy: true do |event_detail|
-          event_detail.input :formatted_start, :as => :string, :input_html => {:class => "hasDatetimePicker"}, label: 'Start'
-          event_detail.input :duration, :as => :select, :collection => [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], :label => "Duration (minutes)"
-          event_detail.input :location, as: :select, :collection => Location.all.order(name: :asc)
-        end
+      f.has_many :event_details, heading: 'Details', allow_destroy: true do |event_detail|
+        event_detail.input :boys_age_groups, collection: EventDetail.values_for_boys_age_groups.map { |w| [w.to_s.humanize.capitalize, w] }, multiple: true, as: :bitmask_attributes
+        event_detail.input :girls_age_groups, collection: EventDetail.values_for_girls_age_groups.map { |w| [w.to_s.humanize.capitalize, w] }, multiple: true, as: :bitmask_attributes
+        event_detail.input :start, :as => :string, :input_html => {:class => "hasDatetimePicker"}, label: 'Start'
+        event_detail.input :length, :as => :select, :collection => [15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180], :label => "Duration (minutes)"
+        event_detail.input :location_id, as: :select, :collection => Location.all.order(name: :asc)
       end
 
       f.actions
     end
   end
 
-
-  # Make sure all of the default events exist so the admin can administer them
-  collection_action :create_events, method: :get do
-
-    # Create all the events in our enum if they don't already exist
-    Event.types.each do |key, value|
-      puts "#{value}"
-      unless Event.where("type = ?", value).exists?
-        event = Event.new
-        event.type = key.to_sym
-        event.heading = key.humanize.titleize
-        event.body = "TODO: Fill out"
-        event.status= :hide
-        event.save!
-      end
-    end
-
-    flash[:notice] = 'Events created'
-    redirect_to collection_path
-  end
-
-  action_item :seed, :only => :index do
-    link_to 'Seed Events', :action => 'create_events'
-  end
+=begin
 
   collection_action :download_csv, method: :get do
 
@@ -203,5 +159,5 @@ ActiveAdmin.register Event do
       [:heading, :body, :tout]
     end
   end
-
+=end
 end

@@ -128,7 +128,7 @@ ActiveAdmin.register PlayerPortal do
       f.input :state
       f.input :zip
       f.input :gender
-      f.input :birthday, start_year: Time.now.year - EventGroup::MAX_AGE, end_year: Time.now.year - EventGroup::MIN_AGE
+      f.input :birthday, start_year: Time.now.year - Event::MAX_AGE, end_year: Time.now.year - Event::MIN_AGE
       f.input :parent1_first
       f.input :parent1_last
       f.input :parent1_email
@@ -261,7 +261,7 @@ ActiveAdmin.register PlayerPortal do
               pp.conditions= row[40]
 
               pp.uid= SecureRandom.uuid
-              pp.season= EventGroup::TRYOUT_YEAR
+              pp.season= Event::TRYOUT_YEAR
               pp.md5= md5
 
               pp.save!

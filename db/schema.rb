@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206155949) do
+ActiveRecord::Schema.define(version: 20160326195504) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -141,44 +141,36 @@ ActiveRecord::Schema.define(version: 20160206155949) do
   end
 
   create_table "event_details", force: :cascade do |t|
-    t.datetime "start"
-    t.integer  "duration"
-    t.integer  "location_id"
-    t.integer  "event_group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "event_groups", force: :cascade do |t|
     t.integer  "event_id"
-    t.integer  "groups",                      default: 0
-    t.string   "boys_age_range",  limit: 255
-    t.string   "girls_age_range", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "location_id"
+    t.datetime "start"
+    t.integer  "length"
+    t.integer  "boys_age_groups"
+    t.integer  "girls_age_groups"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "event_translations", force: :cascade do |t|
-    t.integer  "event_id",               null: false
-    t.string   "locale",     limit: 255, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "heading",    limit: 255
-    t.text     "body"
-    t.text     "tout"
+    t.integer  "event_id",    null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+    t.text     "description"
   end
 
   add_index "event_translations", ["event_id"], name: "index_event_translations_on_event_id"
   add_index "event_translations", ["locale"], name: "index_event_translations_on_locale"
 
   create_table "events", force: :cascade do |t|
-    t.integer  "type",                   default: 0, null: false
-    t.string   "heading",    limit: 255
-    t.text     "body"
-    t.text     "tout"
-    t.integer  "status",                 default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "category",    default: 0, null: false
+    t.string   "title"
+    t.text     "description"
+    t.string   "image_url"
+    t.decimal  "cost"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "locations", force: :cascade do |t|

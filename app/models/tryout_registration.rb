@@ -30,11 +30,11 @@ class TryoutRegistration < ActiveRecord::Base
   before_validation :strip_string_fields
 
   def init
-    self.year = EventGroup::TRYOUT_YEAR
+    self.year = Event::TRYOUT_YEAR
   end
 
   def self.sheet_name
-    "#{EventGroup::TRYOUT_YEAR} #{Rails.application.secrets.google_drive_tryouts_doc}"
+    "#{Event::TRYOUT_YEAR} #{Rails.application.secrets.google_drive_tryouts_doc}"
   end
 
   private
