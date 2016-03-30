@@ -11,14 +11,17 @@ def generate_csv(events)
       row << event.description
       row << event.cost
 
-      event.event_details.each do |event_detail|
+      event.event_details.each_with_index do |event_detail, index|
+        row = ['', '', '', ''] unless index == 0
         row << event_detail.boys_age_groups.join(', ')
         row << event_detail.girls_age_groups.join(', ')
-        row << event_detail.start
+        row << I18n.l(event_detail.start)
         row << event_detail.length
         row << event_detail.location.name
+
+        csv << row
       end
-      csv << row
+      csv << row if event.event_details.length == 0
     end
   end
 
@@ -43,6 +46,13 @@ ActiveAdmin.register Event do
 
     render xlsx: 'tryouts', formats: 'xlsx'
   end
+
+  # active_admin_importable do |model, hash|
+  #   event = Event.find_by_name(hash[:store_name])
+  #   hash[:store_id] = store.id
+  #   hash.delete(:store_name)
+  #   model.create!(hash)
+  # end
 
   index :download_links => [:csv] do
     column :category
