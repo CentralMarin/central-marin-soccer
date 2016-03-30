@@ -25,7 +25,8 @@ ActiveAdmin.register Event do
     end
     column :details do |event|
       event.event_details.each do |event_detail|
-        div event_detail.age_groups
+        div event_detail.boys_age_groups.join(', ')
+        div event_detail.girls_age_groups.join(', ')
       end
       nil
     end
@@ -42,11 +43,17 @@ ActiveAdmin.register Event do
     end
     panel "Event Details" do
       table_for event.event_details do
-        column :boys_age_groups
-        column :girls_age_groups
+        column :boys_age_groups do |event_detail|
+          event_detail.boys_age_groups.join(', ')
+        end
+        column :girls_age_groups do |event_detail|
+          event_detail.girls_age_groups.join(', ')
+        end
         column :start
         column :length
-        column :location
+        column :location do |event_detail|
+          event_detail.location.name
+        end
       end
     end
   end
@@ -62,12 +69,10 @@ ActiveAdmin.register Event do
     f.inputs do
       f.input :category, as: :select, collection: Event.categories.keys
       f.input :cost
-      f.translated_inputs "Translated fields", switch_locale: false do |t|
+      f.translated_inputs 'Translated fields', switch_locale: false do |t|
         t.input :title
         t.input :description, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
       end
-
-      # f.input :status, label: 'Status', collection: Event.statuses.keys, as: :select
 
       f.has_many :event_details, heading: 'Details', allow_destroy: true do |event_detail|
         event_detail.input :boys_age_groups, collection: EventDetail.values_for_boys_age_groups.map { |w| [w.to_s.humanize.capitalize, w] }, multiple: true, as: :bitmask_attributes
@@ -78,6 +83,20 @@ ActiveAdmin.register Event do
       end
 
       f.actions
+    end
+  end
+
+  csv do
+    column :category
+    column :cost
+    column :title
+    column :description
+    event_details.each do |event_detail|
+      column :boys_age_groups
+      column :girls_age_groups
+      column :start
+      column :length
+      column :location
     end
   end
 

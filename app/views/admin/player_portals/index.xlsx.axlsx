@@ -1,7 +1,7 @@
 
 
 workbook = xlsx_package.workbook
-workbook.add_worksheet(name: "#{EventGroup::TRYOUT_YEAR} Season") do |sheet|
+workbook.add_worksheet(name: "#{Event::TRYOUT_YEAR} Season") do |sheet|
     # Add our header
     sheet.add_row ['First', 'Last', 'Birthday', 'Parent', 'Email', 'Cell', 'Parent', 'Email', 'Cell', 'Volunteer', 'Fee', 'Paid', 'Due']
 

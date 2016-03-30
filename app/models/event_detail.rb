@@ -1,5 +1,6 @@
 class EventDetail < ActiveRecord::Base
   belongs_to :event
+  belongs_to :location
 
   bitmask :boys_age_groups, as: [
       :U8,
