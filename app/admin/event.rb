@@ -1,3 +1,30 @@
+def generate_csv(events)
+  file = CSV.generate do |csv|
+    # Determine which event has the most details associated with it so we can generate the appropriate headings?
+    csv << ['Category', 'Title', 'Description', 'Cost', 'Boys Age Groups', 'Girls Age Groups', 'Start', 'Length', 'Location']
+
+
+    events.each do |event|
+      row = []
+      row << event.category
+      row << event.title
+      row << event.description
+      row << event.cost
+
+      event.event_details.each do |event_detail|
+        row << event_detail.boys_age_groups.join(', ')
+        row << event_detail.girls_age_groups.join(', ')
+        row << event_detail.start
+        row << event_detail.length
+        row << event_detail.location.name
+      end
+      csv << row
+    end
+  end
+
+  send_data file, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment;filename=events.csv"
+end
+
 ActiveAdmin.register Event do
 
   include ActiveAdminTranslate
@@ -17,7 +44,7 @@ ActiveAdmin.register Event do
     render xlsx: 'tryouts', formats: 'xlsx'
   end
 
-  index do
+  index :download_links => [:csv] do
     column :category
     column :title
     column :cost do |event|
@@ -82,20 +109,6 @@ ActiveAdmin.register Event do
       end
 
       f.actions
-    end
-  end
-
-  csv do
-    column :category
-    column :cost
-    column :title
-    column :description
-    event_details.each do |event_detail|
-      column :boys_age_groups
-      column :girls_age_groups
-      column :start
-      column :length
-      column :location
     end
   end
 
@@ -178,4 +191,14 @@ ActiveAdmin.register Event do
     end
   end
 =end
+  controller do
+    def index
+      index! do |format|
+        format.csv {
+          generate_csv(@events)
+        }
+      end
+    end
+  end
+
 end
