@@ -17,6 +17,11 @@ en:
     - October
     - November
     - December
+    formats:
+      default: "%m/%d/%Y"
+  time:
+    formats:
+      default: "%m/%d/%Y %H:%M"
   title: "Welcome to Central Marin Soccer Club"
   footer_copy: "All rights reserved © %{year} - Central Marin Soccer Club"
   header_text_alt: 'Central Marin Competitive Soccer Club'

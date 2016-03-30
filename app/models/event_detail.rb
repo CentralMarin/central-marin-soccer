@@ -31,4 +31,12 @@ class EventDetail < ActiveRecord::Base
       :U18,
       :U19,
   ]
+
+  def to_s
+    # TODO: Would be nice to condense the range if more than one
+    boys = girls = ''
+    boys = "#{I18n.t('team.gender.boys')} #{boys_age_groups.join(', ')}" if boys_age_groups?
+    girls = "#{I18n.t('team.gender.girls')} #{girls_age_groups.join(', ')}" if girls_age_groups?
+    "#{boys}#{boys.present? && girls.present? ? ' & ' : ''}#{girls} #{I18n.l start} @ #{location.name}"
+  end
 end

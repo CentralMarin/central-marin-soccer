@@ -16,7 +16,7 @@ $(document).ready(function() {
 
     datetimepicker_func = function(e, elem){
         $('input.hasDatetimePicker').datetimepicker({
-            dateFormat: "mm/dd/yy",
+            dateFormat: "yy-mm-dd",
             timeFormat: "HH:mm",
             hourMin: 9,
             hourMax: 20,

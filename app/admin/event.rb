@@ -25,8 +25,7 @@ ActiveAdmin.register Event do
     end
     column :details do |event|
       event.event_details.each do |event_detail|
-        div event_detail.boys_age_groups.join(', ')
-        div event_detail.girls_age_groups.join(', ')
+        div event_detail.to_s
       end
       nil
     end
