@@ -6,8 +6,14 @@
     %ol
       %li
         %h3
-          Warning: All #{@model} records are replaced during this operation.
-        If you'd like to update existing #{@model.pluralize}, click the Download CSV link on the previous screen to download the existing #{@model.pluralize} first.
+          Warnings:
+          %ul
+            %li
+              Don't edit CSV in Microsoft Excel 2011 on Mac
+            %li
+              All #{@model} records are replaced during this operation. <a href="#{admin_events_path}.csv">Download and edit CSV</a> if you want to update records.
+
+
       %li.file.input.optional
         %label.label{for: 'active_admin_import_model_file'}
           File
