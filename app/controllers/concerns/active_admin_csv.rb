@@ -1,4 +1,4 @@
-module ActiveAdminCsvUpload
+module ActiveAdminCsv
 
   # Shared member actions. Using "send" due to "_action" and "_item" are a private methods
   def self.included(base)
