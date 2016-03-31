@@ -25,10 +25,19 @@ ActiveAdmin.register Event do
       number_to_currency event.cost
     end
     column :details do |event|
-      event.event_details.each do |event_detail|
-        div event_detail.to_s
+      table_for event.event_details do
+        column :boys_age_groups do |event_detail|
+          event_detail.boys_age_groups.join(', ')
+        end
+        column :girls_age_groups do |event_detail|
+          event_detail.girls_age_groups.join(', ')
+        end
+        column :start
+        column :length
+        column :location do |event_detail|
+          event_detail.location.name
+        end
       end
-      nil
     end
 
     actions
