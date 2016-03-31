@@ -11,7 +11,7 @@
       %li.file.input.optional
         %label.label{for: 'active_admin_import_model_file'}
           File
-        = f.file_field :file, id: 'active_admin_import_model_file'
+        = f.file_field :file, id: 'active_admin_import_model_file', accept: '.csv'
   %fieldset.actions
     %ol
       %li.action.input_action
