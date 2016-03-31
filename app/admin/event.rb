@@ -1,18 +1,22 @@
 def generate_csv(events)
   file = CSV.generate do |csv|
     # Determine which event has the most details associated with it so we can generate the appropriate headings?
-    csv << ['Category', 'Title', 'Description', 'Cost', 'Boys Age Groups', 'Girls Age Groups', 'Start', 'Length', 'Location']
+    csv << ['Category', 'Cost', 'Title', 'Description', 'Título', 'Descripción', 'Boys Age Groups', 'Girls Age Groups', 'Start', 'Length', 'Location']
 
 
     events.each do |event|
       row = []
       row << event.category
+      row << event.cost
       row << event.title
       row << event.description
-      row << event.cost
+
+      spanish = event.translations.find_by(locale: :es)
+      row << (spanish ? spanish.title : '')
+      row << (spanish ? spanish.description : '')
 
       event.event_details.each_with_index do |event_detail, index|
-        row = ['', '', '', ''] unless index == 0
+        row = ['', '', '', '', '', ''] unless index == 0
         row << event_detail.boys_age_groups.join(', ')
         row << event_detail.girls_age_groups.join(', ')
         row << I18n.l(event_detail.start)
@@ -25,12 +29,15 @@ def generate_csv(events)
     end
   end
 
-  send_data file, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment;filename=events.csv"
+  # file.encode!('iso-8859-15')
+
+  send_data file, :type => 'text/csv; charset=UTF-8; header=present', :disposition => "attachment;filename=events.csv"
 end
 
 ActiveAdmin.register Event do
 
   include ActiveAdminTranslate
+  include ActiveAdminCsvUpload
 
   permit_params :category, :title, :description, :image_url, :cost, :translations_attributes => [:title, :description, :locale, :id], :event_details_attributes => [:id, :start, :length, :location_id, :_destroy, :boys_age_groups => [], :girls_age_groups => []]
 
@@ -122,86 +129,34 @@ ActiveAdmin.register Event do
     end
   end
 
-=begin
-
-  collection_action :download_csv, method: :get do
-
-    event =  Event.find_by(id: params[:event_id])
-    file = CSV.generate do |csv|
-      csv << ['groups', 'start', 'duration', 'location']
-
-      event.event_groups.each do |event_group|
-        groups = event_group.groups
-        event_group.event_details.each do |event_detail|
-            row = []
-            row << groups.join(', ')
-            row << event_detail.formatted_start
-            row << event_detail.duration
-            row << event_detail.location.name
-            csv << row
-        end
-      end
-    end
-
-    send_data file, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment;filename=#{event.heading}.csv"
-  end
-
-  collection_action :upload_csv, method: :get do
-    @event_id = params[:event_id]
-    render 'admin/csv/event_details_upload_csv'
-  end
-
-  collection_action :import_csv, :method => :post do
-
-    event_id = params[:events][:id].to_i
-
-    EventGroup.transaction do
-      EventGroup.delete_all(:event_id => event_id)
-
-      event = Event.find_by_id(event_id)
-
-      # read the csv
-      csv_data = params[:events][:file]
-      csv_file = csv_data.read
-      previous_groups = ''
-      event_group = nil
-      CSV.parse(csv_file, {:headers => true}) do |row|
-        groups = row[0].gsub(' ', '').split(',')
-        if groups != previous_groups
-          event_group = EventGroup.new(groups: groups, event_id: event_id)
-          previous_groups = groups
-        end
-
-        event_detail = EventDetail.new()
-        event_detail.formatted_start = row[1]
-        event_detail.duration = row[2]
-        event_detail.location = Location.find_by(name: row[3])
-
-        event_group.event_details << event_detail
-
-        event_group.save!
-      end
-    end
-
-    flash[:notice] = 'CSV imported successfully!'
-    redirect_to admin_event_path(params[:events][:id])
-  end
-
-  action_item :download_csv, :only => :show do
-    link_to 'Download Event Item CSV', :action => 'download_csv', :event_id => event.id
-  end
-
-  action_item :upload_csv, :only => :show do
-    link_to 'Upload Event Item CSV', :action => 'upload_csv', :event_id => event.id
-  end
-
   controller do
+
+    def process_csv_row(row, event)
+      if row[0].present? # Is this a new event or adding to existing details
+        event = Event.create!(category: row[0], title: row[2], description: row[3], cost: row[1])
+        event.translations.create!(locale: :es,
+                                   title: (row[4].present? ? row[4] : nil),
+                                   description: (row[5].present? ? row[5] : nil))
+      end
+
+      # Do we have event details to process?
+      if row[6].present? || row[7].present? || row[8].present? || row[9].present? || row[10].present?
+        event_detail = EventDetail.create!(event_id: event.id,
+                                       boys_age_groups: (row[6].present? ? row[6].gsub(' ', '').split(',') : nil),
+                                       girls_age_groups: (row[7].present? ? row[7].gsub(' ', '').split(',') : nil),
+                                       start: (row[8].present? ? DateTime.strptime(row[8], '%m/%d/%Y %H:%M') : nil),
+                                       length: row[9],
+                                       location: (row[10].present? ? Location.find_by_name(row[10]) : nil)
+        )
+      end
+
+      event
+    end
+
     def translation_fields
-      [:heading, :body, :tout]
+      [:title, :description]
     end
-  end
-=end
-  controller do
+
     def index
       index! do |format|
         format.csv {

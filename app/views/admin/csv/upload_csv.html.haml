@@ -1,16 +1,20 @@
 = form_for :csv, :url=>{:action=>"import_csv"}, :html => { :multipart => true } do |f|
-  %h3
-    Warning: All #{@model} records are replaced during this operation.
-    %br
-      If you'd like to update existing #{@model.pluralize}, click the CSV link on the previous screen to download the existing #{@model.pluralize} first.
-  %table
-    %tr
-      %td
-        %label{:for => "dump_file"}
-          Select a CSV File :
-      %td
-        = f.file_field :file
-    %tr
-      %td
-        = submit_tag 'Submit'
+  %fieldset.inputs
+    %legend
+      %span
+        Please, select file to import
+    %ol
+      %li
+        %h3
+          Warning: All #{@model} records are replaced during this operation.
+        If you'd like to update existing #{@model.pluralize}, click the Download CSV link on the previous screen to download the existing #{@model.pluralize} first.
+      %li.file.input.optional
+        %label.label{for: 'active_admin_import_model_file'}
+          File
+        = f.file_field :file, id: 'active_admin_import_model_file'
+  %fieldset.actions
+    %ol
+      %li.action.input_action
+        = submit_tag 'Import', data: {'disable-with': 'Wait...'}
+
 
