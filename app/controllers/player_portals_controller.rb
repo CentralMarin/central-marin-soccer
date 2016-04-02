@@ -75,8 +75,8 @@ class PlayerPortalsController < InheritedResources::Base
     folder = PlayerPortalsController.usclub_assets_path(session, player_portal)
     if params['player-image'].present?
       # Save off the player's image
-      filename = PlayerPortalsController.generate_file_name(player_portal, "Image.png")
-      image_data = Base64.decode64(params['player-image']['data:image/png;base64,'.length .. -1])
+      filename = PlayerPortalsController.generate_file_name(player_portal, "Image.jpg")
+      image_data = Base64.decode64(params['player-image']['data:image/jpeg;base64,'.length .. -1])
       file = TryoutsController.upload_string(session, image_data, folder, filename)
 
       # Share with anyone with the link

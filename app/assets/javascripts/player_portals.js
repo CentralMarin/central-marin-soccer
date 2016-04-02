@@ -247,8 +247,8 @@ function makeid()
         };
 
         var png = function () {
-            var png = $("#canvas")[0].toDataURL('image/png');
-            $("#png").val(png);
+            var jpg = $("#canvas")[0].toDataURL('image/jpeg', 1.0);
+            $("#jpg").val(jpg);
         };
 
         var _toggleVolunteerFee = function(show) {
