@@ -1,9 +1,11 @@
 ActiveAdmin.register Team, {:sort_order => "year_desc"} do
 
- menu :label => 'Teams', :parent => 'Teams'
- permit_params :coach_id, :team_level_id, :gender, :year, :name, :teamsnap_team_id, :crop_x, :crop_y, :crop_w, :crop_h, :image
+  include ActiveAdminCsv
 
- index do
+  menu :label => 'Teams', :parent => 'Teams'
+  permit_params :coach_id, :team_level_id, :gender, :year, :name, :teamsnap_team_id, :crop_x, :crop_y, :crop_w, :crop_h, :image
+
+  index :download_links => [:csv] do
     column :year
     column :age, sortable: false
     column :gender
@@ -12,7 +14,8 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
     column(:coach, :sortable => :'coaches.name') {|team| team.coach.to_s}
     actions
 
- end
+  end
+
   show do |team|
     attributes_table do
       row :name
@@ -56,29 +59,35 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
     </script>".html_safe
  end
 
- include ActiveAdminCsvUpload
-
- csv do
-   column :name
-   column :team_level
-   column :year
-   column :gender
-   column :coach
-   column :teamsnap_team_id
- end
-
  controller do
-   def process_csv_row(team, row)
-     puts row
-     team.name = row[0]
-     if row[1].nil?
-       row[1] = ''
+
+   include ActiveAdminCsvController
+
+   def generate_csv(csv, teams)
+     csv << ['Name', 'Team Level', 'Year', 'Gender', 'Coach', 'TeamSnap ID']
+
+     teams.each do |team|
+       row = []
+       row << team.name
+       row << team.team_level
+       row << team.year
+       row << team.gender
+       row << team.coach
+       row << team.teamsnap_team_id
+
+       csv << row
      end
-     team.team_level = TeamLevel.find_by(name: row[1])
-     team.year = row[2]
-     team.gender_id = Gender.id(row[3])
-     team.coach = Coach.find_by(name: row[4])
-     team.teamsnap_team_id = row[5]
+   end
+
+   def process_csv_row(row, team)
+
+
+     team = Team.create!(name: row[0],
+                  team_level: TeamLevel.includes(:translations).find_by(name: row[1].nil? ? '' : row[1]),
+                  year: row[2],
+                  gender_id: Gender.id(row[3]),
+                  coach: Coach.find_by(name: row[4]),
+                  teamsnap_team_id: row[5])
 
      if team.coach.nil?
        logger.info "Coach: #{row[4]}"
@@ -88,9 +97,16 @@ ActiveAdmin.register Team, {:sort_order => "year_desc"} do
        logger.info "TeamLevel: #{row[1]}"
      end
 
-     team.save!
+     team
+   end
+
+   def index
+     index! do |format|
+       format.csv {
+         download_csv(Team.all)
+       }
+     end
    end
 
  end
-
 end

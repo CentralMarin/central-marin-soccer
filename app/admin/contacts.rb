@@ -1,6 +1,6 @@
 ActiveAdmin.register Contact do
 
-  include ActiveAdminCsvUpload
+  include ActiveAdminCsv
   include ActiveAdminTranslate
 
   permit_params :name, :email, :bio, :club_position, :description, :category, :image, :crop_x, :crop_y, :crop_w, :crop_h, :translations_attributes => [:bio, :club_position, :description, :locale, :id]
@@ -17,7 +17,7 @@ ActiveAdmin.register Contact do
   scope :other_assistance
   scope :coaching
 
-  index do
+  index :download_links => [:csv] do
     ranked_handle_column(:row_order)
     column :id
     column :category do |contact|
@@ -100,33 +100,59 @@ ActiveAdmin.register Contact do
        </script>".html_safe
   end
 
-  csv do
-    column :name
-    column :email
-    column :bio
-    column :club_position
-    column :description
-    column :category
-    column :row_order
-  end
-
   controller do
-    def process_csv_row(contact, row)
-      contact.name = row[0]
-      contact.email = row[1]
-      contact.bio = row[2]
-      contact.club_position = row[3]
-      contact.description = row[4]
-      contact.category = row[5]
-      contact.row_order = row[6]
+    include ActiveAdminCsvController
 
+    def process_csv_row(row, contact)
+      contact = Contact.create!(name: row[0], email: row[1], bio: row[2], club_position: row[3], description: row[4],
+                      category: row[8], row_order: row[9])
+
+      contact.translations.create!(locale: :es,
+                                   bio: (row[5].present? ? row[5] : nil),
+                                   club_position: (row[6].present? ? row[6] : nil),
+                                   description: (row[7].present? ? row[7] : nil))
+
+      image_path = Rails.root.join('public' + row[10])
+      contact.image = image_path.open if row[10].present? && image_path.exist?
       contact.save!
-    end
-  end
 
-  controller do
+      contact
+    end
+
+    def generate_csv(csv, contacts)
+      csv << ['Name', 'Email', 'Bio', 'Club Position', 'Description', 'Biografía', 'Posición', 'Descripción', 'Category', 'Order']
+
+      contacts.each do |contact|
+        row = []
+        row << contact.name
+        row << contact.email
+        row << contact.bio
+        row << contact.club_position
+        row << contact.description
+
+        spanish = contact.translations.find_by(locale: :es)
+        row << (spanish ? spanish.bio : '')
+        row << (spanish ? spanish.club_position : '')
+        row << (spanish ? spanish.description : '')
+
+        row << contact.category
+        row << contact.row_order
+        row << contact.image
+
+        csv << row
+      end
+    end
+
     def translation_fields
       [:bio, :club_position, :description]
+    end
+
+    def index
+      index! do |format|
+        format.csv {
+          download_csv(Contact.all)
+        }
+      end
     end
   end
 end

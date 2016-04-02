@@ -27,15 +27,15 @@ ActiveAdmin.register Event do
     column :details do |event|
       table_for event.event_details do
         column :boys_age_groups do |event_detail|
-          event_detail.boys_age_groups.join(', ')
+          event_detail.boys_age_groups.to_s
         end
         column :girls_age_groups do |event_detail|
-          event_detail.girls_age_groups.join(', ')
+          event_detail.girls_age_groups.to_s
         end
         column :start
         column :length
         column :location do |event_detail|
-          event_detail.location.name
+          event_detail.location_name
         end
       end
     end
@@ -46,22 +46,26 @@ ActiveAdmin.register Event do
   show do |event|
     attributes_table do
       row :category
-      row :title
-      row :description
+      row :title do |event|
+        show_tanslated(self, event, :title)
+      end
+      row :description do |event|
+        show_tanslated(self, event, :description)
+      end
       row :cost
     end
     panel "Event Details" do
       table_for event.event_details do
         column :boys_age_groups do |event_detail|
-          event_detail.boys_age_groups.join(', ')
+          event_detail.boys_age_groups.to_s
         end
         column :girls_age_groups do |event_detail|
-          event_detail.girls_age_groups.join(', ')
+          event_detail.girls_age_groups.to_s
         end
         column :start
         column :length
         column :location do |event_detail|
-          event_detail.location.name
+          event_detail.location_name
         end
       end
     end
@@ -122,7 +126,6 @@ ActiveAdmin.register Event do
     end
 
     def generate_csv(csv, events)
-      # Determine which event has the most details associated with it so we can generate the appropriate headings?
       csv << ['Category', 'Cost', 'Title', 'Description', 'Título', 'Descripción', 'Boys Age Groups', 'Girls Age Groups', 'Start', 'Length', 'Location']
 
       events.each do |event|
@@ -138,8 +141,8 @@ ActiveAdmin.register Event do
 
         event.event_details.each_with_index do |event_detail, index|
           row = ['', '', '', '', '', ''] unless index == 0
-          row << event_detail.boys_age_groups.join(', ')
-          row << event_detail.girls_age_groups.join(', ')
+          row << event_detail.boys_age_groups.to_s
+          row << event_detail.girls_age_groups.to_s
           row << I18n.l(event_detail.start)
           row << event_detail.length
           row << event_detail.location.name
@@ -157,7 +160,6 @@ ActiveAdmin.register Event do
     def index
       index! do |format|
         format.csv {
-          # generate_csv(@events)
           download_csv(Event.all)
         }
       end
