@@ -227,13 +227,13 @@ class TryoutsController < CmsController
     folder
   end
 
-  def self.upload_string(session, data, folder, filename)
+  def self.upload_string(session, data, folder, filename, content_type = 'image/jpeg')
     self.upload(session, folder, filename) do |file|
       if file.nil?
-        session.upload_from_string(data, filename, convert: false)
-      else
-        file.update_from_string(data)
+        # upload tmp file and then replace it
+        file = session.upload_from_string('tmp', filename, convert: false, content_type: content_type, file_name: filename)
       end
+      file.update_from_string(data)
     end
 
   end

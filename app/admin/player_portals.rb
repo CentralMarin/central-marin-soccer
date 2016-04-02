@@ -77,7 +77,44 @@ ActiveAdmin.register PlayerPortal do
     redirect_to player_portal_path(uid)
   end
 
+  sidebar :Statistics, only: :index do
+    stats = PlayerPortal.stats
+    table_for stats[:collected] do
+      column '', :type
+      column 'Players', :count do |stat|
+        stat[:count]
+      end
+      column 'Collected', :collected do |stat|
+        number_to_currency stat[:collected]
+      end
+    end
+    table_for stats[:outstanding] do
+      column '', :type
+      column 'Players', :count do |stat|
+        stat[:count]
+      end
+      column 'Oustanding', :collected do |stat|
+        number_to_currency stat[:collected]
+      end
+    end
+
+    table_for stats[:totals] do
+      column '', :type
+      column 'Players', :count do |stat|
+        stat[:count]
+      end
+      column 'Potential', :collected do |stat|
+        number_to_currency stat[:collected]
+      end
+    end
+  end
+
   index :download_links => [:pdf, :xlsx] do
+
+    stats = PlayerPortal.stats
+
+    json_data = [{label: 'one', data: 500}, {label: 'two', data: 10}]
+
     column :portal do |portal|
       link_to 'Launch', impersonate_admin_player_portal_path(portal.uid), target: '_blank'
     end
@@ -102,17 +139,12 @@ ActiveAdmin.register PlayerPortal do
     column :oef do |portal|
       portal.status?(:oef) ? status_tag( 'yes', :ok) : status_tag('no')
     end
-    column :club_registration_fee
+    column :club_registration_fee do |portal|
+      number_to_currency(portal.club_registration_fee)
+    end
     column :amount_paid
-    column :due do |portal|
-      paid = 0
-      paid = portal.amount_paid.gsub(/[^\d\.]/, '').to_f unless portal.amount_paid.blank?
-      val = (portal.club_registration_fee.to_f - paid).round(2)
-      if (val < 0)
-        0
-      else
-        val
-      end
+    column :amount_due do |portal|
+      number_to_currency(portal.amount_due)
     end
     actions
   end
