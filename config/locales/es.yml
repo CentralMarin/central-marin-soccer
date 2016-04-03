@@ -43,7 +43,7 @@ es:
       default: "%m/%d/%Y"
   time:
     formats:
-      default: "%m/%d/%Y %H:%M"
+      default: "%B %d, %Y %H:%M"
   title: "Bienvenido a Central Marín Club de Fútbol"
   footer_copy: "Todos los derechos reservados © %{year} - Central Marín Club de Fútbol"
   header_text_alt: 'Centro Marin Club de fútbol Competitivo'

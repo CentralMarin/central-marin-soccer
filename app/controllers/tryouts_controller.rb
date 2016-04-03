@@ -6,7 +6,7 @@ class TryoutsController < CmsController
     init_web_parts('Tryouts Overview')
 
     @year = Event::TRYOUT_YEAR
-    @info, age_group  = Event.tryout_related_events
+    @tryouts = Event.where(category: Event::categories[:tryout])
   end
 
   def registration

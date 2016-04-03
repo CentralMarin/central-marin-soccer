@@ -2,7 +2,7 @@ class EventDetail < ActiveRecord::Base
   belongs_to :event
   belongs_to :location
 
-  bitmask :boys_age_groups, as: [
+  AGE_GROUPS = [
       :U8,
       :U9,
       :U10,
@@ -17,26 +17,53 @@ class EventDetail < ActiveRecord::Base
       :U19,
   ]
 
-  bitmask :girls_age_groups, as: [
-      :U8,
-      :U9,
-      :U10,
-      :U11,
-      :U12,
-      :U13,
-      :U14,
-      :U15,
-      :U16,
-      :U17,
-      :U18,
-      :U19,
-  ]
+  BITMASK_METHODS = Proc.new do
+    def to_s
+      Array(self).join(', ')
+    end
 
-  def to_s
-    # TODO: Would be nice to condense the range if more than one
-    boys = girls = ''
-    boys = "#{I18n.t('team.gender.boys')} #{boys_age_groups.join(', ')}" if boys_age_groups?
-    girls = "#{I18n.t('team.gender.girls')} #{girls_age_groups.join(', ')}" if girls_age_groups?
-    "#{boys}#{boys.present? && girls.present? ? ' & ' : ''}#{girls} #{I18n.l start} @ #{location.name}"
+    def to_ranges
+
+      return "#{EventDetail::AGE_GROUPS[0].to_s}-#{EventDetail::AGE_GROUPS[-1].to_s}" if self.length == 0
+
+      groups = {}
+      self.each_with_index do |age, index|
+        groups[age] = age[1..-1].to_i - index
+      end
+
+      groupings = groups.group_by do |k,v|
+        v
+      end.values.map do |a|
+        a.map do |b|
+          b[0]
+        end
+      end
+
+      result = ''
+      groupings.each do |v|
+        if result != ''
+          result += ', '
+        end
+        result += v.length > 3 ? v[0].to_s + '-' + v[-1].to_s : v.join(', ')
+      end
+
+      result
+    end
   end
+
+  bitmask :boys_age_groups, as: AGE_GROUPS, &BITMASK_METHODS
+  bitmask :girls_age_groups, as: AGE_GROUPS, &BITMASK_METHODS
+
+  def location_name
+    if location_id.nil?
+      'TBD'
+    else
+      location.name
+    end
+  end
+
+  protected
+
+  # TODO: Add birthyear
+
 end

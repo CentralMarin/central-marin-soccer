@@ -7,16 +7,28 @@
     = t('registration.index.online')
   = link_to t('registration.index.online_link'), tryouts_registration_url, :class => 'alt'
 
-- @info.each do |event|
+- Array(@tryouts).each do |tryout|
   %div.box{class: 'grid_16'}
-    %a{name: event.type}
+    %a{name: tryout.category}
     %h2
-      = event.heading
-    = event.body.html_safe unless event.body.nil?
+      = tryout.title
+    = tryout.description.html_safe unless tryout.description.blank?
     %p
-      = render partial: 'tryouts/tryout_info', :locals => {tryout: event}
+      - boys, girls = tryout.by_age_ranges
+      - if !boys.empty?
+        %h3
+          = t('team.gender.boys')
+        - boys.each do |age, details|
+          = render partial: 'tryouts/tryout_info', :locals => {gender: 'team.gender.boys', age: age, tryout: details}
 
-%div.grid_16.box
+      - if !girls.empty?
+        %h3
+          = t('team.gender.girls')
+        - girls.each do |age, details|
+          = render partial: 'tryouts/tryout_info', :locals => {gender: 'team.gender.girls', age: age, tryout: details}
+
+
+-#%div.grid_16.box
   = cms_region(@web_parts, 'tryouts.faq1', :div)
 
   %div.clear
