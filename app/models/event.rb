@@ -28,24 +28,39 @@ class Event < ActiveRecord::Base
   end
 
   def by_age_ranges
-    boys = {}
-    girls = {}
+    boys, girls = by_age_groups
+    new_boys = {}
+    new_girls = {}
 
-    # Naive solution. TODO: What if an age is part of a range and by itself for different details
-    event_details.each do |detail|
-      age_range(boys, detail, detail.boys_age_groups)
-      age_range(girls, detail, detail.girls_age_groups)
+
+    EventDetail::AGE_GROUPS.each do |current_age|
+      group_age_ranges(new_boys, boys, current_age)
+      group_age_ranges(new_girls, girls, current_age)
     end
 
-    [boys, girls]
+    [new_boys, new_girls]
   end
 
   protected
 
-  def age_range(groups, detail, ages)
-    range = ages.to_ranges
-    groups[range] = [] if groups[range].nil?
-    groups[range] << detail
+  def group_age_ranges(result, group, current_age)
+    ages = []
+    current_details = group[current_age]
+    unless current_details.nil?
+      group[current_age] = nil # Clear the result since we've processed it
+      ages << current_age
+
+      # Let's find if we have any matches
+      group.each do |age, details|
+        if current_details == details
+          ages << age
+          group[age] = nil
+        end
+      end
+
+      # Convert array of ages to string of age ranges
+      result[EventDetail.to_ranges(ages)] = current_details
+    end
   end
 
   def age_groups(groups, detail, ages, &block)

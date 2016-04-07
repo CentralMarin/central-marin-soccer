@@ -23,31 +23,9 @@ class EventDetail < ActiveRecord::Base
     end
 
     def to_ranges
-
       return "#{EventDetail::AGE_GROUPS[0].to_s}-#{EventDetail::AGE_GROUPS[-1].to_s}" if self.length == 0
 
-      groups = {}
-      self.each_with_index do |age, index|
-        groups[age] = age[1..-1].to_i - index
-      end
-
-      groupings = groups.group_by do |k,v|
-        v
-      end.values.map do |a|
-        a.map do |b|
-          b[0]
-        end
-      end
-
-      result = ''
-      groupings.each do |v|
-        if result != ''
-          result += ', '
-        end
-        result += v.length > 3 ? v[0].to_s + '-' + v[-1].to_s : v.join(', ')
-      end
-
-      result
+      EventDetail.to_ranges(self)
     end
   end
 
@@ -60,6 +38,34 @@ class EventDetail < ActiveRecord::Base
     else
       location.name
     end
+  end
+
+  def self.to_ranges(ages)
+
+    return nil if ages.length == 0
+
+    groups = {}
+    ages.each_with_index do |age, index|
+      groups[age] = age[1..-1].to_i - index
+    end
+
+    groupings = groups.group_by do |k,v|
+      v
+    end.values.map do |a|
+      a.map do |b|
+        b[0]
+      end
+    end
+
+    result = ''
+    groupings.each do |v|
+      if result != ''
+        result += ', '
+      end
+      result += v.length > 3 ? v[0].to_s + '-' + v[-1].to_s : v.join(', ')
+    end
+
+    result
   end
 
   protected
