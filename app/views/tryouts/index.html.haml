@@ -28,7 +28,7 @@
           = render partial: 'tryouts/tryout_info', :locals => {gender: 'team.gender.girls', age: age, tryout: details}
 
 
--#%div.grid_16.box
+%div.grid_16.box
   = cms_region(@web_parts, 'tryouts.faq1', :div)
 
   %div.clear
@@ -48,18 +48,6 @@
     %label{:for => 'birthdate_month'}
       = "#{t('registration.form.birthdate')} *"
   %div.grid_4
-    %select#birthdate_month{:name => 'birthdate_month', :required => true}
-      %option
-      -(1..12).each do |month|
-        %option
-          = month
-    /
-    %select#birthdate_day{:name => 'birthdate_day', :required => true}
-      %option
-      -(1..31).each do |day|
-        %option
-          = day
-    /
     %select#birthdate_year{:name => 'birthdate_year', :required => true}
       %option
       - (Time.now.year - 18..Time.now.year-7).each do |year|
@@ -94,5 +82,5 @@
 - content_for :javascript do
   = javascript_include_tag "tryouts"
   %script
-    $(document).ready(soccer.tryouts.init_registration('birthdate_month', 'birthdate_day', 'birthdate_year', 'gender'));
+    $(document).ready(soccer.tryouts.init_registration('birthdate_year', 'gender'));
     $(document).ready(soccer.tryouts.show_age_group_chart($('#dialog')));

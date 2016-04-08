@@ -83,7 +83,7 @@ class TryoutsController < CmsController
     (Event::MIN_AGE..Event::MAX_AGE - 1).each do |age|
       chart_row = []
       chart_row[0] = @season - age
-      chart_row[1] = "U#{EventGroup.age_group(chart_row[0])}"
+      chart_row[1] = "U#{age == 17 ? age + 2 : age + 1}"
 
       @chart_info.append chart_row + age_group_info[chart_row[1]]
     end
@@ -109,12 +109,12 @@ class TryoutsController < CmsController
 
   protected
 
-  def lookup_tryout(gender, year)
-    events, age_group = Event.tryouts(gender, year)
-
-    return (events.empty? ? nil : events[0]), age_group
-  end
-
+  # def lookup_tryout(gender, year)
+  #   events, age_group = Event.tryouts(gender, year)
+  #
+  #   return (events.empty? ? nil : events[0]), age_group
+  # end
+  #
   def format_phone_number(phone_number)
 
     if phone_number.blank?

@@ -11,30 +11,26 @@
     namespace("soccer");
     soccer.tryouts = (function () {
 
-        var _month_node;
-        var _day_node;
         var _year_node;
         var _gender_name;
 
         var _birthdate_changed = function(e) {
-            var month = _month_node.val();
-            var day = _day_node.val();
-            var year = _year_node.val();
-            var gender = $('input[name="' + _gender_name + '"]:checked').val();
+          var year = _year_node.val();
+          var gender = $('input[name="' + _gender_name + '"]:checked').val();
 
-            if (month && day && year && gender) {
-                var ageLevelApi = '<%= Rails.application.routes.url_helpers.tryouts_agelevel_path(:only_path => true, format: 'json') %>?year=' + year + '&gender=' + gender;
-                $.getJSON(ageLevelApi, { year: year, gender: gender })
-                  .done(function(json) {
-                    _show_tryout(json);
-                  })
-                  .fail(function( jqxhr, textStatus, error ) {
-                    var err = textStatus + ", " + error;
-                    console.log( "Request Failed: " + err );
-                  });
-            } else {
-                _show_tryout(null);
-            }
+          if (year && gender) {
+              var ageLevelApi = '<%= Rails.application.routes.url_helpers.tryouts_agelevel_path(:only_path => true, format: 'json') %>?year=' + year + '&gender=' + gender;
+              $.getJSON(ageLevelApi, { year: year, gender: gender })
+                .done(function(json) {
+                  _show_tryout(json);
+                })
+                .fail(function( jqxhr, textStatus, error ) {
+                  var err = textStatus + ", " + error;
+                  console.log( "Request Failed: " + err );
+                });
+          } else {
+              _show_tryout(null);
+          }
         };
 
         var _show_tryout = function(tryout_info) {
@@ -61,19 +57,15 @@
             }
         };
 
-        var init_registration = function(month, day, year, gender) {
+        var init_registration = function(year, gender) {
 
-            // Save off dom elements
-            _month_node = $('#' + month);
-            _day_node = $('#' + day);
-            _year_node = $('#' + year);
-            _gender_name = gender;
+          // Save off dom elements
+          _year_node = $('#' + year);
+          _gender_name = gender;
 
-            // Register change handlers for birthdate
-            _month_node.change(_birthdate_changed);
-            _day_node.change(_birthdate_changed);
-            _year_node.change(_birthdate_changed);
-            $('input[name="' + _gender_name + '"]').change(_birthdate_changed);
+          // Register change handlers for birthdate
+          _year_node.change(_birthdate_changed);
+          $('input[name="' + _gender_name + '"]').change(_birthdate_changed);
         };
 
         var show_age_group_chart = function(e) {
