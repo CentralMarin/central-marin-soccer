@@ -298,7 +298,7 @@ en:
       gender: 'Gender'
       gender_boy: 'Boy'
       gender_girl: 'Girl'
-      birthdate: 'Birthday'
+      birthdate: 'Birth Year'
       previous: 'Previous Soccer'
       previous_rec: 'Rec Soccer'
       previous_other: 'Other Competitive Club'

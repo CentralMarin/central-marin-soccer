@@ -319,7 +319,7 @@ es:
       gender: 'Sexo'
       gender_boy: 'Niño'
       gender_girl: 'Niña'
-      birthdate: 'Cumpleaños'
+      birthdate: 'Año de Nacimiento'
       previous: 'Fútbol Anterior'
       previous_rec: 'Fútbol Recreativo'
       previous_other: 'Otro Club Competitiva'
