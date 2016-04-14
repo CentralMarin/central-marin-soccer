@@ -3,13 +3,17 @@
 workbook = xlsx_package.workbook
 workbook.add_worksheet(name: "#{Event::TRYOUT_YEAR} Season") do |sheet|
     # Add our header
-    sheet.add_row ['First', 'Last', 'Birthday', 'Parent', 'Email', 'Cell', 'Parent', 'Email', 'Cell', 'Volunteer', 'Fee', 'Paid', 'Due']
+    sheet.add_row ['First', 'Last', 'Birthday', 'Address', 'City', 'State', 'Zip', 'Parent', 'Email', 'Cell', 'Parent', 'Email', 'Cell', 'Volunteer', 'Fee', 'Paid', 'Due']
 
     @player_portals.each do |player|
         sheet.add_row [
             player.first,
             player.last,
             player.birthday,
+            player.address,
+            player.city,
+            player.state,
+            player.zip,
             "#{player.parent1_first} #{player.parent1_last}",
             player.parent1_email,
             player.parent1_cell,
