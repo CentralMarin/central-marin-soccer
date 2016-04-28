@@ -21,7 +21,7 @@ en:
       default: "%m/%d/%Y"
   time:
     formats:
-      default: "%B %d, %Y %H:%M"
+      default: "%B %d, %Y %l:%M %P"
   title: "Welcome to Central Marin Soccer Club"
   footer_copy: "All rights reserved © %{year} - Central Marin Soccer Club"
   header_text_alt: 'Central Marin Competitive Soccer Club'

@@ -25,9 +25,9 @@
   %ul
     - tryout.each do |detail|
       %li
-        = "#{l detail.start} @" unless detail.start.nil?
+        = "#{l detail.start} - #{(detail.start + detail.length.minutes).strftime('%l:%M %P')} @" unless detail.start.nil?
         - if detail.location.nil?
-          TBD
+          To Be Determined
         - else
           %a{:href => detail.location.map_url}
             = "#{detail.location.name} - #{detail.location.address}"
