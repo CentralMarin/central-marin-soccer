@@ -12,13 +12,20 @@
     soccer.tryouts = (function () {
 
         var _year_node;
+        var _month_node;
+        var _day_node;
         var _gender_name;
 
-        var _birthdate_changed = function(e) {
+        var _birthdate_changed = function() {
           var year = _year_node.val();
           var gender = $('input[name="' + _gender_name + '"]:checked').val();
 
-          if (year && gender) {
+          var show = year && gender;
+          if (show && _month_node && _day_node) {
+            show = _month_node.val() && _day_node.val();
+          }
+
+          if (show) {
               var ageLevelApi = '<%= Rails.application.routes.url_helpers.tryouts_agelevel_path(:only_path => true, format: 'json') %>?year=' + year + '&gender=' + gender;
               $.getJSON(ageLevelApi, { year: year, gender: gender })
                 .done(function(json) {
@@ -57,15 +64,33 @@
             }
         };
 
-        var init_registration = function(year, gender) {
+        var _register_birthdate_change = function(name) {
+          if (typeof name == 'undefined') {
+            return null;
+          }
+          
+          var node = $('#' + name);
+          if (node) {
+            node.change(_birthdate_changed);
+          }
+
+          return node;
+        };
+
+        var init_registration = function(gender, year, month, day) {
 
           // Save off dom elements
-          _year_node = $('#' + year);
           _gender_name = gender;
+          _year_node = _register_birthdate_change(year);
+          _month_node = _register_birthdate_change(month);
+          _day_node = _register_birthdate_change(day);
 
           // Register change handlers for birthdate
           _year_node.change(_birthdate_changed);
           $('input[name="' + _gender_name + '"]').change(_birthdate_changed);
+
+          // Call in case the values are already filled in
+          _birthdate_changed();
         };
 
         var show_age_group_chart = function(e) {
