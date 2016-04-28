@@ -40,6 +40,16 @@ class EventDetail < ActiveRecord::Base
     end
   end
 
+  def self.year_to_age_group(year)
+    index = (Event::TRYOUT_YEAR - year) - Event::MIN_AGE
+    EventDetail::AGE_GROUPS[index]
+  end
+
+  def self.age_group_to_year(age_group)
+    index = EventDetail::AGE_GROUPS.find_index(age_group)
+    Event::TRYOUT_YEAR - index - Event::MIN_AGE
+  end
+
   def self.to_ranges(ages)
 
     return nil if ages.length == 0
@@ -62,14 +72,27 @@ class EventDetail < ActiveRecord::Base
       if result != ''
         result += ', '
       end
-      result += v.length > 3 ? v[0].to_s + '-' + v[-1].to_s : v.join(', ')
+      result += age_groups_to_string(v)
     end
 
     result
   end
 
+  def self.age_group_to_string(group)
+    # "#{age_group_to_year(group)} (#{group.to_s})"
+    "#{group.to_s} (#{age_group_to_year(group)})"
+  end
+
+  # TODO: U19 showing wrong birthyear
+
   protected
 
-  # TODO: Add birthyear
+  def self.age_groups_to_string(groups)
+    if groups.length > 3
+      age_group_to_string(groups[0]) + ' - ' + age_group_to_string(groups[-1])
+    else
+      age_group_to_string(groups[0]) + ', ' + age_group_to_string(groups[-1])
+    end
+  end
 
 end

@@ -1,11 +1,15 @@
 %h2{:class => 'alt'}
   = age
   %ul
-    - tryout.each do |detail|
-      %li
-        = "#{l detail.start} - #{(detail.start + detail.length.minutes).strftime('%l:%M %P')} @" unless detail.start.nil?
-        - if detail.location.nil?
-          To Be Determined
-        - else
-          %a{:href => detail.location.map_url}
-            = "#{detail.location.name} - #{detail.location.address}"
+    - if tryout.nil?
+      No tryouts currently scheduled
+    - else
+      - tryout.each do |detail|
+        %li
+          = "#{l detail.start} - #{(detail.start + detail.length.minutes).strftime('%l:%M %P')} @" unless detail.start.nil?
+          - if detail.location.nil?
+            To Be Determined
+          - else
+            %a{:href => detail.location.map_url}
+              = "#{detail.location.name} - #{detail.location.address}"
+

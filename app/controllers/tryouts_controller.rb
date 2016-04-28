@@ -96,10 +96,10 @@ class TryoutsController < CmsController
     year = params['year'].to_i
     gender = Gender.new(params['gender'].to_i)
 
-    tryout, @age_group = lookup_tryout(gender, year)
+    tryout, age = lookup_tryout(gender, year)
 
     # Minify the HTML so we can make it part of the JSON
-    html = render_to_string :partial => 'tryout_info.html', locals: {tryout: tryout}, format: :html
+    html = render_to_string :partial => 'tryout_info.html', locals: {age: age, tryout: tryout}, format: :html
     minified = HtmlPress.press html
 
     respond_to do |format|
@@ -108,6 +108,26 @@ class TryoutsController < CmsController
   end
 
   protected
+
+  def lookup_tryout(gender, year)
+    age = EventDetail.year_to_age_group(year)
+
+    tryout_results = []
+    tryouts = Event.where(category: Event::categories[:tryout])
+    tryouts.each do |tryout|
+      boys, girls = tryout.by_age_groups
+
+      # filter to the right gender
+      gender_tryouts = (gender.name == 'Boys'? boys : girls)
+
+      tryout_results << gender_tryouts[age] unless gender_tryouts[age].nil?
+
+      i = 0
+    end
+
+    [tryout_results.flatten!, EventDetail.age_group_to_string(age)]
+
+  end
 
   # def lookup_tryout(gender, year)
   #   events, age_group = Event.tryouts(gender, year)
