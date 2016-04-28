@@ -1,25 +1,3 @@
--#- if tryout.nil?
-  = t('registration.tryouts.no_tryouts')
--#- else
-  - if tryout.event_details.nil?
-    = t('registration.tryouts.future_tryouts')
-  - else
-    - tryout.event_details.each do |detail|
-      %h2{:class => 'alt'}
-        -# TODO: Target one age group
-        = "#{t('team.gender.boys')}: #{detail.boys_age_groups.to_html}" unless detail.boys_age_groups.nil?
-        %br
-        = "#{t('team.gender.girls')}: #{detail.girls_age_groups.to_html}" unless detail.girls_age_groups.nil?
-        %ul
-          %li
-            = "#{detail.start} @"
-            - if detail.location.nil?
-              TBD
-            - else
-              %a{:href => detail.location.map_url}
-                = "#{detail.location.name} - #{detail.location.address}"
-
-
 %h2{:class => 'alt'}
   = age
   %ul
