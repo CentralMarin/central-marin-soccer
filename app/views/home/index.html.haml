@@ -21,12 +21,6 @@
 %div{class: 'grid_16'}
   &nbsp;
 
-- @events.each do |event|
-  %div{class: 'grid_16 box'}
-    %h2= event.heading
-    %p= event.tout.html_safe
-    = link_to t('home.learn_more'), tryouts_url(anchor: "#{event.type}"), class: 'right'
-
 %div{class: 'grid_10'}
   %div{class: 'box'}
     = cms_region(@web_parts, 'home.donate', :div)

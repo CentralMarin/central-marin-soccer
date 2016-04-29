@@ -14,8 +14,6 @@ class HomeController < CmsController
     Field.statuses.each_with_index do |status, index|
       @fields_status[status] = field_status_count[index] || 0
     end
-
-    @events = Event.touts
   end
 
   protected
