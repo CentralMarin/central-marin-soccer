@@ -25,7 +25,7 @@ class TryoutsController < CmsController
                                                           :policy_holder, :policy_number, :alergies, :medical_conditions,
                                                           :completed_by, :relationship, :waiver))
 
-    @tryout_registration.age = EventGroup.age_group(@tryout_registration.birthdate.year) unless @tryout_registration.birthdate.nil?
+    @tryout_registration.age = Event.age(@tryout_registration.birthdate.year) unless @tryout_registration.birthdate.nil?
 
     if @tryout_registration.save
 
@@ -121,20 +121,11 @@ class TryoutsController < CmsController
       gender_tryouts = (gender.name == 'Boys'? boys : girls)
 
       tryout_results << gender_tryouts[age] unless gender_tryouts[age].nil?
-
-      i = 0
     end
 
     [tryout_results.flatten!, EventDetail.age_group_to_string(age)]
-
   end
 
-  # def lookup_tryout(gender, year)
-  #   events, age_group = Event.tryouts(gender, year)
-  #
-  #   return (events.empty? ? nil : events[0]), age_group
-  # end
-  #
   def format_phone_number(phone_number)
 
     if phone_number.blank?

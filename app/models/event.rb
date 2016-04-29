@@ -15,6 +15,10 @@ class Event < ActiveRecord::Base
   validates :title, :presence => true
   validates :description, :presence => true
 
+  def self.age(year)
+    TRYOUT_YEAR - year + 1
+  end
+
   def by_age_groups
     boys = {}
     girls = {}

@@ -79,7 +79,7 @@
       %div.grid_3
         = f.label :previous_team, "#{t('registration.form.previous')} *"
       %div.grid_12
-        = f.select :previous_team, options_for_select({t('registration.form.previous_rec') => 'Rec Soccer', t('registration.form.previous_other') => 'Other Competitive Club', t('registration.form.previous_cm') => 'Central Marin Soccer Club'}), {:include_blank => true}, {:required => true}
+        = f.select :previous_team, options_for_select({t('registration.form.previous_rec') => 'Rec Soccer', t('registration.form.previous_other') => 'Other Competitive Club', t('registration.form.previous_cm') => 'Central Marin Soccer Club'}, selected: f.object.previous_team), {:include_blank => true}, {:required => true}
         = show_error(t('registration.form.previous'), :previous_team)
 
       %div.clear
@@ -177,7 +177,7 @@
       %div.grid_7
         = f.label :relationship, "#{t('registration.form.signor.relationship')} *"
       %div.grid_7
-        = f.select :relationship, options_for_select({t('registration.form.signor.father') => 'Father', t('registration.form.signor.mother') => 'Mother', t('registration.form.signor.guardian') => 'Guardian'}), {:include_blank => true}, {:required => true}
+        = f.select :relationship, options_for_select({t('registration.form.signor.father') => 'Father', t('registration.form.signor.mother') => 'Mother', t('registration.form.signor.guardian') => 'Guardian'}, selected: f.object.relationship), {:include_blank => true}, {:required => true}
         = show_error(t('registration.form.signor.relationship'), :relationship)
 
       %div.clear
@@ -214,10 +214,9 @@
   %script{type: 'text/javascript', src:'/polyfiller.js'}
   = javascript_include_tag "tryouts"
   %script
-    $(document).ready(soccer.tryouts.init_registration('tryout_registration_birthdate_1i', 'tryout_registration[gender]'));
+    $(document).ready(soccer.tryouts.init_registration('tryout_registration[gender]', 'tryout_registration_birthdate_1i', 'tryout_registration_birthdate_2i', 'tryout_registration_birthdate_3i'));
     $(document).ready($('input[name="tryout_registration[gender]"]').focus());
     $(document).ready($.webshims.setOptions('forms', { lazyCustomMessages: true }));
 
     //start polyfilling
     $(document).ready($.webshims.polyfill('forms forms-ext'));
-

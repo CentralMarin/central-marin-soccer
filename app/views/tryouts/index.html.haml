@@ -82,5 +82,5 @@
 - content_for :javascript do
   = javascript_include_tag "tryouts"
   %script
-    $(document).ready(soccer.tryouts.init_registration('birthdate_year', 'gender'));
+    $(document).ready(soccer.tryouts.init_registration('gender', 'birthdate_year'));
     $(document).ready(soccer.tryouts.show_age_group_chart($('#dialog')));

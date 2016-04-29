@@ -64,6 +64,6 @@
     = t('registration.confirmation.tryouts.heading')
   %p
     = t('registration.confirmation.tryouts.overview').html_safe
-  = render :partial => 'tryouts/tryout_info', :locals => {tryout: @tryout }
+  = render :partial => 'tryouts/tryout_info', :locals => {age: @age_group, tryout: @tryout }
 
 

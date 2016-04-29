@@ -78,7 +78,7 @@ module TryoutRegistrationsHelper
 
   def end_row()
     content_tag(:div, :class => 'clear') do
-      '&nbsp;'
+      '&nbsp;'.html_safe
     end
   end
 

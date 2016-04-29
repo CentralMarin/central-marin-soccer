@@ -41,7 +41,7 @@ class EventDetail < ActiveRecord::Base
   end
 
   def self.year_to_age_group(year)
-    index = (Event::TRYOUT_YEAR - year) - Event::MIN_AGE
+    index = Event.age(year) - 1 - Event::MIN_AGE
     EventDetail::AGE_GROUPS[index]
   end
 
@@ -79,11 +79,8 @@ class EventDetail < ActiveRecord::Base
   end
 
   def self.age_group_to_string(group)
-    # "#{age_group_to_year(group)} (#{group.to_s})"
     "#{group.to_s} (#{age_group_to_year(group)})"
   end
-
-  # TODO: U19 showing wrong birthyear
 
   protected
 
