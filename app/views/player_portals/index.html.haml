@@ -24,7 +24,7 @@
 
 .jumbotron
   %h2
-    = t 'player_portal.index.jumbo.heading', first: @player_portal.first, year: EventGroup::TRYOUT_YEAR
+    = t 'player_portal.index.jumbo.heading', first: @player_portal.first, year: Event::TRYOUT_YEAR
   = t('player_portal.index.jumbo.body').html_safe
 
   - progress = @player_portal.status.progress
