@@ -85,10 +85,13 @@ class EventDetail < ActiveRecord::Base
   protected
 
   def self.age_groups_to_string(groups)
-    if groups.length > 3
-      age_group_to_string(groups[0]) + ' - ' + age_group_to_string(groups[-1])
-    else
-      age_group_to_string(groups[0]) + ', ' + age_group_to_string(groups[-1])
+    case groups.length
+      when 1
+        age_group_to_string(groups[0])
+      when 2
+        age_group_to_string(groups[0]) + ', ' + age_group_to_string(groups[-1])
+      else
+        age_group_to_string(groups[0]) + ' - ' + age_group_to_string(groups[-1])
     end
   end
 
