@@ -290,10 +290,12 @@ es:
       referees: 'Número de Árbitros'
       born: 'Nacido en '
       minute: ' minutos'
+      info: 'Más Información'
     tryouts:
       heading: 'Seleccione cumpleaños del jugador y el género'
       no_tryouts: 'No hay pruebas programadas actualmente'
       future_tryouts: "Registrar para las pruebas y yo te enviará un mail cuando se finalicen las fechas, horas y lugares"
+      location_tba: 'El lugar se anunciará'
     confirmation:
       subject: 'Marin Centro Competitiva Registro Confirmación Club de Fútbol ...'
       heading: ' Prueba Confirmación'

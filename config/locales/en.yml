@@ -268,10 +268,12 @@ en:
       referees: 'Number of Referees'
       born: 'Born in '
       minute: ' min'
+      info: 'More Information'
     tryouts:
       heading: "Select the player's birthday and gender"
       no_tryouts: 'No tryouts currently scheduled'
       future_tryouts: "Register for tryouts and we'll email you when the dates, times, and locations are finalized"
+      location_tba: 'The location will be announced.'
     confirmation:
       subject: 'Central Marin Competitive Soccer Club Registration Confirmation ...'
       heading: ' Tryout Confirmation'

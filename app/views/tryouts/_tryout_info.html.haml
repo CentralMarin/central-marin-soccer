@@ -2,13 +2,13 @@
   = age
   %ul
     - if tryout.nil?
-      No tryouts currently scheduled
+      = t('registration.tryouts.no_tryouts')
     - else
       - tryout.each do |detail|
         %li
           = "#{l detail.start} - #{(detail.start + detail.length.minutes).strftime('%l:%M %P')} @" unless detail.start.nil?
           - if detail.location.nil?
-            To Be Determined
+            =t('registration.tryouts.location_tba')
           - else
             %a{:href => detail.location.map_url}
               = "#{detail.location.name} - #{detail.location.address}"
