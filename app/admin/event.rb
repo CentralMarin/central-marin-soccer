@@ -143,9 +143,9 @@ ActiveAdmin.register Event do
           row = ['', '', '', '', '', ''] unless index == 0
           row << event_detail.boys_age_groups.to_s
           row << event_detail.girls_age_groups.to_s
-          row << I18n.l(event_detail.start)
+          row << (event_detail.start.nil? ? '' : I18n.l(event_detail.start))
           row << event_detail.length
-          row << event_detail.location.name
+          row << (event_detail.location.nil? ? '' : event_detail.location.name)
 
           csv << row
         end
