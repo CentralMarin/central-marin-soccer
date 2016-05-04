@@ -63,7 +63,7 @@ class Event < ActiveRecord::Base
       end
 
       # Convert array of ages to string of age ranges
-      result[EventDetail.to_ranges(ages)] = current_details
+      result[EventDetail.to_ranges(ages)] = current_details.sort! {|a,b| a.start <=> b.start }
     end
   end
 
