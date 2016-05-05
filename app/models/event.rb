@@ -19,6 +19,20 @@ class Event < ActiveRecord::Base
     TRYOUT_YEAR - year + 1
   end
 
+  def age_specific_details(sex, birthday)
+    age = "U#{Event.age(birthday.year)}".to_sym
+    details = nil
+    if sex == 'Boys'
+      details = event_details.with_boys_age_groups(age)
+    else
+      details = event_details.with_girls_age_groups(age)
+    end
+
+    # only return events in the future
+    now = Time.now
+    details.select{|x| x.start.nil? || x.start >= now}
+  end
+
   def by_age_groups
     boys = {}
     girls = {}

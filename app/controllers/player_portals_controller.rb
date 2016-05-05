@@ -37,6 +37,7 @@ class PlayerPortalsController < InheritedResources::Base
 
   def index
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
+    @events = Event.all
   end
 
   def club_form

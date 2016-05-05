@@ -22,12 +22,41 @@
           = t 'player_portal.index.heading'
 
 
+- progress = @player_portal.status.progress
+- if progress == 100
+  .jumbotron
+    %h2
+      Upcoming Events
+      - @events.each do |event|
+        - details = event.age_specific_details(@player_portal.gender, @player_portal.birthday)
+        - if details.length > 0
+          .panel.panel-default
+            .panel-heading
+              %h3.panel-title
+                = event.title
+            .panel-body
+              = event.description.html_safe
+              %ul.list-group
+                - details.each do |detail|
+                  %li.list-group-item
+                    %h5
+                      - if detail.start.nil? && detail.location.nil?
+                        The Date, Time, and Location will be announced shortly
+                      - else
+                        - if detail.start.nil?
+                          The Date and Time will be announced shortly
+                        - else
+                          = "#{l detail.start} - #{(detail.start + detail.length.minutes).strftime('%l:%M %P')} @" unless detail.start.nil?
+                        - if detail.location.nil?
+                          =t('registration.tryouts.location_tba')
+                        - else
+                          %a{:href => detail.location.map_url}
+                            = "#{detail.location.name} - #{detail.location.address}"
+
 .jumbotron
   %h2
     = t 'player_portal.index.jumbo.heading', first: @player_portal.first, year: Event::TRYOUT_YEAR
   = t('player_portal.index.jumbo.body').html_safe
-
-  - progress = @player_portal.status.progress
 
   .panel.panel-default
     .panel-heading
