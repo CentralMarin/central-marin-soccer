@@ -7,7 +7,10 @@ class PlayerPortal < ActiveRecord::Base
                 :team_year,
                 :birth_year
 
-  scope :birth_year, lambda {|year| where("birthday >= ? and birthday <= ?", "#{year}-01-01", "#{year}-12-31")}
+  def self.birth_year_in(*args)
+    args.sort!{|a,b| a <=> b}
+    where("birthday >= ? and birthday <= ?", "#{args[0]}-01-01", "#{args[-1]}-12-31")
+  end
 
   def self.paid_club_fees(paid)
     if paid == 'Yes'
@@ -26,7 +29,7 @@ class PlayerPortal < ActiveRecord::Base
   end
 
   def self.ransackable_scopes(_opts)
-    [:birth_year, :paid_club_fees, :oef]
+    [:birth_year_in, :paid_club_fees, :oef]
   end
 
   # Credit Card Processing Fees
