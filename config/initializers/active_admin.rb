@@ -232,4 +232,5 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
+  config.current_filters = false
 end
