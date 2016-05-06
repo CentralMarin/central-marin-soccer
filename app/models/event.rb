@@ -15,6 +15,10 @@ class Event < ActiveRecord::Base
   validates :title, :presence => true
   validates :description, :presence => true
 
+  def self.years
+    (Time.now.year - Event::MAX_AGE..Time.now.year - Event::MIN_AGE).to_a.map(&:to_s)
+  end
+
   def self.age(year)
     TRYOUT_YEAR - year + 1
   end

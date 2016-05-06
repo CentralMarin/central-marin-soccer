@@ -43,7 +43,7 @@ ActiveAdmin.register PlayerPortal do
   filter :last_or_parent1_last_or_parent2_last_cont, as: :string, label: 'Last Name'
   filter :email_or_parent1_email_or_parent2_email_cont, as: :string, label: 'Email'
   filter :gender, as: :check_boxes, label: 'Gender', collection: ['Boys', 'Girls']
-  filter :birth_year, as: :check_boxes, label: 'Year', collection: proc {(Time.now.year - Event::MAX_AGE..Time.now.year - Event::MIN_AGE).to_a}
+  filter :birth_year, as: :check_boxes, label: 'Year', collection: proc {Event.years}
   filter :paid_club_fees, as: :select, collection: ['Yes', 'No']
   filter :oef, as: :select, collection: ['Yes', 'No']
 
