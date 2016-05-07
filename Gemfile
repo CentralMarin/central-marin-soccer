@@ -6,22 +6,22 @@ gem 'rails', '4.2.6'
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
 gem 'ckeditor', '4.1.6'
-gem 'carrierwave', '0.11.0'
+gem 'carrierwave', '0.11.2'
 gem 'mini_magick', '4.5.1'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
 gem 'google_drive', '1.0.6'
-gem 'premailer-rails', '1.9.1'
+gem 'premailer-rails', '1.9.2'
 gem 'nokogiri', '1.6.7.2'
-gem 'devise', '3.5.6'
-gem 'bing_translator', '4.5.0'
+gem 'devise', '4.1.0'
+gem 'bing_translator', '4.6.0'
 gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activeadmin-ranked-model'
 gem 'html_press', '0.8.2'
 gem 'pdf-forms', '1.0.0'
-gem 'stripe', '1.38.0'
+gem 'stripe', '1.42.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '1.3.11'
 
@@ -39,7 +39,7 @@ gem 'uglifier', '2.7.2'
 gem 'therubyracer', :platforms => :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-ui-themes', '0.0.11'
+gem 'jquery-ui-themes', '0.0.12'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '2.5.3'
@@ -64,17 +64,17 @@ group :development do
 end
 
 group :staging, :production do
-  gem 'mysql2', '0.4.3'
+  gem 'mysql2', '0.4.4'
 end
 
 group :development, :test do
   gem 'i18n-tasks', '~> 0.9.5'
   gem 'rspec-rails', '3.4.2'
-  gem 'factory_girl_rails', '4.6.0'
+  gem 'factory_girl_rails', '4.7.0'
   gem 'faker', '1.6.3'
-  gem 'capybara', '2.6.2'
+  gem 'capybara', '2.7.1'
   gem 'selenium-webdriver', '2.53.0'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '1.6.4', group: :development
+gem 'spring', '1.7.1', group: :development
