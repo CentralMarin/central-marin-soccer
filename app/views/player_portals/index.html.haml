@@ -7,6 +7,16 @@
       &times;
   .message
 
+.modal.fade#pleaseWaitDialog{tabindex: '-1', role: 'dialog', data: {backdrop: 'static', keyboard: 'false'}}
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        %h3
+          = t 'player_portal.registration.processing'
+      .modal-body
+        .progress{style: 'height: 20px;'}
+          .progress-bar.progress-bar-success.progress-bar-striped.active{role: 'progressbar', style: "width: 100%;"}
+
 / Declare status tags
 - icon_ok = {class: 'glyphicon-ok', style: 'color:green'}
 
@@ -37,8 +47,9 @@
   %script
     $(document).ready(player_portal.modalPdf.init());
     $(document).ready(player_portal.modalImg.init());
+    var errors = {'amex': "#{t('player_portal.registration.no_amex')}", 'docs': "#{t('player_portal.registration.read_docs')}", 'fiveHundred': "#{t('player_portal.registration.fiveHundred')}"}
     - if progress == 100
       - @events.each do |event|
         - details = event.age_specific_details(@player_portal.gender, @player_portal.birthday)
         - if details.length > 0
-          $(document).ready(player_portal.event_registration('event_#{event.id}', "#{Rails.application.secrets.stripe_key}"));
+          $(document).ready(player_portal.event_registration(#{event.cost}, 'event_#{event.id}', "#{Rails.application.secrets.stripe_key}", null, errors));

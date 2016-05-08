@@ -85,8 +85,9 @@ function makeid()
         _scrollToTop();
       };
 
-      var setupStripe = function(key, button, validate, success) {
+      var setupStripe = function(key, button, validate, success, errorMsgs) {
 
+        var _errorMsgs = errorMsgs;
         var _submitForm = function(url, formData) {
 
           var pleaseWait = $('#pleaseWaitDialog');
@@ -485,15 +486,13 @@ function makeid()
 
     }());
 
-    player_portal.event_registration = function(container_name, key, success) {
+    player_portal.event_registration = function(cost, container_name, key, success, errors) {
         var _container_name = container_name;
         var _event_container;
         var _subtotal = 0.0;
+        var _cost = cost;
 
         var _calculateAndShowCost = function() {
-          var subtotal_id = $('#' + _container_name + '_subtotal');
-          var fees_id = $('#' + _container_name + '_fees');
-          var total_id = $('#' + _container_name + '_total');
 
           // Calculate credit card fees and total
           var total = 0.00;
@@ -504,13 +503,14 @@ function makeid()
           }
 
           // update the view
-          subtotal_id.html('$' + _subtotal);
-          fees_id.html('$' + cc_fees);
-          total_id.html('$' + total);
+          $('#' + _container_name + '_subtotal').html('$' + _subtotal);
+          $('#' + _container_name + '_fees').html('$' + cc_fees);
+          $('#' + _container_name + '_total').html('$' + total);
+          $('#' + _container_name + '_button').data('amount', '$' + total);
         };
 
         var _eventSelectionChange = function(e) {
-          _subtotal += ($(e.target).is(':checked') ? 10.00 : -10.00);
+          _subtotal += ($(e.target).is(':checked') ? _cost : -1 * _cost);
 
           _calculateAndShowCost();
         };
@@ -521,7 +521,7 @@ function makeid()
         };
 
         // register click handler
-        var _init = function(key, success) {
+        var _init = function(key, success, errors) {
           _event_container = $('#' + container_name);
           // add onchange event for all checkboxes
           checkboxes = _event_container.find('input:checkbox');
@@ -530,10 +530,10 @@ function makeid()
           }
           _calculateAndShowCost();
 
-          player_portal.payment.setupStripe(key, $('#' + container_name + '_button'), validate, success)
+          player_portal.payment.setupStripe(key, $('#' + container_name + '_button'), validate, success, errors)
         };
 
-      _init(key, success);
+      _init(key, success, errors);
     };
 }());
 
