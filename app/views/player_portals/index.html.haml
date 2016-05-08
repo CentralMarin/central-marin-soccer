@@ -32,4 +32,5 @@
     $(document).ready(player_portal.modalImg.init());
     - if progress == 100
       - @events.each do |event|
-        $(document).ready(player_portal.event_registration.init($('event_#{event.id}'));
+        - if event.event_details.length > 0
+          $(document).ready(player_portal.event_registration.init('event_#{event.id}'));

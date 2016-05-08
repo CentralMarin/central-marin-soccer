@@ -395,14 +395,46 @@ function makeid()
     }());
 
     player_portal.event_registration = (function() {
+        var _container_name;
         var _event_container;
+        var _subtotal = 0.0;
+
+        var _calculateAndShowCost = function() {
+          var subtotal_id = $('#' + _container_name + '_subtotal');
+          var fees_id = $('#' + _container_name + '_fees');
+          var total_id = $('#' + _container_name + '_total');
+
+          // Calculate credit card fees and total
+          var total = 0.00;
+          var cc_fees = 0.00;
+          if (_subtotal != 0.0) {
+            total = ((_subtotal + <%= PlayerPortal::CC_FIXED %>) / (1 -<%= PlayerPortal::CC_PERCENTAGE %>)).toFixed(2);
+            var cc_fees = (total - _subtotal).toFixed(2);
+          }
+
+          // update the view
+          subtotal_id.html('$' + _subtotal);
+          fees_id.html('$' + cc_fees);
+          total_id.html('$' + total);
+        };
+
+        var _eventSelectionChange = function(e) {
+          _subtotal += ($(e.target).is(':checked') ? 10.00 : -10.00);
+
+          _calculateAndShowCost();
+        };
 
         // register click handler
-        var init = function(container) {
-            _event_container = container;
-            // add onchange event for all checkboxes
-            checkboxes = container.children('input:checkbox')
-            var i = 0;
+        var init = function(container_name) {
+          _container_name = container_name;
+          _event_container = $('#' + container_name);
+          // add onchange event for all checkboxes
+          checkboxes = _event_container.find('input:checkbox');
+          for(var i = 0; i < checkboxes.length; i++) {
+              checkboxes[i].onchange = _eventSelectionChange;
+          }
+          _calculateAndShowCost();
+
         };
 
         return {

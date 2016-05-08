@@ -13,7 +13,7 @@
               %p
                 = event.description.html_safe
               %p
-                = "Cost: #{number_to_currency(event.cost)}"
+                = "Cost: #{number_to_currency(event.cost)} / session"
               %p
                 If you'd like to attend, select the dates below and click the register button.
               %ul.list-group{id: "event_#{event.id}"}
@@ -34,8 +34,26 @@
                           - else
                             %a{:href => detail.location.map_url}
                               = "#{detail.location.name} - #{detail.location.address}"
-              %p
-                Credit Card Processing Fee:
-              %p
-                Total:
-              %button
+
+
+              %h5
+                %table.table.table-striped{data: {description: "#{event.title}"}}
+                  %tr
+                    %td
+                      .text-nowrap
+                        Subtotal
+                    %td
+                      .text-right{id: "event_#{event.id}_subtotal"}
+                  %tr
+                    %td
+                      .text-nowrap
+                        Credit Card Fees
+                    %td
+                      .text-right{id: "event_#{event.id}_fees"}
+                  %tr
+                    %td
+                      .text-nowrap
+                        Total
+                    %td
+                      .text-right{id: "event_#{event.id}_total"}
+                = t('player_portal.registration.payment.types').html_safe
