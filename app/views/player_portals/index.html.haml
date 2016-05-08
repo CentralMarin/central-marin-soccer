@@ -35,23 +35,35 @@
               %h3.panel-title
                 = event.title
             .panel-body
-              = event.description.html_safe
+              %p
+                = event.description.html_safe
+              %p
+                = "Cost: #{number_to_currency(event.cost)}"
+              %p
+                If you'd like to attend, select the dates below and click the register button.
               %ul.list-group
                 - details.each do |detail|
                   %li.list-group-item
-                    %h5
-                      - if detail.start.nil? && detail.location.nil?
-                        The Date, Time, and Location will be announced shortly
-                      - else
-                        - if detail.start.nil?
-                          The Date and Time will be announced shortly
+                    .small
+                      %input{type: :checkbox, name: "event_detail_#{detail.id}", id: "event_detail_#{detail.id}"}
+                      %label{for: "event_detail_#{detail.id}"}
+                        - if detail.start.nil? && detail.location.nil?
+                          The Date, Time, and Location will be announced shortly
                         - else
-                          = "#{l detail.start} - #{(detail.start + detail.length.minutes).strftime('%l:%M %P')} @" unless detail.start.nil?
-                        - if detail.location.nil?
-                          =t('registration.tryouts.location_tba')
-                        - else
-                          %a{:href => detail.location.map_url}
-                            = "#{detail.location.name} - #{detail.location.address}"
+                          - if detail.start.nil?
+                            The Date and Time will be announced shortly
+                          - else
+                            = "#{l detail.start} - #{(detail.start + detail.length.minutes).strftime('%l:%M %P')} @" unless detail.start.nil?
+                          - if detail.location.nil?
+                            =t('registration.tryouts.location_tba')
+                          - else
+                            %a{:href => detail.location.map_url}
+                              = "#{detail.location.name} - #{detail.location.address}"
+              %p
+                Credit Card Processing Fee:
+              %p
+                Total:
+              %button
 
 .jumbotron
   %h2
@@ -114,6 +126,5 @@
   %script
     $(document).ready(player_portal.modalPdf.init());
     $(document).ready(player_portal.modalImg.init());
-    if (!("FormData" in window)) {
-    // TODO: Pop a modal and force the user to use another browser
-    }
+    - if progress == 100
+      $(document).ready(player_portal.event_registration.init());

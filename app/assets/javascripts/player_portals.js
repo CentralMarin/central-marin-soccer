@@ -9,23 +9,6 @@
 //= require jquery.Jcrop.min
 //= require namespace
 
-jQuery.swap = function( elem, options, callback, args ) {
-    var ret, name, old = {};
-    // Remember the old values, and insert the new ones
-    for ( name in options ) {
-        old[ name ] = elem.style[ name ];
-        elem.style[ name ] = options[ name ];
-    }
-
-    ret = callback.apply( elem, args || [] );
-
-    // Revert the old values
-    for ( name in options ) {
-        elem.style[ name ] = old[ name ];
-    }
-    return ret;
-};
-
 function makeid()
 {
     var text = "";
@@ -409,6 +392,17 @@ function makeid()
             init:init
         };
 
+    }());
+
+    player_portal.event_registration = (function() {
+        // register click handler
+        var init = function() {
+            alert('init');
+        };
+
+        return {
+            init:init
+        }
     }());
 }());
 
