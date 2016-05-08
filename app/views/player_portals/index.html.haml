@@ -41,4 +41,4 @@
       - @events.each do |event|
         - details = event.age_specific_details(@player_portal.gender, @player_portal.birthday)
         - if details.length > 0
-          $(document).ready(player_portal.event_registration.init('event_#{event.id}', "#{Rails.application.secrets.stripe_key}"));
+          $(document).ready(player_portal.event_registration('event_#{event.id}', "#{Rails.application.secrets.stripe_key}"));

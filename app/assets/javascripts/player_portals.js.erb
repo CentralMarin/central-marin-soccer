@@ -485,8 +485,8 @@ function makeid()
 
     }());
 
-    player_portal.event_registration = (function() {
-        var _container_name;
+    player_portal.event_registration = function(container_name, key, success) {
+        var _container_name = container_name;
         var _event_container;
         var _subtotal = 0.0;
 
@@ -517,12 +517,11 @@ function makeid()
 
         // make sure we have something selected
         var validate = function() {
-          return (_subtotal <= 0 ? false : true);
+          return _subtotal > 0;
         };
 
         // register click handler
-        var init = function(container_name, key, success) {
-          _container_name = container_name;
+        var _init = function(key, success) {
           _event_container = $('#' + container_name);
           // add onchange event for all checkboxes
           checkboxes = _event_container.find('input:checkbox');
@@ -534,10 +533,8 @@ function makeid()
           player_portal.payment.setupStripe(key, $('#' + container_name + '_button'), validate, success)
         };
 
-        return {
-            init:init
-        }
-    }());
+      _init(key, success);
+    };
 }());
 
 $("[data-hide]").on("click", function(){
