@@ -395,9 +395,14 @@ function makeid()
     }());
 
     player_portal.event_registration = (function() {
+        var _event_container;
+
         // register click handler
-        var init = function() {
-            alert('init');
+        var init = function(container) {
+            _event_container = container;
+            // add onchange event for all checkboxes
+            checkboxes = container.children('input:checkbox')
+            var i = 0;
         };
 
         return {

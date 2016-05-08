@@ -1,0 +1,56 @@
+- icon_missing = {class: 'glyphicon-remove', style: 'color:red'}
+.jumbotron
+  %h2
+    = t 'player_portal.index.jumbo.heading', first: player_portal.first, year: Event::TRYOUT_YEAR
+  = t('player_portal.index.jumbo.body').html_safe
+
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title
+        = t 'player_portal.index.panel.heading'
+        .progress
+          .progress-bar{class: (progress == 100 ? 'progress-bar-success' : 'progress-bar-info'), role: 'progressbar', aria: {valuenow: progress, valuemin: '0', valuemax: '100'}, style: "width: #{progress}%"}
+            %span.sr-only
+              = t 'player_portal.index.panel.sr_status', progress: progress
+    .panel-body
+      %ul
+        - PlayerPortal.values_for_status.each do |status|
+          %li
+            %span.glyphicon{(player_portal.status?(status) ? icon_ok : icon_missing)}
+            = t player_portal.status.i18n(status)
+            - case status
+              - when :form
+                %button.btn.btn-default.btn-sm{data: {toggle: 'modal', target: '#documentModal', document: "#{player_portal_club_form_path}#Fit", title: t('player_portal.index.modal.club_form')}}
+                  = t 'player_portal.view'
+              - when :picture
+                - if player_portal.picture.present?
+                  %button.btn.btn-default.btn-sm{data: {toggle: 'modal', target: '#imageModal', document: "#{player_portal.picture}", title: t('player_portal.index.modal.player_pass')}}
+                    = t 'player_portal.view'
+              - when :proof_of_birth
+              - when :paid
+                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.team_fees.pdf')), title: t('player_portal.registration.documents.team_fees.heading')}}
+                  = t 'player_portal.registration.documents.team_fees.button'
+              - when :volunteer
+                - if player_portal.volunteer_choice.present?
+                  = "- #{t(PlayerPortal::VOLUNTEER_OPTIONS[player_portal.volunteer_choice.to_sym])}"
+              - when :docs_reviewed
+                %br
+                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.concussion.pdf')), title: t('player_portal.registration.documents.concussion.heading')}}
+                  = t 'player_portal.registration.documents.concussion.button'
+                &nbsp;
+                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.post_concussion.pdf')), title: t('player_portal.registration.documents.post_concussion.heading')}}
+                  = t 'player_portal.registration.documents.post_concussion.button'
+                &nbsp;
+                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.parent_code_of_conduct.pdf')), title: t('player_portal.registration.documents.parent_code_of_conduct.heading')}}
+                  = t 'player_portal.registration.documents.parent_code_of_conduct.button'
+                &nbsp;
+                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: url_to_asset(t('player_portal.registration.documents.player_code_of_conduct.pdf')), title: t('player_portal.registration.documents.player_code_of_conduct.heading')}}
+                  = t 'player_portal.registration.documents.player_code_of_conduct.button'
+              - when :oef
+                %br
+                %button.btn.btn-default.btn-sm{type: 'button', data: {toggle: 'modal', target: '#documentModal', document: "#{url_to_asset(t('player_portal.registration.oef.pdf'))}", title: 'On Equal Footing'}}
+                  = t 'player_portal.registration.oef.info'
+
+  %p.text-right
+    %a.btn.btn-primary.btn-lg{href: "#{player_portal_registration_path}", role: "button"}
+      = t(progress != 100 ? 'player_portal.index.jumbo.button_complete' : 'player_portal.index.jumbo.button_update')
