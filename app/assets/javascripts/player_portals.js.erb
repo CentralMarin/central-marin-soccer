@@ -77,6 +77,97 @@ function makeid()
         };
     }());
 
+    player_portal.payment = (function() {
+      var showAlert = function(mesg) {
+        var alert = $('#alert');
+        alert.find('.message').html(mesg);
+        alert.show();
+        _scrollToTop();
+      };
+
+      var setupStripe = function(key, button, validate, success) {
+
+        var _submitForm = function(url, formData) {
+
+          var pleaseWait = $('#pleaseWaitDialog');
+
+          // Show the pleaseWaitDialog
+          pleaseWait.modal('show');
+
+          $.ajax({
+                url: url,
+                data: formData,
+                contentType: false,
+                processData: false,
+                type: 'POST'
+              })
+              .done(function(data) {
+                window.location.href = _success + '?success=1';
+              })
+              .fail(function(data) {
+                if (data.status == 402) {
+                  var error = JSON.parse(data.responseText).error;
+
+                  // Dismiss the modal and show the error message
+                  pleaseWait.modal('hide');
+
+                  _showAlert(error);
+                } else {
+                  window.alert(_errorMsgs.fiveHundred);
+                }
+              });
+        };
+
+        // Setup Stripe
+        var handler = StripeCheckout.configure({
+          key: key,
+          image: 'https://s3.amazonaws.com/stripe-uploads/acct_17gopvKdw52ZEJhQmerchant-icon-1456253746398-logo.png',
+          locale: 'auto',
+          token: function(token) {
+            // Due to high fees, we do not accept American Express cards
+            if (token.card.brand == 'American Express') {
+              showAlert(_errorMsgs.amex);
+              return;
+            }
+
+            var form = button.parents('form');
+            var formData = new FormData(form[0]);
+            formData.append('stripeToken', token.id);
+            formData.append('stripeEmail', token.email);
+
+            success(form.attr('action'), formData);
+          }
+        });
+
+        button.on('click', function(e) {
+
+          if (!validate())
+          {
+            return false;
+          }
+
+          // Open Checkout with further options
+          handler.open({
+            name: 'Central Marin Soccer Club',
+            description: button.data('description'),
+            amount: button.data('amount')
+          });
+          e.preventDefault();
+        });
+
+        // Close Checkout on page navigation
+        $(window).on('popstate', function() {
+          handler.close();
+        });
+      };
+
+      return {
+        showAlert: showAlert,
+        setupStripe: setupStripe
+      }
+
+    }());
+
     player_portal.registration_wizard = (function() {
         var CROP_WIDTH = 300;
         var CROP_HEIGHT = 300;
@@ -424,8 +515,13 @@ function makeid()
           _calculateAndShowCost();
         };
 
+        // make sure we have something selected
+        var validate = function() {
+          return (_subtotal <= 0 ? false : true);
+        };
+
         // register click handler
-        var init = function(container_name) {
+        var init = function(container_name, key, success) {
           _container_name = container_name;
           _event_container = $('#' + container_name);
           // add onchange event for all checkboxes
@@ -435,6 +531,7 @@ function makeid()
           }
           _calculateAndShowCost();
 
+          player_portal.payment.setupStripe(key, $('#' + container_name + '_button'), validate, success)
         };
 
         return {
