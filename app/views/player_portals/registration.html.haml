@@ -65,7 +65,7 @@
   %script{src: "https://checkout.stripe.com/checkout.js"}
   %script
     var defaultImage = "#{@player_portal.status?(:picture) ? @player_portal.picture :  image_path('default-avatar.png')}";
-    var errors = {'amex': "#{t('player_portal.registration.no_amex')}", 'docs': "#{t('player_portal.registration.read_docs')}", 'fiveHundred': "#{t('player_portal.registration.read_docs')}"}
+    var errors = {'amex': "#{t('player_portal.registration.no_amex')}", 'docs': "#{t('player_portal.registration.read_docs')}", 'fiveHundred': "#{t('player_portal.registration.fiveHundred')}"}
     $(document).ready(player_portal.registration_wizard.init(defaultImage, "#{Rails.application.secrets.stripe_key}", "#{player_portal_path}", #{@player_portal.status?(:paid)}, errors));
     $(document).ready(player_portal.modalPdf.init());
 
