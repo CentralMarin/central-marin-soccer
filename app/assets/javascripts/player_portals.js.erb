@@ -409,7 +409,7 @@ function makeid()
           var cc_fees = 0.00;
           if (_subtotal != 0.0) {
             total = ((_subtotal + <%= PlayerPortal::CC_FIXED %>) / (1 -<%= PlayerPortal::CC_PERCENTAGE %>)).toFixed(2);
-            var cc_fees = (total - _subtotal).toFixed(2);
+            cc_fees = (total - _subtotal).toFixed(2);
           }
 
           // update the view
