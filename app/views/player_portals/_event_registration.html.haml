@@ -5,7 +5,8 @@
       - @events.each do |event|
         - details = event.age_specific_details(@player_portal.gender, @player_portal.birthday)
         - if details.length > 0
-          %form{method: 'post', action: "#{player_portal_events_path}"}
+          = form_tag player_portal_events_path do
+            = hidden_field_tag('event', event.id)
             .panel.panel-default
               .panel-heading
                 %h3.panel-title

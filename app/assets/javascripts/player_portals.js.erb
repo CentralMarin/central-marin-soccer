@@ -91,14 +91,13 @@ function makeid()
         _scrollToTop();
       };
 
-      var setupStripe = function(key, button, validate, success, errorMsgs) {
+      var setupStripe = function(key, button, validate, errorMsgs) {
 
         var _errorMsgs = errorMsgs;
         var _submitForm = function(url, formData) {
 
-          var pleaseWait = $('#pleaseWaitDialog');
-
           // Show the pleaseWaitDialog
+          var pleaseWait = $('#pleaseWaitDialog');
           pleaseWait.modal('show');
 
           $.ajax({
@@ -109,18 +108,16 @@ function makeid()
                 type: 'POST'
               })
               .done(function(data) {
-                window.location.href = _success + '?success=1';
+                window.location.href = url + '?success=1';
               })
               .fail(function(data) {
+                // Dismiss the modal and show the error message
+                pleaseWait.modal('hide');
+
                 if (data.status == 402) {
-                  var error = JSON.parse(data.responseText).error;
-
-                  // Dismiss the modal and show the error message
-                  pleaseWait.modal('hide');
-
-                  _showAlert(error);
+                  showAlert(JSON.parse(data.responseText).error);
                 } else {
-                  window.alert(_errorMsgs.fiveHundred);
+                  showAlert(_errorMsgs.fiveHundred);
                 }
               });
         };
@@ -142,7 +139,7 @@ function makeid()
             formData.append('stripeToken', token.id);
             formData.append('stripeEmail', token.email);
 
-            success(form.attr('action'), formData);
+            _submitForm(form.attr('action'), formData);
           }
         });
 
@@ -370,16 +367,14 @@ function makeid()
                 window.location.href = _success + '?success=1';
             })
             .fail(function(data) {
-                if (data.status == 402) {
-                    var error = JSON.parse(data.responseText).error;
+              // Dismiss the modal and show the error message
+              pleaseWait.modal('hide');
 
-                    // Dismiss the modal and show the error message
-                    pleaseWait.modal('hide');
-
-                    _showAlert(error);
-                } else {
-                    window.alert(_errorMsgs.fiveHundred);
-                }
+              if (data.status == 402) {
+                _showAlert(JSON.parse(data.responseText).error);
+              } else {
+                _showAlert(_errorMsgs.fiveHundred);
+              }
             });
         };
 
@@ -492,7 +487,7 @@ function makeid()
 
     }());
 
-    player_portal.event_registration = function(cost, container_name, key, success, errors) {
+    player_portal.event_registration = function(cost, container_name, key, errors) {
         var _container_name = container_name;
         var _event_container;
         var _subtotal = 0.0;
@@ -527,7 +522,7 @@ function makeid()
         };
 
         // register click handler
-        var _init = function(key, success, errors) {
+        var _init = function(key, errors) {
           _event_container = $('#' + container_name);
           // add onchange event for all checkboxes
           checkboxes = _event_container.find('input:checkbox');
@@ -536,10 +531,11 @@ function makeid()
           }
           _calculateAndShowCost();
 
-          player_portal.payment.setupStripe(key, $('#' + container_name + '_button'), validate, success, errors)
+          var button = $('#' + container_name + '_button');
+          player_portal.payment.setupStripe(key, button, validate, errors)
         };
 
-      _init(key, success, errors);
+      _init(key, errors);
     };
 }());
 

@@ -40,6 +40,53 @@ class PlayerPortalsController < InheritedResources::Base
     @events = Event.all
   end
 
+  def events
+    player_portal = PlayerPortal.find_by(uid: params[:uid])
+    stripe_email = params['stripeEmail']
+    stripe_token = params['stripeToken']
+    event = Event.find_by(id: params['event'])
+
+    # Find the events selected
+    event_details = []
+    dates_selected = []
+    params.keys.each do |key|
+      if key.start_with?('event_detail_')
+        ed = EventDetail.find_by(id: key.scan(/\d+$/).first)
+        dates_selected << ed.start.strftime("%m/%d/%Y")
+        event_details << ed
+      end
+    end
+
+    # Calculate the amount due
+    subtotal = event.cost * event_details.length
+    total = (subtotal + calculate_cc_fees(subtotal)).round(2)
+
+    # update the database in a transaction
+    PlayerPortalSelectedEvent.transaction do
+
+      event_details.each do |detail|
+        PlayerPortalSelectedEvent.create!(player_portal_id: player_portal.id, event_detail_id: detail.id)
+      end
+
+      # Notify stripe about the amount
+      charge = Stripe::Charge.create(
+          :amount      => (total * 100).to_i,
+          :description => event.description,
+          :source => stripe_token,
+          :currency    => 'usd',
+          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, md5: player_portal.md5, event_dates: dates_selected.join(', ')}
+      )
+
+    end
+
+    # TODO: Send confirmation email
+
+    render json: {}, status: 200
+
+  rescue Stripe::CardError => e
+    render json: { :error => e.message }, :status => 402
+  end
+
   def club_form
     player = PlayerPortal.find_by(uid: params[:uid])
 
@@ -160,13 +207,17 @@ class PlayerPortalsController < InheritedResources::Base
 
   private
 
+    def calculate_cc_fees(subtotal)
+      (subtotal + PlayerPortal::CC_FIXED) / (1-PlayerPortal::CC_PERCENTAGE) - subtotal
+    end
+
     def calculate_fees(registration_fee, volunteer_opt_out)
 
       goal = registration_fee
       goal += PlayerPortal::VOLUNTEER_OPT_OUT_FEE if volunteer_opt_out
 
-      total = (goal + PlayerPortal::CC_FIXED) / (1-PlayerPortal::CC_PERCENTAGE)
-      cc_fees = total - goal
+      cc_fees = calculate_cc_fees(goal)
+      total = goal + cc_fees
 
       fees = []
       fees << [t('player_portal.registration.payment.club'), "$#{'%.2f' % registration_fee}"]
