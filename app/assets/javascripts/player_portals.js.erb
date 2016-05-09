@@ -78,6 +78,12 @@ function makeid()
     }());
 
     player_portal.payment = (function() {
+
+      var _scrollToTop = function() {
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+      };
+
       var showAlert = function(mesg) {
         var alert = $('#alert');
         alert.find('.message').html(mesg);

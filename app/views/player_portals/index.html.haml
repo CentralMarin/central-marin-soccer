@@ -43,7 +43,6 @@
 = render partial: 'registration_status', locals: {progress: progress, player_portal: @player_portal, icon_ok: icon_ok}
 
 - content_for :javascript do
-  %script{src: "https://checkout.stripe.com/checkout.js"}
   %script
     $(document).ready(player_portal.modalPdf.init());
     $(document).ready(player_portal.modalImg.init());
