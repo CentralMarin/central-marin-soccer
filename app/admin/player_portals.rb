@@ -241,7 +241,7 @@ ActiveAdmin.register PlayerPortal do
     end
 
     flash[:notice] = "Notified #{players.length} players."
-    redirect_to :action => :index
+    redirect_to :action => :index, q: params[:q]
 
   end
 
