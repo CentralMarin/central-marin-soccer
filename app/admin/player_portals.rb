@@ -221,24 +221,18 @@ ActiveAdmin.register PlayerPortal do
   end
 
   collection_action :process_email, title: 'Send Email', method: :post do
-    i = 0
-    head :ok
-    #   carousel_list = params[:carousel_list]
-    #
-    #   # Remove existing carousel items
-    #   ArticleCarousel.all.each do |carousel_item|
-    #     carousel_item.destroy
-    #   end
-    #
-    #   # Add carousel items
-    #   carousel_list.each_with_index do |article_id, index|
-    #     ac = ArticleCarousel.new()
-    #     ac.article_id = article_id
-    #     ac.carousel_order = index
-    #     ac.save
-    #   end
-    #
-    #   head :ok
+
+    # TODO: Save the subject, body, and filter criteria to the database so we have a record of this correspondense
+
+    players = PlayerPortal.ransack(params[:notification][:q]).result
+
+    players.each do |player|
+      PlayerPortalMailer.notify(player, params[:notification][:subject], params[:notification][:body]).deliver
+    end
+
+    flash[:notice] = "Notified #{players.length} players."
+    redirect_to :action => :index
+
   end
 
   action_item :import, :only => :index do

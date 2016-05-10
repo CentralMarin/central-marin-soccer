@@ -26,3 +26,47 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+Examples:
+
+    Type: Outing
+    Header: Night at the Earthquakes
+    Description: Come hang out with the club and watch some great soccer
+    Image: http://foo.com/image.jpg
+    Cost: $20
+    Event Details - Optional
+    ----
+    Type: Outing
+    Header: Night at the Earthquakes
+    Description: Come hang out with the club and watch some great soccer
+    Image: http://foo.com/image.jpg
+    Cost: $20
+
+    [N]
+        Start: Feb 1, 2016 @ 1:00pm
+        Length: 120 minutes
+        group:
+            Boys: U8, U9, U10
+            Girls: U11, U12, U13
+        Start: TBD <String would be nice>
+        group:
+            Boys: U8, U9, U10
+            Girls: U11, U12, U13
+        Start: <Just date, times to be announced>
+        group:
+            Boys: U8, U9, U10
+            Girls: U11, U12, U13
+    ----
+    Type: Training
+    Start: April 1, 2016 @ 3:30pm
+    Length: 90 minutes
+    Header: Striker Training
+    Description: Get extra training...
+    Image: <http> - Optional
+    Cost: <optional>
+    ----
+    Type: Meeting
+Event
+    Type
+    Heading
+    Ages and Genders

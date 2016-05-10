@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509130153) do
+ActiveRecord::Schema.define(version: 20160510040013) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -184,6 +184,26 @@ ActiveRecord::Schema.define(version: 20160509130153) do
     t.decimal  "lng",                    precision: 15, scale: 10
     t.string   "address",    limit: 255
     t.string   "type",       limit: 255,                           default: "Field"
+  end
+
+  create_table "notification_translations", force: :cascade do |t|
+    t.integer  "notification_id", null: false
+    t.string   "locale",          null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "subject"
+    t.text     "body"
+  end
+
+  add_index "notification_translations", ["locale"], name: "index_notification_translations_on_locale"
+  add_index "notification_translations", ["notification_id"], name: "index_notification_translations_on_notification_id"
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.text     "q"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pages", force: :cascade do |t|

@@ -1,0 +1,44 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %style{type:"text/css"}= Rails.application.assets_manifest.assets["player_portal_email.scss"]
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Central Marin Soccer Club
+  %body{:leftmargin => "0", :marginheight => "0", :marginwidth => "0", :offset => "0", :topmargin => "0"}
+  %center
+    %table#bodyTable{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :height => "100%", :width => "100%"}
+      %tr
+        %td#bodyCell{:align => "center", :valign => "top"}
+          / BEGIN TEMPLATE //
+          %table#templateContainer{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+            %tr
+              %td{:align => "center", :valign => "top"}
+                / BEGIN HEADER //
+                %table#templateHeader{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                  %tr
+                    %td.headerContent{:valign => "top"}
+                      %img#headerImage{:src => image_path('email_header.jpg'), :style => "max-width:600px;"}/
+            / // END HEADER
+            %tr
+              %td{:align => "center", :valign => "top"}
+                / BEGIN COLUMNS //
+                %table#templateColumns{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                  %tr
+                    %td.templateColumnContainer{:align => "center", :style => "padding-top:20px;", :valign => "top"}
+                      %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
+                        %tr
+                          %td.leftColumnContent{:valign => "top"}
+                            = @body.html_safe
+                            Please
+                            %a{:href => player_portal_url(@player_portal.uid, host: 'https://centralmarinsoccer.com'), :target => "_blank"}
+                              click on the link
+                            and enter your child’s birthday to access your player portal.
+                    %td.templateColumnContainer{:align => "center", :style => "padding-top:20px;", :valign => "top"}
+                      %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
+                        %tr
+                          %td.rightColumnContent{:valign => "top"}
+                            Por favor
+                            %a{:href => player_portal_url(@player_portal.uid, host: 'https://es.centralmarinsoccer.com'), :target => "_blank"}
+                              haga clic en el enlace
+                            y entrar en cumpleaños de su hijo/hija para tener acceso a su portal de jugador.
+            / // END COLUMNS
