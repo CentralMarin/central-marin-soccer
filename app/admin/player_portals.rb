@@ -222,9 +222,19 @@ ActiveAdmin.register PlayerPortal do
 
   collection_action :process_email, title: 'Send Email', method: :post do
 
-    # TODO: Save the subject, body, and filter criteria to the database so we have a record of this correspondense
+    notification = Notification.new
+    notification.q = params[:q]
+    I18n.with_locale(:en) do
+      notification.subject = params['subject-en']
+      notification.body = params['body-en']
+    end
+    I18n.with_locale(:es) do
+      notification.subject = params['subject-es']
+      notification.body = params['body-es']
+    end
+    notification.save!
 
-    players = PlayerPortal.ransack(params[:notification][:q]).result
+    players = PlayerPortal.ransack(params[:q]).result
 
     players.each do |player|
       PlayerPortalMailer.notify(player, params['subject-en'], params['body-en'], params['subject-es'], params['body-es']).deliver

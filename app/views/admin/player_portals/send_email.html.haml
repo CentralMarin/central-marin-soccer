@@ -1,10 +1,7 @@
 %h3
   = "This email will go to #{@players.length} players and their parents"
 
--#= form_for @notification, :url=>{:action=>"send_email"}, :html => { :multipart => true } do |f|
-= semantic_form_for Notification.new, :url=>{:action=>"process_email"}, method: :post do |f|
-
-  = f.hidden_field :q, value: params[:q]
+= semantic_form_for Notification.new, :url=>{:action=>"process_email", q: params[:q]}, method: :post do |f|
 
   %fieldset.inputs
     %div.activeadmin-translations
