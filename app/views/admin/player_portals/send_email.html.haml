@@ -1,9 +1,50 @@
 %h3
   = "This email will go to #{@players.length} players and their parents"
 
--
+-#= form_for @notification, :url=>{:action=>"send_email"}, :html => { :multipart => true } do |f|
+= semantic_form_for Notification.new, :url=>{:action=>"process_email"}, method: :post do |f|
 
-= active_admin_form_for [:admin, @notification], url: send_email_admin_player_portals_path, builder: ActiveAdmin::FormBuilder do |f|
+  = f.hidden_field :q, value: params[:q]
+
+  %fieldset.inputs
+    %div.activeadmin-translations
+      %ul.available-locales
+        %li
+          %a{href: '.locale-en'}
+            English
+        %li
+          %a{href: '.locale-es'}
+            Spanish
+
+      -#= f.globalize_fields_for_locales I18n.available_locales do |g|
+      -#  = g.text_field :subject
+
+
+      %fieldset.inputs.local.locale-en
+        = f.hidden_field "notification[translations_attributes][0][locale]", value: 'en'
+        %ol
+          %li.string.input.optional.stringish
+            %label.label{for: "notification_translations_attributes_0_subject"}
+              Subject
+            -#= f.text_field 'notification[translations_attributes][0][subject]', id: "notification_translations_attributes_0_subject"
+            = f.text_field :subject, id: "notification_translations_attributes_0_subject"
+          %li.ckeditor.input.optional
+            %label.label{for: "notification_translations_attributes_0_body"}
+              Body
+            -#= f.cktext_area "notification[translations_attributes][0][body]", id: "notification_translations_attributes_0_body"
+            = f.cktext_area :body, id: "notification_translations_attributes_0_body"
+
+        %fieldset.inputs.local.locale-es
+          Spanish
+
+  %fieldset.actions
+    %ol
+      %li.action.input_action
+        = submit_tag 'Send', data: {'disable-with': 'Wait...'}
+
+
+
+-#= active_admin_form_for [:admin, @notification], url: send_email_admin_player_portals_path, builder: ActiveAdmin::FormBuilder do |f|
   - if f.object.errors.size >= 1
     - f.inputs "Errors" do
       - f.object.errors.full_messages.join('|')
