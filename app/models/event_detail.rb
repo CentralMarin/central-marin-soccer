@@ -1,6 +1,7 @@
 class EventDetail < ActiveRecord::Base
   belongs_to :event
   belongs_to :location
+  has_many :player_portal_selected_events
 
   AGE_GROUPS = [
       :U8,

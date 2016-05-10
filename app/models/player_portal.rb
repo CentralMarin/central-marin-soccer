@@ -7,6 +7,8 @@ class PlayerPortal < ActiveRecord::Base
                 :team_year,
                 :birth_year
 
+  has_many :player_portal_selected_events
+
   def self.birth_year_in(*args)
     args.sort!{|a,b| a <=> b}
     where("birthday >= ? and birthday <= ?", "#{args[0]}-01-01", "#{args[-1]}-12-31")

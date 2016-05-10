@@ -38,6 +38,7 @@ class PlayerPortalsController < InheritedResources::Base
   def index
     @player_portal = PlayerPortal.find_by(uid: params[:uid])
     @events = Event.all
+    @selected_events = PlayerPortalSelectedEvent.find_by(player_portal_id: @player_portal.id)
   end
 
   def events
