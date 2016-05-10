@@ -12,13 +12,14 @@ class PlayerPortalMailer < ApplicationMailer
     end
   end
 
-  def notify(player_portal, subject, body)
+  def notify(player_portal, subject_en, body_en, subject_es, body_es)
     @player_portal = player_portal
-    @body = body
+    @body_en = body_en
+    @body_es = body_es
 
     mail to: [player_portal.email, player_portal.parent1_email, player_portal.parent2_email],
          from: Rails.application.secrets.google_email_from,
-         subject: subject if valid_email?(player_portal)
+         subject: "#{subject_en} / #{subject_es}" if valid_email?(player_portal)
   end
 
   protected

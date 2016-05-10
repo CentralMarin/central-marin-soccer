@@ -28,7 +28,7 @@
                       %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
                         %tr
                           %td.leftColumnContent{:valign => "top"}
-                            = @body.html_safe
+                            = @body_en.html_safe
                             Please
                             %a{:href => player_portal_url(@player_portal.uid, host: 'https://centralmarinsoccer.com'), :target => "_blank"}
                               click on the link
@@ -37,6 +37,7 @@
                       %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
                         %tr
                           %td.rightColumnContent{:valign => "top"}
+                            = @body_es.html_safe
                             Por favor
                             %a{:href => player_portal_url(@player_portal.uid, host: 'https://es.centralmarinsoccer.com'), :target => "_blank"}
                               haga clic en el enlace
