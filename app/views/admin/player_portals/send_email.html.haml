@@ -1,0 +1,15 @@
+%h3
+  = "This email will go to #{@players.length} players and their parents"
+
+= active_admin_form_for [:admin, @notification], url: send_email_admin_player_portals_path, builder: ActiveAdmin::FormBuilder do |f|
+  - if f.object.errors.size >= 1
+    - f.inputs "Errors" do
+      - f.object.errors.full_messages.join('|')
+
+  - f.inputs do
+    - f.translated_inputs 'Translated fields', switch_locale: false do |t|
+      - t.input :subject
+      - t.input :body, :as => :ckeditor, :input_html => {:ckeditor => {:language => "#{t.object.locale}", :scayt_sLang => "#{SPELLCHECK_LANGUAGES[t.object.locale.to_sym]}"}}
+
+  - f.actions
+

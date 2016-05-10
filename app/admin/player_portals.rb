@@ -210,6 +210,38 @@ ActiveAdmin.register PlayerPortal do
     render xlsx: 'registration_night', formats: 'xlsx'
   end
 
+  collection_action :send_email, method: :post do
+    i = 0
+    head :ok
+  #   carousel_list = params[:carousel_list]
+  #
+  #   # Remove existing carousel items
+  #   ArticleCarousel.all.each do |carousel_item|
+  #     carousel_item.destroy
+  #   end
+  #
+  #   # Add carousel items
+  #   carousel_list.each_with_index do |article_id, index|
+  #     ac = ArticleCarousel.new()
+  #     ac.article_id = article_id
+  #     ac.carousel_order = index
+  #     ac.save
+  #   end
+  #
+  #   head :ok
+  end
+
+  action_item :send_email_link, only: :index do
+    link_to "Send Email", action: 'send_email', q: params[:q]
+  end
+
+  collection_action :send_email, title: 'Send Email', method: :get do
+    @players = PlayerPortal.ransack(params[:q]).result
+    @notification = Notification.new
+
+    render "send_email"
+  end
+
   action_item :import, :only => :index do
     link_to "Import Players", :action => "player_portal_import"
   end
