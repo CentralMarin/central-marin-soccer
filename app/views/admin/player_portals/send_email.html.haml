@@ -1,4 +1,20 @@
-%h3
+%table
+  %tr
+    %td{colspan: 2}
+      Filter Criteria:
+  %tr
+    - unless params[:q].blank?
+      - params[:q].each do |key, value|
+        %tr
+          %td
+            = key.humanize
+          %td
+            = (value.respond_to?(:join) ? value.join(', ') : value.to_s)
+    - else
+      %tr
+        %td
+          None
+
   = "This email will go to #{@players.length} players and their parents"
 
 = semantic_form_for Notification.new, :url=>{:action=>"process_email", q: params[:q]}, method: :post do |f|

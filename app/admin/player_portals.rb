@@ -215,7 +215,8 @@ ActiveAdmin.register PlayerPortal do
   end
 
   collection_action :send_email, title: 'Send Email' do
-    @players = PlayerPortal.ransack(params[:q]).result
+    filters = params[:q]
+    @players = PlayerPortal.ransack(filters).result
 
     render "send_email"
   end
