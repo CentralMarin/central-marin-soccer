@@ -18,7 +18,7 @@ class PlayerPortalMailer < ApplicationMailer
     @body_es = body_es
 
     mail to: [player_portal.email, player_portal.parent1_email, player_portal.parent2_email],
-         from: Rails.application.secrets.google_email_from,
+         from: Rails.application.secrets.google_info_email_from,
          subject: "#{subject_en} / #{subject_es}" if valid_email?(player_portal)
   end
 
