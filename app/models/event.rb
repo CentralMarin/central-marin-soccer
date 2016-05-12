@@ -32,9 +32,9 @@ class Event < ActiveRecord::Base
       details = event_details.with_girls_age_groups(age)
     end
 
-    unless player_portal_id.nil?
-      details = details.joins("LEFT JOIN player_portal_selected_events on event_details.id = player_portal_selected_events.event_detail_id and player_portal_selected_events.player_portal_id = #{player_portal_id}")
-    end
+    # unless player_portal_id.nil?
+    #   details = details.joins("LEFT JOIN player_portal_selected_events on event_details.id = player_portal_selected_events.event_detail_id and player_portal_selected_events.player_portal_id = #{player_portal_id}")
+    # end
 
     # only return events in the future
     now = Time.now

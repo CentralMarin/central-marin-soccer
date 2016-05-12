@@ -1,0 +1,13 @@
+workbook = xlsx_package.workbook
+
+workbook.add_worksheet(name: "#{@detail.start.strftime("%m-%d-%Y")} ") do |sheet|
+  # Add our header
+  sheet.add_row ['First', 'Last', 'Year']
+  @detail.player_portals.each do |player|
+    sheet.add_row [
+        player.first,
+        player.last,
+        player.birthday.year
+                  ]
+  end
+end

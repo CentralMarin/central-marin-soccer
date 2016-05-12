@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510040013) do
+ActiveRecord::Schema.define(version: 20160512180714) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -150,6 +150,13 @@ ActiveRecord::Schema.define(version: 20160510040013) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  create_table "event_details_player_portals", id: false, force: :cascade do |t|
+    t.integer "player_portal_id"
+    t.integer "event_detail_id"
+  end
+
+  add_index "event_details_player_portals", ["player_portal_id", "event_detail_id"], name: "player_portals_event_details_index", unique: true
 
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",    null: false

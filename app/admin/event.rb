@@ -37,11 +37,25 @@ ActiveAdmin.register Event do
         column :location do |event_detail|
           event_detail.location_name
         end
+        column :registrations do |event_detail|
+          link_to event_detail.player_portals.length, download_registrations_admin_event_path(event_detail.id)
+
+
+        end
       end
     end
 
     actions
   end
+
+  member_action :download_registrations do
+
+    @detail = EventDetail.find(params[:id])
+    event_name = "#{@detail.event.title} - #{@detail.start.strftime('%m-%d-%Y')}"
+
+    render xlsx: 'event_registrations', filename: event_name, formats: 'xlsx'
+  end
+
 
   show do |event|
     attributes_table do
@@ -66,6 +80,9 @@ ActiveAdmin.register Event do
         column :length
         column :location do |event_detail|
           event_detail.location_name
+        end
+        column :registrations do |event_detail|
+          event_detail.player_portals.length
         end
       end
     end

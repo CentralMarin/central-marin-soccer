@@ -47,27 +47,24 @@ class PlayerPortalsController < InheritedResources::Base
     stripe_token = params['stripeToken']
     event = Event.find_by(id: params['event'])
 
-    # Find the events selected
-    event_details = []
-    dates_selected = []
-    params.keys.each do |key|
-      if key.start_with?('event_detail_')
-        ed = EventDetail.find_by(id: key.scan(/\d+$/).first)
-        dates_selected << ed.start.strftime("%m/%d/%Y")
-        event_details << ed
-      end
-    end
-
-    # Calculate the amount due
-    subtotal = event.cost * event_details.length
-    total = (subtotal + calculate_cc_fees(subtotal)).round(2)
-
     # update the database in a transaction
-    PlayerPortalSelectedEvent.transaction do
+    PlayerPortal.transaction do
 
-      event_details.each do |detail|
-        PlayerPortalSelectedEvent.create!(player_portal_id: player_portal.id, event_detail_id: detail.id)
+      # Find the events selected
+      dates_selected = []
+      count = 0
+      params.keys.each do |key|
+        if key.start_with?('event_detail_')
+          ed =  EventDetail.find_by(id: key.scan(/\d+$/).first)
+          player_portal.event_details << ed
+          dates_selected << ed.start.strftime("%m/%d/%Y")
+          count += 1
+        end
       end
+
+      # Calculate the amount due
+      subtotal = event.cost * count
+      total = (subtotal + calculate_cc_fees(subtotal)).round(2)
 
       # Notify stripe about the amount
       charge = Stripe::Charge.create(
