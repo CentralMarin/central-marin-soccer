@@ -23,7 +23,7 @@
                   - details.each do |detail|
                     %li.list-group-item
                       .small
-                        - if detail.player_portal_selected_events.length == 1
+                        - if detail.player_portal_selected_events.where(player_portal_id: @player_portal.id).length == 1
                           %span.glyphicon{icon_ok}
                           - selected += 1
                         - else
