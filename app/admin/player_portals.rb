@@ -238,7 +238,7 @@ ActiveAdmin.register PlayerPortal do
     players = PlayerPortal.ransack(params[:q]).result
 
     players.each do |player|
-      PlayerPortalMailer.notify(player, params['subject-en'], params['body-en'], params['subject-es'], params['body-es']).deliver
+      PlayerPortalMailer.delay.notify(player, params['subject-en'], params['body-en'], params['subject-es'], params['body-es'])
     end
 
     flash[:notice] = "Notified #{players.length} players."

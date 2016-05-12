@@ -16,7 +16,7 @@ module CentralMarinSoccer
     config.active_record.raise_in_transactional_callbacks = true
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-# config.time_zone = 'Pacific Time (US & Canada)'
+    #config.time_zone = 'Pacific Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
@@ -25,18 +25,17 @@ module CentralMarinSoccer
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
 
-
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
-
-    # Configure the default encoding used in templates for Ruby 2.1.
-# config.encoding = "utf-8"
 
     # Enable the asset pipeline
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Setup Delayed Job
+    config.active_job.queue_adapter = :delayed_job
 
   end
 end
