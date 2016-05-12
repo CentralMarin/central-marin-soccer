@@ -22,8 +22,9 @@ gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activead
 gem 'html_press', '0.8.2'
 gem 'pdf-forms', '1.0.0'
 gem 'stripe', '1.42.0'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '1.3.11'
+gem 'delayed_job_active_record', '4.1.0'
+gem 'daemon-spawn', '0.4.2'
+gem "delayed_job_web", '1.2.10'
 
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '3.3.6'
@@ -61,6 +62,10 @@ group :development do
   gem 'capistrano-faster-assets', '1.0.2'
   gem 'capistrano-passenger', '0.2.0'
   gem 'letter_opener_web', '1.3.0'
+end
+
+group :development do
+  gem 'sqlite3', '1.3.11'
 end
 
 group :staging, :production do
