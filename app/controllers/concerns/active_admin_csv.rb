@@ -17,7 +17,7 @@ module ActiveAdminCsv
       resource_class.transaction do
 
         # remove all the existing records
-        resource_class.destroy_all
+        resource_class.destroy_all unless defined? preserve_data? && preserve_data?
 
         csv_data = params[:csv][:file]
         csv_file = csv_data.read.force_encoding('UTF-8')

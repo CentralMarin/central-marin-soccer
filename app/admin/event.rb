@@ -120,23 +120,46 @@ ActiveAdmin.register Event do
 
     include ActiveAdminCsvController
 
+    def preserve_data?
+      true
+    end
+
     def process_csv_row(row, event)
+
       if row[0].present? # Is this a new event or adding to existing details
-        event = Event.create!(category: row[0], title: row[2], description: row[3], cost: row[1])
-        event.translations.create!(locale: :es,
-                                   title: (row[4].present? ? row[4] : nil),
-                                   description: (row[5].present? ? row[5] : nil))
+        # determine if this event already exists
+        event = Event.joins(:translations)
+                    .find_by(category: Event::categories[row[0].to_sym], event_translations: {title: row[2], locale: 'en'})
+        if event.nil?
+          event = Event.create!(category: row[0], title: row[2], description: row[3], cost: row[1])
+          event.translations.create!(locale: :es,
+                                     title: (row[4].present? ? row[4] : nil),
+                                     description: (row[5].present? ? row[5] : nil))
+        end
       end
 
       # Do we have event details to process?
       if row[6].present? || row[7].present? || row[8].present? || row[9].present? || row[10].present?
-        event_detail = EventDetail.create!(event_id: event.id,
-                                       boys_age_groups: (row[6].present? ? row[6].gsub(' ', '').split(',') : nil),
-                                       girls_age_groups: (row[7].present? ? row[7].gsub(' ', '').split(',') : nil),
-                                       start: (row[8].present? ? DateTime.strptime(row[8], '%m/%d/%Y %H:%M') : nil),
-                                       length: row[9],
-                                       location: (row[10].present? ? Location.find_by_name(row[10]) : nil)
-        )
+
+        # update length, and location
+        length = row[9]
+        location = (row[10].present? ? Location.find_by_name(row[10]) : nil)
+
+        start = (row[8].present? ? DateTime.strptime(row[8], '%m/%d/%Y %H:%M') : nil)
+        event_detail = EventDetail.find_by(event_id: event.id, start: start, length: length, location: location)
+        if event_detail.nil?
+          event_detail = EventDetail.new(event_id: event.id,
+                              start: start,
+                              length: length,
+                              location: location
+          )
+        end
+
+        # update the groups
+        event_detail.boys_age_groups = (row[6].present? ? row[6].gsub(' ', '').split(',') : nil)
+        event_detail.girls_age_groups = (row[7].present? ? row[7].gsub(' ', '').split(',') : nil)
+
+        event_detail.save!
       end
 
       event
