@@ -3,7 +3,7 @@
     %h2
       Upcoming Events
       - @events.each do |event|
-        - details = event.age_specific_details(@player_portal.gender, @player_portal.birthday, @player_portal.id)
+        - details = event.age_specific_details(@player_portal.gender, @player_portal.birthday)
         - if details.length > 0
           = form_tag player_portal_events_path do
             - selected = 0

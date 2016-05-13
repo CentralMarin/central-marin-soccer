@@ -23,7 +23,7 @@ class Event < ActiveRecord::Base
     TRYOUT_YEAR - year + 1
   end
 
-  def age_specific_details(sex, birthday, player_portal_id = nil)
+  def age_specific_details(sex, birthday)
     age = "U#{Event.age(birthday.year)}".to_sym
     details = nil
     if sex == 'Boys'
@@ -31,10 +31,6 @@ class Event < ActiveRecord::Base
     else
       details = event_details.with_girls_age_groups(age)
     end
-
-    # unless player_portal_id.nil?
-    #   details = details.joins("LEFT JOIN player_portal_selected_events on event_details.id = player_portal_selected_events.event_detail_id and player_portal_selected_events.player_portal_id = #{player_portal_id}")
-    # end
 
     # only return events in the future
     now = Time.now
