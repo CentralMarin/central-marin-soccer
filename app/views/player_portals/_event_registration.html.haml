@@ -1,6 +1,6 @@
 
 - if progress > 80
-  - registration_cutoff = 2.hours.ago
+  - registration_cutoff = 2.hours.from_now
   .jumbotron
     %h2
       Upcoming Events
@@ -8,7 +8,7 @@
         - details = event.age_specific_details(@player_portal.gender, @player_portal.birthday)
         - if details.length > 0
           = form_tag player_portal_events_path do
-            - selected = 0
+            - available = 0
             = hidden_field_tag('event', event.id)
             .panel.panel-default
               .panel-heading
@@ -27,12 +27,11 @@
                       .small
                         - if detail.player_portals.where(id: @player_portal.id).length == 1
                           %span.glyphicon{icon_ok}
-                          - selected += 1
-                        - elsif detail.start > registration_cutoff
+                        - elsif registration_cutoff > detail.start
                           %span.glyphicon{icon_closed}
-                          - selected += 1
                         - else
                           %input{type: :checkbox, name: "event_detail_#{detail.id}", id: "event_detail_#{detail.id}"}
+                          - available += 1
                         %label{for: "event_detail_#{detail.id}"}
                           - if detail.start.nil? && detail.location.nil?
                             The Date, Time, and Location will be announced shortly
@@ -47,7 +46,7 @@
                               %a{:href => detail.location.map_url}
                                 = "#{detail.location.name} - #{detail.location.address}"
 
-                - unless selected == details.length
+                - if available > 0
                   %h5
                     %table.table.table-striped{data: {description: "#{event.title}"}}
                       %tr
