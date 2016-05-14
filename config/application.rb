@@ -16,7 +16,7 @@ module CentralMarinSoccer
     config.active_record.raise_in_transactional_callbacks = true
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    #config.time_zone = 'Pacific Time (US & Canada)'
+    config.time_zone = 'Pacific Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
