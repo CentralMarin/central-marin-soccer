@@ -1,4 +1,6 @@
-- if progress == 100
+
+- if progress > 80
+  - registration_cutoff = 2.hours.ago
   .jumbotron
     %h2
       Upcoming Events
@@ -25,6 +27,9 @@
                       .small
                         - if detail.player_portals.where(id: @player_portal.id).length == 1
                           %span.glyphicon{icon_ok}
+                          - selected += 1
+                        - elsif detail.start > registration_cutoff
+                          %span.glyphicon{icon_closed}
                           - selected += 1
                         - else
                           %input{type: :checkbox, name: "event_detail_#{detail.id}", id: "event_detail_#{detail.id}"}
