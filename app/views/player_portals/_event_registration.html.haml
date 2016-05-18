@@ -28,7 +28,7 @@
                         - if detail.player_portals.where(id: @player_portal.id).length == 1
                           %span.glyphicon{icon_ok}
                         - elsif registration_cutoff > detail.start
-                          %span.glyphicon{icon_closed}
+                          &nbps; 
                         - else
                           %input{type: :checkbox, name: "event_detail_#{detail.id}", id: "event_detail_#{detail.id}"}
                           - available += 1
