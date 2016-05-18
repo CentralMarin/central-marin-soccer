@@ -22,9 +22,7 @@ gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activead
 gem 'html_press', '0.8.2'
 gem 'pdf-forms', '1.0.0'
 gem 'stripe', '1.42.0'
-gem 'delayed_job_active_record', '4.1.0'
-gem 'daemon-spawn', '0.4.2'
-gem "delayed_job_web", '1.2.10'
+gem 'mailgun-ruby', '1.1.0', require: 'mailgun'
 
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '3.3.6'
