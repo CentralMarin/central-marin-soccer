@@ -68,7 +68,7 @@ class PlayerPortalsController < InheritedResources::Base
       # Notify stripe about the amount
       charge = Stripe::Charge.create(
           :amount      => (total * 100).to_i,
-          :description => event.description,
+          :description => event.title,
           :source => stripe_token,
           :currency    => 'usd',
           :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, md5: player_portal.md5, event_dates: dates_selected.join(', ')},
