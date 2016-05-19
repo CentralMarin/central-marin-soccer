@@ -223,6 +223,8 @@ ActiveAdmin.register PlayerPortal do
 
   collection_action :process_email, title: 'Send Email', method: :post do
 
+    msg_client = Mailgun::Client.new
+
     notification = Notification.new
     notification.q = params[:q]
     I18n.with_locale(:en) do
@@ -238,7 +240,18 @@ ActiveAdmin.register PlayerPortal do
     players = PlayerPortal.ransack(params[:q]).result
 
     players.each do |player|
-      PlayerPortalMailer.delay.notify(player, params['subject-en'], params['body-en'], params['subject-es'], params['body-es'])
+
+      # Send message using mailgun
+      html = render_to_string(partial: 'player_portal_mailer/notify', locals: {player_portal: player, body_en: params['body-en'], body_es: params['body-es']})
+
+      data = { from: Rails.application.secrets.mailgun_from,
+               to: [player.email, player.parent1_email, player.parent2_email],
+               subject: "#{player.first} - #{params['subject-en']} / #{params['subject-es']}",
+               html: html.to_str
+      }
+
+      msg_client.send_message Rails.application.secrets.mailgun_domain, data
+      i = 0
     end
 
     flash[:notice] = "Notified #{players.length} players."

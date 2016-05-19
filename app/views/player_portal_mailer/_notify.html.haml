@@ -29,21 +29,21 @@
                         %tr
                           %td.leftColumnContent{:valign => "top"}
                             %p
-                              = @player_portal.first
-                            = @body_en.html_safe
+                              = player_portal.first
+                            = body_en.html_safe
                             Please
-                            %a{:href => player_portal_url(@player_portal.uid, host: 'https://centralmarinsoccer.com'), :target => "_blank"}
+                            %a{:href => player_portal_url(player_portal.uid, host: 'https://centralmarinsoccer.com'), :target => "_blank"}
                               click on the link
-                            and enter #{@player_portal.first}’s birthday to access your player portal.
+                            and enter #{player_portal.first}’s birthday to access your player portal.
                     %td.templateColumnContainer{:align => "center", :style => "padding-top:20px;", :valign => "top"}
                       %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
                         %tr
                           %td.rightColumnContent{:valign => "top"}
                             %p
-                              = @player_portal.first
-                            = @body_es.html_safe
+                              = player_portal.first
+                            = body_es.html_safe
                             Por favor
-                            %a{:href => player_portal_url(@player_portal.uid, host: 'https://es.centralmarinsoccer.com'), :target => "_blank"}
+                            %a{:href => player_portal_url(player_portal.uid, host: 'https://es.centralmarinsoccer.com'), :target => "_blank"}
                               haga clic en el enlace
-                            y entrar en cumpleaños de #{@player_portal.first} para tener acceso a su portal de jugador.
+                            y entrar en cumpleaños de #{player_portal.first} para tener acceso a su portal de jugador.
             / // END COLUMNS

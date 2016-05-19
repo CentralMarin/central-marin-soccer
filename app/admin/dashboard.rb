@@ -3,6 +3,11 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
+    section "Bounded Messages" do
+      mg_client = Mailgun::Client.new
+      result = mg_client.get "#{mailgun_domain}/stats"
+      i = 0
+    end
     #
     # section "Players" do
     #   ul do
