@@ -1,0 +1,11 @@
+%div
+  - stats.each do |name, value|
+    = name
+    - if value.respond_to?(:each)
+      - value.each do |details|
+        %ul
+          - details.each do |name, value|
+            %li
+              = "#{name}: #{value}"
+    - else
+      = ": #{value}"
