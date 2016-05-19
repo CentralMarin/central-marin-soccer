@@ -4,54 +4,64 @@
 
 
     player_portal.event_registration = function(cost, container_name, key, errors) {
-        var _container_name = container_name;
-        var _event_container;
-        var _subtotal = 0.0;
-        var _cost = cost;
+      var _container_name = container_name;
+      var _event_container;
+      var _subtotal = 0.0;
+      var _cost = cost;
 
-        var _calculateAndShowCost = function() {
+      var _calculateAndShowCost = function() {
 
-            // Calculate credit card fees and total
-            var total = 0.00;
-            var cc_fees = 0.00;
-            if (_subtotal != 0.0) {
-                total = ((_subtotal + <%= PlayerPortal::CC_FIXED %>) / (1 -<%= PlayerPortal::CC_PERCENTAGE %>)).toFixed(2);
-                cc_fees = (total - _subtotal).toFixed(2);
-            }
+        // Calculate credit card fees and total
+        var total = 0.00;
+        var cc_fees = 0.00;
+        if (_subtotal != 0.0) {
+            total = ((_subtotal + <%= PlayerPortal::CC_FIXED %>) / (1 -<%= PlayerPortal::CC_PERCENTAGE %>)).toFixed(2);
+            cc_fees = (total - _subtotal).toFixed(2);
+        }
 
-            // update the view
-            $('#' + _container_name + '_subtotal').html('$' + _subtotal);
-            $('#' + _container_name + '_fees').html('$' + cc_fees);
-            $('#' + _container_name + '_total').html('$' + total);
-            $('#' + _container_name + '_button').data('amount', '$' + total);
-        };
+        // update the view
+        $('#' + _container_name + '_subtotal').html('$' + _subtotal);
+        $('#' + _container_name + '_fees').html('$' + cc_fees);
+        $('#' + _container_name + '_total').html('$' + total);
+        $('#' + _container_name + '_button').data('amount', '$' + total);
+      };
 
-        var _eventSelectionChange = function(e) {
-            _subtotal += ($(e.target).is(':checked') ? _cost : -1 * _cost);
+      var _eventSelectionChange = function(e) {
+        _subtotal += ($(e.target).is(':checked') ? _cost : -1 * _cost);
 
-            _calculateAndShowCost();
-        };
+        _calculateAndShowCost();
+      };
 
-        // make sure we have something selected
-        var validate = function() {
-            return _subtotal > 0;
-        };
+      // make sure we have something selected
+      var _validate = function() {
+        return _subtotal > 0;
+      };
 
-        // register click handler
-        var _init = function(key, errors) {
-            _event_container = $('#' + container_name);
-            // add onchange event for all checkboxes
-            checkboxes = _event_container.find('input:checkbox');
-            for(var i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].onchange = _eventSelectionChange;
-            }
-            _calculateAndShowCost();
+//      var _refund = function(event) {
+//        alert('refund');
+//      };
 
-            var button = $('#' + container_name + '_button');
-            player_portal.payment.setupStripe(key, button, validate, errors)
-        };
+      // register handlers
+      var _init = function(key, errors) {
+        _event_container = $('#' + container_name);
+        // add onchange event for all checkboxes
+        checkboxes = _event_container.find('input:checkbox');
+        for(var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].onchange = _eventSelectionChange;
+        }
+        _calculateAndShowCost();
 
-        _init(key, errors);
+        var button = $('#' + container_name + '_button');
+        player_portal.payment.setupStripe(key, button, _validate, errors)
+
+        // find all refund buttons
+//        var refunds = $("[name='event_details_id']");
+//        for(i = 0; i < refunds.length; i++) {
+//          $(refunds[i]).click(_refund);
+//        }
+      };
+
+      _init(key, errors);
     };
 
 }());

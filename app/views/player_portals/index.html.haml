@@ -20,6 +20,7 @@
 / Declare status tags
 - icon_ok = {class: 'glyphicon-ok', style: 'color:green'}
 - icon_missing = {class: 'glyphicon-remove', style: 'color:red'}
+- minimum_progress_for_events = 60
 
 - if params[:success].present?
   .alert.alert-success.alert-dismissible.fade.in{role: "alert"}
@@ -39,7 +40,7 @@
 
 
 - progress = @player_portal.status.progress
-= render partial: 'event_registration', locals: {progress: progress, icon_ok: icon_ok, icon_closed: icon_missing}
+= render partial: 'event_registration', locals: {progress: progress, icon_ok: icon_ok, icon_closed: icon_missing, minimum_progress_for_events: minimum_progress_for_events}
 
 = render partial: 'registration_status', locals: {progress: progress, player_portal: @player_portal, icon_ok: icon_ok, icon_missing: icon_missing}
 
@@ -48,7 +49,7 @@
     $(document).ready(player_portal.modalPdf.init());
     $(document).ready(player_portal.modalImg.init());
     var errors = {'amex': "#{t('player_portal.registration.no_amex')}", 'docs': "#{t('player_portal.registration.read_docs')}", 'fiveHundred': "#{t('player_portal.registration.fiveHundred')}"}
-    - if progress == 100
+    - if progress > minimum_progress_for_events
       - @events.each do |event|
         - details = event.age_specific_details(@player_portal.gender, @player_portal.birthday)
         - if details.length > 0

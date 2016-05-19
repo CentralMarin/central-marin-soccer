@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   get '/portal/:uid', :to => 'player_portals#index', :as => 'player_portal'
   post '/portal/:uid', :to => 'player_portals#events', :as => 'player_portal_events'
+  post '/portal/:uid/refund', :to => 'player_portals#events_refund', :as => 'player_portal_events_refund'
   get '/portal/:uid/login', :to => 'player_portals#session_new', :as => 'player_portal_login'
   post '/portal/:uid/login', :to => 'player_portals#session_create', :as => 'player_portal_create'
   get '/portal/:uid/logout', :to => 'player_portals#session_destroy', :as => 'player_portal_logout'

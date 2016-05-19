@@ -71,7 +71,9 @@ class PlayerPortalsController < InheritedResources::Base
           :description => event.description,
           :source => stripe_token,
           :currency    => 'usd',
-          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, md5: player_portal.md5, event_dates: dates_selected.join(', ')}
+          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, md5: player_portal.md5, event_dates: dates_selected.join(', ')},
+          :receipt_email => stripe_email,
+          :statement_descriptor => event.description
       )
 
     end
@@ -82,6 +84,25 @@ class PlayerPortalsController < InheritedResources::Base
 
   rescue Stripe::CardError => e
     render json: { :error => e.message }, :status => 402
+  end
+
+  def events_refund
+    player_portal = PlayerPortal.find_by(uid: params[:uid])
+    event_details = EventDetail.find_by(id: params[:event_details_id])
+    cost = EventDetail.event.cost
+
+    PlayerPortal.transaction do
+      # Remove the mapping for the player
+      # Ask Stripe to refund the cost of the event
+      #player_portal.event_details
+
+      # Find the stripe charge
+
+      # Stripe::Refund
+    end
+
+    # redirect to index page
+
   end
 
   def club_form
@@ -156,7 +177,9 @@ class PlayerPortalsController < InheritedResources::Base
           :description => "#{Event::TRYOUT_YEAR} Club Registration Fee",
           :source => params[:stripeToken],
           :currency    => 'usd',
-          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, volunteer: volunteer_choice, md5: player_portal.md5}
+          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, volunteer: volunteer_choice, md5: player_portal.md5},
+          :receipt_email => stripe_email,
+          :statement_descriptor => 'CM Club Registration'
       )
 
       player_portal.status << :paid

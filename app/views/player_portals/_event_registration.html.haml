@@ -1,5 +1,5 @@
 
-- if progress > 80
+- if progress > minimum_progress_for_events
   - registration_cutoff = 2.hours.from_now
   .jumbotron
     %h2
@@ -27,12 +27,14 @@
                       .small
                         - if detail.player_portals.where(id: @player_portal.id).length == 1
                           %span.glyphicon{icon_ok}
+                          -#%button.btn.btn-default.btn-sm{type: 'button', name: "event_details_id", value: "#{detail.id}"}
+                          -#  Request Refund
                         - elsif registration_cutoff > detail.start
                           &nbps; 
                         - else
                           %input{type: :checkbox, name: "event_detail_#{detail.id}", id: "event_detail_#{detail.id}"}
                           - available += 1
-                        %label{for: "event_detail_#{detail.id}"}
+                        %label.small{for: "event_detail_#{detail.id}"}
                           - if detail.start.nil? && detail.location.nil?
                             The Date, Time, and Location will be announced shortly
                           - else
