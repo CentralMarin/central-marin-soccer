@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512194031) do
+ActiveRecord::Schema.define(version: 20160520191136) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -140,22 +140,6 @@ ActiveRecord::Schema.define(version: 20160512194031) do
     t.string   "image",         limit: 255
   end
 
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
-
   create_table "event_details", force: :cascade do |t|
     t.integer  "event_id"
     t.integer  "location_id"
@@ -170,9 +154,22 @@ ActiveRecord::Schema.define(version: 20160512194031) do
   create_table "event_details_player_portals", id: false, force: :cascade do |t|
     t.integer "player_portal_id"
     t.integer "event_detail_id"
+    t.string  "charge"
   end
 
   add_index "event_details_player_portals", ["player_portal_id", "event_detail_id"], name: "player_portals_event_details_index", unique: true
+
+  create_table "event_registrations", force: :cascade do |t|
+    t.integer  "event_detail_id"
+    t.integer  "player_portal_id"
+    t.string   "charge"
+    t.integer  "amount"
+    t.datetime "created_at",       default: '2016-05-20 20:35:34', null: false
+    t.datetime "updated_at",       default: '2016-05-20 20:35:34', null: false
+  end
+
+  add_index "event_registrations", ["event_detail_id"], name: "index_event_registrations_on_event_detail_id"
+  add_index "event_registrations", ["player_portal_id"], name: "index_event_registrations_on_player_portal_id"
 
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",    null: false

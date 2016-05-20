@@ -54,9 +54,7 @@ class PlayerPortalsController < InheritedResources::Base
       count = 0
       params.keys.each do |key|
         if key.start_with?('event_detail_')
-          ed =  EventDetail.find_by(id: key.scan(/\d+$/).first)
-          player_portal.event_details << ed
-          dates_selected << ed.start.strftime("%m/%d/%Y")
+          dates_selected << EventDetail.find_by(id: key.scan(/\d+$/).first).start.strftime("%m/%d/%Y")
           count += 1
         end
       end
@@ -76,9 +74,12 @@ class PlayerPortalsController < InheritedResources::Base
           :statement_descriptor => event.title[0..20]
       )
 
+      params.keys.each do |key|
+        if key.start_with?('event_detail_')
+          EventRegistration.create!(event_detail_id: key.scan(/\d+$/).first, player_portal_id: player_portal.id, charge: charge.id, amount: event.cost)
+        end
+      end
     end
-
-    # TODO: Send confirmation email
 
     render json: {}, status: 200
 
@@ -178,7 +179,7 @@ class PlayerPortalsController < InheritedResources::Base
           :source => params[:stripeToken],
           :currency    => 'usd',
           :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, volunteer: volunteer_choice, md5: player_portal.md5},
-          :receipt_email => stripe_email,
+          :receipt_email => params['stripeEmail'],
           :statement_descriptor => 'CM Club Registration'
       )
 

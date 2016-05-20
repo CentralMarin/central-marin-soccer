@@ -20,7 +20,7 @@
 / Declare status tags
 - icon_ok = {class: 'glyphicon-ok', style: 'color:green'}
 - icon_missing = {class: 'glyphicon-remove', style: 'color:red'}
-- minimum_progress_for_events = 60
+- minimum_progress_for_events = 30
 
 - if params[:success].present?
   .alert.alert-success.alert-dismissible.fade.in{role: "alert"}
@@ -40,7 +40,8 @@
 
 
 - progress = @player_portal.status.progress
-= render partial: 'event_registration', locals: {progress: progress, icon_ok: icon_ok, icon_closed: icon_missing, minimum_progress_for_events: minimum_progress_for_events}
+- if progress > minimum_progress_for_events
+  = render partial: 'event_registration', locals: {progress: progress, icon_ok: icon_ok, icon_closed: icon_missing, minimum_progress_for_events: minimum_progress_for_events}
 
 = render partial: 'registration_status', locals: {progress: progress, player_portal: @player_portal, icon_ok: icon_ok, icon_missing: icon_missing}
 
