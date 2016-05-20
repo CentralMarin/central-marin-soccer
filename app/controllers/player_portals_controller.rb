@@ -73,7 +73,7 @@ class PlayerPortalsController < InheritedResources::Base
           :currency    => 'usd',
           :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, md5: player_portal.md5, event_dates: dates_selected.join(', ')},
           :receipt_email => stripe_email,
-          :statement_descriptor => event.description
+          :statement_descriptor => event.title[0..20]
       )
 
     end
