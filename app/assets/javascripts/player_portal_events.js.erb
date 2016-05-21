@@ -43,6 +43,10 @@
 
         if (confirm('Are you sure you do not want to attend? $10 will be returned to your credit card.') == true) {
 
+          // Turn the button text to processing
+          button.text('Processing');
+          button.prop('disabled', true);
+
           $.ajax({
             url: button.data('url'),
             data: {id: button.data('er')},
