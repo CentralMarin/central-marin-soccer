@@ -37,9 +37,34 @@
         return _subtotal > 0;
       };
 
-//      var _refund = function(event) {
-//        alert('refund');
-//      };
+      var _refund = function(event) {
+        var button = $(event.target);
+        var token = $("input[name='authenticity_token']").attr('value');
+
+        if (confirm('Are you sure you do not want to attend? $10 will be returned to your credit card.') == true) {
+
+          $.ajax({
+            url: button.data('url'),
+            data: {id: button.data('er')},
+            type: 'POST',
+            beforeSend: function(jqXHR, settings) {
+              jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            }
+          })
+          .done(function(data) {
+            window.location.href = window.location.href.split('?')[0];
+          })
+          .fail(function(data) {
+
+            if (data.status == 402) {
+              showAlert(JSON.parse(data.responseText).error);
+            } else {
+              showAlert(_errorMsgs.fiveHundred + ': ' + data.responseText);
+            }
+          });
+        }
+
+      };
 
       // register handlers
       var _init = function(key, errors) {
@@ -52,13 +77,13 @@
         _calculateAndShowCost();
 
         var button = $('#' + container_name + '_button');
-        player_portal.payment.setupStripe(key, button, _validate, errors)
+        player_portal.payment.setupStripe(key, button, _validate, errors);
 
-        // find all refund buttons
-//        var refunds = $("[name='event_details_id']");
-//        for(i = 0; i < refunds.length; i++) {
-//          $(refunds[i]).click(_refund);
-//        }
+        // find all refund buttons and add click handlers
+        var refunds = $("[name='event_registration_id']");
+        for(i = 0; i < refunds.length; i++) {
+          $(refunds[i]).click(_refund);
+        }
       };
 
       _init(key, errors);

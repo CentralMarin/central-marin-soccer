@@ -89,20 +89,21 @@ class PlayerPortalsController < InheritedResources::Base
 
   def events_refund
     player_portal = PlayerPortal.find_by(uid: params[:uid])
-    event_details = EventDetail.find_by(id: params[:event_details_id])
-    cost = EventDetail.event.cost
+    event_registration = EventRegistration.find_by(id: params[:id])
 
     PlayerPortal.transaction do
+      # Grab the event registration information
+      charge = event_registration.charge
+      amount = event_registration.amount
+
       # Remove the mapping for the player
+      event_registration.destroy
+
       # Ask Stripe to refund the cost of the event
-      #player_portal.event_details
-
-      # Find the stripe charge
-
-      # Stripe::Refund
+      refund = Stripe::Refund.create(charge: charge, amount: amount * 100, reason: :requested_by_customer)
     end
 
-    # redirect to index page
+    render json: {}, status: 200
 
   end
 
@@ -246,7 +247,7 @@ class PlayerPortalsController < InheritedResources::Base
       fees << [t('player_portal.registration.payment.cc_fee'), "$#{'%.2f' %cc_fees}"]
       fees << [t('player_portal.registration.payment.total'), "$#{'%.2f' %total}"]
 
-      return {fees: fees, total: (total * 100).round} # convert to cents
+      {fees: fees, total: (total * 100).round} # convert to cents
     end
 
     def player_portal_params

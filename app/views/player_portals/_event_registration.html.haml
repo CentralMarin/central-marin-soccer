@@ -24,10 +24,11 @@
                 - details.each do |detail|
                   %li.list-group-item
                     .small
-                      - if detail.player_portals.where(id: @player_portal.id).length == 1
+                      - er = detail.event_registrations.where(player_portal_id: @player_portal.id)
+                      - if er.length == 1
                         %span.glyphicon{icon_ok}
-                        -#%button.btn.btn-default.btn-sm{type: 'button', name: "event_details_id", value: "#{detail.id}"}
-                        -#  Request Refund
+                        %button.btn.btn-default.btn-sm{type: 'button', name: "event_registration_id", data: {url: "#{player_portal_events_refund_path(@player_portal.uid)}", er: "#{er[0].id}"}}
+                          Cancel
                       - elsif registration_cutoff > detail.start
                         &nbps;
                       - else
