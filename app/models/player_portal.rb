@@ -7,7 +7,8 @@ class PlayerPortal < ActiveRecord::Base
                 :team_year,
                 :birth_year
 
-  has_and_belongs_to_many :event_details
+  has_many :event_details, through: :event_registrations
+  has_many :event_registrations
 
   def self.birth_year_in(*args)
     args.sort!{|a,b| a <=> b}

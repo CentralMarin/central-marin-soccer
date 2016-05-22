@@ -54,9 +54,7 @@ class PlayerPortalsController < InheritedResources::Base
       count = 0
       params.keys.each do |key|
         if key.start_with?('event_detail_')
-          ed =  EventDetail.find_by(id: key.scan(/\d+$/).first)
-          player_portal.event_details << ed
-          dates_selected << ed.start.strftime("%m/%d/%Y")
+          dates_selected << EventDetail.find_by(id: key.scan(/\d+$/).first).start.strftime("%m/%d/%Y")
           count += 1
         end
       end
@@ -68,20 +66,45 @@ class PlayerPortalsController < InheritedResources::Base
       # Notify stripe about the amount
       charge = Stripe::Charge.create(
           :amount      => (total * 100).to_i,
-          :description => event.description,
+          :description => event.title,
           :source => stripe_token,
           :currency    => 'usd',
-          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, md5: player_portal.md5, event_dates: dates_selected.join(', ')}
+          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, md5: player_portal.md5, event_dates: dates_selected.join(', ')},
+          :receipt_email => stripe_email,
+          :statement_descriptor => event.title[0..20]
       )
 
+      params.keys.each do |key|
+        if key.start_with?('event_detail_')
+          EventRegistration.create!(event_detail_id: key.scan(/\d+$/).first, player_portal_id: player_portal.id, charge: charge.id, amount: event.cost)
+        end
+      end
     end
-
-    # TODO: Send confirmation email
 
     render json: {}, status: 200
 
   rescue Stripe::CardError => e
     render json: { :error => e.message }, :status => 402
+  end
+
+  def events_refund
+    player_portal = PlayerPortal.find_by(uid: params[:uid])
+    event_registration = EventRegistration.find_by(id: params[:id])
+
+    PlayerPortal.transaction do
+      # Grab the event registration information
+      charge = event_registration.charge
+      amount = event_registration.amount
+
+      # Remove the mapping for the player
+      event_registration.destroy
+
+      # Ask Stripe to refund the cost of the event
+      refund = Stripe::Refund.create(charge: charge, amount: amount * 100, reason: :requested_by_customer)
+    end
+
+    render json: {}, status: 200
+
   end
 
   def club_form
@@ -156,7 +179,9 @@ class PlayerPortalsController < InheritedResources::Base
           :description => "#{Event::TRYOUT_YEAR} Club Registration Fee",
           :source => params[:stripeToken],
           :currency    => 'usd',
-          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, volunteer: volunteer_choice, md5: player_portal.md5}
+          :metadata => {player_first: player_portal.first, player_last: player_portal.last, player_birthday: player_portal.birthday, volunteer: volunteer_choice, md5: player_portal.md5},
+          :receipt_email => params['stripeEmail'],
+          :statement_descriptor => 'CM Club Registration'
       )
 
       player_portal.status << :paid
@@ -222,7 +247,7 @@ class PlayerPortalsController < InheritedResources::Base
       fees << [t('player_portal.registration.payment.cc_fee'), "$#{'%.2f' %cc_fees}"]
       fees << [t('player_portal.registration.payment.total'), "$#{'%.2f' %total}"]
 
-      return {fees: fees, total: (total * 100).round} # convert to cents
+      {fees: fees, total: (total * 100).round} # convert to cents
     end
 
     def player_portal_params

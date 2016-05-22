@@ -1,176 +1,5 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-
-//= require jquery
-//= require bootstrap-sprockets
-//= require jquery.bootstrap.wizard
-//= require jquery.validate.min
-//= require wizard
-//= require jquery.Jcrop.min
-//= require namespace
-
-function makeid()
-{
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 5; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-}
-
 (function () {
     namespace('player_portal');
-    player_portal.modalPdf = (function() {
-
-        var init = function() {
-            // setup document modal
-            $('#documentModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget); // button that triggered the modal
-                var title = button.data('title');
-                var modal = $(this);
-                var document = button.data('document') + '?id=' + makeid();
-
-                // force the browser to reload the pdf by adding a random querystring
-
-
-                // Set the document links
-                var obj = modal.find('.modal-body object');
-                obj.attr('data', document);
-                obj.find('a').attr('href', document);
-
-                // Set the title
-                modal.find('.modal-title').text(title);
-
-                // Set the footer
-                modal.find('.modal-footer a').attr('href', document);
-            });
-        };
-
-        return {
-            init:init
-        };
-    }());
-
-    player_portal.modalImg = (function() {
-
-        var init = function() {
-            // setup image modal
-            $('#imageModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget); // button that triggered the modal
-                var document = button.data('document');
-                var title = button.data('title');
-                var modal = $(this);
-
-                // Set the title
-                modal.find('.modal-title').text(title);
-
-                // Set the document links
-                var obj = modal.find('.modal-body img');
-                obj.attr('src', document);
-            });
-        };
-
-        return {
-            init:init
-        };
-    }());
-
-    player_portal.payment = (function() {
-
-      var _scrollToTop = function() {
-        $('html, body').animate({scrollTop : 0},800);
-        return false;
-      };
-
-      var showAlert = function(mesg) {
-        var alert = $('#alert');
-        alert.find('.message').html(mesg);
-        alert.show();
-        _scrollToTop();
-      };
-
-      var setupStripe = function(key, button, validate, errorMsgs) {
-
-        var _errorMsgs = errorMsgs;
-        var _submitForm = function(url, formData) {
-
-          // Show the pleaseWaitDialog
-          var pleaseWait = $('#pleaseWaitDialog');
-          pleaseWait.modal('show');
-
-          $.ajax({
-                url: url,
-                data: formData,
-                contentType: false,
-                processData: false,
-                type: 'POST'
-              })
-              .done(function(data) {
-                window.location.href = url + '?success=1';
-              })
-              .fail(function(data) {
-                // Dismiss the modal and show the error message
-                pleaseWait.modal('hide');
-
-                if (data.status == 402) {
-                  showAlert(JSON.parse(data.responseText).error);
-                } else {
-                  showAlert(_errorMsgs.fiveHundred);
-                }
-              });
-        };
-
-        // Setup Stripe
-        var handler = StripeCheckout.configure({
-          key: key,
-          image: 'https://s3.amazonaws.com/stripe-uploads/acct_17gopvKdw52ZEJhQmerchant-icon-1456253746398-logo.png',
-          locale: 'auto',
-          token: function(token) {
-            // Due to high fees, we do not accept American Express cards
-            if (token.card.brand == 'American Express') {
-              showAlert(_errorMsgs.amex);
-              return;
-            }
-
-            var form = button.parents('form');
-            var formData = new FormData(form[0]);
-            formData.append('stripeToken', token.id);
-            formData.append('stripeEmail', token.email);
-
-            _submitForm(form.attr('action'), formData);
-          }
-        });
-
-        button.on('click', function(e) {
-
-          if (!validate())
-          {
-            return false;
-          }
-
-          // Open Checkout with further options
-          handler.open({
-            name: 'Central Marin Soccer Club',
-            description: button.data('description'),
-            amount: button.data('amount')
-          });
-          e.preventDefault();
-        });
-
-        // Close Checkout on page navigation
-        $(window).on('popstate', function() {
-          handler.close();
-        });
-      };
-
-      return {
-        showAlert: showAlert,
-        setupStripe: setupStripe
-      }
-
-    }());
 
     player_portal.registration_wizard = (function() {
         var CROP_WIDTH = 300;
@@ -363,19 +192,19 @@ function makeid()
                 processData: false,
                 type: 'POST'
             })
-            .done(function(data) {
-                window.location.href = _success + '?success=1';
-            })
-            .fail(function(data) {
-              // Dismiss the modal and show the error message
-              pleaseWait.modal('hide');
+                .done(function(data) {
+                    window.location.href = _success + '?success=1';
+                })
+                .fail(function(data) {
+                    // Dismiss the modal and show the error message
+                    pleaseWait.modal('hide');
 
-              if (data.status == 402) {
-                _showAlert(JSON.parse(data.responseText).error);
-              } else {
-                _showAlert(_errorMsgs.fiveHundred);
-              }
-            });
+                    if (data.status == 402) {
+                        _showAlert(JSON.parse(data.responseText).error);
+                    } else {
+                        _showAlert(_errorMsgs.fiveHundred);
+                    }
+                });
         };
 
         var _showAlert = function(mesg) {
@@ -487,58 +316,4 @@ function makeid()
 
     }());
 
-    player_portal.event_registration = function(cost, container_name, key, errors) {
-        var _container_name = container_name;
-        var _event_container;
-        var _subtotal = 0.0;
-        var _cost = cost;
-
-        var _calculateAndShowCost = function() {
-
-          // Calculate credit card fees and total
-          var total = 0.00;
-          var cc_fees = 0.00;
-          if (_subtotal != 0.0) {
-            total = ((_subtotal + <%= PlayerPortal::CC_FIXED %>) / (1 -<%= PlayerPortal::CC_PERCENTAGE %>)).toFixed(2);
-            cc_fees = (total - _subtotal).toFixed(2);
-          }
-
-          // update the view
-          $('#' + _container_name + '_subtotal').html('$' + _subtotal);
-          $('#' + _container_name + '_fees').html('$' + cc_fees);
-          $('#' + _container_name + '_total').html('$' + total);
-          $('#' + _container_name + '_button').data('amount', '$' + total);
-        };
-
-        var _eventSelectionChange = function(e) {
-          _subtotal += ($(e.target).is(':checked') ? _cost : -1 * _cost);
-
-          _calculateAndShowCost();
-        };
-
-        // make sure we have something selected
-        var validate = function() {
-          return _subtotal > 0;
-        };
-
-        // register click handler
-        var _init = function(key, errors) {
-          _event_container = $('#' + container_name);
-          // add onchange event for all checkboxes
-          checkboxes = _event_container.find('input:checkbox');
-          for(var i = 0; i < checkboxes.length; i++) {
-              checkboxes[i].onchange = _eventSelectionChange;
-          }
-          _calculateAndShowCost();
-
-          var button = $('#' + container_name + '_button');
-          player_portal.payment.setupStripe(key, button, validate, errors)
-        };
-
-      _init(key, errors);
-    };
 }());
-
-$("[data-hide]").on("click", function(){
-     $(this).closest("." + $(this).attr("data-hide")).hide();
-});

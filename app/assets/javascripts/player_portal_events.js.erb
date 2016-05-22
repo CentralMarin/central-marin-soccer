@@ -1,0 +1,96 @@
+
+(function () {
+    namespace('player_portal');
+
+
+    player_portal.event_registration = function(cost, container_name, key, errors) {
+      var _container_name = container_name;
+      var _event_container;
+      var _subtotal = 0.0;
+      var _cost = cost;
+
+      var _calculateAndShowCost = function() {
+
+        // Calculate credit card fees and total
+        var total = 0.00;
+        var cc_fees = 0.00;
+        if (_subtotal != 0.0) {
+            total = ((_subtotal + <%= PlayerPortal::CC_FIXED %>) / (1 -<%= PlayerPortal::CC_PERCENTAGE %>)).toFixed(2);
+            cc_fees = (total - _subtotal).toFixed(2);
+        }
+
+        // update the view
+        $('#' + _container_name + '_subtotal').html('$' + _subtotal);
+        $('#' + _container_name + '_fees').html('$' + cc_fees);
+        $('#' + _container_name + '_total').html('$' + total);
+        $('#' + _container_name + '_button').data('amount', '$' + total);
+      };
+
+      var _eventSelectionChange = function(e) {
+        _subtotal += ($(e.target).is(':checked') ? _cost : -1 * _cost);
+
+        _calculateAndShowCost();
+      };
+
+      // make sure we have something selected
+      var _validate = function() {
+        return _subtotal > 0;
+      };
+
+      var _refund = function(event) {
+        var button = $(event.target);
+        var token = $("input[name='authenticity_token']").attr('value');
+
+        if (confirm('Are you sure you do not want to attend? $10 will be returned to your credit card.') == true) {
+
+          // Turn the button text to processing
+          button.text('Processing');
+          button.prop('disabled', true);
+
+          $.ajax({
+            url: button.data('url'),
+            data: {id: button.data('er')},
+            type: 'POST',
+            beforeSend: function(jqXHR, settings) {
+              jqXHR.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            }
+          })
+          .done(function(data) {
+            window.location.href = window.location.href.split('?')[0];
+          })
+          .fail(function(data) {
+
+            if (data.status == 402) {
+              showAlert(JSON.parse(data.responseText).error);
+            } else {
+              showAlert(_errorMsgs.fiveHundred + ': ' + data.responseText);
+            }
+          });
+        }
+
+      };
+
+      // register handlers
+      var _init = function(key, errors) {
+        _event_container = $('#' + container_name);
+        // add onchange event for all checkboxes
+        checkboxes = _event_container.find('input:checkbox');
+        for(var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].onchange = _eventSelectionChange;
+        }
+        _calculateAndShowCost();
+
+        var button = $('#' + container_name + '_button');
+        player_portal.payment.setupStripe(key, button, _validate, errors);
+
+        // find all refund buttons and add click handlers
+        var refunds = $("[name='event_registration_id']");
+        for(i = 0; i < refunds.length; i++) {
+          $(refunds[i]).click(_refund);
+        }
+      };
+
+      _init(key, errors);
+    };
+
+}());

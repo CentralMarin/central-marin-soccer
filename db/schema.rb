@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518193351) do
+ActiveRecord::Schema.define(version: 20160520191136) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -154,9 +154,22 @@ ActiveRecord::Schema.define(version: 20160518193351) do
   create_table "event_details_player_portals", id: false, force: :cascade do |t|
     t.integer "player_portal_id"
     t.integer "event_detail_id"
+    t.string  "charge"
   end
 
   add_index "event_details_player_portals", ["player_portal_id", "event_detail_id"], name: "player_portals_event_details_index", unique: true
+
+  create_table "event_registrations", force: :cascade do |t|
+    t.integer  "event_detail_id"
+    t.integer  "player_portal_id"
+    t.string   "charge"
+    t.integer  "amount"
+    t.datetime "created_at",       default: '2016-05-20 20:35:34', null: false
+    t.datetime "updated_at",       default: '2016-05-20 20:35:34', null: false
+  end
+
+  add_index "event_registrations", ["event_detail_id"], name: "index_event_registrations_on_event_detail_id"
+  add_index "event_registrations", ["player_portal_id"], name: "index_event_registrations_on_player_portal_id"
 
   create_table "event_translations", force: :cascade do |t|
     t.integer  "event_id",    null: false
