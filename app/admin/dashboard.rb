@@ -15,6 +15,23 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
+    section "Background Jobs" do
+      now = Time.now.getgm
+      ul do
+        li do
+          jobs = Delayed::Job.where('failed_at is not null').count(:id)
+          link_to "#{jobs} failing jobs", admin_jobs_path(scope: :failing_jobs), style: 'color: red'
+        end
+        li do
+          jobs = Delayed::Job.where('run_at <= ?', now).count(:id)
+          link_to "#{jobs} late jobs", admin_jobs_path(scope: :late_jobs), style: 'color: hsl(40, 100%, 40%)'
+        end
+        li do
+          jobs = Delayed::Job.where('run_at > ?', now).count(:id)
+          link_to "#{jobs} scheduled jobs", admin_jobs_path(scope: :scheduled_jobs), style: 'color: green'
+        end
+      end
+    end
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do

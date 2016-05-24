@@ -223,8 +223,6 @@ ActiveAdmin.register PlayerPortal do
 
   collection_action :process_email, title: 'Send Email', method: :post do
 
-    msg_client = Mailgun::Client.new
-
     notification = Notification.new
     notification.q = params[:q]
     I18n.with_locale(:en) do
@@ -238,20 +236,8 @@ ActiveAdmin.register PlayerPortal do
     notification.save!
 
     players = PlayerPortal.ransack(params[:q]).result
-
     players.each do |player|
-
-      # Send message using mailgun
-      html = render_to_string(partial: 'player_portal_mailer/notify', locals: {player_portal: player, body_en: params['body-en'], body_es: params['body-es']})
-
-      data = { from: Rails.application.secrets.mailgun_from,
-               to: [player.email, player.parent1_email, player.parent2_email],
-               subject: "#{player.first} - #{params['subject-en']} / #{params['subject-es']}",
-               html: html.to_str
-      }
-
-      msg_client.send_message Rails.application.secrets.mailgun_domain, data
-      i = 0
+      SendEmailJob.set(wait: 1.seconds).perform_later(player, params)
     end
 
     flash[:notice] = "Notified #{players.length} players."
@@ -378,6 +364,27 @@ ActiveAdmin.register PlayerPortal do
           render xlsx: 'index', formats: 'xlsx'
         }
       end
+    end
+
+    protected
+
+    def send_mail(data)
+      # mg_client = Mailgun::Client.new
+      mg_client = Mailgun::Client.new(Rails.application.secrets.mailgun_api_key, "bin.mailgun.net", "A7e108c8", ssl = false)
+
+      result = mg_client.send_message(Rails.application.secrets.mailgun_domain, data).to_h!
+      if result.key?('retry-seconds')
+
+        wait = result['retry-seconds']
+
+        logger.info "Delayed sending emails. Waiting #{wait} seconds"
+
+        # wait until we can send again
+        sleep wait + 1
+
+        send_mail(data)
+      end
+
     end
   end
 end
