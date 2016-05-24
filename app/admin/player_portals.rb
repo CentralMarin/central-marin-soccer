@@ -211,10 +211,10 @@ ActiveAdmin.register PlayerPortal do
   end
 
   action_item :send_email_link, only: :index do
-    link_to "Send Email", action: 'send_email', q: params[:q]
+    link_to "Email Players", action: 'send_email', q: params[:q]
   end
 
-  collection_action :send_email, title: 'Send Email' do
+  collection_action :send_email, title: 'Email Players' do
     filters = params[:q]
     @players = PlayerPortal.ransack(filters).result
 
@@ -237,7 +237,7 @@ ActiveAdmin.register PlayerPortal do
 
     players = PlayerPortal.ransack(params[:q]).result
     players.each do |player|
-      SendEmailJob.set(wait: 1.seconds).perform_later(player, params)
+      SendNotifyEmailJob.set(wait: 1.seconds).perform_later(player, params)
     end
 
     flash[:notice] = "Notified #{players.length} players."
@@ -364,27 +364,6 @@ ActiveAdmin.register PlayerPortal do
           render xlsx: 'index', formats: 'xlsx'
         }
       end
-    end
-
-    protected
-
-    def send_mail(data)
-      # mg_client = Mailgun::Client.new
-      mg_client = Mailgun::Client.new(Rails.application.secrets.mailgun_api_key, "bin.mailgun.net", "A7e108c8", ssl = false)
-
-      result = mg_client.send_message(Rails.application.secrets.mailgun_domain, data).to_h!
-      if result.key?('retry-seconds')
-
-        wait = result['retry-seconds']
-
-        logger.info "Delayed sending emails. Waiting #{wait} seconds"
-
-        # wait until we can send again
-        sleep wait + 1
-
-        send_mail(data)
-      end
-
     end
   end
 end

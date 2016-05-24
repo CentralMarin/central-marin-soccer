@@ -1,4 +1,4 @@
-class SendEmailJob < ActiveJob::Base
+class SendNotifyEmailJob < ActiveJob::Base
   queue_as :default
 
   def perform(player, content)
