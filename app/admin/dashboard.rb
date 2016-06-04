@@ -6,13 +6,51 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
-        panel "Notifications" do
-          mg_client = Mailgun::Client.new
-          results = mg_client.get "#{Rails.application.secrets.mailgun_domain}/stats"
+        panel 'Revenue' do
+          # Determine total
+          players = PlayerPortal.all
+          by_year = players.group_by {|player| player.birthday.year }
 
-          render partial: 'notifications', locals: {stats: results.to_h}
+          panel 'Players' do
+            table_for by_year.keys do
+              column :year
+              column :Income do |year|
+                # by_year[year].inject(0) {|sum, player| sum + player.amount_paid}
+              end
+              column :Outstanding do |year|
+
+              end
+            end
+          end
+
+          events = Event.where(category: Event::categories[:training])
+          events.each do |event|
+            panel event.title do
+              cost = event.cost
+              groups = event.event_details.group_by {|detail| "Boys: #{detail.boys_age_groups.to_ranges} Girls: #{detail.girls_age_groups.to_ranges}" }
+              table_for groups.keys do
+                column :group do |group|
+                  group
+                end
+                column :events do |group|
+                  groups[group].length
+                end
+                column :income do |group|
+                  groups[group].inject(0) {|sum, detail| sum + detail.event_registrations.length * cost }
+                end
+              end
+            end
+          end
         end
       end
+      # column do
+      #   panel "Notifications" do
+      #     mg_client = Mailgun::Client.new
+      #     results = mg_client.get "#{Rails.application.secrets.mailgun_domain}/stats"
+      #
+      #     render partial: 'notifications', locals: {stats: results.to_h}
+      #   end
+      # end
     end
 
     section "Background Jobs" do
