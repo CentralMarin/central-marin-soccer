@@ -11,19 +11,19 @@ gem 'mini_magick', '4.5.1'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.4', :require => false
-gem 'google_drive', '1.0.6'
+gem 'google_drive', '2.0.1'
 gem 'premailer-rails', '1.9.2'
 gem 'nokogiri', '1.6.7.2'
-gem 'devise', '4.1.0'
+gem 'devise', '4.1.1'
 gem 'bing_translator', '4.6.0'
 gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activeadmin-ranked-model'
 gem 'html_press', '0.8.2'
 gem 'pdf-forms', '1.0.0'
-gem 'stripe', '1.42.0'
+gem 'stripe', '1.43.0'
 gem 'mailgun-ruby', '1.1.0', require: 'mailgun'
-gem 'delayed_job_active_record', '4.1.0'
+gem 'delayed_job_active_record', '4.1.1'
 gem 'daemon-spawn', '0.4.2'
 
 # Use SCSS for stylesheets
@@ -46,7 +46,7 @@ gem 'jquery-ui-themes', '0.0.12'
 gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.4.1'
+gem 'jbuilder', '2.5.0'
 
 gem 'axlsx', '2.0.1'
 gem 'axlsx_rails', '0.4.0'
