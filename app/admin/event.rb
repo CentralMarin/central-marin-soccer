@@ -39,8 +39,6 @@ ActiveAdmin.register Event do
         end
         column :registrations do |event_detail|
           link_to event_detail.player_portals.length, download_registrations_admin_event_path(event_detail.id)
-
-
         end
       end
     end
