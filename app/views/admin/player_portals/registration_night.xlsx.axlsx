@@ -59,8 +59,8 @@ sheets['unknown'] = sheet
         (player.status?(:picture) ? '✔' : ''),
         (player.status?(:docs_reviewed) ? '✔' : ''),
         (player.status?(:volunteer) ? player.volunteer_choice.to_s.humanize : ''),
-        player.amount_paid,
-        (player.amount_paid.present? ? 'online' : '')
+        player.paid,
+        (player.payment > 0 ? 'online' : '')
         ], height: row_height
 
 end

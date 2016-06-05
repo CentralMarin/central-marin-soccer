@@ -17,9 +17,9 @@ class PlayerPortal < ActiveRecord::Base
 
   def self.paid_club_fees(paid)
     if paid == 'Yes'
-      where.not(amount_paid: nil).where.not(amount_paid: '')
+      where.not(payment: 0)
     else
-      where("amount_paid is null or amount_paid=''")
+      where(payment: 0)
     end
   end
 
@@ -84,10 +84,7 @@ class PlayerPortal < ActiveRecord::Base
   end
 
   def paid
-    amt_paid = 0
-    amt_paid = self.amount_paid.gsub(/[^\d\.]/, '').to_f unless self.amount_paid.blank?
-
-    amt_paid
+    amt = payment / 100.0 # Convert from cents to dollars
   end
 
   def to_hash
@@ -137,13 +134,13 @@ class PlayerPortal < ActiveRecord::Base
     players.each do |player|
       amount_paid = player.paid
 
-      if player.amount_paid.blank?
+      if player.payment == 0
         no_payment_players += 1
         outstanding_payments += player.club_registration_fee
-      elsif player.amount_due < player.club_registration_fee && player.amount_due > 0
+      elsif player.paid < player.club_registration_fee
         partial_payment_players += 1
-        outstanding_partial_payments += amount_paid
-        partial_payments += player.amount_due
+        outstanding_partial_payments += player.club_registration_fee - amount_paid
+        partial_payments += amount_paid
       else
         paid_in_full_players += 1
         fees_paid += player.club_registration_fee
@@ -152,19 +149,12 @@ class PlayerPortal < ActiveRecord::Base
       total_fees += player.club_registration_fee
     end
 
-    return {collected: [
-        {type: 'Paid in Full', count: paid_in_full_players, collected: fees_paid},
-        {type: 'Partial Payment', count: partial_payment_players, collected: partial_payments},
-        {type: 'Subtotal', count: paid_in_full_players + partial_payment_players, collected: fees_paid + partial_payments},
-    ],
-    outstanding: [
-        {type: 'No Payment', count: no_payment_players, collected: -1 *outstanding_payments },
-        {type: 'Partial Payment', count: partial_payment_players, collected: -1 * outstanding_partial_payments},
-        {type: 'Subtotal', count: no_payment_players + partial_payment_players, collected: -1 * (outstanding_payments + outstanding_partial_payments)},
-    ],
-    totals: [
-        {type: 'Total', count: total_players, collected: total_fees}
-    ]}
+    [
+      {type: 'No', count: no_payment_players, collected: 0, outstanding: -1 * outstanding_payments },
+      {type: 'Partial', count: partial_payment_players, collected: partial_payments, outstanding: -1 * outstanding_partial_payments},
+      {type: 'Full', count: paid_in_full_players, collected: fees_paid, outstanding: 0},
+      {type: 'Total', count: total_players, collected: total_fees, outstanding: -1 * (outstanding_payments + outstanding_partial_payments)}
+    ]
   end
 
   protected

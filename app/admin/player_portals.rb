@@ -55,7 +55,7 @@ ActiveAdmin.register PlayerPortal do
                 :physician_name, :physician_phone1, :physician_phone2,
                 :insurance_name, :insurance_phone, :policy_holder, :policy_number,
                 :alergies, :conditions,
-                :volunteer_choice, :picture, :amount_paid, :status =>[]
+                :volunteer_choice, :picture, :payment, :status =>[]
 
   actions :index, :show, :update, :edit, :destroy
 
@@ -79,32 +79,16 @@ ActiveAdmin.register PlayerPortal do
 
   sidebar :Statistics, only: :index do
     stats = PlayerPortal.stats
-    table_for stats[:collected] do
-      column '', :type
-      column 'Players', :count do |stat|
+    table_for stats do
+      column 'Payment', :type
+      column '#', :count do |stat|
         stat[:count]
       end
       column 'Collected', :collected do |stat|
         number_to_currency stat[:collected]
       end
-    end
-    table_for stats[:outstanding] do
-      column '', :type
-      column 'Players', :count do |stat|
-        stat[:count]
-      end
-      column 'Oustanding', :collected do |stat|
-        number_to_currency stat[:collected]
-      end
-    end
-
-    table_for stats[:totals] do
-      column '', :type
-      column 'Players', :count do |stat|
-        stat[:count]
-      end
-      column 'Potential', :collected do |stat|
-        number_to_currency stat[:collected]
+      column 'Outstanding', :outstanding do |stat|
+        number_to_currency stat[:outstanding]
       end
     end
   end
@@ -142,7 +126,9 @@ ActiveAdmin.register PlayerPortal do
     column :club_registration_fee do |portal|
       number_to_currency(portal.club_registration_fee)
     end
-    column :amount_paid
+    column :paid do |portal|
+      number_to_currency(portal.paid)
+    end
     column :amount_due do |portal|
       number_to_currency(portal.amount_due)
     end
@@ -191,7 +177,7 @@ ActiveAdmin.register PlayerPortal do
       f.input :status, collection: PlayerPortal.values_for_status.each.map{|c| [c.to_s.gsub('_', ' '), c]}, multiple: true, as: :bitmask_attributes
       f.input :volunteer_choice, as: :select, collection: PlayerPortal::VOLUNTEER_OPTIONS.map {|key,value| [key.to_s.humanize, key]}
       f.input :picture
-      f.input :amount_paid
+      f.input :payment, label: 'Payment (in cents)'
 
       f.actions
     end

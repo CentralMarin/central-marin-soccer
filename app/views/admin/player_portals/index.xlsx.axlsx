@@ -22,7 +22,7 @@ workbook.add_worksheet(name: "#{Event::TRYOUT_YEAR} Season") do |sheet|
             player.parent2_cell,
             player.volunteer_choice,
             player.club_registration_fee,
-            player.amount_paid,
+            player.paid,
             player.amount_due
             ]
     end
