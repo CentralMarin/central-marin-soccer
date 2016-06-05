@@ -293,9 +293,9 @@ ActiveRecord::Schema.define(version: 20160605001824) do
     t.string   "volunteer_choice"
     t.string   "picture"
     t.string   "amount_paid"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "payment"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "payment",          default: 0
   end
 
   create_table "team_level_translations", force: :cascade do |t|
