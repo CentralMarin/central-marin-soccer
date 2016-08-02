@@ -5,14 +5,14 @@ gem 'rails', '4.2.6'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
-gem 'ckeditor', '4.1.6'
+gem 'ckeditor', '4.2.0'
 gem 'carrierwave', '0.11.2'
 gem 'mini_magick', '4.5.1'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.7', :require => false
 gem 'google_drive', '1.0.6'
-gem 'premailer-rails', '1.9.3'
+gem 'premailer-rails', '1.9.4'
 gem 'nokogiri', '1.6.8'
 gem 'devise', '4.2.0'
 gem 'bing_translator', '4.6.0'
@@ -27,8 +27,8 @@ gem 'delayed_job_active_record', '4.1.1'
 gem 'daemon-spawn', '0.4.2'
 
 # Use SCSS for stylesheets
-gem 'bootstrap-sass', '3.3.6'
-gem 'sass-rails', '5.0.5'
+gem 'bootstrap-sass', '3.3.7'
+gem 'sass-rails', '5.0.6'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '2.7.2'
@@ -46,10 +46,10 @@ gem 'jquery-ui-themes', '0.0.12'
 gem 'turbolinks', '2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.5.0'
+gem 'jbuilder', '2.6.0'
 
 gem 'axlsx', '2.0.1'
-gem 'axlsx_rails', '0.4.0'
+gem 'axlsx_rails', '0.5.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
