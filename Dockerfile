@@ -5,7 +5,8 @@ MAINTAINER rrobinett@centralmarinsoccer.com
 # well as RubyGems. As the Ruby image itself is based on a
 # Debian image, we use apt-get to install those.
 RUN apt-get update && apt-get install -y \
-  build-essential
+  build-essential \
+  imagemagick
 
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
