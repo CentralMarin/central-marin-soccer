@@ -10,6 +10,9 @@
 /log/*.log
 /tmp
 
+# Ignore uploaded images
+assets
+
 *.rbc
 *.sassc
 .sass-cache
@@ -35,12 +38,12 @@ config/*.p12
 .capistrano
 
 # Ignore Google config
-USClubForms/config.json
-USClubForms/Boys
-USClubForms/Girls
-Tryouts/config.json
-Tryouts/*.xlsx
-Tryouts/client_secret.json
+tools/USClubForms/config.json
+tools/USClubForms/Boys
+tools/USClubForms/Girls
+tools/Tryouts/config.json
+tools/Tryouts/*.xlsx
+tools/Tryouts/client_secret.json
 
 docker
-.env.web
+.env
