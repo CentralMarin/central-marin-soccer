@@ -56,19 +56,14 @@ group :doc do
   gem 'sdoc', :require => false
 end
 
-# Use Capistrano for deployment
-group :development do
-  gem 'capistrano-rails',   '1.1.7'
-  gem 'capistrano-faster-assets', '1.0.2'
-  gem 'capistrano-passenger', '0.2.0'
+group :development, :test do
+  gem 'ruby-debug-ide'
+  gem 'debase'
   gem 'letter_opener_web', '1.3.0'
 end
 
-#group :development do
-#  gem 'sqlite3', '1.3.11'
-#end
 
-  gem 'mysql2', '0.4.4'
+gem 'mysql2', '0.4.4'
 
 group :development, :test do
   gem 'i18n-tasks', '~> 0.9.5'
