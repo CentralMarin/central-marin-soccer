@@ -7,17 +7,18 @@ services:
     - mysql:/var/lib/mysql
     ports:
     - 3306:3306
-#  web:
-#    build: .
-#    volumes:
-#      - .:/myapp
-#      - ./docker/public/ckeditor_assets:/myapp/public/ckeditor_assets
-#      - ./docker/public/uploads:/myapp/public/uploads
-#    ports:
-#      - "3000:3000"
-#    links:
-#      - db:DBHOST
-#    env_file:
-#      - '.env.web'
+  app:
+    build: .
+    depends_on:
+      - db
+    command: rails server -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/app
+      - ckeditor_assets:/myapp/public/ckeditor_assets
+      - uploads:/myapp/public/uploads
+    ports:
+      - "3000:3000"
 volumes:
   mysql:
+  uploads:
+  ckeditor_assets:
