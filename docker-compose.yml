@@ -11,14 +11,13 @@ services:
     build: .
     depends_on:
       - db
-    command: rails server -p 3000 -b '0.0.0.0'
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- /app/bin/rails s -b 0.0.0.0 -p 3000 -e development"
     volumes:
       - .:/app
-      - ckeditor_assets:/myapp/public/ckeditor_assets
-      - uploads:/myapp/public/uploads
+      - ./assets/ckeditor_assets:/app/public/ckeditor_assets
+      - ./assets/uploads:/app/public/uploads
     ports:
       - "3000:3000"
+      - "1234:1234"
 volumes:
   mysql:
-  uploads:
-  ckeditor_assets:
