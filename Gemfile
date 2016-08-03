@@ -64,13 +64,11 @@ group :development do
   gem 'letter_opener_web', '1.3.0'
 end
 
-group :development do
-  gem 'sqlite3', '1.3.11'
-end
+#group :development do
+#  gem 'sqlite3', '1.3.11'
+#end
 
-group :staging, :production do
   gem 'mysql2', '0.4.4'
-end
 
 group :development, :test do
   gem 'i18n-tasks', '~> 0.9.5'
