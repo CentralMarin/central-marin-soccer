@@ -19,5 +19,11 @@ services:
     ports:
       - "3000:3000"
       - "1234:1234"
+  web:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+     - "8080:80"
 volumes:
   mysql:

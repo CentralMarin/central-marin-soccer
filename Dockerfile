@@ -1,18 +1,19 @@
-FROM ruby:2.3
+FROM ruby:2.3.1
 MAINTAINER rrobinett@centralmarinsoccer.com
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
 # Debian image, we use apt-get to install those.
 RUN apt-get update && apt-get install -y \
-  build-essential \
-  imagemagick
+  build-essential
 
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
 # commands.
 RUN mkdir -p /app
 WORKDIR /app
+
+RUN gem install passenger --no-rdoc --no-ri
 
 # Copy the Gemfile as well as the Gemfile.lock and install
 # the RubyGems. This is a separate step so the dependencies
@@ -31,4 +32,4 @@ EXPOSE 3000
 # The main command to run when the container starts. Also
 # tell the Rails dev server to bind to all interfaces by
 # default.
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["passenger", "start", "--port", "3000", "--min-instances", "4", "--max-pool-size", "4", "--no-friendly-error-pages", "--sticky-sessions"]
