@@ -1,19 +1,19 @@
   server {
     listen 443 ssl;
-    server_name centralmarinsoccer.com;
+    server_name ${DOMAIN};
     include /etc/nginx/server_common.conf;
   }
 
   server {
     listen 443 ssl;
-    server_name es.centralmarinsoccer.com;
+    server_name es.${DOMAIN};
     include /etc/nginx/server_common.conf;
   }
 
   # Redirect to spanish SSL
   server {
     listen 80;
-    server_name es.centralmarinsoccer.com;
+    server_name es.${DOMAIN};
 
     # Allow letsencrypt to retrieve key information
     include /etc/nginx/letsencrypt-acme-challenge.conf;
@@ -22,22 +22,12 @@
       return 301 https://$server_name$request_uri;
     }
 
-  }
-
-  server {
-    listen 80;
-    server_name test.centralmarinsoccer.com;
-
-    location /.well-known/acme-challenge/ {
-        default_type "text/plain";
-        root         /var/www/letsencrypt;
-    }
   }
 
   # Redirect to english SSL
   server {
     listen 80;
-    server_name centralmarinsoccer.com;
+    server_name ${DOMAIN};
 
     # Allow letsencrypt to retrieve key information
     include /etc/nginx/letsencrypt-acme-challenge.conf;
@@ -50,19 +40,19 @@
 
   server {
     listen 80;
-    server_name www.centralmarinsoccer.com;
+    server_name www.${DOMAIN};
 
     # Allow letsencrypt to retrieve key information
     include /etc/nginx/letsencrypt-acme-challenge.conf;
 
     location / {
-      return 301 https://centralmarinsoccer.com$request_uri;
+      return 301 https://${DOMAIN}$request_uri;
     }
 
   }
 
   server {
     listen 443;
-    server_name www.centralmarinsoccer.com;
-    return 301 https://centralmarinsoccer.com$request_uri;
+    server_name www.${DOMAIN};
+    return 301 https://${DOMAIN}$request_uri;
   }

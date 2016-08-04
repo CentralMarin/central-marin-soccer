@@ -23,6 +23,8 @@ services:
     build:
       context: .
       dockerfile: nginx/Dockerfile
+    environment:
+     - DOMAIN=centralmarinsoccer.local
     ports:
      - "8080:80"
 volumes:
