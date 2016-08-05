@@ -2,30 +2,47 @@ version: '2'
 services:
   db:
     image: mysql
-    env_file: .env
+    environment:
+     - MYSQL_ROOT_PASSWORD=test
+     - MYSQL_USER=soccer
+     - MYSQL_PASSWORD=soccer
+     - MYSQL_DATABASE=soccer_production
     volumes:
     - mysql:/var/lib/mysql
     ports:
-    - 3306:3306
+    - "3306:3306"
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: passenger/Dockerfile
+    environment:
+      - PASSENGER_ENVIRONMENT=development
+      - PASSENGER_FRIENDLY_ERROR_PAGES=true
     depends_on:
       - db
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- /app/bin/rails s -b 0.0.0.0 -p 3000 -e development"
+#    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- /app/bin/rails s -b 0.0.0.0 -p 3000 -e development"
     volumes:
       - .:/app
       - ./assets/ckeditor_assets:/app/public/ckeditor_assets
       - ./assets/uploads:/app/public/uploads
+      - assets:/app/public/assets
     ports:
       - "3000:3000"
-      - "1234:1234"
+#      - "1234:1234"
   web:
     build:
       context: .
       dockerfile: nginx/Dockerfile
+    depends_on:
+      - app
     environment:
      - DOMAIN=centralmarinsoccer.local
+    volumes:
+      - ./assets/ckeditor_assets:/usr/share/nginx/html/ckeditor_assets
+      - ./assets/uploads:/usr/share/nginx/html/uploads
+      - assets:/usr/share/nginx/html/assets
     ports:
      - "8080:80"
 volumes:
   mysql:
+  assets:

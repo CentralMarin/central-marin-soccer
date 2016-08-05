@@ -1,4 +1,5 @@
 FROM nginx
+MAINTAINER rrobinett@centralmarinsoccer.com
 
 # Copy config files
 COPY nginx/default.template /etc/nginx/conf.d/default.template
@@ -13,4 +14,5 @@ ENV DOMAIN=centralmarinsoccer.com
 EXPOSE 80
 EXPOSE 443
 
+# Replace $DOMAIN with the value specified
 CMD /bin/bash -c "envsubst '\$DOMAIN' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
