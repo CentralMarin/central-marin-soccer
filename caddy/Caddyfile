@@ -1,0 +1,17 @@
+www.qa.centralmarinsoccer.com {
+  redir https://centralmarinsoccer.local{uri}
+}
+
+qa.centralmarinsoccer.com {
+
+  # expose logs via docker
+  log stdout
+  errors stderr
+
+  proxy / http://app:3000 
+
+  # TODO: 
+  # root public
+  # header <some path> Cache-Controll "max-age=2592000"
+  # header <some path> Cache-Controll "max-age=2592000"
+}

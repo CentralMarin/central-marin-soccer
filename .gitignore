@@ -46,4 +46,4 @@ tools/Tryouts/*.xlsx
 tools/Tryouts/client_secret.json
 
 docker
-.env
+.*.env
