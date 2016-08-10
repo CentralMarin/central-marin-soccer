@@ -1,0 +1,9 @@
+localhost:8000
+
+tls self_signed
+
+# expose logs to docker
+log stdout
+errors stderr
+
+proxy / http://app:3000
