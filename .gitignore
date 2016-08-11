@@ -24,7 +24,6 @@ capybara-*.html
 /spec/tmp/*
 **.orig
 rerun.txt
-pickle-email-*.html
 .DS_Store
 .idea/
 *.iml
@@ -34,8 +33,6 @@ public/cache/*
 public/ckeditor_assets/*
 config/secrets.yml
 config/*.p12
-.vagrant
-.capistrano
 
 # Ignore Google config
 tools/USClubForms/config.json
@@ -45,5 +42,4 @@ tools/Tryouts/config.json
 tools/Tryouts/*.xlsx
 tools/Tryouts/client_secret.json
 
-docker
 .*.env

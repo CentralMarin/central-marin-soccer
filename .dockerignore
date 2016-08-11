@@ -2,8 +2,5 @@
 db/*.sqlite
 log/*
 tmp/*
-Dockerfile
 README.md
-TeamSnap
-Tryouts
-USClubForms
+tools/*
