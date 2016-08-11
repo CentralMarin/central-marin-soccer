@@ -5,6 +5,7 @@ services:
     env_file: .centralmarin.env
     volumes:
     - mysql:/var/lib/mysql
+   # - ./soccer_production_8-10-16.sql:/soccer_production.sql
     ports:
     - "3306:3306"
   app:
@@ -15,25 +16,22 @@ services:
     env_file: .centralmarin.env
     depends_on:
       - db
-#    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rdebug-ide --host 0.0.0.0 --port 1234 --dispatcher-port 26162 -- /app/bin/rails s -b 0.0.0.0 -p 3000 -e development"
     volumes:
       - .:/app
       - assets:/app/public
     ports:
       - "3000:3000"
-#      - "1234:1234"
   web:
     build:
       context: .
       dockerfile: caddy/Dockerfile
     image: centralmarin/web
+    command: --conf /etc/Caddyfile.localhost
     depends_on:
       - app
     env_file: .centralmarin.env
-    volumes:
-      - assets:/usr/share/nginx/html
     ports:
-     - "8080:80"
+     - "8000:8000"
 volumes:
   mysql:
   assets:

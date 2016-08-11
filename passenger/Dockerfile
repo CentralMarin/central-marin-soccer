@@ -27,8 +27,6 @@ COPY . ./
 # from the outside.
 EXPOSE 3000
 
-RUN gem install passenger --no-rdoc --no-ri
-
 ENV RAILS_ENV production
 
 ENV PASSENGER_PORT 3000

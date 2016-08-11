@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 
+gem 'passenger', '5.0.30'
+
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
 gem 'ckeditor', '4.2.0'
