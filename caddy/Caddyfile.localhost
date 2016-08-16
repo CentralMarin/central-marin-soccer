@@ -1,9 +1,40 @@
-localhost:8000
+www.cms.local {
+  tls self_signed
 
-tls self_signed
+  redir https://cms.local{uri}
+}
 
-# expose logs to docker
-log stdout
-errors stderr
+www.qa.cms.local {
+  tls self_signed
+  redir https://qa.cms.local{uri}
+}
 
-proxy / http://app:3000
+localhost:8000 {
+  tls self_signed
+
+  # expose logs to docker
+  log stdout
+  errors stderr
+
+  proxy / http://app:3000
+}
+
+cms.local:8000 {
+  tls self_signed
+
+  # expose logs to docker
+  log stdout
+  errors stderr
+
+  proxy / http://app:3000
+}
+
+qa.cms.local:8000 {
+  tls self_signed
+
+  # expose logs to docker
+  log stdout
+  errors stderr
+
+  proxy / http://app-qa:3000
+}

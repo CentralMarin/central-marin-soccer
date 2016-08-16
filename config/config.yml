@@ -1,7 +1,10 @@
 development: &DEVELOPMENT
-  switch_hosts: { es: "centralmarinsoccer.local", en: "es.centralmarinsoccer.local" }
+  switch_hosts: { es: "cms.local", en: "es.cms.local" }
 test:
   <<: *DEVELOPMENT
+
+staging:
+  switch_hosts: { es: "qa.centralmarinsoccer.com", en: "es.qa.centralmarinsoccer.com" }
 
 production:
   switch_hosts: { es: "centralmarinsoccer.com", en: "es.centralmarinsoccer.com" }

@@ -18,7 +18,6 @@ VOLUME /srv
 WORKDIR /srv
 
 ADD caddy/Caddyfile /etc/Caddyfile
-ADD caddy/Caddyfile.localhost /etc/Caddyfile.localhost
 
 ENTRYPOINT ["/usr/bin/caddy"]
 CMD ["--conf", "/etc/Caddyfile", "-email", "rrobinett@centralmarinsoccer.com"]

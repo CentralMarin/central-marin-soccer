@@ -5,7 +5,7 @@ services:
     env_file: .centralmarin.env
     volumes:
     - mysql:/var/lib/mysql
-   # - ./soccer_production_8-10-16.sql:/soccer_production.sql
+    - ./tools:/tools
     ports:
     - "3306:3306"
   app:
@@ -26,10 +26,12 @@ services:
       context: .
       dockerfile: caddy/Dockerfile
     image: centralmarin/web
-    command: --conf /etc/Caddyfile.localhost
     depends_on:
       - app
     env_file: .centralmarin.env
+    volumes:
+      - ./caddy/Caddyfile.localhost:/etc/Caddyfile
+      - assets:/app/public
     ports:
      - "8000:8000"
 volumes:

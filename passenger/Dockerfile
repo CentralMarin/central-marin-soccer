@@ -18,7 +18,10 @@ WORKDIR /app
 # will be cached unless changes to one of those two files
 # are made.
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install --jobs 20 --retry 5
+
+# If you have problems with timeouts or resolution, use the following line instead
+#RUN gem install bundler && bundle install 
+RUN gem install bundler && bundle install --jobs 20 --retry 10
 
 # Copy the main application.
 COPY . ./
