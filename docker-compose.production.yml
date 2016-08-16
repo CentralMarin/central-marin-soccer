@@ -1,0 +1,27 @@
+version: '2'
+services:
+  db:
+    image: mysql
+    env_file: .centralmarin.env
+    volumes:
+    - mysql:/var/lib/mysql
+    ports:
+    - "3306:3306"
+  app-qa:
+    build:
+      context: .
+      dockerfile: passenger/Dockerfile
+    image: centralmarin/app
+    env_file: .centralmarin-qa.env
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+      - assets:/app/public
+    ports:
+      - "3001:3000"
+  app:
+    env_file: .centralmarin-prod.env
+volumes:
+  mysql:
+  assets:
