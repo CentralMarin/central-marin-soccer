@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
 
-  TRYOUT_YEAR = 2016
+  TRYOUT_YEAR = 2017
   MIN_AGE = 7
   MAX_AGE = 19
 
@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.age(year)
-    TRYOUT_YEAR - year + 1
+    TRYOUT_YEAR - year
   end
 
   def age_specific_details(sex, birthday)

@@ -45,7 +45,7 @@ class EventDetail < ActiveRecord::Base
   end
 
   def self.year_to_age_group(year)
-    index = Event.age(year) - 1 - Event::MIN_AGE
+    index = Event.age(year) - Event::MIN_AGE
     EventDetail::AGE_GROUPS[index]
   end
 
