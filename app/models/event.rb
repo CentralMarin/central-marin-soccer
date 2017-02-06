@@ -20,7 +20,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.age(year)
-    TRYOUT_YEAR - year
+    TRYOUT_YEAR - year + 1
   end
 
   def age_specific_details(sex, birthday)
