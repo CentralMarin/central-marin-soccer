@@ -6,7 +6,7 @@
 //
 //= require plugins
 //= require jsrender
-//= require jquery-ui/dialog
+//= require jquery-ui
 //= require namespace
 
 (function () {

@@ -1,18 +1,25 @@
-db:
-  image: mysql
-  env_file:
-    - '.env.web'
-  volumes:
-    - ./docker/data:/docker-entrypoint-initdb.d
-web:
-  build: .
-  volumes:
-    - .:/myapp
-    - ./docker/public/ckeditor_assets:/myapp/public/ckeditor_assets
-    - ./docker/public/uploads:/myapp/public/uploads
-  ports:
-    - "3000:3000"
-  links:
-    - db:DBHOST
-  env_file:
-    - '.env.web'
+version: '2'
+services:
+  db:
+    image: mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=dev
+     - MYSQL_DATABASE=soccer
+    volumes:
+     - mysql:/var/lib/mysql
+     - ./data:/docker-entrypoint-initdb.d
+     - .:/opt
+    ports:
+     - "3306:3306"
+  web:
+     build: .
+     command: bundle exec rails s -p 3000 -b '0.0.0.0'
+     volumes:
+      - .:/myapp
+     ports:
+      - "3000:3000"
+     depends_on:
+       - db
+volumes:
+  mysql:
+

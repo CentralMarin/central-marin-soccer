@@ -44,3 +44,5 @@ Tryouts/client_secret.json
 
 docker
 .env.web
+
+data/*

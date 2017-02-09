@@ -5,14 +5,14 @@ gem 'rails', '4.2.6'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
-gem 'ckeditor', '4.2.0'
-gem 'carrierwave', '0.11.2'
-gem 'mini_magick', '4.5.1'
+gem 'ckeditor', '4.2.2'
+gem 'carrierwave', '1.0.0'
+gem 'mini_magick', '4.6.0'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.7', :require => false
 gem 'google_drive', '1.0.6'
-gem 'premailer-rails', '1.9.4'
+gem 'premailer-rails', '1.9.5'
 gem 'nokogiri', '1.6.8'
 gem 'devise', '4.2.0'
 gem 'bing_translator', '4.6.0'
@@ -20,9 +20,9 @@ gem 'bitmask_attributes', '1.0.0'
 gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activeadmin-ranked-model'
 gem 'html_press', '0.8.2'
-gem 'pdf-forms', '1.0.0'
-gem 'stripe', '1.44.0'
-gem 'mailgun-ruby', '1.1.0', require: 'mailgun'
+gem 'pdf-forms', '1.1.1'
+gem 'stripe', '1.58.0'
+gem 'mailgun-ruby', '1.1.3', require: 'mailgun'
 gem 'delayed_job_active_record', '4.1.1'
 gem 'daemon-spawn', '0.4.2'
 
@@ -37,49 +37,44 @@ gem 'uglifier', '2.7.2'
 #gem 'coffee-rails', '~> 4.0.1'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', :platforms => :ruby
+gem 'therubyracer', '0.12.3', :platforms => :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-ui-themes', '0.0.12'
+gem 'jquery-ui-rails', '6.0.1'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '2.5.3'
+gem 'turbolinks', '5.0.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.6.0'
+gem 'jbuilder', '2.6.1'
 
 gem 'axlsx', '2.0.1'
 gem 'axlsx_rails', '0.5.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', :require => false
+  gem 'sdoc', '0.4.2', :require => false
 end
 
 # Use Capistrano for deployment
 group :development do
-  gem 'capistrano-rails',   '1.1.7'
+  gem 'capistrano-rails',   '1.2.2'
   gem 'capistrano-faster-assets', '1.0.2'
   gem 'capistrano-passenger', '0.2.0'
-  gem 'letter_opener_web', '1.3.0'
+  gem 'letter_opener_web', '1.3.1'
 end
 
-group :development do
-  gem 'sqlite3', '1.3.11'
-end
-
-group :staging, :production do
-  gem 'mysql2', '0.4.4'
-end
+gem 'mysql2', '0.4.5'
 
 group :development, :test do
-  gem 'i18n-tasks', '~> 0.9.5'
-  gem 'rspec-rails', '3.5.0'
-  gem 'factory_girl_rails', '4.7.0'
-  gem 'faker', '1.6.3'
-  gem 'capybara', '2.7.1'
-  gem 'selenium-webdriver', '2.53.4'
+  gem 'i18n-tasks', '0.9.11'
+  gem 'rspec-rails', '3.5.2'
+  gem 'factory_girl_rails', '4.8.0'
+  gem 'faker', '1.7.3'
+  gem 'capybara', '2.12.0'
+  gem 'selenium-webdriver', '3.0.7'
 end
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '1.7.2', group: :development
+gem 'spring', '2.0.1', group: :development
