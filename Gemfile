@@ -57,12 +57,10 @@ group :doc do
   gem 'sdoc', '0.4.2', :require => false
 end
 
-# Use Capistrano for deployment
 group :development do
-  gem 'capistrano-rails',   '1.2.2'
-  gem 'capistrano-faster-assets', '1.0.2'
-  gem 'capistrano-passenger', '0.2.0'
   gem 'letter_opener_web', '1.3.1'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring', '2.0.1'
 end
 
 gem 'mysql2', '0.4.5'
@@ -75,6 +73,3 @@ group :development, :test do
   gem 'capybara', '2.12.0'
   gem 'selenium-webdriver', '3.0.7'
 end
-
-# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-gem 'spring', '2.0.1', group: :development
