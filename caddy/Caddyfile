@@ -1,0 +1,41 @@
+
+
+api.centralmarinsoccer.com {
+	gzip
+	tls rrobinett@centralmarinsoccer.com
+	root /var/www/api.centralmarinsoccer.com
+	proxy /teams teams:8080
+	cors
+
+        prometheus 192.168.1.16:9180
+}
+
+monitoring.centralmarinsoccer.com {
+	tls rrobinett@centralmarinsoccer.com
+	proxy / teams:3000
+}
+
+staging.centralmarinsoccer.com {
+	gzip
+	tls rrobinett@centralmarinsoccer.com
+	root /var/www/centralmarinsoccer.com
+	proxy / webapp:8000 {
+		except /assets /uploads /ckeditor_assets
+	}
+}
+
+www.staging.centralmarinsoccer.com {
+	redir https://staging.centralmarinsoccer.com{uri}
+}
+
+es.staging.centralmarinsoccer.com {
+	gzip
+	root /var/www/centralmarinsoccer.com
+	proxy / webapp:8000 {
+		except /assets /uploads /ckeditor_assets
+	}
+}
+
+www.es.staging.centralmarinsoccer.com {
+	redir https://es.staging.centralmarinsoccer.com{uri}
+}
