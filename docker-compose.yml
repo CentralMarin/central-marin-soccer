@@ -2,26 +2,36 @@ version: '2'
 services:
   db:
     image: mysql
-    environment:
-     - MYSQL_ROOT_PASSWORD=dev
-     - MYSQL_DATABASE=soccer
+    env_file:
+     - .centralmarinsoccer.env
     volumes:
      - mysql:/var/lib/mysql
      - ./data:/docker-entrypoint-initdb.d
      - .:/opt
     ports:
      - "3306:3306"
-  web:
+  app:
      build: .
-     command: bundle exec rails s -p 3000 -b '0.0.0.0'
-     environment:
-      - DATABASE_PWD=dev
+     command: bundle exec unicorn -c config/unicorn.rb
+     env_file:
+      - .centralmarinsoccer.env
      volumes:
-      - .:/myapp
+#      - .:/myapp
+      - ./tmp/ckeditor_assets:/myapp/public/ckeditor_assets
+      - ./tmp/uploads:/myapp/public/uploads
      ports:
-      - "3000:3000"
+      - "8000:8000"
      depends_on:
        - db
+  web:
+    #image: abiosoft/caddy
+    build: caddy
+    ports: 
+      - "80:80"
+    volumes_from:
+      - app
+    depends_on:
+      - app
 volumes:
   mysql:
 
