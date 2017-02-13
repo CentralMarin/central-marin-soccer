@@ -18,9 +18,13 @@ monitoring.centralmarinsoccer.com {
 staging.centralmarinsoccer.com {
 	gzip
 	tls rrobinett@centralmarinsoccer.com
-	root /var/www/centralmarinsoccer.com
+	root /myapp/public
 	proxy / webapp:8000 {
+		transparent
 		except /assets /uploads /ckeditor_assets
+	}
+	expires {
+		match .(js|css|jpg|jpeg|png|pdf|gif|JPG)$ 5y
 	}
 }
 
@@ -29,11 +33,16 @@ www.staging.centralmarinsoccer.com {
 }
 
 es.staging.centralmarinsoccer.com {
-	gzip
-	root /var/www/centralmarinsoccer.com
-	proxy / webapp:8000 {
-		except /assets /uploads /ckeditor_assets
-	}
+        gzip
+        tls rrobinett@centralmarinsoccer.com
+        root /myapp/public
+        proxy / webapp:8000 {
+                transparent
+                except /assets /uploads /ckeditor_assets
+        }
+        expires {
+		match .(js|css|jpg|jpeg|png|pdf|gif|JPG)$ 5y
+        }
 }
 
 www.es.staging.centralmarinsoccer.com {
