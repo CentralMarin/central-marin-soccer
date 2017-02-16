@@ -1,0 +1,7 @@
+localhost:80
+gzip
+root /myapp/public
+proxy / app:8000 {
+    transparent
+    except /assets /uploads /ckeditor_assets
+}

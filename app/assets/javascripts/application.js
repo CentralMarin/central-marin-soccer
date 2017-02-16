@@ -7,6 +7,7 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 
 jQuery.swap = function( elem, options, callback, args ) {
     var ret, name, old = {};

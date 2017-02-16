@@ -1,0 +1,25 @@
+[Unit]
+Description=Website App Container
+Requires=docker.service
+After=docker.service
+Requires=mysql.service
+
+[Service]
+Restart=always
+Environment=ContainerImage=centralmarinsoccer/web:latest
+Environment=ContainerName=website-app
+Environment=ServicePort=8000
+
+ExecStartPre=-/usr/bin/docker pull ${ContainerImage}
+ExecStart=/usr/bin/docker run -p ${ServicePort}:8000 \
+ --link db \
+ --env-file=/etc/website-app.env \
+ -v /mnt/nfs/centralmarinsoccer/web/uploads:/myapp/public/uploads \
+ -v /mnt/nfs/centralmarinsoccer/web/ckeditor_assets:/myapp/public/ckeditor_assets \
+ --name ${ContainerName} ${ContainerImage}
+ExecStop=-/usr/bin/docker stop -t 2 ${ContainerName}
+ExecStopPost=-/usr/bin/docker rm -f ${ContainerName}
+
+[Install]
+WantedBy=default.target
+

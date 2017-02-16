@@ -14,6 +14,8 @@ ADD . /myapp
 # Provide dummy data to Rails so it can pre-compile assets.
 RUN bundle exec rake RAILS_ENV=production DATABASE_PWD=foo SECRET_TOKEN=pickasecuretoken assets:precompile
 
+# Add ckeditor files
+RUN bundle exec rake
 # Expose a volume so that nginx will be able to read in assets in production.
 VOLUME ["/myapp/public"]
 

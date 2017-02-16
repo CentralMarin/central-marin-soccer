@@ -13,10 +13,12 @@ services:
   app:
      build: .
      command: bundle exec unicorn -c config/unicorn.rb
+     environment:
+      - RAILS_ENV=development
      env_file:
       - .centralmarinsoccer.env
      volumes:
-#      - .:/myapp
+      - .:/myapp
       - ./tmp/ckeditor_assets:/myapp/public/ckeditor_assets
       - ./tmp/uploads:/myapp/public/uploads
      ports:
@@ -24,10 +26,14 @@ services:
      depends_on:
        - db
   web:
-    #image: abiosoft/caddy
     build: caddy
-    ports: 
-      - "80:80"
+    volumes:
+      - ./caddy/Caddyfile.dev:/etc/Caddyfile
+      - ./tmp/uploads:/myapp/public/uploads
+      - ./tmp/ckeditor_assets:/myapp/public/ckeditor_assets
+    ports:
+      - "8080:80"
+      - "8081:443"
     volumes_from:
       - app
     depends_on:

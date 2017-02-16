@@ -1,0 +1,23 @@
+[Unit]
+Description=MySQL Container
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+Environment=ContainerImage=mysql
+Environment=ContainerName=db
+Environment=ServicePort=3306
+Environment=MYSQL_ROOT_PASSWORD=soccer
+
+ExecStartPre=-/usr/bin/docker pull ${ContainerImage}
+ExecStart=/usr/bin/docker run \
+ -p ${ServicePort}:3306 \
+ -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} \
+ -v /mnt/nfs/centralmarinsoccer/db:/var/lib/mysql \
+ --name ${ContainerName} ${ContainerImage}
+ExecStop=/usr/bin/docker stop -t 2 ${ContainerName}
+ExecStopPost=/usr/bin/docker rm -f ${ContainerName}
+
+[Install]
+WantedBy=default.target

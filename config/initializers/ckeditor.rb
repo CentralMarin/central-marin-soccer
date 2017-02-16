@@ -16,6 +16,10 @@ if Object.const_defined?("Ckeditor")
     # config.attachment_file_types = ["doc", "docx", "xls", "odt", "ods", "pdf", "rar", "zip", "tar", "swf"]
     
     # Ckeditor files destination path (default 'public/javascripts')
-    #config.path = 'public/assets'
+    #config.asset_path = '/ckeditor/'
+
+    # speed up the asset pipeline compilation
+    config.assets_languages = ['en', 'es']
+    config.assets_plugins = ['youtube']
   end
 end

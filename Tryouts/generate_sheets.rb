@@ -4,7 +4,7 @@ require "yaml"
 require 'axlsx'
 
 BLANK_ROWS = 10
-TRYOUT_YEAR = 2016
+TRYOUT_YEAR = 2017
 FONT_SIZE = 13
 
 # TOTAL Page Width = 92

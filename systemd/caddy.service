@@ -1,0 +1,26 @@
+[Unit]
+Description=Caddy HTTP/2 web server
+Documentation=https://caddyserver.com/docs
+After=docker.service
+Requires=docker.service website-app.service 
+
+[Service]
+#Restart=on-failure
+
+; Letsencrypt-issued certificates will be written to this directory.
+Environment=SSL=/etc/ssl/caddy
+
+Environment=ContainerImage=centralmarinsoccer/caddy
+Environment=ContainerName=caddy
+
+ExecStartPre=-/usr/bin/docker pull ${ContainerImage}
+ExecStart=/usr/bin/docker run -p 80:80 -p 443:443 \
+ --volumes-from website-app \
+ -v ${SSL}:/root/.caddy \
+ -v /etc/Caddyfile:/etc/Caddyfile \
+ -v /mnt/nfs/centralmarinsoccer/web/uploads:/myapp/public/uploads \
+ -v /mnt/nfs/centralmarinsoccer/web/ckeditor_assets:/myapp/public/ckeditor_assets \
+ --link website-app \
+ --name ${ContainerName} ${ContainerImage}
+ExecStop=-/usr/bin/docker stop -t 2 ${ContainerName}
+ExecStopPost=-/usr/bin/docker rm -f ${ContainerName}

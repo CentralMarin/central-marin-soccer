@@ -26,9 +26,10 @@
                             resizable: false,
                             autoOpen: true,
                             draggable: false,
+                            closeText: '',
                             show: {
-                                effect: "scale",
-                                duration: 500
+                                effect: "explode",
+                                duration: 100
                             }
                         });
                         $("#coach_details").html($("#CoachTemplate").render(coachDetails));
