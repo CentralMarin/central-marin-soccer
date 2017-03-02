@@ -1,7 +1,7 @@
-require "net/https"
-require "json"
 
 class TeamsController < CmsController
+
+  helper TeamsHelper
 
   # GET /teams
   def index

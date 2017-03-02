@@ -1,7 +1,5 @@
 -# Pull out the coaches
 -# Pull out the managers
--# Make the roster scoll so it's the same size as the picture
--# Put a default picture if we don't have one on
 -# Link the coach to their bio / page
 -# Add the ability to show articles on the page
 
@@ -15,11 +13,9 @@
 
 %div.grid_5.omega
   %h3{id: 'info'}
-    = t('team.coach')
-    -#= link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :style => 'font-size: 18px;', :data => {:coach_id => "#{@team.coach.id}"} do
-      =" #{@team.coach.name}"
+    = "#{t('team.coach')} #{coach(@team['members'])}"
   %h3{id: 'managers'}
-    = t('team.manager')
+    = "#{t('team.manager')} #{manager(@team['members'])}"
 
   %div.box
     %h2= t('team.roster')
@@ -82,21 +78,4 @@
 -#
 %hr.grid_16
 %p= link_to t('team.back'), teams_path
-
--#%div#coach_dialog
--#  %div#coach_details
--#
--#%script{id: 'CoachTemplate', type: 'text/html'}
--#  %div{id: 'simplemodal'}
--#    %img{class: 'coachImage', src: '{{:image_url}}'}
--#    %div
--#      %h3= '{{:name}}'
--#      %p= '{{:bio}}'
--#    %div{class: 'teams'}
--#      %h3= t "coach.teams"
--#      %ul
--#        = '{{for teams}}'
--#        %li
--#          %a{href: '/teams/{{:id}}'}= '{{:name}}'
--#        = '{{/for}}'
 
