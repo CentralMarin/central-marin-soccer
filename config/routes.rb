@@ -32,7 +32,6 @@ Rails.application.routes.draw do
 
   get '/teams/', :to => 'teams#index', :as => 'teams'
   get '/teams/:id', :to => 'teams#show', :as => 'team'
-  get '/teams/:id/teamsnap', :to => 'teams#teamsnap'
 
   get '/fields/', :to => 'fields#index', :as => 'fields'
   get '/fields/:id', :to => 'fields#show', :as => 'field'

@@ -17,6 +17,14 @@ header {
 	position: absolute;
 }
 
+.odd {
+  background-color: #0d0f22;
+}
+
+.even {
+  background-color: #2a3142;
+}
+
 #header_container {
 	height: 138px;
 	background: image-url('header_grad3.png') repeat-x;

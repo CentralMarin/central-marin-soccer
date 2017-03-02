@@ -41,7 +41,10 @@ TODO: Need to understand downtime for each of the scenarios
 
 
 
-
+# TODO
+* Get all teams from teams API
+* Associate coaches with teams
+* Existing Teams and Team Levels goes away
 
 
 Docker containers should default to just work in production mode. Any overrides for Development are handled in docker-compose file

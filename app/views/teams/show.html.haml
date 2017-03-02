@@ -1,73 +1,102 @@
+-# Pull out the coaches
+-# Pull out the managers
+-# Make the roster scoll so it's the same size as the picture
+-# Put a default picture if we don't have one on
+-# Link the coach to their bio / page
+-# Add the ability to show articles on the page
+
 - content_for :css do
   = stylesheet_link_tag "team"
 
 %div.grid_16
   %center
-    %h1= "#{@team}"
+    %h1= "#{@team['year']} #{@team['gender']} #{@team['level']}"
     %hr
 
 %div.grid_5.omega
   %h3{id: 'info'}
     = t('team.coach')
-    = link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :style => 'font-size: 18px;', :data => {:coach_id => "#{@team.coach.id}"} do
+    -#= link_to "##{@team.coach.id}", :class => 'coachlink', :rel => "#coach#{@team.coach.id}", :style => 'font-size: 18px;', :data => {:coach_id => "#{@team.coach.id}"} do
       =" #{@team.coach.name}"
   %h3{id: 'managers'}
     = t('team.manager')
 
   %div.box
-    %h2
-      = link_to @team.teamsnap_roster_url do
-        = t('team.roster')
-    %div{id: 'roster', class: 'scroll-box'}
-      %div#roster_progress
+    %h2= t('team.roster')
+
+    %div.scroll-box
+      %ul
+        - @team['members'].each do |member|
+          %li= member['name']
 
 %div.grid_11
   %center
-    = image_tag image_path(@team.image), alt: "Team Photo", height: "#{Team::IMAGE_HEIGHT}", width: "#{Team::IMAGE_WIDTH}"
+    - if @team['image_url'].present?
+      = image_tag @team['image_url'], alt: "Team Photo", width: 600
+    - else
+      = image_tag 'default_team_photo.jpeg', width: 600
+
 
 %div.clear
 
 %div.grid_16.box
-  %h2
-    = link_to @team.teamsnap_schedule_url do
-      = t('team.schedule')
+  %h2= t('team.schedule')
+  %table{style: 'color: white; font-size: 14px;'}
+    %thead
+      %tr
+        %th{width: "70%", align: "left"}
+          Name
+        %th{width: "10%", align: "center"}
+          Date
+        %th{align: "center"}
+          Time
+    %tbody
+      - if not @team['events']
+        %tr
+          %td{colspan: "3"}
+            No upcoming events
+      - else
+        - @team['events'].each do |event|
+          - date = Date.parse(event['start'])
+          %tr
+            %td{align: 'left'}
+              = event['opponent']
+            %td{align: 'center'}
+              = date.strftime('%m/%d/%Y')
+            %td{align: 'center'}
+              = date.strftime('%H:%M')
 
-  %div{id: 'schedule', class: 'scroll-box'}
-    %div#schedule_progress
-
-%div.clear
-- if not @articles.nil?
-  %div.grid_16.box
-    %h2= t('team.news')
-    - @articles.each do |article|
-      - if not article.image.to_s.blank?
-        %div.grid_15=image_tag article.image
-      %a{name: article.to_param}
-      %h3.grid_15=article.title
-      %div.clear
-      %div.grid_15= article.body.html_safe
-      %p.grid_15= "Published: #{article.updated_at.strftime('%m/%d/%Y')}"
-      %hr
-
+-#%div.clear
+-#- if not @articles.nil?
+-#  %div.grid_16.box
+-#    %h2= t('team.news')
+-#    - @articles.each do |article|
+-#      - if not article.image.to_s.blank?
+-#        %div.grid_15=image_tag article.image
+-#      %a{name: article.to_param}
+-#      %h3.grid_15=article.title
+-#      %div.clear
+-#      %div.grid_15= article.body.html_safe
+-#      %p.grid_15= "Published: #{article.updated_at.strftime('%m/%d/%Y')}"
+-#      %hr
+-#
 %hr.grid_16
 %p= link_to t('team.back'), teams_path
 
-%div#coach_dialog
-  %div#coach_details
+-#%div#coach_dialog
+-#  %div#coach_details
+-#
+-#%script{id: 'CoachTemplate', type: 'text/html'}
+-#  %div{id: 'simplemodal'}
+-#    %img{class: 'coachImage', src: '{{:image_url}}'}
+-#    %div
+-#      %h3= '{{:name}}'
+-#      %p= '{{:bio}}'
+-#    %div{class: 'teams'}
+-#      %h3= t "coach.teams"
+-#      %ul
+-#        = '{{for teams}}'
+-#        %li
+-#          %a{href: '/teams/{{:id}}'}= '{{:name}}'
+-#        = '{{/for}}'
 
-%script{id: 'CoachTemplate', type: 'text/html'}
-  %div{id: 'simplemodal'}
-    %img{class: 'coachImage', src: '{{:image_url}}'}
-    %div
-      %h3= '{{:name}}'
-      %p= '{{:bio}}'
-    %div{class: 'teams'}
-      %h3= t "coach.teams"
-      %ul
-        = '{{for teams}}'
-        %li
-          %a{href: '/teams/{{:id}}'}= '{{:name}}'
-        = '{{/for}}'
-
-- content_for :javascript do
-  =javascript_include_tag "team"

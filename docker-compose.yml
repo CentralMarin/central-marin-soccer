@@ -7,16 +7,15 @@ services:
     volumes:
      - mysql:/var/lib/mysql
      - ./data:/docker-entrypoint-initdb.d
-     - .:/opt
     ports:
      - "3306:3306"
   app:
-     build: .
-     command: bundle exec unicorn -c config/unicorn.rb
-     environment:
-      - RAILS_ENV=development
+     image: centralmarinsoccer/web
      env_file:
       - .centralmarinsoccer.env
+     environment:
+      - RAILS_ENV=development
+     command: bundle exec rails s -p 8000 -b '0.0.0.0'
      volumes:
       - .:/myapp
       - ./tmp/ckeditor_assets:/myapp/public/ckeditor_assets
@@ -25,19 +24,19 @@ services:
       - "8000:8000"
      depends_on:
        - db
-  web:
-    build: caddy
-    volumes:
-      - ./caddy/Caddyfile.dev:/etc/Caddyfile
-      - ./tmp/uploads:/myapp/public/uploads
-      - ./tmp/ckeditor_assets:/myapp/public/ckeditor_assets
-    ports:
-      - "8080:80"
-      - "8081:443"
-    volumes_from:
-      - app
-    depends_on:
-      - app
+#  web:
+#    image: centralmarinsoccer/caddy
+#    volumes:
+#      - ./caddy/Caddyfile:/etc/Caddyfile
+#      - ./tmp/uploads:/myapp/public/uploads
+#      - ./tmp/ckeditor_assets:/myapp/public/ckeditor_assets
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes_from:
+#      - app
+#    depends_on:
+#      - app
 volumes:
   mysql:
 

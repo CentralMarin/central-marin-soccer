@@ -1,21 +1,33 @@
 
 = cms_region(@web_parts, 'teams.overview', :div, ['grid_16', 'box'])
 
-%div{class: 'grid_16'}
-  %table
-    %thead
-      %tr
-        %td{class: 'grid_7'}
-          %h2= Team.genders[0]
-        %td{class: 'grid_7'}
-          %h2= Team.genders[1]
-    %tbody
-      - @teams_by_year_and_gender.each do |year, boys_and_girls|
-        %tr
-          %td{class: 'grid_7'}
-            - boys_and_girls[0].each do |team|
-              %h3= link_to team, team
-          %td{class: 'grid_7'}
-            - boys_and_girls[1].each do |team|
-              %h3= link_to team, team
+- genders = ['Girls', 'Boys']
+- years = (1999..2009)
+%div.grid_16
+  %h2
+    %div.grid_3
+      Year
+    - genders.each do |gender|
+      %div.grid_5
+        = gender
+  %h3
+    - years.each_with_index do |year, i|
+      - row = (i % 2 == 0 ? 'even' : 'odd')
+      %div{class: row}
+        %div.grid_3
+          - if year == years.end
+            Academy
+          - else
+            = year
+        - genders.each do |gender|
+          %div.grid_5
+            - teams = @teams[[year, gender]]
+            - if teams
+              - teams.each do |team|
+                = link_to "#{team['year']} #{team['gender']} #{team['level']}",  team_path(team['id'])
+                %br
+            - else
+              &nbsp;
+
+        %div.clear
 

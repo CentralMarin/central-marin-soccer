@@ -27,6 +27,9 @@ gem 'mailgun-ruby', '1.1.3', require: 'mailgun'
 gem 'delayed_job_active_record', '4.1.1'
 gem 'daemon-spawn', '0.4.2'
 
+# Consume RESTful client
+gem 'httparty', '0.14.0'
+
 # Use SCSS for stylesheets
 gem 'bootstrap-sass', '3.3.7'
 gem 'sass-rails', '5.0.6'
