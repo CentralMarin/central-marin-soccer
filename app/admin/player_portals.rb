@@ -43,6 +43,7 @@ ActiveAdmin.register PlayerPortal do
   filter :last_or_parent1_last_or_parent2_last_cont, as: :string, label: 'Last Name'
   filter :email_or_parent1_email_or_parent2_email_cont, as: :string, label: 'Email'
   filter :gender, as: :check_boxes, label: 'Gender', collection: ['Boys', 'Girls']
+  filter :season, as: :select, collection: ['2016', '2017']
   filter :birth_year, as: :check_boxes, label: 'Year', collection: proc {Event.years}
   filter :paid_club_fees, as: :select, collection: ['Yes', 'No']
   filter :oef, as: :select, collection: ['Yes', 'No']
@@ -123,6 +124,7 @@ ActiveAdmin.register PlayerPortal do
     column :oef do |portal|
       portal.status?(:oef) ? status_tag( 'yes', :ok) : status_tag('no')
     end
+    column :season
     column :club_registration_fee do |portal|
       number_to_currency(portal.club_registration_fee)
     end

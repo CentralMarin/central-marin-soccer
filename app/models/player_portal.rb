@@ -71,9 +71,10 @@ class PlayerPortal < ActiveRecord::Base
   end
 
   def init
+    year = Time.now.year
     unless birthday.nil?
       self.birth_year= birthday.year
-      self.team_year= "U#{Time.now.year - birth_year + 1}"
+      self.team_year= "U#{year - birth_year + 1 - (year - season)}"
       self.club_registration_fee=  TEAM_COSTS[team_year.to_sym]
 
       # Calculate amount due
