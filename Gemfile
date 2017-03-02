@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.8'
 gem 'unicorn', '5.2.0'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
@@ -12,7 +12,7 @@ gem 'mini_magick', '4.6.0'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.7', :require => false
-gem 'google_drive', '1.0.6'
+gem 'google_drive', '2.1.2'
 gem 'premailer-rails', '1.9.5'
 gem 'nokogiri', '1.6.8'
 gem 'devise', '4.2.0'
@@ -22,8 +22,8 @@ gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activeadmin-ranked-model'
 gem 'html_press', '0.8.2'
 gem 'pdf-forms', '1.1.1'
-gem 'stripe', '1.58.0'
-gem 'mailgun-ruby', '1.1.3', require: 'mailgun'
+gem 'stripe', '2.0.1'
+gem 'mailgun-ruby', '1.1.5', require: 'mailgun'
 gem 'delayed_job_active_record', '4.1.1'
 gem 'daemon-spawn', '0.4.2'
 
@@ -51,7 +51,7 @@ gem 'jquery-ui-rails', '6.0.1'
 gem 'turbolinks', '5.0.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '2.6.1'
+gem 'jbuilder', '2.6.3'
 
 gem 'axlsx', '2.0.1'
 gem 'axlsx_rails', '0.5.0'
@@ -70,10 +70,10 @@ end
 gem 'mysql2', '0.4.5'
 
 group :development, :test do
-  gem 'i18n-tasks', '0.9.11'
+  gem 'i18n-tasks', '0.9.12'
   gem 'rspec-rails', '3.5.2'
   gem 'factory_girl_rails', '4.8.0'
   gem 'faker', '1.7.3'
-  gem 'capybara', '2.12.0'
-  gem 'selenium-webdriver', '3.0.7'
+  gem 'capybara', '2.12.1'
+  gem 'selenium-webdriver', '3.2.2'
 end
