@@ -9,10 +9,10 @@ out
 Dockerfile
 README.md
 TeamSnap
-Tryouts
 USClubForms
 .centralmarinsoccer.env
 docker-compose.yml
 doc
 caddy
 systemd
+config/*.p12

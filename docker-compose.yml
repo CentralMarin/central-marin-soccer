@@ -18,6 +18,7 @@ services:
      command: bundle exec rails s -p 8000 -b '0.0.0.0'
      volumes:
       - .:/myapp
+      - ./config/CentralMarinSoccerTryouts.p12:/myapp/config/CentralMarinSoccerTryouts.p12
       - ./tmp/ckeditor_assets:/myapp/public/ckeditor_assets
       - ./tmp/uploads:/myapp/public/uploads
      ports:
