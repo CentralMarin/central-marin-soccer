@@ -264,6 +264,7 @@ ActiveAdmin.register PlayerPortal do
           birthday = row[10]
           md5 = Digest::MD5.hexdigest("#{first}|#{last}|#{birthday}")
 
+          logger.info("Birthday: #{birthday} Name: #{first} #{last}")
           # Check if we already have this record
           pp = PlayerPortal.find_by_md5(md5)
           if pp.nil?
@@ -279,7 +280,7 @@ ActiveAdmin.register PlayerPortal do
               pp.state= row[7]
               pp.zip= row[8]
               pp.gender= row[9]
-              pp.birthday= Date.strptime(birthday, "%m/%d/%Y")
+              pp.birthday= Date.strptime(birthday, "%Y-%m-%d")
               pp.status << :proof_of_birth if row[13] == 'Central Marin Soccer Club'
 
               pp.parent1_first= row[14]
