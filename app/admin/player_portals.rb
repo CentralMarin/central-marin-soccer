@@ -198,40 +198,40 @@ ActiveAdmin.register PlayerPortal do
     render xlsx: 'registration_night', formats: 'xlsx'
   end
 
-  action_item :send_email_link, only: :index do
-    link_to "Email Players", action: 'send_email', q: params[:q]
-  end
+  # action_item :send_email_link, only: :index do
+  #   link_to "Email Players", action: 'send_email', q: params[:q]
+  # end
 
-  collection_action :send_email, title: 'Email Players' do
-    filters = params[:q]
-    @players = PlayerPortal.ransack(filters).result
+  # collection_action :send_email, title: 'Email Players' do
+  #   filters = params[:q]
+  #   @players = PlayerPortal.ransack(filters).result
+  #
+  #   render "send_email"
+  # end
 
-    render "send_email"
-  end
-
-  collection_action :process_email, title: 'Send Email', method: :post do
-
-    notification = Notification.new
-    notification.q = params[:q]
-    I18n.with_locale(:en) do
-      notification.subject = params['subject-en']
-      notification.body = params['body-en']
-    end
-    I18n.with_locale(:es) do
-      notification.subject = params['subject-es']
-      notification.body = params['body-es']
-    end
-    notification.save!
-
-    players = PlayerPortal.ransack(params[:q]).result
-    players.each do |player|
-      SendNotifyEmailJob.set(wait: 1.seconds).perform_later(player, params)
-    end
-
-    flash[:notice] = "Notified #{players.length} players."
-    redirect_to :action => :index, q: params[:q]
-
-  end
+  # collection_action :process_email, title: 'Send Email', method: :post do
+  #
+  #   notification = Notification.new
+  #   notification.q = params[:q]
+  #   I18n.with_locale(:en) do
+  #     notification.subject = params['subject-en']
+  #     notification.body = params['body-en']
+  #   end
+  #   I18n.with_locale(:es) do
+  #     notification.subject = params['subject-es']
+  #     notification.body = params['body-es']
+  #   end
+  #   notification.save!
+  #
+  #   players = PlayerPortal.ransack(params[:q]).result
+  #   players.each do |player|
+  #     SendNotifyEmailJob.set(wait: 1.seconds).perform_later(player, params)
+  #   end
+  #
+  #   flash[:notice] = "Notified #{players.length} players."
+  #   redirect_to :action => :index, q: params[:q]
+  #
+  # end
 
   action_item :import, :only => :index do
     link_to "Import Players", :action => "player_portal_import"
