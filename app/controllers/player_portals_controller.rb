@@ -129,6 +129,8 @@ class PlayerPortalsController < InheritedResources::Base
     render json: {}, status: 200
 
   rescue Stripe::CardError => e
+    logger.info "Card Error: #{e}"
+
     render json: { :error => e.message }, :status => 402
   end
 
