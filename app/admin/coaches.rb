@@ -12,9 +12,6 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
     column :bio do |coach|
       html_overview(coach.bio)
     end
-    column :team do |coach|
-      coach.teams.to_a.join("<br/>").html_safe
-    end
     actions
 
   end
@@ -29,9 +26,6 @@ ActiveAdmin.register Coach, {:sort_order => "name_asc"} do
       end
       row :bio do
         show_tanslated(self, coach, :bio)
-      end
-      row :team do
-        coach.teams.join("<br/>").html_safe
       end
       row :created_at
       row :updated_at

@@ -16,8 +16,6 @@ class Coach < ActiveRecord::Base
 
   active_admin_translates :bio
 
-  has_many :teams
-
   email_regex = /\A['\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name,         :presence => true,
@@ -31,7 +29,7 @@ class Coach < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    { :name => self.name, :bio => self.bio, :teams => teams.as_json, :image_url => options[:image_url] }
+    { :name => self.name, :bio => self.bio, :teams => "", :image_url => options[:image_url] }
   end
 
   # Include the image processing module

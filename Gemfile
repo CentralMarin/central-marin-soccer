@@ -8,13 +8,13 @@ gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
 gem 'ckeditor', '4.2.2'
 gem 'carrierwave', '1.0.0'
-gem 'mini_magick', '4.6.0'
+gem 'mini_magick', '4.6.1'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.7', :require => false
 gem 'google_drive', '1.0.6'
 gem 'premailer-rails', '1.9.5'
-gem 'nokogiri', '1.6.8'
+gem 'nokogiri', '1.6.8.1'
 gem 'devise', '4.2.0'
 gem 'bing_translator', '4.6.0'
 gem 'bitmask_attributes', '1.0.0'
@@ -61,15 +61,12 @@ group :doc do
   gem 'sdoc', '0.4.2', :require => false
 end
 
-group :development do
-  gem 'letter_opener_web', '1.3.1'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring', '2.0.1'
-end
-
 gem 'mysql2', '0.4.5'
 
 group :development, :test do
+  gem 'letter_opener_web', '1.3.1'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring', '2.0.1'
   gem 'i18n-tasks', '0.9.12'
   gem 'rspec-rails', '3.5.2'
   gem 'factory_girl_rails', '4.8.0'
