@@ -18,8 +18,6 @@ class InformationController < CmsController
 
   def academy
     init_web_parts('Academy')
-
-    @academy_teams = Team.academy(Time.now.year)
   end
 
   def scholarship

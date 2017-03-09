@@ -8,30 +8,35 @@
 
 %div.grid_16
   %center
-    %h1= "#{@team['year']} #{@team['gender']} #{@team['level']}"
+    %h1= "#{team_name(@team)}"
     %hr
 
 %div.grid_5.omega
-  %h3{id: 'info'}
-    = "#{t('team.coach')} #{coach(@team['members'])}"
-  %h3{id: 'managers'}
-    = "#{t('team.manager')} #{manager(@team['members'])}"
-
+  %div.box
+    %h2= "#{t('team.coach')} & #{t('team.manager')}"
+    %div.small-scroll-box
+      %ul
+        - coach(@team['members']).each do |result|
+          %li
+            = result
+        - manager(@team['members']).each do |result|
+          %li
+            = result
   %div.box
     %h2= t('team.roster')
 
     %div.scroll-box
       %ul
         - @team['members'].each do |member|
-          %li= member['name']
+          - if member['is_player']
+            %li= member['name']
 
-%div.grid_11
+%div.grid_11.center
   %center
     - if @team['image_url'].present?
       = image_tag @team['image_url'], alt: "Team Photo", width: 600
     - else
       = image_tag 'default_team_photo.jpeg', width: 600
-
 
 %div.clear
 

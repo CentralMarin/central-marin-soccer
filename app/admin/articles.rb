@@ -7,7 +7,13 @@ def prepare_article(article_id = nil)
   end
 
   @coaches = Coach.all.order('name desc').map {|e| [e.to_s, e.id] }
-  @teams = Team.all.order('year desc').map {|e| [e.to_team_name_with_coach, e.id]}
+  # @teams = Team.teams.map {|e| [e['Name'], e['id']]}
+  @teams = []
+  Team.teams.each do |k, v|
+    v.each do |team|
+      @teams << [team['name'], team['id']]
+    end
+  end
 
   # Load the all option
   @coaches.insert(0, ['All', 0])
@@ -41,7 +47,7 @@ ActiveAdmin.register Article do
       articles.category.to_s
     end
     column :team_id do |articles|
-      Team.to_team_name_with_coach(articles.team_id) unless articles.team_id == 0
+      articles.team_id
     end
     column :coach_id do |articles|
       Coach.find(articles.coach_id) unless articles.coach_id == 0
@@ -67,11 +73,11 @@ ActiveAdmin.register Article do
         subcategory = ''
         case article.category
           when :team
-            team = Team.find_by id: article.team_id
+            team = Team.find article.team_id
             if team.blank?
                subcategory = '- Unknown team'
             else
-              subcategory = "- #{team.to_s}"
+              subcategory = "- #{team['name']}"
             end
           when :coach
             coach = Coach.find_by(id: article.coach_id)

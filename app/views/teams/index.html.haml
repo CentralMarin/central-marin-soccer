@@ -24,7 +24,7 @@
             - teams = @teams[[year, gender]]
             - if teams
               - teams.each do |team|
-                = link_to "#{team['year']} #{team['gender']} #{team['level']}",  team_path(team['id'])
+                = link_to "#{team_name(team)}",  team_path(team['id'])
                 %br
             - else
               &nbsp;

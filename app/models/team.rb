@@ -14,11 +14,15 @@ class Team
 
   def self.find(id)
     response = get("https://api.centralmarinsoccer.com/teams/#{id}")
-    if response.success?
-      response
-    else
-      raise response.response
+    unless response.success?
+      return nil
     end
+
+    # TODO: Sort the players
+    # TODO: Pull out the coach(es)
+    # TODO: Pull out the manager(s)
+
+    response
   end
 
   private
