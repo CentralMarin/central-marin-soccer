@@ -72,5 +72,5 @@ group :development, :test do
   gem 'factory_girl_rails', '4.8.0'
   gem 'faker', '1.7.3'
   gem 'capybara', '2.12.1'
-  gem 'selenium-webdriver', '3.2.2'
+  gem 'selenium-webdriver', '3.3.0'
 end
