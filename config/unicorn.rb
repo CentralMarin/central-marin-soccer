@@ -8,9 +8,8 @@ worker_processes ENV['WORKER_PROCESSES'].to_i
 # Listen on a tcp port or unix socket.
 listen ENV['LISTEN_ON']
 
-# Use a shorter timeout instead of the 60s default. If you are handling large
-# uploads you may want to increase this.
-timeout 30
+# Increased timeout to handle importing of players into the player portal
+timeout ENV['UNICORN_TIMEOUT'].to_i
 
 # Combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings:
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
