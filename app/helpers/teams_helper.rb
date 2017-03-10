@@ -1,12 +1,4 @@
 module TeamsHelper
-  def coach members
-    find_position(members, 'coach')
-  end
-
-  def manager members
-    find_position(members, 'manager')
-  end
-
   def team_name team
     "#{team['year']} #{team['gender']} #{team['level']}"
   end

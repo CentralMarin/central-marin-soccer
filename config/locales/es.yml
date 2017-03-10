@@ -99,8 +99,8 @@ es:
     name:
       under: "A"
       team: "Equipo"
-    coach: "Entrenador:"
-    manager: "Gerente:"
+    coach: "Entrenador"
+    manager: "Gerente"
     roster: "lista"
     schedule: "Programar"
     news: "Noticias del Equipo"

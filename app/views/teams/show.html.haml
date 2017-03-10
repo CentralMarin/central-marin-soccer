@@ -16,20 +16,17 @@
     %h2= "#{t('team.coach')} & #{t('team.manager')}"
     %div.small-scroll-box
       %ul
-        - coach(@team['members']).each do |result|
-          %li
-            = result
-        - manager(@team['members']).each do |result|
-          %li
-            = result
+        - @team['coaches'].each do |coach|
+          %li= coach
+        - @team['volunteers'].each do |volunteer|
+          %li= volunteer
   %div.box
     %h2= t('team.roster')
 
     %div.scroll-box
       %ul
-        - @team['members'].each do |member|
-          - if member['is_player']
-            %li= member['name']
+        - @team['players'].each do |player|
+          %li= player
 
 %div.grid_11.center
   %center

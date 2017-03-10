@@ -77,8 +77,8 @@ en:
     name:
       under: "U"
       team: "Team"
-    coach: "Coach:"
-    manager: "Manager:"
+    coach: "Coach"
+    manager: "Manager"
     roster: "Roster"
     schedule: "Schedule"
     news: "Team News"

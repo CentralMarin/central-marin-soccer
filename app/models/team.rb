@@ -18,6 +18,31 @@ class Team
       return nil
     end
 
+    players = []
+    coaches = []
+    volunteers = []
+    response['members'].each do |member|
+      if member['is_player']
+        players << member['name']
+      elsif not member['position'].blank? and member['position'].downcase.include?('coach')
+        coaches << "#{member['name']} - #{member['position']}"
+      else
+        volunteers << "#{member['name']} - #{member['position']}"
+      end
+    end
+    players.sort!
+    response['players'] = players
+
+    if coaches.length == 0
+      coaches << 'TBD - Coach'
+    end
+    response['coaches'] = coaches
+
+    if volunteers.length == 0
+      volunteers << 'TBD - Manager'
+    end
+    response['volunteers'] = volunteers
+
     # TODO: Sort the players
     # TODO: Pull out the coach(es)
     # TODO: Pull out the manager(s)
