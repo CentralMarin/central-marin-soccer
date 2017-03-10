@@ -4,6 +4,9 @@ font_size = 13
 # TOTAL Page Width = 92
 columns = [
     {index: 0, width: 4}, # Bib #
+    {index: 46, width: 4}, # Tryout 1
+    {index: 47, width: 4}, # Tryout 2
+    {index: 48, width: 4}, # Tryout 3
     {index: 2, width: 15}, # First Name
     {index: 3, width: 15}, # Last Name
     {index: 10, right_align: true, width: 9}, # Birthdate
@@ -17,7 +20,6 @@ default_style = {
 }
 
 workbook = xlsx_package.workbook
-dups = workbook.add_worksheet(name: 'Possible Duplicates')
 
 @ws.worksheets.each do |google_sheet|
 
@@ -28,7 +30,7 @@ dups = workbook.add_worksheet(name: 'Possible Duplicates')
 
   # Set margins, header, and page
   margins = {left: 0.05, right: 0.05, bottom: 0.25, footer: 0.25, top: 0.5, header: 0.25}
-  setup = {orientation: :landscape }
+  setup = {orientation: :landscape, paper_size: 5 }
   header_footer = {different_first: false, odd_header: "&C&H &18 &B&A: Sheet &P of &N"}
 
   Rails.logger.info "  Adding and formattting worksheet for excel"
@@ -45,10 +47,8 @@ dups = workbook.add_worksheet(name: 'Possible Duplicates')
     # Sort google spreadsheet
     rows = google_sheet.rows
     sorted_rows = rows[1..-1].sort! do |row1, row2|
-      result = row1[columns[1][:index]].downcase.strip <=> row2[columns[1][:index]].downcase.strip
-      result = row1[columns[2][:index]].downcase.strip <=> row2[columns[2][:index]].downcase.strip if result == 0
 
-      dups.add_row row1 if result == 0
+      result = row1[columns[0][:index]].downcase.strip <=> row2[columns[0][:index]].downcase.strip
 
       result
     end
@@ -58,6 +58,8 @@ dups = workbook.add_worksheet(name: 'Possible Duplicates')
     rows.each_with_index do |row, index|
       sheet.add_row columns.collect { |meta_data| row[meta_data[:index]]}, :style => index == 0 ? header_row : cell, widths: [:ignore]
     end
+
+    # Add Extra Blank Columns
 
     # Add 10 blank rows for walk ups
     (1..blank_rows).each { |index| sheet.add_row [" "] * columns.length, style: Axlsx::STYLE_THIN_BORDER }
