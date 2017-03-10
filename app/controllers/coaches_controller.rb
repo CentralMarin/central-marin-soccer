@@ -5,7 +5,7 @@ class CoachesController < ApplicationController
   # GET /coaches
   # GET /coaches.json
   def index
-    @coaches = Coach.all
+    @coaches = Coach.all.order(:name)
 
     @part_name = 'coaching.overview'
     @web_parts = WebPart.load(@part_name)
