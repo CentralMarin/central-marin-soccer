@@ -23,9 +23,8 @@ gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activead
 gem 'html_press', '0.8.2'
 gem 'pdf-forms', '1.1.1'
 gem 'stripe', '2.0.1'
-gem 'mailgun-ruby', '1.1.5', require: 'mailgun'
-gem 'delayed_job_active_record', '4.1.1'
-gem 'daemon-spawn', '0.4.2'
+# gem 'mailgun-ruby', '1.1.5', require: 'mailgun'
+gem 'mailgun_rails', '0.9.0'
 
 # Consume RESTful client
 gem 'httparty', '0.14.0'
@@ -64,7 +63,6 @@ end
 gem 'mysql2', '0.4.5'
 
 group :development, :test do
-  gem 'letter_opener_web', '1.3.1'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '2.0.1'
   gem 'i18n-tasks', '0.9.12'
