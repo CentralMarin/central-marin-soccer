@@ -35,6 +35,11 @@ end
 
 ActiveAdmin.register PlayerPortal do
 
+  scope("Current Season") {|scope| scope.where(season: '2017')}
+  scope :all
+
+  config.sort_order = 'created_date_asc'
+
   before_filter only: :index do
     @per_page = 10_000 if request.format == 'application/pdf' || request.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   end
