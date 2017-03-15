@@ -183,7 +183,7 @@ en:
             expires: '<small>Expires:</small>'
         volunteer:
           heading: 'Volunteer Preference'
-          overview: 'This year Central Marin has instituted a policy that requires a family member of each player to volunteer during the soccer season. This allows the club to put your fees to work in the best possible way; coaching and fields. We will be announcing volunteer opportunities throughout the season. Please select your preference below.'
+          overview: 'Central Marin is a volunteer run organization (except for professional coaching and some administration). In order for the club to make the best use of your funds, it is mandatory for at least one parent to volunteer during the season to help run the club or the team. The club charges a $75 volunteer fee up front which is refunded once you have completed your volunteer duties.'
           preference: 'Volunteer Preference:'
         documents:
           concussion:
@@ -224,19 +224,24 @@ en:
                 </ul>'
           charges: 'Charges Summary'
           club: 'Club Registration'
-          opt_out: 'Volunteer Opt Out'
+          opt_out: 'Volunteer Fee'
           cc_fee: 'Credit Card Processing'
           total: 'Total'
           types: 'Online payment types: <strong>Visa, MasterCard, Discover, and Diners.</strong>'
   volunteer:
     options:
-      opt_out: 'Opt out and pay an additional $100'
-      fields: 'Field Maintenance - equipment storage, lining, and installing nets'
+      opt_out: 'Opt out - I choose to not volunteer and forfeit my $75'
+      fields: 'Field Liner'
       manager: 'Team Manager'
-      travel: 'Travel Coordinator'
-      board: 'Voting / Non Voting Board Member'
-      tournament: 'Tournament Volunteer'
-      tryout: 'Tryout Checkin / Registration Night'
+      travel: 'Team Travel / Team Tournament Coordinator'
+      photographer: 'Team Photographer'
+      treasurer: 'Team Treasurer'
+      equipment: 'Team Equipment Manager - Bench, Tent and Balls'
+      maintenance: 'Field Maintenance Coordinator'
+      safety: 'Safety Officer'
+      registration: 'Registration night volunteer'
+      tryout: 'I helped with tryouts'
+      board: 'Board Member - You will be contacted'
       no_preference: 'No Preference - Let me know where I can help'
   registration:
     index:

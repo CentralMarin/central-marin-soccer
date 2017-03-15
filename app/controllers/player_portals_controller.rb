@@ -170,14 +170,14 @@ class PlayerPortalsController < InheritedResources::Base
     def calculate_fees(registration_fee, volunteer_opt_out)
 
       goal = registration_fee
-      goal += PlayerPortal::VOLUNTEER_OPT_OUT_FEE if volunteer_opt_out
+      goal += PlayerPortal::VOLUNTEER_OPT_OUT_FEE
 
       cc_fees = calculate_cc_fees(goal)
       total = goal + cc_fees
 
       fees = []
       fees << [t('player_portal.registration.payment.club'), "$#{'%.2f' % registration_fee}"]
-      fees << [t('player_portal.registration.payment.opt_out'), "$#{'%.2f' % PlayerPortal::VOLUNTEER_OPT_OUT_FEE}"] if volunteer_opt_out
+      fees << [t('player_portal.registration.payment.opt_out'), "$#{'%.2f' % PlayerPortal::VOLUNTEER_OPT_OUT_FEE}"]
       fees << [t('player_portal.registration.payment.cc_fee'), "$#{'%.2f' %cc_fees}"]
       fees << [t('player_portal.registration.payment.total'), "$#{'%.2f' %total}"]
 

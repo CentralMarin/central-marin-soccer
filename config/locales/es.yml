@@ -246,20 +246,26 @@ es:
                                           </ul>'
           charges: 'Resumen de costos'
           club: 'Registración de Club'
-          opt_out: 'Exclusión de voluntariado'
+          opt_out: 'Voluntario honorario'
           cc_fee: 'Procesamiento de tarjetas de crédito'
           total: 'Total'
           types: 'Maneras de pagar en línea: <strong>Visa, MasterCard, Discover y Diners.</strong>'
   volunteer:
     options:
-      opt_out: 'Pagar $100 extra en lugar de ser voluntario'
+      opt_out: 'Pagar $75 extra en lugar de ser voluntario'
       fields: 'Mantenimiento de campo - almacenamiento de equipos, rallado e instalación de redes'
       manager: 'Jefe de equipo'
-      travel: 'Coordinador de viajes'
+      travel: 'Coordinador del equipo de viaje'
+      photographer: 'Fotógrafo de equipo'
+      treasurer: 'Tesorero del equipor'
+      equipment: 'Director de equipo del equipo'
+      maintenance: 'Coordinador de mantenimiento de campo'
+      safety: 'Oficial de seguridad'
+      registration: 'Noche de registro voluntario'
+      tryout: 'Ayudaba con pruebas'
       board: 'Miembro de Junta'
-      tournament: 'Voluntario de torneo'
-      tryout: 'Registración para prueba / Registración para club'
       no_preference: 'Sin preferencias - Me gustaría saber donde puedo ayudar'
+
   registration:
     index:
       heading: ' Pruebas de fútbol'

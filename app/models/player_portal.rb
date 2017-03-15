@@ -38,7 +38,7 @@ class PlayerPortal < ActiveRecord::Base
   # Credit Card Processing Fees
   CC_PERCENTAGE = 0.022
   CC_FIXED = 0.3
-  VOLUNTEER_OPT_OUT_FEE = 100
+  VOLUNTEER_OPT_OUT_FEE = 75
 
   # Volunteer Options - i18n string lookup
   VOLUNTEER_OPTIONS = {
@@ -46,8 +46,13 @@ class PlayerPortal < ActiveRecord::Base
       fields: 'volunteer.options.fields',
       manager: 'volunteer.options.manager',
       travel: 'volunteer.options.travel',
+      photographer: 'volunteer.options.photographer',
+      treasurer: 'volunteer.options.treasurer',
+      equipment: 'volunteer.options.equipment',
+      maintenance: 'volunteer.options.maintenance',
+      safety: 'volunteer.options.safety',
+      registration: 'volunteer.options.registration',
       board: 'volunteer.options.board',
-      tournament: 'volunteer.options.tournament',
       tryout: 'volunteer.options.tryout',
       no_preference: 'volunteer.options.no_preference'
   }
