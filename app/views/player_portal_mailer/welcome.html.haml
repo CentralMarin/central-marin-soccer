@@ -17,7 +17,7 @@
                 %table#templateHeader{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
                   %tr
                     %td.headerContent{:valign => "top"}
-                      %img#headerImage{:src => image_path('email_header.jpg'), :style => "max-width:600px;"}/
+                      %img#headerImage{:src => "https://centralmarinsoccer.com#{asset_path('email_header.jpg')}", :style => "max-width:600px;"}/
             / // END HEADER
             %tr
               %td{:align => "center", :valign => "top"}
@@ -28,24 +28,69 @@
                       %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
                         %tr
                           %td.leftColumnContent{:valign => "top"}
-                            %h3 Congratulations on #{@player_portal.first} being selected to a Central Marin soccer team!
+                            %h3 Dear #{@player_portal.first},
                             %p
-                              This year we have a new online registration system.
+                              Congratulations - we’re thrilled you’re a Central Marin player! There’s a great deal that goes on before our players lace their cleats and pull their jerseys over their heads. At Central Marin, we are constantly looking to streamline, improve, and when possible, simplify all the necessary administration. With that in mind, we want to touch base with you and your family on three specific things.
                             %p
-                              Please
+                              %b
+                                First, Team Managers and Treasurers
+                            %p
+                              Each team needs an array of volunteers, but foremost in planning are team managers and treasurers.  If one of your family members have the time and inclination, please contact your coaches and let them know.
+                            %p
+                              %b
+                                Second, Registration
+                            %p
+                              This is our second year using an online registration system which allows you to skip the in-person registration night, upload all necessary documents, and pay online through the Player Portal.
                               %a{:href => player_portal_url(@player_portal.uid, host: 'https://centralmarinsoccer.com'), :target => "_blank"}
-                                click on the link
+                                Please click here to access the Player Portal
                               and enter your child’s birthday to begin registering your child.
+                              %b
+                                For legal and liability reasons, we need your full registration payment before you start your first practice.
+                              We appreciate your help in keeping us compliant!
+                            %p
+                              %b
+                                And Third, Financial Aid
+                            %p
+                              If you would like to request financial assistance through the OEF Scholarship program,
+                              %b
+                                you must register in person on Thursday, March 16th from 7.00 - 8.30pm at the San Rafael Community Center.
+                              Scholarships are awarded on a case-by-case basis.  We will work with you to set up a payment plan that will work for you and your team.  For specific questions, email oef@centralmarinsoccer.com
+                            %p
+                              It’s going to be an inspiring 2017-18 and we’re so glad you’ll be a part of it!
+                            %p
+                              Central Marin Soccer
                     %td.templateColumnContainer{:align => "center", :style => "padding-top:20px;", :valign => "top"}
                       %table{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%"}
                         %tr
                           %td.rightColumnContent{:valign => "top"}
-                            %h3 Felicidades a #{@player_portal.first} en su seleccion a un equipo de futbol de Central Marin.
+                            %h3 Estimado #{@player_portal.first},
                             %p
-                              Este año tenemos una systema nueva en linea para inscribir su hijo/hija. 
+                              ¡Felicidades! Estamos encantados de que seas un jugador de Central Marin! Hay muchas cosas que hacer antes que nuestros jugadores se amarren las agujetas de sus tacos y se pongan las camisetas. En Central Marin tratamos de mejorar constantemente y, cuando sea posible, simplificar todos los tramites administrativos. Tomando esto en cuenta, quisiéramos comunicarnos contigo y tu familia respecto a tres puntos específicos.
                             %p
-                              Por favor
+                              %b
+                                Primero, los administradores y los tesoreros del equipo.
+                            %p
+                              Cada equipo necesita diversos voluntarios, pero los administradores y tesoreros del equipo son lo primordial. Si algún miembro de tu familia tiene el tiempo y la disposición, por favor comunícate con tus entrenadores para avisarles.
+                            %p
+                              %b
+                                Segundo, la inscripción.
+                            %p
+                              Este es el segundo año en que usamos un sistema de inscripción en línea, el cual permite saltarse la noche de inscripción en persona, subir todos los documentos necesarios y pagar en línea por medio del Portal del Jugador (Player Portal).
                               %a{:href => player_portal_url(@player_portal.uid, host: 'https://es.centralmarinsoccer.com'), :target => "_blank"}
-                                haga clic en el enlace
-                              y registre el cumpleaños de su hijo/hija para iniciar la inscripcion de su hijo/hija.
+                                Por favor haz clic aquí para ingresar al Portal del Jugador.
+                              %b
+                                Por motivos legales y de responsabilidad legal, necesitamos que efectúes tu primer pago de inscripción antes de iniciar tu primera práctica.
+                              ¡Gracias por ayudarnos a cumplir con los requisitos legales!
+                            %p
+                              %b
+                                Y tercero, las becas.
+                            %p
+                              Si quisieras solicitar ayuda económica por medio del programa de becas OEF,
+                              %b
+                                debes inscribirte en persona el día jueves, 16 de marzo, de 7 a 8:30 de la noche en el Centro Comunitario de San Rafael (San Rafael Community Center).
+                              Las becas se otorgan al evaluar caso por caso. Podemos ponernos de acuerdo contigo para establecer un plan de pagos a plazos que te convenga a ti y también a tu equipo. Si tienes dudas específicas, manda un correo a: oef@centralmarinsoccer.com
+                            %p
+                              La temporada 2017-18 va a ser motivo de inspiración, ¡por lo que nos da mucho gusto que te hayas integrado!
+                            %p
+                              Central Marin Soccer
             / // END COLUMNS
