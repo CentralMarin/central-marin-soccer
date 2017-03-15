@@ -38,8 +38,6 @@ ActiveAdmin.register PlayerPortal do
   scope("Current Season") {|scope| scope.where(season: '2017')}
   scope :all
 
-  config.sort_order = 'created_date_asc'
-
   before_filter only: :index do
     @per_page = 10_000 if request.format == 'application/pdf' || request.format == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   end
@@ -203,41 +201,6 @@ ActiveAdmin.register PlayerPortal do
     render xlsx: 'registration_night', formats: 'xlsx'
   end
 
-  # action_item :send_email_link, only: :index do
-  #   link_to "Email Players", action: 'send_email', q: params[:q]
-  # end
-
-  # collection_action :send_email, title: 'Email Players' do
-  #   filters = params[:q]
-  #   @players = PlayerPortal.ransack(filters).result
-  #
-  #   render "send_email"
-  # end
-
-  # collection_action :process_email, title: 'Send Email', method: :post do
-  #
-  #   notification = Notification.new
-  #   notification.q = params[:q]
-  #   I18n.with_locale(:en) do
-  #     notification.subject = params['subject-en']
-  #     notification.body = params['body-en']
-  #   end
-  #   I18n.with_locale(:es) do
-  #     notification.subject = params['subject-es']
-  #     notification.body = params['body-es']
-  #   end
-  #   notification.save!
-  #
-  #   players = PlayerPortal.ransack(params[:q]).result
-  #   players.each do |player|
-  #     SendNotifyEmailJob.set(wait: 1.seconds).perform_later(player, params)
-  #   end
-  #
-  #   flash[:notice] = "Notified #{players.length} players."
-  #   redirect_to :action => :index, q: params[:q]
-  #
-  # end
-
   action_item :import, :only => :index do
     link_to "Import Players", :action => "player_portal_import"
   end
@@ -264,6 +227,7 @@ ActiveAdmin.register PlayerPortal do
         selected = row[45]
         if selected == 'Y' || selected == 'y'
 
+          # TODO: Add season to the MD5 hash
           first = row[2]
           last = row[3]
           birthday = row[10]
