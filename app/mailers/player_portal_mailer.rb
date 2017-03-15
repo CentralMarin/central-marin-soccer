@@ -1,4 +1,4 @@
-class PlayerPortalMailer < ApplicationMailer
+class PlayerPortalMailer < ActionMailer::Base
 
   def welcome(player_portal)
 
