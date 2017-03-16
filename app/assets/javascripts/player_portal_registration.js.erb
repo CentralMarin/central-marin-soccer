@@ -202,7 +202,7 @@
                     if (data.status == 402) {
                         _showAlert(JSON.parse(data.responseText).error);
                     } else {
-                        _showAlert(_errorMsgs.fiveHundred);
+                        _showAlert(_errorMsgs.fiveHundred + ': ' + data.responseText);
                     }
                 });
         };

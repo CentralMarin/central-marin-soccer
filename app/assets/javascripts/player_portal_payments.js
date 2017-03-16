@@ -41,7 +41,7 @@
                         if (data.status == 402) {
                             showAlert(JSON.parse(data.responseText).error);
                         } else {
-                            showAlert(_errorMsgs.fiveHundred);
+                            showAlert(_errorMsgs.fiveHundred + ': ' + data.responseText);
                         }
                     });
             };
