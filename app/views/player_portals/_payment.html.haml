@@ -9,7 +9,7 @@
           = t 'player_portal.registration.documents.team_fees.button'
   .col-sm-5
     - @fees.each do |type, fees_info|
-      %table.table.table-striped{id: (fees_info[:id]), class: ('hidden' if type == :volunteer), data: {description: '2016 Season Club Registration Fees', amount: fees_info[:total]}}
+      %table.table.table-striped{id: (fees_info[:id]), class: ('hidden' if type == :volunteer), data: {description: '2017 Season Club Registration Fees', amount: fees_info[:total]}}
         - total_row = fees_info[:fees].last
         - fees_info[:fees].each do |fee|
           %tr
