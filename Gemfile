@@ -2,13 +2,13 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
-gem 'unicorn', '5.2.0'
+gem 'unicorn', '5.3.0'
 
 gem 'activeadmin', :git => 'http://github.com/gregbell/active_admin'
 gem 'activeadmin-globalize', git: 'http://github.com/CentralMarin/activeadmin-globalize'
 gem 'ckeditor', '4.2.2'
 gem 'carrierwave', '1.0.0'
-gem 'mini_magick', '4.6.1'
+gem 'mini_magick', '4.7.0'
 gem 'globalize', '5.0.1'
 gem 'haml-rails', '0.9.0'
 gem 'whenever', '0.9.7', :require => false
@@ -22,7 +22,7 @@ gem 'ranked-model', '0.4.0'
 gem 'activeadmin-ranked-model', :git => 'http://github.com/CentralMarin/activeadmin-ranked-model'
 gem 'html_press', '0.8.2'
 gem 'pdf-forms', '1.1.1'
-gem 'stripe', '2.0.3'
+gem 'stripe', '2.1.0'
 # gem 'mailgun-ruby', '1.1.5', require: 'mailgun'
 gem 'mailgun_rails', '0.9.0'
 
@@ -53,7 +53,7 @@ gem 'turbolinks', '5.0.1'
 gem 'jbuilder', '2.6.3'
 
 gem 'axlsx', '2.0.1'
-gem 'axlsx_rails', '0.5.0'
+gem 'axlsx_rails', '0.5.1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -65,7 +65,7 @@ gem 'mysql2', '0.4.5'
 group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '2.0.1'
-  gem 'i18n-tasks', '0.9.12'
+  gem 'i18n-tasks', '0.9.13'
   gem 'rspec-rails', '3.5.2'
   gem 'factory_girl_rails', '4.8.0'
   gem 'faker', '1.7.3'
