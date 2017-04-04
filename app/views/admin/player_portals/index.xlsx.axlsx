@@ -3,7 +3,7 @@
 workbook = xlsx_package.workbook
 workbook.add_worksheet(name: "#{Event::TRYOUT_YEAR} Season") do |sheet|
     # Add our header
-    sheet.add_row ['First', 'Last', 'Birthday', 'Address', 'City', 'State', 'Zip', 'Parent', 'Email', 'Cell', 'Parent', 'Email', 'Cell', 'Volunteer', 'Fee', 'Paid', 'Due']
+    sheet.add_row ['First', 'Last', 'Birthday', 'Address', 'City', 'State', 'Zip', 'Parent', 'Email', 'Cell', 'Parent', 'Email', 'Cell', 'Volunteer', 'Fee', 'Paid', 'Due', 'ID']
 
     @player_portals.each do |player|
         sheet.add_row [
@@ -23,7 +23,8 @@ workbook.add_worksheet(name: "#{Event::TRYOUT_YEAR} Season") do |sheet|
             player.volunteer_choice,
             player.club_registration_fee,
             player.paid,
-            player.amount_due
+            player.amount_due,
+            player.id
             ]
     end
 end
